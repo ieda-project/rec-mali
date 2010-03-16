@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  global_id: MyString
+  child: 
+  author: 
+  done_on: 2010-03-16
+  height: 1
+  weight: 1.5
+  mac: 1
+
+two:
+  global_id: MyString
+  child: 
+  author: 
+  done_on: 2010-03-16
+  height: 1
+  weight: 1.5
+  mac: 1

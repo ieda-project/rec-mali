@@ -1,0 +1,2 @@
+class GdtDiagnostic < Diagnostic
+end

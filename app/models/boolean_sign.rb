@@ -1,0 +1,2 @@
+class BooleanSign < Sign
+end

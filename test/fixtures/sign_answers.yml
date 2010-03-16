@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  sign: 
+  diagnostic: 
+  boolean_value: false
+  integer_value: 1
+  list_value: MyString
+
+two:
+  sign: 
+  diagnostic: 
+  boolean_value: false
+  integer_value: 1
+  list_value: MyString

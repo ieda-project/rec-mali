@@ -1,0 +1,2 @@
+class ListSign < Sign
+end

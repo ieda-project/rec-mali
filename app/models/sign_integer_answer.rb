@@ -1,0 +1,2 @@
+class SignIntegerAnswer < SignAnswer
+end

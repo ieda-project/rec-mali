@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  born_on: 2010-03-16
+  global_id: MyString
+  gender: false
+
+two:
+  first_name: MyString
+  last_name: MyString
+  born_on: 2010-03-16
+  global_id: MyString
+  gender: false

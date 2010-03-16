@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  global_id: MyString
+  location: MyText
+  phone: MyString
+
+two:
+  global_id: MyString
+  location: MyText
+  phone: MyString

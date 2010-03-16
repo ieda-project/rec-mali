@@ -1,0 +1,2 @@
+class SignListAnswer < SignAnswer
+end

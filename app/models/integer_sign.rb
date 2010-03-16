@@ -1,0 +1,2 @@
+class IntegerSign < Sign
+end

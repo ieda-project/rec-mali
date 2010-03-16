@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  illness: 
+  sequence: 1
+  type: MyString
+  min_value: 1
+  max_value: 1
+  values: MyString
+
+two:
+  name: MyString
+  illness: 
+  sequence: 1
+  type: MyString
+  min_value: 1
+  max_value: 1
+  values: MyString
