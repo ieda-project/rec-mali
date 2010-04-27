@@ -1,6 +1,7 @@
 class CreateIllnessAnswers < ActiveRecord::Migration
   def self.up
     create_table :illness_answers do |t|
+      t.string :global_id
       t.references :illness, :diagnostic
       t.boolean :value
       t.timestamps
