@@ -1,12 +1,14 @@
 class CreateSignAnswers < ActiveRecord::Migration
   def self.up
     create_table :sign_answers do |t|
-      t.string :global_id
       t.references :sign, :diagnostic
       t.string :type, :list_value
       t.boolean :boolean_value
       t.integer :integer_value
       t.timestamps
+
+      t.string :global_id
+      t.boolean :imported
     end
   end
 

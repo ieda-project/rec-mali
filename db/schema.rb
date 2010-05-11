@@ -12,10 +12,11 @@
 ActiveRecord::Schema.define(:version => 20100316145742) do
 
   create_table "child_photos", :force => true do |t|
-    t.string   "global_id"
     t.integer  "child_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "global_id"
+    t.boolean  "imported"
   end
 
   add_index "child_photos", ["child_id"], :name => "index_child_photos_on_child_id"
@@ -25,10 +26,11 @@ ActiveRecord::Schema.define(:version => 20100316145742) do
     t.string   "first_name"
     t.string   "last_name"
     t.date     "born_on"
-    t.string   "global_id"
     t.boolean  "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "global_id"
+    t.boolean  "imported"
   end
 
   add_index "children", ["global_id"], :name => "index_children_on_global_id"
@@ -62,7 +64,6 @@ ActiveRecord::Schema.define(:version => 20100316145742) do
 
   create_table "diagnostics", :force => true do |t|
     t.string   "type"
-    t.string   "global_id"
     t.integer  "child_id"
     t.integer  "author_id"
     t.date     "done_on"
@@ -71,6 +72,8 @@ ActiveRecord::Schema.define(:version => 20100316145742) do
     t.float    "weight"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "global_id"
+    t.boolean  "imported"
   end
 
   add_index "diagnostics", ["author_id"], :name => "index_diagnostics_on_author_id"
@@ -84,6 +87,8 @@ ActiveRecord::Schema.define(:version => 20100316145742) do
     t.boolean  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "global_id"
+    t.boolean  "imported"
   end
 
   add_index "illness_answers", ["diagnostic_id"], :name => "index_illness_answers_on_diagnostic_id"
@@ -120,6 +125,8 @@ ActiveRecord::Schema.define(:version => 20100316145742) do
     t.integer  "integer_value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "global_id"
+    t.boolean  "imported"
   end
 
   create_table "signs", :force => true do |t|
@@ -135,11 +142,12 @@ ActiveRecord::Schema.define(:version => 20100316145742) do
   end
 
   create_table "sites", :force => true do |t|
-    t.string   "global_id"
     t.text     "locations"
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "global_id"
+    t.boolean  "imported"
   end
 
   create_table "treatments", :force => true do |t|

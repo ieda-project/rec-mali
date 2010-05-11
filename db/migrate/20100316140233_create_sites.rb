@@ -1,10 +1,12 @@
 class CreateSites < ActiveRecord::Migration
   def self.up
     create_table :sites do |t|
-      t.string :global_id
       t.text :locations
       t.string :phone
       t.timestamps
+
+      t.string :global_id
+      t.boolean :imported
     end
   end
 

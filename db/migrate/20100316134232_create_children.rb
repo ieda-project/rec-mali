@@ -4,9 +4,11 @@ class CreateChildren < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.date :born_on
-      t.string :global_id
       t.boolean :gender
       t.timestamps
+
+      t.string :global_id
+      t.boolean :imported
     end
     add_index :children, :global_id
   end
