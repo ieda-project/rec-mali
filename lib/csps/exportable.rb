@@ -1,10 +1,16 @@
 module Csps::Exportable
+  MODELS = []
   def self.included model
+    (MODELS << model.name).uniq!
     model.send :extend, ClassMethods
     model.send :attr_readonly, :imported
     model.send :before_create, :set_imported
     model.send :after_create, :fill_global_id
     model.metaclass.delegate :local, to: :scoped
+  end
+
+  def self.models
+    MODELS.map &:constantize
   end
 
   protected
