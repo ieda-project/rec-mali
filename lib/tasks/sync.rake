@@ -1,11 +1,30 @@
+def check_sync_remote
+  unless ENV['REMOTE'].present? && File.directory?(ENV['REMOTE'])
+    STDERR.puts 'Error: Please specify a data directory with REMOTE'
+    exit 1
+  end
+end
+
 namespace :sync do
-  desc 'Dump the database for syncing'
-  task :dump => :environment do
-    target = ENV['TARGET']
-    unless target.present? && File.directory?(target)
-      STDERR.puts 'Error: Please specify a target directory with TARGET'
-      exit 1
+  desc 'Synchronize'
+  task :perform => [ :up, :down ]
+
+  desc 'Read remote databases'
+  task :down => :environment do
+    check_sync_remote
+    p = %r|/([a-z0-9_-]+)/([a-z0-9_]+)\.csps\Z|
+    Dir.glob("#{ENV['REMOTE']}/*/*.csps") do |path|
+      host, model = path.scan(p).first
+      next if host == Csps.site
+      klass = model.camelize.constantize rescue next
+      File.open(path, 'r') { |src| klass.import_from src }
     end
+  end
+
+  desc 'Dump local database'
+  task :up => :environment do
+    check_sync_remote
+    target = File.join ENV['REMOTE'], Csps.site
 
     unless Rails.env.production?
       # Load all models
@@ -17,20 +36,7 @@ namespace :sync do
     Csps::Exportable.models.each do |model|
       puts "Exporting #{model} (#{model.local.count})"
       File.open("#{target}/#{model.name.underscore}.csps", 'w') do |out|
-        columns = (model.column_names - [ model.primary_key, 'imported' ]).sort
-        out.puts columns.join(',')
-
-        model.local.order(:created_at).each do |record|
-          columns.each do |col|
-            v = record.send col
-            out.puts case v
-              when true then 't'
-              when false then 'f'
-              when nil then 'n'
-              else ':' + v.to_s.gsub("\n", "\\\n")
-            end
-          end
-        end
+        model.export_to out
       end
     end
   end
