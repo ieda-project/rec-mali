@@ -1,0 +1,23 @@
+%section.profile
+  %div
+    %img(alt='')
+  %div
+    %h1= @child.name
+    %p
+      #{@child.gender ? 'Né' : 'Née'} le #{@child.born_on},
+      #{@child.age_in_months} mois
+      %br/
+      Village: #{@child.village.try(:name) || '-'}
+  %div
+    %h2 Dernières mesures
+    - if @child.last_visit
+      = partial 'measurements', locals: { diag: @child.last_visit }
+    - else
+      %p Never measured.
+
+- for diag in @child.diagnostics.order('id DESC').limit(5) do
+  %section.consultation
+    %h2
+      Consultation du #{diag.done_on}
+      %span.by par #{diag.author.name}
+    %table

@@ -1,0 +1,9 @@
+%form#login(method='post' action=session_path)
+  %div
+    %label(for='session_login') Nom d'utilisateur
+    %input#session_login(type='text' name='session[login]')/
+  %div
+    %label(for='session_password') Mot de passe
+    %input#session_password(type='password' name='session[password]')/
+  %div
+    %button(type='submit') Connexion

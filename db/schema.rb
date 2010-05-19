@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100316145742) do
+ActiveRecord::Schema.define(:version => 20100519175415) do
 
   create_table "child_photos", :force => true do |t|
     t.integer  "child_id"
@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(:version => 20100316145742) do
   add_index "child_photos", ["global_id"], :name => "index_child_photos_on_global_id"
 
   create_table "children", :force => true do |t|
+    t.integer  "village_id"
     t.string   "first_name"
     t.string   "last_name"
     t.date     "born_on"
     t.boolean  "gender"
+    t.datetime "last_visit_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "global_id"
@@ -163,6 +165,12 @@ ActiveRecord::Schema.define(:version => 20100316145742) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "login"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "villages", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
