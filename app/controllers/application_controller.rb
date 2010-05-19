@@ -1,3 +1,45 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  include Wopata::ActionController::Statuses
+  authenticate_from :session
+
+  protected
+
+  class << self
+    def fetch model, opts={}
+      module_eval "def model; '#{model}'; end"
+      fp = Array(opts.delete(:parents) || opts.delete(:parent) || []).map do |ref|
+        "if params[:#{ref}_id]
+           @parent = @#{ref} = #{ref.to_s.camelize}.from_param(params[:#{ref}_id])
+           return @parent || not_found
+         end"
+      end
+      if fp.any?
+        fp << 'not_found' if opts[:root] == false
+        module_eval "
+          def fetch_parent
+            #{fp.join("\n")}
+          end", __FILE__, __LINE__
+        module_eval "
+          def fetch 
+            @object = @#{model.underscore} =
+            (@parent ?
+             @parent.#{model.underscore.pluralize} :
+             #{model}).from_param(params[:id]) || not_found
+          end", __FILE__, __LINE__
+      else
+        module_eval "
+          def fetch
+            @object = @#{model.underscore} = #{model}.from_param(params[:id]) || not_found
+          end", __FILE__, __LINE__
+      end
+
+      opts[:only] = [ :show, :edit, :update, :destroy, *(opts[:also] || []) ] unless opts[:only] || opts[:except]
+      prepend_before_filter :fetch, opts
+      prepend_before_filter :fetch_parent if fp.any?
+    end
+  end
+
+  def login_required
+    logged_in? || denied
+  end
 end
