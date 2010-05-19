@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include Wopata::ActionController::Statuses
   authenticate_from :session
   attr_reader :back_title, :back_url
-  helper_method :back_title, :back_url, :back?
+  helper_method :back_title, :back_url, :back?, :page
 
   def back title, url
     @back_title, @back_url = title, url
@@ -12,15 +12,18 @@ class ApplicationController < ActionController::Base
     !!@back_url
   end
 
+  def page
+    params[:p]
+  end
+
   protected
 
   class << self
     def fetch model, opts={}
-      module_eval "def model; '#{model}'; end"
+      module_eval "def model; #{model}; end"
       fp = Array(opts.delete(:parents) || opts.delete(:parent) || []).map do |ref|
         "if params[:#{ref}_id]
-           @parent = @#{ref} = #{ref.to_s.camelize}.from_param(params[:#{ref}_id])
-           return @parent || not_found
+           @parent = @#{ref} = #{ref.to_s.camelize}.find(params[:#{ref}_id]) rescue return(not_found)
          end"
       end
       if fp.any?
@@ -34,12 +37,12 @@ class ApplicationController < ActionController::Base
             @object = @#{model.underscore} =
             (@parent ?
              @parent.#{model.underscore.pluralize} :
-             #{model}).from_param(params[:id]) || not_found
+             #{model}).find(params[:id]) rescue not_found
           end", __FILE__, __LINE__
       else
         module_eval "
           def fetch
-            @object = @#{model.underscore} = #{model}.from_param(params[:id]) || not_found
+            @object = @#{model.underscore} = #{model}.find(params[:id]) rescue not_found
           end", __FILE__, __LINE__
       end
 
