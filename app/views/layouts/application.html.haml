@@ -1,0 +1,16 @@
+!!! XML
+!!! 5
+%html
+  %head
+    %title CSPS
+    = stylesheet_link_tag 'screen', media: 'screen'
+  %body
+    %header
+      - if back?
+        %nav#prev= link_to back_title, back_url
+      - form_tag session_path, method: 'delete' do
+        Agent:
+        %span#user= current_user.name
+        %button(type="submit") Logout
+
+= yield

@@ -1,0 +1,241 @@
+body
+  width: 1000px
+  background-color: #ddd
+  margin: 10px auto
+  font-family: "Lucida Grande"
+  font-size: 12px
+form#login
+  background-color: white
+  -webkit-border-radius: 12px
+  padding: 10px
+  width: 410px
+  margin: 100px auto
+  div>*
+    display: inline-block
+    width: 200px
+    font-size: 1.3em
+  div:last-child
+    margin-top: 10px
+    text-align: center
+
+h1
+  color: maroon
+  font-size: 1.4em
+
+h2
+  font-size: 1.4em
+  span.by
+    display: block
+    float: right
+
+input
+  &[type=checkbox] + button
+    border: none
+    cursor: pointer
+    position: relative
+    display: inline-block
+    background-color: #999
+    padding: 2px
+    padding-right: 1em
+    -webkit-border-radius: 6px
+  &:checked + button
+    padding-right: 2px
+    padding-left: 1em
+  &[type=checkbox] + button:after
+    -webkit-border-radius: 4px
+    font-size: 10px
+    padding: 2px
+    display: inline-block
+    width: 3em
+    text-align: center
+    content: 'NON'
+    background-color: #ddd
+    color: #777
+  &:checked + button:after
+    content: 'OUI'
+    background-color: #dfd
+    color: black
+
+section *
+  &:first-child
+    margin-top: 0
+  &:last-child
+    margin-bottom: 0
+
+section>h2
+  &:first-child
+    background-color: #f96
+    margin: -10px
+    margin-bottom: 10px
+    padding: 10px
+    border-bottom: solid 1px #888
+    -webkit-border-top-left-radius: 12px
+    -webkit-border-top-right-radius: 12px
+  &:last-child
+    -webkit-border-radius: 12px
+    border-bottom: none
+    margin-bottom: -10px
+
+header>*
+  line-height: 29px
+
+header
+  position: relative
+  display: block
+  height: 29px
+  form
+    float: right
+    margin: 0 10px
+    font-size: 16px
+  #user
+    font-weight: bold
+  button
+    width: 26px
+    height: 26px
+    position: relative
+    top: -4px
+    border: none
+    background: url(../images/logout.png) transparent
+    color: transparent
+    font-size: 0
+
+nav
+  display: block
+  text-align: center
+  &#prev
+    float: left
+  p.hint
+    background-color: white
+    -webkit-border-radius: 6px
+    margin: 0
+    padding: 0 7px
+    display: inline-block
+    font-size: 12px
+    height: 29px
+    line-height: 29px
+  a
+    display: inline-block
+    font-size: 12px
+    height: 29px
+    line-height: 29px
+    text-transform: uppercase
+    position: relative
+    padding: 0 2px 0 9px
+    margin: 0 17px 0 10px
+    text-decoration: none
+    /* Overrideable:
+    background: url(../images/bnl.png)
+    color: white
+    &:after
+      display: block
+      position: absolute
+      top: 0
+      right: -7px
+      content: ""
+      height: 29px
+      width: 7px
+      background: url(../images/bnr.png) center right no-repeat
+  &#prev a
+    background-image: url(../images/bpl.png)
+    padding-left: 16px
+
+section
+  /* One section is 960px wide
+  background-color: #fff
+  display: block
+  margin: 10px
+  padding: 10px
+  -webkit-border-radius: 12px
+  &.profile
+    /* One section is 980px wide
+    background-color: transparent
+    padding: 0
+
+section form div
+  float: left
+  padding: 2px 0
+  width: 50%
+  label
+    display: inline-block
+    width: 35%
+  input
+    width: 270px
+
+table
+  background-color: #bbb
+  margin: 1em 0
+  width: 100%
+  border-spacing: 1px
+  border: solid 1px #bbb
+
+th, td
+  text-align: left
+  padding: 2px 4px
+
+th
+  background-color: #fed
+  border: solid 1px white
+
+td
+  background-color: white
+
+table+div.pagination
+  margin: -1em 0 0 0
+  border: solid 2px #bbb
+  border-top: none
+  background-color: #fed
+  form
+    text-align: center
+    margin: 0
+    padding: 2px
+    border: solid 1px white
+
+div.pagination
+  input
+    text-align: right
+    width: 2em
+  a
+    text-decoration: none
+    font-size: 1.2em
+    color: black
+
+.profile>div
+  float: left
+  background-color: white
+  -webkit-border-radius: 12px
+  padding: 4px
+
+.profile
+  h1
+    font-size: 1.6em
+  h2
+    font-size: 1em
+  img
+    width: 130px
+    height: 130px
+    display: block
+    -webkit-border-radius: 8px
+  div+div
+    margin-left: 10px
+    padding: 10px
+    width: 512px
+    height: 118px
+  div+div+div
+    margin-left: 10px
+    padding: 10px
+    width: 270px
+    height: 118px
+
+.consultation
+  table
+    float: left
+    width: 60%
+  table+table
+    float: right
+    width: 38%
+
+.profile:after, .consultation:after, form:after
+  display: block
+  content: ""
+  clear: both
+  height: 0
