@@ -1,6 +1,16 @@
 class ApplicationController < ActionController::Base
   include Wopata::ActionController::Statuses
   authenticate_from :session
+  attr_reader :back_title, :back_url
+  helper_method :back_title, :back_url, :back?
+
+  def back title, url
+    @back_title, @back_url = title, url
+  end
+
+  def back?
+    !!@back_url
+  end
 
   protected
 
@@ -41,5 +51,9 @@ class ApplicationController < ActionController::Base
 
   def login_required
     logged_in? || denied
+  end
+
+  [ :login_required ].each do |filter|
+    class_eval "def self.#{filter} *args; before_filter :#{filter}, *args; end", __FILE__, __LINE__
   end
 end
