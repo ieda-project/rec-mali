@@ -6,9 +6,19 @@ if Rails.env.development?
   end
 
   100.times do
-    Child.create first_name: Faker::Name.first_name,
-                 last_name:  Faker::Name.last_name,
-                 born_on:    Date.parse('1999-08-11')+rand(1500),
-                 village_id: rand(4)+1
+    child = Child.create(
+      first_name: Faker::Name.first_name,
+      last_name:  Faker::Name.last_name,
+      born_on:    Date.parse('1999-08-11')+rand(1500),
+      village_id: rand(4)+1)
+
+    date = Date.parse('2010-05-05')
+    (rand(5)+3).times do
+      Diagnostic.create(
+        child: child,
+        author_id: 1,
+        done_on: date)
+      date += 1
+    end
   end
 end
