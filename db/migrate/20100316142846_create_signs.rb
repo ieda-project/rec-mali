@@ -1,7 +1,7 @@
 class CreateSigns < ActiveRecord::Migration
   def self.up
     create_table :signs do |t|
-      t.string :type, :key, :values
+      t.string :type, :key, :question, :values
       t.references :illness
       t.integer :sequence, :min_value, :max_value
       t.timestamps

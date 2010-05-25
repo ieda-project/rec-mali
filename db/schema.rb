@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
 
   create_table "illnesses", :force => true do |t|
     t.string   "key"
+    t.string   "name"
     t.integer  "sequence"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -134,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
   create_table "signs", :force => true do |t|
     t.string   "type"
     t.string   "key"
+    t.string   "question"
     t.string   "values"
     t.integer  "illness_id"
     t.integer  "sequence"

@@ -1,7 +1,7 @@
 class CreateIllnesses < ActiveRecord::Migration
   def self.up
     create_table :illnesses do |t|
-      t.string :key
+      t.string :key, :name
       t.integer :sequence
       t.timestamps
     end
