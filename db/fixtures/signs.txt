@@ -1,0 +1,29 @@
+danger|Signes de danger
+  boire|L’enfant est il capable de boire ou de prendre le sein ?|boolean
+  vomit|L’enfant vomit t’il tout ce qu’il consomme ?|boolean
+  convulsions_passe|L’enfant a-t-il eu  des convulsions ?|boolean
+  lethargie|L'enfant est-il léthargique ou inconscient ?|boolean
+  convulstions_present|L’enfant convulse t-il actuellement ?|boolean
+
+oreille|Affection de l'oreille
+  mal|L'enfant a-t-il mal aux oreilles ?|boolean
+  ecoulement|Y-a-t-il un écoulement ?|boolean
+  duree_ecoulement|Si oui, depuis combien de temps ?|integer|0|100
+  pus_ecoulement|Regarder si du pus coule d’une oreille|boolean
+  gonflement|Rechercher un gonflement douloureux derrière l’oreille|boolean
+
+anemie|Amémie
+  paleur_palmaire|Observer et rechercher la pâleur palmaire|list|no;medium;high
+
+nutrition|Etat nutritionel
+  amaigrissement|Rechercher un amaigrissement visible et sévère|boolean
+  oedemes|Rechercher des oedèmes au niveau des deux pieds|list|no;yes+;yes++;yes+++
+  poids_age|Le poids pour l'âge est-il très faible ?|boolean
+
+diarrhee|Diarrhée
+  diarrhee_duree|Depuis combien de temps ?|integer|0|100    
+  sang_selles|Y a-t-il du sang dans les selles ?|boolean
+  diarrhee_etat_enfant|L'enfant est-il léthargique ou inconscient? Ou Agité et irritable?|list|none;lethargique_inconscient;agite_irritable
+  yeux_enfonces|Regarder si les yeux de l’enfant sont enfoncés|boolean
+  soif|Offrir à boire à l’enfant : est-il incapable de boire ou boit-il difficilement? Ou  boit-il avidement, est-il assoiffé ?|list|normal;avide;impossible
+  signe_pli|Pincer la peau de l’abdomen. Le pli cutané s’efface-t-il ?|list|normal;lentement;tres_lentement

@@ -20,3 +20,35 @@ end
     date += 1
   end
 end
+
+Illness.transaction do
+  File.open('db/fixtures/signs.txt', 'r') do |f|
+    illness, seq = nil, 0
+    f.each_line do |line|
+      next if line.blank?
+      data = line.chomp.strip.split '|'
+      if line =~ /\A\s/
+        # Sign
+        hash = {
+          illness: illness,
+          key: data[0],
+          question: data[1] }
+        case data[2]
+          when 'integer'
+            hash[:min_value] = data[3]
+            hash[:max_value] = data[4]
+          when 'list'
+            hash[:values] = data[3]
+        end
+        (data[2].camelize + 'Sign').constantize.create hash
+      else
+        # Illness
+        illness = Illness.create(
+          key: data[0],
+          name: data[1],
+          sequence: seq)
+        seq += 1
+      end
+    end
+  end
+end
