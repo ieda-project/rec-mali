@@ -27,10 +27,14 @@
         %th Village
         %th Dernière visite
     %tbody
-      - for child in @children.includes(:village).paginate(page, window: 20) do
+      - for child in @children.includes(:village).paginate(page, window: 15) do
         %tr
           %td= link_to child.first_name, child
           %td= link_to child.last_name, child
           %td= child.born_on
           %td= child.village.name
           %td= child.last_visit_at
+
+%nav
+  %p.hint Le patient se présente au dispensaire pour la première fois ?
+  = link_to 'Nouveau patient', new_child_path

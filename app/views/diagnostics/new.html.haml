@@ -1,0 +1,14 @@
+- form_for @diagnostic, url: child_diagnostics_path(@child) do |form|
+  %section.profile
+    %div
+      %img(alt='')
+    %div
+      %h1= @child.name
+      %p
+        #{@child.gender ? 'Né' : 'Née'} le #{@child.born_on},
+        #{@child.age_in_months} mois
+        %br/
+        Village: #{@child.village.try(:name) || '-'}
+    %div= partial 'diagnostics/new_measurements', locals: { form: form }
+  %section.consultation
+    = partial 'diagnostics/new', locals: { form: form }

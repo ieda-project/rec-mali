@@ -1,0 +1,10 @@
+- for i in Illness.order(:sequence) do
+  %fieldset
+    %legend= i.name
+    %table
+      - i.signs.each_with_index do |sign,index|
+        - form.fields_for :sign_answers do |fields| # This does not work
+          %tr
+            %th(scope="row")= sign.question
+            %td
+              = partial "sign_#{sign.kind}", locals: { form: fields, sign: sign }

@@ -12,4 +12,17 @@ class ChildrenController < ApplicationController
   def show
     back 'Rechercher un autre patient', children_path
   end
+
+  def new
+    @child = Child.new
+  end
+
+  def create
+    @child = Child.new params[:child]
+    if @child.save
+      see_other child_path
+    else
+      unprocessable action: :new
+    end
+  end
 end
