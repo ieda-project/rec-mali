@@ -11,6 +11,7 @@ end
     born_on:    Date.parse('1999-08-11')+rand(1500),
     village_id: rand(4)+1)
 
+=begin
   date = Date.parse('2010-05-05')
   (rand(5)+3).times do
     Diagnostic.create(
@@ -19,6 +20,7 @@ end
       done_on: date)
     date += 1
   end
+=end
 end
 
 Illness.transaction do
