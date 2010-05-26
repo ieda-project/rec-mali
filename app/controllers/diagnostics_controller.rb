@@ -2,10 +2,7 @@ class DiagnosticsController < ApplicationController
   before_filter :fetch_child
 
   def new
-    @diagnostic = @child.diagnostics.new
-    Sign.order(:sequence).each do |i| 
-      @diagnostic.sign_answers.build sign: i
-    end
+    @diagnostic = @child.diagnostics.new.prebuild
   end
 
   def create
@@ -15,9 +12,9 @@ class DiagnosticsController < ApplicationController
     answers.each { |a| @diagnostic.sign_answers.build(a) }
 
     if @diagnostic.save
-      redirect_to @child
+      see_other @child
     else
-      render action: :new
+      unprocessable action: :new
     end
   end
 

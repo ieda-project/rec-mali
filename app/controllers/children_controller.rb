@@ -15,14 +15,23 @@ class ChildrenController < ApplicationController
 
   def new
     @child = Child.new
+    @diagnostic = @child.diagnostics.build.prebuild
   end
 
   def create
+    puts params[:child].inspect
+    diag = params[:child].delete(:diagnostic)
+    answers = diag.delete(:sign_answers).values
     @child = Child.new params[:child]
+    @diagnostic = @child.diagnostics.build diag
+    @diagnostic.child = @child
+    @diagnostic.author = current_user
+    answers.each { |a| @diagnostic.sign_answers.build(a) }
+
     if @child.save
-      see_other child_path
+      see_other @child
     else
-      unprocessable action: :new
+      render action: 'new'
     end
   end
 end

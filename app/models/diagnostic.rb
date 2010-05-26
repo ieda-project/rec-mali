@@ -14,6 +14,20 @@ class Diagnostic < ActiveRecord::Base
 
   validates_presence_of :child
 
+  def type_name
+    '-'
+  end
+
+  def prebuild
+    if new_record?
+      sign_answers.clear
+      Sign.order(:sequence).each do |i| 
+        sign_answers.build sign: i
+      end
+    end
+    self
+  end
+
   protected
 
   def update_child

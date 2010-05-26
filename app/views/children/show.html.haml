@@ -11,7 +11,7 @@
   %div
     %h2 Dernières mesures
     - if @child.last_visit
-      = partial 'measurements', locals: { diag: @child.last_visit }
+      = partial 'measurements', locals: { diagnostic: @child.last_visit }
     - else
       %p Never measured.
 
@@ -21,6 +21,13 @@
       Consultation du #{diag.done_on}
       %span.by par #{diag.author.name}
     %table
+      %tr
+        %th(scope="row") Date de consulation
+        %td= diag.done_on
+      %tr
+        %th(scope="row") Méthode de diagnostic
+        %td= diag.type_name
+    = partial 'measurements', locals: { diagnostic: diag }
 
 %nav
   %p.hint Le patient se présente à nouveau au dispensaire ?

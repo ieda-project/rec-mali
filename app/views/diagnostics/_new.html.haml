@@ -3,9 +3,11 @@
   %fieldset
     %legend= i.name
     %table
-      - @diagnostic.sign_answers.for(i).each do |answer|
+      - form.object.sign_answers.for(i).each do |answer|
         - form.fields_for "sign_answers][#{count}", answer do |fields|
           %tr
             %th(scope="row")= answer.sign.question
-            %td= partial "sign_#{answer.sign.kind}", locals: { sign: answer.sign, form: fields }
+            %td
+              = fields.hidden_field :sign_id
+              = partial "diagnostics/sign_#{answer.sign.kind}", locals: { sign: answer.sign, form: fields }
         - count += 1

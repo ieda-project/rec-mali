@@ -1,3 +1,4 @@
+= @diagnostic.errors
 - form_for @child do |form|
   %section.profile
     %div
@@ -13,7 +14,8 @@
         %br/
         Village:
         = form.select :village_id, Village.to_select
-    - form.fields_for :diagnostic do |fields|
+    - form.fields_for :diagnostic, @diagnostic do |fields|
       %div= partial 'diagnostics/new_measurements', locals: { form: fields }
   %section
-    = partial 'diagnostics/new', locals: { form: form }
+    - form.fields_for :diagnostic, @diagnostic do |fields|
+      = partial 'diagnostics/new', locals: { form: fields }
