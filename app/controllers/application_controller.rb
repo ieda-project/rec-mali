@@ -2,7 +2,11 @@ class ApplicationController < ActionController::Base
   include Wopata::ActionController::Statuses
   authenticate_from :session
   attr_reader :back_title, :back_url
-  helper_method :back_title, :back_url, :back?, :page
+  helper_method :back_title, :back_url, :back?, :page, :show?
+
+  def show?
+    params[:action] == 'show'
+  end
 
   def back title, url
     @back_title, @back_url = title, url

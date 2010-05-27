@@ -16,6 +16,7 @@ class ChildrenController < ApplicationController
   def new
     @child = Child.new
     @diagnostic = @child.diagnostics.build.prebuild
+    back 'Rechercher un autre patient', children_path
   end
 
   def create
@@ -32,6 +33,22 @@ class ChildrenController < ApplicationController
       see_other @child
     else
       render action: 'new'
+    end
+  end
+
+  def edit
+    if request.xhr?
+      render partial: 'edit' if request.xhr?
+    else
+      render action: 'show'
+    end
+  end
+
+  def update
+    if @child.update_attributes(params[:child])
+      see_other @child
+    else
+      render action: 'show'
     end
   end
 end

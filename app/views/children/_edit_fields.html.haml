@@ -1,0 +1,10 @@
+%h1
+  = form.text_field :first_name, 'data-label' => 'Prenom', size: 16
+  = form.text_field :last_name, 'data-label' => 'Nom', size: 16
+%p
+  = form.select :gender, [ %w(Né 1), %w(Née 0) ]
+  le
+  = form.text_field :born_on, 'data-label' => 'Date', size: 10
+  %br/
+  Village:
+  = form.select :village_id, Village.to_select

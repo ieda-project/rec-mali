@@ -1,0 +1,7 @@
+%h1= child.name
+%p
+  #{child.gender ? 'Né' : 'Née'} le #{child.born_on},
+  #{child.age_in_months} mois
+  %br/
+  Village: #{child.village.try(:name) || '-'}
+%button.edit(type="button") Editer

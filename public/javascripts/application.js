@@ -43,4 +43,13 @@ Element.behaviour(function() {
     this.cb.checked = !this.cb.checked
     return false
   })
+
+  this.getElements('.editable').each(function (div) {
+    div.getElement('button.edit').addEvent('click', function() {
+      new Request.HTML({
+        link: 'ignore', update: div,
+        onSuccess: function() { div.updated() }
+      }).get(div.get('data-edit-url'))
+    })
+  })
 })
