@@ -4,9 +4,4 @@ class SignAnswer < ActiveRecord::Base
   belongs_to :diagnostic
 
   validates_presence_of :sign
-  before_create :set_type
-
-  def set_type
-    self.type = 'SignBooleanAnswer'
-  end
 end

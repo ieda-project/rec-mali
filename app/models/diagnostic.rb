@@ -6,8 +6,8 @@ class Diagnostic < ActiveRecord::Base
   has_many :illness_answers
   has_many :sign_answers do
     def build data
-      sign = data.delete(:sign) || Sign.find(data.delete(:sign_id))
-      push(sign ? sign.build_answer(data) : SignAnswer.new(data))
+      sign = data.delete(:sign) || Sign.find(data.delete(:sign_id)) rescue nil
+      returning(sign ? sign.build_answer(data) : SignAnswer.new(data)) { |sa| push sa }
     end
     def for illness
       select { |a| a.sign.illness == illness }
