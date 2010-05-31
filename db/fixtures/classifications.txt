@@ -1,0 +1,22 @@
+danger|Pas de signes généraux de dangers|!(danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulstions_present)
+danger|Signes généraux de dangers présents|danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulstions_present
+
+oreille|Pas d'infection|!oreille.mal
+oreille|Infection chronique|oreille.ecoulement AND oreille.pus_ecoulement AND (duree_ecoulement >= 14)
+oreille|Infection aiguë|(oreille.ecoulement AND oreille.pus_ecoulement AND (duree_ecoulement >= 14)) OR oreille.mal
+oreille|Mastoïdïte|oreille.gonflement
+
+anemie|Pas d'anémie|anemie.paleur_palmaire == low
+anemie|Anémie|anemie.paleur_palmaire == medium
+anemie|Anémie grave|anemie.paleur_palmaire == high
+
+nutrition|Pas de poids très faible|!nutrition.amaigrissement AND (nutrition.oedemes == no) AND !nutrition.poids_age
+nutrition|Poids très faible|nutrition.poids_age
+nutrition|Malnutrition sévère|nutrition.amaigrissement OR (nutrition.oedemes != no)
+
+diarrhee|Pas de déshydratation|!TWO_OF((diarrhee.diarrhee_etat_enfant == agite_irritable), diarrhee.yeux_enfonces, (diarrhee.soif == avide), (diarrhee.signe_pli == lentement)) AND !TWO_OF((diarrhee.diarrhee_etat_enfant == agite_irritable), diarrhee.yeux_enfonces, (diarrhee.soif == impossible), (diarrhee.signe_pli == tres_lentement))
+diarrhee|Signes évidents de déshydratation|TWO_OF((diarrhee.diarrhee_etat_enfant == agite_irritable), diarrhee.yeux_enfonces, (diarrhee.soif == avide), (diarrhee.signe_pli == lentement))
+diarrhee|Déshydratation sévère|TWO_OF((diarrhee.diarrhee_etat_enfant == agite_irritable), diarrhee.yeux_enfonces, (diarrhee.soif == impossible), (diarrhee.signe_pli == tres_lentement))
+diarrhee|Diarrhée persistente|(diarrhee.diarrhee_duree >= 14) AND (!TWO_OF((diarrhee.diarrhee_etat_enfant == agite_irritable), diarrhee.yeux_enfonces, (diarrhee.soif == avide), (diarrhee.signe_pli == lentement)) AND !TWO_OF((diarrhee.diarrhee_etat_enfant == agite_irritable), diarrhee.yeux_enfonces, (diarrhee.soif == impossible), (diarrhee.signe_pli == tres_lentement)))
+diarrhee|Diarrhée persistente sévère|(diarrhee.diarrhee_duree >= 14) AND (TWO_OF((diarrhee.diarrhee_etat_enfant == agite_irritable), diarrhee.yeux_enfonces, (diarrhee.soif == avide), (diarrhee.signe_pli == lentement)) OR TWO_OF((diarrhee.diarrhee_etat_enfant == agite_irritable), diarrhee.yeux_enfonces, (diarrhee.soif == impossible), (diarrhee.signe_pli == tres_lentement)))
+diarrhee|Dysenterie|(diarrhee.diarrhee_duree >= 14) AND diarrhee.sang_selles

@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
 
   create_table "classifications", :force => true do |t|
     t.string   "key"
+    t.string   "name"
     t.text     "equation"
     t.integer  "illness_id"
     t.datetime "created_at"

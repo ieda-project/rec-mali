@@ -20,7 +20,6 @@ class Diagnostic < ActiveRecord::Base
       end
     end
   end
-  has_many :classifications
   before_create :set_date
   after_create :update_child
 

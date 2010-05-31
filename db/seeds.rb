@@ -23,6 +23,8 @@ end
 =end
 end
 
+illnesses = {}
+
 Illness.transaction do
   File.open('db/fixtures/signs.txt', 'r') do |f|
     illness, seq = nil, 0
@@ -49,8 +51,19 @@ Illness.transaction do
           key: data[0],
           name: data[1],
           sequence: seq)
+        illnesses[illness.key] = illness
         seq += 1
       end
     end
+  end
+end
+
+File.open('db/fixtures/classifications.txt', 'r') do |f|
+  f.each_line do |line|
+    next if line.blank?
+    illness, name, equation = line.split '|'
+    illnesses[illness].classifications.create(
+      name: name,
+      equation: equation)
   end
 end
