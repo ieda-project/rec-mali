@@ -2,10 +2,22 @@ class Diagnostic < ActiveRecord::Base
   include Csps::Exportable
   belongs_to :child
   belongs_to :author, class_name: 'User'
+  has_and_belongs_to_many :classifications
   has_many :illness_answers
   has_many :sign_answers do
+    def build data
+      sign = data.delete(:sign) || Sign.find(data.delete(:sign_id))
+      push(sign ? sign.build_answer(data) : SignAnswer.new(data))
+    end
     def for illness
       select { |a| a.sign.illness == illness }
+    end
+    def to_hash
+      returning({}) do |hash|
+        includes(sign: :illness).each do |answer|
+          hash.store answer.sign.full_key, answer.value
+        end
+      end
     end
   end
   has_many :classifications
