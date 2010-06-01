@@ -27,7 +27,7 @@ class ChildrenController < ApplicationController
     @diagnostic = @child.diagnostics.build diag
     @diagnostic.child = @child
     @diagnostic.author = current_user
-    answers.each { |a| @diagnostic.sign_answers.build(a) }
+    answers.each { |a| @diagnostic.sign_answers.add(a) }
 
     if @child.save
       see_other @child
