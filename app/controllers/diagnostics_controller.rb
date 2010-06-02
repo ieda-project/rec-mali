@@ -2,6 +2,7 @@ class DiagnosticsController < ApplicationController
   before_filter :fetch_child
 
   def show
+    back 'Toutes les consultations', @child
     @diagnostic = @child.diagnostics.find params[:id]
   rescue
     not_found
