@@ -62,7 +62,7 @@ class Diagnostic < ActiveRecord::Base
     self.done_on ||= Date.today
   end
 
-  def clear_classifications
+  def clear_classifications obj
     classifications.clear
   end
 end
