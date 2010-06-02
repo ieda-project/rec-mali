@@ -1,11 +1,14 @@
 class DiagnosticsController < ApplicationController
   before_filter :fetch_child
+  before_filter :fetch, only: [ :show, :calculations, :edit, :update ]
 
   def show
     back 'Toutes les consultations', @child
-    @diagnostic = @child.diagnostics.find params[:id]
-  rescue
-    not_found
+  end
+
+  def calculations
+    Classification.run @diagnostic
+    see_other [ @child, @diagnostic ]
   end
 
   def new
@@ -26,13 +29,9 @@ class DiagnosticsController < ApplicationController
   end
 
   def edit
-    @diagnostic = @child.diagnostics.find params[:id]
-  rescue
-    not_found
   end
 
   def update
-    @diagnostic = @child.diagnostics.find params[:id]
     Diagnostic.transaction do
       params[:diagnostic].delete(:sign_answers).each_value do |a|
         @diagnostic.sign_answers.add(a)
@@ -49,5 +48,11 @@ class DiagnosticsController < ApplicationController
 
   def fetch_child
     @child = Child.find(params[:child_id]) or not_found
+  end
+
+  def fetch
+    @diagnostic = @child.diagnostics.find params[:id]
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
 end

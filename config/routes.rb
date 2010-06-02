@@ -3,6 +3,7 @@ Csps::Application.routes.draw do |map|
 
   resources :children do
     resources :diagnostics do
+      member { post :calculations }
     end
   end
 

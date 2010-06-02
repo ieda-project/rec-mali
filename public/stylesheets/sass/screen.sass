@@ -106,6 +106,9 @@ nav
   text-align: center
   &#prev
     float: left
+    a
+      background-image: url(../images/bpl.png)
+      padding-left: 16px
   p.hint
     background-color: white
     -webkit-border-radius: 6px
@@ -115,31 +118,29 @@ nav
     font-size: 12px
     height: 29px
     line-height: 29px
-  a
-    display: inline-block
-    font-size: 12px
+nav a, nav button, section button[type=submit]
+  display: inline-block
+  border: none
+  font-size: 12px
+  height: 29px
+  line-height: 29px
+  text-transform: uppercase
+  position: relative
+  padding: 0 2px 0 9px
+  margin: 0 17px 0 10px
+  text-decoration: none
+  /* Overrideable:
+  background: url(../images/bnl.png)
+  color: white
+  &:after
+    display: block
+    position: absolute
+    top: 0
+    right: -7px
+    content: ""
     height: 29px
-    line-height: 29px
-    text-transform: uppercase
-    position: relative
-    padding: 0 2px 0 9px
-    margin: 0 17px 0 10px
-    text-decoration: none
-    /* Overrideable:
-    background: url(../images/bnl.png)
-    color: white
-    &:after
-      display: block
-      position: absolute
-      top: 0
-      right: -7px
-      content: ""
-      height: 29px
-      width: 7px
-      background: url(../images/bnr.png) center right no-repeat
-  &#prev a
-    background-image: url(../images/bpl.png)
-    padding-left: 16px
+    width: 7px
+    background: url(../images/bnr.png) center right no-repeat
 
 section
   /* One section is 960px wide
@@ -276,5 +277,3 @@ div.pagination
     right: 5px
     top: 5px
     border: 0
-    background-color: #ddd
-    -webkit-border-radius: 4px
