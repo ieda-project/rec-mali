@@ -10,3 +10,8 @@
         %tr
           %th(scope="row")= sa.sign.question
           %td= sa.value
+    - cs = @diagnostic.classifications.for(i)
+    - if cs.any?
+      %ul.classification
+        - for c in cs do
+          %li= c.name
