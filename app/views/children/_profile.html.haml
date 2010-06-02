@@ -1,0 +1,11 @@
+%section.profile
+  %div
+    %img(alt='')
+  %div.editable{'data-edit-url' => edit_child_path(@child)}
+    = partial 'children/'+(show? ? 'show' : 'edit'), locals: { child: @child }
+  %div
+    %h2 Dernières mesures
+    - if @child.last_visit
+      = partial 'children/measurements', locals: { diagnostic: @child.last_visit }
+    - else
+      %p Never measured.

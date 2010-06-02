@@ -46,7 +46,7 @@ class ChildrenController < ApplicationController
 
   def update
     if @child.update_attributes(params[:child])
-      see_other @child
+      redirect_to :back
     else
       render action: 'show'
     end

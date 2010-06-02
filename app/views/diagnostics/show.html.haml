@@ -1,0 +1,12 @@
+= partial 'children/profile'
+%section.consultation
+  = partial 'header', locals: { diagnostic: @diagnostic }
+
+- for i in Illness.order(:sequence) do
+  %section.consultation
+    %h2= i.name
+    %table
+      - for sa in @diagnostic.sign_answers.for(i) do
+        %tr
+          %th(scope="row")= sa.sign.question
+          %td= sa.value

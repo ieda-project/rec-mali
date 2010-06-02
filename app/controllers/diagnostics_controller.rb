@@ -1,6 +1,12 @@
 class DiagnosticsController < ApplicationController
   before_filter :fetch_child
 
+  def show
+    @diagnostic = @child.diagnostics.find params[:id]
+  rescue
+    not_found
+  end
+
   def new
     @diagnostic = @child.diagnostics.new.prebuild
   end

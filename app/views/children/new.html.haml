@@ -4,7 +4,7 @@
       %img(alt='')
     %div= partial 'edit_fields', locals: { form: form }
     - form.fields_for :diagnostic, @diagnostic do |fields|
-      %div= partial 'diagnostics/new_measurements', locals: { form: fields }
+      %div= partial 'diagnostics/edit_measurements', locals: { form: fields }
   %section
     - form.fields_for :diagnostic, @diagnostic do |fields|
-      = partial 'diagnostics/new', locals: { form: fields }
+      = partial 'diagnostics/edit_signs', locals: { form: fields }

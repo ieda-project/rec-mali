@@ -4,13 +4,18 @@ class Diagnostic < ActiveRecord::Base
   belongs_to :author, class_name: 'User'
   has_and_belongs_to_many :classifications
   has_many :illness_answers
-  has_many :sign_answers do
-    def build data
+  has_many :sign_answers, include: :sign do
+    def add data
       sign = data.delete(:sign) || Sign.find(data.delete(:sign_id)) rescue nil
-      returning(sign ? sign.build_answer(data) : SignAnswer.new(data)) { |sa| push sa }
+      existing = detect { |i| i.sign_id == sign.id }
+      if existing
+        existing.update_attributes data
+      else
+        returning(sign ? sign.build_answer(data) : SignAnswer.new(data)) { |sa| push sa }
+      end
     end
     def for illness
-      select { |a| a.sign.illness == illness }
+       select { |a| a.sign.illness_id == illness.id }
     end
     def to_hash
       returning({}) do |hash|
@@ -30,11 +35,9 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def prebuild
-    if new_record?
-      sign_answers.clear
-      Sign.order(:sequence).each do |i| 
-        sign_answers.build sign: i
-      end
+    sign_ids = sign_answers.map(&:sign_id).to_hash
+    Sign.order(:sequence).each do |i| 
+      sign_answers.build(sign: i) unless sign_ids[i.id]
     end
     self
   end

@@ -1,3 +1,12 @@
+class Array
+  def to_hash &block
+    block ||= proc { true }
+    returning Hash.new do |h|
+      each { |i| h[i] = block.(i) }
+    end
+  end
+end
+
 class Object
   def metaclass
     class << self; self; end

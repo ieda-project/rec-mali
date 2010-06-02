@@ -1,0 +1,13 @@
+%h2
+  = link_to 'Consultation', child_diagnostic_path(@child, diagnostic)
+  du #{diagnostic.done_on}
+  = link_to 'Edit', edit_child_diagnostic_path(@child, diagnostic)
+  %span.by par #{diagnostic.author.name}
+%table
+  %tr
+    %th(scope="row") Date de consulation
+    %td= diagnostic.done_on
+  %tr
+    %th(scope="row") Méthode de diagnostic
+    %td= diagnostic.type_name
+= partial 'children/measurements', locals: { diagnostic: diagnostic }
