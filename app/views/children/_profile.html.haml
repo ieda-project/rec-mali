@@ -1,5 +1,5 @@
 %section.profile
-  %div
+  %div.photo
     %img(alt='')
   %div.editable{'data-edit-url' => edit_child_path(@child)}
     = partial 'children/'+(show? ? 'show' : 'edit'), locals: { child: @child }

@@ -16,6 +16,34 @@ $extend(Element, {
   }
 })
 
+transient = {
+  div: null,
+  open: function(what, style) {
+    if (!this.div) {
+      this.div = new Element('div', { id: 'transient' }).inject(document.body)
+    }
+    this.div.setStyles({
+      width: (style && style.width ? style.width : '400')+'px',
+      visibility: 'hidden' })
+
+    if (typeof(what) == 'object') {
+      if (!what.each) what = [what]
+      what.each(function(i) { this.div.adopt(i) }.bind(this))
+    } else {
+      this.div.innerHTML = what
+    }
+
+    var size = this.div.getSize()
+    this.div.setStyles({
+      left: ((window.innerWidth - size.x) / 2) + 'px',
+      top: ((window.innerHeight - size.y) / 2) + 'px',
+      visibility: 'visible' })
+  },
+  close: function() { this.div.dispose() },
+  ajax: function(url) {
+  }
+}
+
 window.addEvent('domready', function() { document.body.updated() })
 
 Element.behaviour(function() {
@@ -51,5 +79,12 @@ Element.behaviour(function() {
         onSuccess: function() { div.updated() }
       }).get(div.get('data-edit-url'))
     })
+  })
+
+  this.getElements('.photo').addEvent('click', function() {
+    var obj = new Element('object', { width: 300, height: 330 })
+    obj.adopt(new Element('param', { name: 'movie', value: '/flash/photo.swf' }))
+    obj.adopt(new Element('param', { name: 'FlashVars', value: 'url=/boo' }))
+    transient.open(obj, { width: 300 })
   })
 })

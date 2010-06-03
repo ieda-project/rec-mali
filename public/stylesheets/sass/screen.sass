@@ -4,6 +4,19 @@ body
   margin: 10px auto
   font-family: "Lucida Grande"
   font-size: 12px
+
+#transient
+  background-color: white
+  position: fixed
+  -webkit-box-shadow: 0 0 12px black
+  -webkit-border-radius: 6px
+  padding: 10px
+#transient, section
+  *:first-child
+    margin-top: 0
+  *:last-child
+    margin-bottom: 0
+
 form#login
   background-color: white
   -webkit-border-radius: 12px
@@ -57,12 +70,6 @@ input
     content: 'OUI'
     background-color: #dfd
     color: black
-
-section *
-  &:first-child
-    margin-top: 0
-  &:last-child
-    margin-bottom: 0
 
 section>h2
   &:first-child
