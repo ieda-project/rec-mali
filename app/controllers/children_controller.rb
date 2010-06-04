@@ -20,7 +20,6 @@ class ChildrenController < ApplicationController
   end
 
   def create
-    puts params[:child].inspect
     diag = params[:child].delete(:diagnostic)
     answers = diag.delete(:sign_answers).values
 
