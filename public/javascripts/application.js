@@ -82,9 +82,23 @@ Element.behaviour(function() {
   })
 
   this.getElements('.photo').addEvent('click', function() {
+    var link = document.getElement('link[rel=photo-upload-target]')
     var obj = new Element('object', { width: 300, height: 330 })
     obj.adopt(new Element('param', { name: 'movie', value: '/flash/photo.swf' }))
-    obj.adopt(new Element('param', { name: 'FlashVars', value: 'url=/boo' }))
+    obj.adopt(new Element('param', {
+      name: 'FlashVars',
+      value: 'url=' + (this.get('data-action') || window.location.href) +
+             '&field=' + this.get('data-field') +
+             '&domid=' + this.get('id')}))
     transient.open(obj, { width: 300 })
   })
 })
+
+function update_image(id, url) {
+  if (id && id != '') {
+    var div = $(id)
+    div.set('html', '')
+    new Element('img', { src: url, alt: '' }).inject(div)
+  }
+  transient.close()
+}

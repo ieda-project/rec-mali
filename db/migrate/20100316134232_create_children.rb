@@ -7,8 +7,11 @@ class CreateChildren < ActiveRecord::Migration
       t.date :born_on
       t.boolean :gender
       t.datetime :last_visit_at
-      t.timestamps
 
+      t.string :photo_file_name, :photo_content_type
+      t.integer :photo_file_size
+
+      t.timestamps
       t.string :global_id
       t.boolean :imported
     end

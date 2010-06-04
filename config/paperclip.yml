@@ -1,0 +1,6 @@
+development:
+  :path: ":rails_root/public/repo/:class_:attachment/:id_:basename_:style.:extension"
+  :url: "/repo/:class_:attachment/:id_:basename_:style.:extension"
+production:
+  :path: ":rails_root/public/repo/:class_:attachment/:id_:basename_:style.:extension"
+  :url: "/repo/:class_:attachment/:id_:basename_:style.:extension"

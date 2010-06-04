@@ -45,10 +45,18 @@ class ChildrenController < ApplicationController
   end
 
   def update
-    if @child.update_attributes(params[:child])
-      redirect_to :back
-    else
-      render action: 'show'
+    success = @child.update_attributes(params[:child])
+    respond_to do |wants|
+      wants.html do
+        success ? redirect_to(:back) : render(action: :show)
+      end
+      wants.json do
+        if success
+          render json: { photo: { thumbnail: @child.photo.url(:thumbnail) }}
+        else
+          render nothing: true, status: 422
+        end
+      end
     end
   end
 end

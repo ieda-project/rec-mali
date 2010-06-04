@@ -7,6 +7,8 @@ class Child < ActiveRecord::Base
   has_one :last_visit,
           class_name: 'Diagnostic',
           order: 'id DESC'
+  has_attached_file :photo,
+                    styles: { thumbnail: '130x130' }
 
   def age
     born_on ? ((Date.today - born_on) / 365).to_i : nil
