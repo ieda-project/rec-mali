@@ -23,7 +23,11 @@ class ChildrenController < ApplicationController
     puts params[:child].inspect
     diag = params[:child].delete(:diagnostic)
     answers = diag.delete(:sign_answers).values
-    @child = Child.new params[:child]
+
+    @child = Child.temporary.first || Child.new
+    @child.attributes = params[:child]
+    @child.temporary = false
+
     @diagnostic = @child.diagnostics.build diag
     @diagnostic.child = @child
     @diagnostic.author = current_user
@@ -36,6 +40,12 @@ class ChildrenController < ApplicationController
     end
   end
 
+  def temp
+    Child.temporary.destroy_all
+    @child = Child.new params[:child].merge(temporary: true)
+    display_updated @child.save
+  end
+
   def edit
     if request.xhr?
       render partial: 'edit' if request.xhr?
@@ -45,7 +55,12 @@ class ChildrenController < ApplicationController
   end
 
   def update
-    success = @child.update_attributes(params[:child])
+    display_updated @child.update_attributes(params[:child])
+  end
+
+  protected
+
+  def display_updated success
     respond_to do |wants|
       wants.html do
         success ? redirect_to(:back) : render(action: :show)

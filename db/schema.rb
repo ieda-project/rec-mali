@@ -11,17 +11,6 @@
 
 ActiveRecord::Schema.define(:version => 20100519175415) do
 
-  create_table "child_photos", :force => true do |t|
-    t.integer  "child_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "global_id"
-    t.boolean  "imported"
-  end
-
-  add_index "child_photos", ["child_id"], :name => "index_child_photos_on_child_id"
-  add_index "child_photos", ["global_id"], :name => "index_child_photos_on_global_id"
-
   create_table "children", :force => true do |t|
     t.integer  "village_id"
     t.string   "first_name"
@@ -36,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
     t.datetime "updated_at"
     t.string   "global_id"
     t.boolean  "imported"
+    t.boolean  "temporary"
   end
 
   add_index "children", ["global_id"], :name => "index_children_on_global_id"

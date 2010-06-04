@@ -2,11 +2,17 @@ module Csps::Exportable
   MODELS = []
   def self.included model
     (MODELS << model.name).uniq!
+    model.send :scope, :local, conditions: 'NOT imported'
+    if model.columns_hash['temporary']
+      model.send :scope, :exportable, conditions: 'NOT imported AND NOT temporary'
+      model.send :scope, :temporary, conditions: 'temporary'
+    else
+      model.send :scope, :exportable, conditions: 'NOT imported'
+    end
     model.send :extend, ClassMethods
     model.send :attr_readonly, :imported
     model.send :before_save, :set_imported
     model.send :after_create, :fill_global_id
-    model.metaclass.delegate :local, to: :scoped
   end
 
   def self.models
@@ -66,7 +72,7 @@ module Csps::Exportable
       columns = (column_names - [ primary_key, 'imported' ]).sort
       out.puts columns.join(?,)
 
-      local.order(:created_at).each do |record|
+      exportable.order(:created_at).each do |record|
         columns.each do |col|
           v = record.send col
           out.puts case v

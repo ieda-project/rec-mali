@@ -13,7 +13,7 @@ class CreateChildren < ActiveRecord::Migration
 
       t.timestamps
       t.string :global_id
-      t.boolean :imported
+      t.boolean :imported, :temporary
     end
     add_index :children, :global_id
   end

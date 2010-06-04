@@ -89,6 +89,7 @@ Element.behaviour(function() {
       name: 'FlashVars',
       value: 'url=' + (this.get('data-action') || window.location.href) +
              '&field=' + this.get('data-field') +
+             (this.get('data-method') ? '&method=' + this.get('data-method') : '')+
              '&domid=' + this.get('id')}))
     transient.open(obj, { width: 300 })
   })

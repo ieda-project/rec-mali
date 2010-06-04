@@ -1,9 +1,10 @@
 Csps::Application.routes.draw do |map|
-  resource :session, :controller => 'session'
+  resource :session, controller: 'session'
 
   resources :children do
+    post :temp, on: :collection
     resources :diagnostics do
-      member { post :calculations }
+      post :calculations, on: :member
     end
   end
 

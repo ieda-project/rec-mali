@@ -1,6 +1,6 @@
 %section.profile
   %div
-    %img(alt='')
+    %img{alt: '', src: @child.photo.url(:thumbnail)}
   %div
     %h1= @child.name
     %p
