@@ -74,6 +74,7 @@ Element.behaviour(function() {
     } else {
       this.sel.selectedIndex ^= 3
     }
+    this.sel.fireEvent('change')
     set_sc(this.sel)
     return false
   })
@@ -100,18 +101,28 @@ Element.behaviour(function() {
     transient.open(obj, { width: 300 })
   })
 
-  var illnesses = this.getElements('section.illness')
+  var illnesses = this.getElements('form.new_diagnostic section.illness')
   if (illnesses[0]) {
+    var button = document.getElement('form.new_diagnostic button[type=submit]')
+    button.setStyle('display', 'none')
     var first = null
     var open_illness = function(illness) {
       illnesses.each(function(i) { i.addClass('closed') })
       illness.removeClass('closed')
     }
-    illnesses.some(function (i) {
-      if (i.getElement('.fieldWithErrors')) {
-        first = i
-        return true
-      }
+
+    illnesses.each(function (i,j) {
+      if (!first && i.getElement('.fieldWithErrors')) { first = i }
+      var answers = i.getElements('input[type=text], input[type=radio], select')
+      answers.addEvent('change', function() {
+        if (answers.every(function(i) { return i.value.match(/[a-z0-9]/) })) {
+          if (illnesses[j]) {
+            open_illness(illnesses[j+1])
+          } else {
+            button.setStyle('display', 'block')
+          }
+        }
+      })
     })
     if (!first) first = illnesses[0]
     open_illness(first)
