@@ -115,8 +115,15 @@ Element.behaviour(function() {
       if (!first && i.getElement('.fieldWithErrors')) { first = i }
       var answers = i.getElements('input[type=text], input[type=radio], select')
       answers.addEvent('change', function() {
-        if (answers.every(function(i) { return i.value.match(/[a-z0-9]/) })) {
-          if (illnesses[j]) {
+        var fun = function(input) {
+          if (input.get('type') == 'radio') {
+            return input.getParent().getElements('input').some(function(x) { return x.checked })
+          } else {
+            return input.value.match(/[a-z0-9]/)
+          }
+        }
+        if (answers.every(fun)) {
+          if (illnesses[j+1]) {
             open_illness(illnesses[j+1])
           } else {
             button.setStyle('display', 'block')
