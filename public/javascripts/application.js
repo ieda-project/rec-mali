@@ -107,6 +107,7 @@ Element.behaviour(function() {
     button.setStyle('display', 'none')
     var first = null
     var open_illness = function(illness) {
+      illness.getElement('h2').addEvent('click', function() { open_illness(illness) })
       illnesses.each(function(i) { i.addClass('closed') })
       illness.removeClass('closed')
     }
