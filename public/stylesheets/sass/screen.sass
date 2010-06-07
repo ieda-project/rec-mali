@@ -43,30 +43,40 @@ h2
     display: block
     float: right
 
-input
-  &[type=checkbox] + button
+select.boolean
+  & + button
     border: none
     cursor: pointer
     position: relative
     display: inline-block
     background-color: #999
     padding: 2px
+    padding-left: 1em
     padding-right: 1em
     -webkit-border-radius: 6px
-  &:checked + button
+  &.false + button
+    padding-right: 2em
+    padding-left: 2px
+  &.true + button
+    padding-left: 2em
     padding-right: 2px
-    padding-left: 1em
-  &[type=checkbox] + button:after
+  & + button:after
     -webkit-border-radius: 4px
     font-size: 10px
     padding: 2px
     display: inline-block
     width: 3em
     text-align: center
-    content: 'NON'
+    content: '?'
     background-color: #ddd
     color: #777
-  &:checked + button:after
+  &.false + button:after
+    margin-right: -2px
+    content: 'NON'
+    background-color: #fdd
+    color: black
+  &.true + button:after
+    margin-left: -2px
     content: 'OUI'
     background-color: #dfd
     color: black

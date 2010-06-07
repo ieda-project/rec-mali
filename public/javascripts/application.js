@@ -61,14 +61,16 @@ Element.behaviour(function() {
     i.fireEvent('blur')
   })
 
-  this.getElements('input[type=checkbox]').each(function (cb) {
-    var button = new Element('button', { type: 'button' }).injectAfter(cb)
+  this.getElements('select.boolean').each(function (sel) {
+    var button = new Element('button', { type: 'button' }).injectAfter(sel)
     button.setAttribute('type', 'button')
-    button.cb = cb
-    cb.setStyle('display', 'none')
+    button.sel = sel
+    sel.setStyle('display', 'none')
+    set_sc(sel)
   })
-  this.getElements('input[type=checkbox]+button').addEvent('click', function(e) {
-    this.cb.checked = !this.cb.checked
+  this.getElements('select.boolean+button').addEvent('click', function(e) {
+    this.sel.selectedIndex = this.sel.selectedIndex < 2 ? 2 : 1
+    set_sc(this.sel)
     return false
   })
 
@@ -103,3 +105,11 @@ function update_image(id, url) {
   }
   transient.close()
 }
+function set_sc(sel) {
+  switch (sel.selectedIndex) {
+    case 1: sel.removeClass('true'); sel.addClass('false'); break;
+    case 2: sel.removeClass('false'); sel.addClass('true'); break;
+    default: sel.removeClass('true'); sel.removeClass('false')
+  }
+}
+

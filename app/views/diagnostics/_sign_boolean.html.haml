@@ -1,1 +1,1 @@
-= form.check_box :boolean_value
+= form.select :boolean_value, [ nil, 0, 1 ], { selected: selected_boolean(form) }, class: 'boolean'
