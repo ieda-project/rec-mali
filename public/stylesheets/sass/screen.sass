@@ -81,20 +81,6 @@ select.boolean
     background-color: #dfd
     color: black
 
-section>h2
-  &:first-child
-    background-color: #f96
-    margin: -10px
-    margin-bottom: 10px
-    padding: 10px
-    border-bottom: solid 1px #888
-    -webkit-border-top-left-radius: 12px
-    -webkit-border-top-right-radius: 12px
-  &:last-child
-    -webkit-border-radius: 12px
-    border-bottom: none
-    margin-bottom: -10px
-
 header>*
   line-height: 29px
 
@@ -166,26 +152,46 @@ section
   margin: 10px
   padding: 10px
   -webkit-border-radius: 12px
+  &>h2
+    &:first-child
+      background-color: #f96
+      margin: -10px
+      margin-bottom: 10px
+      padding: 10px
+      border-bottom: solid 1px #888
+      -webkit-border-top-left-radius: 12px
+      -webkit-border-top-right-radius: 12px
+    &:last-child
+      -webkit-border-radius: 12px
+      border-bottom: none
+      margin-bottom: -10px
+  &.closed
+    padding-bottom: 0
+    &>*
+      display: none
+    &>h2
+      display: block
+      border: none
+      -webkit-border-radius: 12px
   &.profile
     /* One section is 980px wide
     background-color: transparent
     padding: 0
-
-section form div
-  float: left
-  padding: 2px 0
-  width: 50%
-  label
-    display: inline-block
-    width: 35%
-  input
-    width: 270px
-  &.buttons
-    width: auto
-    float: none
-    clear: both
-    text-align: center
-    padding-top: 5px
+  form div
+    float: left
+    padding: 2px 0
+    width: 50%
+    label
+      display: inline-block
+      width: 35%
+    input
+      width: 270px
+    &.buttons
+      width: auto
+      float: none
+      clear: both
+      text-align: center
+      padding-top: 5px
 
 table
   background-color: #bbb
@@ -294,3 +300,9 @@ div.pagination
     right: 5px
     top: 5px
     border: 0
+
+tr.has-errors
+  th
+    color: red
+div.fieldWithErrors input[type=text]
+  border-color: red

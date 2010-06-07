@@ -1,11 +1,11 @@
 - count = 0
 - for i in Illness.order(:sequence) do
-  %fieldset
-    %legend= i.name
+  %section.illness
+    %h2= i.name
     %table
       - form.object.sign_answers.for(i).each do |answer|
         - form.fields_for "sign_answers][#{count}", answer do |fields|
-          %tr
+          %tr{class: answer.errors.any? ? 'has-errors' : ''}
             %th(scope="row")= answer.sign.question
             %td
               = fields.hidden_field :sign_id

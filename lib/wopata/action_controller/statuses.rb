@@ -3,7 +3,13 @@ module Wopata::ActionController::Statuses
     module_eval "
       def #{n} opts={}
         respond_to do |wants|
-          wants.html { render opts.merge(template: 'shared/#{s}', status: #{s}, layout: 'lobby') }
+          wants.html do
+            if opts[:action]
+              render opts.merge(status: #{s})
+            else
+              render opts.merge(template: 'shared/#{s}', status: #{s}, layout: 'lobby')
+            end
+          end
           wants.any  { render opts.merge(template: 'shared/#{s}', status: #{s}) }
         end
         false

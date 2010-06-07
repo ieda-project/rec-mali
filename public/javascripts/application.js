@@ -69,7 +69,11 @@ Element.behaviour(function() {
     set_sc(sel)
   })
   this.getElements('select.boolean+button').addEvent('click', function(e) {
-    this.sel.selectedIndex = this.sel.selectedIndex < 2 ? 2 : 1
+    if (this.sel.selectedIndex == 0) {
+      this.sel.selectedIndex = (e.page.x < this.getPosition().x + this.getSize().x/2) ? 1 : 2
+    } else {
+      this.sel.selectedIndex ^= 3
+    }
     set_sc(this.sel)
     return false
   })
@@ -95,6 +99,23 @@ Element.behaviour(function() {
              '&domid=' + this.get('id')}))
     transient.open(obj, { width: 300 })
   })
+
+  var illnesses = this.getElements('section.illness')
+  if (illnesses[0]) {
+    var first = null
+    var open_illness = function(illness) {
+      illnesses.each(function(i) { i.addClass('closed') })
+      illness.removeClass('closed')
+    }
+    illnesses.some(function (i) {
+      if (i.getElement('.fieldWithErrors')) {
+        first = i
+        return true
+      }
+    })
+    if (!first) first = illnesses[0]
+    open_illness(first)
+  }
 })
 
 function update_image(id, url) {

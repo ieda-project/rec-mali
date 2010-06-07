@@ -9,7 +9,8 @@
       %br/
       Village: #{@child.village.try(:name) || '-'}
   %div= partial 'diagnostics/edit_measurements', locals: { form: form }
-%section.consultation
-  = partial 'diagnostics/edit_signs', locals: { form: form }
+
+= partial 'diagnostics/edit_signs', locals: { form: form }
+
 %nav
   %button(type="submit") Terminer la consultation

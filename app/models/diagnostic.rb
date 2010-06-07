@@ -7,7 +7,7 @@ class Diagnostic < ActiveRecord::Base
       select { |c| c.illness_id == illness.id }
     end
   end
-  has_many :sign_answers, include: :sign,
+  has_many :sign_answers, include: :sign, order: 'signs.sequence',
            after_add: :clear_classifications, after_remove: :clear_classifications do
     def add data
       sign = data.delete(:sign) || Sign.find(data.delete(:sign_id)) rescue nil
@@ -38,7 +38,8 @@ class Diagnostic < ActiveRecord::Base
   before_create :set_date
   after_create :update_child
 
-  validates_presence_of :child
+  validates_presence_of :child, :height, :weight, :mac
+  validate :validate_answers
 
   def type_name
     '-'
@@ -46,8 +47,8 @@ class Diagnostic < ActiveRecord::Base
 
   def prebuild
     sign_ids = sign_answers.map(&:sign_id).to_hash
-    Sign.order(:sequence).each do |i| 
-      sign_answers.build(sign: i) unless sign_ids[i.id]
+    Sign.order(:sequence).each do |sign| 
+      sign_answers << sign.answer_class.new(sign: sign) unless sign_ids[sign.id]
     end
     self
   end
@@ -62,7 +63,11 @@ class Diagnostic < ActiveRecord::Base
     self.done_on ||= Date.today
   end
 
-  def clear_classifications obj
+  def clear_classifications obj=nil
     classifications.clear
+  end
+
+  def validate_answers
+    errors[:sign_answers] << :invalid if prebuild.sign_answers.reject(&:valid?).any?
   end
 end

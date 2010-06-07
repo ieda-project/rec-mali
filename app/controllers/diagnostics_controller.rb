@@ -39,7 +39,7 @@ class DiagnosticsController < ApplicationController
       if @diagnostic.update_attributes params[:diagnostic]
         see_other [@child, @diagnostic]
       else
-        unprocessable action: :new
+        unprocessable action: :edit
       end
     end
   end

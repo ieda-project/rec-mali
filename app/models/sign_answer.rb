@@ -3,5 +3,5 @@ class SignAnswer < ActiveRecord::Base
   belongs_to :sign
   belongs_to :diagnostic
 
-  validates_presence_of :sign
+  validates_presence_of :sign, :type
 end
