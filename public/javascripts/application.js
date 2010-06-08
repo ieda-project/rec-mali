@@ -84,7 +84,7 @@ Element.behaviour(function() {
       new Request.HTML({
         link: 'ignore', update: div,
         onSuccess: function() { div.updated() }
-      }).get(div.get('data-edit-url'))
+      }).get(div.get('data-edit-href'))
     })
   })
 
