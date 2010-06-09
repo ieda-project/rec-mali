@@ -107,7 +107,9 @@ Element.behaviour(function() {
     button.setStyle('display', 'none')
     var first = null
     var open_illness = function(illness) {
-      illness.getElement('h2').addEvent('click', function() { open_illness(illness) })
+      illness.getElement('h2').
+        addEvent('click', function() { open_illness(illness) }).
+        getElements('ul').dispose()
       illnesses.each(function(i) { i.addClass('closed') })
       illness.removeClass('closed')
     }
@@ -124,6 +126,28 @@ Element.behaviour(function() {
           }
         }
         if (answers.every(fun)) {
+          // Calculate
+          var data = {}
+          i.getElements('tr').each(function (tr) {
+            var sign_id = tr.getElement('input[type=hidden]').get('value')
+            tr.getElements('input[type!=hidden], select').some(function (input) {
+              if (input.get('type') != 'radio' || input.checked) {
+                data['s['+sign_id+']'] = input.value
+                return true
+              }
+            })
+          })
+          new Request.JSON({
+            url: i.get('data-classify-href'),
+            onSuccess: function(ret) {
+              var ul = new Element('ul')
+              ret.each(function (cl) {
+                new Element('li', { 'class': (cl[1] ? 'active' : null), html: cl[0] }).inject(ul)
+              })
+              ul.inject(i.getElement('h2'))
+            }
+          }).get(data)
+
           if (illnesses[j+1]) {
             open_illness(illnesses[j+1])
           } else {

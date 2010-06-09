@@ -1,6 +1,6 @@
 - count = 0
 - for i in Illness.order(:sequence) do
-  %section.illness
+  %section.illness{'data-classify-href' => classification_illness_path(i)}
     %h2= i.name
     %table
       - form.object.sign_answers.for(i).each do |answer|

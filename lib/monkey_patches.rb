@@ -1,8 +1,13 @@
 class Array
   def to_hash &block
-    block ||= proc { true }
     returning Hash.new do |h|
-      each { |i| h[i] = block.(i) }
+      each { |i| h.store block.(i), i }
+    end
+  end
+
+  def to_rhash
+    returning Hash.new do |h|
+      each { |i| h[i] = true }
     end
   end
 end

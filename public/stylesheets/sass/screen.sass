@@ -152,6 +152,22 @@ section
   margin: 10px
   padding: 10px
   -webkit-border-radius: 12px
+  &.illness h2
+    position: relative
+    ul
+      position: absolute
+      top: 13px
+      right: 10px
+      margin: 0
+      padding: 0
+      font-size: 12px
+    li
+      display: inline-block
+      opacity: 0.4
+      margin-left: 10px
+      &.active
+        opacity: 1
+        color: red
   &>h2
     &:first-child
       background-color: #f96

@@ -1,5 +1,8 @@
 Csps::Application.routes.draw do |map|
   resource :session, controller: 'session'
+  resources :illnesses do
+    get :classification, on: :member
+  end
 
   resources :children do
     post :temp, on: :collection

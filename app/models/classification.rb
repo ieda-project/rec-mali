@@ -10,10 +10,14 @@ class Classification < ActiveRecord::Base
   end
 
   def run diag, data={}
-    if Csps::Formula.new(self).calculate(data || diag.sign_answers.to_hash)
+    if calculate(data || diag.sign_answers.to_hash)
       diag.classifications << self unless diag.classifications.include?(self)
     else
       diag.classifications.delete self
     end
+  end
+
+  def calculate data
+    Csps::Formula.new(self).calculate(data)
   end
 end
