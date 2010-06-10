@@ -46,7 +46,7 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def prebuild
-    sign_ids = sign_answers.map(&:sign_id).to_hash
+    sign_ids = sign_answers.map(&:sign_id).to_rhash
     Sign.order(:sequence).each do |sign| 
       sign_answers << sign.answer_class.new(sign: sign) unless sign_ids[sign.id]
     end
