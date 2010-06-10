@@ -1,6 +1,7 @@
-%section.profile
+.profile
   %div#mugshot.photo(data-field='child[photo]')
     %img{alt: '', src: @child.photo.url(:thumbnail)}
+%section
   %div.editable{'data-edit-href' => edit_child_path(@child)}
     = partial 'children/'+(show? ? 'show' : 'edit'), locals: { child: @child }
   %div

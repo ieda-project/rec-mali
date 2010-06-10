@@ -1,3 +1,7 @@
+%nav
+  %p.hint Le patient se présente au dispensaire pour la première fois ?
+  = link_to 'Nouveau patient', new_child_path, :class => 'new-child'
+
 %section
   %h1 Rechercher un patient
   - search_form do |f|
@@ -33,7 +37,3 @@
           %td= child.born_on
           %td= child.village.name
           %td= child.last_visit_at
-
-%nav
-  %p.hint Le patient se présente au dispensaire pour la première fois ?
-  = link_to 'Nouveau patient', new_child_path

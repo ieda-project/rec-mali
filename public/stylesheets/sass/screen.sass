@@ -3,7 +3,7 @@
 
 body
   background: #e8e8e5 url(../images/backgrounds/bg-header.gif) repeat-x 0 -27px
-  font-family: "Lucida Grande"
+  font-family: Verdana
   font-size: 12px
   margin: auto
   -webkit-font-smoothing: antialiased
@@ -94,6 +94,7 @@ header
   display: block
   height: 44px
   line-height: 50px
+  margin: 0 0 10px
   overflow: hidden
   form
     float: right
@@ -121,18 +122,28 @@ nav
   text-align: center
   &#prev
     float: left
+    line-height: 43px
     a
-      background-image: url(../images/bpl.png)
-      padding-left: 16px
+      background-image: url(../images/backgrounds/button-back-index.png)
+      font-weight: bold
+      height: 38px
+      line-height: 38px
+      padding: 0 5px 0 37px
+      text-shadow 0 -1px 0 #0096eb
+      &:after  
+        background: url(../images/backgrounds/button-back-index.png) -39px right no-repeat
+        height: 38px
   p.hint
-    background-color: white
-    -webkit-border-radius: 6px
-    margin: 0
-    padding: 0 7px
+    background-color: #e4a000
+    border: 2px solid #b27d01
+    color: white 
     display: inline-block
-    font-size: 12px
+    font-size: 1.15em
     height: 29px
     line-height: 29px
+    margin: 0
+    padding: 0 7px
+    -webkit-border-radius: 6px
 nav a, nav button, section button[type=submit]
   display: inline-block
   border: none
@@ -140,7 +151,6 @@ nav a, nav button, section button[type=submit]
   font-size: 12px
   height: 29px
   line-height: 29px
-  text-transform: uppercase
   position: relative
   padding: 0 2px 0 9px
   margin: 0 17px 0 10px
@@ -148,6 +158,17 @@ nav a, nav button, section button[type=submit]
   /* Overrideable:
   background: url(../images/bnl.png)
   color: white
+  &.new-child
+    background: url(../images/backgrounds/button-new-child.gif)
+    font-size: 1.4em
+    font-weight: bold
+    height: 46px
+    line-height: 46px
+    padding: 0 7px 0 50px
+    &:after  
+      background: url(../images/backgrounds/button-new-child.gif) -46px right no-repeat
+      height: 46px
+      width: 10px
   &:after
     display: block
     position: absolute
