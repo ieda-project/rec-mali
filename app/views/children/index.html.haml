@@ -1,6 +1,5 @@
 %section
   %h1 Rechercher un patient
-
   - search_form do |f|
     %div
       %label Prénom
@@ -11,14 +10,14 @@
     %div
       %label Date de naissance
       = f.text_field :born_on
-    %div
+    %div.village
       %label Village
       = f.select :village_id, []
     %div.buttons
-      %button(type='reset') Clear
+      -#%button(type='reset') Clear
       %button(type='submit') Rechercher
 
-  %table
+  %table.children
     %thead
       %tr
         %th Prénom

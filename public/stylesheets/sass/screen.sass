@@ -1,12 +1,15 @@
+*
+  outline: none
+
 body
-  width: 1000px
-  background-color: #ddd
-  margin: 10px auto
+  background: #e8e8e5 url(../images/backgrounds/bg-header.gif) repeat-x 0 -27px
   font-family: "Lucida Grande"
   font-size: 12px
-div.fieldWithErrors
-  display: inline-block
+  margin: auto
+  -webkit-font-smoothing: antialiased
+  width: 1000px
 
+  
 #transient
   background-color: white
   position: fixed
@@ -34,6 +37,9 @@ form#login
     text-align: center
 input.blank
   color: #999
+
+a
+  color: #007ec5
 
 h1
   color: maroon
@@ -83,28 +89,32 @@ select.boolean
     background-color: #dfd
     color: black
 
-header>*
-  line-height: 29px
-
 header
   position: relative
   display: block
-  height: 29px
+  height: 44px
+  line-height: 50px
+  overflow: hidden
   form
     float: right
     margin: 0 10px
-    font-size: 16px
+    font-size: 15px
+    position: relative
+    top: -4px
+    color: white
   #user
     font-weight: bold
   button
-    width: 26px
-    height: 26px
+    background: url(../images/backgrounds/bg-header.gif) no-repeat
+    border: none
+    cursor: pointer
+    height: 27px
     position: relative
     top: -4px
-    border: none
-    background: url(../images/logout.png) transparent
+    width: 27px
     color: transparent
     font-size: 0
+    margin: 0 0 0 5px
 
 nav
   display: block
@@ -126,6 +136,7 @@ nav
 nav a, nav button, section button[type=submit]
   display: inline-block
   border: none
+  cursor: pointer
   font-size: 12px
   height: 29px
   line-height: 29px
@@ -150,26 +161,11 @@ nav a, nav button, section button[type=submit]
 section
   /* One section is 960px wide
   background-color: #fff
+  border: 3px solid #d3d3d0
   display: block
   margin: 10px
   padding: 10px
   -webkit-border-radius: 12px
-  &.illness h2
-    position: relative
-    ul
-      position: absolute
-      top: 13px
-      right: 10px
-      margin: 0
-      padding: 0
-      font-size: 12px
-    li
-      display: inline-block
-      opacity: 0.4
-      margin-left: 10px
-      &.active
-        opacity: 1
-        color: red
   &>h2
     &:first-child
       background-color: #f96
@@ -195,22 +191,45 @@ section
     /* One section is 980px wide
     background-color: transparent
     padding: 0
-  form div
-    float: left
-    padding: 2px 0
-    width: 50%
-    label
-      display: inline-block
-      width: 35%
-    input
-      width: 270px
-    &.buttons
-      width: auto
-      float: none
-      clear: both
-      text-align: center
-      padding-top: 5px
-
+  h1
+    background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 0
+    border: 2px solid #0096eb
+    color: white
+    display: block
+    height: 32px
+    line-height: 32px
+    margin: 0
+    padding: 0 0 0 10px
+    -webkit-border-top-left-radius: 4px
+    -webkit-border-top-right-radius: 4px
+  table
+    border-spacing: 0
+    &.children
+      background: none
+      border-bottom: 2px solid #efefef
+      -webkit-border-bottom-left-radius: 5px
+      -webkit-border-bottom-right-radius: 5px
+      th
+        background: #f2ffe7
+        border: 3px solid #ccff99
+        border-left: 0
+        color: #66cc33
+        font-size: 1.25em
+        padding: 8px 10px
+        &:first-child
+          border-left: 3px solid #ccff99
+          -webkit-border-top-left-radius: 6px
+        &:last-child
+          -webkit-border-top-right-radius: 6px
+      td
+        border-right: 3px solid #efefef
+        border-bottom: 1px solid #efefef
+        color: #666
+        font-size: 1.2em
+        padding: 8px 10px
+        &:first-child
+          border-left: 3px solid #efefef
+           
 table
   background-color: #bbb
   margin: 1em 0

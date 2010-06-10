@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def search_form &block
-    form_for :q, html: { method: 'get' }, &block
+    form_for :q, html: { method: 'get', class: 'search' }, &block
   end
 end
