@@ -101,19 +101,25 @@ Element.behaviour(function() {
     transient.open(obj, { width: 300 })
   })
 
-  var illnesses = this.getElements('form.new_diagnostic section.illness')
+  var illnesses = this.getElements('form.diagnostic section.illness')
   if (illnesses[0]) {
-    var button = document.getElement('form.new_diagnostic button[type=submit]')
+    var form = this.getElement('form.diagnostic')
+    var button = form.getElement('button[type=submit]')
     button.setStyle('display', 'none')
     var first = null
     var open_illness = function(illness) {
       illness.getElement('h2').
+        removeEvent('click').
         addEvent('click', function() { open_illness(illness) }).
         getElements('ul').dispose()
       illnesses.each(function(i) { i.addClass('closed') })
       illness.removeClass('closed')
+      window.scrollTo(0, illness.getPosition().y)
     }
 
+    if (form.hasClass('edit') || form.getElement('.fieldWithErrors')) {
+      form.getElements('section.illness>h2').addEvent('click', function() { open_illness(this.getParent()) })
+    }
     illnesses.each(function (i,j) {
       if (!first && i.getElement('.fieldWithErrors')) { first = i }
       var answers = i.getElements('input[type=text], input[type=radio], select')
@@ -151,6 +157,7 @@ Element.behaviour(function() {
           if (illnesses[j+1]) {
             open_illness(illnesses[j+1])
           } else {
+            i.addClass('closed')
             button.setStyle('display', 'block')
           }
         }
