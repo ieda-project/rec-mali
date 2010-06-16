@@ -1,7 +1,9 @@
-%h1= child.name
+%span.name= child.name
 %p
-  #{child.gender ? 'Né' : 'Née'} le #{child.born_on},
+  %strong #{child.gender ? 'Né' : 'Née'} le :
+  #{child.born_on},
   #{child.age_in_months} mois
   %br/
-  Village: #{child.village.try(:name) || '-'}
+  %strong Village : 
+  #{child.village.try(:name) || '-'}
 %button.edit(type="button") Editer

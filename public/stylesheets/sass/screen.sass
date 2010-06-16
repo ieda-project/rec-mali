@@ -1,3 +1,8 @@
+$link:      #007ec5
+$bg_th:     #f2ffe7
+$border_th: #ccff99
+$color_th:  #66cc33
+
 *
   outline: none
 
@@ -39,7 +44,7 @@ input.blank
   color: #999
 
 a
-  color: #007ec5
+  color = !link
 
 h1
   color: maroon
@@ -158,6 +163,17 @@ nav a, nav button, section button[type=submit]
   /* Overrideable:
   background: url(../images/bnl.png)
   color: white
+  &.new-diagnostic
+    background: url(../images/backgrounds/button-new-diagnostic.gif)
+    font-size: 1.4em
+    font-weight: bold
+    height: 46px
+    line-height: 46px
+    padding: 0 7px 0 50px
+    &:after  
+      background: url(../images/backgrounds/button-new-diagnostic.gif) -46px right no-repeat
+      height: 46px
+      width: 10px
   &.new-child
     background: url(../images/backgrounds/button-new-child.gif)
     font-size: 1.4em
@@ -179,6 +195,52 @@ nav a, nav button, section button[type=submit]
     width: 7px
     background: url(../images/bnr.png) center right no-repeat
 
+.profile-child
+  overflow: hidden
+  .photo
+    margin: 10px 0 0 10px
+    float: left
+  section
+    float: right
+    padding: 17px 20px
+    width: 800px
+    span.name
+      color = !link
+      font-size: 1.55em
+      font-weight: bold
+    .editable
+      width: 350px
+      float: left
+      position: relative
+      form
+        margin: 0
+      button
+        position: absolute
+        right: 5px
+        top: 5px
+        border: 0
+      p
+        color: #666
+        font-size: 1.1em
+        line-height: 1.4em
+        margin: 12px 0 0
+    .measurements
+      width: 440px
+      float: right
+      h2
+        margin: 0
+      p, ul
+        display: block
+        border: 2px solid #efefef
+        border-top: 0
+        margin: 0
+        -webkit-border-bottom-left-radius: 4px
+        -webkit-border-bottom-right-radius: 4px
+        padding: 10px
+        color: #666
+      table
+        :
+        
 section
   /* One section is 960px wide
   background-color: #fff
@@ -191,7 +253,7 @@ section
     &:first-child
       background-color: #f96
       margin: -10px
-      margin-bottom: 10px
+      margin-bottom: 0
       padding: 10px
       border-bottom: solid 1px #888
       -webkit-border-top-left-radius: 12px
@@ -200,6 +262,16 @@ section
       -webkit-border-radius: 12px
       border-bottom: none
       margin-bottom: -10px
+  &.illness
+    h2
+      background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 0 
+      color: white
+      height: 32px
+      padding: 0 0 0 10px
+      line-height: 32px
+      border: 0
+      -webkit-border-top-left-radius: 10px
+      -webkit-border-top-right-radius: 10px
   &.closed
     padding-bottom: 0
     &>*
@@ -208,10 +280,6 @@ section
       display: block
       border: none
       -webkit-border-radius: 12px
-  &.profile
-    /* One section is 980px wide
-    background-color: transparent
-    padding: 0
   h1
     background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 0
     border: 2px solid #0096eb
@@ -223,6 +291,14 @@ section
     padding: 0 0 0 10px
     -webkit-border-top-left-radius: 4px
     -webkit-border-top-right-radius: 4px
+  h2
+    background = !bg_th
+    color = !color_th
+    font-size: 1.1em
+    padding: 5px 7px
+    border: 2px solid !border_th
+    -webkit-border-top-left-radius: 4px
+    -webkit-border-top-right-radius: 4px
   table
     border-spacing: 0
     &.children
@@ -231,10 +307,10 @@ section
       -webkit-border-bottom-left-radius: 5px
       -webkit-border-bottom-right-radius: 5px
       th
-        background: #f2ffe7
-        border: 3px solid #ccff99
+        background = !bg_th
+        border: 3px solid !border_th
         border-left: 0
-        color: #66cc33
+        color = !color_th
         font-size: 1.25em
         padding: 8px 10px
         &:first-child
@@ -302,8 +378,6 @@ div.pagination
 
 .profile>div
   float: left
-  background-color: white
-  -webkit-border-radius: 12px
   padding: 4px
 
 .profile
@@ -346,18 +420,6 @@ div.pagination
   content: ""
   clear: both
   height: 0
-
-.editable
-  position: relative
-  h1
-    margin-top: 0
-  form
-    margin: 0
-  button
-    position: absolute
-    right: 5px
-    top: 5px
-    border: 0
 
 tr.has-errors
   th

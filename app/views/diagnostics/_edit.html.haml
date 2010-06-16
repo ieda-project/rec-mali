@@ -1,14 +1,15 @@
-%section.profile
-  %div
+.profile-child
+  %div.photo
     %img{alt: '', src: @child.photo.url(:thumbnail)}
-  %div
-    %h1= @child.name
-    %p
-      #{@child.gender ? 'Né' : 'Née'} le #{@child.born_on},
-      #{@child.age_in_months} mois
-      %br/
-      Village: #{@child.village.try(:name) || '-'}
-  %div= partial 'diagnostics/edit_measurements', locals: { form: form }
+  %section
+    %div.editable
+      %span.name= @child.name
+      %p
+        #{@child.gender ? 'Né' : 'Née'} le #{@child.born_on},
+        #{@child.age_in_months} mois
+        %br/
+        Village: #{@child.village.try(:name) || '-'}
+    %div.measurements= partial 'diagnostics/edit_measurements', locals: { form: form }
 
 = partial 'diagnostics/edit_signs', locals: { form: form }
 
