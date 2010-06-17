@@ -79,15 +79,6 @@ Element.behaviour(function() {
     return false
   })
 
-  this.getElements('.editable').each(function (div) {
-    div.getElement('button.edit').addEvent('click', function() {
-      new Request.HTML({
-        link: 'ignore', update: div,
-        onSuccess: function() { div.updated() }
-      }).get(div.get('data-edit-href'))
-    })
-  })
-
   this.getElements('.photo').addEvent('click', function() {
     var link = document.getElement('link[rel=photo-upload-target]')
     var obj = new Element('object', { width: 300, height: 330 })
@@ -166,6 +157,16 @@ Element.behaviour(function() {
     if (!first) first = illnesses[0]
     open_illness(first)
   }
+  
+  this.getElements('.editable').each(function (div) {
+    div.getElement('button.edit').addEvent('click', function() {
+      new Request.HTML({
+        link: 'ignore', update: div,
+        onSuccess: function() { div.updated() }
+      }).get(div.get('data-edit-href'))
+    })
+  })
+
 })
 
 function update_image(id, url) {
