@@ -471,9 +471,10 @@ tr.has-errors
   th
     color: red !important
     
-div.fieldWithErrors input[type=text]
+div.fieldWithErrors 
   display: inline
-  border-color: red
-  &:focus
+  input[type=text]
     border-color: red
-    -webkit-box-shadow: rgba(250, 0, 0, 0.8) 0px 0px 5px
+    &:focus
+      border-color: red
+      -webkit-box-shadow: rgba(250, 0, 0, 0.8) 0px 0px 5px
