@@ -15,12 +15,12 @@ form
         margin: 6px 0 0
         select
           width: 283px
-      input,label
+      input[type=text],label
         font-size: 1.2em
       label
         display: inline-block
         width: 35%
-      input
+      input[type=text]
         padding: 5px 5px
         width: 270px
       &.buttons
@@ -50,9 +50,10 @@ form
   label
     color: #6d9bb5
     font-weight: bold
-  input
+  input[type=text]
     border: 2px solid #c1dae8
     -webkit-border-radius: 5px
+    padding: 3px 4px
     &:focus
       border-color: #007ec5
       -webkit-box-shadow: rgba(0, 126, 197, 0.8) 0px 0px 5px

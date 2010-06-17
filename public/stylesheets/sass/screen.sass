@@ -58,41 +58,52 @@ h2
 
 select.boolean
   & + button
-    border: none
+    border: 1px solid #c0c0c0
     cursor: pointer
     position: relative
     display: inline-block
-    background-color: #999
-    padding: 2px
+    color: #666
+    font-weight: bold
+    font-size: 1.1em
+    background: url(../images/backgrounds/bg-switch.gif) repeat-x 0 0
+    padding: 1px
     padding-left: 1em
     padding-right: 1em
-    -webkit-border-radius: 6px
+    -webkit-border-radius: 5px
+  &.true + button
+    background-position: 0 -24px
+    color: #007ec5
+    border: 1px solid #007ec5
   &.false + button
     padding-right: 2em
-    padding-left: 2px
+    padding-left: 1px
   &.true + button
     padding-left: 2em
-    padding-right: 2px
+    padding-right: 1px
   & + button:after
     -webkit-border-radius: 4px
     font-size: 10px
-    padding: 2px
+    padding: 3px 2px
     display: inline-block
     width: 3em
+    border: 1px solid #b4b4b4
     text-align: center
     content: '?'
-    background-color: #ddd
+    background-color: #ededed
     color: #777
   &.false + button:after
-    margin-right: -2px
-    content: 'NON'
-    background-color: #fdd
+    margin-right: -1px
+    content: 'Non'
+    background-color: white
     color: black
+    border: 1px solid #b4b4b4
   &.true + button:after
-    margin-left: -2px
-    content: 'OUI'
-    background-color: #dfd
+    margin-left: -1px
+    content: 'Oui'
+    background-color: white
     color: black
+    border: 1px solid #0370ae
+    color: #0370ae
 
 header
   position: relative
@@ -198,7 +209,7 @@ nav a, nav button, section button[type=submit]
 .profile-child
   overflow: hidden
   .photo
-    margin: 10px 0 0 10px
+    margin: 10px 0 0 13px
     float: left
   section
     float: right
@@ -215,10 +226,18 @@ nav a, nav button, section button[type=submit]
       form
         margin: 0
       button
+        background: url(../images/icons/edit.gif) no-repeat 0 0
         position: absolute
         right: 5px
+        height: 19px
+        line-height: 19px
+        padding: 0 0 0 30px
+        color = !link
+        font-size: 1.2em
+        font-weight: bold
         top: 5px
         border: 0
+        text-decoration: underline
       p
         color: #666
         font-size: 1.1em
@@ -239,7 +258,29 @@ nav a, nav button, section button[type=submit]
         padding: 10px
         color: #666
       table
-        :
+        background: white
+        border: 2px solid #e6e6e6
+        border-top: 0
+        padding: 7px 0 5px
+        margin: 0
+        -webkit-border-bottom-left-radius: 4px
+        -webkit-border-bottom-right-radius: 4px
+        th
+          color: #666
+          text-align: right
+          font-size: 1.1em
+        th, td
+          -webkit-border-bottom-left-radius: 4px
+          -webkit-border-bottom-right-radius: 4px
+        td
+          border-right: 2px solid #e6e6e6
+          &:last-child
+            border-right: 0
+        em
+          color: #9ebbcc
+          font-style: normal
+        input
+          width: 30px  
         
 section
   /* One section is 960px wide
@@ -272,6 +313,12 @@ section
       border: 0
       -webkit-border-top-left-radius: 10px
       -webkit-border-top-right-radius: 10px
+    tr
+      th
+        color: #666
+        width: 650px
+      th, td
+        border-bottom: 1px solid #f2f2f2
   &.closed
     padding-bottom: 0
     &>*
@@ -350,8 +397,7 @@ th, td
   padding: 2px 4px
 
 th
-  background-color: #fed
-  border: solid 1px white
+  background-color: white
 
 td
   background-color: white
@@ -423,6 +469,11 @@ div.pagination
 
 tr.has-errors
   th
-    color: red
+    color: red !important
+    
 div.fieldWithErrors input[type=text]
+  display: inline
   border-color: red
+  &:focus
+    border-color: red
+    -webkit-box-shadow: rgba(250, 0, 0, 0.8) 0px 0px 5px
