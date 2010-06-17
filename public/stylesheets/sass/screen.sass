@@ -27,6 +27,9 @@ body
   *:last-child
     margin-bottom: 0
 
+button
+  cursor: pointer
+
 form#login
   background-color: white
   -webkit-border-radius: 12px
@@ -237,12 +240,26 @@ nav a, nav button, section button[type=submit]
         font-weight: bold
         top: 5px
         border: 0
+        margin: 0
         text-decoration: underline
+      form
+        button
+          background-position: 0 -19px
+          color: #7bdb27
+          &:after
+            background: none
+          
       p
         color: #666
         font-size: 1.1em
         line-height: 1.4em
         margin: 12px 0 0
+        input[type=text]
+          min-width: 78px
+          
+      .name
+        input[type=text]
+          font-size: 1.2em
     .measurements
       width: 440px
       float: right

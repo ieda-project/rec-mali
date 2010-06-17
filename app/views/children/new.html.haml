@@ -3,9 +3,9 @@
     %div#mugshot.photo{'data-field' => 'child[photo]', 'data-method' => 'post', 'data-action' => temp_children_path}
       %img{alt: '', src: @child.photo.url(:thumbnail)}
     %section
-      %div= partial 'edit_fields', locals: { form: form }
+      %div.editable= partial 'edit_fields', locals: { form: form }
       - form.fields_for :diagnostic, @diagnostic do |fields|
-        %div= partial 'diagnostics/edit_measurements', locals: { form: fields }
+        %div.measurements= partial 'diagnostics/edit_measurements', locals: { form: fields }
   - form.fields_for :diagnostic, @diagnostic do |fields|
     = partial 'diagnostics/edit_signs', locals: { form: fields }
   %nav
