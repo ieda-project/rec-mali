@@ -21,19 +21,34 @@
       -#%button(type='reset') Clear
       %button(type='submit') Rechercher
 
-  %table.children
-    %thead
-      %tr
-        %th Prénom
-        %th Nom
-        %th Date de naissance
-        %th Village
-        %th Dernière visite
-    %tbody
-      - for child in @children.includes(:village).paginate(page, window: 15) do
+  - if @children.any?
+    %table.children
+      %thead
         %tr
-          %td= link_to child.first_name, child
-          %td= link_to child.last_name, child
-          %td= child.born_on
-          %td= child.village.name
-          %td= child.last_visit_at
+          %th Prénom
+          %th Nom
+          %th Date de naissance
+          %th Village
+          %th Dernière visite
+      %tbody
+        - for child in @children.includes(:village).paginate(page, window: 15) do
+          %tr
+            %td= link_to child.first_name, child
+            %td= link_to child.last_name, child
+            %td= child.born_on
+            %td= child.village.name
+            %td= child.last_visit_at
+    %ul.pagination
+      %li.em= link_to "< Prev", "#"
+      %li 1
+      %li= link_to "2", "#"
+      %li ...
+      %li= link_to "3", "#"
+      %li.em= link_to "Next >", "#"
+  - else
+    .no-result
+      %p Aucun patient ne correspond aux termes de recherche spécifiés 
+      %p 
+        %strong Suggestions : 
+        Vérifiez l’orthographe des termes de recherche ou consultez la
+        = link_to "liste des patients", children_path

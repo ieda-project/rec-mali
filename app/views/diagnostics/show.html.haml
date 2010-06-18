@@ -5,7 +5,7 @@
 - unless @diagnostic.classifications.any?
   %nav
     %form{method: 'post', action: calculations_child_diagnostic_path(@child, @diagnostic)}
-      %button(type="submit") Run classifications
+      %button.validation(type="submit") Run classifications
 
 - for i in Illness.order(:sequence) do
   %section.consultation
