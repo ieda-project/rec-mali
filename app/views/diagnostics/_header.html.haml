@@ -1,7 +1,7 @@
 %h2
   = link_to 'Consultation', child_diagnostic_path(@child, diagnostic)
   du #{diagnostic.done_on}
-  = link_to 'Edit', edit_child_diagnostic_path(@child, diagnostic)
+  = link_to 'Edit', edit_child_diagnostic_path(@child, diagnostic), :class => 'edit'
   %span.by par #{diagnostic.author.name}
 %table
   %tr
@@ -10,4 +10,4 @@
   %tr
     %th(scope="row") Méthode de diagnostic
     %td= diagnostic.type_name
-= partial 'children/measurements', locals: { diagnostic: diagnostic }
+%div.measurements= partial 'children/measurements', locals: { diagnostic: diagnostic }

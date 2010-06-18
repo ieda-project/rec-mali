@@ -58,6 +58,7 @@ h2
   span.by
     display: block
     float: right
+    margin: 0 12px 0 0
 
 select.boolean
   & + button
@@ -260,6 +261,9 @@ nav a, nav button, section button[type=submit]
       .name
         input[type=text]
           font-size: 1.2em
+
+.profile-child
+  section, section.consultation
     .measurements
       width: 440px
       float: right
@@ -291,6 +295,7 @@ nav a, nav button, section button[type=submit]
           -webkit-border-bottom-right-radius: 4px
         td
           border-right: 2px solid #e6e6e6
+          color: #333
           &:last-child
             border-right: 0
         em
@@ -320,7 +325,7 @@ section
       -webkit-border-radius: 12px
       border-bottom: none
       margin-bottom: -10px
-  &.illness
+  &.illness, &.consultation
     h2
       background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 0 
       color: white
@@ -331,6 +336,15 @@ section
       border: 0
       -webkit-border-top-left-radius: 10px
       -webkit-border-top-right-radius: 10px
+      a
+        color: white
+        text-decoration: underline
+        &.edit
+          background: url(../images/icons/edit.gif) no-repeat 7px -50px
+          padding: 0 0 0 34px
+          margin: 0 0 0 8px
+          border-left: 2px solid white
+           
     tr
       th
         color: #666
