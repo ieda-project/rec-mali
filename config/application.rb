@@ -38,5 +38,6 @@ module Csps
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters << :password
-  end
+    config.secret_token = "gr5pi7fw5vmpus3cqzwe78pybb65zmtk5hhv"
+end
 end
