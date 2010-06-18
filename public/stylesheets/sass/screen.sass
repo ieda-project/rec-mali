@@ -294,47 +294,63 @@ nav a, nav button, section button[type=submit]
         input[type=text]
           font-size: 1.2em
 
-.profile-child
-  section
-    .measurements
-      width: 440px
-      float: right
-      h2
-        margin: 0
-      p, ul
-        display: block
-        border: 2px solid #efefef
-        border-top: 0
-        margin: 0
-        -webkit-border-bottom-left-radius: 4px
-        -webkit-border-bottom-right-radius: 4px
-        padding: 10px
+section.consultation
+  .measurements
+    margin: 10px 0 0
+    
+.profile-child section, section.consultation
+  .measurements
+    width: 440px
+    float: right
+    h2
+      background = !bg_th
+      color = !color_th
+      font-size: 1.1em
+      padding: 5px 7px
+      border: 2px solid !border_th
+      -webkit-border-top-left-radius: 4px
+      -webkit-border-top-right-radius: 4px
+      margin: 0
+      height: auto
+      line-height: normal
+    p, ul
+      display: block
+      border: 2px solid #efefef
+      border-top: 0
+      margin: 0
+      -webkit-border-bottom-left-radius: 4px
+      -webkit-border-bottom-right-radius: 4px
+      padding: 10px
+      color: #666
+    table
+      background: white
+      border: 2px solid #e6e6e6
+      border-top: 0
+      padding: 7px 0 5px
+      margin: 0
+      -webkit-border-bottom-left-radius: 4px
+      -webkit-border-bottom-right-radius: 4px
+      width: 440px !important
+      th
         color: #666
-      table
-        background: white
-        border: 2px solid #e6e6e6
-        border-top: 0
-        padding: 7px 0 5px
-        margin: 0
+        text-align: right
+        font-size: 1.1em
+      th, td
+        border-bottom: 0
+        min-width: inherit !important
         -webkit-border-bottom-left-radius: 4px
         -webkit-border-bottom-right-radius: 4px
-        th
-          color: #666
-          text-align: right
-          font-size: 1.1em
-        th, td
-          -webkit-border-bottom-left-radius: 4px
-          -webkit-border-bottom-right-radius: 4px
-        td
-          border-right: 2px solid #e6e6e6
-          color: #333
-          &:last-child
-            border-right: 0
-        em
-          color: #9ebbcc
-          font-style: normal
-        input
-          width: 30px  
+      td
+        border-right: 2px solid #e6e6e6
+        color: #333
+        min-width: 50px !important
+        &:last-child
+          border-right: 0
+      em
+        color: #9ebbcc
+        font-style: normal
+      input
+        width: 30px  
         
 section
   /* One section is 960px wide
@@ -548,7 +564,7 @@ div.pagination
 .consultation
   table
     float: left
-    width: 60%
+    width: 500px
   table+table
     float: right
     width: 38%
@@ -558,6 +574,9 @@ div.pagination
     padding: 0
   ul.classification
     font-size: 1.3em
+    li
+      padding: 0 0 10px
+      color: red
 
 .profile:after, .consultation:after
   display: block

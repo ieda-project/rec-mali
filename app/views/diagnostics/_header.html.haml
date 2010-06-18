@@ -10,4 +10,6 @@
   %tr
     %th(scope="row") Méthode de diagnostic
     %td= diagnostic.type_name
-%div.measurements= partial 'children/measurements', locals: { diagnostic: diagnostic }
+%div.measurements
+  %h2 Dernières mesures
+  = partial 'children/measurements', locals: { diagnostic: diagnostic }
