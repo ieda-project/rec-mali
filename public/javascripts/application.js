@@ -101,8 +101,7 @@ Element.behaviour(function() {
     var open_illness = function(illness) {
       illness.getElement('h2').
         removeEvent('click').
-        addEvent('click', function() { open_illness(illness) }).
-        getElements('ul').dispose()
+        addEvent('click', function() { open_illness(illness) })
       illnesses.each(function(i) { i.addClass('closed') })
       illness.removeClass('closed')
       window.scrollTo(0, illness.getPosition().y)
@@ -111,17 +110,26 @@ Element.behaviour(function() {
     if (form.hasClass('edit') || form.getElement('.fieldWithErrors')) {
       form.getElements('section.illness>h2').addEvent('click', function() { open_illness(this.getParent()) })
     }
+
+    var fun = function(input) {
+      if (input.get('type') == 'radio') {
+        return input.getParent().getElements('input').some(function(x) { return x.checked })
+      } else {
+        return input.value.match(/[a-z0-9]/)
+      }
+    }
+
     illnesses.each(function (i,j) {
       if (!first && i.getElement('.fieldWithErrors')) { first = i }
       var answers = i.getElements('input[type=text], input[type=radio], select')
+
+      if (illnesses[j+1]) {
+        i.getElements('.next button').
+          addEvent('click', function() { open_illness(illnesses[j+1]) }).
+          setStyle('visibility', answers.some(fun) ? 'visible' : 'hidden')
+      } else { i.getElements('.next').dispose() }
+
       answers.addEvent('change', function() {
-        var fun = function(input) {
-          if (input.get('type') == 'radio') {
-            return input.getParent().getElements('input').some(function(x) { return x.checked })
-          } else {
-            return input.value.match(/[a-z0-9]/)
-          }
-        }
         if (answers.every(fun)) {
           // Calculate
           var data = {}
@@ -141,14 +149,15 @@ Element.behaviour(function() {
               ret.each(function (cl) {
                 new Element('li', { 'class': (cl[1] ? 'active' : null), html: cl[0] }).inject(ul)
               })
-              ul.inject(i.getElement('h2'))
+              var h2 = i.getElement('h2')
+              h2.getElements('ul').dispose()
+              ul.inject(h2)
             }
           }).get(data)
 
           if (illnesses[j+1]) {
-            open_illness(illnesses[j+1])
+            i.getElement('.next button').setStyle('visibility', 'visible')
           } else {
-            i.addClass('closed')
             button.setStyle('display', 'block')
           }
         }

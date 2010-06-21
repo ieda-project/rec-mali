@@ -11,3 +11,5 @@
               = fields.hidden_field :sign_id
               = partial "diagnostics/sign_#{answer.sign.kind}", locals: { sign: answer.sign, form: fields }
         - count += 1
+    .next
+      %button(type="button") Next
