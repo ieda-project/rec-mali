@@ -3,7 +3,6 @@ class IllnessesController < ApplicationController
     illness = Illness.find params[:id]
     if params[:s].present?
       signs = Sign.find(params[:s].keys, include: :illness).to_hash &:id
-      puts signs.inspect
       data = {}
 
       params[:s].each do |sign_id,value|
