@@ -8,7 +8,16 @@ class DiagnosticsController < ApplicationController
 
   def calculations
     Classification.run @diagnostic
-    see_other [ @child, @diagnostic ]
+    respond_to do |wants|
+      wants.html { see_other [ @child, @diagnostic ] }
+      wants.json do
+        data = {}
+        @diagnostic.classifications.each do |i|
+          (data[i.illness_id] ||= []) << i.name
+        end
+        render json: data
+      end
+    end
   end
 
   def new

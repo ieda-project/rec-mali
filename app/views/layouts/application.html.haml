@@ -5,6 +5,7 @@
     %title CSPS
     = stylesheet_link_tag 'screen', 'forms', media: 'screen'
     = javascript_include_tag 'mootools', 'application'
+    = yield :head
   %body
     %header
       - if back?

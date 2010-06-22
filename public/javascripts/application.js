@@ -138,17 +138,16 @@ Element.behaviour(function() {
             tr.getElements('input[type!=hidden], select').some(function (input) {
               if (input.get('type') != 'radio' || input.checked) {
                 data['s['+sign_id+']'] = input.value
-                return true
-              }
-            })
-          })
+                return true }})})
           new Request.JSON({
             url: i.get('data-classify-href'),
-            onSuccess: function(ret) {
+            onSuccess: function(json) {
               var ul = new Element('ul')
-              ret.each(function (cl) {
-                new Element('li', { 'class': (cl[1] ? 'active' : null), html: cl[0] }).inject(ul)
-              })
+              json.each(function (cl) {
+                new Element(
+                  'li', {
+                    'class': (cl[1] ? 'active' : null),
+                    html:    cl[0] }).inject(ul) })
               var h2 = i.getElement('h2')
               h2.getElements('ul').dispose()
               ul.inject(h2)
@@ -158,11 +157,8 @@ Element.behaviour(function() {
           if (illnesses[j+1]) {
             i.getElement('.next button').setStyle('visibility', 'visible')
           } else {
-            button.setStyle('display', 'block')
-          }
-        }
-      })
-    })
+            button.setStyle('display', 'block') }}})})
+
     if (!first) first = illnesses[0]
     open_illness(first)
   }
@@ -172,10 +168,22 @@ Element.behaviour(function() {
       new Request.HTML({
         link: 'ignore', update: div,
         onSuccess: function() { div.updated() }
-      }).get(div.get('data-edit-href'))
-    })
-  })
+      }).get(div.get('data-edit-href')) })})
 
+  var link = document.getElement('link[rel=calculations]')
+  if (link) {
+    new Request.JSON({
+      url: link.get('href'),
+      onSuccess: function(json) {
+        jj = json
+        $$('section.consultation').each(function (section) {
+          var illness = section.get('data-illness-id')
+          if (illness && json[illness]) {
+            section.getElements('p.classification').dispose()
+            var ul = new Element('ul', { 'class': 'classification' })
+            json[illness].each(function(i) { new Element('li', { html: i }).inject(ul) })
+            ul.inject(section) }})}}).post()
+  }
 })
 
 function update_image(id, url) {

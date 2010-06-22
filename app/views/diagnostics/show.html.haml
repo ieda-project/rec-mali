@@ -1,14 +1,13 @@
+- unless @diagnostic.classifications.any?
+  - content_for :head do
+    %link{type:"application/json", rel:"calculations", href:calculations_child_diagnostic_path(@child, @diagnostic)}/
+
 = partial 'children/profile'
 %section.consultation
   = partial 'header', locals: { diagnostic: @diagnostic }
 
-- unless @diagnostic.classifications.any?
-  %nav
-    %form{method: 'post', action: calculations_child_diagnostic_path(@child, @diagnostic)}
-      %button.validation(type="submit") Run classifications
-
 - for i in Illness.order(:sequence) do
-  %section.consultation
+  %section.consultation{ 'data-illness-id' => i.id }
     %h2= i.name
     %table
       - for sa in @diagnostic.sign_answers.for(i) do
@@ -20,3 +19,5 @@
       %ul.classification
         - for c in cs do
           %li= c.name
+    - else
+      %p.classification Calculations en cours..
