@@ -603,3 +603,23 @@ div.no-result
 
 .next
   text-align: right
+  button
+    position: relative
+    display: inline-block
+    color: white
+    border: none
+    background: url(../images/backgrounds/button-next.gif)
+    font-size: 1.4em
+    font-weight: bold
+    height: 30px
+    line-height: 30px
+    padding: 0 40px 0 17px
+    &:after  
+      position: absolute
+      right: 0
+      top: 0
+      display: block
+      content: ""
+      background: url(../images/backgrounds/button-next.gif) -30px right no-repeat
+      height: 30px
+      width: 30px
