@@ -31,3 +31,15 @@ class Struct
     end
   end
 end
+
+require 'iconv'
+
+class String
+  def cacheize
+    Iconv.new('ASCII//IGNORE//TRANSLIT', encoding.name).iconv(
+      gsub(/[-'\s]+/, ' ')).downcase.gsub(/[^a-z ]/, '')
+  end
+  def cacheize!
+    self[0..-1] = cacheize
+  end
+end

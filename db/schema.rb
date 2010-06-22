@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
     t.string   "global_id"
     t.boolean  "imported"
     t.boolean  "temporary"
+    t.string   "cache_first_name"
+    t.string   "cache_last_name"
   end
 
   add_index "children", ["global_id"], :name => "index_children_on_global_id"

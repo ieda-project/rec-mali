@@ -5,11 +5,17 @@ module Wopata::ActiveRecord
       c, d = [], []
       q.to_hash.each do |key,value|
         next unless value.present?
-        col = columns_hash[key.to_s] or next
+
+        if col = columns_hash["cache_#{key}"]
+          value.cacheize!
+        else
+          next unless col = columns_hash[key.to_s]
+        end
+
         case col.type
           when :string
             values = value.split(/\s+/).map { |q| "%#{q}%" }
-            c << '(' + (["#{key} LIKE ?"]*values.length).join(' OR ') + ')'
+            c << '(' + (["#{col.name} LIKE ?"]*values.length).join(' OR ') + ')'
             d += values
           when :boolean
             c << (%w(1 true yes).include?(value) ? key : "NOT #{key}")
