@@ -5,4 +5,3 @@
 = partial 'children/profile'
 - for diag in @child.diagnostics.order('id DESC').limit(5) do
   %section.consultation= partial 'diagnostics/header', locals: { diagnostic: diag }
-

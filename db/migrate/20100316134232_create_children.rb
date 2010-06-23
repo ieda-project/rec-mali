@@ -14,6 +14,9 @@ class CreateChildren < ActiveRecord::Migration
       t.string :global_id
       t.boolean :imported, :temporary
 
+      t.boolean :bcg_polio0, :penta1_polio1,
+                :penta2_polio2, :penta3_polio3, :measles
+
       t.string :cache_first_name, :cache_last_name
     end
     add_index :children, :global_id

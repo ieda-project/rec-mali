@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
     t.string   "global_id"
     t.boolean  "imported"
     t.boolean  "temporary"
+    t.boolean  "bcg_polio0"
+    t.boolean  "penta1_polio1"
+    t.boolean  "penta2_polio2"
+    t.boolean  "penta3_polio3"
+    t.boolean  "measles"
     t.string   "cache_first_name"
     t.string   "cache_last_name"
   end
