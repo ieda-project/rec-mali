@@ -1,4 +1,14 @@
+class Hash
+  def force_encoding enc
+    each { |k,v| v.try(:force_encoding, enc) }
+  end
+end
+
 class Array
+  def force_encoding enc
+    each { |i| i.try(:force_encoding, enc) }
+  end
+
   def to_hash &block
     returning Hash.new do |h|
       each { |i| h.store block.(i), i }
