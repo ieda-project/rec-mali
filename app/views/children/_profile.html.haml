@@ -3,7 +3,7 @@
     %img{alt: '', src: @child.photo.url(:thumbnail)}
   %section
     .editable{'data-edit-href' => edit_child_path(@child)}
-      = partial 'children/'+(show? ? 'show' : 'edit'), locals: { child: @child }
+      = partial 'children/'+(show? ? 'show' : 'editer'), locals: { child: @child }
     .measurements
       %h2 Dernières mesures
       - if @child.last_visit
