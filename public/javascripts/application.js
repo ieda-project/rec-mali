@@ -96,7 +96,6 @@ Element.behaviour(function() {
   if (illnesses[0]) {
     var form = this.getElement('form.diagnostic')
     var button = form.getElement('button[type=submit]')
-    button.setStyle('display', 'none')
     var first = null
     var open_illness = function(illness) {
       illness.getElement('h2').
@@ -159,12 +158,24 @@ Element.behaviour(function() {
           } else {
             button.setStyle('display', 'block') }}})})
 
-    if (!first) first = illnesses[0]
-    open_illness(first)
+    button.setStyle('display', 'none')
+    if (first) {
+      open_illness(first)
+    } else {
+      illnesses.each(function(i) { i.addClass('closed') })
+      var child_fields = document.getElements('div.measurements input')
+      var open_first = function() {
+        if (child_fields.every(function(i) { return i.value != '' })) {
+          open_illness(illnesses[0])
+          child_fields.removeEvent('change', open_first)
+        }
+      }
+      child_fields.addEvent('change', open_first)
+    }
   }
   
   this.getElements('.editable').each(function (div) {
-    div.getElement('button.edit').addEvent('click', function() {
+    div.getElements('button.edit').addEvent('click', function() {
       new Request.HTML({
         link: 'ignore', update: div,
         onSuccess: function() { div.updated() }
