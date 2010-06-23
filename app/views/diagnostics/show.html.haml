@@ -3,7 +3,7 @@
     %link{type:"application/json", rel:"calculations", href:calculations_child_diagnostic_path(@child, @diagnostic)}/
 
 = partial 'children/profile'
-%section.consultation
+%section.resume
   = partial 'header', locals: { diagnostic: @diagnostic }
 
 - for i in Illness.order(:sequence) do

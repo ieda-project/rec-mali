@@ -297,11 +297,12 @@ nav a, nav button, section button[type=submit]
           font-size: 1.2em
           width: 95px
 
-section.consultation
-  .measurements
-    margin: 10px 0 0
+section
+  &.consultation, &.resume
+    .measurements
+      margin: 10px 0 0
     
-.profile-child section, section.consultation
+.profile-child section, section.consultation, section.resume
   ul.vaccinations
     float: left
   div.vaccinations
@@ -383,7 +384,12 @@ section
       margin-bottom: -10px
   &.closed
     -webkit-border-radius: 14px
-  &.illness, &.consultation
+  &.consultation
+    h2
+      background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 -32px !important 
+  &.resume
+    overflow: hidden
+  &.illness, &.consultation, &.resume
     h2
       background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 0 
       color: white
@@ -576,7 +582,7 @@ div.pagination
     width: 270px
     height: 118px
 
-.consultation
+.consultation, .resume
   table
     float: left
     width: 500px
