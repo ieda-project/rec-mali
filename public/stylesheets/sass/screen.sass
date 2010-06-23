@@ -426,6 +426,10 @@ section
         height: 25px
         min-width: 100px
         border-bottom: 1px solid #f2f2f2
+        .question
+          margin: 0 20px 0 0
+          float: left
+          line-height: 28px
   &.closed
     padding-bottom: 0
     &>*
@@ -453,6 +457,9 @@ section
     border: 2px solid !border_th
     -webkit-border-top-left-radius: 4px
     -webkit-border-top-right-radius: 4px
+  tr.odd
+    td
+      background: #f6f6f6
   table
     border-spacing: 0
     &.children
@@ -460,9 +467,6 @@ section
       border-bottom: 2px solid #efefef
       -webkit-border-bottom-left-radius: 5px
       -webkit-border-bottom-right-radius: 5px
-      tr.odd
-        td
-          background: #f9f9f9
       th
         background = !bg_th
         border: 3px solid !border_th
