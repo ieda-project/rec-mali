@@ -32,7 +32,7 @@
           %th Dernière visite
       %tbody
         - for child in @children.includes(:village).paginate(page, window: 15) do
-          %tr
+          %tr{ :class => cycle("odd", "even") }
             %td= link_to child.first_name, child
             %td= link_to child.last_name, child
             %td= child.born_on

@@ -94,15 +94,17 @@ select.boolean
     padding-right: 1em
     -webkit-border-radius: 5px
   &.true + button
-    background-position: 0 -24px
-    color: #007ec5
-    border: 1px solid #007ec5
-  &.false + button
-    padding-right: 2em
-    padding-left: 1px
-  &.true + button
+    background-position: 0 -48px
+    border: 1px solid #62c400
+    color: #6c0
     padding-left: 2em
     padding-right: 1px
+  &.false + button
+    background-position: 0 -24px
+    color: #f00
+    padding-right: 2em
+    padding-left: 1px
+    border: 1px solid #d10b0b
   & + button:after
     -webkit-border-radius: 4px
     font-size: 10px
@@ -117,16 +119,15 @@ select.boolean
   &.false + button:after
     margin-right: -1px
     content: 'Non'
+    color: #f00
     background-color: white
-    color: black
-    border: 1px solid #b4b4b4
+    border: 1px solid #d10b0b
   &.true + button:after
     margin-left: -1px
     content: 'Oui'
     background-color: white
-    color: black
-    border: 1px solid #0370ae
-    color: #0370ae
+    border: 1px solid #62c400
+    color: #6c0
 
 header
   position: relative
@@ -157,10 +158,10 @@ header
     margin: 0 0 0 5px
 
 nav
-  margin: 10px 0
   display: block
   text-align: center
   overflow: hidden
+  margin: 0 0 15px
   &#prev
     float: left
     line-height: 43px
@@ -294,6 +295,7 @@ nav a, nav button, section button[type=submit]
       .name
         input[type=text]
           font-size: 1.2em
+          width: 125px
 
 section.consultation
   .measurements
@@ -458,6 +460,9 @@ section
       border-bottom: 2px solid #efefef
       -webkit-border-bottom-left-radius: 5px
       -webkit-border-bottom-right-radius: 5px
+      tr.odd
+        td
+          background: #f9f9f9
       th
         background = !bg_th
         border: 3px solid !border_th
