@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_filter :params_are_utf8
+
   include Wopata::ActionController::Statuses
   authenticate_from :session
   attr_reader :back_title, :back_url
@@ -21,6 +23,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def params_are_utf8
+    params.force_encoding Encoding::UTF_8
+  end
 
   class << self
     def fetch model, opts={}
