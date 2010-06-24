@@ -234,6 +234,18 @@ nav a, nav button, section button[type=submit]
       background: url(../images/backgrounds/button-validation.gif) -46px right no-repeat
       height: 46px
       width: 40px
+  &.edit
+    background: url(../images/backgrounds/button-edit.gif)
+    float: left
+    font-size: 1.4em
+    font-weight: bold
+    height: 46px
+    line-height: 46px
+    padding: 0 8px 0 47px
+    &:after  
+      background: url(../images/backgrounds/button-edit.gif) -46px right no-repeat
+      height: 46px
+      width: 15px
   &:after
     display: block
     position: absolute
@@ -411,7 +423,25 @@ section
       background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 -32px !important 
   &.resume
     overflow: hidden
-  &.illness, &.consultation, &.resume
+  &.treatment
+    ol
+      font-size: 1.2em
+      margin: 8px 0 0
+      padding: 0 0 0 27px
+      overflow: hidden
+      li
+        margin: 5px 0 0
+        border-bottom: 1px solid #ededed
+        font-weight: bold
+        position: relative
+        padding: 0 0 5px
+        top: 1px
+        color: #666
+    textarea
+      width: 942px
+      height: 70px
+        
+  &.illness, &.consultation, &.resume, &.treatment
     h2
       background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 0 
       color: white
