@@ -2,7 +2,7 @@ class CreateClassifications < ActiveRecord::Migration
   def self.up
     create_table :classifications do |t|
       t.string :key, :name
-      t.text :equation
+      t.text :equation, :treatment
       t.references :illness
       t.timestamps
       t.boolean :in_imci, :in_gdt
