@@ -261,6 +261,7 @@ nav a, nav button, section button[type=submit]
       width: 350px
       float: left
       position: relative
+      margin: 0 0 10px
       form
         margin: 0
       button
@@ -300,14 +301,35 @@ nav a, nav button, section button[type=submit]
 section
   &.consultation, &.resume
     .measurements
-      margin: 10px 0 0
+      margin: 10px 0 0 
     
 .profile-child section, section.consultation, section.resume
-  ul.vaccinations
-    float: left
   div.vaccinations
-    padding-top: 8px
+    border-top: 2px solid #E6E6E6
     clear: both
+    margin: 15px 0 0
+    overflow: hidden
+    padding: 10px 0 0
+    color: #666
+    input
+      margin: 0 0 0 5px
+    label
+      font-size: 1.1em
+    h3
+      float: left
+      font-size: 1.1em
+      margin: 0
+    ul
+      font-size: 1.1em
+      list-style: none
+      padding: 0
+      margin: 0
+      overflow: hidden
+      li
+        background: url(../images/icons/check.gif) no-repeat 0 2px
+        float: left
+        margin: 0 5px 0 10px
+        padding: 0 0 0 20px
   .measurements
     width: 440px
     float: right

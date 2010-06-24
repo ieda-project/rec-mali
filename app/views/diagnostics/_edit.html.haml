@@ -5,17 +5,19 @@
     .editable
       %span.name= @child.name
       %p
-        #{@child.gender ? 'Né' : 'Née'} le #{@child.born_on},
+        %strong #{@child.gender ? 'Né' : 'Née'} le :
+        #{@child.born_on},
         #{@child.age_in_months} mois
         %br/
-        Village: #{@child.village.try(:name) || '-'}
+        %strong Village : #{@child.village.try(:name) || '-'}
 
     .measurements= partial 'diagnostics/edit_measurements', locals: { form: form }
     .vaccinations
+      %h3 Vaccinations :
       - form.fields_for :child do |fields|
         - for key, name in Child::VACCINATIONS do
           = fields.check_box key, checked: @child.send(key)
-          = name
+          %label= name
 
 = partial 'diagnostics/edit_signs', locals: { form: form }
 

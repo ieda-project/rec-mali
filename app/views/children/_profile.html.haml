@@ -10,6 +10,8 @@
         = partial 'children/measurements', locals: { diagnostic: @child.last_visit }
       - else
         %p Never measured.
-    %ul.vaccinations
-      - for i in @child.vaccinations do
-        %li= i
+    .vaccinations
+      %h3 Vaccinations :
+      %ul
+        - for i in @child.vaccinations do
+          %li= i
