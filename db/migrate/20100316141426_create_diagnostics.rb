@@ -6,6 +6,7 @@ class CreateDiagnostics < ActiveRecord::Migration
       t.date :done_on
       t.integer :height, :mac
       t.float :weight
+      t.text :comments
       t.timestamps
 
       t.string :global_id

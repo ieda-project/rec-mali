@@ -1,13 +1,9 @@
-- unless @diagnostic.classifications.any?
-  - content_for :head do
-    %link{type:"application/json", rel:"calculations", href:calculations_child_diagnostic_path(@child, @diagnostic)}/
-
 = partial 'children/profile'
 %section.resume
   = partial 'header', locals: { diagnostic: @diagnostic }
 
 - for i in Illness.order(:sequence) do
-  %section.consultation{ 'data-illness-id' => i.id }
+  %section.consultation
     %h2= i.name
     %table
       - for sa in @diagnostic.sign_answers.for(i) do
@@ -15,9 +11,6 @@
           %th(scope="row")= sa.sign.question
           %td= sa.value
     - cs = @diagnostic.classifications.for(i)
-    - if cs.any?
-      %ul.classification
-        - for c in cs do
-          %li= c.name
-    - else
-      %p.classification Calcul en cours..
+    %ul.classification
+      - for c in cs do
+        %li= c.name

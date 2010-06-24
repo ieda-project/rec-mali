@@ -1,9 +1,21 @@
 class DiagnosticsController < ApplicationController
   before_filter :fetch_child
-  before_filter :fetch, only: [ :show, :calculations, :edit, :update ]
+  before_filter :fetch, only: [ :show, :wait, :treatments, :calculations, :edit, :update ]
+
+  def show?
+    %w(show treatments).include? params[:action]
+  end
 
   def show
     back 'Toutes les consultations', @child
+  end
+
+  def wait
+    render layout: 'empty'
+  end
+
+  def treatments
+    back 'Consultation', [ @child, @diagnostic ]
   end
 
   def calculations
@@ -32,7 +44,7 @@ class DiagnosticsController < ApplicationController
     answers.each { |a| @diagnostic.sign_answers.add(a) }
 
     if @diagnostic.save
-      see_other [@child, @diagnostic]
+      see_other [:wait, @child, @diagnostic]
     else
       unprocessable action: :new
     end
@@ -44,13 +56,18 @@ class DiagnosticsController < ApplicationController
   def update
     Diagnostic.transaction do
       @child.update_attributes params[:diagnostic].delete(:child)
-      params[:diagnostic].delete(:sign_answers).each_value do |a|
+      (params[:diagnostic].delete(:sign_answers) || {}).each_value do |a|
         @diagnostic.sign_answers.add(a)
       end
+      final = (params[:step] == 'final')
       if @diagnostic.update_attributes params[:diagnostic]
-        see_other [@child, @diagnostic]
+        if final
+          see_other @child
+        else
+          see_other [:wait, @child, @diagnostic]
+        end
       else
-        unprocessable action: :edit
+        unprocessable action: (final ? :treatments : :edit)
       end
     end
   end

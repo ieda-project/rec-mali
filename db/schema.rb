@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
     t.string   "key"
     t.string   "name"
     t.text     "equation"
+    t.text     "treatment"
     t.integer  "illness_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -60,11 +61,6 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
     t.integer "sign_id"
   end
 
-  create_table "classifications_treatments", :id => false, :force => true do |t|
-    t.integer "classification_id"
-    t.integer "treatment_id"
-  end
-
   create_table "diagnostics", :force => true do |t|
     t.string   "type"
     t.integer  "child_id"
@@ -73,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
     t.integer  "height"
     t.integer  "mac"
     t.float    "weight"
+    t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "global_id"
@@ -154,15 +151,6 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
     t.string   "global_id"
     t.boolean  "imported"
   end
-
-  create_table "treatments", :force => true do |t|
-    t.string   "key"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "treatments", ["key"], :name => "index_treatments_on_key"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

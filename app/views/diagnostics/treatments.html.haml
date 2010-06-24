@@ -1,0 +1,24 @@
+- unless @diagnostic.classifications.any?
+  - content_for :head do
+    %link{type:"application/json", rel:"calculations", href:calculations_child_diagnostic_path(@child, @diagnostic)}/
+
+= partial 'children/profile'
+
+%h2 Traitement
+
+- for cl in @diagnostic.classifications do
+  - next if cl.treatment.blank?
+  %section.treatment
+    %h2= cl.name
+    != html cl.treatment
+
+- form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit diagnostic' } do |form|
+  %input(type="hidden" name="step" value="final")/
+
+  %section.treatment
+    %h2 Commentaires
+    = form.text_area :comments, cols:20, rows:5
+    
+  %nav
+    %button.edit(type="submit") Modifier le diagnostic
+    %button.validation(type="submit") Terminer le diagnostic

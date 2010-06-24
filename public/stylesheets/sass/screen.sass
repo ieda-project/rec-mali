@@ -13,7 +13,14 @@ body
   margin: auto
   -webkit-font-smoothing: antialiased
   width: 1000px
-
+  &.empty
+    background-image: none
+    margin-top: 100px
+    &>.message
+      margin: auto
+      width: 400px
+      text-align: center
+      font-size: 3em
   
 #transient
   background-color: white

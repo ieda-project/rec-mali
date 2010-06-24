@@ -7,7 +7,10 @@ Csps::Application.routes.draw do |map|
   resources :children do
     post :temp, on: :collection
     resources :diagnostics do
-      post :calculations, on: :member
+      member do
+        get :treatments, :wait
+        post :calculations
+      end
     end
   end
 

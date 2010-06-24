@@ -45,6 +45,22 @@ transient = {
 }
 
 window.addEvent('domready', function() { document.body.updated() })
+window.addEvent('domready', function() {
+  var link, next
+  if (link = document.getElement('link.auto-post')) {
+    new Request.JSON({
+      url: link.get('href'),
+      onSuccess: function(json) {
+        jj = json
+        $$('section.consultation').each(function (section) {
+          var illness = section.get('data-illness-id')
+          if (illness && json[illness]) {
+            section.getElements('p.classification').dispose()
+            var ul = new Element('ul', { 'class': 'classification' })
+            json[illness].each(function(i) { new Element('li', { html: i }).inject(ul) })
+            ul.inject(section) }})
+        if (next = document.getElement('link[rel=next]')) window.location = next.href }}).post() }
+})
 
 Element.behaviour(function() {
   this.getElements('form.new_child input[type=text]').addEvent('focus', function() {
@@ -180,21 +196,6 @@ Element.behaviour(function() {
         link: 'ignore', update: div,
         onSuccess: function() { div.updated() }
       }).get(div.get('data-edit-href')) })})
-
-  var link = document.getElement('link[rel=calculations]')
-  if (link) {
-    new Request.JSON({
-      url: link.get('href'),
-      onSuccess: function(json) {
-        jj = json
-        $$('section.consultation').each(function (section) {
-          var illness = section.get('data-illness-id')
-          if (illness && json[illness]) {
-            section.getElements('p.classification').dispose()
-            var ul = new Element('ul', { 'class': 'classification' })
-            json[illness].each(function(i) { new Element('li', { html: i }).inject(ul) })
-            ul.inject(section) }})}}).post()
-  }
 })
 
 function update_image(id, url) {
