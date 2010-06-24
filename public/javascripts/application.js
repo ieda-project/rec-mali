@@ -60,6 +60,88 @@ window.addEvent('domready', function() {
             json[illness].each(function(i) { new Element('li', { html: i }).inject(ul) })
             ul.inject(section) }})
         if (next = document.getElement('link[rel=next]')) window.location = next.href }}).post() }
+
+  illnesses = document.getElements('form.diagnostic section.illness')
+  if (illnesses[0]) {
+    var form = document.getElement('form.diagnostic')
+    var button = form.getElement('button[type=submit]').setStyle('visibility', 'hidden')
+    var first = null
+
+    open_illness = function(illness) {
+      illness.getElement('h2').
+        removeEvent('click').
+        addEvent('click', function() { open_illness(illness) })
+      illnesses.each(function(i) { i.addClass('closed') })
+      illness.removeClass('closed')
+      window.scrollTo(0, illness.getPosition().y)
+    }
+    all_valid = function() { return illnesses.every(function (i) { return i.valid }) }
+    validate_illness = function(illness, calculate) {
+      illness.valid = illness.fields.every(function(i) {
+        if (i.get('type') == 'hidden') {
+          return true
+        } else if (i.get('type') == 'radio') {
+          return i.getParent().getElements('input').some(function(x) { return x.checked })
+        } else {
+          return i.value.match(/[a-z0-9]/)
+        }
+      })
+      if (calculate != false && illness.valid) {
+        var data = {}
+        illness.getElements('tr').each(function (tr) {
+          var sign_id = tr.getElement('input[type=hidden]').get('value')
+          tr.getElements('input[type!=hidden], select').some(function (input) {
+            if (input.get('type') != 'radio' || input.checked) {
+              data['s['+sign_id+']'] = input.value
+              return true }})})
+        new Request.JSON({
+          url: illness.get('data-classify-href'),
+          onSuccess: function(json) {
+            var ul = new Element('ul')
+            json.each(function (cl) {
+              new Element(
+                'li', {
+                  'class': (cl[1] ? 'active' : null),
+                  html:    cl[0] }).inject(ul) })
+            var h2 = illness.getElement('h2')
+            h2.getElements('ul').dispose()
+            ul.inject(h2)
+          }
+        }).get(data)
+      }
+      if (!illness.valid) illness.getElements('h2 ul').dispose()
+      illness.getElements('.next button').setStyle('visibility', illness.valid ? 'visible' : 'hidden')
+      button.setStyle('visibility', (illness.valid && all_valid()) ? 'visible' : 'hidden')
+      return illness.valid
+    }
+    validate_measurements = function() {
+      var ret = document.getElements('.measurements input').every(function(i) { return i.value != '' })
+      if (ret) {
+        if (illnesses.every(function (i) { return i.hasClass('closed') })) open_illness(illnesses[0])
+      } else {
+        illnesses.each(function(i) { i.addClass('closed') })
+      }
+      return ret
+    }
+    document.getElements('.measurements input').addEvent('change', validate_measurements)
+
+    illnesses.each(function (i,j) {
+      i.addClass('closed')
+      i.fields = i.getElements('input[type=text], input[type=radio], select')
+      if (!first && i.getElement('.fieldWithErrors')) first = i
+
+      if (illnesses[j+1]) {
+        i.getElements('.next button').addEvent('click', function() { open_illness(illnesses[j+1]) })
+      } else {
+        i.getElements('.next').dispose()
+      }
+
+      i.fields.addEvent('change', function() { validate_illness(i) })
+      validate_illness(i, false)
+    })
+
+    if (first) { open_illness(first) } else validate_measurements()
+  }
 })
 
 Element.behaviour(function() {
@@ -108,87 +190,6 @@ Element.behaviour(function() {
     transient.open(obj, { width: 300 })
   })
 
-  var illnesses = this.getElements('form.diagnostic section.illness')
-  if (illnesses[0]) {
-    var form = this.getElement('form.diagnostic')
-    var button = form.getElement('button[type=submit]')
-    var first = null
-    var open_illness = function(illness) {
-      illness.getElement('h2').
-        removeEvent('click').
-        addEvent('click', function() { open_illness(illness) })
-      illnesses.each(function(i) { i.addClass('closed') })
-      illness.removeClass('closed')
-      window.scrollTo(0, illness.getPosition().y)
-    }
-
-    if (form.hasClass('edit') || form.getElement('.fieldWithErrors')) {
-      form.getElements('section.illness>h2').addEvent('click', function() { open_illness(this.getParent()) })
-    }
-
-    var fun = function(input) {
-      if (input.get('type') == 'radio') {
-        return input.getParent().getElements('input').some(function(x) { return x.checked })
-      } else {
-        return input.value.match(/[a-z0-9]/)
-      }
-    }
-
-    illnesses.each(function (i,j) {
-      if (!first && i.getElement('.fieldWithErrors')) { first = i }
-      var answers = i.getElements('input[type=text], input[type=radio], select')
-
-      if (illnesses[j+1]) {
-        i.getElements('.next button').
-          addEvent('click', function() { open_illness(illnesses[j+1]) }).
-          setStyle('visibility', answers.some(fun) ? 'visible' : 'hidden')
-      } else { i.getElements('.next').dispose() }
-
-      answers.addEvent('change', function() {
-        if (answers.every(fun)) {
-          // Calculate
-          var data = {}
-          i.getElements('tr').each(function (tr) {
-            var sign_id = tr.getElement('input[type=hidden]').get('value')
-            tr.getElements('input[type!=hidden], select').some(function (input) {
-              if (input.get('type') != 'radio' || input.checked) {
-                data['s['+sign_id+']'] = input.value
-                return true }})})
-          new Request.JSON({
-            url: i.get('data-classify-href'),
-            onSuccess: function(json) {
-              var ul = new Element('ul')
-              json.each(function (cl) {
-                new Element(
-                  'li', {
-                    'class': (cl[1] ? 'active' : null),
-                    html:    cl[0] }).inject(ul) })
-              var h2 = i.getElement('h2')
-              h2.getElements('ul').dispose()
-              ul.inject(h2)
-            }
-          }).get(data)
-
-          if (illnesses[j+1]) {
-            i.getElement('.next button').setStyle('visibility', 'visible')
-          } else {
-            button.setStyle('display', 'block') }}})})
-
-    button.setStyle('display', 'none')
-    if (first) {
-      open_illness(first)
-    } else {
-      illnesses.each(function(i) { i.addClass('closed') })
-      var child_fields = document.getElements('div.measurements input')
-      var open_first = function() {
-        if (child_fields.every(function(i) { return i.value != '' })) {
-          open_illness(illnesses[0])
-          child_fields.removeEvent('change', open_first)
-        }
-      }
-      child_fields.addEvent('change', open_first)
-    }
-  }
   
   this.getElements('.editable').each(function (div) {
     div.getElements('button.edit').addEvent('click', function() {
