@@ -64,6 +64,7 @@ File.open('db/fixtures/classifications.txt', 'r') do |f|
     illness, name, equation = line.split '|'
     illnesses[illness].classifications.create(
       name: name,
+      treatment: '# ' + Faker::Lorem.sentences(4).join("\n# "),
       equation: equation)
   end
 end
