@@ -1,12 +1,12 @@
 class Hash
   def force_encoding enc
-    each { |k,v| v.try(:force_encoding, enc) }
+    each { |k,v| v.force_encoding enc rescue nil }
   end
 end
 
 class Array
   def force_encoding enc
-    each { |i| i.try(:force_encoding, enc) }
+    each { |i| i.force_encoding enc rescue nil }
   end
 
   def to_hash &block
