@@ -3,7 +3,7 @@ class SignListAnswer < SignAnswer
   validate :validate_list_value
 
   def value
-    list_value
+    I18n.t "signs.#{list_value}"
   end
 
   protected

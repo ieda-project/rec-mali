@@ -1,0 +1,16 @@
+fr:
+  signs:
+    'no': non
+    medium: moyen
+    high: élevé
+    'yes+': 'oui +'
+    'yes++': 'oui ++'
+    'yes+++': 'oui +++'
+    none: aucun
+    lethargique_inconscient: léthargique et inconscient
+    agite_irritable: agité et irritable
+    normal: normal
+    avide: avide
+    impossible: impossible
+    lentement: lentement
+    tres_lentement: très lentement
