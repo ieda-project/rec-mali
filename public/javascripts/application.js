@@ -67,7 +67,8 @@ window.addEvent('domready', function() {
     var button = form.getElement('button[type=submit]').setStyle('visibility', 'hidden')
     var first = null
 
-    open_illness = function(illness) {
+    var measurements_valid
+    function open_illness(illness) {
       illness.getElement('h2').
         removeEvent('click').
         addEvent('click', function() { open_illness(illness) })
@@ -75,8 +76,15 @@ window.addEvent('domready', function() {
       illness.removeClass('closed')
       window.scrollTo(0, illness.getPosition().y)
     }
-    all_valid = function() { return illnesses.every(function (i) { return i.valid }) }
-    validate_illness = function(illness, calculate) {
+    function all_valid() { return illnesses.every(function (i) { return i.valid }) }
+    function show_hide_button(illness) {
+      if ((!illness || illness.valid) && measurements_valid && all_valid()) {
+        button.setStyle('visibility', 'visible')
+      } else {
+        button.setStyle('visibility', 'hidden')
+      }
+    }
+    function validate_illness(illness, calculate) {
       illness.valid = illness.fields.every(function(i) {
         if (i.get('type') == 'hidden') {
           return true
@@ -110,18 +118,19 @@ window.addEvent('domready', function() {
         }).get(data)
       }
       if (!illness.valid) illness.getElements('h2 ul').dispose()
+      show_hide_button(illness)
       illness.getElements('.next button').setStyle('visibility', illness.valid ? 'visible' : 'hidden')
-      button.setStyle('visibility', (illness.valid && all_valid()) ? 'visible' : 'hidden')
       return illness.valid
     }
-    validate_measurements = function() {
-      var ret = document.getElements('.measurements input').every(function(i) { return i.value != '' })
-      if (ret) {
+    function validate_measurements() {
+      measurements_valid = document.getElements('.measurements input').every(function(i) { return i.value != '' })
+      if (measurements_valid) {
         if (illnesses.every(function (i) { return i.hasClass('closed') })) open_illness(illnesses[0])
       } else {
         illnesses.each(function(i) { i.addClass('closed') })
       }
-      return ret
+      show_hide_button()
+      return measurements_valid
     }
     document.getElements('.measurements input').addEvent('change', validate_measurements)
 
