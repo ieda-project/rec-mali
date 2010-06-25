@@ -39,6 +39,8 @@ class Diagnostic < ActiveRecord::Base
   after_create :update_child
 
   validates_presence_of :child, :height, :weight, :mac
+  validates_numericality_of :height, only_integer: true
+  validates_numericality_of :weight, :mac
   validate :validate_answers
 
   def type_name

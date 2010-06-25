@@ -123,7 +123,13 @@ window.addEvent('domready', function() {
       return illness.valid
     }
     function validate_measurements() {
-      measurements_valid = document.getElements('.measurements input').every(function(i) { return i.value != '' })
+      measurements_valid = document.getElements('.measurements input').every(function(i) {
+        if (i.hasClass('float')) {
+          return i.value.match(/^[0-9]+(\.[0-9]+){0,1}$/) && parseFloat(i.value) > 0
+        } else {
+          return i.value.match(/^[0-9]+$/) && parseInt(i.value) > 0
+        }
+      })
       if (measurements_valid) {
         if (illnesses.every(function (i) { return i.hasClass('closed') })) open_illness(illnesses[0])
       } else {
