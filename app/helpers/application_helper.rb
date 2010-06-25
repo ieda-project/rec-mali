@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'redcloth'
 
 module ApplicationHelper
@@ -11,5 +13,21 @@ module ApplicationHelper
 
   def html textile
     RedCloth.new(textile).to_html
+  end
+
+  def date d
+    d.strftime '%d/%m/%Y'
+  end
+
+  def age d
+    months = ((Date.today - d).to_f / 12).round
+    if months < 24
+      "#{months} mois"
+    elsif months < 120
+      years, mod = months.divmod 12
+      "#{years}#{mod >= 6 && '½'} ans"
+    else
+      "#{months / 12} ans"
+    end
   end
 end

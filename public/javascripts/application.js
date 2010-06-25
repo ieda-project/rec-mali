@@ -206,6 +206,12 @@ Element.behaviour(function() {
         link: 'ignore', update: div,
         onSuccess: function() { div.updated() }
       }).get(div.get('data-edit-href')) })})
+
+  this.getElements('#child_gender').addEvent('change', function() {
+    this.form.getElements('.nee').set(
+      'html',
+      this.selectedIndex == 0 ? 'Né' : 'Née')
+  })
 })
 
 function update_image(id, url) {

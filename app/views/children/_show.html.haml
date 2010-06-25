@@ -1,8 +1,7 @@
 %span.name= child.name
 %p
   %strong #{child.gender ? 'Né' : 'Née'} le :
-  #{child.born_on},
-  #{child.age_in_months} mois
+  #{date child.born_on}, #{age child.born_on}
   %br/
   %strong Village : 
   #{child.village.try(:name) || '-'}
