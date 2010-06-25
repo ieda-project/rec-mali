@@ -13,8 +13,7 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "name"
     t.date     "born_on"
     t.boolean  "gender"
     t.datetime "last_visit_at"
@@ -31,8 +30,7 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
     t.boolean  "penta2_polio2"
     t.boolean  "penta3_polio3"
     t.boolean  "measles"
-    t.string   "cache_first_name"
-    t.string   "cache_last_name"
+    t.string   "cache_name"
   end
 
   add_index "children", ["global_id"], :name => "index_children_on_global_id"
@@ -153,9 +151,9 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "name"
     t.string   "login"
+    t.string   "crypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,4 +1,5 @@
 class DiagnosticsController < ApplicationController
+  login_required
   before_filter :fetch_child
   before_filter :fetch, only: [ :show, :wait, :treatments, :calculations, :edit, :update ]
 

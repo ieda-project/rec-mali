@@ -1,6 +1,5 @@
 class Child < ActiveRecord::Base
   include Csps::Exportable
-  include Csps::Human
   belongs_to :village
   has_many :child_photos
   has_many :diagnostics
@@ -31,8 +30,6 @@ class Child < ActiveRecord::Base
 
   @@iconv = Iconv.new('ASCII//IGNORE//TRANSLIT', 'UTF-8')
   def fill_cache_fields
-    %w(first_name last_name).each do |field|
-      send "cache_#{field}=", send(field).cacheize
-    end
+    self.cache_name = name.cacheize
   end
 end

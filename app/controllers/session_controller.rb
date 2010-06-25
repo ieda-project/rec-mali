@@ -12,4 +12,9 @@ class SessionController < ApplicationController
     remove_user_from_session
     see_other '/'
   end
+
+  def welcome
+    @user = User.new
+    render layout: 'lobby'
+  end
 end

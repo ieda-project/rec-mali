@@ -13,9 +13,10 @@ body
   margin: auto
   -webkit-font-smoothing: antialiased
   width: 1000px
+  &.lobby, &.empty
+    margin-top: 100px
   &.empty
     background-image: none
-    margin-top: 100px
     &>.message
       margin: auto
       width: 400px
@@ -42,7 +43,7 @@ form#login
   -webkit-border-radius: 12px
   padding: 20px
   width: 215px
-  margin: 100px auto
+  margin: auto
   border: 3px solid #d3d3d0
   -webkit-border-radius: 12px
   div>*

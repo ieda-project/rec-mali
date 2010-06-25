@@ -13,3 +13,4 @@ end
 
 gem 'faker'
 gem 'RedCloth'
+gem 'bcrypt-ruby', require: 'bcrypt'

@@ -1,4 +1,4 @@
-User.create first_name: 'Albert', last_name: 'Schweitzer', login: 'albert'
+#User.create first_name: 'Albert', last_name: 'Schweitzer', login: 'albert'
 
 for n in %w(Kiembara Kongoussi Bobo-Dioulasso Niangoloko).map do
   Village.create name: n

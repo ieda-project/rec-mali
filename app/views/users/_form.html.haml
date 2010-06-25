@@ -1,0 +1,15 @@
+%table
+  %tr
+    %th(scope="row") Nom
+    %td= form.text_field :name
+  %tr
+    %th(scope="row") Username
+    %td= form.text_field :login
+  %tr
+    %th(scope="row") Password
+    %td= form.password_field :password
+  %tr
+    %th(scope="row") Password confirmation
+    %td= form.password_field :password_confirmation
+%p
+  %button(type="submit") Sauvegarder

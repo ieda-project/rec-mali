@@ -1,5 +1,9 @@
 Csps::Application.routes.draw do |map|
-  resource :session, controller: 'session'
+  resource :session, controller: 'session' do
+    get :welcome
+  end
+  resources :users
+
   resources :illnesses do
     get :classification, on: :member
   end

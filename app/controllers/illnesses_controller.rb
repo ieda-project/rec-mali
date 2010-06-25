@@ -1,4 +1,6 @@
 class IllnessesController < ApplicationController
+  login_required
+
   def classification
     illness = Illness.find params[:id]
     if params[:s].present?

@@ -6,11 +6,8 @@
   %h1 Rechercher un patient
   - search_form do |f|
     %div
-      %label Prénom
-      = f.text_field :first_name
-    %div
       %label Nom
-      = f.text_field :last_name
+      = f.text_field :name
     %div
       %label Date de naissance
       = f.text_field :born_on
@@ -25,7 +22,6 @@
     %table.children
       %thead
         %tr
-          %th Prénom
           %th Nom
           %th Date de naissance
           %th Village
@@ -33,8 +29,7 @@
       %tbody
         - for child in @children.includes(:village).paginate(page, window: 15) do
           %tr{ :class => cycle("odd", "even") }
-            %td= link_to child.first_name, child
-            %td= link_to child.last_name, child
+            %td= link_to child.name, child
             %td= child.born_on
             %td= child.village.name
             %td= child.last_visit_at

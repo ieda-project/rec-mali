@@ -2,7 +2,7 @@ class ChildrenController < ApplicationController
   login_required
   fetch 'Child'
 
-  Search = Struct.new(:first_name, :last_name, :born_on, :village_id)
+  Search = Struct.new(:name, :born_on, :village_id)
 
   def index
     @q = Search.from_hash params[:q]

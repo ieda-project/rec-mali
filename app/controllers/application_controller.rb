@@ -63,7 +63,13 @@ class ApplicationController < ActionController::Base
   end
 
   def login_required
-    logged_in? || denied
+    if logged_in?
+      true
+    elsif User.count.zero?
+      see_other welcome_session_path
+    else
+      denied
+    end
   end
 
   [ :login_required ].each do |filter|

@@ -8,6 +8,7 @@ module Doorman::Engines
           User.find session[:current_user_id]
         rescue
           remove_user_from_session
+          nil
         end
       end
     end
