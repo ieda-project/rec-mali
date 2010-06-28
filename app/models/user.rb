@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   before_save :crypt_password
 
   def self.authenticate login, password
-    (u = find_by_login(login)) && BCrypt::Password.new(u.crypted_password) == password
+    (u = find_by_login(login)) &&
+    BCrypt::Password.new(u.crypted_password) == password &&
+    u
   end
 
   protected
