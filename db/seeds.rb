@@ -4,6 +4,7 @@ for n in %w(Kiembara Kongoussi Bobo-Dioulasso Niangoloko).map do
   Village.create name: n
 end
 
+=begin
 100.times do
   child = Child.create(
     first_name: Faker::Name.first_name,
@@ -11,7 +12,6 @@ end
     born_on:    Date.parse('1999-08-11')+rand(1500),
     village_id: rand(4)+1)
 
-=begin
   date = Date.parse('2010-05-05')
   (rand(5)+3).times do
     Diagnostic.create(
@@ -20,8 +20,8 @@ end
       done_on: date)
     date += 1
   end
-=end
 end
+=end
 
 illnesses = {}
 
@@ -58,13 +58,32 @@ Illness.transaction do
   end
 end
 
+treatments = {}
+File.open('db/fixtures/treatments.txt', 'r') do |f|
+  cl = nil
+  f.each_line do |line|
+    next if line.blank?
+    if line =~ /^\[(.+)\]\Z/
+      cl = $1
+    elsif cl
+      treatments[cl] ||= ''
+      treatments[cl] += line
+    end
+  end
+end
+
 File.open('db/fixtures/classifications.txt', 'r') do |f|
   f.each_line do |line|
     next if line.blank?
     illness, name, equation = line.split '|'
-    illnesses[illness].classifications.create(
+    illnesses[illness].classifications.create!(
       name: name,
-      treatment: '# ' + Faker::Lorem.sentences(4).join("\n# "),
+      treatment: treatments.delete(name).try(:chomp),
       equation: equation)
   end
+end
+
+if treatments.any?
+  puts "WARNING: #{treatments.size} orphaned treatments!"
+  puts "Keys: #{treatments.keys.join(', ')}."
 end

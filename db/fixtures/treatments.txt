@@ -1,0 +1,82 @@
+﻿[Mastoïdïte]
+# Donner la première dose +d’antibiotique+ approprié,
+# Donner la première dose de +paracétamol+ pour calmer la douleur,
+# Transférer *d’URGENCE* à l’hôpital.
+
+[Infection aiguë]
+# Donner un +antibiotique+ approprié pendant +8 jours+,
+# Donner du +paracétamol+ pour calmer la douleur,
+# Assécher l’oreille à l’aide d’une mèche,
+# Revoir l’enfant dans 5 jours.
+
+[Infection chronique]
+# Assécher l’oreille à l’aide d’une mèche,
+# Administrer les +gouttes auriculaires d’antibiotiques purs+,
+# Revoir l’enfant dans +5 jours+.
+
+
+
+[Anémie grave]
+# Donner la première dose de +quinine+ injectable pour le paludisme grave,
+# Traiter l'enfant pour prévenir l'hypoglycémie,
+# Transférer *d’URGENCE* à l’hôpital.
+
+[Anémie]
+# Evaluer l’alimentation de l’enfant et conseiller la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS du tableau CONSEILLER la mère,
+# Donner du +fer/acide folique+,
+# Donner une +Combinaison Thérapeutique+ à base +d’Arthémisinine+,
+# Donner du +mébendazole+ pendant +3 jours+ ou de +l’albendazole+ en +prise unique+,
+# Expliquez à la mère quand revenir immédiatement,
+# Revoir l’enfant dans +14 jours+.
+
+
+
+[Malnutrition sévère]
+# Donner de la +vitamine A+ (1èredose),
+# Traiter l'enfant pour prévenir l'hypoglycémie,
+# Transférer *d’URGENCE* à l’hôpital.
+
+[Poids très faible]
+# Evaluer l’alimentation de l’enfant et conseiller à la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS du tableau CONSEILLER LA MÈRE,
+# Donner du +mébendazole+ si +l’enfant a 2 ans+ ou plus ou de +l’albendazole+ s’il n’en a +pas reçu pendant les 6 mois précédents+,
+# Donner de la +vitamine A, J1, J2, J14+,
+# Expliquer à la mère quand revenir immédiatement,
+# Si problème d’alimentation, revoir l’enfant dans +5 jours+,
+# Si pas de problème d'alimentation, revoir l’enfant dans +14 jours+.
+
+[Pas de poids très faible]
+# Si l’enfant a moins de 2 ans, évaluer l’alimentation de l’enfant et conseiller  à la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS  du  tableau CONSEILLER LA MÈRE,
+# Donner de la +vitamine A+ si l’enfant n’en a +pas reçu dans les 6 mois précédents+,
+# Si problème d’alimentation, revoir l’enfant dans +5 jours+,
+4. Expliquer à la mère quand revenir immédiatement.
+
+
+
+[Dysenterie]
+# Traiter pendant +8 jours+ avec un +antibiotique+ approprié,
+# Donner du +sulfate de zinc+ pendant +14 jours+,
+# Expliquer quand revenir immédiatement,
+# Revoir dans +2 jours+.
+	
+[Diarrhée persistente sévère]
+# Traiter la déshydratation avant de transférer, à moins que l’enfant n’ait une autre classification grave.
+
+[Diarrhée persistente]
+# Transférer à l’hôpital,
+# Donner des multivitamines et des sels minéraux,
+# Donner du sulfate de zinc pendant 14 jours,
+# Expliquer quand revenir immédiatement.
+
+[Déshydratation sévère]
+# Si l’enfant n’a pas, d’autre classification grave :
+## donner des liquides pour déshydratation sévère (Plan C).
+# Si l’enfant a une autre classification grave :
+## transférer *d’URGENCE* à l’hôpital, la mère donnant fréquemment des gorgées de +SRO+ en cours de route,
+## Conseiller à la mère de continuer l’allaitement au sein.
+# Si l’enfant a 2 ans ou plus et si une épidémie de choléra sévit dans la région :
+## Donner un antibiotique pour le choléra.
+
+[Signes évidents de déshydratation]
+# Donner liquides et aliments pour signes évidents de déshydratation (Plan B),
+# Donner du +sulfate de zinc+ pendant +14 jours+,
+# Si l’enfant a une autre classification grave, transférer *d’URGENCE* à l’hôpital, la mère donnant fréquemment des gorgées de +SRO+ en cours de route.
