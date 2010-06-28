@@ -63,7 +63,7 @@ class DiagnosticsController < ApplicationController
       final = (params[:step] == 'final')
       if @diagnostic.update_attributes params[:diagnostic]
         if final
-          see_other @child
+          see_other [ @child, @diagnostic ]
         else
           see_other [:wait, @child, @diagnostic]
         end

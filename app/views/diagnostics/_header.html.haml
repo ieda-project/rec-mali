@@ -2,6 +2,8 @@
   = link_to 'Consultation', child_diagnostic_path(@child, diagnostic)
   du #{diagnostic.done_on}
   = link_to 'Edit', edit_child_diagnostic_path(@child, diagnostic), :class => 'edit'
+  - if diagnostic.classifications.any?
+    = link_to 'Traitements', treatments_child_diagnostic_path(@child, diagnostic), :class => 'treatments'
   %span.by par #{diagnostic.author.name}
 %table
   %tr
