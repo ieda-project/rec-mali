@@ -122,12 +122,15 @@ window.addEvent('domready', function() {
       illness.getElements('.next button').setStyle('visibility', illness.valid ? 'visible' : 'hidden')
       return illness.valid
     }
+    var head_inputs = document.getElements('.profile-child input[type=text]')
     function validate_measurements() {
-      measurements_valid = document.getElements('.measurements input').every(function(i) {
+      measurements_valid = head_inputs.every(function(i) {
         if (i.hasClass('float')) {
           return i.value.match(/^[0-9]+(\.[0-9]+){0,1}$/) && parseFloat(i.value) > 0
-        } else {
+        } else if (i.hasClass('integer')) {
           return i.value.match(/^[0-9]+$/) && parseInt(i.value) > 0
+        } else {
+          return i.value.match(/[^ ]/)
         }
       })
       if (measurements_valid) {
@@ -138,7 +141,7 @@ window.addEvent('domready', function() {
       show_hide_button()
       return measurements_valid
     }
-    document.getElements('.measurements input').addEvent('change', validate_measurements)
+    head_inputs.addEvent('change', validate_measurements)
 
     illnesses.each(function (i,j) {
       i.addClass('closed')

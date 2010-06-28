@@ -1,4 +1,4 @@
-- form_for @child do |form|
+- form_for @child, html: { class: 'new child diagnostic' } do |form|
   .profile-child
     %div#mugshot.photo{'data-field' => 'child[photo]', 'data-method' => 'post', 'data-action' => temp_children_path}
       %img{alt: '', src: @child.photo.url(:thumbnail)}
