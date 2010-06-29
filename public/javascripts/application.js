@@ -67,14 +67,14 @@ window.addEvent('domready', function() {
     var button = form.getElement('button[type=submit]').setStyle('visibility', 'hidden')
     var first = null
 
-    var measurements_valid
-    function open_illness(illness) {
+    var measurements_valid = true
+    function open_illness(illness, scroll) {
       illness.getElement('h2').
         removeEvent('click').
         addEvent('click', function() { open_illness(illness) })
       illnesses.each(function(i) { i.addClass('closed') })
       illness.removeClass('closed')
-      window.scrollTo(0, illness.getPosition().y)
+      if (scroll != false) window.scrollTo(0, illness.getPosition().y)
     }
     function all_valid() { return illnesses.every(function (i) { return i.valid }) }
     function show_hide_button(illness) {
@@ -123,7 +123,9 @@ window.addEvent('domready', function() {
       return illness.valid
     }
     var head_inputs = document.getElements('.profile-child input[type=text]')
+    var head_next = document.getElement('.profile-child .next button')
     function validate_measurements() {
+      var was_valid = measurements_valid
       measurements_valid = head_inputs.every(function(i) {
         if (i.hasClass('float')) {
           return i.value.match(/^[0-9]+(\.[0-9]+){0,1}$/) && parseFloat(i.value) > 0
@@ -133,15 +135,17 @@ window.addEvent('domready', function() {
           return i.value.match(/[^ ]/)
         }
       })
-      if (measurements_valid) {
-        if (illnesses.every(function (i) { return i.hasClass('closed') })) open_illness(illnesses[0])
-      } else {
+      if (!was_valid && measurements_valid) {
+        head_next.setStyle('visibility', 'visible')
+      } else if (was_valid && !measurements_valid) {
         illnesses.each(function(i) { i.addClass('closed') })
+        head_next.setStyle('visibility', 'hidden')
       }
-      show_hide_button()
+      if (was_valid != measurements_valid) show_hide_button()
       return measurements_valid
     }
-    head_inputs.addEvent('change', validate_measurements)
+    head_next.addEvent('click', function() { open_illness(illnesses[0], false) })
+    validate_measurements.periodical(1000)
 
     illnesses.each(function (i,j) {
       i.addClass('closed')
