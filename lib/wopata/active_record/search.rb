@@ -13,6 +13,15 @@ module Wopata::ActiveRecord
         end
 
         case col.type
+          when :date
+            case value
+              when %r|^([0-9]{2})/([0-9]{2})/([0-9]{4})$|
+                c << 'born_on = ?'
+                d << "#{$3}-#{$2}-#{$1}"
+              when /^([0-9]{4})$/
+                c << 'born_on >= ? AND born_on <= ?'
+                d += [ "#{$1}-01-01", "#{$1}-12-31" ]
+            end
           when :string
             values = value.split(/\s+/).map { |q| "%#{q}%" }
             c << '(' + (["#{col.name} LIKE ?"]*values.length).join(' OR ') + ')'
