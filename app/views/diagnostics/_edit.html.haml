@@ -6,7 +6,7 @@
       %span.name= @child.name
       %p
         %strong #{@child.gender ? 'Né' : 'Née'} le :
-        #{date @child.born_on}, #{age @child.born_on}
+        #{l @child.born_on}, #{age @child.born_on}
         %br/
         %strong Village : #{@child.village.try(:name) || '-'}
 

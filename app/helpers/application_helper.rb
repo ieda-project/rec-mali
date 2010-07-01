@@ -15,10 +15,6 @@ module ApplicationHelper
     RedCloth.new(textile).to_html
   end
 
-  def date d
-    d.strftime '%d/%m/%Y'
-  end
-
   def age d
     months = ((Date.today - d).to_f / 12).round
     if months < 24

@@ -4,7 +4,7 @@
   = form.select :gender, [ %w(Masculin 1), %w(Féminin 0) ], selected: (form.object.gender ? '1' : '0')
   %span.nee= form.object.gender ? 'Né' : 'Née'
   le
-  = form.text_field :born_on, 'data-label' => 'Date', size: 10
+  = form.date_select(:born_on)
   %br/
   %strong Village :
   = form.select :village_id, Village.to_select

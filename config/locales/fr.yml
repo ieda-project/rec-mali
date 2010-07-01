@@ -1,4 +1,15 @@
 fr:
+  date:
+    formats:
+      default: '%d/%m/%Y'
+      short: '%d/%m'
+      long: '%d/%m/%Y'
+    order:
+      - :day
+      - :month
+      - :year
+    month_names: [ janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre ]
+    abbr_month_names: [ jan, fév, mar, avr, mai, juin, juil, août, sep, oct, nov, déc ]
   signs:
     'no': non
     medium: moyen
