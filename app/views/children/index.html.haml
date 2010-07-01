@@ -13,7 +13,7 @@
       = f.text_field :born_on
     %div.village
       %label Village
-      = f.select :village_id, []
+      = f.select :village_id, Village.to_select, include_blank: true
     %div.buttons
       -#%button(type='reset') Clear
       %button(type='submit') Rechercher
