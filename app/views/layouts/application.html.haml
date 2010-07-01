@@ -13,6 +13,6 @@
       - form_tag session_path, method: 'delete' do
         Agent:
         %span#user= current_user.name
-        %button(type="submit") Logout
+        %button.confirm(type="submit" data-confirm="Etes vous sûr de vouloir vous déconnecter ?") Logout
 
 = yield

@@ -225,6 +225,9 @@ Element.behaviour(function() {
       'html',
       this.selectedIndex == 0 ? 'Né' : 'Née')
   })
+  this.getElements('.confirm').addEvent('click', function() {
+    return confirm(this.get('data-confirm') || 'Ok?')
+  })
 })
 
 function update_image(id, url) {
