@@ -1,0 +1,14 @@
+%section
+  %h1
+    = @query.title
+    = @query.case_status_key
+  %h2 Chart
+  %div!= ziya_chart query_url(@query, format: :xml), size: '800x282'
+  %h2
+    Query values
+    = link_to 'Export XLS', export_query_path(@query, :xls)
+  %table
+    - @results.keys.sort.reverse.each do |k|
+      %tr
+        %th= k
+        %td= @results[k]

@@ -11,10 +11,10 @@
     %div
       %label Date de naissance
       = f.text_field :born_on
-    %div.village
+    .village
       %label Village
       = f.select :village_id, Village.to_select, include_blank: true
-    %div.buttons
+    .buttons
       -#%button(type='reset') Clear
       %button(type='submit') Rechercher
 

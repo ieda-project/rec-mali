@@ -3,6 +3,9 @@ Csps::Application.routes.draw do |map|
     get :welcome
   end
   resources :users
+  resources :queries do
+    get :export, on: :member
+  end
 
   resources :illnesses do
     get :classification, on: :member

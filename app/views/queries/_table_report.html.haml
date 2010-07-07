@@ -1,0 +1,15 @@
+- start_column = 2
+%table
+  %tr
+    %td
+      ' '
+    %td
+      "Cases"
+time_series.each_with_index do |ts, i|
+
+  sheet1[i+1, 0] = ts
+end
+
+report.each_with_index do |rp, j|
+  sheet1[j+1, 1] = rp[:value]
+end

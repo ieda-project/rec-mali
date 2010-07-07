@@ -11,6 +11,9 @@ else
   gem 'sqlite3-ruby', require: 'sqlite3'
 end
 
-gem 'faker'
-gem 'RedCloth'
 gem 'bcrypt-ruby', require: 'bcrypt'
+gem 'builder'
+gem 'faker'
+gem 'RedCloth', require: 'redcloth'
+gem 'spreadsheet'
+gem 'ziya'

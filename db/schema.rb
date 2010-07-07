@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100519175415) do
+ActiveRecord::Schema.define(:version => 20100706114638) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -96,6 +96,16 @@ ActiveRecord::Schema.define(:version => 20100519175415) do
     t.string   "key"
     t.string   "name"
     t.integer  "sequence"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "queries", :force => true do |t|
+    t.string   "title"
+    t.string   "klass"
+    t.integer  "case_status"
+    t.text     "conditions"
+    t.datetime "last_run_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -55,6 +55,31 @@ class Diagnostic < ActiveRecord::Base
     self
   end
 
+  class << self
+    def search_columns
+      column_names
+    end
+    
+    def group_stats_by case_status, rs
+      # TODO
+      m = self.minimum :done_on
+      return {} if m.nil?
+      d1 = m.beginning_of_month
+      d2 = d1.next_month
+      grs = {}
+      while Date.today.next_month.beginning_of_month >= d2
+        k = "#{d1.year}-#{sprintf("%02d", d1.month)}"
+        grs[k] = 0
+        rs.each do |r|
+          grs[k] += 1 if r.done_on < d2
+        end
+        d1 = d1.next_month
+        d2 = d2.next_month
+      end
+      grs
+    end
+  end
+
   protected
 
   def update_child

@@ -7,6 +7,7 @@ ActiveRecord::Relation.send :include, Wopata::ActiveRecord::Search
   ActiveRecord::Base.metaclass.send :delegate, method, to: :scoped
 end
 
+ActiveRecord::Base.send :extend, Wopata::ActiveRecord::Enumeration
 ActiveRecord::Base.metaclass.send :alias_method, :[], :find
 
 Paperclip.options[:defaults] = YAML.load_file(File.join(Rails.root, 'config', 'paperclip.yml'))[Rails.env]

@@ -1,0 +1,13 @@
+- queries = Query.order(:title)
+- if (lqueries = Query.latest_run).any?
+  %section
+    %h2 Latest queries
+    %ul.queries
+      - lqueries.each do |q|
+        %li= link_to q.title, query_path(q)
+
+%section
+  %h2 #{queries.size} queries
+  %ul.queries
+    - queries.each do |q|
+      %li= link_to q.title, query_path(q)
