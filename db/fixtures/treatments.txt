@@ -1,57 +1,25 @@
-﻿[Mastoïdïte]
+﻿/* TOUX */
+[Pneumonie grave ou maladie très grave]
 # Donner la première dose +d’antibiotique+ approprié,
-# Donner la première dose de +paracétamol+ pour calmer la douleur,
-# Transférer *d’URGENCE* à l’hôpital.
+# Transférer *d’URGENCE* à l’hôpital,
+# Si l’enfant n’a pas d’autre classification grave donner un bronchodilateur en inhalation si respiration sifflante,
+# Traiter l'enfant pour +prévenir l'hypoglycémie+.
 
-[Infection aiguë]
+[Pneumonie]
 # Donner un +antibiotique+ approprié pendant +8 jours+,
-# Donner du +paracétamol+ pour calmer la douleur,
-# Assécher l’oreille à l’aide d’une mèche,
-# Revoir l’enfant dans 5 jours.
-
-[Infection chronique]
-# Assécher l’oreille à l’aide d’une mèche,
-# Administrer les +gouttes auriculaires d’antibiotiques purs+,
-# Revoir l’enfant dans +5 jours+.
-
-
-
-[Anémie grave]
-# Donner la première dose de +quinine+ injectable pour le paludisme grave,
-# Traiter l'enfant pour prévenir l'hypoglycémie,
-# Transférer *d’URGENCE* à l’hôpital.
-
-[Anémie]
-# Evaluer l’alimentation de l’enfant et conseiller la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS du tableau CONSEILLER la mère,
-# Donner du +fer/acide folique+,
-# Donner une +Combinaison Thérapeutique+ à base +d’Arthémisinine+,
-# Donner du +mébendazole+ pendant +3 jours+ ou de +l’albendazole+ en +prise unique+,
-# Expliquez à la mère quand revenir immédiatement,
-# Revoir l’enfant dans +14 jours+.
-
-
-
-[Malnutrition sévère]
-# Donner de la +vitamine A+ (1èredose),
-# Traiter l'enfant pour prévenir l'hypoglycémie,
-# Transférer *d’URGENCE* à l’hôpital.
-
-[Poids très faible]
-# Evaluer l’alimentation de l’enfant et conseiller à la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS du tableau CONSEILLER LA MÈRE,
-# Donner du +mébendazole+ si +l’enfant a 2 ans+ ou plus ou de +l’albendazole+ s’il n’en a +pas reçu pendant les 6 mois précédents+,
-# Donner de la +vitamine A, J1, J2, J14+,
+# Calmer le mal de gorge et la toux avec un +remède inoffensif+,
 # Expliquer à la mère quand revenir immédiatement,
-# Si problème d’alimentation, revoir l’enfant dans +5 jours+,
-# Si pas de problème d'alimentation, revoir l’enfant dans +14 jours+.
+# Revoir dans +2 jours+.
 
-[Pas de poids très faible]
-# Si l’enfant a moins de 2 ans, évaluer l’alimentation de l’enfant et conseiller  à la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS  du  tableau CONSEILLER LA MÈRE,
-# Donner de la +vitamine A+ si l’enfant n’en a +pas reçu dans les 6 mois précédents+,
-# Si problème d’alimentation, revoir l’enfant dans +5 jours+,
-4. Expliquer à la mère quand revenir immédiatement.
-
+[Pas de pneumonie: toux ou rhume]
+# Si la toux  évolue depuis plus +14 jours+, référer le malade pour bilan,
+# Calmer le mal de gorge et la toux avec un +remède inoffensif+,
+# Expliquer à la mère quand revenir immédiatement,
+# Revoir dans +5 jours+ s’il n’y a pas d’amélioration.
 
 
+
+/* DIARRHEE */
 [Dysenterie]
 # Traiter pendant +8 jours+ avec un +antibiotique+ approprié,
 # Donner du +sulfate de zinc+ pendant +14 jours+,
@@ -80,3 +48,156 @@
 # Donner liquides et aliments pour signes évidents de déshydratation (Plan B),
 # Donner du +sulfate de zinc+ pendant +14 jours+,
 # Si l’enfant a une autre classification grave, transférer *d’URGENCE* à l’hôpital, la mère donnant fréquemment des gorgées de +SRO+ en cours de route.
+
+
+
+/* FIEVRE */
+[Maladie fébrile très grave ou paludisme grave]
+# Donner de la +quinine+ pour paludisme grave (première dose),
+# Donner la première dose +d’antibiotique+ approprié,
+# Traiter l’enfant pour éviter +l’hypoglycémie+,
+# Administrer, au dispensaire, une dose de +paracétamol+ ou de +l’acétyl salicylate de lysine+ si la fièvre est de +38,5°C ou plus+,
+# Enveloppement humide,
+# Transférer *d’URGENCE* à l’hôpital.
+
+[Paludisme simple]
+# Donner une +Combinaison Thérapeutique à base d’Arthémisinine+,
+# Administrer, au dispensaire, une dose de +paracétamol+ si la température est de +38.5°C ou plus+,
+# EXpliquer à la mère quand revenir immédiatement,
+# Revoir l’enfant dans +2 jours+ si la fièvre persiste,
+# Si la fièvre a été présente tous les jours depuis +plus de 7 jours+, référer pour bilan.
+
+[Rougeole grave et compliqué]
+# Donner de la +Vitamine A+,
+# Donner la première dose d’un +antibiotique+ approprié,
+# Si opacité de la cornée ou écoulement de pus au niveau des yeux, traiter avec la +pommade ophtalmique à la tétracycline+.
+
+[Rougeole avec complication aux yeux ou à la bouche]
+# Donner de la +Vitamine A, J1, J2, J14+,
+# Si écoulement oculaire de pus, traiter avec la +pommade ophtalmique à la tétracycline+,
+# Revoir l'enfant dans +2 jours+,
+# En cas d’ulcération dans la bouche, traiter au +violet de gentiane dilué+.
+
+[Rougeole]
+1. Donner de la +vitamine A, J1,J2, J14+,
+2. Donner un +antibiotique+ approprié pendant +8 jours+,
+3. Expliquer à la mère quand revenir immédiatement,
+4. Revoir l’enfant dans +5 jours+.
+
+[Antécédent de rougeole]
+# Donner une dose de  +Vitamine A+, (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
+# Expliquer à la mère quand revenir immédiatement.
+
+
+
+/* OREILLE */
+[Mastoïdïte]
+# Donner la première dose +d’antibiotique+ approprié,
+# Donner la première dose de +paracétamol+ pour calmer la douleur,
+# Transférer *d’URGENCE* à l’hôpital.
+
+[Infection aiguë]
+# Donner un +antibiotique+ approprié pendant +8 jours+,
+# Donner du +paracétamol+ pour calmer la douleur,
+# Assécher l’oreille à l’aide d’une mèche,
+# Revoir l’enfant dans 5 jours.
+
+[Infection chronique]
+# Assécher l’oreille à l’aide d’une mèche,
+# Administrer les +gouttes auriculaires d’antibiotiques purs+,
+# Revoir l’enfant dans +5 jours+.
+
+
+
+/* ANEMIE */
+[Anémie grave]
+# Donner la première dose de +quinine+ injectable pour le paludisme grave,
+# Traiter l'enfant pour prévenir +l'hypoglycémie+,
+# Transférer *d’URGENCE* à l’hôpital.
+
+[Anémie]
+# Evaluer l’alimentation de l’enfant et conseiller la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS du tableau CONSEILLER la mère,
+# Donner du +fer/acide folique+,
+# Donner une +Combinaison Thérapeutique+ à base +d’Arthémisinine+,
+# Donner du +mébendazole+ pendant +3 jours+ ou de +l’albendazole+ en +prise unique+,
+# Expliquez à la mère quand revenir immédiatement,
+# Revoir l’enfant dans +14 jours+.
+
+
+
+/* MALNUTRITION */
+[Malnutrition sévère]
+# Donner de la +vitamine A+ (1èredose),
+# Traiter l'enfant pour prévenir l'hypoglycémie,
+# Transférer *d’URGENCE* à l’hôpital.
+
+[Poids très faible]
+# Evaluer l’alimentation de l’enfant et conseiller à la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS du tableau CONSEILLER LA MÈRE,
+# Donner du +mébendazole+ si +l’enfant a 2 ans+ ou plus ou de +l’albendazole+ s’il n’en a +pas reçu pendant les 6 mois précédents+,
+# Donner de la +vitamine A, J1, J2, J14+,
+# Expliquer à la mère quand revenir immédiatement,
+# Si problème d’alimentation, revoir l’enfant dans +5 jours+,
+# Si pas de problème d'alimentation, revoir l’enfant dans +14 jours+.
+
+[Pas de poids très faible]
+# Si l’enfant a moins de 2 ans, évaluer l’alimentation de l’enfant et conseiller  à la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS  du  tableau CONSEILLER LA MÈRE,
+# Donner de la +vitamine A+ si l’enfant n’en a +pas reçu dans les 6 mois précédents+,
+# Si problème d’alimentation, revoir l’enfant dans +5 jours+,
+4. Expliquer à la mère quand revenir immédiatement.
+
+
+
+/* VIH */
+[Infection VIH symptomatique confirmée]
+# Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
+# Donner une +prophylaxie au cotrimoxazole+,
+# Vérifier le statut vaccinal,
+# Donner une +supplémentation en vitamine+ à tous les enfants à partir de l’âge de +6 mois+,
+# Evaluer l’alimentation de l’enfant et donner les conseils appropriés à la mère,
+# Référer pour prise en charge ultérieure incluant les ARV,
+# Donner les conseils à la mère pour les soins à domicile,
+# Revoir au bout de +14 jours+, puis +tous les mois pendant 3 mois+, puis +tous les 3 mois ou conformément au calendrier vaccinal+.
+
+[Infection VIH confirmée]
+# Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
+# Donner une +prophylaxie au cotrimoxazole+,
+# Vérifier le statut vaccinal,
+# Donner une supplémentation en +vitamine+ à tous les enfants à partir de l’âge de +6 mois+,
+# Evaluer l’alimentation de l’enfant et donner les conseils appropriés à la mère,
+# Référer pour prise en charge ultérieure incluant les ARV,
+# Donner les conseils à la mère pour les soins à domicile,
+# Revoir au bout de +14 jours+, puis +tous les mois pendant 3 mois+, puis +tous les 3 mois ou conformément au calendrier vaccinal+.
+
+[Infection VIH symptomatique probable]
+# Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
+# Donner une +prophylaxie au cotrimoxazole+,
+# Donner une supplémentation en +vitamine+ à tous les enfants à partir de l’âge de +6 mois+,
+# Évaluer l’alimentation de l’enfant et donner les conseils appropriés à la mère,
+# Réaliser un test de confirmation de l’infection à VIH,
+# Référer pour prise en charge ultérieure incluant les ARV,
+# Donner les conseils à la mère pour les soins à domicile,
+# Revoir au bout de +14 jours+, puis +tous les mois pendant 3 mois+, puis +tous les 3 mois ou conformément au calendrier vaccinal+.
+
+[Infection VIH possible / exposition au VIH]
+# Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
+# Donner une +prophylaxie au cotrimoxazole+,
+# Donner une supplémentation en +vitamine+ à tous les enfants à partir de l’âge de +6 mois+,
+# Évaluer l’alimentation de l’enfant et donner les conseils appropriés à la mère,
+# Confirmer l’infection à VIH de l’enfant dès que possible en utilisant le meilleur test disponible,
+# Référer pour prise en charge ultérieure incluant les ARV,
+# Revoir au bout de +14 jours+, puis +tous les mois pendant 3 mois+, puis +tous les 3 mois ou conformément au calendrier vaccinal+.
+
+[Infection VIH symptomatique suspecte]
+# Traiter, conseiller et suivre pour les infections existantes,
+# Conseiller la mère sur l’alimentation et sur sa propre santé,
+# Encourager à faire le test.
+
+[Infection VIH peu problable]
+# Traiter, conseiller et suivre pour les infections existantes,
+# Conseiller la mère sur l’alimentation et sur sa propre santé,
+# Encourager à faire le test.
+
+[Pas d'infection du VIH]
+# Traiter, conseiller et suivre pour les infections existantes,
+# Conseiller la mère sur l’alimentation et sur sa propre santé,
+# Encourager à faire le test.

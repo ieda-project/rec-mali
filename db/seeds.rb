@@ -62,6 +62,7 @@ treatments = {}
 File.open('db/fixtures/treatments.txt', 'r') do |f|
   cl = nil
   f.each_line do |line|
+    line.gsub(%r(/\*.*?\*/), '')
     next if line.blank?
     if line =~ /^\[(.+)\]\Z/
       cl = $1

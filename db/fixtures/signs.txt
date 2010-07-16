@@ -1,29 +1,68 @@
 danger|Signes de danger
-  boire|L’enfant est il capable de boire ou de prendre le sein ?|boolean
-  vomit|L’enfant vomit t’il tout ce qu’il consomme ?|boolean
-  convulsions_passe|L’enfant a-t-il eu  des convulsions ?|boolean
+  boire|L’enfant est il capable de boire ou de prendre le sein ?|boolean
+  vomit|L’enfant vomit t’il tout ce qu’il consomme ?|boolean
+  convulsions_passe|L’enfant a-t-il eu  des convulsions ?|boolean
   lethargie|L'enfant est-il léthargique ou inconscient ?|boolean
-  convulstions_present|L’enfant convulse t-il actuellement ?|boolean
+  convulstions_present|L’enfant convulse t-il actuellement ?|boolean
+
+toux|Toux
+  enfant_tousse|L'enfant tousse t-il ?|boolean
+  toux_duree|Depuis combien de temps ?|integer|0|100
+  mouvements_respiratoires|Compter les mouvements respiratoires par minute|list|respiration_normale;respiration_rapide
+  tirage_sous_costal|Rechercher un tirage sous-costal|boolean
+  stridor|Regarder et écouter si l’enfant  a un stridor|boolean
+  respiration_sifflante|Rechercher une respiration sifflante|boolean  
+
+diarrhee|Diarrhée
+  diarrhee_duree|Depuis combien de temps ?|integer|0|100	
+  sang_selles|Y a-t-il du sang dans les selles ?|boolean
+  diarrhee_etat_enfant|L'enfant est-il léthargique ou inconscient? Ou Agité et irritable?|list|none;lethargique_inconscient;agite_irritable
+  yeux_enfonces|Regarder si les yeux de l’enfant sont enfoncés|boolean
+  soif|Offrir à boire à l’enfant : est-il incapable de boire ou boit-il difficilement? Ou  boit-il avidement, est-il assoiffé ?|list|normal;avide;impossible
+  signe_pli|Pincer la peau de l’abdomen. Le pli cutané s’efface-t-il ?|list|normal;lentement;tres_lentement  
+
+fievre|Fièvre
+  presence_fievre|L'enfant a-t-il de la fièvre (antécédents ou chaud au toucher ou température de 38° C ou plus) ?|boolean
+  fievre_duree|Depuis combien de temps ?|integer|0|100
+  fievre_longue|Si depuis plus de 7 jours, la fièvre a-t-elle été présente tous les jours ?|boolean
+  urines_abondantes|L’enfant émet-il des urines peu abondantes ou foncées (coca cola) ?|boolean	
+  saignements|L’enfant a t-il eu des saignements ?|boolean
+  rougeole_dernierement|L'enfant a-t-il eu la rougeole au cours des 3 derniers mois ?|boolean
+  raideur_nuque|Observer et rechercher une raideur de nuque|boolean
+  palu_ictere|Signes de paludisme grave : Ictère (yeux jaunes) ?|boolean
+  palu_saignements|Signes de paludisme grave : Saignements anormaux ?|boolean
+  palu_urines_foncees|Signes de paludisme grave : Urines foncées|boolean
+  palu_choc|Signes de paludisme grave : Choc (pouls rapide, extrémités)|boolean
+  rougeole_eruption|Signe de rougeole lors de la consultation: Eruption généralisée|boolean
+  rougeole_ecoulement_nasal|Signe de rougeole lors de la consultation: Ecoulement nasal|boolean
+  rougeole_yeux_rouges|Signe de rougeole lors de la consultation: Yeux rouges|boolean
+  rougeole_toux|Signe de rougeole lors de la consultation: Toux|boolean
+  yeux_pus|Ecoulement oculaire de pus|boolean
+  ulcerations|Ulcérations dans la bouche|boolean
+  ulcerations_profondes|Ulcérations profondes ou étendues dans la bouche|boolean
+  opacite_cornee|Opacité de la cornée|boolean
 
 oreille|Affection de l'oreille
-  mal|L'enfant a-t-il mal aux oreilles ?|boolean
-  ecoulement|Y-a-t-il un écoulement ?|boolean
-  duree_ecoulement|Si oui, depuis combien de temps ?|integer|0|100
+  mal|L'enfant a-t-il mal aux oreilles ?|boolean
+  ecoulement|Y-a-t-il un écoulement ?|boolean
+  duree_ecoulement|Si oui, depuis combien de temps ?|integer|0|100
   pus_ecoulement|Regarder si du pus coule d’une oreille|boolean
   gonflement|Rechercher un gonflement douloureux derrière l’oreille|boolean
-
+  
 anemie|Amémie
   paleur_palmaire|Observer et rechercher la pâleur palmaire|list|no;medium;high
-
+  
 nutrition|Etat nutritionel
   amaigrissement|Rechercher un amaigrissement visible et sévère|boolean
   oedemes|Rechercher des oedèmes au niveau des deux pieds|list|no;yes+;yes++;yes+++
   poids_age|Le poids pour l'âge est-il très faible ?|boolean
 
-diarrhee|Diarrhée
-  diarrhee_duree|Depuis combien de temps ?|integer|0|100    
-  sang_selles|Y a-t-il du sang dans les selles ?|boolean
-  diarrhee_etat_enfant|L'enfant est-il léthargique ou inconscient? Ou Agité et irritable?|list|none;lethargique_inconscient;agite_irritable
-  yeux_enfonces|Regarder si les yeux de l’enfant sont enfoncés|boolean
-  soif|Offrir à boire à l’enfant : est-il incapable de boire ou boit-il difficilement? Ou  boit-il avidement, est-il assoiffé ?|list|normal;avide;impossible
-  signe_pli|Pincer la peau de l’abdomen. Le pli cutané s’efface-t-il ?|list|normal;lentement;tres_lentement
+vih|VIH  
+  serologie_enfant|Sérologie de l'enfant|list|inconnue;positive;negative
+  test_enfant|Test virologique pour l'enfant|list|pas_de_test;positif;negatif
+  pneumonie_recidivante|Pneumonie récidivante|boolean
+  diarrhee_dernierement|Diarrhée au cours des 3 derniers mois|boolean
+  candidose_buccale|Candidose buccale|boolean
+  hypertrophie_ganglions_lymphatiques|Hypertrophie des ganglions lymphatiques et palpables à plus d’un endroit|boolean
+  augmentation_glande_parotide|Augmentation du volume de la glande parotide|boolean
+  serologie_mere|Sérologie de la mère|list|inconnue;positive;negative
