@@ -7,7 +7,7 @@
       - form.fields_for :diagnostic, @diagnostic do |fields|
         %div.measurements= partial 'diagnostics/edit_measurements', locals: { form: fields }
       .next
-        %button(type="button") Suivant
+        %button.next(type="button") Suivant
   - form.fields_for :diagnostic, @diagnostic do |fields|
     = partial 'diagnostics/edit_signs', locals: { form: fields }
   %nav

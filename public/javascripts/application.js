@@ -196,18 +196,17 @@ Element.behaviour(function() {
   })
 
   this.getElements('select.boolean').each(function (sel) {
-    var button = new Element('button', { type: 'button' }).injectAfter(sel)
-    button.setAttribute('type', 'button')
+    var button = new Element('div', { 'class': 'switch' }).injectAfter(sel)
+    var yes = new Element('div', { 'class': 'yes', text: 'Oui' }).inject(button)
+    var no = new Element('div', { 'class': 'no', text: 'Non' }).inject(button)
     button.sel = sel
+    yes.sel = sel
+    no.sel = sel
     sel.setStyle('display', 'none')
     set_sc(sel)
   })
-  this.getElements('select.boolean+button').addEvent('click', function(e) {
-    if (this.sel.selectedIndex == 0) {
-      this.sel.selectedIndex = (e.page.x < this.getPosition().x + this.getSize().x/2) ? 1 : 2
-    } else {
-      this.sel.selectedIndex ^= 3
-    }
+  this.getElements('select.boolean+div.switch div').addEvent('click', function(e) {
+    this.sel.selectedIndex = (this.hasClass('yes')) ? 2 : 1
     this.sel.fireEvent('change')
     set_sc(this.sel)
     return false
@@ -254,9 +253,9 @@ function update_image(id, url) {
 }
 function set_sc(sel) {
   switch (sel.selectedIndex) {
-    case 1: sel.removeClass('true'); sel.addClass('false'); break;
-    case 2: sel.removeClass('false'); sel.addClass('true'); break;
-    default: sel.removeClass('true'); sel.removeClass('false')
+    case 1: sel.getNext().removeClass('yes'); sel.getNext().addClass('no'); break;
+    case 2: sel.getNext().removeClass('no'); sel.getNext().addClass('yes'); break;
+    default: sel.getNext().removeClass('yes'); sel.getNext().removeClass('no')
   }
 }
 
