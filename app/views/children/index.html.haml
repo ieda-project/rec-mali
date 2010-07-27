@@ -19,6 +19,9 @@
       %button(type='submit') Rechercher
 
   - if @children.any?
+    %p.result-count
+      %strong= @children.size
+      Patient(s) trouvé(s)
     %table.children
       %thead
         %tr
