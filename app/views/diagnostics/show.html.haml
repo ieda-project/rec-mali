@@ -9,7 +9,7 @@
       - for sa in @diagnostic.sign_answers.for(i) do
         %tr
           %th(scope="row")= sa.sign.question
-          %td= sa.value
+          %td!= sa.html_value rescue sa.value
     - cs = @diagnostic.classifications.for(i)
     %ul.classification
       - for c in cs do

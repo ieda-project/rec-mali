@@ -4,6 +4,10 @@ class SignBooleanAnswer < SignAnswer
   def value
     boolean_value ? 'oui' : 'non'
   end
+  
+  def html_value
+    "<div class='switch #{boolean_value ? 'yes' : 'no'}'><div class='yes'>Oui</div><div class='no'>Non</div></div>"
+  end
 
   def raw_value
     boolean_value
