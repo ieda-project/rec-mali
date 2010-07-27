@@ -79,9 +79,9 @@ window.addEvent('domready', function() {
     function all_valid() { return illnesses.every(function (i) { return i.valid }) }
     function show_hide_button(illness) {
       if ((!illness || illness.valid) && measurements_valid && all_valid()) {
-        button.setStyle('visibility', 'visible')
+        button.disabled = false
       } else {
-        button.setStyle('visibility', 'hidden')
+        button.disabled = true
       }
     }
     function validate_illness(illness, calculate) {
@@ -119,7 +119,7 @@ window.addEvent('domready', function() {
       }
       if (!illness.valid) illness.getElements('h2 ul').dispose()
       show_hide_button(illness)
-      illness.getElements('.next button').setStyle('visibility', illness.valid ? 'visible' : 'hidden')
+      illness.getElements('.next button').disabled = !illness.valid
       return illness.valid
     }
     var head_inputs = document.getElements('.profile-child input[type=text]')
@@ -136,10 +136,10 @@ window.addEvent('domready', function() {
         }
       })
       if (!was_valid && measurements_valid) {
-        head_next.setStyle('visibility', 'visible')
+        head_next.disabled = false
       } else if (was_valid && !measurements_valid) {
         illnesses.each(function(i) { i.addClass('closed') })
-        head_next.setStyle('visibility', 'hidden')
+        head_next.disabled = true
       }
       if (was_valid != measurements_valid) show_hide_button()
       return measurements_valid

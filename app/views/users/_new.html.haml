@@ -1,3 +1,5 @@
-%h2 New user
-- form_for @user do |f|
-  = partial 'users/form', locals: { form: f }
+#user-session
+  %h1 Inscription
+  %p Bienvenue sur CSPS. Créer un centre.  
+  - form_for @user do |f|
+    = partial 'users/form', locals: { form: f }
