@@ -1,6 +1,8 @@
 #user-session
   %h1 Connexion
   %form#login(method='post' action=session_path)
+    - if @error
+      %p.error= @error
     - if @to
       %input{type: 'hidden', name: 'to', value: @to}/
     %div
@@ -11,6 +13,3 @@
       %input#session_password(type='password' name='session[password]')/
     %div
       %button(type='submit') Connexion
-  
-  - if @error
-    %p.error= @error
