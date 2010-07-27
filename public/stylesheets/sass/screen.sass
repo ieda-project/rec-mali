@@ -246,6 +246,10 @@ nav a, nav button, section button[type=submit]
     height: 46px
     line-height: 46px
     padding: 0 42px 0 12px
+    &.disabled
+      background-position: 0 -92px
+      &:after
+        background-position: right -138px
     &:after  
       background: url(../images/backgrounds/button-validation.gif) -46px right no-repeat
       height: 46px
@@ -696,12 +700,7 @@ div.no-result
 .next
   margin-top: 8px
   text-align: right
-  &.disable
-    button
-      background-position: 0 -60px
-      &:after
-        background-position: right -90px
-  button
+  button.next
     position: relative
     display: inline-block
     color: white
@@ -712,6 +711,10 @@ div.no-result
     height: 30px
     line-height: 30px
     padding: 0 40px 0 17px
+    &.disabled
+      background-position: 0 -60px
+      &:after
+        background-position: right -90px
     &:after  
       position: absolute
       right: 0
