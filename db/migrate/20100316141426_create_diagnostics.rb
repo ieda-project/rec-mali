@@ -7,6 +7,7 @@ class CreateDiagnostics < ActiveRecord::Migration
       t.integer :height, :mac
       t.float :weight
       t.text :comments
+      t.string :failed_classifications
       t.timestamps
 
       t.string :global_id
