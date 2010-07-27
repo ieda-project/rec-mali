@@ -16,6 +16,52 @@ $extend(Element, {
   }
 })
 
+// AlertBox
+
+var Alertbox = new Element('div', { id: 'alert' })
+$extend(Alertbox, {
+  display: function(message, delay) {
+    message = '' + message
+    if (this.timeout) this.timeout = $clear(this.timeout)
+    this.set('text', message).reposition().setStyle('visibility', 'visible')
+    //this.get('tween', {onComplete: function() {}}).start('opacity', 0.7)
+    if (!delay || delay > 0) this.timeout = this.hide.delay(delay || (2000 + message.length * 30), this)
+  },
+  wait: function() {
+    this.display(_('wait'), -1)
+  },
+  reposition: function() {
+    this.setStyles({
+      top: this.ypos(),
+      left: this.xpos()
+    })
+    return this
+  },
+	xpos: function() {
+		return Math.round((document.documentElement.scrollLeft || document.body.scrollLeft) +
+            (window.getWidth() - this.getWidth()) / 2);
+	},
+	ypos: function() {
+		return Math.round((document.documentElement.scrollTop || document.body.scrollTop) +
+            (window.getHeight() - this.getHeight()) / 2)
+	},
+  hide_unless_delayed: function() {
+    if (!this.timeout && this.getStyle('opacity') > 0) this.hide()
+  },
+  hide: function() {
+    //this.get('tween', {onComplete: function() {
+      Alertbox.setStyle('visibility', 'hidden')
+    //}}).start('opacity', 0)
+  }
+})
+
+window.addEvent('domready', function() {
+  // AlertBox
+  Alertbox.inject(document.body)
+  window._alert = window.alert
+  window.alert = function(message) { Alertbox.display(message) }
+})
+    
 transient = {
   div: null,
   open: function(what, style) {
@@ -44,6 +90,10 @@ transient = {
   }
 }
 
+alert_fill = function() {
+  alert('Vous devez compléter le formulaire avant de poursuivre')
+}
+
 window.addEvent('domready', function() { document.body.updated() })
 window.addEvent('domready', function() {
   var link, next
@@ -66,6 +116,11 @@ window.addEvent('domready', function() {
     var form = document.getElement('form.diagnostic')
     var button = form.getElement('button[type=submit]').addClass('disabled')
     var first = null
+    illnesses.each(function(i) {
+      i.getElement('h2').addEvent('click', function() {
+        alert_fill()
+      })
+    })
 
     var measurements_valid = true
     function open_illness(illness, scroll) {
@@ -80,8 +135,14 @@ window.addEvent('domready', function() {
     function show_hide_button(illness) {
       if ((!illness || illness.valid) && measurements_valid && all_valid()) {
         button.removeClass('disabled')
+        button.removeEvents()
       } else {
         button.addClass('disabled')
+        button.addEvent('click', function(e) {
+          alert_fill()
+          e.stop()
+          return false
+        })
       }
     }
     function validate_illness(illness, calculate) {
@@ -151,7 +212,7 @@ window.addEvent('domready', function() {
     }
     head_next.addEvent('click', function() {
       if (this.hasClass('disabled'))
-        alert('Vous devez compléter de formulaire avant de poursuivre')
+        alert_fill()
       else
         open_illness(illnesses[0], false) })
     validate_measurements.periodical(500)
@@ -164,7 +225,7 @@ window.addEvent('domready', function() {
       if (illnesses[j+1]) {
         i.getElements('.next button').addEvent('click', function(e) {
           if (this.hasClass('disabled'))
-            alert('Vous devez compléter de formulaire avant de poursuivre')
+            alert_fill()
           else
             open_illness(illnesses[j+1])
         })

@@ -6,6 +6,11 @@
       %div.editable= partial 'edit_fields', locals: { form: form }
       - form.fields_for :diagnostic, @diagnostic do |fields|
         %div.measurements= partial 'diagnostics/edit_measurements', locals: { form: fields }
+        .vaccinations
+          %h3 Vaccinations :
+          - for key, name in Child::VACCINATIONS do
+            = form.check_box key, checked: @child.send(key)
+            %label= name
       .next
         %button.next(type="button") Suivant
   - form.fields_for :diagnostic, @diagnostic do |fields|
