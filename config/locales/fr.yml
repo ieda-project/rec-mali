@@ -25,6 +25,14 @@ fr:
     impossible: impossible
     lentement: lentement
     tres_lentement: très lentement
+    respiration_normale: respiration normale
+    respiration_rapide: respiration rapide
+    inconnue: inconnue
+    positive: positive
+    negative: negative
+    pas_de_test: pas de test
+    positif: positif
+    negatif: negatif
   activerecord:
     errors:
       messages:
