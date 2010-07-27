@@ -33,7 +33,7 @@ class ChildrenController < ApplicationController
     answers.each { |a| @diagnostic.sign_answers.add(a) }
 
     if @child.save
-      see_other @child
+      see_other [:wait, @child, @diagnostic]
     else
       render action: 'new'
     end
