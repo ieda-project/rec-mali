@@ -6,6 +6,10 @@ class SignListAnswer < SignAnswer
     I18n.t "signs.#{list_value}"
   end
 
+  def raw_value
+    list_value
+  end
+
   protected
 
   def validate_list_value

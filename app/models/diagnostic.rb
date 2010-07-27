@@ -28,7 +28,7 @@ class Diagnostic < ActiveRecord::Base
     def to_hash
       returning({}) do |hash|
         includes(sign: :illness).each do |answer|
-          hash.store answer.sign.full_key, answer.value
+          hash.store answer.sign.full_key, answer.raw_value
         end
       end
     end
