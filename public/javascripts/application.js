@@ -90,10 +90,6 @@ transient = {
   }
 }
 
-alert_fill = function() {
-  alert('Vous devez compléter le formulaire avant de poursuivre')
-}
-
 window.addEvent('domready', function() { document.body.updated() })
 window.addEvent('domready', function() {
   var link, next
@@ -145,6 +141,9 @@ window.addEvent('domready', function() {
         })
       }
     }
+    function alert_fill() {
+      alert('Vous devez compléter le formulaire avant de poursuivre')
+    }
     function validate_illness(illness, calculate) {
       illness.valid = illness.fields.every(function(i) {
         if (i.get('type') == 'hidden') {
@@ -165,7 +164,9 @@ window.addEvent('domready', function() {
                 data['s['+sign_id+']'] = input.value
                 return true }})})
           return i == illness })
-
+        var h2 = illness.getElement('h2')
+        h2.getElements('ul, img').dispose()
+        loader = new Element('img', {src: '/images/loader.gif'}).inject(h2, 'top')
         new Request.JSON({
           url: illness.get('data-classify-href'),
           onSuccess: function(json) {
@@ -176,7 +177,7 @@ window.addEvent('domready', function() {
                   'class': cl[1].toString(),
                   html:    cl[0] }).inject(ul) })
             var h2 = illness.getElement('h2')
-            h2.getElements('ul').dispose()
+            h2.getElements('img').dispose()
             ul.inject(h2)
           }
         }).get(data)

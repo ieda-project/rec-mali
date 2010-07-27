@@ -20,6 +20,7 @@ fr:
       long_ordinal: "%A %d %B %Y %H:%M:%S %Z"
       only_second: "%S"
     am: 'am'
+    pm: 'pm'
 
   signs:
     'no': non
