@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20100706114638) do
     t.integer  "mac"
     t.float    "weight"
     t.text     "comments"
+    t.string   "failed_classifications"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "global_id"
