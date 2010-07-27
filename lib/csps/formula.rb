@@ -5,7 +5,7 @@ class Csps::Formula
   LOGICAL = {
     'AND' => ' && ',
     'OR'  => ' || ' }
-  RE = /([a-z0-9._]+|TWO_OF\(|,|#{LOGICAL.keys.join('|')}|[\(\)]|#{EQ.join('|')}|!)/
+  RE = /([a-z0-9._]+|AT_LEAST_TWO_OF\(|,|#{LOGICAL.keys.join('|')}|[\(\)]|#{EQ.join('|')}|!)/
 
   def initialize cl
     src = cl.equation.scan(RE).map &:first
@@ -42,7 +42,7 @@ class Csps::Formula
     @data = nil
   end
 
-  def TWO_OF *args
+  def AT_LEAST_TWO_OF *args
     args.inject 0 do |c,i|
       return true if i && (c += 1) == 2
       c

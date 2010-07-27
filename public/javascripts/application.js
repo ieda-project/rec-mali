@@ -152,7 +152,7 @@ window.addEvent('domready', function() {
         } else if (i.get('type') == 'radio') {
           return i.getParent().getElements('input').some(function(x) { return x.checked })
         } else {
-          return i.value.match(/[a-z0-9]/)
+          return i.value.match(/^[0-9]+$/) && parseInt(i.value) >= 0
         }
       })
       if (calculate != false && illness.valid) {
