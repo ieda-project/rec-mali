@@ -697,6 +697,11 @@ div.no-result
 .next
   margin-top: 8px
   text-align: right
+  &.disable
+    button
+      background-position: 0 -60px
+      &:after
+        background-position: right -90px
   button
     position: relative
     display: inline-block
@@ -714,7 +719,7 @@ div.no-result
       top: 0
       display: block
       content: ""
-      background: url(../images/backgrounds/button-next.gif) -30px right no-repeat
+      background: url(../images/backgrounds/button-next.gif) right -30px no-repeat
       height: 30px
       width: 30px
 
