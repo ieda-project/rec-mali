@@ -11,4 +11,4 @@
   - form.fields_for :diagnostic, @diagnostic do |fields|
     = partial 'diagnostics/edit_signs', locals: { form: fields }
   %nav
-    %button(type="submit") Terminer la consultation
+    %button.validation(type="submit") Terminer la consultation
