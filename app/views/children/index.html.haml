@@ -8,10 +8,10 @@
     %div
       %label Nom
       = f.text_field :name
-    %div
+    .select
       %label Date de naissance
-      = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => 'Indifférent', :selected => ((params[:q] ? params[:q][:born_on] : nil) || Date.today.year - 8).to_i
-    .village
+      = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => '-', :selected => ((params[:q] ? params[:q][:born_on] : nil)).to_i
+    .select
       %label Village
       = f.select :village_id, Village.to_select, include_blank: true
     .buttons
@@ -35,7 +35,7 @@
             %td= link_to child.name, child
             %td= l child.born_on
             %td= child.village.name
-            %td= child.last_visit_at
+            %td= l child.last_visit_at
     -#%ul.pagination
       %li.em= link_to "< Prev", "#"
       %li 1

@@ -1,4 +1,5 @@
 class Csps::Formula
+  class FormulaError < StandardError; end
   attr_reader :code, :data
 
   EQ = %w(== != <= >=)
@@ -38,6 +39,8 @@ class Csps::Formula
   def calculate data
     @data = data
     eval(@code)
+  rescue SyntaxError
+    raise FormulaError, 'Syntax error in formula'
   ensure
     @data = nil
   end
