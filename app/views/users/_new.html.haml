@@ -1,5 +1,2 @@
-#user-session
-  %h1 Inscription
-  %p Bienvenue sur CSPS. Créer un centre.  
-  - form_for @user do |f|
-    = partial 'users/form', locals: { form: f }
+- form_for @user do |f|
+  = partial 'users/form', locals: { form: f }

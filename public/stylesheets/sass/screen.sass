@@ -72,6 +72,13 @@ button
     div:last-child
       margin-top: 10px
       text-align: center
+    div.errors
+      color: red
+      margin: 0 0 5px 0
+      text-align: left
+      position: relative
+      top: -10px
+      font-size: 0.9em
     label
       font-size: 1.2em
       display: block
@@ -387,7 +394,7 @@ section
       -webkit-border-top-left-radius: 4px
       -webkit-border-top-right-radius: 4px
       margin: 0
-      height: auto
+      min-height: 10px !important
       line-height: normal
     p, ul
       display: block
@@ -451,11 +458,19 @@ section
       margin-bottom: -10px
   &.closed
     -webkit-border-radius: 14px
-  &.consultation
-    h2
-      background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 -32px !important 
+  h2.consultation
+    background-position: 0 0 !important
   &.resume
     overflow: hidden
+    padding: 10px 10px 20px
+    .contain
+      overflow: hidden
+      margin: 0 0 7px
+      padding: 16px 0 13px
+      .measurements
+        margin: 0 !important
+    h2.resume
+      background-position: 0 -168px
   &.treatment
     ol
       font-size: 1.2em
@@ -486,6 +501,11 @@ section
       -webkit-border-top-left-radius: 9px
       -webkit-border-top-right-radius: 9px
       overflow: hidden
+      img
+        position: relative
+        float: right
+        top: 5px
+        right: 10px
       a
         color: white
         text-decoration: underline
@@ -702,7 +722,7 @@ tr.has-errors
     
 div.fieldWithErrors 
   display: inline
-  input[type=text]
+  input[type=text], input[type=password]
     border-color: red
     &:focus
       border-color: red
