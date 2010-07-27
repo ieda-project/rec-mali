@@ -328,7 +328,7 @@ nav a, nav button, section button[type=submit]
           margin: 0
           input[type=text]
             font-size: 1.2em
-            width: 80%
+            width: 85px
 
 section
   &.consultation, &.resume
@@ -463,15 +463,16 @@ section
         
   &.illness, &.consultation, &.resume, &.treatment
     h2
-      background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 0 
+      background: #007dc4 url(../images/backgrounds/bg-headings.gif) repeat-x 0 0 
       color: white
-      height: 32px
+      min-height: 32px
       cursor: pointer
       padding: 0 0 0 10px
       line-height: 32px
       border: 0
       -webkit-border-top-left-radius: 9px
       -webkit-border-top-right-radius: 9px
+      overflow: hidden
       a
         color: white
         text-decoration: underline
@@ -488,6 +489,7 @@ section
         float: right
         padding: 0
         margin: 0 5px 0 0
+        width: 650px
         li
           color: #94ccec
           display: inline 
@@ -698,7 +700,7 @@ div.no-result
   text-align: center
 
 .next
-  margin-top: 8px
+  margin-top: 15px
   text-align: right
   button.next
     position: relative
