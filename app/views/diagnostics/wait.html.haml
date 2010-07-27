@@ -1,5 +1,5 @@
 - content_for :head do
-  %link.auto-post{type:"application/json", rel:"calculations", href:calculations_child_diagnostic_path(@child, @diagnostic)}/
-  %link{type:"application/json", rel:"next", href:treatments_child_diagnostic_path(@child, @diagnostic)}/
+  %link.auto-post{type: "application/json", rel: "calculations", href: calculations_child_diagnostic_path(@child, @diagnostic)}/
+  %link{type: "application/json", rel: "next", href: treatments_child_diagnostic_path(@child, @diagnostic)}/
 
 %p.message Please, wait..

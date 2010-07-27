@@ -14,6 +14,13 @@ class Classification < ActiveRecord::Base
     else
       diag.classifications.delete self
     end
+    if diag.failed_classifications.present?
+      diag.failed_classifications -= [id]
+      diag.save if diag.changed?
+    end
+  rescue
+    diag.classifications.delete self
+    diag.update_attribute :failed_classifications, [4, *diag.failed_classifications].uniq
   end
 
   def calculate data

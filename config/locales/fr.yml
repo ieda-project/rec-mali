@@ -10,7 +10,7 @@ fr:
       - :year
     month_names: [ janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre ]
     abbr_month_names: [ jan, fév, mar, avr, mai, juin, juil, août, sep, oct, nov, déc ]
-  
+ 
   time:
     formats:
       default: "%d %B %Y %H:%M"
@@ -20,7 +20,6 @@ fr:
       long_ordinal: "%A %d %B %Y %H:%M:%S %Z"
       only_second: "%S"
     am: 'am'
-    pm: 'pm'
 
   signs:
     'no': non

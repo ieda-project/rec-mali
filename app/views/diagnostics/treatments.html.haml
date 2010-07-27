@@ -6,6 +6,13 @@
 
 %h2.em Traitements
 
+- if @diagnostic.failed_classifications.try :any?
+  %section.warning
+    %h3 Les classifications suivante on échoués:
+    %ul
+      - for c in Classification.find(@diagnostic.failed_classifications) do
+        %li= c.name
+
 - for cl in @diagnostic.classifications do
   - next if cl.treatment.blank?
   %section.treatment

@@ -1,5 +1,6 @@
 class Diagnostic < ActiveRecord::Base
   include Csps::Exportable
+  serialize :failed_classifications
   belongs_to :child
   belongs_to :author, class_name: 'User'
   has_and_belongs_to_many :classifications do
