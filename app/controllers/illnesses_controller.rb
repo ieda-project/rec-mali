@@ -14,7 +14,7 @@ class IllnessesController < ApplicationController
       end
 
       ret = illness.classifications.map do |cl|
-        [ cl.name, cl.calculate(data) ]
+        [ cl.name, (cl.calculate(data) rescue 'error') ]
       end
 
       render text: ret.to_json

@@ -157,12 +157,15 @@ window.addEvent('domready', function() {
       })
       if (calculate != false && illness.valid) {
         var data = {}
-        illness.getElements('tr').each(function (tr) {
-          var sign_id = tr.getElement('input[type=hidden]').get('value')
-          tr.getElements('input[type!=hidden], select').some(function (input) {
-            if (input.get('type') != 'radio' || input.checked) {
-              data['s['+sign_id+']'] = input.value
-              return true }})})
+        illnesses.some(function(i) {
+          i.getElements('tr').each(function (tr) {
+            var sign_id = tr.getElement('input[type=hidden]').get('value')
+            tr.getElements('input[type!=hidden], select').some(function (input) {
+              if (input.get('type') != 'radio' || input.checked) {
+                data['s['+sign_id+']'] = input.value
+                return true }})})
+          return i == illness })
+
         new Request.JSON({
           url: illness.get('data-classify-href'),
           onSuccess: function(json) {
@@ -170,7 +173,7 @@ window.addEvent('domready', function() {
             json.each(function (cl) {
               new Element(
                 'li', {
-                  'class': (cl[1] ? 'active' : null),
+                  'class': cl[1].toString(),
                   html:    cl[0] }).inject(ul) })
             var h2 = illness.getElement('h2')
             h2.getElements('ul').dispose()

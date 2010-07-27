@@ -41,6 +41,8 @@ class Csps::Formula
     eval(@code)
   rescue SyntaxError
     raise FormulaError, 'Syntax error in formula'
+  rescue ArgumentError
+    raise FormulaError, 'Argument error in formula'
   ensure
     @data = nil
   end
