@@ -68,6 +68,13 @@ button
     div:last-child
       margin-top: 10px
       text-align: center
+    div.errors
+      color: red
+      margin: 0 0 5px 0
+      text-align: left
+      position: relative
+      top: -10px
+      font-size: 0.9em
     label
       font-size: 1.2em
       display: block
@@ -711,7 +718,7 @@ tr.has-errors
     
 div.fieldWithErrors 
   display: inline
-  input[type=text]
+  input[type=text], input[type=password]
     border-color: red
     &:focus
       border-color: red

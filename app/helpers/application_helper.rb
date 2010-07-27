@@ -26,4 +26,8 @@ module ApplicationHelper
       "#{months / 12} ans"
     end
   end
+  
+  def errors_on form, field
+    render :partial => 'shared/errors', :locals => {:form => form, :field => field}
+  end
 end

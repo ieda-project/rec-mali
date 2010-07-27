@@ -25,3 +25,8 @@ fr:
     impossible: impossible
     lentement: lentement
     tres_lentement: très lentement
+  activerecord:
+    errors:
+      messages:
+        blank: doit être rempli(e)
+        confirmation: ne concorde pas avec la confirmation

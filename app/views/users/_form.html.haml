@@ -1,14 +1,18 @@
 %div
   %label Nom
   = form.text_field :name
+  = errors_on form, :name
 %div
   %label Username
   = form.text_field :login
+  = errors_on form, :login
 %div
   %label Password
   = form.password_field :password
+  = errors_on form, :password
 %div
   %label Password confirmation
   = form.password_field :password_confirmation
+  = errors_on form, :password_confirmation
 %div
   %button(type="submit") Sauvegarder

@@ -1,0 +1,3 @@
+- if form.object.errors[field].to_a.any?
+  .errors
+    = form.object.errors[field].to_a.join ','
