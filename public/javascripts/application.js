@@ -64,7 +64,7 @@ window.addEvent('domready', function() {
   illnesses = document.getElements('form.diagnostic section.illness')
   if (illnesses[0]) {
     var form = document.getElement('form.diagnostic')
-    var button = form.getElement('button[type=submit]').setStyle('visibility', 'hidden')
+    var button = form.getElement('button[type=submit]').addClass('disabled')
     var first = null
 
     var measurements_valid = true
@@ -79,9 +79,9 @@ window.addEvent('domready', function() {
     function all_valid() { return illnesses.every(function (i) { return i.valid }) }
     function show_hide_button(illness) {
       if ((!illness || illness.valid) && measurements_valid && all_valid()) {
-        button.disabled = false
+        button.removeClass('disabled')
       } else {
-        button.disabled = true
+        button.addClass('disabled')
       }
     }
     function validate_illness(illness, calculate) {
@@ -119,7 +119,12 @@ window.addEvent('domready', function() {
       }
       if (!illness.valid) illness.getElements('h2 ul').dispose()
       show_hide_button(illness)
-      illness.getElements('.next button').disabled = !illness.valid
+      if (illness.getElement('.next button')) {
+        if (illness.valid)
+          illness.getElement('.next button').removeClass('disabled')
+        else
+          illness.getElement('.next button').addClass('disabled')
+      }
       return illness.valid
     }
     var head_inputs = document.getElements('.profile-child input[type=text]')
@@ -136,16 +141,20 @@ window.addEvent('domready', function() {
         }
       })
       if (!was_valid && measurements_valid) {
-        head_next.disabled = false
+        head_next.removeClass('disabled')
       } else if (was_valid && !measurements_valid) {
         illnesses.each(function(i) { i.addClass('closed') })
-        head_next.disabled = true
+        head_next.addClass('disabled')
       }
       if (was_valid != measurements_valid) show_hide_button()
       return measurements_valid
     }
-    head_next.addEvent('click', function() { open_illness(illnesses[0], false) })
-    validate_measurements.periodical(1000)
+    head_next.addEvent('click', function() {
+      if (this.hasClass('disabled'))
+        alert('Vous devez compléter de formulaire avant de poursuivre')
+      else
+        open_illness(illnesses[0], false) })
+    validate_measurements.periodical(500)
 
     illnesses.each(function (i,j) {
       i.addClass('closed')
@@ -153,7 +162,12 @@ window.addEvent('domready', function() {
       if (!first && i.getElement('.fieldWithErrors')) first = i
 
       if (illnesses[j+1]) {
-        i.getElements('.next button').addEvent('click', function() { open_illness(illnesses[j+1]) })
+        i.getElements('.next button').addEvent('click', function(e) {
+          if (this.hasClass('disabled'))
+            alert('Vous devez compléter de formulaire avant de poursuivre')
+          else
+            open_illness(illnesses[j+1])
+        })
       } else {
         i.getElements('.next').dispose()
       }

@@ -18,7 +18,7 @@
           = fields.check_box key, checked: @child.send(key)
           %label= name
     .next
-      %button(type="button") Suivant
+      %button.next(type="button") Suivant
 
 = partial 'diagnostics/edit_signs', locals: { form: form }
 

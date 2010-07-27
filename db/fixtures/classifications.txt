@@ -2,7 +2,7 @@ danger|Pas de signes généraux de dangers|!(danger.boire OR danger.vomit OR dan
 danger|Signes généraux de dangers présents|danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulstions_present
 
 toux|Pas de toux|!toux.enfant_tousse
-toux|Pas de pneumonie: toux ou rhume|toux.enfant_tousse AND !(toux.enfant_tousse AND (toux.mouvements_respiratoires == respiration_rapide)) AND !(toux.enfant_tousse AND (danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulstions_present OR toux.tirage_sous_costal OR toux.stridor OR toux.respiration_sifflante)
+toux|Pas de pneumonie: toux ou rhume|toux.enfant_tousse AND !(toux.enfant_tousse AND (toux.mouvements_respiratoires == respiration_rapide)) AND !(toux.enfant_tousse AND (danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulstions_present OR toux.tirage_sous_costal OR toux.stridor OR toux.respiration_sifflante))
 toux|Pneumonie|toux.enfant_tousse AND (toux.mouvements_respiratoires == respiration_rapide)
 toux|Pneumonie grave ou maladie très grave|toux.enfant_tousse AND (danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulstions_present OR toux.tirage_sous_costal OR toux.stridor OR toux.respiration_sifflante)
 
