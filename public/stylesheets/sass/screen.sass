@@ -372,7 +372,7 @@ section
       -webkit-border-top-left-radius: 4px
       -webkit-border-top-right-radius: 4px
       margin: 0
-      height: auto
+      min-height: 10px !important
       line-height: normal
     p, ul
       display: block
@@ -436,11 +436,19 @@ section
       margin-bottom: -10px
   &.closed
     -webkit-border-radius: 14px
-  &.consultation
-    h2
-      background: url(../images/backgrounds/bg-headings.gif) repeat-x 0 -32px !important 
+  h2.consultation
+    background-position: 0 0 !important
   &.resume
     overflow: hidden
+    padding: 10px 10px 20px
+    .contain
+      overflow: hidden
+      margin: 0 0 7px
+      padding: 16px 0 13px
+      .measurements
+        margin: 0 !important
+    h2.resume
+      background-position: 0 -168px
   &.treatment
     ol
       font-size: 1.2em
