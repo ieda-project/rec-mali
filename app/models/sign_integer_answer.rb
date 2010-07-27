@@ -4,4 +4,5 @@ class SignIntegerAnswer < SignAnswer
   def value
     integer_value
   end
+  alias raw_value value
 end

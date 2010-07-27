@@ -4,4 +4,8 @@ class SignBooleanAnswer < SignAnswer
   def value
     boolean_value ? 'oui' : 'non'
   end
+
+  def raw_value
+    boolean_value
+  end
 end

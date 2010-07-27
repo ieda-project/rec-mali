@@ -96,33 +96,37 @@ h2
     float: right
     margin: 0 12px 0 0
 
-select.boolean
-  & + button
-    border: 1px solid #c0c0c0
-    cursor: pointer
-    position: relative
-    display: inline-block
-    color: #666
-    font-weight: bold
-    font-size: 1.1em
-    background: url(../images/backgrounds/bg-switch.gif) repeat-x 0 0
-    padding: 1px
-    padding-left: 1em
-    padding-right: 1em
-    -webkit-border-radius: 5px
-  &.true + button
+.switch
+  border: 1px solid #c0c0c0
+  cursor: pointer
+  position: relative
+  display: inline-block
+  color: #666
+  font-weight: bold
+  font-size: 1.1em
+  background: url(../images/backgrounds/bg-switch.gif) repeat-x 0 0
+  padding: 1px 1px
+  -webkit-border-radius: 5px
+  overflow: hidden
+  &.yes
     background-position: 0 -48px
-    border: 1px solid #62c400
-    color: #6c0
-    padding-left: 2em
-    padding-right: 1px
-  &.false + button
+    border-color: #62c400
+    .yes
+      background-color: white
+      border-color: #62c400
+      color: #6c0
+    .no
+      color: #777
+  &.no
     background-position: 0 -24px
-    color: #f00
-    padding-right: 2em
-    padding-left: 1px
-    border: 1px solid #d10b0b
-  & + button:after
+    border-color: #d10b0b
+    .no
+      background-color: white
+      border-color: #d10b0b
+      color: #f00
+    .yes
+      color: #777
+  div
     -webkit-border-radius: 4px
     font-size: 10px
     padding: 3px 2px
@@ -130,22 +134,17 @@ select.boolean
     width: 3em
     border: 1px solid #b4b4b4
     text-align: center
-    content: '?'
     background-color: #ededed
     color: #777
-  &.false + button:after
-    margin-right: -1px
-    content: 'Non'
+    &:first-child
+      margin: 0 3px 0 0
+  .no
+    float: left
     color: #f00
-    background-color: white
-    border: 1px solid #d10b0b
-  &.true + button:after
-    margin-left: -1px
-    content: 'Oui'
-    background-color: white
-    border: 1px solid #62c400
+  .yes
+    float: right
     color: #6c0
-
+    
 header
   position: relative
   display: block
@@ -321,11 +320,11 @@ nav a, nav button, section button[type=submit]
         margin: 12px 0 0
         input[type=text]
           min-width: 78px
-          
-      .name
-        input[type=text]
-          font-size: 1.2em
-          width: 95px
+        &.name
+          margin: 0
+          input[type=text]
+            font-size: 1.2em
+            width: 80%
 
 section
   &.consultation, &.resume
@@ -697,6 +696,11 @@ div.no-result
 .next
   margin-top: 8px
   text-align: right
+  &.disable
+    button
+      background-position: 0 -60px
+      &:after
+        background-position: right -90px
   button
     position: relative
     display: inline-block
@@ -714,7 +718,7 @@ div.no-result
       top: 0
       display: block
       content: ""
-      background: url(../images/backgrounds/button-next.gif) -30px right no-repeat
+      background: url(../images/backgrounds/button-next.gif) right -30px no-repeat
       height: 30px
       width: 30px
 

@@ -1,9 +1,13 @@
-.name
+%p.name
+  %strong Nom :
   = form.text_field :name, 'data-label' => 'Nom', size: 30
 %p
+  %strong Sexe :
   = form.select :gender, [ %w(Masculin 1), %w(Féminin 0) ], selected: (form.object.gender ? '1' : '0')
-  %span.nee= form.object.gender ? 'Né' : 'Née'
-  le
+  %br/
+  %strong
+    %span.nee= form.object.gender ? 'Né' : 'Née'
+    le :
   = form.date_select(:born_on)
   %br/
   %strong Village :
