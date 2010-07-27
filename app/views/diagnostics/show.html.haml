@@ -2,15 +2,15 @@
 %section.resume
   = partial 'header', locals: { diagnostic: @diagnostic }
 
-- for i in Illness.order(:sequence) do
-  %section.consultation
-    %h2= i.name
-    %table
-      - for sa in @diagnostic.sign_answers.for(i) do
-        %tr
-          %th(scope="row")= sa.sign.question
-          %td!= sa.html_value rescue sa.value
-    - cs = @diagnostic.classifications.for(i)
-    %ul.classification
-      - for c in cs do
-        %li= c.name
+  - for i in Illness.order(:sequence) do
+    %section.consultation
+      %h2.consultation= i.name
+      %table
+        - for sa in @diagnostic.sign_answers.for(i) do
+          %tr
+            %th(scope="row")= sa.sign.question
+            %td!= sa.html_value rescue sa.value
+      - cs = @diagnostic.classifications.for(i)
+      %ul.classification
+        - for c in cs do
+          %li= c.name
