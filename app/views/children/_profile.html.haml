@@ -13,5 +13,8 @@
     .vaccinations
       %h3 Vaccinations :
       %ul
-        - for i in @child.vaccinations do
-          %li= i
+        - Child::VACCINATIONS.each do |k,n|
+          - if @child.send(k)
+            %li.yes= n
+          - else
+            %li.no= n
