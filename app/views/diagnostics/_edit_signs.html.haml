@@ -1,7 +1,14 @@
 - count = 0
 - for i in Illness.order(:sequence) do
   %section.illness{'data-classify-href' => classification_illness_path(i)}
-    %h2= i.name
+    %h2
+      = i.name
+      - cs = i.classifications
+      - my_cs = @diagnostic.classifications.for(i)
+      %ul.classification
+        - for c in cs do
+          %li{:class => (my_cs.include? c).inspect}
+            = c.name
     %table
       - form.object.sign_answers.for(i).sort.each do |answer|
         - form.fields_for "sign_answers][#{count}", answer do |fields|
