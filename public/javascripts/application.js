@@ -166,7 +166,7 @@ window.addEvent('domready', function() {
       }
     }
     function alert_fill() {
-      alert('Vous devez compléter le formulaire avant de poursuivre')
+      alert('Veuillez répondre à toutes les questions avant de poursuivre')
     }
     function validate_illness(illness, calculate) {
       illness.valid = illness.fields.every(function(i) {
