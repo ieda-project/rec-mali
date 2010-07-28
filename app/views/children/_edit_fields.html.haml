@@ -8,7 +8,7 @@
   %strong
     %span.nee= form.object.gender ? 'Né' : 'Née'
     le :
-  = form.date_select(:born_on)
+  = form.date_select(:born_on, :start_year => Date.today.year, :end_year => Date.today.year - 18)
   %br/
   %strong Village :
   = form.select :village_id, Village.to_select
