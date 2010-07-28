@@ -7,6 +7,7 @@ class ChildrenController < ApplicationController
   def index
     @q = Search.from_hash params[:q]
     @children = model.search(@q)
+    @page = (params[:page] || '1').to_i
   end
 
   def show
