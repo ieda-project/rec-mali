@@ -191,7 +191,7 @@ window.addEvent('domready', function() {
                 return true }})})
           return i == illness })
         var h2 = illness.getElement('h2')
-        h2.getElements('ul, img').dispose()
+        h2.getElements('img').dispose()
         loader = new Element('img', {src: '/images/loader.gif'}).inject(h2, 'top')
         new Request.JSON({
           url: illness.get('data-classify-href'),
@@ -203,7 +203,7 @@ window.addEvent('domready', function() {
                   'class': cl[1].toString(),
                   html:    cl[0] }).inject(ul) })
             var h2 = illness.getElement('h2')
-            h2.getElements('img').dispose()
+            h2.getElements('img, ul').dispose()
             ul.inject(h2)
           }
         }).get(data)
