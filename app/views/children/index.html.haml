@@ -19,8 +19,12 @@
       %button(type='submit') Rechercher
 
   - if @children.any?
+    - paged = @children.includes(:village).paginate(@page, window: 15)
     %p.result-count
-      %strong= @children.size
+      - if paged.size < paged.total
+        %strong= paged.size
+        de
+      %strong= paged.total
       Patient(s) trouvé(s)
     %table.children
       %thead
@@ -28,21 +32,26 @@
           %th Nom
           %th Date de naissance
           %th Village
-          %th Dernière visite
+          %th Dernière consultation
       %tbody
-        - for child in @children.includes(:village).paginate(page, window: 15) do
+        - for child in paged do
           %tr{ :class => cycle("odd", "even") }
             %td= link_to child.name, child
             %td= l child.born_on
             %td= child.village.name
             %td= l child.last_visit_at
-    -#%ul.pagination
-      %li.em= link_to "< Prev", "#"
-      %li 1
-      %li= link_to "2", "#"
-      %li ...
-      %li= link_to "3", "#"
-      %li.em= link_to "Next >", "#"
+    %ul.pagination
+      - if paged.prev?
+        %li.em= link_to "< Prev", url_for(request.query_parameters.merge(:page => @page - 1))
+      - 1.upto(paged.pages) do |p|
+        - if p == @page
+          %li= @page || 1
+        - elsif (@page - p).abs < 4 || p == 1 || p == paged.pages 
+          %li= link_to p, url_for(request.query_parameters.merge(:page => p))
+        - elsif (@page - p).abs < 5
+          %li ...
+      - if paged.next?
+        %li.em= link_to "Next >", url_for(request.query_parameters.merge(:page => @page + 1))
   - else
     .no-result
       %p Aucun patient ne correspond aux termes de recherche spécifiés 

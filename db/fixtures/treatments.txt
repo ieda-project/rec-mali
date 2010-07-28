@@ -1,5 +1,4 @@
-﻿/* TOUX */
-[Pneumonie grave ou maladie très grave]
+﻿[Pneumonie grave ou maladie très grave]
 # Donner la première dose +d’antibiotique+ approprié,
 # Transférer *d’URGENCE* à l’hôpital,
 # Si l’enfant n’a pas d’autre classification grave donner un bronchodilateur en inhalation si respiration sifflante,
@@ -17,9 +16,6 @@
 # Expliquer à la mère quand revenir immédiatement,
 # Revoir dans +5 jours+ s’il n’y a pas d’amélioration.
 
-
-
-/* DIARRHEE */
 [Dysenterie]
 # Traiter pendant +8 jours+ avec un +antibiotique+ approprié,
 # Donner du +sulfate de zinc+ pendant +14 jours+,
@@ -32,26 +28,20 @@
 [Diarrhée persistente]
 # Transférer à l’hôpital,
 # Donner des multivitamines et des sels minéraux,
-# Donner du sulfate de zinc pendant 14 jours,
+# Donner +du sulfate de zinc+ pendant +14 jours+,
 # Expliquer quand revenir immédiatement.
 
 [Déshydratation sévère]
-# Si l’enfant n’a pas, d’autre classification grave :
-## donner des liquides pour déshydratation sévère (Plan C).
-# Si l’enfant a une autre classification grave :
-## transférer *d’URGENCE* à l’hôpital, la mère donnant fréquemment des gorgées de +SRO+ en cours de route,
-## Conseiller à la mère de continuer l’allaitement au sein.
-# Si l’enfant a 2 ans ou plus et si une épidémie de choléra sévit dans la région :
-## Donner un antibiotique pour le choléra.
+# Si l’enfant n’a pas, d’autre classification grave : donner des liquides pour déshydratation sévère (Plan C).
+# Si l’enfant a une autre classification grave : transférer *d’URGENCE* à l’hôpital, la mère donnant fréquemment des gorgées de +SRO+ en cours de route,
+# Conseiller à la mère de continuer l’allaitement au sein,
+# Si l’enfant a +2 ans ou plus+ et si une +épidémie de choléra+ sévit dans la région : donner un +antibiotique+ pour le choléra.
 
 [Signes évidents de déshydratation]
 # Donner liquides et aliments pour signes évidents de déshydratation (Plan B),
 # Donner du +sulfate de zinc+ pendant +14 jours+,
 # Si l’enfant a une autre classification grave, transférer *d’URGENCE* à l’hôpital, la mère donnant fréquemment des gorgées de +SRO+ en cours de route.
 
-
-
-/* FIEVRE */
 [Maladie fébrile très grave ou paludisme grave]
 # Donner de la +quinine+ pour paludisme grave (première dose),
 # Donner la première dose +d’antibiotique+ approprié,
@@ -63,7 +53,7 @@
 [Paludisme simple]
 # Donner une +Combinaison Thérapeutique à base d’Arthémisinine+,
 # Administrer, au dispensaire, une dose de +paracétamol+ si la température est de +38.5°C ou plus+,
-# EXpliquer à la mère quand revenir immédiatement,
+# Expliquer à la mère quand revenir immédiatement,
 # Revoir l’enfant dans +2 jours+ si la fièvre persiste,
 # Si la fièvre a été présente tous les jours depuis +plus de 7 jours+, référer pour bilan.
 
@@ -79,18 +69,15 @@
 # En cas d’ulcération dans la bouche, traiter au +violet de gentiane dilué+.
 
 [Rougeole]
-1. Donner de la +vitamine A, J1,J2, J14+,
-2. Donner un +antibiotique+ approprié pendant +8 jours+,
-3. Expliquer à la mère quand revenir immédiatement,
-4. Revoir l’enfant dans +5 jours+.
+# Donner de la +vitamine A, J1,J2, J14+,
+# Donner un +antibiotique+ approprié pendant +8 jours+,
+# Expliquer à la mère quand revenir immédiatement,
+# Revoir l’enfant dans +5 jours+.
 
 [Antécédent de rougeole]
 # Donner une dose de  +Vitamine A+, (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
 # Expliquer à la mère quand revenir immédiatement.
 
-
-
-/* OREILLE */
 [Mastoïdïte]
 # Donner la première dose +d’antibiotique+ approprié,
 # Donner la première dose de +paracétamol+ pour calmer la douleur,
@@ -107,9 +94,6 @@
 # Administrer les +gouttes auriculaires d’antibiotiques purs+,
 # Revoir l’enfant dans +5 jours+.
 
-
-
-/* ANEMIE */
 [Anémie grave]
 # Donner la première dose de +quinine+ injectable pour le paludisme grave,
 # Traiter l'enfant pour prévenir +l'hypoglycémie+,
@@ -123,9 +107,6 @@
 # Expliquez à la mère quand revenir immédiatement,
 # Revoir l’enfant dans +14 jours+.
 
-
-
-/* MALNUTRITION */
 [Malnutrition sévère]
 # Donner de la +vitamine A+ (1èredose),
 # Traiter l'enfant pour prévenir l'hypoglycémie,
@@ -143,11 +124,8 @@
 # Si l’enfant a moins de 2 ans, évaluer l’alimentation de l’enfant et conseiller  à la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS  du  tableau CONSEILLER LA MÈRE,
 # Donner de la +vitamine A+ si l’enfant n’en a +pas reçu dans les 6 mois précédents+,
 # Si problème d’alimentation, revoir l’enfant dans +5 jours+,
-4. Expliquer à la mère quand revenir immédiatement.
+# Expliquer à la mère quand revenir immédiatement.
 
-
-
-/* VIH */
 [Infection VIH symptomatique confirmée]
 # Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
 # Donner une +prophylaxie au cotrimoxazole+,
@@ -172,7 +150,7 @@
 # Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
 # Donner une +prophylaxie au cotrimoxazole+,
 # Donner une supplémentation en +vitamine+ à tous les enfants à partir de l’âge de +6 mois+,
-# Évaluer l’alimentation de l’enfant et donner les conseils appropriés à la mère,
+# Evaluer l’alimentation de l’enfant et donner les conseils appropriés à la mère,
 # Réaliser un test de confirmation de l’infection à VIH,
 # Référer pour prise en charge ultérieure incluant les ARV,
 # Donner les conseils à la mère pour les soins à domicile,
@@ -182,7 +160,7 @@
 # Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
 # Donner une +prophylaxie au cotrimoxazole+,
 # Donner une supplémentation en +vitamine+ à tous les enfants à partir de l’âge de +6 mois+,
-# Évaluer l’alimentation de l’enfant et donner les conseils appropriés à la mère,
+# Evaluer l’alimentation de l’enfant et donner les conseils appropriés à la mère,
 # Confirmer l’infection à VIH de l’enfant dès que possible en utilisant le meilleur test disponible,
 # Référer pour prise en charge ultérieure incluant les ARV,
 # Revoir au bout de +14 jours+, puis +tous les mois pendant 3 mois+, puis +tous les 3 mois ou conformément au calendrier vaccinal+.

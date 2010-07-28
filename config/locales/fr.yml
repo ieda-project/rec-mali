@@ -8,8 +8,8 @@ fr:
       - :day
       - :month
       - :year
-    month_names: [ janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre ]
-    abbr_month_names: [ jan, fév, mar, avr, mai, juin, juil, août, sep, oct, nov, déc ]
+    month_names: [ Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Août, Septembre, Octobre, Novembre, Décembre ]
+    abbr_month_names: [ Jan, Fév, Mar, Avr, Mai, Juin, Juil, Août, Sep, Oct, Nov, Déc ]
  
   time:
     formats:
@@ -23,28 +23,28 @@ fr:
     pm: 'pm'
 
   signs:
-    'no': non
-    medium: moyen
-    high: élevé
-    'yes+': 'oui +'
-    'yes++': 'oui ++'
-    'yes+++': 'oui +++'
-    none: aucun
-    lethargique_inconscient: léthargique et inconscient
-    agite_irritable: agité et irritable
-    normal: normal
-    avide: avide
-    impossible: impossible
-    lentement: lentement
-    tres_lentement: très lentement
-    respiration_normale: respiration normale
-    respiration_rapide: respiration rapide
-    inconnue: inconnue
-    positive: positive
-    negative: negative
-    pas_de_test: pas de test
-    positif: positif
-    negatif: negatif
+    'no': Non
+    medium: Moyen
+    high: Elevé
+    'yes+': 'Oui +'
+    'yes++': 'Oui ++'
+    'yes+++': 'Oui +++'
+    none: Aucun
+    lethargique_inconscient: Léthargique et inconscient
+    agite_irritable: Agité et irritable
+    normal: Normal
+    avide: Avide
+    impossible: Impossible
+    lentement: Lentement
+    tres_lentement: Très lentement
+    respiration_normale: Respiration normale
+    respiration_rapide: Respiration rapide
+    inconnue: Inconnue
+    positive: Positive
+    negative: Négative
+    pas_de_test: Pas de test
+    positif: Positif
+    negatif: Négatif
   activerecord:
     errors:
       messages:

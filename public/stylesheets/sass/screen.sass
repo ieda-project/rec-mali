@@ -461,6 +461,7 @@ section
   &.closed
     -webkit-border-radius: 14px
   h2.consultation
+    cursor: auto !important
     background-position: 0 0 !important
   &.resume
     overflow: hidden
@@ -472,10 +473,13 @@ section
       .measurements
         margin: 0 !important
     h2.resume
+      cursor: auto
       background-position: 0 -168px
   &.treatment
+    font-weight: bold
+    color: #666
+    line-height: 1.4em
     ol
-      font-size: 1.2em
       margin: 8px 0 0
       padding: 0 0 0 27px
       overflow: hidden
@@ -484,14 +488,14 @@ section
       li
         margin: 5px 0 0
         border-bottom: 1px solid #ededed
-        font-weight: bold
-        position: relative
-        padding: 0 0 5px
-        top: 1px
-        color: #666
+        padding: 0 0 7px
+      li:last-child
+        border: none
     textarea
       width: 942px
       height: 70px
+    h2
+      cursor: auto !important
         
   &.illness, &.consultation, &.resume, &.treatment
     h2
@@ -534,11 +538,13 @@ section
           line-height: 28px 
           list-style: none
           margin: 2px 10px 2px 0
-          &.active
+          &.true
             background-color: red
             color: white
             padding: 0 7px 
             -webkit-border-radius: 5px
+          &.error
+            text-decoration: line-through
     tr
       th
         color: #666

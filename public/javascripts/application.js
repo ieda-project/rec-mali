@@ -24,6 +24,9 @@ $extend(Alertbox, {
     message = '' + message
     if (this.timeout) this.timeout = $clear(this.timeout)
     this.set('text', message).reposition().setStyle('visibility', 'visible')
+    Alertbox.removeEvents('click').addEvent('click', function(e) {
+      Alertbox.hide()
+    })
     //this.get('tween', {onComplete: function() {}}).start('opacity', 0.7)
     if (!delay || delay > 0) this.timeout = this.hide.delay(delay || (2000 + message.length * 30), this)
   },
@@ -116,15 +119,41 @@ window.addEvent('domready', function() {
       i.getElement('h2').addEvent('click', function() {
         alert_fill()
       })
+      i.getElements('input[type=text]').each(function(input) {
+        tr = input.getParent('tr')
+        if (tr = tr.getPrevious()) {
+          if (select = tr.getElement('select')) {
+            select.addEvent('change', function(e) {
+              if (this.selectedIndex < 2) {
+                input.saved = input.value
+                input.value = ''
+                input.disabled = true
+                input.fallback = new Element('input', {type: 'hidden', id: input.id, name: input.name, value: '0'})
+                input.fallback.inject(input.getParent('tr'))
+              } else {
+                if (input.disabled == true)
+                  input.value = input.saved
+                input.disabled = false
+                if (input.fallback) {
+                  input.fallback.dispose()
+                }
+              }
+            })
+            select.fireEvent('change')
+          }
+        }
+      })
     })
 
     var measurements_valid = true
     function open_illness(illness, scroll) {
       illness.getElement('h2').
-        removeEvent('click').
+        removeEvents('click').
         addEvent('click', function() { open_illness(illness) })
       illnesses.each(function(i) { i.addClass('closed') })
       illness.removeClass('closed')
+      if (!illness.getElement('h2').getElement('ul'))
+        validate_illness(illness)
       if (scroll != false) window.scrollTo(0, illness.getPosition().y)
     }
     function all_valid() { return illnesses.every(function (i) { return i.valid }) }
@@ -142,26 +171,41 @@ window.addEvent('domready', function() {
       }
     }
     function alert_fill() {
-      alert('Vous devez compléter le formulaire avant de poursuivre')
+      alert('Veuillez répondre à toutes les questions avant de poursuivre')
     }
     function validate_illness(illness, calculate) {
       illness.valid = illness.fields.every(function(i) {
         if (i.get('type') == 'hidden') {
           return true
+        } else if (i.disabled) {
+          return true        
         } else if (i.get('type') == 'radio') {
           return i.getParent().getElements('input').some(function(x) { return x.checked })
         } else {
           return i.value.match(/^[0-9]+$/) && parseInt(i.value) >= 0
         }
       })
+      if (calculate != false) {
+        var str = ''
+        illnesses.each(function(i) {
+          if (i.get('data-classify-href') > illness.get('data-classify-href')) {
+            var h2 = i.getElement('h2')
+            h2.getElements('img, ul').dispose()
+            h2.removeEvents('click').
+            addEvent('click', function() { alert_fill() })
+          }
+        })
+      }
       if (calculate != false && illness.valid) {
         var data = {}
-        illness.getElements('tr').each(function (tr) {
-          var sign_id = tr.getElement('input[type=hidden]').get('value')
-          tr.getElements('input[type!=hidden], select').some(function (input) {
-            if (input.get('type') != 'radio' || input.checked) {
-              data['s['+sign_id+']'] = input.value
-              return true }})})
+        illnesses.some(function(i) {
+          i.getElements('tr').each(function (tr) {
+            var sign_id = tr.getElement('input[type=hidden]').get('value')
+            tr.getElements('input[type!=hidden], select').some(function (input) {
+              if (input.get('type') != 'radio' || input.checked) {
+                data['s['+sign_id+']'] = input.value
+                return true }})})
+          return i == illness })
         var h2 = illness.getElement('h2')
         h2.getElements('img').dispose()
         loader = new Element('img', {src: '/images/loader.gif'}).inject(h2, 'top')
@@ -172,11 +216,10 @@ window.addEvent('domready', function() {
             json.each(function (cl) {
               new Element(
                 'li', {
-                  'class': (cl[1] ? 'active' : null),
+                  'class': cl[1].toString(),
                   html:    cl[0] }).inject(ul) })
             var h2 = illness.getElement('h2')
-            h2.getElements('img').dispose()
-            h2.getElements('ul').dispose()
+            h2.getElements('img, ul').dispose()
             ul.inject(h2)
           }
         }).get(data)
