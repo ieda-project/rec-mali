@@ -116,12 +116,36 @@ window.addEvent('domready', function() {
       i.getElement('h2').addEvent('click', function() {
         alert_fill()
       })
+      i.getElements('input[type=text]').each(function(input) {
+        tr = input.getParent('tr')
+        if (tr = tr.getPrevious()) {
+          if (select = tr.getElement('select')) {
+            select.addEvent('change', function(e) {
+              if (this.selectedIndex < 2) {
+                input.saved = input.value
+                input.value = ''
+                input.disabled = true
+                input.fallback = new Element('input', {type: 'hidden', id: input.id, name: input.name, value: '0'})
+                input.fallback.inject(input.getParent('tr'))
+              } else {
+                if (input.disabled == true)
+                  input.value = input.saved
+                input.disabled = false
+                if (input.fallback) {
+                  input.fallback.dispose()
+                }
+              }
+            })
+            select.fireEvent('change')
+          }
+        }
+      })
     })
 
     var measurements_valid = true
     function open_illness(illness, scroll) {
       illness.getElement('h2').
-        removeEvent('click').
+        removeEvents('click').
         addEvent('click', function() { open_illness(illness) })
       illnesses.each(function(i) { i.addClass('closed') })
       illness.removeClass('closed')
@@ -148,6 +172,8 @@ window.addEvent('domready', function() {
       illness.valid = illness.fields.every(function(i) {
         if (i.get('type') == 'hidden') {
           return true
+        } else if (i.disabled) {
+          return true        
         } else if (i.get('type') == 'radio') {
           return i.getParent().getElements('input').some(function(x) { return x.checked })
         } else {

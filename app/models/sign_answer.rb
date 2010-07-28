@@ -4,4 +4,8 @@ class SignAnswer < ActiveRecord::Base
   belongs_to :diagnostic
 
   validates_presence_of :sign, :type
+  
+  def <=> other
+    sign_id <=> other.sign_id
+  end
 end
