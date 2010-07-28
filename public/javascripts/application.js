@@ -24,6 +24,9 @@ $extend(Alertbox, {
     message = '' + message
     if (this.timeout) this.timeout = $clear(this.timeout)
     this.set('text', message).reposition().setStyle('visibility', 'visible')
+    Alertbox.removeEvents('click').addEvent('click', function(e) {
+      Alertbox.hide()
+    })
     //this.get('tween', {onComplete: function() {}}).start('opacity', 0.7)
     if (!delay || delay > 0) this.timeout = this.hide.delay(delay || (2000 + message.length * 30), this)
   },
@@ -149,6 +152,8 @@ window.addEvent('domready', function() {
         addEvent('click', function() { open_illness(illness) })
       illnesses.each(function(i) { i.addClass('closed') })
       illness.removeClass('closed')
+      if (!illness.getElement('h2').getElement('ul'))
+        validate_illness(illness)
       if (scroll != false) window.scrollTo(0, illness.getPosition().y)
     }
     function all_valid() { return illnesses.every(function (i) { return i.valid }) }
@@ -180,6 +185,17 @@ window.addEvent('domready', function() {
           return i.value.match(/^[0-9]+$/) && parseInt(i.value) >= 0
         }
       })
+      if (calculate != false) {
+        var str = ''
+        illnesses.each(function(i) {
+          if (i.get('data-classify-href') > illness.get('data-classify-href')) {
+            var h2 = i.getElement('h2')
+            h2.getElements('img, ul').dispose()
+            h2.removeEvents('click').
+            addEvent('click', function() { alert_fill() })
+          }
+        })
+      }
       if (calculate != false && illness.valid) {
         var data = {}
         illnesses.some(function(i) {
