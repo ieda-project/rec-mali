@@ -17,6 +17,7 @@ namespace :sync do
       host, model = path.scan(p).first
       next if host == Csps.site
       klass = model.camelize.constantize rescue next
+      puts "Importing #{model}"
       File.open(path, 'r') { |src| klass.import_from src }
     end
   end
@@ -26,11 +27,9 @@ namespace :sync do
     check_sync_remote
     target = File.join ENV['REMOTE'], Csps.site
 
-    unless Rails.env.production?
-      # Load all models
-      Dir.glob("#{Rails.root}/app/models/*.rb").each do |f|
-        Object.const_get File.basename(f).sub(/\.rb\Z/, '').camelize
-      end
+    # Load all models
+    Dir.glob("#{Rails.root}/app/models/*.rb").each do |f|
+      Object.const_get File.basename(f).sub(/\.rb\Z/, '').camelize
     end
 
     Csps::Exportable.models.each do |model|
