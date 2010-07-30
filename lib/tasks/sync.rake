@@ -40,4 +40,9 @@ namespace :sync do
       end
     end
   end
+  
+  desc 'Migrate database with seed if needed'
+  task migrate: 'db:migrate' do
+    Rake::Task['db:seed'].invoke if Illness.count.zero?
+  end
 end
