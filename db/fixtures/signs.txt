@@ -32,7 +32,7 @@ fievre|Fièvre
   palu_ictere|Signes de paludisme grave : Ictère (yeux jaunes) ?|boolean
   palu_saignements|Signes de paludisme grave : Saignements anormaux ?|boolean
   palu_urines_foncees|Signes de paludisme grave : Urines foncées|boolean
-  palu_choc|Signes de paludisme grave : Choc (pouls rapide, extrémités)|boolean
+  palu_choc|Signes de paludisme grave : Choc (pouls rapide, extrémités froides)|boolean
   rougeole_eruption|Signe de rougeole lors de la consultation: Eruption généralisée|boolean
   rougeole_ecoulement_nasal|Signe de rougeole lors de la consultation: Ecoulement nasal|boolean
   rougeole_yeux_rouges|Signe de rougeole lors de la consultation: Yeux rouges|boolean
@@ -50,7 +50,7 @@ oreille|Affection de l'oreille
   gonflement|Rechercher un gonflement douloureux derrière l’oreille|boolean
   
 anemie|Amémie
-  paleur_palmaire|Observer et rechercher la pâleur palmaire|list|no;medium;high
+  paleur_palmaire|Observer et rechercher la pâleur palmaire|list|absente;legere;severe
   
 nutrition|Etat nutritionel
   amaigrissement|Rechercher un amaigrissement visible et sévère|boolean
