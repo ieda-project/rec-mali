@@ -11,7 +11,7 @@
             = c.name
     %table
       - form.object.sign_answers.for(i).sort.each do |answer|
-        - form.fields_for "sign_answers][#{count}", answer do |fields|
+        = form.fields_for "sign_answers][#{count}", answer do |fields|
           %tr{class: answer.errors.any? ? 'has-errors' : ''}
             %td(scope="row")
               .question= answer.sign.question

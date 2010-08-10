@@ -10,7 +10,7 @@
     %header
       - if back?
         %nav#prev= link_to back_title, back_url
-      - form_tag session_path, method: 'delete' do
+      = form_tag session_path, method: 'delete' do
         Agent:
         %span#user= current_user.login
         | CSPS:

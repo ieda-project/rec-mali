@@ -1,6 +1,9 @@
 %p.name
+  %strong Prénom :
+  = form.text_field :first_name, 'data-label' => 'Prénom', size: 30
+%p.name
   %strong Nom :
-  = form.text_field :name, 'data-label' => 'Nom', size: 30
+  = form.text_field :last_name, 'data-label' => 'Nom', size: 30
 %p
   %strong Sexe :
   = form.select :gender, [ %w(Masculin 1), %w(Féminin 0) ], selected: (form.object.gender ? '1' : '0')

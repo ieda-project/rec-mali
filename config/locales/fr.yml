@@ -45,6 +45,9 @@ fr:
     pas_de_test: Pas de test
     positif: Positif
     negatif: Négatif
+    absente: Absente
+    legere: Légère
+    severe: Sévère
   activerecord:
     errors:
       messages:

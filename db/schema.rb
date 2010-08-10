@@ -13,7 +13,8 @@ ActiveRecord::Schema.define(:version => 20100706114638) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "last_name"
     t.date     "born_on"
     t.boolean  "gender"
     t.datetime "last_visit_at"
