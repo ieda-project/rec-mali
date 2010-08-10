@@ -30,14 +30,14 @@
       %thead
         %tr
           %th Nom
-          %th Date de naissance
+          %th Année de naissance
           %th Village
           %th Dernière consultation
       %tbody
         - for child in paged do
           %tr{ :class => cycle("odd", "even") }
             %td= link_to child.name, child
-            %td= l child.born_on
+            %td= child.born_on.year
             %td= child.village.name
             %td= l child.last_visit_at
     %ul.pagination

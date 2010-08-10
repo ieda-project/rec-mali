@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def age d
-    months = ((Date.today - d).to_f / 12).round
+    months = ((Date.today - d).to_f / 365.25 * 12).round
     if months < 24
       "#{months} mois"
     elsif months < 120
