@@ -14,7 +14,7 @@ class Child < ActiveRecord::Base
   VACCINATIONS = {
     bcg_polio0: 'BCG/Polio-0',
     penta1_polio1: 'PENTA-1/Polio-1',
-    penta2_polio2: 'Polio-2/PENTA-2',
+    penta2_polio2: 'PENTA-2/Polio-2',
     penta3_polio3: 'PENTA-3/Polio-3',
     measles: 'Antirougeoleux' }
 
