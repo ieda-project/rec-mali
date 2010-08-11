@@ -26,6 +26,10 @@ class Object
   def metaclass
     class << self; self; end
   end
+
+  def in? *arr
+    arr.flatten.include? self
+  end
 end
 
 class Struct
