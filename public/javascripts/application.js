@@ -170,12 +170,20 @@ window.addEvent('domready', function() {
       if ((!illness || illness.valid) && measurements_valid && all_valid()) {
         button.removeClass('disabled')
         button.removeEvents()
+        document.removeEvents('keypress')
       } else {
         button.addClass('disabled')
         button.addEvent('click', function(e) {
           alert_fill()
           e.stop()
           return false
+        })
+        document.addEvent('keypress', function(e) {
+          if (event.keyCode == 13) {
+            return false;
+          } else {
+            return true;
+          }
         })
       }
     }
