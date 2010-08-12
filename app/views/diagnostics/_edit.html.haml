@@ -16,7 +16,7 @@
       - form.fields_for :child do |fields|
         - for key, name in Child::VACCINATIONS do
           = fields.check_box key, checked: @child.send(key)
-          %label= name
+          = fields.label key, name
     .next
       %button.next(type="button") Suivant
 
