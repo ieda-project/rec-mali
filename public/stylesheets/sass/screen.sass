@@ -41,9 +41,27 @@ div#alert
 #transient
   background-color: white
   position: fixed
-  -webkit-box-shadow: 0 0 12px black
-  -webkit-border-radius: 6px
-  padding: 10px
+  -webkit-box-shadow: 0 1px 0.5em rgba(0, 0, 0, 0.6)
+  -webkit-border-radius: 3px
+  padding: 25px 10px 5px 10px
+  .close-transient
+    position: absolute
+    top: 0px
+    right: 10px
+    cursor: pointer
+    text-align: center
+    line-height: 20px
+    font-weight: bold
+    width: 40px
+    background-color: #c00
+    color: white
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5)
+    border-bottom-right-radius: 3px
+    border-bottom-left-radius: 3px
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6)
+  .close-transient:hover
+    background-color: #f00
+    -webkit-box-shadow: 0 0 7px rgba(255, 0, 0, 1)
 #transient, section
   *:first-child
     margin-top: 0

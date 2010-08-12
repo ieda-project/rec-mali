@@ -10,6 +10,8 @@ class Child < ActiveRecord::Base
                     styles: { thumbnail: '110x130' }
 
   before_save :fill_cache_fields
+  
+  scope :unfilled, :conditions => {:first_name => nil, :last_name => nil}
 
   VACCINATIONS = {
     bcg_polio0: 'BCG/Polio-0',

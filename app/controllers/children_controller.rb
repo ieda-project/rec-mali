@@ -5,6 +5,8 @@ class ChildrenController < ApplicationController
   Search = Struct.new(:name, :born_on, :village_id)
 
   def index
+    # Clean empty children (only photo)
+    Child.unfilled.destroy_all
     @q = Search.from_hash params[:q]
     @children = model.search(@q, params[:o], params[:d])
     @page = (params[:page] || '1').to_i

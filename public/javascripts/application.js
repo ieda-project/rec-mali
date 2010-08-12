@@ -71,6 +71,7 @@ transient = {
     if (!this.div) {
       this.div = new Element('div', { id: 'transient' }).inject(document.body)
     }
+    this.div.innerHTML = ''
     this.div.setStyles({
       width: (style && style.width ? style.width : '400')+'px',
       visibility: 'hidden' })
@@ -81,6 +82,11 @@ transient = {
     } else {
       this.div.innerHTML = what
     }
+    this.close_button = new Element('div', {'class': 'close-transient', 'text': 'X'})
+    this.close_button.addEvent('click', function(e) {
+      this.close()
+    }.bind(this))
+    this.close_button.inject(this.div)
 
     var size = this.div.getSize()
     this.div.setStyles({
@@ -88,7 +94,10 @@ transient = {
       top: ((window.innerHeight - size.y) / 2) + 'px',
       visibility: 'visible' })
   },
-  close: function() { this.div.dispose() },
+  close: function() {
+    this.div.dispose()
+    this.div = false
+  },
   ajax: function(url) {
   }
 }
