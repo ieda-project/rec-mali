@@ -1,6 +1,6 @@
 module Wopata::ActiveRecord
   module Search
-    def search q
+    def search q, order=nil, dir=nil
       return scoped unless q.present?
       c, d = [], []
       q.to_hash.each do |key,value|
@@ -33,7 +33,13 @@ module Wopata::ActiveRecord
             d << value
         end
       end
-      where c.join(' AND '), *d
+      ret = where c.join(' AND '), *d
+
+      if order.present? && order =~ /\A[a-z.]+\Z/
+        ret.order order + (dir.in?(%w(d desc DESC)) ? ' DESC' : '')
+      else
+        ret
+      end
     end
   end
 end

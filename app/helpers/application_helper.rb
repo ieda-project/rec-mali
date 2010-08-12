@@ -3,6 +3,15 @@
 require 'redcloth'
 
 module ApplicationHelper
+  def sortable_header name, label
+    a,d = if params[:o] == label
+      [' class="current"'].send(
+        params[:d] == 'd' ? :unshift : :push,
+        '')
+    end
+    %Q(#{name} <a#{a} href="?o=#{label}">↑<a> <a#{d} href="?o=#{label}&d=d">↓<a>)
+  end
+
   def partial name, opts={}
     render opts.merge(partial: name)
   end

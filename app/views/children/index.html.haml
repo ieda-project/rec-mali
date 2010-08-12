@@ -29,10 +29,10 @@
     %table.children
       %thead
         %tr
-          %th Nom
-          %th Année de naissance
-          %th Village
-          %th Dernière consultation
+          %th!= sortable_header 'Nom', 'name'
+          %th!= sortable_header 'Année de naissance', 'born_on'
+          %th!= sortable_header 'Village', 'villages.name'
+          %th!= sortable_header 'Dernière consultation', 'last_visit_at'
       %tbody
         - for child in paged do
           - if child.born_on
