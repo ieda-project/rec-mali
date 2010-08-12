@@ -7,7 +7,7 @@ class Child < ActiveRecord::Base
           class_name: 'Diagnostic',
           order: 'id DESC'
   has_attached_file :photo,
-                    styles: { thumbnail: '130x130' }
+                    styles: { thumbnail: '110x130' }
 
   before_save :fill_cache_fields
 

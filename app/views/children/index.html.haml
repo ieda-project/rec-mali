@@ -35,11 +35,12 @@
           %th Dernière consultation
       %tbody
         - for child in paged do
-          %tr{ :class => cycle("odd", "even") }
-            %td= link_to child.name, child
-            %td= child.born_on.year
-            %td= child.village.name
-            %td= l child.last_visit_at
+          - if child.born_on
+            %tr{ :class => cycle("odd", "even") }
+              %td= link_to child.name, child
+              %td= child.born_on.year if child.born_on
+              %td= child.village.name if child.village
+              %td= l child.last_visit_at if child.last_visit_at
     %ul.pagination
       - if paged.prev?
         %li.em= link_to "< Prev", url_for(request.query_parameters.merge(:page => @page - 1))
