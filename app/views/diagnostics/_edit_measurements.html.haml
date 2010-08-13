@@ -4,7 +4,7 @@
     %tr
       %th(scope='row') Taille
       %td
-        = form.text_field :height, size: 4, class: 'integer'
+        = form.text_field :height, size: 4, class: 'float'
         %em cm
       %th(scope='row') Poids
       %td
@@ -12,5 +12,5 @@
         %em kg
       %th(scope='row') Périm. Brac.
       %td
-        = form.text_field :mac, size: 4, class: 'float'
+        = form.text_field :mac, size: 4, class: 'integer'
         %em mm

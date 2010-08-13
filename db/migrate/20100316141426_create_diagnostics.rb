@@ -4,8 +4,8 @@ class CreateDiagnostics < ActiveRecord::Migration
       t.string :type
       t.references :child, :author
       t.date :done_on
-      t.integer :height, :mac
-      t.float :weight
+      t.integer :mac
+      t.float :height, :weight
       t.text :comments
       t.string :failed_classifications
       t.timestamps

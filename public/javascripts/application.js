@@ -257,7 +257,7 @@ window.addEvent('domready', function() {
       var was_valid = measurements_valid
       measurements_valid = head_inputs.every(function(i) {
         if (i.hasClass('float')) {
-          return i.value.match(/^[0-9]+(\.[0-9]+){0,1}$/) && parseFloat(i.value) > 0
+          return i.value.match(/^[0-9]+([\.,][0-9]+){0,2}$/) && parseFloat(i.value) > 0
         } else if (i.hasClass('integer')) {
           return i.value.match(/^[0-9]+$/) && parseInt(i.value) > 0
         } else {
