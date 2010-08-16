@@ -3,7 +3,7 @@ class CreateDiagnostics < ActiveRecord::Migration
     create_table :diagnostics do |t|
       t.string :type
       t.references :child, :author
-      t.date :done_on
+      t.datetime :done_on
       t.integer :mac
       t.float :height, :weight
       t.text :comments

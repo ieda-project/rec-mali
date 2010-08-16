@@ -10,7 +10,7 @@
       %td
         = form.text_field :weight, size: 4, class: 'float'
         %em kg
-      - if form.object.child.born_on < 6.months.ago.to_date
+      - if form.object.child.nil? or form.object.child.born_on < 6.months.ago.to_date
         %th(scope='row') Périm. Brac.
         %td
           = form.text_field :mac, size: 4, class: 'integer'

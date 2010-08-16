@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20100706114638) do
     t.string   "type"
     t.integer  "child_id"
     t.integer  "author_id"
-    t.date     "done_on"
+    t.datetime "done_on"
     t.integer  "mac"
     t.float    "height"
     t.float    "weight"
