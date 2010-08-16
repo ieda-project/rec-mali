@@ -36,7 +36,7 @@ Illness.transaction do
         hash = {
           illness: illness,
           key: data[0],
-          question: data[1] }
+          question: RedCloth.new(data[1], [:lite_mode]).to_html }
         case data[2]
           when 'integer'
             hash[:min_value] = data[3]
