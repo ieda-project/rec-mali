@@ -1,18 +1,4 @@
-%h2.resume
-  = link_to 'Consultation', child_diagnostic_path(@child, diagnostic)
-  du #{diagnostic.done_on}
-  = link_to 'Editer', edit_child_diagnostic_path(@child, diagnostic), :class => 'edit'
-  - if diagnostic.classifications.any?
-    = link_to 'Traitements', treatments_child_diagnostic_path(@child, diagnostic), :class => 'treatments'
-  %span.by par #{diagnostic.author.name}
-.contain
-  %table
-    %tr
-      %th(scope="row") Date de consulation
-      %td= l diagnostic.done_on
-    %tr
-      %th(scope="row") Méthode de diagnostic
-      %td= diagnostic.type_name
-  %div.measurements
-    %h2 Dernières mesures
-    = partial 'children/measurements', locals: { diagnostic: diagnostic }
+- link_to child_diagnostic_path(@child, diagnostic) do
+  %strong #{diagnostic.done_on}
+  %span.by Consultation réalisée par #{diagnostic.author.login}
+  %span.link
