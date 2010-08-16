@@ -4,14 +4,14 @@
 %p.name
   %strong Nom :
   = form.text_field :last_name, 'data-label' => 'Nom', size: 30
-%p
+%p.name
   %strong Sexe :
   = form.select :gender, [ %w(Masculin 1), %w(Féminin 0) ], selected: (form.object.gender ? '1' : '0')
-  %br/
+%p.name
   %strong
     %span.nee= form.object.gender ? 'Né' : 'Née'
     le :
   = form.date_select(:born_on, :start_year => Date.today.year, :end_year => Date.today.year - 18)
-  %br/
+%p.name
   %strong Village :
   = form.select :village_id, Village.to_select
