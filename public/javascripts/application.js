@@ -276,8 +276,10 @@ window.addEvent('domready', function() {
     head_next.addEvent('click', function() {
       if (this.hasClass('disabled'))
         alert_fill()
-      else
-        open_illness(illnesses[0], false) })
+      else {
+        open_illness(illnesses[0], false)
+        head_next.setStyle('visibility', 'hidden')
+      }})
     validate_measurements.periodical(500)
 
     illnesses.each(function (i,j) {
