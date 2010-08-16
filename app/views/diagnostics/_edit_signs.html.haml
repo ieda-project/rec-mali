@@ -14,7 +14,7 @@
         = form.fields_for "sign_answers][#{count}", answer do |fields|
           %tr{class: answer.errors.any? ? 'has-errors' : ''}
             %td(scope="row")
-              .question= answer.sign.question
+              .question!= answer.sign.question
               = fields.hidden_field :sign_id
               = partial "diagnostics/sign_#{answer.sign.kind}", locals: { sign: answer.sign, form: fields }
         - count += 1
