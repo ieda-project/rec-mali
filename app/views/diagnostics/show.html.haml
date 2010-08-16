@@ -1,7 +1,8 @@
 = partial 'children/profile'
-%section.resume
-  = partial 'header', locals: { diagnostic: @diagnostic }
 
+%h2.em= partial 'header', locals: { diagnostic: @diagnostic }
+
+%section.resume
   - if @diagnostic.failed_classifications.try :any?
     %section.warning
       %h3 Les classifications suivante on échoués:
