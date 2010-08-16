@@ -40,9 +40,17 @@ class Diagnostic < ActiveRecord::Base
   after_create :update_child
 
   validates_presence_of :child, :height, :weight, :mac
-  validates_numericality_of :height, only_integer: true
-  validates_numericality_of :weight, :mac
+  validates_numericality_of :mac, :only_integer => true
+  validates_numericality_of :height, :weight
   validate :validate_answers
+  
+  def height= val
+    write_attribute :height, val.to_s.gsub(',', '.')
+  end
+
+  def weight= val
+    write_attribute :weight, val.to_s.gsub(',', '.')
+  end
 
   def type_name
     '-'
@@ -88,7 +96,7 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def set_date
-    self.done_on ||= Date.today
+    self.done_on ||= Time.now
   end
 
   def clear_classifications obj=nil

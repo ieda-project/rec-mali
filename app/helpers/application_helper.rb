@@ -30,7 +30,7 @@ module ApplicationHelper
       "#{months} mois"
     elsif months < 120
       years, mod = months.divmod 12
-      "#{years}#{mod >= 6 && '½'} ans"
+      "#{years}#{mod >= 6 ? '½' : ''} ans"
     else
       "#{months / 12} ans"
     end

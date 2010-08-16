@@ -4,13 +4,14 @@
     %tr
       %th(scope='row') Taille
       %td
-        = form.text_field :height, size: 4, class: 'integer'
+        = form.text_field :height, size: 4, class: 'float'
         %em cm
       %th(scope='row') Poids
       %td
         = form.text_field :weight, size: 4, class: 'float'
         %em kg
-      %th(scope='row') Périm. Brac.
-      %td
-        = form.text_field :mac, size: 4, class: 'float'
-        %em mm
+      - if form.object.child.nil? or form.object.child.born_on < 6.months.ago.to_date
+        %th(scope='row') Périm. Brac.
+        %td
+          = form.text_field :mac, size: 4, class: 'integer'
+          %em mm

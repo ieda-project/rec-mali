@@ -2,8 +2,9 @@
   %tbody
     %tr
       %th(scope='row') Taille
-      %td #{diagnostic.height} cm
+      %td #{diagnostic.height.round(1)} cm
       %th(scope='row') Poids
-      %td #{diagnostic.weight} kg
-      %th(scope='row') Périm. Brac.
-      %td #{diagnostic.mac} mm
+      %td #{diagnostic.weight.round(2)} kg
+      - if diagnostic.child.born_on < 6.months.ago.to_date
+        %th(scope='row') Périm. Brac.
+        %td #{diagnostic.mac} mm
