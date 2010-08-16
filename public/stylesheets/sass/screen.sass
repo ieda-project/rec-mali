@@ -339,6 +339,7 @@ nav a, nav button, section button[type=submit]
   .photo
     margin: 10px 0 0 13px
     float: left
+    cursor: pointer
   section
     float: right
     padding: 17px 20px
@@ -367,7 +368,8 @@ nav a, nav button, section button[type=submit]
         top: 5px
         border: 0
         margin: 0
-        text-decoration: underline
+        &:hover
+          text-decoration: underline
       form
         button
           background-position: 0 -19px

@@ -1,5 +1,5 @@
 .profile-child
-  #mugshot.photo(data-field='child[photo]')
+  #mugshot.photo{:"data-field" => 'child[photo]', :"data-action" => child_path(@child)}
     %img{alt: '', src: @child.photo.url(:thumbnail)}
   %section
     .editable{'data-edit-href' => edit_child_path(@child)}

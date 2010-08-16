@@ -27,5 +27,5 @@
     = form.text_area :comments, cols:20, rows:5
     
   %nav
-    %button.edit(type="submit") Modifier le diagnostic
+    = link_to 'Modifier le diagnostic', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit'
     %button.validation(type="submit") Terminer le diagnostic
