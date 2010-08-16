@@ -139,6 +139,9 @@ h2
     color: #333
     text-decoration: none
 
+h3
+  float: left
+
 select + .switch
   cursor: pointer
 
@@ -303,6 +306,10 @@ nav a, nav button, section button[type=submit]
     height: 46px
     line-height: 46px
     padding: 0 8px 0 47px
+    &.em
+      background: url(../images/backgrounds/button-edit-light.gif)
+      &:after  
+        background: url(../images/backgrounds/button-edit-light.gif) -46px right no-repeat
     &:after  
       background: url(../images/backgrounds/button-edit.gif) -46px right no-repeat
       height: 46px

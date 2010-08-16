@@ -1,6 +1,12 @@
 = partial 'children/profile'
 
-%h2.em= partial 'header', locals: { diagnostic: @diagnostic }
+%h2.em
+  = partial 'header', locals: { diagnostic: @diagnostic }
+
+%nav
+  = link_to 'Editer', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
+  - if @diagnostic.classifications.any?
+    = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
 
 %section.resume
   - if @diagnostic.failed_classifications.try :any?
@@ -22,3 +28,8 @@
       %ul.classification
         - for c in cs do
           %li= c.name
+
+- if @diagnostic.classifications.any?
+  %nav
+    = link_to 'Editer', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
+    = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
