@@ -1,7 +1,6 @@
 class Child < ActiveRecord::Base
   include Csps::Exportable
   belongs_to :village
-  has_many :child_photos
   has_many :diagnostics
   has_one :last_visit,
           class_name: 'Diagnostic',

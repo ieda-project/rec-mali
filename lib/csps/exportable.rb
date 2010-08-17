@@ -2,12 +2,12 @@ module Csps::Exportable
   MODELS = []
   def self.included model
     (MODELS << model.name).uniq!
-    model.send :scope, :local, conditions: 'NOT imported'
+    model.send :scope, :local, conditions: [ 'imported != ?', true ]
     if model.columns_hash['temporary']
-      model.send :scope, :exportable, conditions: 'NOT imported AND NOT temporary'
-      model.send :scope, :temporary, conditions: 'temporary'
+      model.send :scope, :exportable, conditions: [ 'imported != ? AND temporary != ?', true, true ]
+      model.send :scope, :temporary, conditions: { temporary: true }
     else
-      model.send :scope, :exportable, conditions: 'NOT imported'
+      model.send :scope, :exportable, conditions: [ 'imported !=', true ]
     end
     model.send :extend, ClassMethods
     model.send :attr_readonly, :imported
