@@ -1,4 +1,9 @@
-%section
-  %h1 Edit user
+
+#user-session
+  %h1 Editer le profil
+  %p 
+    C'est ici que vous pouvez modifier les 
+    %br 
+    renseignements de votre compte.
   - form_for @user do |f|
     = partial 'form', locals: { form: f }
