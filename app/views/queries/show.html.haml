@@ -1,7 +1,7 @@
 %section
   %h1
     = @query.title
-    = @query.case_status_key
+    =# @query.case_status_key
   %h2 Chart
   %div!= ziya_chart query_url(@query, format: :xml), size: '800x282'
   %h2

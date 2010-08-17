@@ -24,11 +24,10 @@ class Query < ActiveRecord::Base
           sql << "LEFT JOIN #{reflection.table_name} ON #{reflection.table_name}.#{reflection.primary_key_name} = #{klass.table_name}.id"
           klass = reflection.class_name.constantize
         else
-          cols = klass.search_columns.map { |i| klass.columns_hash[i] }
+          cols = klass.columns_hash.values
           if cols.map(&:name).include?(path_item)
-            # UGLY
-            col = nil; cols.each { |c| col = c if c.name == path_item }
-            col_type = col.is_a?(ActiveRecord::ConnectionAdapters::Column) ? col.type : col.column_type
+            col = klass.columns_hash[path_item]
+            col_type = type || col.type
             path_item = 'born_on' if path_item == 'age'
             # /UGLY
             sql_cond, sql_params, sql_error = self.send("build_#{col_type.to_s.downcase}_sql", klass, path_item, operator, value)
@@ -94,7 +93,7 @@ class Query < ActiveRecord::Base
     age = value.to_i
     case operator
     when '<', '<=', '>=', '>'
-      return "#{klass.table_name}.#{kattr} #{operator} ?", age.years.ago, nil
+      return "? #{operator} #{klass.table_name}.#{kattr}", age.months.ago, nil
     when '='
       return "#{klass.table_name}.#{kattr} >= ? AND #{klass.table_name}.#{kattr} < ?", [age.years.ago, (age+1).years.ago - 1.day], nil
     else

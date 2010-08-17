@@ -1,0 +1,12 @@
+@new children 0-11 months
+{
+  "klass":"Child",
+  "case_status":"open",
+  "0": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":"<",
+    "value":"11"
+  }
+}
+

@@ -84,6 +84,29 @@ File.open('db/fixtures/classifications.txt', 'r') do |f|
   end
 end
 
+t = {}
+File::open('db/fixtures/queries_translations.txt', 'r') do |f|
+  while s = f.gets
+    k, v = s.split("\t").map {|x| x.strip}
+    raise "error: #{k}" if v.blank?
+    t[k] = v
+  end
+end
+
+stats = File::read(File::join('db', 'fixtures', 'queries.txt'))
+Query.destroy_all
+stats.split('@').each do |s|
+  next if s.size == 0
+  title = s.split("\n").first.strip
+  source = s.split("\n")[1..-1].join("\n")
+  h = JSON.parse(source)
+  case_status = Query::CASE_STATUSES.index(h.delete('case_status'))
+  klass = h.delete('klass')
+  puts title
+  Query.create!(:title => t[title], :case_status => case_status, :klass => klass, :conditions => h.to_json)
+end
+
+
 if treatments.any?
   puts "WARNING: #{treatments.size} orphaned treatments!"
   puts "Keys: #{treatments.keys.join(', ')}."

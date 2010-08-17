@@ -31,6 +31,28 @@ class Child < ActiveRecord::Base
   def name
     "#{first_name} #{last_name}"
   end
+  
+  def self.group_stats_by case_status, rs
+    m = self.minimum(:created_at)
+    return {} if m.nil?
+    d1 = m.beginning_of_month
+    d2 = d1.next_month.to_date
+    grs = {}
+    while Date.today.next_month.beginning_of_month >= d2
+      k = dates2key(d1)
+      grs[k] = 0
+      rs.each do |r|
+        grs[k] += 1 if r.created_at >= d1 and r.created_at < d2
+      end
+      d1 = d1.next_month
+      d2 = d2.next_month
+    end
+    grs
+  end
+  
+  def self.dates2key d
+    "#{d.year}-#{sprintf("%02d", d.month)}"
+  end
 
   protected
 
