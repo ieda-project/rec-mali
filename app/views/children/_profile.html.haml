@@ -10,6 +10,19 @@
         = partial 'children/measurements', locals: { diagnostic: @child.last_visit }
       - else
         %p Never measured.
+    .ratios
+      %ul
+        %li
+          %span= "Poids / Age"
+          %strong
+            = (@child.last_visit.weight / Index.weight_age.gender(@child.gender).near(@child.months).y * 100).round(0)
+            = '%'
+        %li.alert
+          %span= "Loremipsum/lorem"
+          %strong 95%
+        %li
+          %span= "Loremipsum/lorem"
+          %strong 95%
     .vaccinations
       %h3 Vaccinations :
       %ul

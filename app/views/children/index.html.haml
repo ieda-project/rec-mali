@@ -1,3 +1,8 @@
+- content_for :header do
+  %ul.menu
+    %li= link_to 'Statistiques', queries_path, :class => 'queries'
+    %li= link_to 'Utilisateurs', users_path
+
 %nav
   %p.hint Le patient se présente au dispensaire pour la première fois ?
   = link_to 'Nouveau patient', new_child_path, :class => 'new-user'
@@ -43,7 +48,7 @@
               %td= l child.last_visit_at if child.last_visit_at
     %ul.pagination
       - if paged.prev?
-        %li.em= link_to "< Prev", url_for(request.query_parameters.merge(:page => @page - 1))
+        %li.em= link_to "< Précédente", url_for(request.query_parameters.merge(:page => @page - 1))
       - 1.upto(paged.pages) do |p|
         - if p == @page
           %li= @page || 1
@@ -52,7 +57,7 @@
         - elsif (@page - p).abs < 5
           %li ...
       - if paged.next?
-        %li.em= link_to "Next >", url_for(request.query_parameters.merge(:page => @page + 1))
+        %li.em= link_to "Suivante >", url_for(request.query_parameters.merge(:page => @page + 1))
   - else
     .no-result
       %p Aucun patient ne correspond aux termes de recherche spécifiés 

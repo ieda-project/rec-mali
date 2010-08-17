@@ -1,10 +1,16 @@
 <%= chart :column %>
   <%=comp :chart_border %>
-    top_thickness: 1
-    bottom_thickness: 2
+    top_thickness: 0
+    bottom_thickness: 1
     left_thickness: 0
     color: 000000
     right_thickness: 0
+
+  <%=comp :axis_category %>
+    size: 13
+
+  <%=comp :axis_value %>
+    size: 14
 
   <%=comp :chart_guide %>
     radius:                 5

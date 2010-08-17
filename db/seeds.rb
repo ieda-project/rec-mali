@@ -87,6 +87,7 @@ end
 t = {}
 File::open('db/fixtures/queries_translations.txt', 'r') do |f|
   while s = f.gets
+    next if s.blank?
     k, v = s.split("\t").map {|x| x.strip}
     raise "error: #{k}" if v.blank?
     t[k] = v
@@ -102,10 +103,27 @@ stats.split('@').each do |s|
   h = JSON.parse(source)
   case_status = Query::CASE_STATUSES.index(h.delete('case_status'))
   klass = h.delete('klass')
-  puts title
-  Query.create!(:title => t[title], :case_status => case_status, :klass => klass, :conditions => h.to_json)
+  q = Query.new(:title => t[title], :case_status => case_status, :klass => klass, :conditions => h.to_json)
+  puts q.errors.inspect unless q.save
 end
 
+Index.destroy_all
+Index::NAMES.each do |name|
+  %w(boys girls).each do |gender|
+    begin
+      file_name = File::join('db', 'fixtures', 'indices', "#{name}-#{gender}.txt")
+      File.open(file_name, 'r') do |f|
+        f.each_line do |line|
+          next if line.blank?
+          x, y = line.split ','
+          Index.create(:x => x, :y => y, :for_boys => (gender == 'boys'), :name => Index::NAMES.index(name))
+        end
+      end
+    rescue => e
+      puts "Can't load #{file_name}: #{e}"
+    end
+  end
+end
 
 if treatments.any?
   puts "WARNING: #{treatments.size} orphaned treatments!"

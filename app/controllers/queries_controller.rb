@@ -8,9 +8,11 @@ class QueriesController < ApplicationController
   require "spreadsheet/excel" 
   
   def index
+    back 'Rechercher un patient', children_path
   end
 
   def show
+    back 'Afficher une autre statistique', queries_path
     @query = Query.find(params[:id])
     @results, errors = @query.run
     respond_to do |format|
@@ -18,9 +20,10 @@ class QueriesController < ApplicationController
       format.xml do
         chart = Ziya::Charts::Column.new
         chart.add :theme, 'pimp'
-        chart.add :axis_category_text, @results.keys.sort.map { |k| k[-2..-1] == '01' ? k[0..3] : '' }
+        labels = @results.keys.sort
+        labels = labels.map { |k| k[-2..-1] == '01' ? k[0..3] : '' } if labels.size > 12
+        chart.add :axis_category_text, labels
         chart.add :series, '', @results.keys.sort.map { |k| @results[k] }
-        puts chart.to_xml.methods
         render xml: chart.to_xml
       end
     end

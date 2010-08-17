@@ -6,10 +6,12 @@ class UsersController < ApplicationController
   layout :decide_layout
 
   def index
+    back 'Rechercher un patient', children_path
     @users = User.order :login
   end
 
   def new
+    back 'Retour', users_path
     @user = User.new
   end
 
@@ -24,6 +26,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    back 'Retour', users_path
   end
 
   def update
