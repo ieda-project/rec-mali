@@ -69,6 +69,10 @@ div#alert
   *:last-child
     margin-bottom: 0
 
+object
+  display: block
+  margin: auto
+
 button
   cursor: pointer
 
@@ -665,7 +669,7 @@ section
       background: #f6f6f6
   table
     border-spacing: 0
-    &.children
+    &.results
       background: none
       border-bottom: 2px solid #efefef
       -webkit-border-bottom-left-radius: 5px
@@ -742,6 +746,14 @@ th
     color: white
     -webkit-border-radius: 0.5em
     margin-left: 2px
+    &.link
+      text-shadow: 0 1px 0 rgba(0,0,0,0.2)
+      -webkit-border-radius: 4px
+      padding: 3px 7px
+      font-size: 0.9em
+      &:hover
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.1)
+        background-color: $color_th - #333
     &.current
       background-color: $color_th - #333
 
