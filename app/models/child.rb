@@ -28,6 +28,10 @@ class Child < ActiveRecord::Base
     born_on ? ((Date.today - born_on) / 365).to_i : nil
   end
   
+  def months
+    born_on ? ((Date.today - born_on) / 365.0 * 12).to_i : nil
+  end
+  
   def name
     "#{first_name} #{last_name}"
   end
