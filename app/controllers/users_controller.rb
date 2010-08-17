@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    back 'Retour', users_path
     @user = User.new
   end
 
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    back 'Retour', users_path
   end
 
   def update
