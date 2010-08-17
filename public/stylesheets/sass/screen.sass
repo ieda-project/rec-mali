@@ -375,6 +375,52 @@ nav a, nav button, section button[type=submit]
     margin: 10px 0 0 13px
     float: left
     cursor: pointer
+  .ratios
+    border-top: 2px solid #E6E6E6
+    padding: 10px 0 0
+    h3
+      display: block
+      color: #666
+      font-size: 1.1em
+    ul
+      display: block
+      margin: 0
+      padding: 0
+      list-style: none
+      overflow: hidden
+      clear: both
+      li
+        width: 247px
+        text-align: center
+        margin: 0 20px 0 0
+        background: #f5f4f4
+        border: 2px solid #E6E6E6
+        -webkit-border-radius: 6px
+        float: left
+        padding: 10px 0
+        &:hover
+          background: !link
+          border-color: #00649c
+          cursor: pointer
+          strong, span
+            color: white
+        &.alert
+          strong
+            color: #c00
+          &:hover
+            border-color: #900
+            background: #c00
+            strong
+              color: white
+        span
+          display: block
+          color: #666
+        strong
+          font-size: 1.6em
+          color: !link
+        &:last-child
+          margin: 0
+
   section
     float: right
     padding: 17px 20px
@@ -440,7 +486,7 @@ section
   div.vaccinations
     border-top: 2px solid #E6E6E6
     clear: both
-    margin: 15px 0 0
+    margin: 15px 0
     overflow: hidden
     padding: 10px 0 0
     color: #666
