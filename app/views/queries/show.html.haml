@@ -2,14 +2,14 @@
   %h1
     = @query.title
     =# @query.case_status_key
-  %h2 Chart
+  %h2 Graphique
   %div!= ziya_chart query_url(@query, format: :xml), size: '800x282'
   %table.results
     %thead
       %tr
         %th{:colspan => 4}
-          Query values
-          = link_to 'Export XLS', export_query_path(@query, :xls), :class => 'link'
+          Valeurs
+          = link_to 'Exporter fichier XLS', export_query_path(@query, :xls), :class => 'link'
     %tbody
       - @results.keys.sort.reverse.each do |k|
         %tr{ :class => cycle("odd", "even") }

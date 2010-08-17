@@ -6,7 +6,7 @@
 
 %h2.em Consultations
 
-%section.consultations
+%section.list-arrow
   %ul
     - for diag in @child.diagnostics.order('id DESC').limit(5) do
       %li{ :class => cycle("odd", "even") }= partial 'diagnostics/header', locals: { diagnostic: diag }
