@@ -103,7 +103,8 @@ stats.split('@').each do |s|
   case_status = Query::CASE_STATUSES.index(h.delete('case_status'))
   klass = h.delete('klass')
   puts title
-  Query.create!(:title => t[title], :case_status => case_status, :klass => klass, :conditions => h.to_json)
+  q = Query.new(:title => t[title], :case_status => case_status, :klass => klass, :conditions => h.to_json)
+  puts q.errors.inspect unless q.save
 end
 
 

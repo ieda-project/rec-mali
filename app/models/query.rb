@@ -1,7 +1,7 @@
 require 'json'
 
 class Query < ActiveRecord::Base
-  enum :case_status, %w{all open new closed referred}
+  enum :case_status, %w{new old follow}
   validates_presence_of :title, :case_status, :klass
 
   def run
@@ -47,7 +47,7 @@ class Query < ActiveRecord::Base
     else
       self.klass.constantize.all(:conditions => ar_params.reverse.push(ar_conditions).reverse)
     end
-    grs = klass.constantize.group_stats_by(self.case_status_key, rs)
+    grs = klass.constantize.group_stats_by(case_status_key, rs)
     update_attribute :last_run_at, Time.now
     return grs, nil
   end
