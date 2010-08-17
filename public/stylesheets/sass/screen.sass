@@ -378,6 +378,8 @@ nav a, nav button, section button[type=submit]
   .ratios
     border-top: 2px solid #E6E6E6
     padding: 10px 0 0
+    overflow: hidden
+    clear: both
     h3
       display: block
       color: #666
@@ -405,16 +407,16 @@ nav a, nav button, section button[type=submit]
           strong, span
             color: white
         &.alert
-          strong
+          strong, span
             color: #c00
           &:hover
             border-color: #900
             background: #c00
-            strong
+            strong, span
               color: white
         span
           display: block
-          color: #666
+          color: !link
         strong
           font-size: 1.6em
           color: !link
@@ -486,7 +488,7 @@ section
   div.vaccinations
     border-top: 2px solid #E6E6E6
     clear: both
-    margin: 15px 0
+    margin: 15px 0 0
     overflow: hidden
     padding: 10px 0 0
     color: #666
@@ -519,6 +521,7 @@ section
       color = !color_th
       font-size: 1.1em
       padding: 5px 7px
+      text-align: center
       border: 2px solid !border_th
       -webkit-border-top-left-radius: 4px
       -webkit-border-top-right-radius: 4px

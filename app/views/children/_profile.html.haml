@@ -10,14 +10,6 @@
         = partial 'children/measurements', locals: { diagnostic: @child.last_visit }
       - else
         %p Never measured.
-    .vaccinations
-      %h3 Vaccinations :
-      %ul
-        - Child::VACCINATIONS.each do |k,n|
-          - if @child.send(k)
-            %li.yes= n
-          - else
-            %li.no= n
     .ratios
       %ul
         %li
@@ -29,3 +21,11 @@
         %li
           %span= "Loremipsum/lorem"
           %strong 95%
+    .vaccinations
+      %h3 Vaccinations :
+      %ul
+        - Child::VACCINATIONS.each do |k,n|
+          - if @child.send(k)
+            %li.yes= n
+          - else
+            %li.no= n
