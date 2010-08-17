@@ -32,17 +32,25 @@ class Child < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
   
-  def self.group_stats_by case_status, rs
+  def self.group_stats_by status, rs
     m = self.minimum(:created_at)
     return {} if m.nil?
     d1 = m.beginning_of_month
     d2 = d1.next_month.to_date
     grs = {}
     while Date.today.next_month.beginning_of_month >= d2
+      diagnosticed = Diagnostic.between(d1, d2).all.map &:child_id
       k = dates2key(d1)
       grs[k] = 0
       rs.each do |r|
-        grs[k] += 1 if r.created_at >= d1 and r.created_at < d2
+        case status
+        when 'new' then
+          grs[k] += 1 if r.created_at >= d1 and r.created_at < d2
+        when 'old' then
+          grs[k] += 1 if r.created_at < d1 and diagnosticed.include? r.id
+        when 'follow' then
+          grs[k] += 1 if diagnosticed.include? r.id
+        end
       end
       d1 = d1.next_month
       d2 = d2.next_month

@@ -8,17 +8,15 @@
     = yield :head
   %body
     %header
-      - if current_page? children_path
-        %ul.menu
-          %li= link_to 'Statistiques', queries_path, :class => 'queries'
-          %li= link_to 'Utilisateurs', users_path
+      = yield :header
       - if back?
         %nav#prev= link_to back_title, back_url
-      = form_tag session_path, method: 'delete' do
-        Agent:
-        %strong= current_user.login
-        | CSPS:
-        %strong= current_user.name
-        %button.confirm(type="submit" data-confirm="Etes vous sûr de vouloir vous déconnecter ?") Logout
+      - unless respond_to? :ziya_chart
+        = form_tag session_path, method: 'delete' do
+          Agent:
+          %strong= current_user.login
+          | CSPS:
+          %strong= current_user.name
+          %button.confirm(type="submit" data-confirm="Etes vous sûr de vouloir vous déconnecter ?") Logout
 
-= yield
+    = yield

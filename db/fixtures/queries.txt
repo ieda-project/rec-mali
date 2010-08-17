@@ -1,12 +1,144 @@
 @new children 0-11 months
 {
   "klass":"Child",
-  "case_status":"open",
+  "case_status":"new",
   "0": {
     "attribute":"born_on",
     "type":"age",
-    "operator":"<",
+    "operator":"<=",
     "value":"11"
+  }
+}
+
+@new children 12-23 months
+{
+  "klass":"Child",
+  "case_status":"new",
+  "0": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":">=",
+    "value":"12"
+  },
+  "1": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":"<=",
+    "value":"23"
+  }
+}
+
+@new children 24-59 months
+{
+  "klass":"Child",
+  "case_status":"new",
+  "0": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":">=",
+    "value":"24"
+  },
+  "1": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":"<=",
+    "value":"59"
+  }
+}
+
+@old children 0-11 months
+{
+  "klass":"Child",
+  "case_status":"old",
+  "0": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":"<=",
+    "value":"11"
+  }
+}
+
+@old children 12-23 months
+{
+  "klass":"Child",
+  "case_status":"old",
+  "0": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":">=",
+    "value":"12"
+  },
+  "1": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":"<=",
+    "value":"23"
+  }
+}
+
+@old children 24-59 months
+{
+  "klass":"Child",
+  "case_status":"old",
+  "0": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":">=",
+    "value":"24"
+  },
+  "1": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":"<=",
+    "value":"59"
+  }
+}
+
+@follow children 0-11 months
+{
+  "klass":"Child",
+  "case_status":"follow",
+  "0": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":"<=",
+    "value":"11"
+  }
+}
+
+@follow children 12-23 months
+{
+  "klass":"Child",
+  "case_status":"follow",
+  "0": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":">=",
+    "value":"12"
+  },
+  "1": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":"<=",
+    "value":"23"
+  }
+}
+
+@follow children 24-59 months
+{
+  "klass":"Child",
+  "case_status":"follow",
+  "0": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":">=",
+    "value":"24"
+  },
+  "1": {
+    "attribute":"born_on",
+    "type":"age",
+    "operator":"<=",
+    "value":"59"
   }
 }
 
