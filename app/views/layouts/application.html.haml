@@ -8,6 +8,10 @@
     = yield :head
   %body
     %header
+      - if current_page? children_path
+        %ul.menu
+          %li= link_to 'Statistiques', queries_path, :class => 'queries'
+          %li= link_to 'Utilisateurs', users_path
       - if back?
         %nav#prev= link_to back_title, back_url
       = form_tag session_path, method: 'delete' do

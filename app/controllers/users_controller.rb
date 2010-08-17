@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   layout :decide_layout
 
   def index
+    back 'Rechercher un patient', children_path
     @users = User.order :login
   end
 
