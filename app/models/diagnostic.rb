@@ -36,7 +36,7 @@ class Diagnostic < ActiveRecord::Base
   end
   has_many :illness_answers
 
-  scope :between, lambda {|d1, d2| {:conditions => ['created_at > ? and created_at <= d2', d1, d2]}}
+  scope :between, lambda {|d1, d2| {:conditions => ['done_on > ? and done_on <= ?', d1, d2]}}
 
   before_create :set_date
   after_create :update_child

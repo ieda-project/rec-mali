@@ -87,6 +87,7 @@ end
 t = {}
 File::open('db/fixtures/queries_translations.txt', 'r') do |f|
   while s = f.gets
+    next if s.blank?
     k, v = s.split("\t").map {|x| x.strip}
     raise "error: #{k}" if v.blank?
     t[k] = v

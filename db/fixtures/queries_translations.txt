@@ -1,3 +1,12 @@
 new children 0-11 months	Nombre de nouveaux enfants suivi de 0-11 mois
 new children 12-23 months	Nombre de nouveaux enfants suivi de 12-23 mois
 new children 24-59 months	Nombre de nouveaux enfants suivi de 24-59 mois
+
+old children 0-11 months	Nombre d'anciens enfants suivi de 0-11 mois
+old children 12-23 months	Nombre d'anciens enfants suivi de 12-23 mois
+old children 24-59 months	Nombre d'anciens enfants suivi de 24-59 mois
+
+follow children 0-11 months	Nombre total d'enfants suivi de 0-11 mois
+follow children 12-23 months	Nombre total d'enfants suivi de 12-23 mois
+follow children 24-59 months	Nombre total d'enfants suivi de 24-59 mois
+

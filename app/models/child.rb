@@ -39,6 +39,7 @@ class Child < ActiveRecord::Base
     d2 = d1.next_month.to_date
     grs = {}
     while Date.today.next_month.beginning_of_month >= d2
+      diagnosticed = Diagnostic.between(d1, d2).all.map &:child_id
       k = dates2key(d1)
       grs[k] = 0
       rs.each do |r|
@@ -46,9 +47,9 @@ class Child < ActiveRecord::Base
         when 'new' then
           grs[k] += 1 if r.created_at >= d1 and r.created_at < d2
         when 'old' then
-          grs[k] += 1 if r.created_at < d1 and r.diagnostic.between(d1, d2).any?
+          grs[k] += 1 if r.created_at < d1 and diagnosticed.include? r.id
         when 'follow' then
-          grs[k] += 1 if r.diagnostic.between(d1, d2).any?
+          grs[k] += 1 if diagnosticed.include? r.id
         end
       end
       d1 = d1.next_month
