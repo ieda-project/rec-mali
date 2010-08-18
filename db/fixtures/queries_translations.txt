@@ -41,3 +41,6 @@ follow children boy paludisme	Nombre d'enfants suivi, garcons avec la classifica
 follow children girl paludisme	Nombre d'enfants suivi, filles avec la classification de paludisme simple
 follow children boy paludisme grave	Nombre d'enfants suivi, garcons avec la classification de paludisme grave
 follow children girl paludisme grave	Nombre d'enfants suivi, filles avec la classification de paludisme grave
+
+follow children fievre 14	Nombre d'enfants suivi avec une fièvre de plus de 14 jours
+follow children ulcerations	Nombre d'enfants suivi avec des ulcérations dans la bouche

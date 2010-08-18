@@ -67,9 +67,9 @@ class Query < ActiveRecord::Base
 
   def build_boolean_sql klass, kattr, operator, value
     if operator == '='
-      return "#{klass.table_name}.#{kattr} = ?", true, nil
+      return "#{klass.table_name}.#{kattr} = ?", value == 'true', nil
     else
-      return "#{klass.table_name}.#{kattr} != ?", true, nil
+      return "#{klass.table_name}.#{kattr} != ?", value == 'true', nil
     end
   end
 

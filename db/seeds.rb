@@ -4,6 +4,7 @@ if Village.count.zero?
   for n in %w(Kiembara Kongoussi Bobo-Dioulasso Niangoloko).map do
     Village.create name: n
   end
+end
 
 unless (children_count = ENV['CHILDREN'].to_i) < 1
   puts "Creating mockup children (#{children_count} entries)"
@@ -26,7 +27,7 @@ unless (children_count = ENV['CHILDREN'].to_i) < 1
   end
 end
 
-  illnesses = {}
+illnesses = {}
 
 puts 'Creating illnesses'
 
@@ -50,9 +51,19 @@ Illness.transaction do
           when 'list'
             hash[:values] = data[3]
         end
+        (data[2].camelize + 'Sign').constantize.create hash
+      else
+        # Illness
+        illness = Illness.create(
+          key: data[0],
+          name: data[1],
+          sequence: seq)
+        illnesses[illness.key] = illness
+        seq += 1
       end
     end
   end
+end
 
 puts 'Creating treatments'
 
@@ -69,6 +80,7 @@ File.open('db/fixtures/treatments.txt', 'r') do |f|
       treatments[cl] += line
     end
   end
+end
 
 puts 'Creating classifications'
 
