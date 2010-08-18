@@ -56,14 +56,21 @@ class Child < ActiveRecord::Base
     (val / i.y * 100).round(0) rescue '-'
   end
   
-  def self.group_stats_by status, rs
+  def self.group_stats_by status, rs, conds
     m = self.minimum(:created_at)
     return {} if m.nil?
     d1 = m.beginning_of_month
     d2 = d1.next_month.to_date
     grs = {}
     while Date.today.next_month.beginning_of_month >= d2
-      diagnosticed = Diagnostic.between(d1, d2).all.map &:child_id
+      diagnosticed = Diagnostic.between(d1, d2).includes(:classifications).all
+      conds.each do |cond|
+        case cond['field']
+        when 'classifications' then
+          diagnosticed = diagnosticed.select {|d| d.classifications.map(&:name).send(cond['operator'], cond['value'])}
+        end
+      end
+      diagnosticed = diagnosticed.map &:child_id
       k = dates2key(d1)
       grs[k] = 0
       rs.each do |r|

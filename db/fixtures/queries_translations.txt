@@ -10,3 +10,34 @@ follow children 0-11 months	Nombre total d'enfants suivi de 0-11 mois
 follow children 12-23 months	Nombre total d'enfants suivi de 12-23 mois
 follow children 24-59 months	Nombre total d'enfants suivi de 24-59 mois
 
+follow children pas de pneumonie	Pas de pneumonie: toux ou rhume
+follow children pneumonie	Pneumonie
+follow children pneumonie grave	Pneumonie grave ou maladie très grave
+follow children signes deshydratation	Signes évidents de déshydratation
+follow children deshydratation severe	Déshydratation sévère
+follow children diarrhee persistente	Diarrhée persistente
+follow children diarrhee severe	Diarrhée persistente sévère
+follow children dysenterie	Dysenterie
+follow children antecedent rougeole	Antécédent de rougeole
+follow children rougeole	Rougeole
+follow children rougeole complication	Rougeole avec complication aux yeux ou à la bouche
+follow children rougeole grave	Rougeole grave et compliqué
+follow children infection chronique	Infection chronique
+follow children infection aigue	Infection aiguë
+follow children mastoidite	Mastoïdïte
+follow children anemie	Anémie
+follow children anemie grave	Anémie grave
+follow children mam	MAM
+follow children mass	MASs
+follow children masc	MASc
+follow children vih pru probable	Infection VIH peu problable
+follow children vih symp suspecte	Infection VIH symptomatique suspecte
+follow children vih exposition	Infection VIH possible / exposition au VIH
+follow children vih symp probable	Infection VIH symptomatique probable
+follow children vih confirmee	Infection VIH confirmée
+follow children vih symp confirmee	Infection VIH symptomatique confirmée
+
+follow children boy paludisme	Nombre d'enfants suivi, garcons avec la classification de paludisme simple
+follow children Nombre d'enfants suivi, filles avec la classification de paludisme simple
+follow children Nombre d'enfants suivi, garcons avec la classification de paludisme grave
+follow children Nombre d'enfants suivi, filles avec la classification de paludisme grave

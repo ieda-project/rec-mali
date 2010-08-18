@@ -3,7 +3,7 @@
     = @query.title
     =# @query.case_status_key
   %h2 Graphique
-  %div!= ziya_chart query_url(@query, format: :xml), size: '950x300'
+  %div.query-graph!= ziya_chart query_url(@query, format: :xml), size: '1200x300'
   %table.results
     %thead
       %tr

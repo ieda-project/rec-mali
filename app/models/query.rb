@@ -7,8 +7,13 @@ class Query < ActiveRecord::Base
   def run
     errors, ar_conditions, ar_params = [], [], []
     conditions = JSON.parse(self.conditions)
-    conditions.each_pair do |k, data|
+    ruby_conds = []
+    conditions.each do |data|
       q_attr, operator, value, type = data['attribute'], data['operator'], data['value'], data['type']
+      if type == 'ruby'
+        ruby_conds << data
+        next
+      end
       klass = self.klass.constantize
       sql = ["id IN (SELECT #{klass.table_name}.id FROM #{klass.table_name}"]
       q_attr.split('.').each do |path_item|
@@ -47,7 +52,7 @@ class Query < ActiveRecord::Base
     else
       self.klass.constantize.all(:conditions => ar_params.reverse.push(ar_conditions).reverse)
     end
-    grs = klass.constantize.group_stats_by(case_status_key, rs)
+    grs = klass.constantize.group_stats_by(case_status_key, rs, ruby_conds)
     update_attribute :last_run_at, Time.now
     return grs, nil
   end
