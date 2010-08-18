@@ -36,8 +36,8 @@ class Child < ActiveRecord::Base
   end
 
   delegate :index, :index_ratio, to: :last_visit, allow_nil: true
-  for name, aka in Diagnostic::INDICES do
-    delegate name, aka, "#{aka}_ratio", to: :last_visit, allow_nil: true
+  for name, ratio in Diagnostic::INDICES do
+    delegate name, ratio, to: :last_visit, allow_nil: true
   end
   
   def self.group_stats_by status, rs

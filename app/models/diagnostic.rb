@@ -95,9 +95,8 @@ class Diagnostic < ActiveRecord::Base
     end
   end
 
-  for name, aka in INDICES
-    alias_method aka, name
-    module_eval "def #{aka}_ratio; index_ratio :#{name}; end", __FILE__, __LINE__
+  for name, ratio in INDICES
+    module_eval "def #{ratio}; index_ratio :#{name}; end", __FILE__, __LINE__
   end
   
   def height= val
