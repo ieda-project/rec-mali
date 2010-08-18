@@ -38,6 +38,6 @@ follow children vih confirmee	Infection VIH confirmée
 follow children vih symp confirmee	Infection VIH symptomatique confirmée
 
 follow children boy paludisme	Nombre d'enfants suivi, garcons avec la classification de paludisme simple
-follow children Nombre d'enfants suivi, filles avec la classification de paludisme simple
-follow children Nombre d'enfants suivi, garcons avec la classification de paludisme grave
-follow children Nombre d'enfants suivi, filles avec la classification de paludisme grave
+follow children girl paludisme	Nombre d'enfants suivi, filles avec la classification de paludisme simple
+follow children boy paludisme grave	Nombre d'enfants suivi, garcons avec la classification de paludisme grave
+follow children girl paludisme grave	Nombre d'enfants suivi, filles avec la classification de paludisme grave

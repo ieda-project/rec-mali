@@ -85,9 +85,9 @@ fr:
     legere: Légère
     severe: Sévère
   indices:
-    weight-age: Poids/Age
-    height-age: Taille/Age
-    weight-height: Poids/Taille
+    weight_age: Poids/Age
+    height_age: Taille/Age
+    weight_height: Poids/Taille
   activerecord:
     errors:
       messages:

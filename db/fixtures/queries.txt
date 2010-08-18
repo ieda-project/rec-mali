@@ -448,4 +448,70 @@
   }]
 }
 
+@follow children boy paludisme
+{
+  "klass":"Child",
+  "case_status":"follow",
+  "conds": [{
+    "type":"boolean",
+    "attribute":"gender",
+    "operator":"=",
+    "value":"true"
+  }, {
+    "type": "ruby",
+    "field": "classifications",
+    "operator": "include?",
+    "value": "Paludisme simple"
+  }]
+}
 
+@follow children girl paludisme
+{
+  "klass":"Child",
+  "case_status":"follow",
+  "conds": [{
+    "type":"boolean",
+    "attribute":"gender",
+    "operator":"=",
+    "value":"false"
+  }, {
+    "type": "ruby",
+    "field": "classifications",
+    "operator": "include?",
+    "value": "Paludisme simple"
+  }]
+}
+
+@follow children boy paludisme grave
+{
+  "klass":"Child",
+  "case_status":"follow",
+  "conds": [{
+    "type":"boolean",
+    "attribute":"gender",
+    "operator":"=",
+    "value":"true"
+  }, {
+    "type": "ruby",
+    "field": "classifications",
+    "operator": "include?",
+    "value": "Maladie fébrile très grave ou paludisme grave"
+  }]
+}
+
+@follow children girl paludisme grave
+{
+  "klass":"Child",
+  "case_status":"follow",
+  "conds": [{
+    "type":"boolean",
+    "attribute":"gender",
+    "operator":"=",
+    "value":"false"
+  }, {
+    "type": "ruby",
+    "field": "classifications",
+    "operator": "include?",
+    "value": "Maladie fébrile très grave ou paludisme grave"
+  }]
+}

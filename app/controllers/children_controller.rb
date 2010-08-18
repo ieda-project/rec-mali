@@ -17,7 +17,7 @@ class ChildrenController < ApplicationController
   def indices
     name = params[:name]
     v, i = @child.index name
-    curve = Index.where(:name => Index::NAMES.index(name)).gender(@child.gender).order(:x).all
+    curve = Index.where(:name => Index::NAMES.index(name.gsub('_', '-'))).gender(@child.gender).order(:x).all
     chart = Ziya::Charts::Line.new
     chart.add :theme, 'pimp'
     labels = curve.map(&:x).map {|e| ((e%6)==0 ? e : '')}
