@@ -45,6 +45,60 @@ class Diagnostic < ActiveRecord::Base
   validates_numericality_of :mac, :only_integer => true
   validates_numericality_of :height, :weight
   validate :validate_answers
+
+  def to_hash
+    returning(sign_answers.to_hash) do |hash|
+      for field in %w(age muac wfa hfa wfh)
+        hash["enfant.#{field}"] = send field
+      end
+    end
+  end
+
+  def muac; mac; end
+
+  def age
+    child.born_on && ((created_at.to_date - child.born_on) / 365).to_i
+  end
+
+  def months
+    child.born_on && ((created_at.to_date - child.born_on) / 365.0 * 12).to_i
+  end
+
+  INDICES = {
+    'weight_age' => 'wfa',
+    'height_age' => 'hfa',
+    'weight_height' => 'wfh' }
+
+  def weight_age
+    [ weight,
+      Index.weight_age.gender(child.gender).near(months) ]
+  end
+
+  def height_age
+    [ height,
+      Index.height_age.gender(child.gender).near(months) ]
+  end
+
+  def weight_height
+    [ weight,
+      Index.weight_height.gender(child.gender).near(height) ]
+  end
+
+  def index name
+    send(name) if INDICES[name.to_s]
+  end
+
+  def index_ratio name
+    if INDICES[name.to_s]
+      val, i = send name
+      (val / i.y * 100).round(0) rescue '-'
+    end
+  end
+
+  for name, aka in INDICES
+    alias_method aka, name
+    module_eval "def #{aka}_ratio; index_ratio :#{name}; end", __FILE__, __LINE__
+  end
   
   def height= val
     write_attribute :height, val.to_s.gsub(',', '.')

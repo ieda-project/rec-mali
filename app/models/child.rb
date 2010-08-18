@@ -24,36 +24,20 @@ class Child < ActiveRecord::Base
   end
 
   def age
-    born_on ? ((Date.today - born_on) / 365).to_i : nil
+    born_on && ((Date.today - born_on) / 365).to_i
   end
   
   def months
-    born_on ? ((Date.today - born_on) / 365.0 * 12).to_i : nil
+    born_on && ((Date.today - born_on) / 365.0 * 12).to_i
   end
   
   def name
     "#{first_name} #{last_name}"
   end
-  
-  def index name
-    return nil unless last_visit
-    val = case name
-    when 'weight-age' then
-      i = Index.weight_age.gender(gender).near(months)
-      last_visit.weight
-    when 'height-age' then
-      i = Index.height_age.gender(gender).near(months)
-      last_visit.height
-    when 'weight-height' then
-      i = Index.weight_height.gender(gender).near(last_visit.height)
-      last_visit.weight
-    end
-    return val, i
-  end
-  
-  def index_ratio name
-    val, i = index name
-    (val / i.y * 100).round(0) rescue '-'
+
+  delegate :index, :index_ratio, to: :last_visit, allow_nil: true
+  for name, aka in Diagnostic::INDICES do
+    delegate name, aka, "#{aka}_ratio", to: :last_visit, allow_nil: true
   end
   
   def self.group_stats_by status, rs

@@ -4,12 +4,12 @@ class Classification < ActiveRecord::Base
   has_and_belongs_to_many :signs
 
   def self.run diag
-    data = diag.sign_answers.to_hash
+    data = diag.to_hash
     all.each { |i| i.run diag, data }
   end
 
   def run diag, data={}
-    if calculate(data || diag.sign_answers.to_hash)
+    if calculate(data || diag.to_hash)
       diag.classifications << self unless diag.classifications.include?(self)
     else
       diag.classifications.delete self
