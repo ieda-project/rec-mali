@@ -29,6 +29,7 @@ Illness.transaction do
   File.open('db/fixtures/signs.txt', 'r') do |f|
     illness, seq = nil, 0
     f.each_line do |line|
+      line.gsub! /#.*$/, ''
       next if line.blank?
       data = line.chomp.strip.split '|'
       if line =~ /\A\s/
@@ -75,6 +76,7 @@ end
 
 File.open('db/fixtures/classifications.txt', 'r') do |f|
   f.each_line do |line|
+    line.gsub! /#.*$/, ''
     next if line.blank?
     illness, name, equation = line.split '|'
     illnesses[illness].classifications.create!(
