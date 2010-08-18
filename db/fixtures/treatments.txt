@@ -10,7 +10,7 @@
 # Expliquer à la mère quand revenir immédiatement,
 # Revoir dans +2 jours+.
 
-[Pas de pneumonie: toux ou rhume]
+[Pas de pneumonie : toux ou rhume]
 # Si la toux  évolue depuis plus +14 jours+, référer le malade pour bilan,
 # Calmer le mal de gorge et la toux avec un +remède inoffensif+,
 # Expliquer à la mère quand revenir immédiatement,
@@ -84,7 +84,7 @@
 # Expliquer à la mère quand revenir immédiatement.
 
 
-[Mastoïdïte]
+[Mastoïdite]
 # Donner la première dose +d’antibiotique+ approprié,
 # Donner la première dose de +paracétamol+ pour calmer la douleur,
 # Transférer *d’URGENCE* à l’hôpital.
