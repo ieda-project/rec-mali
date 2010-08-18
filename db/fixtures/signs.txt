@@ -1,63 +1,59 @@
+﻿## Illness / Signs ##
+
 danger|Signes de danger
-  boire|L’enfant est il capable de boire ou de prendre le sein ?|boolean
-  vomit|L’enfant vomit t’il tout ce qu’il consomme ?|boolean
-  convulsions_passe|L’enfant a-t-il eu  des convulsions ?|boolean
-  lethargie|L'enfant est-il léthargique ou inconscient ?|boolean
-  convulstions_present|L’enfant convulse t-il actuellement ?|boolean
+  boire|Demander si l’enfant est incapable de boire ou de prendre le sein ?|boolean
+  vomit|Demander si l’enfant vomit tout ce qu’il consomme ?|boolean
+  convulsions_passe|Demander si l’enfant a eu des convulsions ?|boolean
+  lethargie|Observer si l’enfant est léthargique ou inconscient ?|boolean
+  convulstions_present|Observer si l’enfant convulse actuellement ?|boolean
 
 toux|Toux
-  enfant_tousse|L'enfant tousse t-il ?|boolean
-  toux_duree|Depuis combien de temps ?|integer|0|100
-  mouvements_respiratoires|Compter les mouvements respiratoires par minute|list|respiration_normale;respiration_rapide
-  tirage_sous_costal|Rechercher un tirage sous-costal|boolean
-  stridor|Regarder et écouter si l’enfant  a un stridor|boolean
-  respiration_sifflante|Rechercher une respiration sifflante|boolean  
+  toux_presence|L'enfant tousse t-il ?|boolean
+  toux_presence_duree|Depuis combien de jours ?|integer
+  mouv_resp|Compter les mouvements respiratoires par minute|list|respiration_normale;respiration_rapide
+  tirage|Rechercher - Y a-t-il un tirage sous-costal ?|boolean
+  stridor|Ecouter - Y a-t-il a un stridor ?|boolean
 
 diarrhee|Diarrhée
-  diarrhee_duree|Depuis combien de temps ?|integer|0|100	
+  diarrhee_presence|L'enfant a-t-il la diarrhée ?|boolean
+  diarrhee_presence_duree|Depuis combien de jours ?|integer
   sang_selles|Y a-t-il du sang dans les selles ?|boolean
-  diarrhee_etat_enfant|L'enfant est-il léthargique ou inconscient? Ou Agité et irritable?|list|none;lethargique_inconscient;agite_irritable
-  yeux_enfonces|Regarder si les yeux de l’enfant sont enfoncés|boolean
+  conscience_agitation|L'enfant est-il normal, agité ou irritable, léthargique ou inconscient ?|list|normal;agite_irritable;lethargique_inconscient
+  yeux_enfonces|Les yeux de l'enfant sont-ils enfoncés ?|boolean
   soif|Offrir à boire à l’enfant : est-il incapable de boire ou boit-il difficilement? Ou  boit-il avidement, est-il assoiffé ?|list|normal;avide;impossible
-  signe_pli|Pincer la peau de l’abdomen. Le pli cutané s’efface-t-il ?|list|normal;lentement;tres_lentement  
+  pli_cutane|Pincer la peau de l’abdomen. Le pli cutané s’efface-t-il: Très lentement (plus de 2 secondes)? Ou lentement ?|list|normal;lentement;tres_lentement
 
 fievre|Fièvre
-  presence_fievre|L'enfant a-t-il de la fièvre (antécédents ou chaud au toucher ou température de 38° C ou plus) ?|boolean
-  fievre_duree|Depuis combien de temps ?|integer|0|100
-  fievre_longue|Si depuis plus de 7 jours, la fièvre a-t-elle été présente tous les jours ?|boolean
-  urines_abondantes|L’enfant émet-il des urines peu abondantes ou foncées (coca cola) ?|boolean	
-  saignements|L’enfant a t-il eu des saignements ?|boolean
-  rougeole_dernierement|L'enfant a-t-il eu la rougeole au cours des 3 derniers mois ?|boolean
-  raideur_nuque|Observer et rechercher une raideur de nuque|boolean
-  palu_ictere|Signes de paludisme grave : Ictère (yeux jaunes) ?|boolean
-  palu_saignements|Signes de paludisme grave : Saignements anormaux ?|boolean
-  palu_urines_foncees|Signes de paludisme grave : Urines foncées|boolean
-  palu_choc|Signes de paludisme grave : Choc (pouls rapide, extrémités froides)|boolean
-  rougeole_eruption|Signe de rougeole lors de la consultation: Eruption généralisée|boolean
-  rougeole_ecoulement_nasal|Signe de rougeole lors de la consultation: Ecoulement nasal|boolean
-  rougeole_yeux_rouges|Signe de rougeole lors de la consultation: Yeux rouges|boolean
-  rougeole_toux|Signe de rougeole lors de la consultation: Toux|boolean
-  yeux_pus|Ecoulement oculaire de pus|boolean
-  ulcerations|Ulcérations dans la bouche|boolean
-  ulcerations_profondes|Ulcérations profondes ou étendues dans la bouche|boolean
-  opacite_cornee|Opacité de la cornée|boolean
+  fievre_presence|L'enfant a-t-il de la fièvre (antécédents ou chaud au toucher ou température de 38° C ou plus) ?|boolean
+  fievre_presence_duree|Depuis combien de jours ?|integer
+  fievre_presence_longue|Si depuis plus de 7 jours, la fièvre a-t-elle été présente tous les jours ?|boolean
+  urines_foncees|Signes de paludisme grave : L'enfant a t-il les urines foncées (Coca-Cola) ?|boolean
+  saignements_anormaux|Signes de paludisme grave : L’enfant a t-il eu des saignements ?|boolean
+  raideur_nuque|Signes de paludisme grave : Observer et rechercher une raideur de nuque|boolean
+  ictere|Signes de paludisme grave : L'enfant a-t-il un ictère (yeux jaunes) ?|boolean
+  choc|Signes de paludisme grave : L'enfant est-il en choc (pouls rapide, extrémités) ?|boolean
+  eruption_cutanee|Signe de rougeole : L'enfant a-t-il une éruption généralisée de type rougeole ou eu une rougeole au cours des 3 derniers mois ?|list|aucun;eruption;antecedent
+  ecoulement_nasal|Signe de rougeole : L'enfant a-t-il un ecoulement nasal ?|boolean
+  yeux_rouge|Signe de rougeole : L'enfant a-t-il les yeux rouges ?|boolean
+  ecoulement_oculaire|Signe de rougeole : L'enfant a-t-il un écoulement oculaire de pus ?|boolean
+  ulcerations|Signe de rougeole : L'enfant a-t-il des ulcérations dans la bouche ?|list|absentes;presentes;profondes_etendues
+  cornee|Signe de rougeole : L'enfant a-t-il une opacité de la cornée ?|boolean
 
 oreille|Affection de l'oreille
-  mal|L'enfant a-t-il mal aux oreilles ?|boolean
-  ecoulement|Y-a-t-il un écoulement ?|boolean
-  duree_ecoulement|Si oui, depuis combien de temps ?|integer|0|100
-  pus_ecoulement|Regarder si du pus coule d’une oreille|boolean
-  gonflement|Rechercher un gonflement douloureux derrière l’oreille|boolean
-  
-anemie|Amémie
-  paleur_palmaire|Observer et rechercher la pâleur palmaire|list|absente;legere;severe
-  
-nutrition|Etat nutritionel
-  amaigrissement|Rechercher un amaigrissement visible et sévère|boolean
-  oedemes|Rechercher des oedèmes au niveau des deux pieds|list|no;yes+;yes++;yes+++
-  poids_age|Le poids pour l'âge est-il très faible ?|boolean
+  oreille_probleme|L'enfant a-t-il un problème à l'oreille ?|boolean
+  oreille_douleur|L'enfant a-t-il mal aux oreilles ?|boolean
+  oreille_ecoulement|Y-a- t-il un écoulement de pus ?|boolean
+  oreille_ecoulement_duree|Si oui, depuis combien de jour ?|integer
+  oreille_gonflement|Rechercher un gonflement douloureux derrière l’oreille|boolean
 
-vih|VIH  
+anemie|Anémie
+  paleur_palmaire|Observer et rechercher la pâleur palmaire|list|absente;legere;severe
+
+malnutrition|Etat nutrotionnel
+  oedemes|Rechercher des oedèmes au niveau des deux pieds|list|no;yes+;yes++;yes+++
+  test_appetit|Test d'appetit|list|pas_indique;negatif;positif
+
+vih|VIH
   serologie_enfant|Sérologie de l'enfant|list|inconnue;positive;negative
   test_enfant|Test virologique pour l'enfant|list|pas_de_test;positif;negatif
   pneumonie_recidivante|Pneumonie récidivante|boolean
@@ -65,4 +61,5 @@ vih|VIH
   candidose_buccale|Candidose buccale|boolean
   hypertrophie_ganglions_lymphatiques|Hypertrophie des ganglions lymphatiques et palpables à plus d’un endroit|boolean
   augmentation_glande_parotide|Augmentation du volume de la glande parotide|boolean
+  test_mere|Test virologique pour la mère|list|pas_de_test;positif;negatif
   serologie_mere|Sérologie de la mère|list|inconnue;positive;negative
