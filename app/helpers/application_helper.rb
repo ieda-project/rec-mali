@@ -26,14 +26,7 @@ module ApplicationHelper
 
   def age d
     months = ((Date.today - d).to_f / 365.25 * 12).round
-    if months < 24
-      "#{months} mois"
-    elsif months < 120
-      years, mod = months.divmod 12
-      "#{years}#{mod >= 6 ? '½' : ''} ans"
-    else
-      "#{months / 12} ans"
-    end
+    "#{months} mois"
   end
   
   def errors_on form, field

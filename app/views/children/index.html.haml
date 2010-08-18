@@ -14,7 +14,7 @@
       %label Nom
       = f.text_field :name
     .select
-      %label Date de naissance
+      %label Année de naissance
       = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => '-', :selected => ((params[:q] ? params[:q][:born_on] : nil)).to_i
     .select
       %label Village
