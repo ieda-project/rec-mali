@@ -1,0 +1,27 @@
+<%= chart :line %>
+  <%=comp :chart_pref %>
+    point_shape: none
+    line_thickness: 2
+  
+  <%=comp :chart_border %>
+    top_thickness: 0
+    bottom_thickness: 1
+    left_thickness: 1
+    color: 000000
+    right_thickness: 0
+
+  <%=comp :chart_note %>
+    x: 0
+    y: -30
+    size: 12
+    background_color: 007ec5
+    background_alpha: 255
+    shadow: 
+
+  <%=comp :axis_category %>
+    size: 11
+
+  <%=comp :axis_value %>
+    size: 12
+
+  

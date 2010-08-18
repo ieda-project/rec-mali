@@ -1,7 +1,7 @@
 class Index < ActiveRecord::Base
   enum :name, %w{weight-age height-age weight-height}
   
-  validates_presence_of :name, :x, :y, :for_boys
+  validates_presence_of :name, :x, :y
   validates_numericality_of :x, :y
   
   NAMES.each_with_index do |name, i|
@@ -14,5 +14,9 @@ class Index < ActiveRecord::Base
     
   def self.near arg
     find(:first, :order => "abs(x - #{arg.to_f})")
+  end
+  
+  def for_girls?
+    not for_boys?
   end
 end

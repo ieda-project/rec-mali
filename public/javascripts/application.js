@@ -350,6 +350,13 @@ Element.behaviour(function() {
              '&domid=' + this.get('id')}))
     transient.open(obj, { width: 300 })
   })
+  
+  this.getElements('.ratios li').addEvent('click', function(e) {
+    if (this.hasClass('disabled'))
+      return;
+    var graph = this.getElement('div.graph').clone()
+    transient.open(graph, { width: 420 })
+  })
 
   
   this.getElements('.editable').each(function (div) {

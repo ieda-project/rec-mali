@@ -35,6 +35,27 @@ class Child < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
   
+  def index name
+    return nil unless last_visit
+    val = case name
+    when 'weight-age' then
+      i = Index.weight_age.gender(gender).near(months)
+      last_visit.weight
+    when 'height-age' then
+      i = Index.height_age.gender(gender).near(months)
+      last_visit.height
+    when 'weight-height' then
+      i = Index.weight_height.gender(gender).near(last_visit.height)
+      last_visit.weight
+    end
+    return val, i
+  end
+  
+  def index_ratio name
+    val, i = index name
+    (val / i.y * 100).round(0) rescue '-'
+  end
+  
   def self.group_stats_by status, rs
     m = self.minimum(:created_at)
     return {} if m.nil?

@@ -2,6 +2,8 @@ class DiagnosticsController < ApplicationController
   login_required
   before_filter :fetch_child
   before_filter :fetch, only: [ :show, :wait, :treatments, :calculations, :edit, :update ]
+  helper Ziya::HtmlHelpers::Charts
+  helper Wopata::Ziya::HtmlHelpersFix
 
   def show?
     %w(show treatments).include? params[:action]

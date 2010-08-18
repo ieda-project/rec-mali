@@ -45,6 +45,7 @@ div#alert
   -webkit-box-shadow: 0 1px 0.5em rgba(0, 0, 0, 0.6)
   -webkit-border-radius: 3px
   padding: 25px 10px 5px 10px
+  overflow: hidden
   .close-transient
     position: absolute
     top: 0px
@@ -63,6 +64,12 @@ div#alert
   .close-transient:hover
     background-color: #f00
     -webkit-box-shadow: 0 0 7px rgba(255, 0, 0, 1)
+  .graph
+    margin: -40px -40px -20px -50px !important
+  h2
+    position: absolute
+    top: 1em
+    left: 1em
 #transient, section
   *:first-child
     margin-top: 0
@@ -380,8 +387,6 @@ nav a
     float: left
     cursor: pointer
   .ratios
-    border-top: 2px solid #E6E6E6
-    padding: 10px 0 0
     overflow: hidden
     clear: both
     h3
@@ -403,11 +408,11 @@ nav a
         border: 2px solid #E6E6E6
         -webkit-border-radius: 6px
         float: left
-        padding: 10px 0
+        padding: 3px 0
+        cursor: pointer
         &:hover
-          background: !link
-          border-color: #00649c
-          cursor: pointer
+          background: #3a3
+          border-color: #080
           strong, span
             color: white
         &.alert
@@ -418,12 +423,31 @@ nav a
             background: #c00
             strong, span
               color: white
+        &.warning
+          strong, span
+            color: #f80
+          &:hover
+            border-color: #d70
+            background: #f80
+            strong, span
+              color: white
+        &.disabled
+          cursor: default !important
+          strong, span
+            color: #888
+          &:hover
+            border-color: #E6E6E6
+            background: #f5f4f4
         span
           display: block
-          color: !link
+          float: left
+          padding: 5px 20px
+          color: #3a3
         strong
           font-size: 1.6em
-          color: !link
+          color: #3a3
+        div.graph
+          display: none
         &:last-child
           margin: 0
 
@@ -490,11 +514,9 @@ section
     
 .profile-child section, section.consultation, section.resume
   div.vaccinations
-    border-top: 2px solid #E6E6E6
     clear: both
-    margin: 15px 0 0
+    margin: 10px 0 0
     overflow: hidden
-    padding: 10px 0 0
     color: #666
     input
       margin: 0 0 0 5px

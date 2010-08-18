@@ -1,6 +1,8 @@
 class ChildrenController < ApplicationController
   login_required
-  fetch 'Child'
+  fetch 'Child', :also => :indices
+  helper Ziya::HtmlHelpers::Charts
+  helper Wopata::Ziya::HtmlHelpersFix
 
   Search = Struct.new(:name, :born_on, :village_id)
 
@@ -10,6 +12,31 @@ class ChildrenController < ApplicationController
     @q = Search.from_hash params[:q]
     @children = model.search(@q, params[:o], params[:d])
     @page = (params[:page] || '1').to_i
+  end
+
+  def indices
+    name = params[:name]
+    v, i = @child.index name
+    curve = Index.where(:name => Index::NAMES.index(name)).gender(@child.gender).order(:x).all
+    chart = Ziya::Charts::Line.new
+    chart.add :theme, 'pimp'
+    labels = curve.map(&:x).map {|e| ((e%6)==0 ? e : '')}
+    chart.add :axis_category_text, labels
+    chart.add(:series, '', curve.map do |c|
+      {:value => c.y}
+    end)
+    chart.add(:series, '', curve.map do |c|
+      if c == i
+        {:value => v,
+         :note => @child.name,
+         :note_x => (i.x > (curve.last.x / 2) ? -15 : 15),
+         :note_y => (v > (curve.last.y / 2) ? 30 : -30),
+         :tooltip => v}
+      else
+        {}
+      end
+    end)
+    render xml: chart.to_xml
   end
 
   def show

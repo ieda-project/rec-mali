@@ -116,7 +116,8 @@ Index::NAMES.each do |name|
         f.each_line do |line|
           next if line.blank?
           x, y = line.split ','
-          Index.create(:x => x, :y => y, :for_boys => (gender == 'boys'), :name => Index::NAMES.index(name))
+          i = Index.new(:x => x, :y => y, :for_boys => (gender == 'boys'), :name => Index::NAMES.index(name))
+          puts i.errors unless i.save
         end
       end
     rescue => e

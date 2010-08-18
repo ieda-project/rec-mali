@@ -1,0 +1,14 @@
+- v = @child.index_ratio(name)
+- if v.is_a? Float
+  - style = :warning if v < 80
+  - style = :alert if v < 60
+- else
+  - style = :disabled
+%li{:class => style}
+  %span= t(name, :scope => :indices)
+  %strong
+    = v
+    = '%'
+  %div.graph
+    %h2= t(name, :scope => :indices)
+    != ziya_chart indices_child_path(@child, :name => name,:format => :xml), :size => '500x400'

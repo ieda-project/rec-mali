@@ -12,7 +12,12 @@ Csps::Application.routes.draw do |map|
   end
 
   resources :children do
-    post :temp, on: :collection
+    member do
+      get :indices
+    end
+    collection do 
+      post :temp
+    end
     resources :diagnostics do
       member do
         get :treatments, :wait

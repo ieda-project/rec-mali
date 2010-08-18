@@ -84,6 +84,10 @@ fr:
     absente: Absente
     legere: Légère
     severe: Sévère
+  indices:
+    weight-age: Poids/Age
+    height-age: Taille/Age
+    weight-height: Poids/Taille
   activerecord:
     errors:
       messages:

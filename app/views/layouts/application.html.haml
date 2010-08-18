@@ -11,12 +11,11 @@
       = yield :header
       - if back?
         %nav#prev= link_to back_title, back_url
-      - unless respond_to? :ziya_chart
-        = form_tag session_path, method: 'delete' do
-          Agent:
-          %strong= current_user.login
-          | CSPS:
-          %strong= current_user.name
-          %button.confirm(type="submit" data-confirm="Etes vous sûr de vouloir vous déconnecter ?") Logout
+      = form_tag session_path, method: 'delete' do
+        Agent:
+        %strong= current_user.name
+        | CSPS:
+        %strong= Csps.site
+        %button.confirm(type="submit" data-confirm="Etes vous sûr de vouloir vous déconnecter ?") Logout
 
     = yield

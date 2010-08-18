@@ -4,6 +4,7 @@ class QueriesController < ApplicationController
   login_required
   fetch 'Query'
   helper Ziya::HtmlHelpers::Charts
+  helper Wopata::Ziya::HtmlHelpersFix
 
   require "spreadsheet/excel" 
   
@@ -27,20 +28,5 @@ class QueriesController < ApplicationController
         render xml: chart.to_xml
       end
     end
-  end
-
-  def export
-    @query = Query.find(params[:id])
-    @results, errors = @query.run
-    report = StringIO.new
-    workbook = Spreadsheet::Excel.new(report)
-    worksheet = workbook.add_worksheet(_(@query.title))
-    worksheet.write(0, 0, _(@query.title))
-    @results.keys.sort.reverse.each_with_index do |k, i|
-      worksheet.write(i+1, 0, k)
-      worksheet.write(i+1, 1, @results[k])
-    end
-    workbook.close
-    send_data report.string, :filename => 'report_query_'+params[:id]+'_.xls', :content_type => "application/xls" 
   end
 end
