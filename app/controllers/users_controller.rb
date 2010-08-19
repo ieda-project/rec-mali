@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.new params[:user]
     if @user.save
       persist_user_into_session @user
-      see_other children_path
+      see_other users_path
     else
       render action: 'new'
     end

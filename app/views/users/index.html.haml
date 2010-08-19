@@ -1,8 +1,8 @@
 %nav
-  = link_to 'Nouveau utilisateur', new_user_path, :class => 'new-user'
+  = link_to 'Nouvel utilisateur', new_user_path, :class => 'new-user'
 
 %section
-  %h1 Users
+  %h1 Utilisateurs
   %table.results
     %thead
       %tr
@@ -10,5 +10,6 @@
         %th Login
     %tbody
       - for user in @users do
-        %td= link_to user.name, [ :edit, user ]
-        %td= user.login
+        %tr
+          %td= link_to user.name, [ :edit, user ]
+          %td= user.login

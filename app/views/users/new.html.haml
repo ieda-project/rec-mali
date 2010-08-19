@@ -1,4 +1,5 @@
 #user-session
-  %h1 Inscription
-  %p Bienvenue sur CSPS. Créer un centre. 
+  %h1 Nouvel utilisateur
+  - unless logged_in?
+    %p Bienvenue sur CSPS. Créer un centre. 
   = partial 'new'
