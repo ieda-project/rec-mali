@@ -119,40 +119,14 @@ window.addEvent('domready', function() {
             ul.inject(section) }})
         if (next = document.getElement('link[rel=next]')) window.location = next.href }}).post() }
 
+  /* ILLNESSES */
+
   illnesses = document.getElements('form.diagnostic section.illness')
   if (illnesses[0]) {
     var form = document.getElement('form.diagnostic')
+    test = form.tree = {}
     var button = form.getElement('button[type=submit]').addClass('disabled')
     var first = null
-    illnesses.each(function(i) {
-      i.getElement('h2').addEvent('click', function() {
-        alert_fill()
-      })
-      i.getElements('input[type=text]').each(function(input) {
-        tr = input.getParent('tr')
-        if (tr = tr.getPrevious()) {
-          if (select = tr.getElement('select')) {
-            select.addEvent('change', function(e) {
-              if (this.selectedIndex < 2) {
-                input.saved = input.value
-                input.value = ''
-                input.disabled = true
-                input.fallback = new Element('input', {type: 'hidden', id: input.id, name: input.name, value: '0'})
-                input.fallback.inject(input.getParent('tr'))
-              } else {
-                if (input.disabled == true)
-                  input.value = input.saved
-                input.disabled = false
-                if (input.fallback) {
-                  input.fallback.dispose()
-                }
-              }
-            })
-            select.fireEvent('change')
-          }
-        }
-      })
-    })
 
     var measurements_valid = true
     function open_illness(illness, scroll) {
@@ -285,6 +259,40 @@ window.addEvent('domready', function() {
     illnesses.each(function (i,j) {
       i.addClass('closed')
       i.fields = i.getElements('input[type=text], input[type=radio], select')
+      i.getElement('h2').addEvent('click', function() { alert_fill() })
+      var obj = form.tree[i.get('data-key')] = {}
+      function copy_value(sign) {
+        if (typeof(sign.checked) == 'undefined' || sign.checked) obj[sign.get('data-key')] = sign.value
+      }
+      i.fields.each(function(s) {
+        copy_value(s)
+        if(s.get('data-dep')) {
+          s.dep = new Function('data', 'oui', 'non', 'try { return('+s.get('data-dep')+') } catch(err) { console.log("Dependency error: "+err); return false }')
+        } else {
+          s.dep = function() { return true }
+        }
+      })
+
+      function run_deps() {
+        i.fields.each(function (s) {
+          s.disabled = !s.dep(form.tree, '1', '0')
+          var td = s.getParent()
+          td.getParent().setStyle('display', s.disabled ? 'none' : 'table-row')
+          if (s.disabled) {
+            if (!td.ghost) td.ghost = new Element('input', { type: 'hidden', name: s.name, value: '' }).inject(td)
+          } else if (s.ghost) {
+            td.ghost.dispose()
+            delete td.ghost
+          }
+        })
+      }
+
+      i.fields.addEvent('change', function() {
+        copy_value(this)
+        run_deps()
+      })
+      run_deps()
+
       if (!first && i.getElement('.fieldWithErrors')) first = i
 
       if (illnesses[j+1]) {

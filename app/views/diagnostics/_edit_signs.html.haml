@@ -1,6 +1,6 @@
 - count = 0
 - for i in Illness.order(:sequence) do
-  %section.illness{'data-classify-href' => classification_illness_path(i)}
+  %section.illness{'data-classify-href' => classification_illness_path(i), 'data-key' => i.key}
     %h2
       = i.name
       - cs = i.classifications
