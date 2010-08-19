@@ -16,7 +16,12 @@ class ChildrenController < ApplicationController
 
   def indices
     name = params[:name]
-    v, i = @child.index name
+    diag = Diagnostic.find(params[:diagnostic]) if params[:diagnostic].present?
+    if diag
+      v, i = diag.index name
+    else
+      v, i = @child.index name
+    end
     curve = Index.where(:name => Index::NAMES.index(name.gsub('_', '-'))).gender(@child.gender).order(:x).all
     chart = Ziya::Charts::Line.new
     chart.add :theme, 'pimp'

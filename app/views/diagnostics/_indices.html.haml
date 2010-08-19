@@ -1,0 +1,7 @@
+- diagnostic ||= nil
+.ratios{:href => indices_child_diagnostics_path(@child)}
+  %ul
+    = render :partial => 'diagnostics/index', :locals => {:name => 'weight_height', :diagnostic => diagnostic}
+    = render :partial => 'diagnostics/index', :locals => {:name => 'height_age', :diagnostic => diagnostic}
+    = render :partial => 'diagnostics/index', :locals => {:name => 'weight_age', :diagnostic => diagnostic}
+

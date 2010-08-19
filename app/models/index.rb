@@ -1,6 +1,9 @@
 class Index < ActiveRecord::Base
   enum :name, %w{weight-age height-age weight-height}
   
+  WARNING = {'weight_age' => 80, 'height_age' => 90, 'weight_height' => 80}
+  ALERT = {'weight_age' => 60, 'height_age' => 85, 'weight_height' => 70}
+  
   validates_presence_of :name, :x, :y
   validates_numericality_of :x, :y
   

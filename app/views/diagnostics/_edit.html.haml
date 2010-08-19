@@ -11,11 +11,6 @@
         %strong Village : #{@child.village.try(:name) || '-'}
 
     .measurements= partial 'diagnostics/edit_measurements', locals: { form: form }
-    .ratios
-      %ul
-        = render :partial => 'children/index', :locals => {:name => 'weight_age'}
-        = render :partial => 'children/index', :locals => {:name => 'height_age'}
-        = render :partial => 'children/index', :locals => {:name => 'weight_height'}
     .vaccinations
       %h3 Vaccinations :
       - form.fields_for :child do |fields|

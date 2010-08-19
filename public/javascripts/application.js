@@ -253,6 +253,44 @@ window.addEvent('domready', function() {
     }
     var head_inputs = document.getElements('.profile-child input[type=text]')
     var head_next = document.getElement('.profile-child .next button')
+    var last_indices_params = null
+    function refresh_indices() {
+      var indices = document.getElement('div.ratios')
+      var href = indices.get('href')
+      // get params for indices computation
+      if (href.indexOf("children/-1") != -1) {
+        // new child
+        var params = new Hash({
+          height: $('child_diagnostic_height').value,
+          weight: $('child_diagnostic_weight').value,
+          gender: $('child_gender').value,
+          day: $('child_born_on_3i').value,
+          month: $('child_born_on_2i').value,
+          year: $('child_born_on_1i').value
+        })
+      } else {
+        // existing child
+        var params = new Hash({
+          height: $('diagnostic_height').value,
+          weight: $('diagnostic_weight').value
+        })
+      }
+      // Test if params changed
+      if (last_indices_params && params.every(function(value, key) {
+        return last_indices_params[key] == value
+      })) {
+        // no changes
+        return false
+      } else {
+        // params changed
+        last_indices_params = params
+      }
+      // replace with new values
+      new Request.HTML({
+        url: href,
+        update: indices
+      }).get(params)
+    }
     function validate_measurements() {
       var was_valid = measurements_valid
       measurements_valid = head_inputs.every(function(i) {
@@ -266,10 +304,13 @@ window.addEvent('domready', function() {
           return i.value.match(/[^ ]/)
         }
       })
+      if (measurements_valid) {
+        refresh_indices()
+      }
       if (!was_valid && measurements_valid) {
         head_next.setStyle('visibility', 'visible')
         head_next.removeClass('disabled')
-        // AJAX for indices
+        refresh_indices()
       } else if (was_valid && !measurements_valid) {
         illnesses.each(function(i) { i.addClass('closed') })
         head_next.setStyle('visibility', 'visible')
@@ -285,7 +326,7 @@ window.addEvent('domready', function() {
         open_illness(illnesses[0], false)
         head_next.setStyle('visibility', 'hidden')
       }})
-    validate_measurements.periodical(500)
+    validate_measurements.periodical(100)
 
     illnesses.each(function (i,j) {
       i.addClass('closed')
