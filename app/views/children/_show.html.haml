@@ -1,7 +1,8 @@
 %span.name= child.name
 %p
   %strong #{child.gender ? 'Né' : 'Née'} le :
-  #{l child.born_on}, #{age child.born_on}
+  %span.age{'data-years' => age_in_years(child.born_on)}
+    #{l child.born_on}, #{textual_age child.born_on}
   %br/
   %strong Village : 
   #{child.village.try(:name) || '-'}
