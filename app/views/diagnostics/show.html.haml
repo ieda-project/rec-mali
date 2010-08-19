@@ -13,6 +13,10 @@
     = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
 
 %section.resume
+  .measurements
+    %h2 Mesures lors du diagnostique
+    = partial 'children/measurements', locals: { diagnostic: @diagnostic }
+    = render :partial => 'diagnostics/indices', locals: { diagnostic: @diagnostic }
   - if @diagnostic.failed_classifications.try :any?
     %section.warning
       %h3 Les classifications suivante on échoués:

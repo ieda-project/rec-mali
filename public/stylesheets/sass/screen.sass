@@ -68,7 +68,7 @@ div.query-graph
     -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6)
   .close-transient:hover
     background-color: #f00
-    -webkit-box-shadow: 0 0 7px rgba(255, 0, 0, 1)
+    -webkit-box-shadow: 0 0 7px rgba(255, 0, 0, 0.8)
   .graph
     margin: -40px -40px -20px -50px !important
   h2
@@ -386,73 +386,6 @@ nav a
     margin: 10px 0 0 13px
     float: left
     cursor: pointer
-  .ratios
-    overflow: hidden
-    clear: both
-    h3
-      display: block
-      color: #666
-      font-size: 1.1em
-    ul
-      display: block
-      margin: 0
-      padding: 0
-      list-style: none
-      overflow: hidden
-      clear: both
-      li
-        width: 247px
-        text-align: center
-        margin: 0 20px 0 0
-        background: #f5f4f4
-        border: 2px solid #E6E6E6
-        -webkit-border-radius: 6px
-        float: left
-        padding: 3px 0
-        cursor: pointer
-        &:hover
-          background: #3a3
-          border-color: #080
-          strong, span
-            color: white
-        &.alert
-          strong, span
-            color: #c00
-          &:hover
-            border-color: #900
-            background: #c00
-            strong, span
-              color: white
-        &.warning
-          strong, span
-            color: #f80
-          &:hover
-            border-color: #d70
-            background: #f80
-            strong, span
-              color: white
-        &.disabled
-          cursor: default !important
-          strong, span
-            color: #888
-          &:hover
-            border-color: #E6E6E6
-            background: #f5f4f4
-        span
-          display: block
-          float: left
-          padding: 0px 20px
-          color: #3a3
-          font-size: 1.3em
-          line-height: 25px
-        strong
-          line-height: 25px
-          font-size: 1.6em
-          color: #3a3
-        div.graph
-          display: none
-        &:last-child
-          margin: 0
 
   section
     float: right
@@ -512,8 +445,33 @@ nav a
 
 section
   &.consultation, &.resume
-    .measurements
-      margin: 10px 0 0 
+    div.measurements
+      float: none
+      width: auto
+      table
+        float: left
+        border-bottom: 2px solid #e6e6e6
+        -webkit-border-bottom-left-radius: 4px
+        td, th
+          height: auto
+      .ratios
+        float: right
+        clear: none
+        -webkit-border-top-right-radius: 4px
+        ul
+          border-bottom-left-radius: 0
+          border-left: none
+          li
+            &.weight_age
+              width: 169px
+            &.height_age
+              width: 169px
+            &.weight_height
+              width: 170px
+      &:after
+        display: block
+        content: ""
+        clear: both
     
 .profile-child section, section.consultation, section.resume
   div.vaccinations
@@ -545,6 +503,7 @@ section
   .measurements
     width: 440px
     float: right
+    margin-bottom: 10px
     h2
       background = !bg_th
       color = !color_th
@@ -559,7 +518,7 @@ section
       line-height: normal
     p, ul
       display: block
-      border: 2px solid #efefef
+      border: 2px solid #e6e6e6
       border-top: 0
       margin: 0
       -webkit-border-bottom-left-radius: 4px
@@ -570,10 +529,9 @@ section
       background: white
       border: 2px solid #e6e6e6
       border-top: 0
+      border-bottom: 1px solid #e6e6e6
       padding: 7px 0 5px
       margin: 0
-      -webkit-border-bottom-left-radius: 4px
-      -webkit-border-bottom-right-radius: 4px
       width: 440px !important
       th
         color: #666
@@ -595,7 +553,63 @@ section
         color: #9ebbcc
         font-style: normal
       input[type=text]
-        width: 30px  
+        width: 30px
+    .ratios
+      overflow: hidden
+      clear: both
+      h3
+        display: block
+        color: #666
+        font-size: 1.1em
+      ul
+        padding: 0
+        display: block
+        margin: 0
+        padding: 7px 0
+        list-style: none
+        overflow: hidden
+        clear: both
+        li
+          width: 144px
+          text-align: center
+          background: white
+          border-right: 2px solid #E6E6E6
+          float: left
+          cursor: pointer
+          text-align: middle
+          color: !link
+          &.weight_age
+            width: 137px
+          &.height_age
+            width: 142px
+          &.weight_height
+            width: 153px
+          span
+            font-size: 1.1em
+            font-weight: bold
+          strong
+            font-size: 1.3em
+            color: #3a3
+            font-weight: normal
+          div.graph
+            display: none
+          &:last-child
+            border-right: none
+          &:hover
+            text-decoration: underline
+            strong
+          &.alert
+            strong
+              color: #c00
+            &:hover
+          &.warning
+            strong
+              color: #f80
+            &:hover
+          &.disabled
+            cursor: default !important
+            strong
+              color: #888
         
 section
   /* One section is 960px wide

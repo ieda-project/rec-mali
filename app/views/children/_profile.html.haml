@@ -8,13 +8,9 @@
       %h2 Dernières mesures
       - if @child.last_visit
         = partial 'children/measurements', locals: { diagnostic: @child.last_visit }
+        = render :partial => 'diagnostics/indices', locals: { diagnostic: @child.last_visit }
       - else
         %p Never measured.
-    .ratios
-      %ul
-        = render :partial => 'children/index', :locals => {:name => 'weight_age'}
-        = render :partial => 'children/index', :locals => {:name => 'height_age'}
-        = render :partial => 'children/index', :locals => {:name => 'weight_height'}
     .vaccinations
       %h3 Vaccinations :
       %ul

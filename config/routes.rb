@@ -23,6 +23,9 @@ Csps::Application.routes.draw do |map|
         get :treatments, :wait
         post :calculations
       end
+      collection do
+        get :indices
+      end
     end
   end
 

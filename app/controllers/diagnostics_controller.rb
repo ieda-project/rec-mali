@@ -1,6 +1,6 @@
 class DiagnosticsController < ApplicationController
   login_required
-  before_filter :fetch_child
+  before_filter :fetch_child, :except => :indices
   before_filter :fetch, only: [ :show, :wait, :treatments, :calculations, :edit, :update ]
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
@@ -19,6 +19,24 @@ class DiagnosticsController < ApplicationController
 
   def treatments
     back 'Consultation', [ @child, @diagnostic ]
+  end
+
+  def indices
+    weight = params[:weight].to_i
+    height = params[:height].to_i
+    if params[:child_id] == '-1' # New child
+      age = ((Date.today - Date.civil(params[:year].to_i, params[:month].to_i, params['day'].to_i)) / 365.0 * 12).to_i
+      gender = (params[:gender] == '1')
+    else
+      child = Child.find(params[:child_id]) if params[:child_id].present?
+      age = child.months
+      gender = child.gender
+    end
+    @values = {}
+    @values['weight_age'] = (weight / Index.weight_age.gender(gender).near(age).y * 100).round(0) rescue '-'
+    @values['height_age'] = (height / Index.height_age.gender(gender).near(age).y * 100).round(0) rescue '-'
+    @values['weight_height'] = (weight / Index.weight_height.gender(gender).near(height).y * 100).round(0) rescue '-'
+    render :partial => 'indices'
   end
 
   def calculations
