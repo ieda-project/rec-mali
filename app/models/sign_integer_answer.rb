@@ -5,4 +5,8 @@ class SignIntegerAnswer < SignAnswer
     integer_value
   end
   alias raw_value value
+  
+  def self.cast v
+    v.to_i
+  end
 end

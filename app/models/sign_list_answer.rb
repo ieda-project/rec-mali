@@ -15,4 +15,8 @@ class SignListAnswer < SignAnswer
   def validate_list_value
     errors[:list_value] << :inclusion unless sign.options.include? list_value
   end
+  
+  def self.cast v
+    v.to_s
+  end
 end

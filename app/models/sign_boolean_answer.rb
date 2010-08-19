@@ -12,4 +12,8 @@ class SignBooleanAnswer < SignAnswer
   def raw_value
     boolean_value
   end
+  
+  def self.cast v
+    %w(t true oui vrai).include? v
+  end
 end

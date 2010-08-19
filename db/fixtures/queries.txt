@@ -515,3 +515,27 @@
     "value": "Maladie fébrile très grave ou paludisme grave"
   }]
 }
+
+@follow children fievre 14
+{
+  "klass":"Child",
+  "case_status":"follow",
+  "conds": [{
+    "type": "ruby",
+    "field": "sign_answers[fievre_presence_duree]",
+    "operator": ">",
+    "value": 14
+  }]
+}
+
+@follow children ulcerations
+{
+  "klass":"Child",
+  "case_status":"follow",
+  "conds": [{
+    "type": "ruby",
+    "field": "sign_answers[ulcerations]",
+    "operator": "!=",
+    "value": "absentes"
+  }]
+}

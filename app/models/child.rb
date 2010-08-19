@@ -46,12 +46,26 @@ class Child < ActiveRecord::Base
     d1 = m.beginning_of_month
     d2 = d1.next_month.to_date
     grs = {}
+    signs = {}
     while Date.today.next_month.beginning_of_month >= d2
       diagnosticed = Diagnostic.between(d1, d2).includes(:classifications).all
       conds.each do |cond|
         case cond['field']
         when 'classifications' then
           diagnosticed = diagnosticed.select {|d| d.classifications.map(&:name).send(cond['operator'], cond['value'])}
+        when /sign_answers\[\w+\]/ then
+          # get wanted sign (with caching)
+          sign_key = cond['field'].scan(/sign_answers\[(\w+)\]/).first.first
+          signs[sign_key] ||= Sign.find_by_key(sign_key)
+          # get answer
+          diagnosticed = diagnosticed.select do |d|
+            answer = d.sign_answers.find_by_sign_id(signs[sign_key].id)
+            if answer
+              answer.raw_value.send(cond['operator'], answer.class.cast(cond['value']))
+            else
+              false
+            end
+          end
         end
       end
       diagnosticed = diagnosticed.map &:child_id
