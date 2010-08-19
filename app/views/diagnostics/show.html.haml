@@ -1,7 +1,11 @@
 = partial 'children/profile'
 
 %h2.em.show
-  = partial 'header', locals: { diagnostic: @diagnostic }
+  %strong
+    = l(@diagnostic.done_on.getlocal, :format => :diagnostic)
+    (#{t(:from, :scope => :datetime)}
+    #{time_ago_in_words(@diagnostic.done_on)})
+  %span.by Consultation réalisée par #{@diagnostic.author.name}
 
 %nav
   = link_to 'Editer', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
