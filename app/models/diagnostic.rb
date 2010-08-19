@@ -56,12 +56,16 @@ class Diagnostic < ActiveRecord::Base
 
   def muac; mac; end
 
+  def reference_date
+    created_at ? created_at.to_date : Date.today
+  end
+
   def age
-    child.born_on && ((created_at.to_date - child.born_on) / 365).to_i
+    child.born_on && ((reference_date - child.born_on) / 365).to_i
   end
 
   def months
-    child.born_on && ((created_at.to_date - child.born_on) / 365.0 * 12).to_i
+    child.born_on && ((reference_date - child.born_on) / 365.0 * 12).to_i
   end
 
   INDICES = {

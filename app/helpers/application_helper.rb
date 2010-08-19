@@ -24,9 +24,15 @@ module ApplicationHelper
     RedCloth.new(textile).to_html
   end
 
-  def age d
-    months = ((Date.today - d).to_f / 365.25 * 12).round
+  def textual_age d, ref=nil
+    ref ||= Date.today
+    months = ((ref - d).to_f / 365.25 * 12).round
     "#{months} mois"
+  end
+
+  def age_in_years d, ref=nil
+    ref ||= Date.today
+    ((ref - d).to_f / 365.25).truncate
   end
   
   def errors_on form, field

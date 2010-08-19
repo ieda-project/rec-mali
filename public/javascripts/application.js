@@ -124,7 +124,10 @@ window.addEvent('domready', function() {
   illnesses = document.getElements('form.diagnostic section.illness')
   if (illnesses[0]) {
     var form = document.getElement('form.diagnostic')
-    test = form.tree = {}
+    test = form.tree = {};
+    (function(age) {
+      if (age) form.tree.enfant = { age: age.get('data-years').toInt() }
+    })(document.getElement('span.age'))
     var button = form.getElement('button[type=submit]').addClass('disabled')
     var first = null
 
