@@ -273,21 +273,29 @@ window.addEvent('domready', function() {
         copy_value(s)
         if(s.get('data-dep')) {
           s.dep = new Function('data', 'oui', 'non', 'try { return('+s.get('data-dep')+') } catch(err) { console.log("Dependency error: "+err); return false }')
-        } else {
-          s.dep = function() { return true }
         }
       })
 
       function run_deps() {
         i.fields.each(function (s) {
-          s.disabled = !s.dep(form.tree, '1', '0')
-          var td = s.getParent()
-          td.getParent().setStyle('display', s.disabled ? 'none' : 'table-row')
-          if (s.disabled) {
-            if (!td.ghost) td.ghost = new Element('input', { type: 'hidden', name: s.name, value: '' }).inject(td)
-          } else if (s.ghost) {
-            td.ghost.dispose()
-            delete td.ghost
+          if (s.dep) {
+            s.disabled = !s.dep(form.tree, '1', '0')
+            var td = s.getParent()
+            if (s.disabled) {
+              if (!td.ghost) {
+                td.ghost = new Element('input', { type: 'hidden', name: s.name, value: '' }).inject(td)
+                td.getElements('*').each(function (el) {
+                  el.old_display = el.getStyle('display')
+                  el.setStyle('display', 'none') })
+                td.na = new Element('div', { text: 'Non applicable' }).inject(td)
+              }
+            } else if (td.ghost) {
+              td.ghost.dispose()
+              td.na.dispose()
+              delete td.ghost
+              delete td.na
+              td.getElements('*').each(function (el) { el.setStyle('display', el.old_display) })
+            }
           }
         })
       }
