@@ -230,7 +230,9 @@ window.addEvent('domready', function() {
     function validate_measurements() {
       var was_valid = measurements_valid
       measurements_valid = head_inputs.every(function(i) {
-        if (i.hasClass('float')) {
+        if (i.hasClass('optional')) {
+          return true
+        } else if (i.hasClass('float')) {
           return i.value.match(/^[0-9]+([\.,][0-9]+){0,2}$/) && parseFloat(i.value) > 0
         } else if (i.hasClass('integer')) {
           return i.value.match(/^[0-9]+$/) && parseInt(i.value) > 0
@@ -239,9 +241,12 @@ window.addEvent('domready', function() {
         }
       })
       if (!was_valid && measurements_valid) {
+        head_next.setStyle('visibility', 'visible')
         head_next.removeClass('disabled')
+        // AJAX for indices
       } else if (was_valid && !measurements_valid) {
         illnesses.each(function(i) { i.addClass('closed') })
+        head_next.setStyle('visibility', 'visible')
         head_next.addClass('disabled')
       }
       if (was_valid != measurements_valid) show_hide_button()

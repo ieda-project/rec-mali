@@ -82,8 +82,15 @@ fr:
     positif: Positif
     negatif: Négatif
     absente: Absente
+    absentes: Absentes
+    presentes: Présentes
+    profondes_etendues: Profondes et étendues
     legere: Légère
     severe: Sévère
+    aucun: Aucun
+    eruption: Eruption
+    antecedent: Antecedent
+    pas_indique: Pas indiqué
   indices:
     weight_age: Poids/Age
     height_age: Taille/Age

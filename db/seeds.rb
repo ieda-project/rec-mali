@@ -36,7 +36,7 @@ Illness.transaction do
     illness, seq = nil, 0
     f.each_line do |line|
       line.gsub! /#.*$/, ''
-      next if line.blank?
+      next if line.chomp.blank?
       data = line.chomp.strip.split '|'
       if line =~ /\A\s/
         # Sign
@@ -54,6 +54,7 @@ Illness.transaction do
         (data[2].camelize + 'Sign').constantize.create hash
       else
         # Illness
+        next if data[1].blank?
         illness = Illness.create(
           key: data[0],
           name: data[1],
