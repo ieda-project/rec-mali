@@ -10,4 +10,10 @@ class Sign < ActiveRecord::Base
   def build_answer data={}
     answer_class.new data.merge(sign: self)
   end
+
+  def html_attributes
+    returning('data-key' => key, 'class' => kind) do |h|
+      h['data-dep'] = dep if dep.present?
+    end
+  end
 end
