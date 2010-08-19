@@ -41,8 +41,8 @@ class Diagnostic < ActiveRecord::Base
   before_create :set_date
   after_create :update_child
 
-  validates_presence_of :child, :height, :weight, :mac
-  validates_numericality_of :mac, :only_integer => true
+  validates_presence_of :child, :height, :weight
+  validates_numericality_of :mac, :only_integer => true, :allow_blank => true
   validates_numericality_of :height, :weight
   validate :validate_answers
 
