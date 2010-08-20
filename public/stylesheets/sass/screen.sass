@@ -178,12 +178,14 @@ select + .switch
   display: inline-block
   color: #666
   font-weight: bold
-  font-size: 1.1em
+  font-size: 1.1em !important
   background: url(../images/backgrounds/bg-switch.gif) repeat-x 0 0
   padding: 1px 1px
   -webkit-border-radius: 5px
   overflow: hidden
   -webkit-user-select: none
+  margin: 0 !important
+  width: auto  !important
   &.yes
     .yes
       background-color: #51a100
@@ -200,17 +202,18 @@ select + .switch
       color: #777
   div
     -webkit-border-radius: 4px
-    font-size: 10px
+    font-size: 10px !important
     padding: 3px 2px
     display: inline-block
-    width: 3em
+    width: 3em !important
     border: 1px solid #b4b4b4
     text-align: center
     background-color: #ededed
     color: #777
     text-transform: uppercase
+    margin: 0 !important
     &:last-child
-      margin: 0 3px 0 0
+      margin: 0 3px 0 0 !important
   .no
     float: left
   .yes

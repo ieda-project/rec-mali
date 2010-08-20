@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include Wopata::ActionController::Statuses
   authenticate_from :session
   attr_reader :back_title, :back_url
-  helper_method :back_title, :back_url, :back?, :page, :show?
+  helper_method :back_title, :back_url, :back?, :page, :show?, :admin?
 
   def show?
     params[:action] == 'show'
@@ -70,6 +70,10 @@ class ApplicationController < ActionController::Base
     else
       denied
     end
+  end
+  
+  def admin?
+    current_user.admin?
   end
 
   [ :login_required ].each do |filter|

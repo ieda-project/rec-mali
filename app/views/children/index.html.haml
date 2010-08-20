@@ -1,7 +1,7 @@
 - content_for :header do
   %ul.menu
     %li= link_to 'Statistiques', queries_path, :class => 'queries'
-    %li= link_to 'Utilisateurs', users_path
+    %li= link_to 'Utilisateurs', users_path if admin?
 
 %nav
   %p.hint Le patient se présente au dispensaire pour la première fois ?

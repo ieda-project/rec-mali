@@ -99,4 +99,5 @@ fr:
     errors:
       messages:
         blank: doit être rempli(e)
+        taken: déjà utilisé
         confirmation: ne concorde pas avec la confirmation
