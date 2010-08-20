@@ -1,7 +1,7 @@
 - content_for :header do
   %ul.menu
     %li= link_to 'Statistiques', queries_path, :class => 'queries'
-    %li= link_to 'Utilisateurs', users_path
+    %li= link_to 'Utilisateurs', users_path if admin?
 
 %nav
   %p.hint Le patient se présente au dispensaire pour la première fois ?
@@ -18,7 +18,7 @@
       = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => '-', :selected => ((params[:q] ? params[:q][:born_on] : nil)).to_i
     .select
       %label Village
-      = f.select :village_id, Village.to_select, include_blank: true
+      = f.select :village_id, Village.used.to_select, include_blank: true
     .buttons
       -#%button(type='reset') Clear
       %button(type='submit') Rechercher

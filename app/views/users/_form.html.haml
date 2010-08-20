@@ -8,11 +8,16 @@
   = errors_on form, :login
 %div
   %label Mot de passe
-  = form.password_field :password
+  = form.password_field :password, :value => ''
   = errors_on form, :password
 %div
   %label Confirmation
-  = form.password_field :password_confirmation
+  = form.password_field :password_confirmation, :value => ''
   = errors_on form, :password_confirmation
+- if logged_in? and admin? and form.object != current_user
+  %div
+    %label Administrateur
+    = form.select :admin, [ nil, 0, 1 ], {:selected => (form.object.admin? ? 1 : 0) }, :class => :boolean
+    = errors_on form, :admin
 %div
   %button(type="submit") Sauvegarder

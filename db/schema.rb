@@ -176,12 +176,16 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.string   "name"
     t.string   "login"
     t.string   "crypted_password"
+    t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "villages", :force => true do |t|
     t.string   "name"
+    t.string   "csps"
+    t.string   "district"
+    t.boolean  "here"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
