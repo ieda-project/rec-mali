@@ -3,7 +3,7 @@ class SignIntegerAnswer < SignAnswer
 
   def value
     if integer_value.nil?
-      'Not applicable'
+      'Non applicable'
     else
       integer_value
     end

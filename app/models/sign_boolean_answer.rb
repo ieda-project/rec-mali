@@ -3,7 +3,7 @@ class SignBooleanAnswer < SignAnswer
 
   def value
     if boolean_value.nil?
-      'Not applicable'
+      'Non applicable'
     else
       boolean_value ? 'oui' : 'non'
     end
@@ -11,7 +11,7 @@ class SignBooleanAnswer < SignAnswer
   
   def html_value
     if boolean_value.nil?
-      'Not applicable'
+      'Non applicable'
     else
       "<div class='switch #{boolean_value ? 'yes' : 'no'}'><div class='yes'>Oui</div><div class='no'>Non</div></div>"
     end

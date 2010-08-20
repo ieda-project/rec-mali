@@ -4,7 +4,7 @@ class SignListAnswer < SignAnswer
 
   def value
     if list_value.blank?
-      'Not applicable'
+      'Non applicable'
     else
       I18n.t "signs.#{list_value}"
     end
