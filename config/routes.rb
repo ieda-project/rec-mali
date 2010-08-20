@@ -17,6 +17,7 @@ Csps::Application.routes.draw do |map|
     end
     collection do 
       post :temp
+      post :villages
     end
     resources :diagnostics do
       member do

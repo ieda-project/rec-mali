@@ -1,7 +1,8 @@
 class CreateVillages < ActiveRecord::Migration
   def self.up
     create_table :villages do |t|
-      t.string :name
+      t.string :name, :csps, :district
+      t.boolean :here
       t.timestamps
     end
   end

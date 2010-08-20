@@ -1,8 +1,21 @@
 #User.create first_name: 'Albert', last_name: 'Schweitzer', login: 'albert'
 
+puts 'Creating villages'
 if Village.count.zero?
-  for n in %w(Kiembara Kongoussi Bobo-Dioulasso Niangoloko).map do
-    Village.create name: n
+  Village.transaction do
+    File.open('db/fixtures/villages.txt', 'r') do |f|
+      district, csps = nil, nil
+      f.each_line do |line|
+        next if line.strip.blank?
+        if line =~ /\A\s\s/
+          Village.create(:name => line.strip, :csps => csps, :district => district)
+        elsif line =~ /\A\s/
+          csps = line.strip
+        else
+          district = line.strip
+        end
+      end
+    end
   end
 end
 
@@ -15,9 +28,10 @@ unless (children_count = ENV['CHILDREN'].to_i) < 1
       last_name:  Faker::Name.last_name,
       born_on:    rand(365*10).days.ago,
       last_visit_at:    rand(365*10).days.ago,
-      village_id: rand(4)+1)
+      gender: rand(2) == 0,
+      village_id: rand(Village.count)+1)
 
-    (rand(6)+1).times do
+    (rand(3)+1).times do
       Diagnostic.create(
         child: child,
         author_id: 1,
