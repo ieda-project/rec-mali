@@ -13,16 +13,15 @@ unless (children_count = ENV['CHILDREN'].to_i) < 1
     child = Child.create(
       first_name: Faker::Name.first_name,
       last_name:  Faker::Name.last_name,
-      born_on:    Date.parse('1999-08-11')+rand(1500),
+      born_on:    rand(365*10).days.ago,
+      last_visit_at:    rand(365*10).days.ago,
       village_id: rand(4)+1)
 
-    date = Date.parse('2010-05-05')
-    (rand(5)+3).times do
+    (rand(6)+1).times do
       Diagnostic.create(
         child: child,
         author_id: 1,
-        done_on: date)
-      date += 1
+        done_on: rand(365*10).days.ago)
     end
   end
 end

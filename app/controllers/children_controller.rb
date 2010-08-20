@@ -10,6 +10,10 @@ class ChildrenController < ApplicationController
     # Clean empty children (only photo)
     Child.unfilled.destroy_all
     @q = Search.from_hash params[:q]
+    if params[:o].blank?
+      params[:o] = 'last_visit_at'
+      params[:d] = 'd'
+    end
     @children = model.search(@q, params[:o], params[:d])
     @page = (params[:page] || '1').to_i
   end

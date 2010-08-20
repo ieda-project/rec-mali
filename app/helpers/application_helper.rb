@@ -9,7 +9,7 @@ module ApplicationHelper
         params[:d] == 'd' ? :unshift : :push,
         '')
     end
-    %Q(#{name} <a#{a} href="?o=#{label}">↑<a> <a#{d} href="?o=#{label}&d=d">↓<a>)
+    %Q(#{name} <a#{a} href="?o=#{label}">↓</a> <a#{d} href="?o=#{label}&d=d">↑</a>)
   end
 
   def partial name, opts={}
