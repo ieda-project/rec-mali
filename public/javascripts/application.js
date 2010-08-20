@@ -311,12 +311,15 @@ window.addEvent('domready', function() {
       i.getElement('h2').addEvent('click', function() { alert_fill() })
       var obj = form.tree[i.get('data-key')] = {}
       function copy_value(sign) {
-        if (typeof(sign.checked) == 'undefined' || sign.checked) obj[sign.get('data-key')] = sign.value
+        var sel = [ null, false, true ]
+        if (typeof(sign.checked) == 'undefined' || sign.checked) {
+          obj[sign.get('data-key')] = sign.selectedIndex ? sel[sign.selectedIndex] : sign.value
+        }
       }
       i.fields.each(function(s) {
         copy_value(s)
         if(s.get('data-dep')) {
-          s.dep = new Function('data', 'oui', 'non', 'try { return('+s.get('data-dep')+') } catch(err) { console.log("Dependency error: "+err); return false }')
+          s.dep = new Function('data', 'try { return('+s.get('data-dep')+') } catch(err) { console.log("Dependency error: "+err); return false }')
         }
       })
 
