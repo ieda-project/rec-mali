@@ -26,9 +26,17 @@ unless (children_count = ENV['CHILDREN'].to_i) < 1
   end
 end
 
-illnesses = {}
-
 puts 'Creating illnesses'
+
+illnesses, deps = {}, {}
+
+File.open('db/fixtures/sign_dependencies.txt', 'r') do |f|
+  f.each_line do |line|
+    line.chomp!
+    next if line.blank?
+    deps.store *line.split('|')
+  end
+end
 
 Illness.transaction do
   File.open('db/fixtures/signs.txt', 'r') do |f|
@@ -42,6 +50,7 @@ Illness.transaction do
         hash = {
           illness: illness,
           key: data[0],
+          dep: deps["#{illness.key}.#{data[0]}"],
           question: RedCloth.new(data[1], [:lite_mode]).to_html }
         case data[2]
           when 'integer'
