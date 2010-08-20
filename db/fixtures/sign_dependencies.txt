@@ -1,33 +1,33 @@
-toux.toux_presence_duree|data.toux.toux_presence oui
-toux.mouv_resp|data.toux.toux_presence oui
-toux.tirage|data.toux.toux_presence oui
-toux.stridor|data.toux.toux_presence oui
+toux.toux_presence_duree|data.toux.toux_presence == oui
+toux.mouv_resp|data.toux.toux_presence == oui
+toux.tirage|data.toux.toux_presence == oui
+toux.stridor|data.toux.toux_presence == oui
 
-diarrhee.diarrhee_presence_duree|data.diarrhee.diarrhee_presence oui
-diarrhee.sang_selles|data.diarrhee.diarrhee_presence oui
-diarrhee.conscience_agitation|data.diarrhee.diarrhee_presence oui
-diarrhee.yeux_enfonces|data.diarrhee.diarrhee_presence oui
-diarrhee.soif|data.diarrhee.diarrhee_presence oui
-diarrhee.pli_cutane|data.diarrhee.diarrhee_presence oui
+diarrhee.diarrhee_presence_duree|data.diarrhee.diarrhee_presence == oui
+diarrhee.sang_selles|data.diarrhee.diarrhee_presence == oui
+diarrhee.conscience_agitation|data.diarrhee.diarrhee_presence == oui
+diarrhee.yeux_enfonces|data.diarrhee.diarrhee_presence == oui
+diarrhee.soif|data.diarrhee.diarrhee_presence == oui
+diarrhee.pli_cutane|data.diarrhee.diarrhee_presence == oui
 
-fievre.fievre_presence_duree|data.fievre.fievre_presence oui
-fievre.fievre_presence_longue|data.fievre.fievre_presence oui
-fievre.fievre.urines_foncees|data.fievre.fievre_presence oui
-fievre.fievre.saignements_anormaux|data.fievre.fievre_presence oui
-fievre.raideur_nuque|data.fievre.fievre_presence oui
-fievre.ictere|data.fievre.fievre_presence oui
-fievre.choc|data.fievre.fievre_presence oui
-fievre.eruption_cutanee|data.fievre.fievre_presence oui
-fievre.ecoulement_nasal|data.fievre.fievre_presence oui
-fievre.yeux_rouge|data.fievre.fievre_presence oui
-fievre.ecoulement_oculaire|data.fievre.fievre_presence oui
-fievre.ulcerations|data.fievre.fievre_presence oui
-fievre.cornee|data.fievre.fievre_presence oui
+fievre.fievre_presence_duree|data.fievre.fievre_presence == oui
+fievre.fievre_presence_longue|data.fievre.fievre_presence == oui
+fievre.fievre.urines_foncees|data.fievre.fievre_presence == oui
+fievre.fievre.saignements_anormaux|data.fievre.fievre_presence == oui
+fievre.raideur_nuque|data.fievre.fievre_presence == oui
+fievre.ictere|data.fievre.fievre_presence == oui
+fievre.choc|data.fievre.fievre_presence == oui
+fievre.eruption_cutanee|data.fievre.fievre_presence == oui
+fievre.ecoulement_nasal|data.fievre.fievre_presence == oui
+fievre.yeux_rouge|data.fievre.fievre_presence == oui
+fievre.ecoulement_oculaire|data.fievre.fievre_presence == oui
+fievre.ulcerations|data.fievre.fievre_presence == oui
+fievre.cornee|data.fievre.fievre_presence == oui
 
-oreille.oreille_douleur|data.oreille.oreille_probleme oui
-oreille.oreille_ecoulement|data.oreille.oreille_probleme oui
-oreille.oreille_ecoulement_duree|data.oreille.oreille_probleme oui && data.oreille.oreille_ecoulement oui
-oreille.oreille_gonflement|data.oreille.oreille_probleme oui
+oreille.oreille_douleur|data.oreille.oreille_probleme == oui
+oreille.oreille_ecoulement|data.oreille.oreille_probleme == oui
+oreille.oreille_ecoulement_duree|data.oreille.oreille_probleme == oui && data.oreille.oreille_ecoulement == oui
+oreille.oreille_gonflement|data.oreille.oreille_probleme == oui
 
 malnutrition.oedemes|data.enfant.age >= 6 
 malnutrition.test_appetit|data.enfant.age >= 6
