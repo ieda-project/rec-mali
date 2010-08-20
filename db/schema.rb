@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.string   "key"
     t.string   "question"
     t.string   "values"
+    t.string   "dep"
     t.integer  "illness_id"
     t.integer  "sequence"
     t.integer  "min_value"

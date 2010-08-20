@@ -1,11 +1,4 @@
 - queries = Query.order(:title)
-- if (lqueries = Query.latest_run).any?
-  %h2.em Statistiques
-  %section.illness.list-arrow
-    %h2 Dernières Statistiques
-    %ul
-      - lqueries.each do |q|
-        %li{ :class => cycle("odd", "even") }= link_to q.title, query_path(q)
 
 %section.illness.list-arrow
   %h2 #{queries.size} statistiques
