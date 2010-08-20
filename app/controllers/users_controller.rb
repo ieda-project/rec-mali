@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new params[:user]
     if @user.save
-      persist_user_into_session @user
       if User.count == 1
+        persist_user_into_session @user
         see_other children_path
       else
         see_other users_path
