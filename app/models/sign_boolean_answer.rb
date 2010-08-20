@@ -1,12 +1,20 @@
 class SignBooleanAnswer < SignAnswer
-  validates_inclusion_of :boolean_value, in: [ true, false ]
+  #validates_inclusion_of :boolean_value, in: [ true, false ]
 
   def value
-    boolean_value ? 'oui' : 'non'
+    if boolean_value.nil?
+      'Not applicable'
+    else
+      boolean_value ? 'oui' : 'non'
+    end
   end
   
   def html_value
-    "<div class='switch #{boolean_value ? 'yes' : 'no'}'><div class='yes'>Oui</div><div class='no'>Non</div></div>"
+    if boolean_value.nil?
+      'Not applicable'
+    else
+      "<div class='switch #{boolean_value ? 'yes' : 'no'}'><div class='yes'>Oui</div><div class='no'>Non</div></div>"
+    end
   end
 
   def raw_value
