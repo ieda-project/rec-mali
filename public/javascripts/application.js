@@ -169,9 +169,7 @@ window.addEvent('domready', function() {
     }
     function validate_illness(illness, calculate) {
       illness.valid = illness.fields.every(function(i) {
-        if (i.get('type') == 'hidden') {
-          return true
-        } else if (i.disabled) {
+        if (i.disabled || i.get('type') == 'hidden') {
           return true        
         } else if (i.get('type') == 'radio') {
           return i.getParent().getElements('input').some(function(x) { return x.checked })

@@ -1,10 +1,12 @@
 class SignIntegerAnswer < SignAnswer
-  validates_presence_of :integer_value
-
   def value
-    integer_value
+    integer_value || 0
   end
   alias raw_value value
+
+  def applicable?
+    !!integer_value
+  end
   
   def self.cast v
     v.to_i

@@ -29,6 +29,7 @@
       %h2.consultation= i.name
       %table
         - for sa in @diagnostic.sign_answers.for(i).sort do
+          - next unless sa.applicable?
           %tr
             %th(scope="row")!= sa.sign.question
             %td!= sa.html_value rescue sa.value
