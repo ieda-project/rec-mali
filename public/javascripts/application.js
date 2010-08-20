@@ -314,6 +314,9 @@ window.addEvent('domready', function() {
         var sel = [ null, false, true ]
         if (typeof(sign.checked) == 'undefined' || sign.checked) {
           obj[sign.get('data-key')] = sign.selectedIndex ? sel[sign.selectedIndex] : sign.value
+        } else if (sign.type == 'text') {
+          console.log("parse value from " + sign.get('data-key'))
+          obj[sign.get('data-key')] = parseInt(sign.value)
         }
       }
       i.fields.each(function(s) {
