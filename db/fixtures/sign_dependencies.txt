@@ -11,9 +11,9 @@ diarrhee.soif|data.diarrhee.diarrhee_presence == oui
 diarrhee.pli_cutane|data.diarrhee.diarrhee_presence == oui
 
 fievre.fievre_presence_duree|data.fievre.fievre_presence == oui
-fievre.fievre_presence_longue|data.fievre.fievre_presence == oui
-fievre.fievre.urines_foncees|data.fievre.fievre_presence == oui
-fievre.fievre.saignements_anormaux|data.fievre.fievre_presence == oui
+fievre.fievre_presence_longue|data.fievre.fievre_presence == oui && data.fievre.fievre_presence_duree >= 7
+fievre.urines_foncees|data.fievre.fievre_presence == oui
+fievre.saignements_anormaux|data.fievre.fievre_presence == oui
 fievre.raideur_nuque|data.fievre.fievre_presence == oui
 fievre.ictere|data.fievre.fievre_presence == oui
 fievre.choc|data.fievre.fievre_presence == oui
