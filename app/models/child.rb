@@ -1,10 +1,9 @@
 class Child < ActiveRecord::Base
   include Csps::Exportable
   belongs_to :village
-  has_many :diagnostics
-  has_one :last_visit,
-          class_name: 'Diagnostic',
-          order: 'id DESC'
+  globally_has_many :diagnostics
+  globally_has_one :last_visit,
+                   class_name: 'Diagnostic', order: 'global_id DESC'
   has_attached_file :photo,
                     styles: { thumbnail: '110x130' }
 
@@ -68,7 +67,7 @@ class Child < ActiveRecord::Base
           end
         end
       end
-      diagnosticed = diagnosticed.map &:child_id
+      diagnosticed = diagnosticed.map &:child_global_id
       k = dates2key(d1)
       grs[k] = 0
       rs.each do |r|
@@ -76,9 +75,9 @@ class Child < ActiveRecord::Base
         when 'new' then
           grs[k] += 1 if r.created_at >= d1 and r.created_at < d2
         when 'old' then
-          grs[k] += 1 if r.created_at < d1 and diagnosticed.include? r.id
+          grs[k] += 1 if r.created_at < d1 and diagnosticed.include? r.global_id
         when 'follow' then
-          grs[k] += 1 if diagnosticed.include? r.id
+          grs[k] += 1 if diagnosticed.include? r.global_id
         end
       end
       d1 = d1.next_month

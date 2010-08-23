@@ -1,8 +1,8 @@
 class CreateDiagnostics < ActiveRecord::Migration
   def self.up
     create_table :diagnostics do |t|
+      t.string :child_global_id, :author_global_id
       t.string :type
-      t.references :child, :author
       t.datetime :done_on
       t.integer :mac
       t.float :height, :weight
@@ -15,8 +15,8 @@ class CreateDiagnostics < ActiveRecord::Migration
     end
     add_index :diagnostics, [:type, :id]
     add_index :diagnostics, [:type, :global_id]
-    add_index :diagnostics, :child_id
-    add_index :diagnostics, :author_id
+    add_index :diagnostics, :child_global_id
+    add_index :diagnostics, :author_global_id
   end
 
   def self.down

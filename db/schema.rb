@@ -37,11 +37,11 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
   add_index "children", ["global_id"], :name => "index_children_on_global_id"
 
   create_table "classifications", :force => true do |t|
+    t.integer  "illness_id"
     t.string   "key"
     t.string   "name"
     t.text     "equation"
     t.text     "treatment"
-    t.integer  "illness_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "in_imci"
@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
   end
 
   create_table "diagnostics", :force => true do |t|
+    t.string   "child_global_id"
+    t.string   "author_global_id"
     t.string   "type"
-    t.integer  "child_id"
-    t.integer  "author_id"
     t.datetime "done_on"
     t.integer  "mac"
     t.float    "height"
@@ -76,14 +76,14 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.boolean  "imported"
   end
 
-  add_index "diagnostics", ["author_id"], :name => "index_diagnostics_on_author_id"
-  add_index "diagnostics", ["child_id"], :name => "index_diagnostics_on_child_id"
+  add_index "diagnostics", ["author_global_id"], :name => "index_diagnostics_on_author_global_id"
+  add_index "diagnostics", ["child_global_id"], :name => "index_diagnostics_on_child_global_id"
   add_index "diagnostics", ["type", "global_id"], :name => "index_diagnostics_on_type_and_global_id"
   add_index "diagnostics", ["type", "id"], :name => "index_diagnostics_on_type_and_id"
 
   create_table "illness_answers", :force => true do |t|
-    t.integer  "illness_id"
-    t.integer  "diagnostic_id"
+    t.string   "illness_global_id"
+    t.string   "diagnostic_global_id"
     t.boolean  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -91,8 +91,8 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.boolean  "imported"
   end
 
-  add_index "illness_answers", ["diagnostic_id"], :name => "index_illness_answers_on_diagnostic_id"
-  add_index "illness_answers", ["illness_id"], :name => "index_illness_answers_on_illness_id"
+  add_index "illness_answers", ["diagnostic_global_id"], :name => "index_illness_answers_on_diagnostic_global_id"
+  add_index "illness_answers", ["illness_global_id"], :name => "index_illness_answers_on_illness_global_id"
 
   create_table "illnesses", :force => true do |t|
     t.string   "key"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
 
   create_table "sign_answers", :force => true do |t|
     t.integer  "sign_id"
-    t.integer  "diagnostic_id"
+    t.string   "diagnostic_global_id"
     t.string   "type"
     t.string   "list_value"
     t.boolean  "boolean_value"
@@ -150,12 +150,12 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
   end
 
   create_table "signs", :force => true do |t|
+    t.integer  "illness_id"
     t.string   "type"
     t.string   "key"
     t.string   "question"
     t.string   "values"
     t.string   "dep"
-    t.integer  "illness_id"
     t.integer  "sequence"
     t.integer  "min_value"
     t.integer  "max_value"
@@ -179,6 +179,8 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "global_id"
+    t.boolean  "imported"
   end
 
   create_table "villages", :force => true do |t|
