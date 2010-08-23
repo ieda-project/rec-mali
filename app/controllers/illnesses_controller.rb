@@ -10,6 +10,7 @@ class IllnessesController < ApplicationController
       params[:s].each do |sign_id,value|
         sign = signs[sign_id.to_i]
         value = (value == '1') if sign.is_a? BooleanSign
+        value = (value.to_i) if sign.is_a? IntegerSign
         data.store sign.full_key, value
       end
 

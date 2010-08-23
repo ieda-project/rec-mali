@@ -26,7 +26,7 @@ module ApplicationHelper
 
   def textual_age d, ref=nil
     ref ||= Date.today
-    months = ((ref - d).to_f / 365.25 * 12).round
+    months = ((ref - d).to_f / 365.25 * 12).truncate
     "#{months} mois"
   end
 

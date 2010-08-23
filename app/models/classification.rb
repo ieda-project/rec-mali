@@ -20,7 +20,7 @@ class Classification < ActiveRecord::Base
     end
   rescue
     diag.classifications.delete self
-    diag.update_attribute :failed_classifications, [4, *diag.failed_classifications].uniq
+    diag.update_attribute :failed_classifications, [*diag.failed_classifications].uniq
   end
 
   def calculate data
