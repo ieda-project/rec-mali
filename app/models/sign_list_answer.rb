@@ -3,7 +3,7 @@ class SignListAnswer < SignAnswer
   before_save :handle_na
 
   def value
-    list_value ? I18n.t("signs.#{list_value}") : 'n/a'
+    applicable? ? I18n.t("signs.#{list_value}") : 'n/a'
   end
 
   def raw_value
@@ -11,7 +11,7 @@ class SignListAnswer < SignAnswer
   end
 
   def applicable?
-    !!list_value
+    list_value.present?
   end
 
   protected

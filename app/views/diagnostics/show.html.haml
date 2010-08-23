@@ -25,18 +25,19 @@
           %li= c.name
 
   - for i in Illness.order(:sequence) do
-    %section.consultation
-      %h2.consultation= i.name
-      %table
-        - for sa in @diagnostic.sign_answers.for(i).sort do
-          - next unless sa.applicable?
-          %tr
-            %th(scope="row")!= sa.sign.question
-            %td!= sa.html_value rescue sa.value
-      - cs = @diagnostic.classifications.for(i)
-      %ul.classification
-        - for c in cs do
-          %li= c.name
+    - answers = @diagnostic.sign_answers.for(i).sort.select {|a| a.applicable?}
+    - if answers.any?
+      %section.consultation
+        %h2.consultation= i.name
+        %table
+          - for sa in answers do
+            %tr
+              %th(scope="row")!= sa.sign.question
+              %td!= sa.html_value rescue sa.value
+        - cs = @diagnostic.classifications.for(i)
+        %ul.classification
+          - for c in cs do
+            %li= c.name
 
 - if @diagnostic.classifications.any?
   %nav
