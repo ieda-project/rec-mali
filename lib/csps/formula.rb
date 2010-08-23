@@ -2,7 +2,7 @@ class Csps::Formula
   class FormulaError < StandardError; end
   attr_reader :code, :data
 
-  EQ = %w(== != <= >=)
+  EQ = %w(== != <= >= < >)
   LOGICAL = {
     'AND' => ' && ',
     'OR'  => ' || ' }
