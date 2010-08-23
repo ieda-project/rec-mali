@@ -7,7 +7,7 @@ module Csps::Exportable
       model.send :scope, :exportable, conditions: [ 'imported != ? AND temporary != ?', true, true ]
       model.send :scope, :temporary, conditions: { temporary: true }
     else
-      model.send :scope, :exportable, conditions: [ 'imported !=', true ]
+      model.send :scope, :exportable, conditions: [ 'imported != ?', true ]
     end
     model.send :extend, ClassMethods
     model.send :attr_readonly, :imported
