@@ -1,15 +1,16 @@
 class Diagnostic < ActiveRecord::Base
   include Csps::Exportable
   serialize :failed_classifications
-  belongs_to :child
-  belongs_to :author, class_name: 'User'
+  globally_belongs_to :child
+  globally_belongs_to :author, class_name: 'User'
   has_and_belongs_to_many :classifications do
     def for illness
       select { |c| c.illness_id == illness.id }
     end
   end
-  has_many :sign_answers, include: :sign, order: 'signs.sequence',
-           after_add: :clear_classifications, after_remove: :clear_classifications do
+  globally_has_many :sign_answers, include: :sign, order: 'signs.sequence',
+                    after_add: :clear_classifications,
+                    after_remove: :clear_classifications do
     def add data
       sign = data.delete(:sign) || Sign.find(data.delete(:sign_id)) rescue nil
       existing = detect { |i| i.sign_id == sign.id }
@@ -34,7 +35,7 @@ class Diagnostic < ActiveRecord::Base
       end
     end
   end
-  has_many :illness_answers
+  globally_has_many :illness_answers
 
   scope :between, lambda {|d1, d2| {:conditions => ['done_on > ? and done_on <= ?', d1, d2]}}
 

@@ -34,6 +34,33 @@ module Csps::Exportable
   end
 
   module ClassMethods
+    def globally_has_many *args, &blk
+      opts = args.extract_options!
+      args.each do |i|
+        has_many i, opts.merge(
+          primary_key: :global_id,
+          foreign_key: "#{name.singularize.underscore}_global_id"), &blk
+      end
+    end
+
+    def globally_has_one *args, &blk
+      opts = args.extract_options!
+      args.each do |i|
+        has_one i, opts.merge(
+          primary_key: :global_id,
+          foreign_key: "#{name.underscore}_global_id"), &blk
+      end
+    end
+
+    def globally_belongs_to *args, &blk
+      opts = args.extract_options!
+      args.each do |i|
+        belongs_to i, opts.merge(
+          primary_key: :global_id,
+          foreign_key: "#{i}_global_id"), &blk
+      end
+    end
+
     def find_local id
       find_by_id_and_imported(id, false) or
         raise(ActiveRecord::RecordNotFound,

@@ -102,7 +102,7 @@ class DiagnosticsController < ApplicationController
   end
 
   def fetch
-    @diagnostic = @child.diagnostics.find params[:id]
+    @diagnostic = @child.diagnostics.find_by_id params[:id]
   rescue ActiveRecord::RecordNotFound
     not_found
   end

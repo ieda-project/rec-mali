@@ -1,6 +1,7 @@
 require 'bcrypt'
 
 class User < ActiveRecord::Base
+  include Csps::Exportable
   attr_accessor :password, :password_confirmation
 
   validates_presence_of :login, :name
