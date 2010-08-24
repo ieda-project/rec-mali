@@ -25,7 +25,7 @@ module ApplicationHelper
   end
 
   def months_to_text m
-    if m > 24
+    if m > 60
       years, rem = m.divmod 12
       "#{years}#{rem >= 6 ? '½' : ''} ans"
     else
