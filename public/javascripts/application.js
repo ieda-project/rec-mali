@@ -201,7 +201,6 @@ window.addEvent('domready', function() {
         new Request.JSON({
           url: illness.get('data-classify-href'),
           onSuccess: function(json) {
-            console.log(json)
             var ul = new Element('ul')
             json.each(function (cl) {
               new Element(
