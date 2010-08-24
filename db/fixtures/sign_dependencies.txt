@@ -29,5 +29,5 @@ oreille.oreille_ecoulement|data.oreille.oreille_probleme
 oreille.oreille_ecoulement_duree|data.oreille.oreille_probleme && data.oreille.oreille_ecoulement 
 oreille.oreille_gonflement|data.oreille.oreille_probleme 
 
-malnutrition.oedemes|data.enfant.age >= 6 
-malnutrition.test_appetit|data.enfant.age >= 6
+malnutrition.oedemes|data.enfant.months >= 6 
+malnutrition.test_appetit|data.enfant.months >= 6
