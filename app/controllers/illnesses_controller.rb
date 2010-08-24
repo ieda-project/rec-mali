@@ -3,21 +3,19 @@ class IllnessesController < ApplicationController
 
   def classification
     illness = Illness.find params[:id]
-    if params[:s].present?
-      signs = Sign.find(params[:s].keys, include: :illness).to_hash &:id
-      data = {}
-
-      params[:s].each do |sign_id,value|
-        sign = signs[sign_id.to_i]
-        value = (value == '1') if sign.is_a? BooleanSign
-        value = (value.to_i) if sign.is_a? IntegerSign
-        data.store sign.full_key, value
+    if params[:d].present?
+      params[:d].each do |k,v|
+        params[:d][k] = case v
+          when 'true' then true
+          when 'false' then false
+          when /\A[0-9.]+\Z/ then v.to_f
+          when /\A[0-9]+\Z/ then v.to_i
+          else v
+        end
       end
-
       ret = illness.classifications.map do |cl|
-        [ cl.name, (cl.calculate(data) rescue 'error') ]
+        [ cl.name, (cl.calculate(params[:d]) rescue 'error') ]
       end
-
       render text: ret.to_json
     else
       render json: {}

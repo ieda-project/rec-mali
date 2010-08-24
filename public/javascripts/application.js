@@ -189,32 +189,30 @@ window.addEvent('domready', function() {
         })
       }
       if (calculate != false && illness.valid) {
-        var data = {}
-        illnesses.some(function(i) {
-          i.getElements('tr').each(function (tr) {
-            var sign_id = tr.getElement('input[type=hidden]').get('value')
-            tr.getElements('input[type!=hidden], select').some(function (input) {
-              if (input.get('type') != 'radio' || input.checked) {
-                data['s['+sign_id+']'] = input.value
-                return true }})})
-          return i == illness })
         var h2 = illness.getElement('h2')
         h2.getElements('img').dispose()
         loader = new Element('img', {src: '/images/loader.gif'}).inject(h2, 'top')
+        var data = {}
+        var keys = ['enfant']
+        illnesses.some(function(i) { keys.push(i.get('data-key')); return i == illness })
+        keys.each(function(key) {
+          for (var subkey in form.tree[key]) data[key+'.'+subkey] = form.tree[key][subkey]
+        })
         new Request.JSON({
           url: illness.get('data-classify-href'),
           onSuccess: function(json) {
+            console.log(json)
             var ul = new Element('ul')
             json.each(function (cl) {
               new Element(
                 'li', {
-                  'class': cl[1].toString(),
+                  'class': (cl[1] || false).toString(),
                   html:    cl[0] }).inject(ul) })
             var h2 = illness.getElement('h2')
             h2.getElements('img, ul').dispose()
             ul.inject(h2)
           }
-        }).get(data)
+        }).get({ d: data })
       }
       if (!illness.valid) illness.getElements('h2 ul').dispose()
       show_hide_button(illness)
@@ -309,13 +307,20 @@ window.addEvent('domready', function() {
       i.getElement('h2').addEvent('click', function() { alert_fill() })
       var obj = form.tree[i.get('data-key')] = {}
       function copy_value(sign) {
-        var sel = [ null, false, true ]
-        if (typeof(sign.checked) == 'undefined' || sign.checked) {
-          obj[sign.get('data-key')] = sign.selectedIndex ? sel[sign.selectedIndex] : sign.value
-        } else if (sign.type == 'text') {
-          console.log("parse value from " + sign.get('data-key'))
-          obj[sign.get('data-key')] = parseInt(sign.value)
+        var value
+        switch (sign.type) {
+          case 'text':
+            value = parseInt(sign.value)
+            if (isNaN(value)) value = 0
+            break
+          case 'select-one':
+            value = [null, false, true][sign.selectedIndex]
+            break
+          case 'radio':
+            if (!sign.checked) return
+            value = sign.value
         }
+        obj[sign.get('data-key')] = value
       }
       i.fields.each(function(s) {
         copy_value(s)
@@ -327,7 +332,7 @@ window.addEvent('domready', function() {
       function run_deps() {
         i.fields.each(function (s) {
           if (s.dep) {
-            s.disabled = !s.dep(form.tree, '1', '0')
+            s.disabled = !s.dep(form.tree)
             var td = s.getParent()
             if (s.disabled) {
               if (!td.ghost) {
