@@ -1,6 +1,6 @@
 ﻿[Pneumonie grave ou maladie très grave]
 # Donner la première dose +d’antibiotique+ approprié,
-# Transférer *d’URGENCE* à l’hôpital,
+# *Transférer d’URGENCE à l’hôpital*,
 # Si l’enfant n’a pas d’autre classification grave donner un bronchodilateur en inhalation si respiration sifflante,
 # Traiter l'enfant pour +prévenir l'hypoglycémie+.
 
@@ -27,24 +27,24 @@
 # Traiter la déshydratation avant de transférer, à moins que l’enfant n’ait une autre classification grave.
 
 [Diarrhée persistente]
-# Transférer à l’hôpital,
-# Donner des multivitamines et des sels minéraux,
-# Donner du sulfate de zinc pendant 14 jours,
+# *Transférer à l’hôpital*,
+# Donner des +multivitamines et des +sels minéraux+,
+# Donner du +sulfate de zinc+ pendant +14 jours+,
 # Expliquer quand revenir immédiatement.
 
 [Déshydratation sévère]
 # Si l’enfant n’a pas, d’autre classification grave :
-## donner des liquides pour déshydratation sévère (Plan C).
+** donner des liquides pour déshydratation sévère (Plan C).
 # Si l’enfant a une autre classification grave :
-## transférer *d’URGENCE* à l’hôpital, la mère donnant fréquemment des gorgées de +SRO+ en cours de route,
-## Conseiller à la mère de continuer l’allaitement au sein.
+** *transférer d’URGENCE à l’hôpital*, la mère donnant fréquemment des gorgées de +SRO+ en cours de route,
+** Conseiller à la mère de continuer l’allaitement au sein.
 # Si l’enfant a 2 ans ou plus et si une épidémie de choléra sévit dans la région :
-## Donner un antibiotique pour le choléra.
+** Donner un antibiotique pour le choléra.
 
 [Signes évidents de déshydratation]
 # Donner liquides et aliments pour signes évidents de déshydratation (Plan B),
 # Donner du +sulfate de zinc+ pendant +14 jours+,
-# Si l’enfant a une autre classification grave, transférer *d’URGENCE* à l’hôpital, la mère donnant fréquemment des gorgées de +SRO+ en cours de route.
+# Si l’enfant a une autre classification grave, *transférer d’URGENCE à l’hôpital*, la mère donnant fréquemment des gorgées de +SRO+ en cours de route.
 
 
 [Maladie fébrile très grave ou paludisme grave]
@@ -53,7 +53,7 @@
 # Traiter l’enfant pour éviter +l’hypoglycémie+,
 # Administrer, au dispensaire, une dose de +paracétamol+ ou de +l’acétyl salicylate de lysine+ si la fièvre est de +38,5°C ou plus+,
 # Enveloppement humide,
-# Transférer *d’URGENCE* à l’hôpital.
+# *Transférer d’URGENCE à l’hôpital.*
 
 [Paludisme simple]
 # Donner une +Combinaison Thérapeutique à base d’Arthémisinine+,
@@ -74,10 +74,10 @@
 # En cas d’ulcération dans la bouche, traiter au +violet de gentiane dilué+.
 
 [Rougeole]
-1. Donner de la +vitamine A, J1,J2, J14+,
-2. Donner un +antibiotique+ approprié pendant +8 jours+,
-3. Expliquer à la mère quand revenir immédiatement,
-4. Revoir l’enfant dans +5 jours+.
+# Donner de la +vitamine A, J1,J2, J14+,
+# Donner un +antibiotique+ approprié pendant +8 jours+,
+# Expliquer à la mère quand revenir immédiatement,
+# Revoir l’enfant dans +5 jours+.
 
 [Antécédent de rougeole]
 # Donner une dose de  +Vitamine A+, (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
@@ -87,13 +87,13 @@
 [Mastoïdite]
 # Donner la première dose +d’antibiotique+ approprié,
 # Donner la première dose de +paracétamol+ pour calmer la douleur,
-# Transférer *d’URGENCE* à l’hôpital.
+# *Transférer d’URGENCE à l’hôpital.*
 
 [Infection aiguë]
 # Donner un +antibiotique+ approprié pendant +8 jours+,
 # Donner du +paracétamol+ pour calmer la douleur,
 # Assécher l’oreille à l’aide d’une mèche,
-# Revoir l’enfant dans 5 jours.
+# Revoir l’enfant dans +5 jours+.
 
 [Infection chronique]
 # Assécher l’oreille à l’aide d’une mèche,
@@ -104,7 +104,7 @@
 [Anémie grave]
 # Donner la première dose de +quinine+ injectable pour le paludisme grave,
 # Traiter l'enfant pour prévenir +l'hypoglycémie+,
-# Transférer *d’URGENCE* à l’hôpital.
+# *Transférer d’URGENCE à l’hôpital.*
 
 [Anémie]
 # Evaluer l’alimentation de l’enfant et conseiller la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS du tableau CONSEILLER la mère,
@@ -116,17 +116,17 @@
 
 
 [MASc]
-# Traiter l'enfant pour prévenir l'hypoglycémie : donner de l'eau sucrée si l'enfant est capable de boire dans le cas contraire mettre en place une sonde naso gastrique  (Si vous avez appris le geste) et  faire passer lentement 50 c d'eau sucrée,
-# Passer la 1ère dose d'Ampiciline en IM,
+# Traiter l'enfant pour prévenir l'hypoglycémie : donner de +l'eau sucrée si l'enfant est capable de boire+ dans le cas contraire mettre en place une +sonde naso gastrique+  (Si vous avez appris le geste) et  faire passer lentement +50 c d'eau sucrée+,
+# Passer la 1ère dose +d'Ampiciline+ en IM,
 # Inscrire l'enfant dans le registre MAS et donner un numéro MAS,
 # Remplir la fiche de référence,
 # Informer la pédiatrie par la "Flotte" de la Référence,
-# *REFERER d’URGENCE à l’hôpital*.
+# *REFERER d’URGENCE à l’hôpital.*
 
 [MASs]
 # Expliquer le contenu du traitement à la mère 
 # Remplir tous les items du registre des MAS  et de la fiche de prise en charge MAS en ambulatoire
-# Donner les premières doses du traitement systématique au CSPS (Donner de l' Acide folique en dose unique , Vitamine A le 1er 2ème et 14ème jour , Amoxicilline pour 05 jours, du mébendazole pendant 3 jours ou de l’albendazole en prise unique
+# Donner les premières doses du traitement systématique au CSPS : donner de +l'Acide folique en dose unique+, +Vitamine A+ le 1er, 2ème et 14ème jour, +Amoxicilline+ pour +5 jours+, du +mébendazole+ pendant +3 jours+ ou de +l’albendazole en prise unique+
 # Donner les sachets de Plyumpy'nut en nombre suffisant jusqu'au prochain rendez-vous 
 # Expliquer à la mère ou l'accompagnante comment donner les médicaments et le PN à domicile et s'assurer qu'elle a compris
 # Expliquer à la mère quand revenir immédiatement. 
@@ -134,13 +134,13 @@
 
 [MAM]
 # Traiter la classification trouvée
-# Donner du mébendazole pendant 3 jours ou de l’albendazole en prise unique
+# Donner du +mébendazole+ pendant +3 jours+ ou de +l’albendazole en prise unique+,
 # Orienter la mère vers le programme de son village
 
 [Pas de malnutrition]
-# Si l’enfant a moins de 2 ans, évaluer l’alimentation de l’enfant et conseiller  à la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS  du  tableau CONSEILLER LA MÈRE.
-# Donner de la vitamine A si l’enfant n’en a pas reçu dans les 6 mois précédents
-# Si  problème d’alimentation, revoir l’enfant dans 5 jours.
+# Si l’enfant a moins de 2 ans, évaluer l’alimentation de l’enfant et conseiller  à la mère de nourrir l’enfant comme décrit dans le cadre *ALIMENTS"*  du  tableau *CONSEILLER LA MÈRE*.
+# Donner de la *vitamine A* si l’enfant n’en a pas reçu dans les 6 mois précédents
+# Si  problème d’alimentation, revoir l’enfant dans +5 jours+.
 # Expliquer à la mère quand revenir immédiatement
 
 
