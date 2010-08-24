@@ -66,11 +66,11 @@ fr:
     'yes++': 'Oui ++'
     'yes+++': 'Oui +++'
     none: Aucun
-    lethargique_inconscient: Léthargique et inconscient
-    agite_irritable: Agité et irritable
+    lethargique_inconscient: Léthargique ou inconscient
+    agite_irritable: Agité ou irritable
     normal: Normal
     avide: Avide
-    impossible: Impossible
+    impossible: Difficilement
     lentement: Lentement
     tres_lentement: Très lentement
     respiration_normale: Respiration normale
