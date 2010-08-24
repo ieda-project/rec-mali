@@ -6,7 +6,7 @@ class Csps::Formula
   LOGICAL = {
     'AND' => ' && ',
     'OR'  => ' || ' }
-  RE = /([a-z0-9._]+|EXACTLY_ONE_OF\(|AT_LEAST_TWO_OF\(|,|#{LOGICAL.keys.join('|')}|[\(\)]|#{EQ.join('|')}|!)/
+  RE = /([a-z0-9._+]+|EXACTLY_ONE_OF\(|AT_LEAST_TWO_OF\(|,|#{LOGICAL.keys.join('|')}|[\(\)]|#{EQ.join('|')}|!)/
 
   def initialize cl
     src = cl.equation.scan(RE).map &:first

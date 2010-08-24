@@ -16,9 +16,8 @@
           - optional = 'optional' if form.object.new_record?
           = form.text_field :mac, size: 4, class: "integer #{optional}"
           %em mm
-.ratios{:href => indices_child_diagnostics_path(:child_id => (@child.id || -1))}
+.ratios
   %ul
     = render :partial => 'diagnostics/index', :locals => {:name => 'weight_height', :diagnostic => form.object}
     = render :partial => 'diagnostics/index', :locals => {:name => 'height_age', :diagnostic => form.object}
     = render :partial => 'diagnostics/index', :locals => {:name => 'weight_age', :diagnostic => form.object}
-

@@ -11,10 +11,11 @@
   - style = :alert if value < Index::ALERT[name]
 - else
   - style = :disabled
-%li{:class => "#{style} #{name}"}
+%li{:class => "#{style} #{name}", 'data-key' => name}
   %span= t(name, :scope => :indices)
   %strong
-    = "#{value.to_i} %"
+    %span.value= value.to_i
+    \%
   - if value.is_a? Float and child
     %div.graph
       %h2= t(name, :scope => :indices)

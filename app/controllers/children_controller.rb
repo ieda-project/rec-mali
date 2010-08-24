@@ -18,6 +18,24 @@ class ChildrenController < ApplicationController
     @page = (params[:page] || '1').to_i
   end
 
+  def calculations
+    data = params[:d]
+    weight = data[:weight].to_i
+    height = data[:height].to_i
+    months = data[:months].to_i
+    gender = (data[:gender] == 'true')
+    render json: {
+      weight_age: [
+        ((weight / Index.weight_age.gender(gender).near(months).y * 100).round(0) rescue nil),
+        Index::WARNING['weight_age'], Index::ALERT['weight_age']],
+      height_age: [
+        ((height / Index.height_age.gender(gender).near(months).y * 100).round(0) rescue nil),
+        Index::WARNING['height_age'], Index::ALERT['height_age']],
+      weight_height: [
+        ((weight / Index.weight_height.gender(gender).near(height).y * 100).round(0) rescue nil),
+        Index::WARNING['weight_height'], Index::ALERT['weight_height']] }
+  end
+
   def indices
     name = params[:name]
     diag = Diagnostic.find(params[:diagnostic]) if params[:diagnostic].present?

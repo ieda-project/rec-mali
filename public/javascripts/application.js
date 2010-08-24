@@ -1,3 +1,4 @@
+function $E(a,b) { return document.getElement(a,b) }
 Element.implement({
   classes: function() { return this.className.split(/\s+/) },
   updated: function(name) {
@@ -105,7 +106,7 @@ transient = {
 window.addEvent('domready', function() { document.body.updated() })
 window.addEvent('domready', function() {
   var link, next
-  if (link = document.getElement('link.auto-post')) {
+  if (link = $E('link.auto-post')) {
     new Request.JSON({
       url: link.get('href'),
       onSuccess: function(json) {
@@ -117,19 +118,19 @@ window.addEvent('domready', function() {
             var ul = new Element('ul', { 'class': 'classification' })
             json[illness].each(function(i) { new Element('li', { html: i }).inject(ul) })
             ul.inject(section) }})
-        if (next = document.getElement('link[rel=next]')) window.location = next.href }}).post() }
+        if (next = $E('link[rel=next]')) window.location = next.href }}).post() }
 
   /* ILLNESSES */
 
   illnesses = document.getElements('form.diagnostic section.illness')
   if (illnesses[0]) {
-    var form = document.getElement('form.diagnostic')
+    var form = $E('form.diagnostic')
     form.tree = { enfant: {} };
     (function(age) {
       if (age) form.tree.enfant = {
         months: age.get('data-months').toInt(),
         age: age.get('data-age').toInt() }
-    })(document.getElement('span.age'))
+    })($E('span.age'))
     var button = form.getElement('button[type=submit]').addClass('disabled')
     var first = null;
 
@@ -244,44 +245,51 @@ window.addEvent('domready', function() {
       return illness.valid
     }
     var head_inputs = document.getElements('.profile-child input[type=text]')
-    var head_next = document.getElement('.profile-child .next button')
-    var last_indices_params = null
+    var head_next = $E('.profile-child .next button')
+
+    var last_indices_data = null
     function refresh_indices() {
-      var indices = document.getElement('div.ratios')
-      var href = indices.get('href')
-      // get params for indices computation
-      if (href.indexOf("children/-1") != -1) {
-        // new child
-        var params = new Hash({
-          height: $('child_diagnostic_height').value,
-          weight: $('child_diagnostic_weight').value,
-          gender: $('child_gender').value,
-          day: $('child_born_on_3i').value,
-          month: $('child_born_on_2i').value,
-          year: $('child_born_on_1i').value
-        })
-      } else {
-        // existing child
-        var params = new Hash({
-          height: $('diagnostic_height').value,
-          weight: $('diagnostic_weight').value
-        })
+      if (!measurements_valid) {
+        if (last_indices_data) {
+          [ 'weight_age', 'height_age', 'weight_height' ].each(function (index) {
+            var li = $E('.ratios .'+index)
+            li.removeClass('alert').removeClass('warning').addClass('disabled')
+            li.getElement('.value').set('text', '-') })
+        }
+        return
       }
-      // Test if params changed
-      if (last_indices_params && params.every(function(value, key) {
-        return last_indices_params[key] == value
-      })) {
-        // no changes
-        return false
-      } else {
-        // params changed
-        last_indices_params = params
-      }
-      // replace with new values
-      new Request.HTML({
-        url: href,
-        update: indices
-      }).get(params)
+      var indices = $E('div.ratios')
+      var g = $('child_gender')
+      var data = new Hash({
+        months: form.tree.enfant.months,
+        weight: $E('input[id$=diagnostic_weight]').value.toInt(),
+        height: $E('input[id$=diagnostic_height]').value.toInt(),
+        gender: g ? (g.selectedIndex == 0) : $E('.profile-child').get('data-gender') })
+      if (last_indices_data && data.every(function(value, key) { return last_indices_data[key] == value })) return
+      last_indices_data = data
+      new Request.JSON({
+        url: '/children/calculations',
+        onSuccess: function(json) {
+          for (index in json) {
+            var v = json[index]
+            var li = $E('.ratios .'+index)
+            li.removeClass('disabled')
+            if (v[0] < v[2]) {
+              li.addClass('alert')
+            } else {
+              li.removeClass('alert')
+              if (v[0] < v[1]) {
+                li.addClass('warning')
+              } else li.removeClass('warning')
+            }
+            li.getElement('.value').set('text', v[0]).setStyle(
+              'font-size', v[0] > 999 ? '0.9em' : '1em')
+          }
+          form.tree.enfant.wfa = json.weight_age[0]
+          form.tree.enfant.hfa = json.height_age[0]
+          form.tree.enfant.wfh = json.weight_height[0]
+        }
+      }).get({ d: data.getClean() })
     }
     function validate_measurements() {
       var was_valid = measurements_valid
@@ -296,13 +304,9 @@ window.addEvent('domready', function() {
           return i.value.match(/[^ ]/)
         }
       })
-      if (measurements_valid) {
-        refresh_indices()
-      }
       if (!was_valid && measurements_valid) {
         head_next.setStyle('visibility', 'visible')
         head_next.removeClass('disabled')
-        refresh_indices()
       } else if (was_valid && !measurements_valid) {
         illnesses.each(function(i) { i.addClass('closed') })
         head_next.setStyle('visibility', 'visible')
@@ -319,6 +323,7 @@ window.addEvent('domready', function() {
         head_next.setStyle('visibility', 'hidden')
       }})
     validate_measurements.periodical(100)
+    refresh_indices.periodical(250)
 
     illnesses.each(function (i,j) {
       i.addClass('closed')
@@ -432,7 +437,7 @@ Element.behaviour(function() {
   })
 
   this.getElements('.photo').addEvent('click', function() {
-    var link = document.getElement('link[rel=photo-upload-target]')
+    var link = $E('link[rel=photo-upload-target]')
     var obj = new Element('object', { width: 300, height: 330 })
     obj.adopt(new Element('param', { name: 'movie', value: '/flash/photo.swf' }))
     obj.adopt(new Element('param', {

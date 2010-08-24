@@ -12,6 +12,9 @@ Csps::Application.routes.draw do |map|
   end
 
   resources :children do
+    collection do
+      get :calculations
+    end
     member do
       get :indices
     end
@@ -23,9 +26,6 @@ Csps::Application.routes.draw do |map|
       member do
         get :treatments, :wait
         post :calculations
-      end
-      collection do
-        get :indices
       end
     end
   end

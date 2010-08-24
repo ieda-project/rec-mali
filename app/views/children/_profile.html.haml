@@ -8,7 +8,7 @@
       %h2 Dernières mesures
       - if @child.last_visit
         = partial 'children/measurements', locals: { diagnostic: @child.last_visit }
-        = render :partial => 'diagnostics/indices', locals: { diagnostic: @child.last_visit }
+        = partial 'diagnostics/indices', locals: { diagnostic: @child.last_visit }
       - else
         %p Never measured.
     .vaccinations
