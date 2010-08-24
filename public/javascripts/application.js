@@ -136,7 +136,7 @@ window.addEvent('domready', function() {
     (function(stem) {
       var today = new Date()
       var y
-      if (var y = $(stem+'_1i')) {
+      if (y = $(stem+'_1i')) {
         var m = $(stem+'_2i')
         var d = $(stem+'_3i')
         $$('select[id^='+stem+'_]').addEvent('change', function() {
