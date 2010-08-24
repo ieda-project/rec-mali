@@ -124,12 +124,31 @@ window.addEvent('domready', function() {
   illnesses = document.getElements('form.diagnostic section.illness')
   if (illnesses[0]) {
     var form = document.getElement('form.diagnostic')
-    test = form.tree = {};
+    form.tree = { enfant: {} };
     (function(age) {
-      if (age) form.tree.enfant = { age: age.get('data-years').toInt() }
+      if (age) form.tree.enfant = {
+        months: age.get('data-months').toInt(),
+        age: age.get('data-age').toInt() }
     })(document.getElement('span.age'))
     var button = form.getElement('button[type=submit]').addClass('disabled')
-    var first = null
+    var first = null;
+
+    (function(stem) {
+      today = new Date()
+      if (y = $(stem+'_1i')) {
+        m = $(stem+'_2i')
+        d = $(stem+'_3i')
+        $$('select[id^='+stem+'_]').addEvent('change', function() {
+          months = ((today.getFullYear() - y.value.toInt())*12) +
+                       (today.getMonth()+1 - m.value.toInt()) -
+                       (d.value.toInt() <= today.getDate() ? 0 : 1)
+          if (months < 0) months = 0
+          form.tree.enfant.months = months
+          form.tree.enfant.age = (months / 12).floor()
+        })
+      }
+      y.fireEvent('change')
+    })('child_born_on')
 
     var measurements_valid = true
     function open_illness(illness, scroll) {

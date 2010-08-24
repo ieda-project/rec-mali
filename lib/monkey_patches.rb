@@ -1,3 +1,13 @@
+class Date
+  def full_months_from other
+    ret = (year - other.year)*12 + (month - other.month) - (other.day <= day ? 0 : 1)
+  end
+
+  def full_years_from other
+    full_months_from(other) / 12
+  end
+end
+
 class Hash
   def force_encoding enc
     each { |k,v| v.force_encoding enc rescue nil }

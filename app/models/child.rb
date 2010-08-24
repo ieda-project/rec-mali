@@ -23,11 +23,11 @@ class Child < ActiveRecord::Base
   end
 
   def age
-    born_on && ((Date.today - born_on) / 365).to_i
+    born_on && Date.today.full_years_from(born_on)
   end
   
   def months
-    born_on && ((Date.today - born_on) / 365.0 * 12).to_i
+    born_on && Date.today.full_months_from(born_on)
   end
   
   def name

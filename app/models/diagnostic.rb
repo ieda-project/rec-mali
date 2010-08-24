@@ -49,7 +49,7 @@ class Diagnostic < ActiveRecord::Base
 
   def to_hash
     returning(sign_answers.to_hash) do |hash|
-      for field in %w(age muac wfa hfa wfh)
+      for field in %w(age months muac wfa hfa wfh)
         hash["enfant.#{field}"] = send field
       end
     end
@@ -62,11 +62,11 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def age
-    child.born_on && ((reference_date - child.born_on) / 365).to_i
+    reference_date.full_years_from(child.born_on)
   end
 
   def months
-    child.born_on && ((reference_date - child.born_on) / 365.0 * 12).to_i
+    reference_date.full_months_from(child.born_on)
   end
 
   INDICES = {

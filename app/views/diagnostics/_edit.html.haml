@@ -7,7 +7,7 @@
       %p
         %strong< #{@child.gender ? 'Né' : 'Née'} le :
         #{l @child.born_on},
-        %span.age{'data-years' => age_in_years(@child.born_on, @diagnostic.reference_date)}<= textual_age @child.born_on, @diagnostic.reference_date
+        %span.age{'data-age' => @diagnostic.age, 'data-months' => @diagnostic.months}<= months_to_text @diagnostic.months
         %br/
         %strong Village : #{@child.village.try(:name) || '-'}
 

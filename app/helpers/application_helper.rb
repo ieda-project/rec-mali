@@ -24,17 +24,15 @@ module ApplicationHelper
     RedCloth.new(textile).to_html
   end
 
-  def textual_age d, ref=nil
-    ref ||= Date.today
-    months = ((ref - d).to_f / 365.25 * 12).truncate
-    "#{months} mois"
+  def months_to_text m
+    if m > 24
+      years, rem = m.divmod 12
+      "#{years}#{rem >= 6 ? '½' : ''} ans"
+    else
+      "#{m} moins"
+    end
   end
 
-  def age_in_years d, ref=nil
-    ref ||= Date.today
-    ((ref - d).to_f / 365.25).truncate
-  end
-  
   def errors_on form, field
     render :partial => 'shared/errors', :locals => {:form => form, :field => field}
   end
