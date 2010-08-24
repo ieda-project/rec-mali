@@ -1,6 +1,6 @@
 class Date
   def full_months_from other
-    ret = (year - other.year)*12 + (month - other.month) - (other.day <= day ? 0 : 1)
+    (year - other.year)*12 + (month - other.month) - (other.day <= day ? 0 : 1)
   end
 
   def full_years_from other
