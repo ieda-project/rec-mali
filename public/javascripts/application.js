@@ -134,10 +134,11 @@ window.addEvent('domready', function() {
     var first = null;
 
     (function(stem) {
-      today = new Date()
-      if (y = $(stem+'_1i')) {
-        m = $(stem+'_2i')
-        d = $(stem+'_3i')
+      var today = new Date()
+      var y
+      if (var y = $(stem+'_1i')) {
+        var m = $(stem+'_2i')
+        var d = $(stem+'_3i')
         $$('select[id^='+stem+'_]').addEvent('change', function() {
           months = ((today.getFullYear() - y.value.toInt())*12) +
                        (today.getMonth()+1 - m.value.toInt()) -
@@ -146,8 +147,8 @@ window.addEvent('domready', function() {
           form.tree.enfant.months = months
           form.tree.enfant.age = (months / 12).floor()
         })
+        y.fireEvent('change')
       }
-      y.fireEvent('change')
     })('child_born_on')
 
     var measurements_valid = true
