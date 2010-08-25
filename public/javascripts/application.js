@@ -264,8 +264,8 @@ window.addEvent('domready', function() {
       var g = $('child_gender')
       var data = new Hash({
         months: form.tree.enfant.months,
-        weight: $E('input[id$=diagnostic_weight]').value.toInt(),
-        height: $E('input[id$=diagnostic_height]').value.toInt(),
+        weight: $E('input[id$=diagnostic_weight]').value.toFloat(),
+        height: $E('input[id$=diagnostic_height]').value.toFloat(),
         gender: g ? (g.selectedIndex == 0) : $E('.profile-child').get('data-gender') })
       if (last_indices_data && data.every(function(value, key) { return last_indices_data[key] == value })) return
       last_indices_data = data

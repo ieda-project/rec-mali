@@ -20,9 +20,9 @@ class ChildrenController < ApplicationController
 
   def calculations
     data = params[:d]
-    weight = data[:weight].to_i
-    height = data[:height].to_i
-    months = data[:months].to_i
+    weight = data[:weight].to_f
+    height = data[:height].to_f
+    months = data[:months].to_f
     gender = (data[:gender] == 'true')
     render json: {
       weight_age: [
