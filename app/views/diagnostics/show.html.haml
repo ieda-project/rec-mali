@@ -14,7 +14,7 @@
 
 %section.resume
   .measurements
-    %h2 Mesures lors du diagnostique
+    %h2 Mesures lors de la consultation
     = partial 'children/measurements', locals: { diagnostic: @diagnostic }
     = partial 'diagnostics/indices', locals: { diagnostic: @diagnostic }
   - if @diagnostic.failed_classifications.try :any?
