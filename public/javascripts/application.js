@@ -134,6 +134,7 @@ window.addEvent('domready', function() {
     var button = form.getElement('button[type=submit]').addClass('disabled')
     var first = null;
 
+    var run_all_deps = function(validate) { return };
     (function(stem) {
       var today = new Date()
       var y
@@ -147,6 +148,7 @@ window.addEvent('domready', function() {
           if (months < 0) months = 0
           form.tree.enfant.months = months
           form.tree.enfant.age = (months / 12).floor()
+          run_all_deps(true)
         })
         y.fireEvent('change')
       }
@@ -353,10 +355,13 @@ window.addEvent('domready', function() {
         }
       })
 
-      function run_deps() {
+      i.run_deps = function(validate) {
+        var change = false
         i.fields.each(function (s) {
           if (s.dep) {
+            var old = s.disabled
             s.disabled = !s.dep(form.tree)
+            if (old != s.disabled) change = true
             var td = s.getParent()
             if (s.disabled) {
               if (!td.ghost) {
@@ -375,13 +380,14 @@ window.addEvent('domready', function() {
             }
           }
         })
+        if (validate && change) validate_illness(i)
       }
 
       i.fields.addEvent('change', function() {
         copy_value(this)
-        run_deps()
+        i.run_deps()
       })
-      run_deps()
+      i.run_deps()
 
       if (!first && i.getElement('.fieldWithErrors')) first = i
 
@@ -399,6 +405,7 @@ window.addEvent('domready', function() {
       i.fields.addEvent('change', function() { validate_illness(i) })
       validate_illness(i, false)
     })
+    run_all_deps = function(validate) { illnesses.each(function (i) { i.run_deps(validate) }) }
 
     if (first) { open_illness(first) } else validate_measurements()
   }
