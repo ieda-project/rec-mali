@@ -157,13 +157,27 @@ Index.destroy_all
 Index::NAMES.each do |name|
   %w(boys girls).each do |gender|
     begin
-      file_name = File::join('db', 'fixtures', 'indices', "#{name}-#{gender}.txt")
-      File.open(file_name, 'r') do |f|
-        f.each_line do |line|
-          next if line.blank?
-          x, y = line.split ','
-          i = Index.new(:x => x, :y => y, :for_boys => (gender == 'boys'), :name => Index::NAMES.index(name))
-          puts i.errors unless i.save
+      if name == 'weight-height'
+        %w(above-2y under-2y).each do |age|
+          file_name = File::join('db', 'fixtures', 'indices', "#{name}-#{age}-#{gender}.txt")
+          File.open(file_name, 'r') do |f|
+            f.each_line do |line|
+              next if line.blank?
+              x, y = line.split ','
+              i = Index.new(:x => x, :y => y, :for_boys => (gender == 'boys'), :name => Index::NAMES.index(name), :above_2yrs => (age == 'above-2y'))
+              puts i.errors unless i.save
+            end
+          end
+        end
+      else
+        file_name = File::join('db', 'fixtures', 'indices', "#{name}-#{gender}.txt")
+        File.open(file_name, 'r') do |f|
+          f.each_line do |line|
+            next if line.blank?
+            x, y = line.split ','
+            i = Index.new(:x => x, :y => y, :for_boys => (gender == 'boys'), :name => Index::NAMES.index(name))
+            puts i.errors unless i.save
+          end
         end
       end
     rescue => e

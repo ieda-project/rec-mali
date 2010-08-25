@@ -32,7 +32,7 @@ class ChildrenController < ApplicationController
         ((height / Index.height_age.gender(gender).near(months).y * 100).round(0) rescue nil),
         Index::WARNING['height_age'], Index::ALERT['height_age']],
       weight_height: [
-        ((weight / Index.weight_height.gender(gender).near(height).y * 100).round(0) rescue nil),
+        ((weight / Index.weight_height.gender(gender).age_in_months(months).near(height).y * 100).round(0) rescue nil),
         Index::WARNING['weight_height'], Index::ALERT['weight_height']] }
   end
 
@@ -44,7 +44,7 @@ class ChildrenController < ApplicationController
     else
       v, i = @child.index name
     end
-    curve = Index.where(:name => Index::NAMES.index(name.gsub('_', '-'))).gender(@child.gender).order(:x).all
+    curve = Index.where(:name => Index::NAMES.index(name.gsub('_', '-'))).gender(@child.gender).age_in_months(@child.months).order(:x).all
     chart = Ziya::Charts::Line.new
     chart.add :theme, 'pimp'
     labels = curve.map(&:x).map {|e| ((e%6)==0 ? e : '')}

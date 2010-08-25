@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.float    "y"
     t.integer  "name"
     t.boolean  "for_boys"
+    t.boolean  "above_2yrs"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

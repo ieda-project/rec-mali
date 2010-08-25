@@ -14,6 +14,7 @@ class Index < ActiveRecord::Base
   scope :boys, :conditions => {:for_boys => true}
   scope :girls, :conditions => {:for_boys => false}
   scope :gender, lambda{|gender| {:conditions => {:for_boys => gender}}}
+  scope :age_in_months, lambda{|months| {:conditions => ['above_2yrs IS NULL OR above_2yrs = ?', (months >= 24)]}}
     
   def self.near arg
     find(:first, :order => "abs(x - #{arg.to_f})")

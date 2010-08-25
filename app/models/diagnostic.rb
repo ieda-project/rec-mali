@@ -86,7 +86,7 @@ class Diagnostic < ActiveRecord::Base
 
   def weight_height
     [ weight,
-      Index.weight_height.gender(child.gender).near(height) ]
+      Index.weight_height.gender(child.gender).age_in_months(child.months).near(height) ]
   end
 
   def index name
