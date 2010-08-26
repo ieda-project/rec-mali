@@ -242,7 +242,7 @@ window.addEvent('domready', function() {
       if (i.get('data-condition')) {
         i.condition = new Function(
           'data',
-          'try { return('+s.get('data-condition')+') } catch(err) { console.log("Condition error: "+err); return false }') }})
+          'try { return('+i.get('data-condition')+') } catch(err) { console.log("Condition error: "+err); return false }') }})
     document.getElements('.profile-child input[type=text], .profile-child select').addEvent('change', function(i) {
       illnesses.each(function(i) { invalidate_illness(i, true); show_hide_button() })
       show_hide_button()
@@ -295,16 +295,20 @@ window.addEvent('domready', function() {
     }
     function validate_measurements() {
       var was_valid = measurements_valid
-      measurements_valid = head_inputs.every(function(i) {
-        if (i.condition && !i.condition(form.tree)) return true
-        if (i.hasClass('float')) {
-          return i.value.match(/^[0-9]+([\.,][0-9]+){0,2}$/) && parseFloat(i.value) > 0
-        } else if (i.hasClass('integer')) {
-          return i.value.match(/^[0-9]+$/) && parseInt(i.value) > 0
-        } else {
-          return i.value.match(/[^ ]/)
-        }
-      })
+      measurements_valid = true
+      head_inputs.each(function(i) {
+        if (i.condition) {
+          if (i.condition(form.tree)) {
+            i.disabled = false
+          } else {
+            i.disabled = true }}
+        if (!i.disabled && measurements_valid) {
+          if (i.hasClass('float')) {
+            measurements_valid = i.value.match(/^[0-9]+([\.,][0-9]+){0,2}$/) && parseFloat(i.value) > 0
+          } else if (i.hasClass('integer')) {
+            measurements_valid = i.value.match(/^[0-9]+$/) && parseInt(i.value) > 0
+          } else {
+            measurements_valid = i.value.match(/[^ ]/) }}})
       if (!was_valid && measurements_valid) {
         head_next.setStyle('visibility', 'visible')
         head_next.removeClass('disabled')
@@ -322,7 +326,7 @@ window.addEvent('domready', function() {
       else {
         open_illness(illnesses[0], false)
       }})
-    validate_measurements.periodical(100)
+    validate_measurements.periodical(150)
     refresh_indices.periodical(250)
 
     illnesses.each(function (i,j) {

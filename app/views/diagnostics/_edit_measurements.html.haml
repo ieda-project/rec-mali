@@ -13,8 +13,7 @@
       - if form.object.new_record? or (form.object.months > 6 and form.object.months < 60)
         %th(scope='row') Périm. Brac.
         %td
-          - optional = 'optional' if form.object.new_record?
-          = form.text_field :mac, size: 4, class: "integer #{optional}"
+          = form.text_field :mac, size: 4, class: 'integer', 'data-condition' => 'data.enfant.months >= 6 && data.enfant.age <= 5'
           %em mm
 .ratios
   %ul
