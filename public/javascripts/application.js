@@ -251,24 +251,25 @@ window.addEvent('domready', function() {
 
     var last_indices_data = null
     function refresh_indices() {
-      if (!measurements_valid) {
+      var weight = $E('input[id$=diagnostic_weight]')
+      var height = $E('input[id$=diagnostic_height]')
+      if (!(weight.valid && height.valid)) {
         if (last_indices_data) {
           [ 'weight_age', 'height_age', 'weight_height' ].each(function (index) {
             var li = $E('.ratios .'+index)
             li.removeClass('alert').removeClass('warning').addClass('disabled')
             li.getElement('.value').set('text', '-') })
-        }
+          last_indices_data = null }
         return
       }
       var indices = $E('div.ratios')
       var g = $('child_gender')
       var data = new Hash({
         months: form.tree.enfant.months,
-        weight: $E('input[id$=diagnostic_weight]').value.toFloat(),
-        height: $E('input[id$=diagnostic_height]').value.toFloat(),
+        weight: weight.value.toFloat(),
+        height: height.value.toFloat(),
         gender: g ? (g.selectedIndex == 0) : $E('.profile-child').get('data-gender') })
       if (last_indices_data && data.every(function(value, key) { return last_indices_data[key] == value })) return
-      last_indices_data = data
       new Request.JSON({
         url: '/children/calculations',
         onSuccess: function(json) {
@@ -290,6 +291,7 @@ window.addEvent('domready', function() {
           form.tree.enfant.wfa = json.weight_age[0]
           form.tree.enfant.hfa = json.height_age[0]
           form.tree.enfant.wfh = json.weight_height[0]
+          last_indices_data = data
         }
       }).get({ d: data.getClean() })
     }
@@ -301,14 +303,18 @@ window.addEvent('domready', function() {
           if (i.condition(form.tree)) {
             i.disabled = false
           } else {
-            i.disabled = true }}
-        if (!i.disabled && measurements_valid) {
+            i.disabled = true
+            i.valid = true
+            i.value = '' }}
+        if (!i.disabled) {
           if (i.hasClass('float')) {
-            measurements_valid = i.value.match(/^[0-9]+([\.,][0-9]+){0,2}$/) && parseFloat(i.value) > 0
+            i.valid = i.value.match(/^[0-9]+([\.,][0-9]+){0,2}$/) && parseFloat(i.value) > 0
           } else if (i.hasClass('integer')) {
-            measurements_valid = i.value.match(/^[0-9]+$/) && parseInt(i.value) > 0
+            i.valid = i.value.match(/^[0-9]+$/) && parseInt(i.value) > 0
           } else {
-            measurements_valid = i.value.match(/[^ ]/) }}})
+            i.valid = i.value.match(/[^ ]/)
+          }
+          if (!i.valid) measurements_valid = false }})
       if (!was_valid && measurements_valid) {
         head_next.setStyle('visibility', 'visible')
         head_next.removeClass('disabled')
