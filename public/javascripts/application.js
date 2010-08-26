@@ -296,12 +296,14 @@ window.addEvent('domready', function() {
           [ 'weight_age', 'height_age', 'weight_height' ].each(function (index) {
             var li = indices.getElement('.'+index)
             li.removeClass('alert').removeClass('warning').addClass('disabled')
-            li.getElement('.value').set('text', '-') })}}).periodical(250) })()
+            li.getElement('.value').set('text', '-') })}}).periodical(250) })();
 
-    function validate_measurements() {
+    // Validate measurements
+    (function() {
       var was_valid = measurements_valid
       measurements_valid = true
       head_inputs.each(function(i) {
+        var value = null
         if (i.condition) {
           if (i.condition(form.tree)) {
             i.disabled = false
@@ -312,13 +314,18 @@ window.addEvent('domready', function() {
             i.value = '' }}
         if (!i.disabled) {
           if (i.hasClass('float')) {
-            i.valid = i.value.match(/^[0-9]+([\.,][0-9]+){0,2}$/) && parseFloat(i.value) > 0
+            value = i.value.toFloat()
+            i.valid = value.toString() == i.value && value > 0
           } else if (i.hasClass('integer')) {
-            i.valid = i.value.match(/^[0-9]+$/) && parseInt(i.value) > 0
+            value = i.value.toInt()
+            i.valid = value.toString() == i.value && value > 0
           } else {
-            i.valid = i.value.match(/[^ ]/)
-          }
-          if (!i.valid) measurements_valid = false }})
+            value = i.value
+            i.valid = value.match(/[^ ]/) }
+          if (!i.valid) measurements_valid = false }
+        var key = i.get('data-key')
+        if (key) form.tree.enfant[key] = value })
+
       if (!was_valid && measurements_valid) {
         head_next.setStyle('visibility', 'visible')
         head_next.removeClass('disabled')
@@ -329,14 +336,12 @@ window.addEvent('domready', function() {
       }
       if (was_valid != measurements_valid) show_hide_button()
       return measurements_valid
-    }
+    }).periodical(150)
+
     head_next.addEvent('click', function() {
       if (this.hasClass('disabled'))
         alert_fill()
-      else {
-        open_illness(illnesses[0], false)
-      }})
-    validate_measurements.periodical(150);
+      else open_illness(illnesses[0], false) })
 
     illnesses.each(function (i,j) {
       i.addClass('closed')
@@ -420,7 +425,7 @@ window.addEvent('domready', function() {
     })
     run_all_deps = function(validate) { illnesses.each(function (i) { i.run_deps(validate) }) }
 
-    if (first) { open_illness(first) } else validate_measurements()
+    if (first) open_illness(first)
   }
 })
 

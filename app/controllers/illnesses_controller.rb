@@ -13,9 +13,14 @@ class IllnessesController < ApplicationController
           else v
         end
       end
+      puts "USING:"
+      puts params[:d].inspect
       ret = illness.classifications.map do |cl|
+        puts cl.equation
         [ cl.name, (cl.calculate(params[:d]) rescue 'error') ]
       end
+      puts
+      puts
       render text: ret.to_json
     else
       render json: {}
