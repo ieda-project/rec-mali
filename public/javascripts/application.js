@@ -302,8 +302,9 @@ window.addEvent('domready', function() {
         if (i.condition) {
           if (i.condition(form.tree)) {
             i.disabled = false
+            i.removeClass('disabled').disabled = false
           } else {
-            i.disabled = true
+            i.addClass('disabled').disabled = true
             i.valid = true
             i.value = '' }}
         if (!i.disabled) {
