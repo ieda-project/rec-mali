@@ -5,4 +5,26 @@ module DiagnosticsHelper
       when true then 1
     end
   end
+
+  def index_value diagnostic, name
+    if @values
+      @values[name]
+    elsif diagnostic && !diagnostic.new_record?
+      diagnostic.index_ratio(name)
+    end
+  end
+
+  def index_style name, value
+    returning [name] do |ret|
+      if value.is_a? Float
+        if value < Index::WARNING[name]
+          ret << 'warning'
+        elsif value < Index::ALERT[name]
+          ret << 'alert'
+        end
+      else
+        ret << 'disabled'
+      end
+    end
+  end
 end

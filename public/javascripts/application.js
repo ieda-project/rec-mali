@@ -247,54 +247,57 @@ window.addEvent('domready', function() {
       illnesses.each(function(i) { invalidate_illness(i, true); show_hide_button() })
       show_hide_button()
     })
-    var head_next = $E('.profile-child .next button')
+    var head_next = $E('.profile-child .next button');
 
-    var last_indices_data = null
-    function refresh_indices() {
+    (function () {
+      var indices = $E('div.ratios')
       var weight = $E('input[id$=diagnostic_weight]')
       var height = $E('input[id$=diagnostic_height]')
-      if (!(weight.valid && height.valid)) {
-        if (last_indices_data) {
-          [ 'weight_age', 'height_age', 'weight_height' ].each(function (index) {
-            var li = $E('.ratios .'+index)
-            li.removeClass('alert').removeClass('warning').addClass('disabled')
-            li.getElement('.value').set('text', '-') })
-          last_indices_data = null }
-        return
-      }
-      var indices = $E('div.ratios')
-      var g = $('child_gender')
-      var data = new Hash({
-        months: form.tree.enfant.months,
-        weight: weight.value.toFloat(),
-        height: height.value.toFloat(),
-        gender: g ? (g.selectedIndex == 0) : $E('.profile-child').get('data-gender') })
-      if (last_indices_data && data.every(function(value, key) { return last_indices_data[key] == value })) return
-      new Request.JSON({
-        url: '/children/calculations',
-        onSuccess: function(json) {
-          for (index in json) {
-            var v = json[index]
-            var li = $E('.ratios .'+index)
-            li.removeClass('disabled')
-            if (v[0] < v[2]) {
-              li.addClass('alert')
-            } else {
-              li.removeClass('alert')
-              if (v[0] < v[1]) {
-                li.addClass('warning')
-              } else li.removeClass('warning')
+      var gender = $('child_gender')
+      function get_indices_data() {
+        if (weight.valid && height.valid) {
+          return new Hash({
+            months: form.tree.enfant.months,
+            weight: weight.value.toFloat(),
+            height: height.value.toFloat(),
+            gender: gender ? (gender.selectedIndex == 0) : $E('.profile-child').get('data-gender') })
+        } else return null }
+      var last_indices_data = get_indices_data();
+      (function() {
+        var data = get_indices_data()
+        if (data) {
+          if (last_indices_data && data.every(function(value, key) { return last_indices_data[key] == value })) return
+          new Request.JSON({
+            url: '/children/calculations',
+            onSuccess: function(json) {
+              for (index in json) {
+                var v = json[index]
+                var li = $E('.ratios .'+index)
+                li.removeClass('disabled')
+                if (v[0] < v[2]) {
+                  li.addClass('alert')
+                } else {
+                  li.removeClass('alert')
+                  if (v[0] < v[1]) {
+                    li.addClass('warning')
+                  } else li.removeClass('warning')
+                }
+                li.getElement('.value').set('text', v[0]).setStyle(
+                  'font-size', v[0] > 999 ? '0.9em' : '1em')
+              }
+              form.tree.enfant.wfa = json.weight_age[0]
+              form.tree.enfant.hfa = json.height_age[0]
+              form.tree.enfant.wfh = json.weight_height[0]
+              last_indices_data = data
             }
-            li.getElement('.value').set('text', v[0]).setStyle(
-              'font-size', v[0] > 999 ? '0.9em' : '1em')
-          }
-          form.tree.enfant.wfa = json.weight_age[0]
-          form.tree.enfant.hfa = json.height_age[0]
-          form.tree.enfant.wfh = json.weight_height[0]
-          last_indices_data = data
-        }
-      }).get({ d: data.getClean() })
-    }
+          }).get({ d: data.getClean() })
+        } else {
+          // No data
+          [ 'weight_age', 'height_age', 'weight_height' ].each(function (index) {
+            var li = indices.getElement('.'+index)
+            li.removeClass('alert').removeClass('warning').addClass('disabled')
+            li.getElement('.value').set('text', '-') })}}).periodical(250) })()
+
     function validate_measurements() {
       var was_valid = measurements_valid
       measurements_valid = true
@@ -333,8 +336,7 @@ window.addEvent('domready', function() {
       else {
         open_illness(illnesses[0], false)
       }})
-    validate_measurements.periodical(150)
-    refresh_indices.periodical(250)
+    validate_measurements.periodical(150);
 
     illnesses.each(function (i,j) {
       i.addClass('closed')
