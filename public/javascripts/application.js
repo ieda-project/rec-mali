@@ -156,9 +156,6 @@ window.addEvent('domready', function() {
 
     var measurements_valid = true
     function open_illness(illness, scroll) {
-      illness.getElement('h2').
-        removeEvents('click').
-        addEvent('click', function() { open_illness(illness) })
       illnesses.each(function(i) { i.addClass('closed') })
       illness.removeClass('closed')
       if (!illness.getElement('h2').getElement('ul'))
@@ -166,8 +163,8 @@ window.addEvent('domready', function() {
       if (scroll != false) window.scrollTo(0, illness.getPosition().y)
     }
     function all_valid() { return illnesses.every(function (i) { return i.valid }) }
-    function show_hide_button(illness) {
-      if ((!illness || illness.valid) && measurements_valid && all_valid()) {
+    function show_hide_button() {
+      if (illnesses.getLast().valid && measurements_valid && all_valid()) {
         button.removeClass('disabled')
         button.removeEvents()
         document.removeEvents('keypress')
@@ -190,27 +187,21 @@ window.addEvent('domready', function() {
     function alert_fill() {
       alert('Veuillez répondre à toutes les questions avant de poursuivre')
     }
+    function invalidate_illness(illness, close) {
+      illness.valid = false
+      var h2 = illness.getElement('h2')
+      h2.getElements('img, ul').dispose()
+      if (close) illness.addClass('closed')
+    }
     function validate_illness(illness, calculate) {
+      if (calculate != false) invalidate_illness(illness)
       illness.valid = illness.fields.every(function(i) {
         if (i.disabled || i.get('type') == 'hidden') {
           return true        
         } else if (i.get('type') == 'radio') {
           return i.getParent().getElements('input').some(function(x) { return x.checked })
         } else {
-          return i.value.match(/^[0-9]+$/) && parseInt(i.value) >= 0
-        }
-      })
-      if (calculate != false) {
-        var str = ''
-        illnesses.each(function(i) {
-          if (i.get('data-classify-href') > illness.get('data-classify-href')) {
-            var h2 = i.getElement('h2')
-            h2.getElements('img, ul').dispose()
-            h2.removeEvents('click').
-            addEvent('click', function() { alert_fill() })
-          }
-        })
-      }
+          return i.value.match(/^[0-9]+$/) && parseInt(i.value) >= 0 }})
       if (calculate != false && illness.valid) {
         var h2 = illness.getElement('h2')
         h2.getElements('img').dispose()
@@ -237,7 +228,7 @@ window.addEvent('domready', function() {
         }).get({ d: data })
       }
       if (!illness.valid) illness.getElements('h2 ul').dispose()
-      show_hide_button(illness)
+      show_hide_button()
       if (illness.getElement('.next button')) {
         if (illness.valid)
           illness.getElement('.next button').removeClass('disabled')
@@ -247,6 +238,15 @@ window.addEvent('domready', function() {
       return illness.valid
     }
     var head_inputs = document.getElements('.profile-child input[type=text]')
+    head_inputs.each(function(i) {
+      if (i.get('data-condition')) {
+        i.condition = new Function(
+          'data',
+          'try { return('+s.get('data-condition')+') } catch(err) { console.log("Condition error: "+err); return false }') }})
+    document.getElements('.profile-child input[type=text], .profile-child select').addEvent('change', function(i) {
+      illnesses.each(function(i) { invalidate_illness(i, true); show_hide_button() })
+      show_hide_button()
+    })
     var head_next = $E('.profile-child .next button')
 
     var last_indices_data = null
@@ -296,9 +296,8 @@ window.addEvent('domready', function() {
     function validate_measurements() {
       var was_valid = measurements_valid
       measurements_valid = head_inputs.every(function(i) {
-        if (i.hasClass('optional')) {
-          return true
-        } else if (i.hasClass('float')) {
+        if (i.condition && !i.condition(form.tree)) return true
+        if (i.hasClass('float')) {
           return i.value.match(/^[0-9]+([\.,][0-9]+){0,2}$/) && parseFloat(i.value) > 0
         } else if (i.hasClass('integer')) {
           return i.value.match(/^[0-9]+$/) && parseInt(i.value) > 0
@@ -322,7 +321,6 @@ window.addEvent('domready', function() {
         alert_fill()
       else {
         open_illness(illnesses[0], false)
-        head_next.setStyle('visibility', 'hidden')
       }})
     validate_measurements.periodical(100)
     refresh_indices.periodical(250)
@@ -330,7 +328,6 @@ window.addEvent('domready', function() {
     illnesses.each(function (i,j) {
       i.addClass('closed')
       i.fields = i.getElements('input[type=text], input[type=radio], select')
-      i.getElement('h2').addEvent('click', function() { alert_fill() })
       var obj = form.tree[i.get('data-key')] = {}
       function copy_value(sign) {
         var value
@@ -402,7 +399,10 @@ window.addEvent('domready', function() {
         i.getElements('.next').dispose()
       }
 
-      i.fields.addEvent('change', function() { validate_illness(i) })
+      i.fields.addEvent('change', function() {
+        i.getAllNext('section.illness').each(function(j) { invalidate_illness(j) })
+        validate_illness(i)
+      })
       validate_illness(i, false)
     })
     run_all_deps = function(validate) { illnesses.each(function (i) { i.run_deps(validate) }) }
