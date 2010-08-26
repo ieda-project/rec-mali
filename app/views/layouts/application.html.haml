@@ -14,8 +14,12 @@
       = form_tag session_path, method: 'delete' do
         Agent:
         %strong= current_user.name
-        | CSPS:
-        %strong= Csps.site
+        |
+        - if csps = Village.csps
+          CSPS:
+          %strong= csps
+        - else
+          Aucun CSPS
         %button.confirm(type="submit" data-confirm="Etes vous sûr de vouloir vous déconnecter ?") Logout
 
     = yield
