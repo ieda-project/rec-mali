@@ -264,9 +264,45 @@ window.addEvent('domready', function() {
         } else return null }
       var last_indices_data = get_indices_data();
       (function() {
+        var was_valid = measurements_valid
+        measurements_valid = true
+        head_inputs.each(function(i) {
+          var value = null
+          if (i.condition) {
+            if (i.condition(form.tree)) {
+              i.disabled = false
+              i.removeClass('disabled').disabled = false
+            } else {
+              i.addClass('disabled').disabled = true
+              i.valid = true
+              i.value = '' }}
+          if (!i.disabled) {
+            if (i.hasClass('float')) {
+              value = i.value.toFloat()
+              i.valid = value.toString() == i.value && value > 0
+            } else if (i.hasClass('integer')) {
+              value = i.value.toInt()
+              i.valid = value.toString() == i.value && value > 0
+            } else {
+              value = i.value
+              i.valid = value.match(/[^ ]/) }
+            if (!i.valid) measurements_valid = false }
+          var key = i.get('data-key')
+          if (key) form.tree.enfant[key] = value })
+
+        if (!was_valid && measurements_valid) {
+          head_next.setStyle('visibility', 'visible')
+          head_next.removeClass('disabled')
+        } else if (was_valid && !measurements_valid) {
+          illnesses.each(function(i) { i.addClass('closed') })
+          head_next.setStyle('visibility', 'visible')
+          head_next.addClass('disabled')
+        }
+        if (was_valid != measurements_valid) show_hide_button()
+
         var data = get_indices_data()
         if (data) {
-          if (last_indices_data && data.every(function(value, key) { return last_indices_data[key] == value })) return
+          if (data.every(function(value, key) { return last_indices_data[key] == value })) return
           new Request.JSON({
             url: '/children/calculations',
             onSuccess: function(json) {
@@ -293,50 +329,11 @@ window.addEvent('domready', function() {
           }).get({ d: data.getClean() })
         } else {
           // No data
+          last_indices_data = null;
           [ 'weight_age', 'height_age', 'weight_height' ].each(function (index) {
             var li = indices.getElement('.'+index)
             li.removeClass('alert').removeClass('warning').addClass('disabled')
-            li.getElement('.value').set('text', '-') })}}).periodical(250) })();
-
-    // Validate measurements
-    (function() {
-      var was_valid = measurements_valid
-      measurements_valid = true
-      head_inputs.each(function(i) {
-        var value = null
-        if (i.condition) {
-          if (i.condition(form.tree)) {
-            i.disabled = false
-            i.removeClass('disabled').disabled = false
-          } else {
-            i.addClass('disabled').disabled = true
-            i.valid = true
-            i.value = '' }}
-        if (!i.disabled) {
-          if (i.hasClass('float')) {
-            value = i.value.toFloat()
-            i.valid = value.toString() == i.value && value > 0
-          } else if (i.hasClass('integer')) {
-            value = i.value.toInt()
-            i.valid = value.toString() == i.value && value > 0
-          } else {
-            value = i.value
-            i.valid = value.match(/[^ ]/) }
-          if (!i.valid) measurements_valid = false }
-        var key = i.get('data-key')
-        if (key) form.tree.enfant[key] = value })
-
-      if (!was_valid && measurements_valid) {
-        head_next.setStyle('visibility', 'visible')
-        head_next.removeClass('disabled')
-      } else if (was_valid && !measurements_valid) {
-        illnesses.each(function(i) { i.addClass('closed') })
-        head_next.setStyle('visibility', 'visible')
-        head_next.addClass('disabled')
-      }
-      if (was_valid != measurements_valid) show_hide_button()
-      return measurements_valid
-    }).periodical(150)
+            li.getElement('.value').set('text', '-') })}}).periodical(150) })();
 
     head_next.addEvent('click', function() {
       if (this.hasClass('disabled'))
