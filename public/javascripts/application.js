@@ -311,7 +311,6 @@ window.addEvent('domready', function() {
           if (!i.disabled && !i.valid) measurements_valid = false })
 
         if (!changes) return
-        console.log('changes')
         head_next.setStyle('visibility', 'visible')
         close_illness()
 
