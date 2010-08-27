@@ -124,6 +124,7 @@ window.addEvent('domready', function() {
 
   illnesses = document.getElements('form.diagnostic section.illness')
   if (illnesses[0]) {
+    var current_illness = null
     var form = $E('form.diagnostic')
     form.tree = { enfant: {} };
     (function(age) {
@@ -155,9 +156,14 @@ window.addEvent('domready', function() {
     })('child_born_on')
 
     var measurements_valid = true
+    function close_illness() {
+      if (current_illness) {
+        current_illness.addClass('closed')
+        current_illness = null }}
     function open_illness(illness, scroll) {
-      illnesses.each(function(i) { i.addClass('closed') })
+      close_illness()
       illness.removeClass('closed')
+      current_illness = illness
       if (!illness.getElement('h2').getElement('ul'))
         validate_illness(illness)
       if (scroll != false) window.scrollTo(0, illness.getPosition().y)
@@ -191,7 +197,7 @@ window.addEvent('domready', function() {
       illness.valid = false
       var h2 = illness.getElement('h2')
       h2.getElements('img, ul').dispose()
-      if (close) illness.addClass('closed')
+      if (close) close_illness()
     }
     function validate_illness(illness, calculate) {
       if (calculate != false) invalidate_illness(illness)
@@ -238,6 +244,7 @@ window.addEvent('domready', function() {
       return illness.valid
     }
     var head_inputs = document.getElements('.profile-child input[type=text]')
+    var head_selects = document.getElements('#child_gender, select[id^=child_born_on]')
     head_inputs.each(function(i) {
       if (i.get('data-condition')) {
         i.condition = new Function(
@@ -266,35 +273,53 @@ window.addEvent('domready', function() {
       (function() {
         var was_valid = measurements_valid
         measurements_valid = true
+        var changes = false
+        head_selects.each(function(i) {
+          if (i.prev_value != i.value) {
+            changes = true
+            i.prev_value = i.value }})
         head_inputs.each(function(i) {
-          var value = null
           if (i.condition) {
             if (i.condition(form.tree)) {
-              i.disabled = false
-              i.removeClass('disabled').disabled = false
+              if (i.disabled) {
+                changed = true
+                i.disabled = false
+                i.prev_value = null
+                i.removeClass('disabled').disabled = false }
             } else {
-              i.addClass('disabled').disabled = true
-              i.valid = true
-              i.value = '' }}
-          if (!i.disabled) {
-            if (i.hasClass('float')) {
-              value = i.value.toFloat()
-              i.valid = value.toString() == i.value && value > 0
-            } else if (i.hasClass('integer')) {
-              value = i.value.toInt()
-              i.valid = value.toString() == i.value && value > 0
-            } else {
-              value = i.value
-              i.valid = value.match(/[^ ]/) }
-            if (!i.valid) measurements_valid = false }
-          var key = i.get('data-key')
-          if (key) form.tree.enfant[key] = value })
+              if (!i.disabled) {
+                changed = true
+                i.addClass('disabled').disabled = true
+                i.valid = true
+                i.value = '' }}}
+          if (i.prev_value != i.value) {
+            changes = true
+            i.prev_value = i.value
+            var value = null
+            if (!i.disabled) {
+              if (i.hasClass('float')) {
+                value = i.value.toFloat()
+                i.valid = value.toString() == i.value && value > 0
+              } else if (i.hasClass('integer')) {
+                value = i.value.toInt()
+                i.valid = value.toString() == i.value && value > 0
+              } else {
+                value = i.value
+                i.valid = value.match(/[^ ]/) }}
+            var key = i.get('data-key')
+            if (key) form.tree.enfant[key] = value }
+          if (!i.disabled && !i.valid) measurements_valid = false })
+
+        if (!changes) return
+        console.log('changes')
+        head_next.setStyle('visibility', 'visible')
+        close_illness()
 
         if (!was_valid && measurements_valid) {
           head_next.setStyle('visibility', 'visible')
           head_next.removeClass('disabled')
         } else if (was_valid && !measurements_valid) {
-          illnesses.each(function(i) { i.addClass('closed') })
+          close_illness()
           head_next.setStyle('visibility', 'visible')
           head_next.addClass('disabled')
         }
@@ -302,7 +327,7 @@ window.addEvent('domready', function() {
 
         var data = get_indices_data()
         if (data) {
-          if (data.every(function(value, key) { return last_indices_data[key] == value })) return
+          if (last_indices_data && data.every(function(value, key) { return last_indices_data[key] == value })) return
           new Request.JSON({
             url: '/children/calculations',
             onSuccess: function(json) {
@@ -338,10 +363,18 @@ window.addEvent('domready', function() {
     head_next.addEvent('click', function() {
       if (this.hasClass('disabled'))
         alert_fill()
-      else open_illness(illnesses[0], false) })
+      else {
+        open_illness(illnesses[0], false)
+        this.setStyle('visibility', 'hidden')
+      }
+    })
 
     illnesses.each(function (i,j) {
-      i.addClass('closed')
+      i.addClass('closed').getElement('h2').addEvent('click', function() {
+        if (current_illness == i) return
+        var yes = current_illness && current_illness.getAllPrevious('section.illness').some(function(ii) {
+          return ii == i })
+        yes ? open_illness(i) : alert_fill() })
       i.fields = i.getElements('input[type=text], input[type=radio], select')
       var obj = form.tree[i.get('data-key')] = {}
       function copy_value(sign) {
