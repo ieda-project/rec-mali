@@ -29,7 +29,7 @@ module ApplicationHelper
       years, rem = m.divmod 12
       "#{years}#{rem >= 6 ? '½' : ''} ans"
     else
-      "#{m} moins"
+      "#{m} mois"
     end
   end
 

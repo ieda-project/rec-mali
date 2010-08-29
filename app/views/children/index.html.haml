@@ -1,5 +1,6 @@
 - content_for :header do
   %ul.menu
+    %li= link_to 'Patients', children_path
     %li= link_to 'Statistiques', queries_path, :class => 'queries'
     %li= link_to 'Utilisateurs', users_path if admin?
 
@@ -11,7 +12,7 @@
   %h1 Rechercher un patient
   - search_form do |f|
     %div
-      %label Nom
+      %label Nom et/ou prénom
       = f.text_field :name
     .select
       %label Année de naissance
@@ -58,10 +59,13 @@
           %li ...
       - if paged.next?
         %li.em= link_to "Suivante >", url_for(request.query_parameters.merge(:page => @page + 1))
-  - else
+  - elsif params[:q]
     .no-result
       %p Aucun patient ne correspond aux termes de recherche spécifiés 
       %p 
         %strong Suggestions : 
         Vérifiez l’orthographe des termes de recherche ou consultez la
         = link_to "liste des patients", children_path
+  - else
+    .no-result
+      %p Aucun enfant n'a encore été diagnostiqué.
