@@ -15,9 +15,9 @@
         Agent:
         %strong= current_user.name
         |
-        - if csps = Village.csps
+        - if Csps.site
           CSPS:
-          %strong= csps
+          %strong= Csps.site
         - else
           Aucun CSPS
         %button.confirm(type="submit" data-confirm="Etes vous sûr de vouloir vous déconnecter ?") Logout

@@ -3,7 +3,6 @@ class ChildrenController < ApplicationController
   fetch 'Child', :also => :indices
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
-  before_filter :ask_for_csps, :except => :villages
   Search = Struct.new(:name, :born_on, :village_id)
 
   def index
@@ -122,13 +121,6 @@ class ChildrenController < ApplicationController
   end
 
   protected
-
-  def ask_for_csps
-    if Village.local.count == 0
-      render action: 'villages'
-      false
-    end
-  end
 
   def display_updated success
     respond_to do |wants|

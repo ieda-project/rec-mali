@@ -19,6 +19,7 @@ if Village.count.zero?
   end
 end
 
+=begin
 unless (children_count = ENV['CHILDREN'].to_i) < 1
   puts "Creating mockup children (#{children_count} entries)"
 
@@ -39,6 +40,7 @@ unless (children_count = ENV['CHILDREN'].to_i) < 1
     end
   end
 end
+=end
 
 puts 'Creating illnesses'
 

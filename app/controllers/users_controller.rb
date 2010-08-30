@@ -18,9 +18,16 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new params[:user]
-    @user.admin = true if User.count == 0
+    unless Csps.site
+      if params[:site]
+        Village.localize params[:site]
+      else
+        @user.errors[:base] < :no_site
+      end
+    end
+    @user.admin = User.count.zero?
     if @user.save
-      if User.count == 1
+      if !logged_in? && @user.admin
         persist_user_into_session @user
         see_other children_path
       else

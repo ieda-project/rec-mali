@@ -1,4 +1,8 @@
 #user-session
   %h1 Nouveau centre
   %p Création du premier utilisateur
-  = partial 'users/new'
+  - form_for @user do |f|
+    %div  
+      %label Site
+      = select_tag :site, options_for_select(Village.site_select)
+    = partial 'users/form', locals: { form: f }

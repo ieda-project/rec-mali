@@ -1,7 +1,0 @@
-#user-session
-  %h1 Choix de la formation sanitaire
-  = form_tag villages_children_path, :method => 'post' do
-    %div
-      = select_tag :site, options_for_select(Village.site_select)
-    %div
-      %button(type='submit') Sélectionner

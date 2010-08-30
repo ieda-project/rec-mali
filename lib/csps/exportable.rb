@@ -13,6 +13,7 @@ module Csps::Exportable
     model.send :attr_readonly, :imported
     model.send :before_save, :set_imported
     model.send :after_create, :fill_global_id
+    model.send :validate, :validate_csps
   end
 
   def self.models
@@ -31,6 +32,10 @@ module Csps::Exportable
       update_attribute :global_id, "#{Csps.site}/#{id}"
     end
     true
+  end
+
+  def validate_csps
+    errors[:global_id] << :invalid if Csps.site.blank?
   end
 
   module ClassMethods
