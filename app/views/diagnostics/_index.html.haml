@@ -1,12 +1,13 @@
 - child ||= @child
 - diagnostic ||= nil
-- value = index_value diagnostic, name
-%li{:class => index_style(name, value), 'data-key' => name}
+- graph = true if graph.nil?
+- value = diagnostic ? index_value(diagnostic, name) : nil
+%li{:class => index_style(name, value, graph), 'data-key' => name}
   %span= t(name, :scope => :indices)
   %strong
     %span.value= value ? value.to_i : '-'
     \%
-  - if value && child
+  - if graph && value && child
     %div.graph
       %h2= t(name, :scope => :indices)
       != ziya_chart indices_child_path(child, :diagnostic => diagnostic,:name => name,:format => :xml), :size => '500x400'

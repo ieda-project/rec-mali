@@ -455,6 +455,8 @@ section
     div.measurements
       float: none
       width: auto
+      h2
+        cursor: default !important
       table
         float: left
         border-bottom: 2px solid #e6e6e6
@@ -582,9 +584,10 @@ section
           background: white
           border-right: 2px solid #E6E6E6
           float: left
-          cursor: pointer
           text-align: middle
           color: !link
+          &.has-graph
+            cursor: pointer
           &.weight_age
             width: 137px
           &.height_age
@@ -602,7 +605,7 @@ section
             display: none
           &:last-child
             border-right: none
-          &:hover
+          &.has-graph:hover
             text-decoration: underline
             strong
           &.alert
@@ -614,7 +617,6 @@ section
               color: #f80
             &:hover
           &.disabled
-            cursor: default !important
             strong
               color: #888
         

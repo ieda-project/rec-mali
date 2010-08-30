@@ -17,6 +17,6 @@
           %em mm
 .ratios
   %ul
-    = partial 'diagnostics/index', locals: { name: 'weight_height', diagnostic: @diagnostic }
-    = partial 'diagnostics/index', locals: { name: 'height_age', diagnostic: @diagnostic }
-    = partial 'diagnostics/index', locals: { name: 'weight_age', diagnostic: @diagnostic }
+    = partial 'diagnostics/index', locals: { name: 'weight_height', diagnostic: @diagnostic, graph: false }
+    = partial 'diagnostics/index', locals: { name: 'height_age', diagnostic: @diagnostic, graph: false }
+    = partial 'diagnostics/index', locals: { name: 'weight_age', diagnostic: @diagnostic, graph: false }
