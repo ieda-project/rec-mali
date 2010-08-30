@@ -18,11 +18,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new params[:user]
-    unless Csps.site
-      if params[:site]
-        Village.localize params[:site]
+    if Csps.site.blank?
+      if params[:zone_id] and zone = Zone.find(params[:zone_id])
+        zone.occupy!
       else
-        @user.errors[:base] < :no_site
+        @user.errors[:base] << :no_site
       end
     end
     @user.admin = User.count.zero?
@@ -33,8 +33,10 @@ class UsersController < ApplicationController
       else
         see_other users_path
       end
-    else
+    elsif Csps.site
       render action: 'new'
+    else
+      render template: 'session/welcome'
     end
   end
 

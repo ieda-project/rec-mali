@@ -1,19 +1,20 @@
 #User.create first_name: 'Albert', last_name: 'Schweitzer', login: 'albert'
 
 puts 'Creating villages'
-if Village.count.zero?
-  Village.transaction do
-    File.open('db/fixtures/villages.txt', 'r') do |f|
-      district, csps = nil, nil
+if Zone.count.zero?
+  Zone.transaction do
+    File.open('db/fixtures/zones.txt', 'r') do |f|
+      idents = {}
       f.each_line do |line|
-        next if line.strip.blank?
-        if line =~ /\A\s\s/
-          Village.create(:name => line.strip, :csps => csps, :district => district)
-        elsif line =~ /\A\s/
-          csps = line.strip
+        line.rstrip!
+        ident = line.match(/^\s*/).to_s.size
+        point = if line[-1] == '*'
+          line[-1] = ''
+          true
         else
-          district = line.strip
+          false
         end
+        idents[ident] = Zone.create name: line.lstrip, parent: idents[ident-1], point: point
       end
     end
   end

@@ -3,7 +3,7 @@ class ChildrenController < ApplicationController
   fetch 'Child', :also => :indices
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
-  Search = Struct.new(:name, :born_on, :village_id)
+  Search = Struct.new(:name, :born_on, :zone_id)
 
   def index
     # Clean empty children (only photo)
@@ -113,13 +113,6 @@ class ChildrenController < ApplicationController
     display_updated @child.update_attributes(params[:child])
   end
   
-  def villages
-    if site = params[:site]
-      Village.localize site
-      redirect_to children_path
-    end
-  end
-
   protected
 
   def display_updated success

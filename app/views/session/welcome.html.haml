@@ -4,5 +4,5 @@
   - form_for @user do |f|
     %div  
       %label Site
-      = select_tag :site, options_for_select(Village.site_select)
+      = select_tag :zone_id, options_for_select(Zone.points.to_select)
     = partial 'users/form', locals: { form: f }

@@ -13,5 +13,5 @@
     le :
   = form.date_select(:born_on, :start_year => Date.today.year, :end_year => Date.today.year - 18)
 %p.name
-  %strong Village :
-  = form.select :village_id, Village.local.to_select
+  %strong Zone :
+  = form.select :zone_id, Zone.csps.to_select

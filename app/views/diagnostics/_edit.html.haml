@@ -9,7 +9,7 @@
         #{l @child.born_on},
         %span.age{'data-age' => @diagnostic.age, 'data-months' => @diagnostic.months}<= months_to_text @diagnostic.months
         %br/
-        %strong Village : #{@child.village.try(:name) || '-'}
+        %strong Zone : #{@child.zone.try(:name) || '-'}
 
     .measurements= partial 'diagnostics/edit_measurements', locals: { form: form }
     .vaccinations

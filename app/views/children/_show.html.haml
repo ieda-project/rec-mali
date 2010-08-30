@@ -4,6 +4,6 @@
   %span.age{'data-age' => child.age, 'data-months' => child.months}
     #{l child.born_on}, #{months_to_text child.months}
   %br/
-  %strong Village : 
-  #{child.village.try(:name) || '-'}
+  %strong Zone : 
+  #{child.zone.try(:name) || '-'}
 %button.edit(type="button") Editer
