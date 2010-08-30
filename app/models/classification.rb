@@ -19,7 +19,6 @@ class Classification < ActiveRecord::Base
       diag.save if diag.changed?
     end
   rescue => e
-    puts "Error with #{name}"
     diag.classifications.delete self
     diag.update_attribute :failed_classifications, [*diag.failed_classifications].uniq
   end
