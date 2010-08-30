@@ -8,7 +8,8 @@
   %span.by Consultation réalisée par #{@diagnostic.author.name}
 
 %nav
-  = link_to 'Editer', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
+  - if Csps.point?
+    = link_to 'Editer', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
   - if @diagnostic.classifications.any?
     = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
 

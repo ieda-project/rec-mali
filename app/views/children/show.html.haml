@@ -1,6 +1,7 @@
 %nav
   %p.hint Le patient se présente à nouveau au dispensaire ?
-  = link_to 'Nouvelle consulation', new_child_diagnostic_path(@child), :class => 'new-diagnostic'
+  - if Csps.point?
+    = link_to 'Nouvelle consulation', new_child_diagnostic_path(@child), :class => 'new-diagnostic'
   
 = partial 'children/profile'
 

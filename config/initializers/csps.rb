@@ -5,5 +5,9 @@ module Csps
     def site
       @site ||= Zone.csps.try(:name).freeze
     end
+
+    def point?
+      @point = Zone.csps.try(:point?) if @point.nil?
+    end
   end
 end

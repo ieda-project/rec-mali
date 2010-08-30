@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.integer  "rgt"
     t.string   "name"
     t.boolean  "here"
+    t.boolean  "accessible"
     t.boolean  "point"
     t.datetime "created_at"
     t.datetime "updated_at"

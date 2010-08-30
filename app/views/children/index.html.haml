@@ -4,9 +4,10 @@
     %li= link_to 'Statistiques', queries_path, :class => 'queries'
     %li= link_to 'Utilisateurs', users_path if admin?
 
-%nav
-  %p.hint Le patient se présente au dispensaire pour la première fois ?
-  = link_to 'Nouveau patient', new_child_path, :class => 'new-user'
+- if Csps.point?
+  %nav
+    %p.hint Le patient se présente au dispensaire pour la première fois ?
+    = link_to 'Nouveau patient', new_child_path, :class => 'new-user'
 
 %section
   %h1 Rechercher un patient

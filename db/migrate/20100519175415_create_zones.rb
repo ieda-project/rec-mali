@@ -4,7 +4,7 @@ class CreateZones < ActiveRecord::Migration
       t.references :parent
       t.integer :lft, :rgt
       t.string :name
-      t.boolean :here, :point
+      t.boolean :here, :accessible, :point
       t.timestamps
     end
   end

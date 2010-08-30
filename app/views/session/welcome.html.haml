@@ -4,5 +4,7 @@
   - form_for @user do |f|
     %div  
       %label Site
-      = select_tag :zone_id, options_for_select(Zone.points.to_select)
+      %select(name="zone_id")
+        - for title, id in Zone.root.to_select(include_self: true) do
+          %option(value=id)!= title
     = partial 'users/form', locals: { form: f }

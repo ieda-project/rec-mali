@@ -6,4 +6,5 @@
   %br/
   %strong Zone : 
   #{child.zone.try(:name) || '-'}
-%button.edit(type="button") Editer
+- if Csps.point?
+  %button.edit(type="button") Editer
