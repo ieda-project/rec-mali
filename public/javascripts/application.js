@@ -299,7 +299,7 @@ window.addEvent('domready', function() {
             if (!i.disabled) {
               if (i.hasClass('float')) {
                 value = i.value.toFloat()
-                i.valid = value.toString() == i.value && value > 0
+                i.valid = value.toString() == i.value.replace(/\/0+$/, '') && value > 0
               } else if (i.hasClass('integer')) {
                 value = i.value.toInt()
                 i.valid = value.toString() == i.value && value > 0
