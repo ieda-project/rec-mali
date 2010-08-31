@@ -9,8 +9,11 @@ class Zone < ActiveRecord::Base
   scope :used, conditions: 'id IN (SELECT DISTINCT zone_id FROM children)'
   scope :points, conditions: { point: true }
   scope :accessible, conditions: { accessible: true }
+  scope :importable_points, conditions: [ "point = ? AND accessible = ? AND (here = ? OR here IS NULL)", true, true, false ]
+  scope :exportable_points, conditions: { point: true, accessible: true }
 
   def option_title; name; end
+  def folder_name; name.gsub(' ', '_'); end
 
   def to_select opts={}
     if opts[:include_self]
@@ -39,7 +42,7 @@ class Zone < ActiveRecord::Base
   end
 
   def traverse t=0
-    puts(' '*t + name + (point ? '*' : ''))
+    puts(' '*t + name + (point ? '*' : '') + " #{lft}:#{rgt}")
     children.each { |ch| ch.traverse t+2 }
     self
   end

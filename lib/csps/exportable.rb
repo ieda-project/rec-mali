@@ -93,8 +93,6 @@ module Csps::Exportable
           end
 
           obj = find_or_initialize_by_global_id hash[:global_id]
-          puts hash.inspect
-          puts
           obj.update_attributes! hash
         end
       end
@@ -115,6 +113,12 @@ module Csps::Exportable
           end
         end
       end
+    end
+
+    def last_modified zone
+      Time.at where('global_id LIKE ?', "#{zone.name}/%").order('updated_at DESC').first.updated_at.to_i
+    rescue
+      nil
     end
   end
 end
