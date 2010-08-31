@@ -26,7 +26,7 @@ namespace :sync do
         klass = model.camelize.constantize rescue next
 
         lastmod = klass.last_modified zone
-        next if !File.exist?(path) or !lastmod or lastmod >= File.mtime(path)
+        next if !File.exist?(path) or (lastmod and lastmod >= File.mtime(path))
 
         puts "Importing #{klass.name} from #{zone.name}"
         File.open(path, 'r') { |src| klass.import_from src }
