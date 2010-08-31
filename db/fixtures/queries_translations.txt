@@ -21,7 +21,7 @@ follow children dysenterie	Dysenterie
 follow children antecedent rougeole	Antécédent de rougeole
 follow children rougeole	Rougeole
 follow children rougeole complication	Rougeole avec complication aux yeux ou à la bouche
-follow children rougeole grave	Rougeole grave et compliqué
+follow children rougeole grave	Rougeole grave et compliquée
 follow children infection chronique	Infection chronique
 follow children infection aigue	Infection aiguë
 follow children mastoidite	Mastoïdïte

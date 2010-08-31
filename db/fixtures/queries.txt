@@ -276,7 +276,7 @@
     "type": "ruby",
     "field": "classifications",
     "operator": "include?",
-    "value": "Rougeole grave et compliqué"
+    "value": "Rougeole grave et compliquée"
   }]
 }
 

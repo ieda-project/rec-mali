@@ -1,17 +1,17 @@
 ﻿## Illness / Signs ##
 
 danger|Signes de danger
-  boire|Demander : l’enfant est incapable de boire ou de prendre le sein ?|boolean
-  vomit|Demander : l’enfant vomit-il tout ce qu’il consomme ?|boolean
-  convulsions_passe|Demander : l’enfant a-t-il eu des convulsions récemment ?|boolean
+  boire|Demander : l’enfant est-il *incapable* de boire ou de prendre le sein ?|boolean
+  vomit|Demander : l’enfant vomit-il *tout* ce qu’il consomme ?|boolean
+  convulsions_passe|Demander : l’enfant a-t-il eu des convulsions *récemment* ?|boolean
   lethargie|Observer : l’enfant est-il léthargique ou inconscient ?|boolean
-  convulsions_present|Observer : l’enfant convulse t-il actuellement ?|boolean
+  convulsions_present|Observer : l’enfant convulse t-il *actuellement* ?|boolean
 
 toux|Toux
-  toux_presence|L'enfant tousse t-il ?|boolean
+  toux_presence|L'enfant a-t-il la toux ou des *difficultés respiratoires* ?|boolean
   toux_presence_duree|Depuis combien de jours ?|integer
   mouv_resp|Compter les mouvements respiratoires par minute (Respiration rapide = FR > 40 pour enfants > 12 mois / FR > 50 pour enfants entre 2 et 12 mois)|list|respiration_normale;respiration_rapide
-  tirage|Rechercher : L'enfant a-t-il un tirage sous-costal (inspiratoire) ?|boolean
+  tirage|Rechercher : L'enfant a-t-il un tirage *sous-costal* (inspiratoire) ?|boolean
   stridor|Ecouter : l'enfant a-t-il a un stridor (inspiratoire) ?|boolean
 
 diarrhee|Diarrhée
@@ -24,12 +24,12 @@ diarrhee|Diarrhée
   pli_cutane|Pincer la peau de l’abdomen. Le pli cutané s’efface-t-il lentement ou très lentement (plus de 2 secondes) ?|list|normal;lentement;tres_lentement
 
 fievre|Fièvre
-  fievre_presence|L'enfant a-t-il de la fièvre (antécédents ou chaud au toucher ou temperature axillaire de plus 38,5°C ou température rectale de plus 38°C) ?|boolean
+  fievre_presence|L'enfant a-t-il de la fièvre (antécédents ou chaud au toucher ou temperature axillaire de plus 38°C ou température rectale de plus 37,5°C) ?|boolean
   fievre_presence_duree|Depuis combien de jours ?|integer
   fievre_presence_longue|Si depuis plus de 7 jours, la fièvre a-t-elle été présente tous les jours ?|boolean
   urines_foncees|Signes de paludisme grave : L'enfant a t-il les urines foncées (Coca-Cola) ?|boolean
   saignements_anormaux|Signes de paludisme grave : L’enfant a t-il eu des saignements ?|boolean
-  raideur_nuque|Signes de paludisme grave : Observer et rechercher une raideur de nuque|boolean
+  raideur_nuque|Signes de paludisme grave : Observer et rechercher une raideur de la nuque|boolean
   ictere|Signes de paludisme grave : L'enfant a-t-il un ictère (yeux jaunes) ?|boolean
   choc|Signes de paludisme grave : L'enfant est-il en choc (pouls rapide, extrémités froides) ?|boolean
   eruption_cutanee|Signe de rougeole : L'enfant a-t-il une éruption généralisée de type rougeole ou eu une rougeole au cours des 3 derniers mois ?|list|aucun;eruption;antecedent
