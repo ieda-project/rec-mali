@@ -188,8 +188,8 @@ select + .switch
   -webkit-border-radius: 5px
   overflow: hidden
   -webkit-user-select: none
-  margin: 0 !important
-  width: auto  !important
+  margin: 3px 0 0 0 !important
+  width: auto !important
   &.yes
     .yes
       background-color: #51a100
@@ -711,8 +711,6 @@ section
     &.list-arrow
       ul
         margin: 10px 0 0
-    .linefeed
-      margin: 0 0 5px
     h2
       background: #007dc4 url(../images/backgrounds/bg-headings.gif) repeat-x 0 0 
       color: white
@@ -763,13 +761,15 @@ section
           &.error
             display: none
     tr
+      &:nth-child(even)
+        th, td
+          background-color: #ddd
       th
         color: #666
         width: 650px
       th, td
         height: 25px
         min-width: 100px
-        border-bottom: 1px solid #f2f2f2
         .question
           margin: 0 20px 0 0
           float: left

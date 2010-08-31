@@ -1,4 +1,4 @@
 - for option in sign.options do
-  .linefeed
-    = form.radio_button :list_value, option, sign.html_attributes
-    = form.label :"list_value_#{option}", I18n.t("signs.#{option}")
+  = form.radio_button :list_value, option, sign.html_attributes
+  = form.label :"list_value_#{option}", I18n.t("signs.#{option}")
+  %br<>/
