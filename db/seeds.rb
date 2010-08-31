@@ -1,4 +1,13 @@
-#User.create first_name: 'Albert', last_name: 'Schweitzer', login: 'albert'
+# encoding: utf-8
+
+class String
+  def fix!
+    rstrip!
+    gsub! /#.*$/, ''
+    gsub! "\xC2\xA0", ' '
+    present?
+  end
+end
 
 puts 'Creating villages'
 if Zone.count.zero?
@@ -6,7 +15,7 @@ if Zone.count.zero?
     File.open('db/fixtures/zones.txt', 'r') do |f|
       idents = {}
       f.each_line do |line|
-        line.rstrip!
+        next unless line.fix!
         ident = line.match(/^\s*/).to_s.size
         point = if line[-1] == '*'
           line[-1] = ''
@@ -49,8 +58,7 @@ illnesses, deps = {}, {}
 
 File.open('db/fixtures/sign_dependencies.txt', 'r') do |f|
   f.each_line do |line|
-    line.chomp!
-    next if line.blank?
+    next unless line.fix!
     deps.store *line.split('|')
   end
 end
@@ -59,8 +67,7 @@ Illness.transaction do
   File.open('db/fixtures/signs.txt', 'r') do |f|
     illness, seq = nil, 0
     f.each_line do |line|
-      line.gsub! /#.*$/, ''
-      next if line.chomp.blank?
+      next unless line.fix!
       data = line.chomp.strip.split '|'
       if line =~ /\A\s/
         # Sign
@@ -97,7 +104,8 @@ treatments = {}
 File.open('db/fixtures/treatments.txt', 'r') do |f|
   cl = nil
   f.each_line do |line|
-    line.gsub(%r(/\*.*?\*/), '')
+    line.gsub! %r(/\*.*?\*/), ''
+    line.gsub! "\xC2\xA0", ' '
     next if line.blank?
     if line =~ /^\[(.+)\]\Z/
       cl = $1
@@ -112,8 +120,7 @@ puts 'Creating classifications'
 
 File.open('db/fixtures/classifications.txt', 'r') do |f|
   f.each_line do |line|
-    line.gsub! /#.*$/, ''
-    next if line.blank?
+    next unless line.fix!
     illness, name, equation = line.split '|'
     illnesses[illness].classifications.create!(
       name: name,
@@ -130,28 +137,28 @@ end
 puts 'Creating translations'
 
 t = {}
-File::open('db/fixtures/queries_translations.txt', 'r') do |f|
-  while s = f.gets
-    next if s.blank?
-    k, v = s.split("\t").map {|x| x.strip}
-    raise "error: #{k}" if v.blank?
+File.open('db/fixtures/queries_translations.txt', 'r') do |f|
+  f.each_line do |line|
+    next unless line.fix!
+    k, v = line.split("\t").map &:strip
+    raise "Error: #{k}" if v.blank?
     t[k] = v
   end
 end
 
 puts 'Creating queries'
 
-stats = File::read(File::join('db', 'fixtures', 'queries.txt'))
+stats = File.read(File.join('db', 'fixtures', 'queries.txt'))
 Query.destroy_all
 stats.split('@').each do |s|
-  next if s.size == 0
+  next if s.blank?
   title = s.split("\n").first.strip
   source = s.split("\n")[1..-1].join("\n")
   h = JSON.parse(source)
   case_status = Query::CASE_STATUSES.index(h.delete('case_status'))
   klass = h.delete('klass')
   q = Query.new(:title => t[title], :case_status => case_status, :klass => klass, :conditions => h['conds'].to_json)
-  puts "error importing #{title}: q.errors" unless q.save
+  puts "Error importing #{title}: q.errors" unless q.save
 end
 
 puts 'Creating indices'
@@ -162,10 +169,10 @@ Index::NAMES.each do |name|
     begin
       if name == 'weight-height'
         %w(above-2y under-2y).each do |age|
-          file_name = File::join('db', 'fixtures', 'indices', "#{name}-#{age}-#{gender}.txt")
+          file_name = File.join('db', 'fixtures', 'indices', "#{name}-#{age}-#{gender}.txt")
           File.open(file_name, 'r') do |f|
             f.each_line do |line|
-              next if line.blank?
+              next unless line.fix!
               x, y = line.split ','
               i = Index.new(:x => x, :y => y, :for_boys => (gender == 'boys'), :name => Index::NAMES.index(name), :above_2yrs => (age == 'above-2y'))
               puts i.errors unless i.save
@@ -176,7 +183,7 @@ Index::NAMES.each do |name|
         file_name = File::join('db', 'fixtures', 'indices', "#{name}-#{gender}.txt")
         File.open(file_name, 'r') do |f|
           f.each_line do |line|
-            next if line.blank?
+            next unless line.fix!
             x, y = line.split ','
             i = Index.new(:x => x, :y => y, :for_boys => (gender == 'boys'), :name => Index::NAMES.index(name))
             puts i.errors unless i.save
