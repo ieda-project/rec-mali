@@ -1,7 +1,7 @@
 [Pneumonie grave ou maladie très grave]
-# Donner la première dose +d’antibiotique+ approprié,
+# Donner la première dose +d’antibiotique+ appropriée,
 # *Transférer d’URGENCE à l’hôpital*,
-# Si l’enfant n’a pas d’autre classification grave donner un bronchodilateur en inhalation si respiration sifflante,
+# Si l’enfant n’a pas d’autre classification grave donner un bronchodilatateur en inhalation si respiration sifflante,
 # Traiter l'enfant pour +prévenir l'hypoglycémie+.
 
 [Pneumonie]
@@ -23,13 +23,14 @@
 # Revoir dans +2 jours+.
 	
 [Diarrhée persistente sévère]
-# Traiter la déshydratation avant de transférer, à moins que l’enfant n’ait une autre classification grave.
+# Traiter la déshydratation avant de transférer d'URGENCE, à moins que l’enfant n’ait une autre classification grave.
 
 [Diarrhée persistente]
-# *Transférer à l’hôpital*,
+# Expliquer à la mére comment nourrir un enfant qui a une diarrhée persistente,
 # Donner des +multivitamines et des +sels minéraux+,
 # Donner du +sulfate de zinc+ pendant +14 jours+,
 # Expliquer quand revenir immédiatement.
+# Revoir dans +5 jours+
 
 [Déshydratation sévère]
 # Si l’enfant n’a pas, d’autre classification grave :
@@ -43,14 +44,21 @@
 [Signes évidents de déshydratation]
 # Donner liquides et aliments pour signes évidents de déshydratation (Plan B),
 # Donner du +sulfate de zinc+ pendant +14 jours+,
-# Si l’enfant a une autre classification grave, *transférer d’URGENCE à l’hôpital*, la mère donnant fréquemment des gorgées de +SRO+ en cours de route.
+# Si l’enfant a une autre classification grave, *transférer d’URGENCE à l’hôpital*, la mère donnant fréquemment des gorgées de +SRO+ en cours de route,
+# Expliquer à la mère quand revenir imédiatement,
+# Revoir dans +2 jours+.
+
+[Pas de déshydratation]
+# Donner liquides et aliments pour traiter la diarrhée à domicile (Plan A),
+# Donner du +sulfate de zinc+ pendant +14 jours+,
+# Revoir dans 5 jours.
 
 
 [Maladie fébrile très grave ou paludisme grave]
 # Donner de la +quinine+ pour paludisme grave (première dose),
 # Donner la première dose +d’antibiotique+ approprié,
 # Traiter l’enfant pour éviter +l’hypoglycémie+,
-# Administrer, au dispensaire, une dose de +paracétamol+ ou de +l’acétyl salicylate de lysine+ si la fièvre est de +38,5°C ou plus+,
+# Administrer au dispensaire, une dose de +paracétamol+ ou de +l’acétyl salicylique+ si la fièvre est de +38,5°C ou plus+,
 # Enveloppement humide,
 # *Transférer d’URGENCE à l’hôpital.*
 
@@ -59,18 +67,18 @@
 # Administrer, au dispensaire, une dose de +paracétamol+ si la température est de +38.5°C ou plus+,
 # EXpliquer à la mère quand revenir immédiatement,
 # Revoir l’enfant dans +2 jours+ si la fièvre persiste,
-# Si la fièvre a été présente tous les jours depuis +plus de 7 jours+, référer pour bilan.
+# Si la fièvre a été présente tous les jours depuis +plus de 7 jours+, transférer d'URGENCE pour bilan.
 
-[Rougeole grave et compliqué]
+[Rougeole grave et compliquée]
 # Donner de la +Vitamine A+,
 # Donner la première dose d’un +antibiotique+ approprié,
-# Si opacité de la cornée ou écoulement de pus au niveau des yeux, traiter avec la +pommade ophtalmique à la tétracycline+.
+# Si opacité de la cornée ou écoulement de pus oculaire, traiter avec de la +pommade ophtalmique à la tétracycline+.
 
 [Rougeole avec complication aux yeux ou à la bouche]
 # Donner de la +Vitamine A, J1, J2, J14+,
-# Si écoulement oculaire de pus, traiter avec la +pommade ophtalmique à la tétracycline+,
-# Revoir l'enfant dans +2 jours+,
+# Si écoulement oculaire de pus, traiter avec de la +pommade ophtalmique à la tétracycline+,
 # En cas d’ulcération dans la bouche, traiter au +violet de gentiane dilué+.
+# Revoir l'enfant dans +2 jours+,
 
 [Rougeole]
 # Donner de la +vitamine A, J1,J2, J14+,
@@ -106,7 +114,7 @@
 # *Transférer d’URGENCE à l’hôpital.*
 
 [Anémie]
-# Evaluer l’alimentation de l’enfant et conseiller la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS du tableau CONSEILLER la mère,
+# Evaluer l’alimentation de l’enfant et conseiller la mère de nourrir l’enfant comme décrit dans le cadre ALIMENTS du tableau _CONSEILLER LA MERE_,
 # Donner du +fer/acide folique+,
 # Donner une +Combinaison Thérapeutique+ à base +d’Arthémisinine+,
 # Donner du +mébendazole+ pendant +3 jours+ ou de +l’albendazole+ en +prise unique+,
@@ -115,32 +123,32 @@
 
 
 [MASc]
-# Traiter l'enfant pour prévenir l'hypoglycémie : donner de +l'eau sucrée si l'enfant est capable de boire+ dans le cas contraire mettre en place une +sonde naso gastrique+  (Si vous avez appris le geste) et  faire passer lentement +50 c d'eau sucrée+,
-# Passer la 1ère dose +d'Ampiciline+ en IM,
+# Traiter l'enfant pour prévenir l'hypoglycémie : donner de +l'eau sucrée si l'enfant est capable de boire+ dans le cas contraire mettre en place une +sonde naso gastrique+ (Si vous avez appris le geste) et  faire passer lentement +50cc d'eau sucrée+,
+# Passer la première dose +d'Ampiciline+ en intra-musculaire,
 # Inscrire l'enfant dans le registre MAS et donner un numéro MAS,
 # Remplir la fiche de référence,
 # Informer la pédiatrie par la "Flotte" de la Référence,
-# *REFERER d’URGENCE à l’hôpital.*
+# *Transférer d’URGENCE à l’hôpital.*
 
 [MASs]
 # Expliquer le contenu du traitement à la mère 
-# Remplir tous les items du registre des MAS  et de la fiche de prise en charge MAS en ambulatoire
-# Donner les premières doses du traitement systématique au CSPS : donner de +l'Acide folique en dose unique+, +Vitamine A+ le 1er, 2ème et 14ème jour, +Amoxicilline+ pour +5 jours+, du +mébendazole+ pendant +3 jours+ ou de +l’albendazole en prise unique+
-# Donner les sachets de Plyumpy'nut en nombre suffisant jusqu'au prochain rendez-vous 
-# Expliquer à la mère ou l'accompagnante comment donner les médicaments et le PN à domicile et s'assurer qu'elle a compris
-# Expliquer à la mère quand revenir immédiatement. 
-# Donner rendez-vous pour le prochain jour de suivi des MAS dans le CSPS
+# Remplir tous les items du registre des MAS et de la fiche de prise en charge MAS en ambulatoire,
+# Donner les premières doses du traitement systématique au CSPS : donner de +l'Acide folique en dose unique+, +Vitamine A+ le 1er, 2ème et 14ème jour, +Amoxicilline+ pour +5 jours+, du +mébendazole+ pendant +3 jours+ ou de +l’albendazole en prise unique+,
+# Donner les sachets de Plyumpy'nut en nombre suffisant jusqu'au prochain rendez-vous ,
+# Expliquer à la mère ou l'accompagnante comment donner les médicaments et le PlumpyNut à domicile et s'assurer qu'elle a compris,
+# Expliquer à la mère quand revenir immédiatement,
+# Donner rendez-vous pour le prochain jour de suivi des MAS dans le CSPS.
 
 [MAM]
-# Traiter la classification trouvée
+# Traiter les classifications trouvées,
 # Donner du +mébendazole+ pendant +3 jours+ ou de +l’albendazole en prise unique+,
-# Orienter la mère vers le programme de son village
+# Orienter la mère vers le programme de son village.
 
 [Pas de malnutrition]
-# Si l’enfant a moins de 2 ans, évaluer l’alimentation de l’enfant et conseiller  à la mère de nourrir l’enfant comme décrit dans le cadre *ALIMENTS"*  du  tableau *CONSEILLER LA MÈRE*.
-# Donner de la *vitamine A* si l’enfant n’en a pas reçu dans les 6 mois précédents
-# Si  problème d’alimentation, revoir l’enfant dans +5 jours+.
-# Expliquer à la mère quand revenir immédiatement
+# Si l’enfant a moins de 2 ans, évaluer l’alimentation de l’enfant et conseiller à la mère de nourrir l’enfant comme décrit dans le cadre _ALIMENTS_ du tableau _CONSEILLER LA MÈRE_.
+# Donner de la +vitamine A+ si l’enfant n’en a pas reçu dans les 6 mois précédents,
+# Expliquer à la mère quand revenir immédiatement,
+# Si problème d’alimentation, revoir l’enfant dans +5 jours+.
 
 
 [Infection VIH symptomatique confirmée]
