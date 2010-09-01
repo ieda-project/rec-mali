@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "global_id"
-    t.boolean  "imported"
     t.boolean  "temporary"
     t.boolean  "bcg_polio0"
     t.boolean  "penta1_polio1"
@@ -73,7 +72,6 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "global_id"
-    t.boolean  "imported"
   end
 
   add_index "diagnostics", ["author_global_id"], :name => "index_diagnostics_on_author_global_id"
@@ -88,7 +86,6 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "global_id"
-    t.boolean  "imported"
   end
 
   add_index "illness_answers", ["diagnostic_global_id"], :name => "index_illness_answers_on_diagnostic_global_id"
@@ -147,7 +144,6 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "global_id"
-    t.boolean  "imported"
   end
 
   create_table "signs", :force => true do |t|
@@ -170,7 +166,6 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "global_id"
-    t.boolean  "imported"
   end
 
   create_table "users", :force => true do |t|
@@ -181,7 +176,6 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "global_id"
-    t.boolean  "imported"
   end
 
   create_table "zones", :force => true do |t|
@@ -192,6 +186,8 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.boolean  "here"
     t.boolean  "accessible"
     t.boolean  "point"
+    t.datetime "last_import_at"
+    t.datetime "last_export_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

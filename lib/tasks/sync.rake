@@ -9,6 +9,7 @@ def check_sync_conditions
     STDERR.puts 'Error: Please specify a data directory with REMOTE'
     exit 1
   end
+  @sync_at ||= Time.at Time.now.to_i # (shaving off microseconds)
 end
 
 namespace :sync do
@@ -31,6 +32,7 @@ namespace :sync do
         puts "Importing #{klass.name} from #{zone.name}"
         File.open(path, 'r') { |src| Csps::SyncProxy.for(klass).import_from src }
       end
+      zone.update_attribute :last_import_at, @sync_at
     end
   end
 
@@ -59,6 +61,7 @@ namespace :sync do
           end
           File.utime lastmod, lastmod, path
         end
+        zone.update_attribute :last_export_at, @sync_at
       end
     end
   end
