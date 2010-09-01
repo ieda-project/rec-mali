@@ -2,6 +2,7 @@ Csps::Application.routes.draw do |map|
   resource :session, controller: 'session' do
     get :welcome
   end
+  resource :syncs
   resources :users
   resources :queries do
     get :export, on: :member

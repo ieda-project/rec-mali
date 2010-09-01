@@ -5,6 +5,7 @@ class CreateZones < ActiveRecord::Migration
       t.integer :lft, :rgt
       t.string :name
       t.boolean :here, :accessible, :point
+      t.datetime :last_import_at, :last_export_at
       t.timestamps
     end
   end

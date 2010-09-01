@@ -8,6 +8,7 @@ module Csps
 
     def point?
       @point = Zone.csps.try(:point?) if @point.nil?
+      @point
     end
   end
 end
