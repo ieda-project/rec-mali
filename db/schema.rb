@@ -37,15 +37,16 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
   add_index "children", ["global_id"], :name => "index_children_on_global_id"
 
   create_table "classifications", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "illness_id"
     t.string   "key"
     t.string   "name"
     t.text     "equation"
     t.text     "treatment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.boolean  "in_imci"
     t.boolean  "in_gdt"
+    t.integer  "level"
   end
 
   add_index "classifications", ["illness_id"], :name => "index_classifications_on_illness_id"

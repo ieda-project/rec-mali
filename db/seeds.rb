@@ -121,10 +121,11 @@ puts 'Creating classifications'
 File.open('db/fixtures/classifications.txt', 'r') do |f|
   f.each_line do |line|
     next unless line.fix!
-    illness, name, equation = line.split '|'
+    illness, name, level, equation = line.split '|'
     illnesses[illness].classifications.create!(
       name: name,
       treatment: treatments.delete(name).try(:chomp),
+      level: Classification::LEVELS.index(level.intern),
       equation: equation)
   end
 end

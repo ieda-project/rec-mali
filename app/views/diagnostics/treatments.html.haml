@@ -16,7 +16,12 @@
 - for cl in @diagnostic.classifications do
   - next if cl.treatment.blank?
   %section.treatment
-    %h2= cl.name
+    %h2
+      = cl.name
+      %ul.classification
+        %li{:class => Classification::LEVELS[cl.level]}
+          = t(Classification::LEVELS[cl.level], :scope => [:levels])
+    
     != html cl.treatment
 
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit diagnostic' } do |form|
@@ -27,5 +32,5 @@
     = form.text_area :comments, cols:20, rows:5
     
   %nav
-    = link_to 'Modifier le diagnostic', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit'
+    = link_to "Modifier l'évaluation", edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit'
     %button.validation(type="submit") Terminer le diagnostic

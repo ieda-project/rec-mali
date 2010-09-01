@@ -2,6 +2,8 @@ class Classification < ActiveRecord::Base
   belongs_to :illness
   has_and_belongs_to_many :diagnostics
   has_and_belongs_to_many :signs
+  
+  LEVELS = [:low, :medium, :high]
 
   def self.run diag
     data = diag.to_hash
@@ -26,4 +28,5 @@ class Classification < ActiveRecord::Base
   def calculate data
     Csps::Formula.new(self).calculate(data)
   end
+  
 end

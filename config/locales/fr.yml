@@ -95,6 +95,10 @@ fr:
     weight_age: Poids/Age
     height_age: Taille/Age
     weight_height: Poids/Taille
+  levels:
+    low: Bas
+    medium: Moyen
+    high: Haut
   activerecord:
     errors:
       messages:
