@@ -1,0 +1,13 @@
+%section
+  %h1 Synchronizations
+  %table
+    %thead
+      %th Site
+      %th Last import
+      %th Last export
+    %tbody
+      - for zone in Zone.synced do
+        %tr{ :class => zone.unsynced? ? 'unsynced' : nil }
+          %td= zone.name
+          %td= zone.last_import_at
+          %td= zone.last_export_at

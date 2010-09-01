@@ -3,10 +3,12 @@
     %li= link_to 'Patients', children_path
     %li= link_to 'Statistiques', queries_path, :class => 'queries'
     %li= link_to 'Utilisateurs', users_path 
-    %li
-      = link_to '#', :class => 'syncs' do
-        Synchronisations
-        %strong 6
+    - if !Csps.point? && current_user.admin?
+      %li
+        = link_to syncs_path, :class => 'syncs' do
+          Synchronisations
+          - unless (unsynced = Zone.unsynced).zero?
+            %strong= unsynced
 
 - if Csps.point?
   %nav

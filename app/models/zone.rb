@@ -11,6 +11,7 @@ class Zone < ActiveRecord::Base
   scope :accessible, conditions: { accessible: true }
   scope :importable_points, conditions: [ "point = ? AND accessible = ? AND (here = ? OR here IS NULL)", true, true, false ]
   scope :exportable_points, conditions: { point: true, accessible: true }
+  scope :synced, conditions: 'last_import_at IS NOT NULL OR last_export_at IS NOT NULL'
 
   def option_title; name; end
   def folder_name; name.gsub(' ', '_'); end
@@ -47,6 +48,11 @@ class Zone < ActiveRecord::Base
     self
   end
 
+  def unsynced?
+    old = 90.days.ago
+    (last_import_at && last_import_at < old) || (last_export_at && last_export_at < old)
+  end
+
   class << self
     def tree
       roots.each &:traverse
@@ -56,5 +62,11 @@ class Zone < ActiveRecord::Base
       find_by_here true
     end
     alias here csps
+
+    def unsynced
+      Zone.where(
+        '(last_import_at AND last_import_at < :old) OR (last_export_at AND last_export_at < :old)',
+        old: 90.days.ago).count
+    end
   end
 end
