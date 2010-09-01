@@ -6,7 +6,6 @@ class CreateUsers < ActiveRecord::Migration
       t.timestamps
 
       t.string :global_id
-      t.boolean :imported
     end
   end
 

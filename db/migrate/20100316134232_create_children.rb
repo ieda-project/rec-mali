@@ -12,7 +12,7 @@ class CreateChildren < ActiveRecord::Migration
 
       t.timestamps
       t.string :global_id
-      t.boolean :imported, :temporary
+      t.boolean :temporary
 
       t.boolean :bcg_polio0, :penta1_polio1,
                 :penta2_polio2, :penta3_polio3, :measles

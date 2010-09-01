@@ -6,7 +6,6 @@ class CreateIllnessAnswers < ActiveRecord::Migration
       t.timestamps
 
       t.string :global_id
-      t.boolean :imported
     end
     add_index :illness_answers, :illness_global_id
     add_index :illness_answers, :diagnostic_global_id

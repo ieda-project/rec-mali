@@ -11,7 +11,6 @@ class CreateDiagnostics < ActiveRecord::Migration
       t.timestamps
 
       t.string :global_id
-      t.boolean :imported
     end
     add_index :diagnostics, [:type, :id]
     add_index :diagnostics, [:type, :global_id]
