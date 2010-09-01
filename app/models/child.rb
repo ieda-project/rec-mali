@@ -9,7 +9,8 @@ class Child < ActiveRecord::Base
 
   before_save :fill_cache_fields
   
-  scope :unfilled, :conditions => {:first_name => nil, :last_name => nil}
+  scope :unfilled, conditions: { first_name: nil, last_name: nil }
+  scope :temporary, conditions: { temporary: true }
 
   VACCINATIONS = {
     bcg_polio0: 'BCG/Polio-0',

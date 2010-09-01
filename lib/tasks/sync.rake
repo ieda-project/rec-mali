@@ -29,7 +29,7 @@ namespace :sync do
         next if !File.exist?(path) or (lastmod and lastmod >= File.mtime(path))
 
         puts "Importing #{klass.name} from #{zone.name}"
-        File.open(path, 'r') { |src| klass.import_from src }
+        File.open(path, 'r') { |src| Csps::SyncProxy.for(klass).import_from src }
       end
     end
   end
@@ -54,7 +54,7 @@ namespace :sync do
 
           puts "Exporting #{klass.name} for #{zone.name} (#{lastmod})"
           File.open(path, 'w') do |out|
-            klass.export_to out
+            Csps::SyncProxy.for(klass).export_to out
           end
           File.utime lastmod, lastmod, path
         end
