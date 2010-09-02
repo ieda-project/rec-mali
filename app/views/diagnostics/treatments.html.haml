@@ -15,12 +15,9 @@
 
 - for cl in @diagnostic.classifications do
   - next if cl.treatment.blank?
-  %section.treatment
+  %section.treatment{:class => Classification::LEVELS[cl.level]}
     %h2
       = cl.name
-      %ul.classification
-        %li{:class => Classification::LEVELS[cl.level]}
-          = t(Classification::LEVELS[cl.level], :scope => [:levels])
     
     != html cl.treatment
 
