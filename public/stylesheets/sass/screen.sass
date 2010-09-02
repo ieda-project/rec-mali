@@ -702,6 +702,25 @@ section
     font-weight: bold
     color: #666
     line-height: 1.4em
+    &.high
+      background: #ee5454
+      ol
+        li
+          border-bottom: 1px solid #db4747
+          color: black
+          
+    &.medium
+      background: #ffd510
+      ol
+        li
+          border-bottom: 1px solid #e7c00a
+          
+    &.low
+      background: #cbf2a4
+      ol
+        li
+          border-bottom: 1px solid #b3db8a
+          
     ol
       margin: 8px 0 0
       padding: 0 0 0 27px
@@ -712,6 +731,7 @@ section
         margin: 5px 0 0
         border-bottom: 1px solid #ededed
         padding: 0 0 7px
+        color: #333
       li:last-child
         border: none
     textarea
