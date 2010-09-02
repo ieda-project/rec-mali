@@ -233,7 +233,7 @@ window.addEvent('domready', function() {
             h2.getElements('img, ul').dispose()
             ul.inject(h2)
           }
-        }).get({ d: data })
+        }).post({ d: data })
       }
       if (!illness.valid) illness.getElements('h2 ul').dispose()
       show_hide_button()
