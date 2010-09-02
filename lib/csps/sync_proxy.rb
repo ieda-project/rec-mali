@@ -19,6 +19,7 @@ module Csps::SyncProxy
 
   def import_from src
     columns = src.gets.chomp.split(?,)
+    count = 0
     catch :end do
       get = proc { src.gets or throw(:end) }
       loop do
@@ -40,8 +41,10 @@ module Csps::SyncProxy
         obj = find_or_initialize_by_global_id hash.delete('global_id')
         obj.attributes = obj.attributes.merge hash
         obj.save!
+        count += 1
       end
     end
+    count
   end
 
   def export_for out, zone
@@ -58,6 +61,6 @@ module Csps::SyncProxy
           else ?: + v.to_s.gsub("\n", "\\\n")
         end
       end
-    end
+    end.size
   end
 end

@@ -9,7 +9,7 @@ Csps::Application.routes.draw do |map|
   end
 
   resources :illnesses do
-    get :classification, on: :member
+    post :classification, on: :member
   end
 
   resources :children do

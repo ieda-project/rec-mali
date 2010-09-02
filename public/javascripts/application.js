@@ -103,6 +103,8 @@ transient = {
   }
 }
 
+editing = false
+
 window.addEvent('domready', function() { document.body.updated() })
 window.addEvent('domready', function() {
   var link, next
@@ -231,7 +233,7 @@ window.addEvent('domready', function() {
             h2.getElements('img, ul').dispose()
             ul.inject(h2)
           }
-        }).get({ d: data })
+        }).post({ d: data })
       }
       if (!illness.valid) illness.getElements('h2 ul').dispose()
       show_hide_button()
@@ -491,16 +493,26 @@ Element.behaviour(function() {
   })
 
   this.getElements('.photo').addEvent('click', function() {
-    var link = $E('link[rel=photo-upload-target]')
-    var obj = new Element('object', { width: 300, height: 330 })
-    obj.adopt(new Element('param', { name: 'movie', value: '/flash/photo.swf' }))
-    obj.adopt(new Element('param', {
-      name: 'FlashVars',
-      value: 'url=' + (this.get('data-action') || window.location.href) +
-             '&field=' + this.get('data-field') +
-             (this.get('data-method') ? '&method=' + this.get('data-method') : '')+
-             '&domid=' + this.get('id')}))
-    transient.open(obj, { width: 300 })
+    if (editing || window.location.href.match(/\/(new|edit)\/*$/)) {
+      var link = $E('link[rel=photo-upload-target]')
+      var obj = new Element('object', { width: 300, height: 330 })
+      obj.adopt(new Element('param', { name: 'movie', value: '/flash/photo.swf' }))
+      obj.adopt(new Element('param', {
+        name: 'FlashVars',
+        value: 'url=' + (this.get('data-action') || window.location.href) +
+               '&field=' + this.get('data-field') +
+               (this.get('data-method') ? '&method=' + this.get('data-method') : '')+
+               '&domid=' + this.get('id')}))
+      transient.open(obj, { width: 300 })
+    } else {
+      var thmb = this.getElement('img')
+      if (thmb.src.match('missing')) return false
+      transient.open(
+        new Element('img', {
+          src: thmb.src.replace('thumbnail', 'normal'),
+          width: 300, height: 300 }),
+        { width: 300 })
+    }
   })
   
   this.getElements('.ratios li').addEvent('click', function(e) {
@@ -515,7 +527,9 @@ Element.behaviour(function() {
     div.getElements('button.edit').addEvent('click', function() {
       new Request.HTML({
         link: 'ignore', update: div,
-        onSuccess: function() { div.updated() }
+        onSuccess: function() {
+          div.updated()
+          editing = true }
       }).get(div.get('data-edit-href')) })})
 
   this.getElements('#child_gender').addEvent('change', function() {

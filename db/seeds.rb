@@ -196,3 +196,19 @@ Index::NAMES.each do |name|
     end
   end
 end
+
+if ENV['OCCUPY']
+  name = ENV['OCCUPY'].gsub '_', ' '
+  zones = Zone.find_all_by_name name
+  if zones[1]
+    puts "Occupying.."
+    zones.each.with_index { |i,n| puts "#{n+1}: #{i}" }
+    print "Which one? "
+    zones[gets.to_i-1].occupy!
+  elsif zone = zones[0]
+    puts "Occupying #{zone.name} (##{zone.id})"
+    zone.occupy!
+  else
+    STDERR.puts "No zone called '#{name}', please occupy by hand."
+  end
+end

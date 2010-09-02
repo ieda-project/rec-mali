@@ -22,47 +22,56 @@ namespace :sync do
     p = %r|/([a-z0-9_]+)\.csps\Z|
     puts "Starting import.."
     Zone.importable_points.each do |zone|
+      imported = false
       Dir.glob("#{ENV['REMOTE']}/#{zone.folder_name}/*.csps") do |path|
         model = path.scan(p).first.first
         klass = model.camelize.constantize rescue next
 
+        next unless File.exist?(path)
+
+        imported ||= true
         lastmod = klass.last_modified zone
-        next if !File.exist?(path) or (lastmod and lastmod >= File.mtime(path))
+        next if lastmod and lastmod >= File.mtime(path)
 
         puts "Importing #{klass.name} from #{zone.name}"
-        File.open(path, 'r') { |src| Csps::SyncProxy.for(klass).import_from src }
+        File.open(path, 'r') { |src| Csps::SyncProxy.for(klass).import_from(src) }
       end
-      zone.update_attribute :last_import_at, @sync_at
+      zone.update_attribute :last_import_at, @sync_at if imported
     end
   end
 
   desc 'Dump local database'
   task :up => :environment do
     check_sync_conditions
-
-    # Load all models
-    Dir.glob("#{Rails.root}/app/models/*.rb").each do |f|
-      Object.const_get File.basename(f).sub(/\.rb\Z/, '').camelize
-    end
-
-    puts "Starting export.."
-    Csps::Exportable.models.each do |klass|
-      proxy = Csps::SyncProxy.for klass
-      Zone.exportable_points.each do |zone|
-        path = "#{ENV['REMOTE']}/#{zone.folder_name}/#{klass.name.underscore}.csps"
-        FileUtils.mkdir_p File.dirname(path)
-
-        if lastmod = klass.last_modified(zone)
-          next if File.exist?(path) and lastmod <= File.mtime(path)
-
-          puts "Exporting #{klass.name} for #{zone.name} (#{lastmod})"
-          File.open(path, 'w') do |out|
-            proxy.export_for out, zone
-          end
-          File.utime lastmod, lastmod, path
-        end
-        zone.update_attribute :last_export_at, @sync_at
+    if Zone.csps.parent_id
+      # Load all models
+      Dir.glob("#{Rails.root}/app/models/*.rb").each do |f|
+        Object.const_get File.basename(f).sub(/\.rb\Z/, '').camelize
       end
+
+      puts "Starting export.."
+
+      Csps::Exportable.models.each do |klass|
+        proxy = Csps::SyncProxy.for klass
+        Zone.exportable_points.each do |zone|
+          next if proxy.exportable_for(zone).empty?
+          path = "#{ENV['REMOTE']}/#{zone.folder_name}/#{klass.name.underscore}.csps"
+          FileUtils.mkdir_p File.dirname(path)
+
+          if lastmod = klass.last_modified(zone)
+            next if File.exist?(path) and lastmod <= File.mtime(path)
+
+            puts "Exporting #{klass.name} for #{zone.name} (#{lastmod})"
+            File.open(path, 'w') do |out|
+              proxy.export_for out, zone
+            end
+            File.utime lastmod, lastmod, path
+          end
+          zone.update_attribute :last_export_at, @sync_at
+        end
+      end
+    else
+      puts 'No need to export at the root level.'
     end
   end
   
