@@ -45,10 +45,17 @@ namespace :sync do
       Object.const_get File.basename(f).sub(/\.rb\Z/, '').camelize
     end
 
+    if not Csps.site.parent_id
+      puts "No need to export anything on the root level"
+      return
+    end
+
     puts "Starting export.."
+
     Csps::Exportable.models.each do |klass|
       proxy = Csps::SyncProxy.for klass
       Zone.exportable_points.each do |zone|
+        next if proxy.exportable_for(zone).empty?
         path = "#{ENV['REMOTE']}/#{zone.folder_name}/#{klass.name.underscore}.csps"
         FileUtils.mkdir_p File.dirname(path)
 

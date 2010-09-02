@@ -37,7 +37,7 @@ class Zone < ActiveRecord::Base
     transaction do
       raise 'Site already set' if Csps.site.present?
       update_attributes here: true, accessible: true
-      children.update_all accessible: true
+      descendants.update_all accessible: true
       self
     end
   end
