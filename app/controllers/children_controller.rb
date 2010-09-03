@@ -66,13 +66,13 @@ class ChildrenController < ApplicationController
   end
 
   def show
-    back 'Rechercher un autre patient', children_path
+    back 'Liste des patients', children_path
   end
 
   def new
     @child = Child.new
     @diagnostic = @child.diagnostics.build.prebuild
-    back 'Rechercher un autre patient', children_path
+    back 'Liste des patients', children_path
   end
 
   def create

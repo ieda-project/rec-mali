@@ -12,7 +12,7 @@
 
 - if Csps.point?
   %nav
-    %p.hint Le patient se présente au dispensaire pour la première fois ?
+    %p.hint Le patient se présente t-il au dispensaire pour la première fois ?
     = link_to 'Nouveau patient', new_child_path, :class => 'new-user'
 
 %section
@@ -45,7 +45,7 @@
           %th!= sortable_header 'Nom', 'last_name'
           %th!= sortable_header 'Année de naissance', 'born_on'
           %th!= sortable_header 'Zone', 'zones.name'
-          %th!= sortable_header 'Dernière consultation', 'last_visit_at'
+          %th!= sortable_header 'Dernière évaluation', 'last_visit_at'
       %tbody
         - for child in paged do
           - if child.born_on

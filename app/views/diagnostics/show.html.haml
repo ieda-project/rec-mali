@@ -5,13 +5,14 @@
     = l(@diagnostic.done_on.getlocal, :format => :diagnostic)
     (#{t(:from, :scope => :datetime)}
     #{time_ago_in_words(@diagnostic.done_on)})
-  %span.by Consultation réalisée par #{@diagnostic.author.name}
+  %span.by Evaluation réalisée par #{@diagnostic.author.name}
 
-%nav
-  - if Csps.point?
-    = link_to 'Editer', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
-  - if @diagnostic.classifications.any?
-    = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
+- if Csps.point? or @diagnostic.classifications.any?
+  %nav
+    - if Csps.point?
+      = link_to 'Modifier', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
+    - if @diagnostic.classifications.any?
+      = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
 
 %section.resume
   .measurements
@@ -42,5 +43,5 @@
 
 - if @diagnostic.classifications.any?
   %nav
-    = link_to 'Editer', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
+    = link_to 'Modifier', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
     = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'

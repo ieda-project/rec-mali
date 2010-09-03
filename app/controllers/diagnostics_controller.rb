@@ -10,15 +10,15 @@ class DiagnosticsController < ApplicationController
   end
 
   def show
-    back 'Toutes les consultations', @child
+    back 'Liste des evaluations', @child
   end
 
-  def wait  
+  def wait
     render layout: 'empty'
   end
 
   def treatments
-    back 'Consultation', [ @child, @diagnostic ]
+    back "Retour a l'evaluation", [ @child, @diagnostic ]
   end
 
   def calculations
@@ -36,7 +36,7 @@ class DiagnosticsController < ApplicationController
   end
 
   def new
-    back 'Toutes les consultations', @child
+    back 'Liste des evaluations', @child
     @diagnostic = @child.diagnostics.new.prebuild
   end
 
@@ -55,7 +55,7 @@ class DiagnosticsController < ApplicationController
   end
 
   def edit
-    back 'La consultation', [@child, @diagnostic]
+    back "L'evaluation", [@child, @diagnostic]
   end
 
   def update
