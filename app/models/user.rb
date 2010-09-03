@@ -5,17 +5,19 @@ class User < ActiveRecord::Base
   attr_accessor :password, :password_confirmation
 
   validates_presence_of :login, :name
-  validates_uniqueness_of :login
-  validates_presence_of :password, :on => :create
+  validates_uniqueness_of :login, scope: :zone_id
+  validates_presence_of :password, on: :create
   validates_confirmation_of :password
   before_save :crypt_password
   
   scope :admins, :conditions => {:admin => true}
 
   def self.authenticate login, password
-    (u = find_by_login(login)) &&
-    BCrypt::Password.new(u.crypted_password) == password &&
-    u
+    if Csps.site
+      (u = find_by_login_and_zone_id(login, Csps.site.id)) &&
+      BCrypt::Password.new(u.crypted_password) == password &&
+      u
+    end
   end
 
   protected

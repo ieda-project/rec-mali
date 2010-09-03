@@ -5,6 +5,7 @@ class CreateSites < ActiveRecord::Migration
       t.string :phone
       t.timestamps
 
+      t.references :zone
       t.string :global_id
     end
   end
