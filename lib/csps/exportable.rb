@@ -15,7 +15,7 @@ module Csps::Exportable
 
   def fill_global_id
     if global_id.blank?
-      update_attribute :global_id, "#{Csps.site}/#{id}"
+      update_attributes global_id: "#{Csps.site}/#{id}", zone_id: Zone.csps.id
     end
     true
   end

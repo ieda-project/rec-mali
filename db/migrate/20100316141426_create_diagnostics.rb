@@ -10,6 +10,7 @@ class CreateDiagnostics < ActiveRecord::Migration
       t.string :failed_classifications
       t.timestamps
 
+      t.references :zone
       t.string :global_id
     end
     add_index :diagnostics, [:type, :id]

@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :admin
       t.timestamps
 
+      t.references :zone
       t.string :global_id
     end
   end

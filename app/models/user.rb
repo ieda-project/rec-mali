@@ -12,9 +12,11 @@ class User < ActiveRecord::Base
   scope :admins, :conditions => {:admin => true}
 
   def self.authenticate user_id, password
-    (u = find_by_id(user_id)) &&
-    BCrypt::Password.new(u.crypted_password) == password &&
-    u
+    if Csps.site
+      (u = find_by_id_and_zone_id(user_id, Csps.site.id)) &&
+      BCrypt::Password.new(u.crypted_password) == password &&
+      u
+    end
   end
   
   def self.to_login_select

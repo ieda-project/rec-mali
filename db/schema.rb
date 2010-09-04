@@ -21,16 +21,16 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "global_id"
-    t.boolean  "temporary"
     t.boolean  "bcg_polio0"
     t.boolean  "penta1_polio1"
     t.boolean  "penta2_polio2"
     t.boolean  "penta3_polio3"
     t.boolean  "measles"
     t.string   "cache_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "temporary"
+    t.string   "global_id"
   end
 
   add_index "children", ["global_id"], :name => "index_children_on_global_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.string   "failed_classifications"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "zone_id"
     t.string   "global_id"
   end
 
@@ -86,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.boolean  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "zone_id"
     t.string   "global_id"
   end
 
@@ -144,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.integer  "integer_value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "zone_id"
     t.string   "global_id"
   end
 
@@ -166,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "zone_id"
     t.string   "global_id"
   end
 
@@ -175,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "zone_id"
     t.string   "global_id"
   end
 

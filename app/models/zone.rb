@@ -9,12 +9,16 @@ class Zone < ActiveRecord::Base
   scope :used, conditions: 'id IN (SELECT DISTINCT zone_id FROM children)'
   scope :points, conditions: { point: true }
   scope :accessible, conditions: { accessible: true }
-  scope :importable_points, conditions: [ "point = ? AND accessible = ? AND (here = ? OR here IS NULL)", true, true, false ]
+  scope :importable_points, conditions: [ "point = ? AND accessible = ?", true, true ]
   scope :exportable_points, conditions: { point: true, accessible: true }
   scope :synced, conditions: 'last_import_at IS NOT NULL OR last_export_at IS NOT NULL'
 
   def option_title; name; end
   def folder_name; name.gsub(' ', '_'); end
+
+  def ever_imported?; last_import_at?; end
+  def ever_exported?; last_export_at?; end
+  def ever_synced?; last_import_at? || last_export_at?; end
 
   def to_select opts={}
     if opts[:include_self]

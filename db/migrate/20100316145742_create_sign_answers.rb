@@ -8,6 +8,7 @@ class CreateSignAnswers < ActiveRecord::Migration
       t.integer :integer_value
       t.timestamps
 
+      t.references :zone
       t.string :global_id
     end
   end

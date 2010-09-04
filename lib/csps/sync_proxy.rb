@@ -6,10 +6,10 @@ module Csps::SyncProxy
         set_table_name real_model.table_name
         if real_model.columns_hash['temporary']
           scope :exportable_for,
-                lambda { |i| where('temporary != ? AND global_id LIKE ?', true, "#{i.name}/%") }
+                lambda { |i| where('temporary != ? AND zone_id = ?', true, i.id) }
         else
           scope :exportable_for,
-                lambda { |i| where('global_id LIKE ?', "#{i.name}/%") }
+                lambda { |i| where(zone_id: i.id) }
         end
         self.inheritance_column = '__nonexistent__'
         self.primary_key = real_model.primary_key
@@ -17,7 +17,7 @@ module Csps::SyncProxy
     end
   end
 
-  def import_from src
+  def import_from src, zone
     columns = src.gets.chomp.split(?,)
     count = 0
     catch :end do
@@ -40,6 +40,7 @@ module Csps::SyncProxy
 
         obj = find_or_initialize_by_global_id hash.delete('global_id')
         obj.attributes = obj.attributes.merge hash
+        obj.zone_id = zone.id
         obj.save!
         count += 1
       end
@@ -48,7 +49,7 @@ module Csps::SyncProxy
   end
 
   def export_for out, zone
-    columns = (column_names - [ primary_key ]).sort
+    columns = (column_names - [ primary_key, 'zone_id' ]).sort
     out.puts columns.join(?,)
 
     exportable_for(zone).order(:created_at).each do |record|
