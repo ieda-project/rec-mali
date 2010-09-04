@@ -3,7 +3,7 @@ class ChildrenController < ApplicationController
   fetch 'Child', :also => :indices
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
-  Search = Struct.new(:name, :born_on, :zone_id)
+  Search = Struct.new(:name, :born_on, :village_id)
 
   def index
     # Clean empty children (only photo)

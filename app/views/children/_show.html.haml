@@ -5,6 +5,6 @@
     #{l child.born_on}, #{months_to_text child.months}
   %br/
   %strong Zone : 
-  #{child.zone.try(:name) || '-'}
+  #{child.village.try(:name) || '-'}
 - if Csps.point?
   %button.edit(type="button") Modifier

@@ -1,7 +1,7 @@
 class CreateChildren < ActiveRecord::Migration
   def self.up
     create_table :children do |t|
-      t.references :zone
+      t.references :village
       t.string :first_name, :last_name
       t.date :born_on
       t.boolean :gender

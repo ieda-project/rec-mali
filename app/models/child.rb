@@ -1,6 +1,6 @@
 class Child < ActiveRecord::Base
   include Csps::Exportable
-  belongs_to :zone
+  belongs_to :village, class_name: 'Zone'
   globally_has_many :diagnostics
   globally_has_one :last_visit,
                    class_name: 'Diagnostic', order: 'global_id DESC'

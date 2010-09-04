@@ -12,7 +12,7 @@
 ActiveRecord::Schema.define(:version => 20100817154909) do
 
   create_table "children", :force => true do |t|
-    t.integer  "zone_id"
+    t.integer  "village_id"
     t.string   "first_name"
     t.string   "last_name"
     t.date     "born_on"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20100817154909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "temporary"
+    t.integer  "zone_id"
     t.string   "global_id"
   end
 
