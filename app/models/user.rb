@@ -4,18 +4,21 @@ class User < ActiveRecord::Base
   include Csps::Exportable
   attr_accessor :password, :password_confirmation
 
-  validates_presence_of :login, :name
-  validates_uniqueness_of :login
+  validates_presence_of :name
   validates_presence_of :password, :on => :create
   validates_confirmation_of :password
   before_save :crypt_password
   
   scope :admins, :conditions => {:admin => true}
 
-  def self.authenticate login, password
-    (u = find_by_login(login)) &&
+  def self.authenticate user_id, password
+    (u = find_by_id(user_id)) &&
     BCrypt::Password.new(u.crypted_password) == password &&
     u
+  end
+  
+  def self.to_login_select
+    all(:select => 'id, name').map {|u| [u.id, u.name]}
   end
 
   protected

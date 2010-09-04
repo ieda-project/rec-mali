@@ -6,11 +6,9 @@
     %thead
       %tr
         %th Nom
-        %th Login
         %th Administrateur
     %tbody
       - for user in @users do
         %tr
           %td= link_to user.name, [ :edit, user ]
-          %td= user.login
           %td= user.admin? ? 'Oui' : 'Non'

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def index
     back 'Rechercher un patient', children_path
-    @users = User.order('admin DESC, login')
+    @users = User.order('admin DESC, name ASC')
   end
 
   def new

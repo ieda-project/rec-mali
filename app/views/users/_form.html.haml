@@ -3,10 +3,6 @@
   = form.text_field :name
   = errors_on form, :name
 %div
-  %label Identifiant
-  = form.text_field :login
-  = errors_on form, :login
-%div
   %label Mot de passe
   = form.password_field :password, :value => ''
   = errors_on form, :password

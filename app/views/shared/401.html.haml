@@ -6,10 +6,12 @@
     - if @to
       %input{type: 'hidden', name: 'to', value: @to}/
     %div
-      %label(for='session_login') Nom d'utilisateur
-      %input#session_login{type:'text', name:'session[login]', value:@login}/
+      %label(for='session_login') Utilisateur
+      %select(name="session[user_id]")
+        - for id, name in User.to_login_select do
+          %option(value=id)!= name
     %div
       %label(for='session_password') Mot de passe
       %input#session_password(type='password' name='session[password]')/
     %div
-      %button(type='submit') Connexion
+      %button(type='submit') Se connecter
