@@ -43,7 +43,7 @@ oreille|Affection de l'oreille
   oreille_probleme|L'enfant a-t-il un problème à l'oreille ?|boolean
   oreille_douleur|L'enfant a-t-il mal aux oreilles ?|boolean
   oreille_ecoulement|Y-a- t-il un écoulement de pus ?|boolean
-  oreille_ecoulement_duree|Si oui, depuis combien de jour ?|integer
+  oreille_ecoulement_duree|Si oui, depuis combien de jours ?|integer
   oreille_gonflement|Rechercher un gonflement douloureux derrière l’oreille|boolean
 
 anemie|Anémie
