@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate login, password
     if Csps.site
-      (u = find_by_login_and_zone_id(login, Csps.site.id)) &&
+      (u = find_by_login_and_zone_id(login, Zone.csps.id)) &&
       BCrypt::Password.new(u.crypted_password) == password &&
       u
     end
