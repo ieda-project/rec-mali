@@ -4,9 +4,9 @@ class SessionController < ApplicationController
   def create
     data = params[:session]
     @to = params[:to] || request.env['HTTP_REFERER'] || '/'
-    @login = data[:login]
+    @user_id = data[:user_id]
 
-    if data.respond_to?(:[]) && user = User.authenticate(data[:login], data[:password])
+    if data.respond_to?(:[]) && user = User.authenticate(@user_id, data[:password])
       persist_user_into_session user
       see_other @to
     else

@@ -45,7 +45,7 @@ unless (children_count = ENV['CHILDREN'].to_i) < 1
     (rand(3)+1).times do
       Diagnostic.create(
         child: child,
-        author_global_id: "#{Csps.site}/1",
+        author_global_id: "#{Csps.site.name}/1",
         done_on: rand(365*10).days.ago)
     end
   end
