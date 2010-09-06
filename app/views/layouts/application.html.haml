@@ -9,11 +9,7 @@
   %body
     %header
       = yield :header
-      %ul#breadcrumbs
-        %li= link_to "Index", "#"
-        %li= link_to "Page 2", "#"
-        %li= link_to "Page 3", "#"
-        %li Page en cours
+      = yield :breadcrumbs
       -#- if back?
         %nav#prev= link_to back_title, back_url
       = form_tag session_path, method: 'delete' do

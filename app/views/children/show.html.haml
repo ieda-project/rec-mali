@@ -1,3 +1,8 @@
+- content_for :breadcrumbs do
+  %ul#breadcrumbs
+    %li= link_to "Nouvelle Recherche", children_path
+    %li= @child.name
+    
 %nav
   %p.hint Le patient se présente t-il à nouveau au dispensaire ?
   - if Csps.point?
