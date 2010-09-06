@@ -1,3 +1,10 @@
+- content_for :breadcrumbs do
+  %ul#breadcrumbs
+    %li= link_to "Nouvelle Recherche", children_path
+    %li= link_to @diagnostic.child.name, @diagnostic.child
+    %li= link_to "Diagnostic", child_diagnostic_path(@diagnostic.child, @diagnostic)
+    %li Identification des traitements
+    
 - unless @diagnostic.classifications.any?
   - content_for :head do
     %link{type:"application/json", rel:"calculations", href:calculations_child_diagnostic_path(@child, @diagnostic)}/
