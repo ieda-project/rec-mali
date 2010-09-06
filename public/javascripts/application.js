@@ -461,6 +461,16 @@ window.addEvent('domready', function() {
 })
 
 Element.behaviour(function() {
+  this.getElements('nav a, ul.menu a, a.wait').addEvent('click', function() {
+    if (document.body.hasClass('pending')) return false
+    document.body.addClass('pending')
+    return true })
+  this.getElements('form').addEvent('submit', function() {
+    this.getElements('button[type=submit]').each(function(i) {
+      i.disabled = true })
+    document.body.addClass('pending')
+    return true })
+
   this.getElements('form.new_child input[type=text]').addEvent('focus', function() {
     if (this.value == this.get('data-label')) this.value = ''
     this.removeClass('blank')
