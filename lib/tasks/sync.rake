@@ -22,16 +22,18 @@ namespace :sync do
     p = %r|/([a-z0-9_]+)\.csps\Z|
     puts "Starting import.."
     Zone.importable_points.each do |zone|
+      imported = false
       Dir.glob("#{ENV['REMOTE']}/#{zone.folder_name}/*.csps") do |path|
         model = path.scan(p).first.first
         klass = model.camelize.constantize rescue next
+        imported = true
 
         next if zone.ever_imported? and zone.last_import_at >= File.mtime(path)
 
         puts "Importing #{klass.name} from #{zone.name}"
         File.open(path, 'r') { |src| Csps::SyncProxy.for(klass).import_from(src, zone) }
       end
-      zone.update_attribute :last_import_at, @sync_at
+      zone.update_attribute :last_import_at, @sync_at if imported
     end
   end
 
