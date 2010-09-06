@@ -55,7 +55,8 @@
           - for child in paged do
             - if child.born_on
               %tr{ :class => cycle("odd", "even") }
-                %td= child.name
+                %td
+                  %strong= child.name
                 %td= child.born_on && child.born_on.year
                 %td= child.village && child.village.name
                 %td= l child.last_visit_at if child.last_visit_at

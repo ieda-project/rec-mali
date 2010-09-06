@@ -325,6 +325,14 @@ ul#breadcrumbs
       &:hover
         text-shadow: 0 0 5px white
 
+.result-count
+  text-align: center
+  color: #666
+  font-size: 1.2em
+  padding: 10px 0
+  strong
+    color: #007EC5
+
 nav
   display: block
   text-align: center
@@ -332,10 +340,10 @@ nav
   margin: 0 0 15px
   &.results
     color: #555
-    margin: 10px 0 0
+    margin: 20px 0 0
     font-size: 1.1em
     background: #f6f6f6
-    padding: 5px 0
+    padding: 15px 0
     -webkit-border-radius: 5px
   &#prev
     float: left
@@ -933,25 +941,27 @@ section
       -webkit-border-bottom-left-radius: 5px
       -webkit-border-bottom-right-radius: 5px
       th
-        background = !bg_th
-        border: 3px solid !border_th
+        background: #edfae1
+        border: 2px solid #dcf4c8
         border-left: 0
         color = !color_th
-        font-size: 1.25em
-        padding: 8px 10px
+        font-size: 1em
+        padding: 5px 10px
         &:first-child
-          border-left: 3px solid #ccff99
+          border-left: 2px solid #dcf4c8
           -webkit-border-top-left-radius: 6px
         &:last-child
           -webkit-border-top-right-radius: 6px
       td
-        border-right: 3px solid #efefef
-        border-bottom: 1px solid #efefef
+        border-right: 2px solid #efefef
+        border-bottom: 0px solid #efefef
         color: #666
         font-size: 1.2em
         padding: 8px 10px
+        strong
+          color: #222
         &:first-child
-          border-left: 3px solid #efefef
+          border-left: 2px solid #efefef
   ul.pagination
     text-align: center
     font-size: 1.2em
@@ -1000,7 +1010,7 @@ th
   a
     float: right
     text-decoration: none
-    background-color: $color_th
+    background-color: #c7e7ac
     color: white
     -webkit-border-radius: 0.5em
     margin-left: 2px
@@ -1012,8 +1022,8 @@ th
       &:hover
         text-shadow: 0 -1px 0 rgba(0,0,0,0.1)
         background-color: $color_th - #333
-    &.current
-      background-color: $color_th - #333
+    &.current, &:hover
+      background-color: $color_th 
 
 td
   background-color: white
