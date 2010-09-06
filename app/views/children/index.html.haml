@@ -1,6 +1,6 @@
 - content_for :header do
   %ul.menu
-    %li= link_to 'Patients', children_path
+    %li= link_to 'Recherche', children_path, :class => 'search'
     %li= link_to 'Statistiques', queries_path, :class => 'queries'
     %li= link_to 'Utilisateurs', users_path 
     - if !Csps.point? && current_user.admin?
@@ -32,12 +32,6 @@
     %h1 Resultats de la recherche
     - if @children.any?
       - paged = @children.includes(:village).paginate(@page, window: 15)
-      %nav.results
-        %p 
-          L'enfant n'est pas dans la liste ?
-          = link_to 'Faire sa première évaluation', new_child_path, :class => 'new-user-child-min'
-          ou
-          = link_to "Faire une nouvelle recherche", children_path, :class => 'new-search-min'
       %p.result-count
         - if paged.size < paged.total
           %strong= paged.size
