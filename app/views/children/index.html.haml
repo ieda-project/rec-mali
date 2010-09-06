@@ -10,69 +10,89 @@
           - unless (unsynced = Zone.unsynced).zero?
             %strong= unsynced
 
-- if Csps.point?
-  %nav
-    %p.hint Le patient se présente t-il au dispensaire pour la première fois ?
-    = link_to 'Nouveau patient', new_child_path, :class => 'new-user'
 
 %section
-  %h1 Rechercher un patient
-  - search_form do |f|
-    %div
-      %label Nom et/ou prénom
-      = f.text_field :name
-    .select
-      %label Année de naissance
-      = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => '-', :selected => ((params[:q] ? params[:q][:born_on] : nil)).to_i
-    .select
-      %label Zone
-      = f.select :village_id, Zone.used.to_select, include_blank: true
-    .buttons
-      -#%button(type='reset') Clear
-      %button(type='submit') Rechercher
+  - unless params[:q]
+    %h1 Rechercher un patient
+    - search_form do |f|
+      %div
+        %label Nom et/ou prénom
+        = f.text_field :name
+      .select
+        %label Année de naissance
+        = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => '-', :selected => ((params[:q] ? params[:q][:born_on] : nil)).to_i
+      .select
+        %label Zone
+        = f.select :village_id, Zone.used.to_select, include_blank: true
+      .buttons
+        -#%button(type='reset') Clear
+        %button(type='submit') Rechercher
 
-  - if @children.any?
-    - paged = @children.includes(:village).paginate(@page, window: 15)
-    %p.result-count
-      - if paged.size < paged.total
-        %strong= paged.size
-        de
-      %strong= paged.total
-      Patient(s) trouvé(s)
-    %table.results
-      %thead
-        %tr
-          %th!= sortable_header 'Nom', 'last_name'
-          %th!= sortable_header 'Année de naissance', 'born_on'
-          %th!= sortable_header 'Zone', 'zones.name'
-          %th!= sortable_header 'Dernière évaluation', 'last_visit_at'
-      %tbody
-        - for child in paged do
-          - if child.born_on
-            %tr{ :class => cycle("odd", "even") }
-              %td= link_to child.name, child
-              %td= child.born_on && child.born_on.year
-              %td= child.village && child.village.name
-              %td= l child.last_visit_at if child.last_visit_at
-    %ul.pagination
-      - if paged.prev?
-        %li.em= link_to "< Précédente", url_for(request.query_parameters.merge(:page => @page - 1))
-      - 1.upto(paged.pages) do |p|
-        - if p == @page
-          %li= @page || 1
-        - elsif (@page - p).abs < 4 || p == 1 || p == paged.pages 
-          %li= link_to p, url_for(request.query_parameters.merge(:page => p))
-        - elsif (@page - p).abs < 5
-          %li ...
-      - if paged.next?
-        %li.em= link_to "Suivante >", url_for(request.query_parameters.merge(:page => @page + 1))
-  - elsif params[:q]
-    .no-result
-      %p Aucun patient ne correspond aux termes de recherche spécifiés 
-      %p 
-        %strong Suggestions : 
-        Vérifiez l’orthographe des termes de recherche ou consultez la
-        = link_to "liste des patients", children_path
   - else
-    .no-result
-      %p Aucun enfant n'a encore été diagnostiqué.
+    %h1 Resultats de la recherche
+    - if @children.any?
+      - paged = @children.includes(:village).paginate(@page, window: 15)
+      %nav.results
+        %p 
+          L'enfant n'est pas dans la liste ?
+          = link_to 'Faire sa première évaluation', new_child_path, :class => 'new-user-child-min'
+          ou
+          = link_to "Faire une nouvelle recherche", children_path, :class => 'new-search-min'
+      %p.result-count
+        - if paged.size < paged.total
+          %strong= paged.size
+          de
+        %strong= paged.total
+        Patient(s) trouvé(s) pour les critères de recherches : 
+        %strong Foo,
+        né(e) en 
+        %strong 2010, 
+        dans le vilage
+        %strong Souli
+      %table.results
+        %thead
+          %tr
+            %th!= sortable_header 'Nom', 'last_name'
+            %th!= sortable_header 'Année de naissance', 'born_on'
+            %th!= sortable_header 'Zone', 'zones.name'
+            %th!= sortable_header 'Dernière évaluation', 'last_visit_at'
+            %th Dossier
+        %tbody
+          - for child in paged do
+            - if child.born_on
+              %tr{ :class => cycle("odd", "even") }
+                %td= child.name
+                %td= child.born_on && child.born_on.year
+                %td= child.village && child.village.name
+                %td= l child.last_visit_at if child.last_visit_at
+                %td= link_to "Voir le dossier →", child
+      %ul.pagination
+        - if paged.prev?
+          %li.em= link_to "< Précédente", url_for(request.query_parameters.merge(:page => @page - 1))
+        - 1.upto(paged.pages) do |p|
+          - if p == @page
+            %li= @page || 1
+          - elsif (@page - p).abs < 4 || p == 1 || p == paged.pages 
+            %li= link_to p, url_for(request.query_parameters.merge(:page => p))
+          - elsif (@page - p).abs < 5
+            %li ...
+        - if paged.next?
+          %li.em= link_to "Suivante >", url_for(request.query_parameters.merge(:page => @page + 1))
+      %nav.results
+        %p 
+          L'enfant n'est pas dans la liste ?
+          = link_to 'Faire sa première évaluation', new_child_path, :class => 'new-user-child-min'
+          ou
+          = link_to "Faire une nouvelle recherche", children_path, :class => 'new-search-min'
+    - elsif params[:q]
+      .no-result
+        %p 
+          Aucun enfant ne correspond aux critères de recherches :
+          %strong Foo, 
+          né(e) en 
+          %strong 2010, 
+          dans le vilage
+          %strong Souli
+        %nav
+          = link_to 'Faire sa première évaluation', new_child_path, :class => 'new-user-child'
+          = link_to "Faire une nouvelle recherche", children_path, :class => 'new-search'
