@@ -12,3 +12,7 @@ module Csps
     end
   end
 end
+
+Paperclip.interpolates :global_id do |attachment, style_name|
+  attachment.instance.global_id
+end
