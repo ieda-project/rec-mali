@@ -249,6 +249,8 @@ header
         background: #777 url(../images/icons/menu.png) no-repeat 8px 7px
         -webkit-border-radius: 4px
         position: relative
+        &.search
+          background-position: 8px -124px
         &.queries
           background-position: 8px -43px
         &.syncs
@@ -293,6 +295,13 @@ nav
   text-align: center
   overflow: hidden
   margin: 0 0 15px
+  &.results
+    color: #555
+    margin: 10px 0 0
+    font-size: 1.1em
+    background: #f6f6f6
+    padding: 5px 0
+    -webkit-border-radius: 5px
   &#prev
     float: left
     line-height: 43px
@@ -343,6 +352,17 @@ nav a, nav button, section button[type=submit]
       height: 46px
       width: 10px
   &.new-user
+    background: url(../images/backgrounds/button-new-user.gif)
+    font-size: 1.4em
+    font-weight: bold
+    height: 46px
+    line-height: 46px
+    padding: 0 7px 0 50px
+    &:after  
+      background: url(../images/backgrounds/button-new-user.gif) -46px right no-repeat
+      height: 46px
+      width: 10px
+  &.new-user-child
     background: url(../images/backgrounds/button-new-child.gif)
     font-size: 1.4em
     font-weight: bold
@@ -353,6 +373,39 @@ nav a, nav button, section button[type=submit]
       background: url(../images/backgrounds/button-new-child.gif) -46px right no-repeat
       height: 46px
       width: 10px
+  &.new-user-child-min
+    background: url(../images/backgrounds/button-new-child-min.gif)
+    font-size: 1em
+    font-weight: bold
+    height: 30px
+    line-height: 30px
+    padding: 0 3px 0 35px
+    &:after  
+      background: url(../images/backgrounds/button-new-child-min.gif) -30px right no-repeat
+      height: 46px
+      width: 7px
+  &.new-search
+    background: url(../images/backgrounds/button-new-search.gif)
+    font-size: 1.4em
+    font-weight: bold
+    height: 46px
+    line-height: 46px
+    padding: 0 7px 0 50px
+    &:after  
+      background: url(../images/backgrounds/button-new-search.gif) -46px right no-repeat
+      height: 46px
+      width: 10px
+  &.new-search-min
+    background: url(../images/backgrounds/button-new-search-min.gif)
+    font-size: 1em
+    font-weight: bold
+    height: 30px
+    line-height: 30px
+    padding: 0 3px 0 35px
+    &:after  
+      background: url(../images/backgrounds/button-new-search-min.gif) -30px right no-repeat
+      height: 46px
+      width: 7px
   &.validation
     background: url(../images/backgrounds/button-validation.gif)
     float: right
@@ -1010,9 +1063,14 @@ div.fieldWithErrors
       -webkit-box-shadow: rgba(250, 0, 0, 0.8) 0px 0px 5px
 
 div.no-result
-  font-size: 1.2em
   padding: 40px 0 
   text-align: center
+  p
+    color: #666
+    font-size: 1.3em
+    padding: 0 0 20px
+    strong
+      color: #007EC5
 
 .next
   margin-top: 15px
