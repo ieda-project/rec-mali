@@ -1,7 +1,6 @@
 - unless params[:q]
   - content_for :header do
     %ul.menu
-      %li= link_to 'Recherche', children_path, :class => 'search'
       %li= link_to 'Statistiques', queries_path, :class => 'queries'
       %li= link_to 'Utilisateurs', users_path 
       - if !Csps.point? && current_user.admin?
@@ -28,7 +27,7 @@
         %label Année de naissance
         = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => '-', :selected => ((params[:q] ? params[:q][:born_on] : nil)).to_i
       .select
-        %label Zone
+        %label Village
         = f.select :village_id, Zone.used.to_select, include_blank: true
       .buttons
         -#%button(type='reset') Clear
@@ -54,7 +53,7 @@
           %tr
             %th!= sortable_header 'Nom', 'last_name'
             %th!= sortable_header 'Année de naissance', 'born_on'
-            %th!= sortable_header 'Zone', 'zones.name'
+            %th!= sortable_header 'Village', 'zones.name'
             %th!= sortable_header 'Dernière évaluation', 'last_visit_at'
             %th Dossier
         %tbody
