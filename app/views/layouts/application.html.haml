@@ -17,7 +17,7 @@
         |
         - if Csps.site
           CSPS:
-          %strong= Csps.site
+          %strong #{Csps.site}#{Csps.point? ? '*' : ''}
         - else
           Aucun CSPS
         %button.confirm(type="submit" data-confirm="Etes vous sûr de vouloir vous déconnecter ?") Logout
