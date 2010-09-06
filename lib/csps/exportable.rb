@@ -11,6 +11,8 @@ module Csps::Exportable
     MODELS.map &:constantize
   end
 
+  def globalid; global_id; end
+
   protected
 
   def fill_global_id

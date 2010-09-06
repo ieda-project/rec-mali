@@ -1,8 +1,8 @@
 development:
-  :path: ":rails_root/public/repo/:class_:attachment/:id_:basename_:style.:extension"
-  :url: "/repo/:class_:attachment/:id_:basename_:style.:extension"
+  :path: ":rails_root/public/repo/:global_id_:class_:attachment_:style.:extension"
+  :url: "/repo/:global_id_:class_:attachment_:style.:extension"
   :default_url: '/images/missing_:style.png'
 production:
-  :path: ":rails_root/public/repo/:class_:attachment/:id_:basename_:style.:extension"
-  :url: "/repo/:class_:attachment/:id_:basename_:style.:extension"
+  :path: ":rails_root/public/repo/:global_id_:class_:attachment_:style.:extension"
+  :url: "/repo/:global_id_:class_:attachment_:style.:extension"
   :default_url: '/images/missing_:style.png'

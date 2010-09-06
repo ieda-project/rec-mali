@@ -14,10 +14,10 @@ end
 
 namespace :sync do
   desc 'Synchronize'
-  task :perform => [ :up, :down ]
+  task :perform => [ :export, :import ]
 
   desc 'Read remote databases'
-  task :down => :environment do
+  task :import => :environment do
     check_sync_conditions
     p = %r|/([a-z0-9_]+)\.csps\Z|
     puts "Starting import.."
@@ -27,18 +27,15 @@ namespace :sync do
         model = path.scan(p).first.first
         klass = model.camelize.constantize rescue next
         imported = true
-
-        next if zone.ever_imported? and zone.last_import_at >= File.mtime(path)
-
         puts "Importing #{klass.name} from #{zone.name}"
-        File.open(path, 'r') { |src| Csps::SyncProxy.for(klass).import_from(src, zone) }
+        Csps::SyncProxy.for(klass).import_from path, zone
       end
       zone.update_attribute :last_import_at, @sync_at if imported
     end
   end
 
   desc 'Dump local database'
-  task :up => :environment do
+  task :export => :environment do
     check_sync_conditions
     if Zone.csps.parent_id
       # Load all models
@@ -59,9 +56,7 @@ namespace :sync do
             next if File.exist?(path) and lastmod <= File.mtime(path)
 
             puts "Exporting #{klass.name} for #{zone.name} (#{lastmod})"
-            File.open(path, 'w') do |out|
-              proxy.export_for out, zone
-            end
+            proxy.export_for path, zone
             File.utime lastmod, lastmod, path
           end
           zone.update_attribute :last_export_at, @sync_at
