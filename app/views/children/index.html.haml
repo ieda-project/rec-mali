@@ -47,7 +47,7 @@
           de
         %strong= paged.total
         patient(s) trouvé(s) pour les critères de recherches : 
-        = raw html_criteria @q
+        = raw html_criteria @orig_name, @q
       %table.results
         %thead
           %tr
@@ -88,7 +88,7 @@
       .no-result
         %p 
           Aucun patient ne correspond aux critères de recherches :
-          = raw html_criteria @q
+          = raw html_criteria @orig_name, @q
         %nav
           = link_to 'Remplir sa première évaluation', new_child_path, :class => 'new-user-child'
           ou

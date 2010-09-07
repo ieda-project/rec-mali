@@ -8,6 +8,7 @@ class ChildrenController < ApplicationController
   def index
     # Clean empty children (only photo)
     Child.unfilled.destroy_all
+    @orig_name = params[:q][:name].dup if params[:q]
     @q = Search.from_hash params[:q]
     if params[:o].blank?
       params[:o] = 'last_visit_at'
