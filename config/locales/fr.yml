@@ -3,7 +3,7 @@ fr:
     formats:
       default: '%d/%m/%Y'
       short: '%d/%m'
-      long: '%d/%m/%Y'
+      long: '%d %B %Y'
     order:
       - :day
       - :month
@@ -16,7 +16,7 @@ fr:
       default: "%d %B %Y %H:%M"
       time: "%H:%M"
       short: "%d %b %H:%M"
-      long: "%A %d %B %Y %H:%M:%S %Z"
+      long: "%d %B %Y %H:%M"
       long_ordinal: "%A %d %B %Y %H:%M:%S %Z"
       only_second: "%S"
       diagnostic: '%d/%m/%Y %Hh'

@@ -59,7 +59,7 @@ illnesses, deps = {}, {}
 File.open('db/fixtures/sign_dependencies.txt', 'r') do |f|
   f.each_line do |line|
     next unless line.fix!
-    deps.store *line.split('|')
+    deps.store *line.split('|', 2)
   end
 end
 

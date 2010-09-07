@@ -8,7 +8,7 @@
 
 %h2.em.show
   %strong
-    = l(@diagnostic.done_on.getlocal, :format => :diagnostic)
+    = l(@diagnostic.done_on.getlocal, :format => :long)
     (#{t(:from, :scope => :datetime)}
     #{time_ago_in_words(@diagnostic.done_on)})
   %span.by Evaluation réalisée par #{@diagnostic.author.name}

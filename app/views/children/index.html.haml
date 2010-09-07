@@ -52,7 +52,7 @@
         %thead
           %tr
             %th!= sortable_header 'Nom', 'last_name'
-            %th!= sortable_header 'Année de naissance', 'born_on'
+            %th!= sortable_header 'Date de naissance', 'born_on'
             %th!= sortable_header 'Village', 'zones.name'
             %th!= sortable_header 'Dernière évaluation', 'last_visit_at'
             %th Dossier
@@ -62,7 +62,7 @@
               %tr{ :class => cycle("odd", "even") }
                 %td
                   %strong= link_to child.name, child
-                %td= child.born_on && child.born_on.year
+                %td= child.born_on && l(child.born_on, :format => :long)
                 %td= child.village && child.village.name
                 %td= l child.last_visit_at if child.last_visit_at
                 %td= link_to "Voir le dossier →", child

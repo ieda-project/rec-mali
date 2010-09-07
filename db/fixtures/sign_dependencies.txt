@@ -30,4 +30,4 @@ oreille.oreille_ecoulement_duree|data.oreille.oreille_probleme && data.oreille.o
 oreille.oreille_gonflement|data.oreille.oreille_probleme 
 
 malnutrition.oedemes|data.enfant.months >= 6 
-malnutrition.test_appetit|data.enfant.months >= 6
+malnutrition.test_appetit|(data.enfant.months >= 6) && ((data.enfant.muac < 110) || (data.enfant.wfh < 70))
