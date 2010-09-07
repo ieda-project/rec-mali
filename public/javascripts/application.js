@@ -246,8 +246,10 @@ window.addEvent('domready', function() {
       return illness.valid
     }
     var head_inputs = document.getElements('.profile-child input[type=text]')
+    var warnings = $$('.profile-child .warn')
+    console.log(warnings)
     var head_selects = document.getElements('#child_gender, select[id^=child_born_on]')
-    head_inputs.each(function(i) {
+    head_inputs.concat(warnings).each(function(i) {
       if (i.get('data-condition')) {
         i.condition = new Function(
           'data',
@@ -325,6 +327,11 @@ window.addEvent('domready', function() {
           head_next.addClass('disabled')
         }
         if (was_valid != measurements_valid) show_hide_button()
+        if (measurements_valid) {
+          warnings.setStyle('display', 'none')
+        } else {
+          warnings.each(function (w) {
+            w.setStyle('display', w.condition(form.tree) ? 'none' : 'block') })}
 
         var data = get_indices_data()
         if (data) {
@@ -461,7 +468,7 @@ window.addEvent('domready', function() {
 })
 
 Element.behaviour(function() {
-  this.getElements('nav a, ul.menu a, a.wait').addEvent('click', function() {
+  this.getElements('nav a, ul.menu a, ul#breadcrumbs a, a.wait').addEvent('click', function() {
     this.addClass('clicked')
     if ($E('html').hasClass('pending')) return false
     $E('html').addClass('pending')

@@ -5,6 +5,6 @@
       %td #{diagnostic.height.round(1)} cm
       %th(scope='row') Poids
       %td #{diagnostic.weight.round(2)} kg
-      - if diagnostic.months > 6 and diagnostic.months < 60
+      - if diagnostic.months > 6
         %th(scope='row') Périm. Brac.
         %td #{diagnostic.mac} mm

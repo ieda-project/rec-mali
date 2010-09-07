@@ -15,6 +15,8 @@
           - for key, name in Child::VACCINATIONS do
             = form.check_box key, checked: @child.send(key)
             = form.label key, name
+      .warn{'data-condition' => 'data.enfant.months >= 2 && data.enfant.age < 5'}
+        L'âge de l'enfant doit être compris entre 2 et 59 mois.
       .next
         %button.next(type="button") Suivant
   = form.fields_for :diagnostic, @diagnostic do |fields|

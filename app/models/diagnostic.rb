@@ -58,7 +58,7 @@ class Diagnostic < ActiveRecord::Base
   def muac; mac; end
 
   def reference_date
-    created_at ? created_at.to_date : Date.today
+    done_on ? done_on.to_date : Date.today
   end
 
   def age
