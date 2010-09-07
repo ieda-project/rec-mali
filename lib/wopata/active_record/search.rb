@@ -23,9 +23,9 @@ module Wopata::ActiveRecord
                 d += [ "#{$1}-01-01", "#{$1}-12-31" ]
             end
           when :string
-            values = value.split(/\s+/).map { |q| "%#{q}%" }
-            c << '(' + (["#{col.name} LIKE ?"]*values.length).join(' OR ') + ')'
-            d += values
+            values =  value.split(' ').map {|slice| "%#{slice.strip.cacheize}%"}.sort.join(' ')
+            c << "#{col.name} LIKE ?"
+            d << values
           when :boolean
             c << (%w(1 true yes).include?(value) ? key : "NOT #{key}")
           else

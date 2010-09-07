@@ -61,7 +61,7 @@ require 'iconv'
 class String
   def cacheize
     Iconv.new('ASCII//IGNORE//TRANSLIT', encoding.name).iconv(
-      gsub(/[-'\s]+/, ' ')).downcase.gsub(/[^a-z ]/, '')
+      gsub(/[-'\s]+/, ' ')).downcase.gsub(/[^a-z ]/, '').split(' ').sort.join(' ')
   end
   def cacheize!
     self[0..-1] = cacheize

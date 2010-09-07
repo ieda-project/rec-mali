@@ -38,7 +38,7 @@
         %button(type='submit') Rechercher
 
   - else
-    %h1 Resultats de la recherche
+    %h1 Résultat de la recherche
     - if @children.any?
       - paged = @children.includes(:village).paginate(@page, window: 15)
       %p.result-count

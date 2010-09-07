@@ -10,17 +10,14 @@
     %header
       = yield :header
       = yield :breadcrumbs
-      -#- if back?
-        %nav#prev= link_to back_title, back_url
       = form_tag session_path, method: 'delete' do
         Agent:
         %strong= current_user.name
         |
         - if Csps.site
           CSPS:
-          %strong #{Csps.site}#{Csps.point? ? '*' : ''}
+          %strong= Csps.site
         - else
           Aucun CSPS
         %button.confirm(type="submit" data-confirm="Etes vous sûr de vouloir vous déconnecter ?") Logout
-
     = yield
