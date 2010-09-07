@@ -1,7 +1,12 @@
+- content_for :breadcrumbs do
+  %ul#breadcrumbs
+    %li= link_to "Recherche", children_path
+    %li= link_to "Statistiques", queries_path
+    %li= @query.title
+
 %section
   %h1
     = @query.title
-    =# @query.case_status_key
   %h2 Graphique
   %div.query-graph!= ziya_chart query_url(@query, format: :xml), size: '1200x300'
   %table.results
@@ -9,7 +14,6 @@
       %tr
         %th{:colspan => 4}
           Valeurs
-          
     %tbody
       - @results.keys.sort.reverse.each do |k|
         %tr{ :class => cycle("odd", "even") }

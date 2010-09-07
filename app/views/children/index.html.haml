@@ -20,21 +20,21 @@
   - unless params[:q]
     %h1 Rechercher un patient
     %p.tip
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean hendrerit tellus ac leo tristique porttitor.
-      %strong Aset
-      lorem ipsum consectetur adipiscing elit.
+      Un patient vient se présenter au 
+      %strong centre de santé.
+      Veuillez tout d'abord rechercher son dossier afin de pouvoir remplir son 
+      %strong évaluation PCIME.
     - search_form do |f|
       %div
         %label Nom et/ou prénom
         = f.text_field :name
       .select
         %label Année de naissance
-        = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => '-', :selected => ((params[:q] ? params[:q][:born_on] : nil)).to_i
+        = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => 'Toutes les années', :selected => ((params[:q] ? params[:q][:born_on] : nil)).to_i
       .select
         %label Village
-        = f.select :village_id, Zone.used.to_select, include_blank: true
+        = f.select :village_id, Zone.used_villages.to_select, include_blank: 'Tous les villages'
       .buttons
-        -#%button(type='reset') Clear
         %button(type='submit') Rechercher
 
   - else
@@ -46,12 +46,8 @@
           %strong= paged.size
           de
         %strong= paged.total
-        Patient(s) trouvé(s) pour les critères de recherches : 
-        %strong Foo,
-        né(e) en 
-        %strong 2010, 
-        dans le vilage
-        %strong Souli
+        patient(s) trouvé(s) pour les critères de recherches : 
+        = raw html_criteria @q
       %table.results
         %thead
           %tr
@@ -65,7 +61,7 @@
             - if child.born_on
               %tr{ :class => cycle("odd", "even") }
                 %td
-                  %strong= child.name
+                  %strong= link_to child.name, child
                 %td= child.born_on && child.born_on.year
                 %td= child.village && child.village.name
                 %td= l child.last_visit_at if child.last_visit_at
@@ -84,19 +80,16 @@
           %li.em= link_to "Suivante >", url_for(request.query_parameters.merge(:page => @page + 1))
       %nav.results
         %p 
-          L'enfant n'est pas dans la liste ?
-          = link_to 'Faire sa première évaluation', new_child_path, :class => 'new-user-child-min'
+          Le patient n'est pas dans la liste ?
+          = link_to 'Remplir sa première évaluation', new_child_path, :class => 'new-user-child-min'
           ou
           = link_to "Faire une nouvelle recherche", children_path, :class => 'new-search-min'
     - elsif params[:q]
       .no-result
         %p 
-          Aucun enfant ne correspond aux critères de recherches :
-          %strong Foo, 
-          né(e) en 
-          %strong 2010, 
-          dans le vilage
-          %strong Souli
+          Aucun patient ne correspond aux critères de recherches :
+          = raw html_criteria @q
         %nav
-          = link_to 'Faire sa première évaluation', new_child_path, :class => 'new-user-child'
+          = link_to 'Remplir sa première évaluation', new_child_path, :class => 'new-user-child'
+          ou
           = link_to "Faire une nouvelle recherche", children_path, :class => 'new-search'

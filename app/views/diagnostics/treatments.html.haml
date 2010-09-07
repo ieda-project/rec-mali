@@ -2,7 +2,7 @@
   %ul#breadcrumbs
     %li= link_to "Nouvelle Recherche", children_path
     %li= link_to @diagnostic.child.name, @diagnostic.child
-    %li= link_to "Diagnostic", child_diagnostic_path(@diagnostic.child, @diagnostic)
+    %li= link_to "Evaluation", child_diagnostic_path(@diagnostic.child, @diagnostic)
     %li Identification des traitements
     
 - unless @diagnostic.classifications.any?
@@ -11,7 +11,7 @@
 
 = partial 'children/profile'
 
-%h2.em Traitements
+%h2.em Identification des traitements
 
 - if @diagnostic.failed_classifications.try :any?
   %section.warning
@@ -25,14 +25,13 @@
   %section.treatment{:class => Classification::LEVELS[cl.level]}
     %h2
       = cl.name
-    
     != html cl.treatment
 
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit diagnostic' } do |form|
   %input(type="hidden" name="step" value="final")/
 
   %section.treatment
-    %h2 Commentaires
+    %h2 Autres observations
     = form.text_area :comments, cols:20, rows:5
     
   %nav

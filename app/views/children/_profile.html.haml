@@ -12,7 +12,7 @@
       - else
         %p Never measured.
     .vaccinations
-      %h3 Vaccinations :
+      %h3 Etat vaccinal :
       %ul
         - Child::VACCINATIONS.each do |k,n|
           - if @child.send(k)

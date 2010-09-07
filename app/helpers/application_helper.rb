@@ -36,4 +36,12 @@ module ApplicationHelper
   def errors_on form, field
     render :partial => 'shared/errors', :locals => {:form => form, :field => field}
   end
+  
+  def html_criteria q
+    ret = []
+    ret << "<strong>#{q[:name]}</strong>" unless q[:name].blank?
+    ret << "né(e) en <strong>#{q[:born_on]}</strong>" unless q[:born_on].blank?
+    ret << "dans le village <strong>#{Zone.find_by_id(q[:village_id]).name}</strong>" unless q[:village_id].blank?
+    ret.join(', ')
+  end
 end

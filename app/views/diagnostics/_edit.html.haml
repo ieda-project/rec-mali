@@ -13,7 +13,7 @@
 
     .measurements= partial 'diagnostics/edit_measurements', locals: { form: form }
     .vaccinations
-      %h3 Vaccinations :
+      %h3 Etat vaccinal :
       - form.fields_for :child do |fields|
         - for key, name in Child::VACCINATIONS do
           = fields.check_box key, checked: @child.send(key)
@@ -24,4 +24,4 @@
 = partial 'diagnostics/edit_signs', locals: { form: form }
 
 %nav
-  %button.validation(type="submit") Terminer la consultation
+  %button.validation(type="submit") Identifier le traitement

@@ -1,4 +1,9 @@
-
+- content_for :breadcrumbs do
+  %ul#breadcrumbs
+    %li= link_to "Nouvelle Recherche", children_path
+    %li= link_to "Utilisateurs", users_path
+    %li= @user.name
+    
 #user-session
   %h1 Editer le profil
   %p 

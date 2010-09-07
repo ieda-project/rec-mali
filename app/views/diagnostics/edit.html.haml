@@ -2,7 +2,7 @@
   %ul#breadcrumbs
     %li= link_to "Nouvelle Recherche", children_path
     %li= link_to @diagnostic.child.name, @diagnostic.child
-    %li Diagnostic
+    %li Evaluation
     
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit diagnostic' } do |form|
   = partial 'edit', locals: { form: form }

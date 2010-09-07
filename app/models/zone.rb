@@ -7,6 +7,7 @@ class Zone < ActiveRecord::Base
 
   scope :external, conditions: { here: false }
   scope :used, conditions: 'id IN (SELECT DISTINCT zone_id FROM children)'
+  scope :used_villages, conditions: 'id IN (SELECT DISTINCT village_id FROM children)'
   scope :points, conditions: { point: true }
   scope :accessible, conditions: { accessible: true }
   scope :importable_points, conditions: [ "point = ? AND accessible = ?", true, true ]
