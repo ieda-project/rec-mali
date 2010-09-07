@@ -462,13 +462,15 @@ window.addEvent('domready', function() {
 
 Element.behaviour(function() {
   this.getElements('nav a, ul.menu a, a.wait').addEvent('click', function() {
-    if (document.body.hasClass('pending')) return false
-    document.body.addClass('pending')
+    this.addClass('clicked')
+    if ($E('html').hasClass('pending')) return false
+    $E('html').addClass('pending')
     return true })
   this.getElements('form').addEvent('submit', function() {
-    this.getElements('button[type=submit]').each(function(i) {
+    $$('button[type=submit]').each(function(i) {
+      i.addClass('clicked')
       i.disabled = true })
-    document.body.addClass('pending')
+    $E('html').addClass('pending')
     return true })
 
   this.getElements('form.new_child input[type=text]').addEvent('focus', function() {
