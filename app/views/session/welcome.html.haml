@@ -8,3 +8,5 @@
         - for title, id in Zone.root.to_select(include_self: true) do
           %option(value=id)!= title
     = partial 'users/form', locals: { form: f }
+
+%img.preload(src="/images/hourglass.png" alt="")/

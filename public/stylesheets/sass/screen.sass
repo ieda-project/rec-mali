@@ -22,21 +22,24 @@ body
       width: 400px
       text-align: center
       font-size: 3em
-html.pending
-  body
-    &:after
-      display: block
-      content: ""
-      position: absolute
-      left: 0
-      top: 100px
-      width: 100%
-      height: 32px
-      background: url(../images/hourglass.gif) transparent center center no-repeat
-      opacity: 1 !important
-      z-index: 4000
-    &>*
-      opacity: 0.4
+html.pending body>*
+  opacity: 0.4
+.page-loader
+  display: block
+  content: ""
+  position: absolute
+  left: 0
+  top: 100px
+  width: 100%
+  height: 200px
+  background: url(../images/hourglass.png) transparent center center no-repeat
+  opacity: 1 !important
+  z-index: 4000
+.preload
+  visibility: hidden
+  position: absolute
+  width: 1px
+  height: 1px
 
 .warning
   background-color: #ffffe0

@@ -468,17 +468,26 @@ window.addEvent('domready', function() {
 })
 
 Element.behaviour(function() {
-  this.getElements('nav a, ul.menu a, ul#breadcrumbs a, a.wait').addEvent('click', function() {
-    this.addClass('clicked')
+  function pending() {
     if ($E('html').hasClass('pending')) return false
     $E('html').addClass('pending')
-    return true })
+    new Element('div', {
+      'class': 'page-loader',
+      'styles': { top: (window.scrollHeight + 100) + 'px' }}).inject(document.body)
+    return true
+  }
+  this.getElements('nav a, ul.menu a, ul#breadcrumbs a, a.wait').addEvent('click', function() {
+    if (pending()) {
+      this.addClass('clicked')
+      return true
+    } else return false })
   this.getElements('form').addEvent('submit', function() {
-    $$('button[type=submit]').each(function(i) {
-      i.addClass('clicked')
-      i.disabled = true })
-    $E('html').addClass('pending')
-    return true })
+    if (pending()) {
+      $$('button[type=submit]').each(function(i) {
+        i.addClass('clicked')
+        i.disabled = true })
+      return true
+    } else return false })
 
   this.getElements('form.new_child input[type=text]').addEvent('focus', function() {
     if (this.value == this.get('data-label')) this.value = ''
