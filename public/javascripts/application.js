@@ -310,10 +310,10 @@ window.addEvent('domready', function() {
             if (!i.disabled) {
               if (i.hasClass('float')) {
                 value = i.value.toFloat()
-                i.valid = value.toString() == i.value.replace(',', '.').replace(/\.0+$/, '') && value > 0
+                i.valid = !isNaN(value) && i.value.trim().match(/^[0-9]*([.,][0-9]+){0,1}$/)
               } else if (i.hasClass('integer')) {
                 value = i.value.toInt()
-                i.valid = value.toString() == i.value && value > 0
+                i.valid = i.value.trim().match(/^[0-9]+$/)
               } else {
                 value = i.value
                 i.valid = value.match(/[^ ]/) }}
