@@ -1,3 +1,8 @@
+(function() {
+  var _saved = parseFloat
+  parseFloat = function(i) { return _saved(i.replace(',', '.')) }
+})()
+
 function $E(a,b) { return document.getElement(a,b) }
 Element.implement({
   classes: function() { return this.className.split(/\s+/) },
@@ -42,12 +47,14 @@ $extend(Alertbox, {
     return this
   },
 	xpos: function() {
-		return Math.round((document.documentElement.scrollLeft || document.body.scrollLeft) +
-            (window.getWidth() - this.getWidth()) / 2);
+		return Math.round(
+      document.body.scrollLeft +
+      (window.getWidth() - this.getWidth()) / 2);
 	},
 	ypos: function() {
-		return Math.round((document.documentElement.scrollTop || document.body.scrollTop) +
-            (window.getHeight() - this.getHeight()) / 2)
+		return Math.round(
+      document.body.scrollTop +
+      (window.getHeight() - this.getHeight()) / 2)
 	},
   hide_unless_delayed: function() {
     if (!this.timeout && this.getStyle('opacity') > 0) this.hide()
@@ -303,7 +310,7 @@ window.addEvent('domready', function() {
             if (!i.disabled) {
               if (i.hasClass('float')) {
                 value = i.value.toFloat()
-                i.valid = value.toString() == i.value.replace(/\.0+$/, '') && value > 0
+                i.valid = value.toString() == i.value.replace(',', '.').replace(/\.0+$/, '') && value > 0
               } else if (i.hasClass('integer')) {
                 value = i.value.toInt()
                 i.valid = value.toString() == i.value && value > 0
@@ -473,7 +480,7 @@ Element.behaviour(function() {
     $E('html').addClass('pending')
     new Element('div', {
       'class': 'page-loader',
-      'styles': { top: (window.scrollHeight + 100) + 'px' }}).inject(document.body)
+      'styles': { top: (document.body.scrollTop + 100) + 'px' }}).inject(document.body)
     return true
   }
   this.getElements('nav a, ul.menu a, ul#breadcrumbs a, a.wait').addEvent('click', function() {
