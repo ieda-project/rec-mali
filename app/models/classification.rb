@@ -26,7 +26,7 @@ class Classification < ActiveRecord::Base
   end
 
   def calculate data
-    Csps::Formula.new(self).calculate(data)
+    Csps::Formula.new(equation).calculate(data)
   end
   
 end

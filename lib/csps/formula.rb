@@ -8,8 +8,12 @@ class Csps::Formula
     'OR'  => ' || ' }
   RE = /([a-z0-9._+]+|EXACTLY_ONE_OF\(|AT_LEAST_TWO_OF\(|,|#{LOGICAL.keys.join('|')}|[\(\)]|#{EQ.join('|')}|!)/
 
-  def initialize cl
-    src = cl.equation.scan(RE).map &:first
+  def initialize code
+    @code = code
+  end
+
+  def self.compile illness, equation
+    src = equation.scan(RE).map &:first
     was_eq = false
     arr = src.map.with_index do |token,i|
       if was_eq 
@@ -23,7 +27,7 @@ class Csps::Formula
       elsif token == ','
         ', '
       elsif token =~ /\A[a-z_.]+\Z/
-        token = "#{cl.illness.key}.#{token}" unless token.index(?.)
+        token = "#{illness.key}.#{token}" unless token.index(?.)
         if EQ.include?(src[i+1])
           "(data['#{token}'] && data['#{token}']"
         else
@@ -33,7 +37,7 @@ class Csps::Formula
         token
       end
     end
-    @code = arr.join ''
+    arr.join ''
   end
 
   def calculate data

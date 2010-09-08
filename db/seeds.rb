@@ -126,7 +126,7 @@ File.open('db/fixtures/classifications.txt', 'r') do |f|
       name: name,
       treatment: treatments.delete(name).try(:chomp),
       level: Classification::LEVELS.index(level.intern),
-      equation: equation)
+      equation: Csps::Formula.compile(illness, equation))
   end
 end
 
