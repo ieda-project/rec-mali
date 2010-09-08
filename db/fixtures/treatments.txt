@@ -1,5 +1,5 @@
 [Pneumonie grave ou maladie très grave]
-# Donner la première dose +d’antibiotique+ appropriée,
+# Donner la première dose +d’antibiotique+ approprié,
 # *Transférer d’URGENCE à l’hôpital*,
 # Si l’enfant n’a pas d’autre classification grave donner un bronchodilatateur en inhalation si respiration sifflante,
 # Traiter l'enfant pour +prévenir l'hypoglycémie+.
