@@ -155,7 +155,7 @@ window.addEvent('domready', function() {
           months = ((today.getFullYear() - y.value.toInt())*12) +
                        (today.getMonth()+1 - m.value.toInt()) -
                        (d.value.toInt() <= today.getDate() ? 0 : 1)
-          if (months < 0) months = 0
+          if (isNaN(months) || months < 0) months = 0
           form.tree.enfant.months = months
           form.tree.enfant.age = (months / 12).floor()
           run_all_deps(true)
@@ -254,7 +254,6 @@ window.addEvent('domready', function() {
     }
     var head_inputs = document.getElements('.profile-child input[type=text]')
     var warnings = $$('.profile-child .warn')
-    console.log(warnings)
     var head_selects = document.getElements('#child_gender, select[id^=child_born_on]')
     head_inputs.concat(warnings).each(function(i) {
       if (i.get('data-condition')) {
@@ -319,7 +318,7 @@ window.addEvent('domready', function() {
                 i.valid = value.match(/[^ ]/) }}
             var key = i.get('data-key')
             if (key) form.tree.enfant[key] = value }
-          if (!i.disabled && !i.valid) measurements_valid = false })
+          if ((i.disabled && i.hasClass('needed')) || (!i.disabled && !i.valid)) measurements_valid = false })
 
         if (!changes) return
         head_next.setStyle('visibility', 'visible')

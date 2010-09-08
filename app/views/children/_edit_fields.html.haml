@@ -11,7 +11,7 @@
   %strong
     %span.nee= form.object.gender ? 'Né' : 'Née'
     le :
-  = form.date_select(:born_on, :start_year => Date.today.year, :end_year => Date.today.year - 18)
+  = form.date_select(:born_on, :start_year => Date.today.year, :end_year => Date.today.year - 18, :include_blank => true)
 %p.name
   %strong Zone :
   = form.select :village_id, Zone.csps.to_select
