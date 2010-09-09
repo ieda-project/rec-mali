@@ -216,7 +216,7 @@ window.addEvent('domready', function() {
         } else if (i.get('type') == 'radio') {
           return i.getParent().getElements('input').some(function(x) { return x.checked })
         } else {
-          return i.value.match(/^[0-9]+$/) && parseInt(i.value) >= 0 }})
+          return i.value.trim().match(/^[0-9]+$/) && parseInt(i.value) >= 0 }})
       if (calculate != false && illness.valid) {
         var h2 = illness.getElement('h2')
         h2.getElements('img').dispose()
