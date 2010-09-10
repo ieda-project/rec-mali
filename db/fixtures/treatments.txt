@@ -121,6 +121,9 @@
 # Expliquez à la mère quand revenir immédiatement,
 # Revoir l’enfant dans +14 jours+.
 
+[Pas d'anémie]
+# Expliquer à la mère quand revenir immédiatement
+
 
 [MASc]
 # Traiter l'enfant pour prévenir l'hypoglycémie : donner de +l'eau sucrée si l'enfant est capable de boire+ dans le cas contraire mettre en place une +sonde naso gastrique+ (Si vous avez appris le geste) et  faire passer lentement +50cc d'eau sucrée+,
