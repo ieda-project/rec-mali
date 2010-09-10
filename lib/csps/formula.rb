@@ -6,7 +6,7 @@ class Csps::Formula
   LOGICAL = {
     'AND' => ' && ',
     'OR'  => ' || ' }
-  RE = /([a-z0-9._+]+|EXACTLY_ONE_OF\(|AT_LEAST_TWO_OF\(|AT_MOST_TWO_OF\(|,|#{LOGICAL.keys.join('|')}|[\(\)]|#{EQ.join('|')}|!)/
+  RE = /([a-z0-9._+]+|EXACTLY_ONE_OF\(|AT_LEAST_TWO_OF\(|AT_MOST_ONE_OF\(|,|#{LOGICAL.keys.join('|')}|[\(\)]|#{EQ.join('|')}|!)/
 
   def initialize code
     @code = code
@@ -53,15 +53,15 @@ class Csps::Formula
 
   def AT_LEAST_TWO_OF *args
     args.inject 0 do |c,i|
-      return true if i && (c += 1) == 2
+      return true if i && (c += 1) == 2 # 2 is OK, so it ends iteration
       c
     end
     false
   end
 
-  def AT_MOST_TWO_OF *args
+  def AT_MOST_ONE_OF *args
     args.inject 0 do |c,i|
-      return false if i && (c += 1) == 3
+      return false if i && (c += 1) == 2 # 2 is TOO MUCH, so it ends iteration
       c
     end
     true
