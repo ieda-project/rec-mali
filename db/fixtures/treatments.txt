@@ -96,13 +96,13 @@
 # Donner la première dose de +paracétamol+ pour calmer la douleur,
 # *Transférer d’URGENCE à l’hôpital.*
 
-[Infection aiguë]
+[Infection aiguë de l'oreille]
 # Donner un +antibiotique+ approprié pendant +8 jours+,
 # Donner du +paracétamol+ pour calmer la douleur,
 # Assécher l’oreille à l’aide d’une mèche,
 # Revoir l’enfant dans +5 jours+.
 
-[Infection chronique]
+[Infection chronique de l'oreille]
 # Assécher l’oreille à l’aide d’une mèche,
 # Administrer les +gouttes auriculaires d’antibiotiques purs+,
 # Revoir l’enfant dans +5 jours+.
@@ -154,7 +154,7 @@
 # Si problème d’alimentation, revoir l’enfant dans +5 jours+.
 
 
-[Infection VIH symptomatique confirmée]
+[Infection à VIH symptomatique confirmée]
 # Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
 # Donner une +prophylaxie au cotrimoxazole+,
 # Vérifier le statut vaccinal,
@@ -164,7 +164,7 @@
 # Donner les conseils à la mère pour les soins à domicile,
 # Revoir au bout de +14 jours+, puis +tous les mois pendant 3 mois+, puis +tous les 3 mois ou conformément au calendrier vaccinal+.
 
-[Infection VIH confirmée]
+[Infection à VIH confirmée]
 # Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
 # Donner une +prophylaxie au cotrimoxazole+,
 # Vérifier le statut vaccinal,
@@ -174,7 +174,7 @@
 # Donner les conseils à la mère pour les soins à domicile,
 # Revoir au bout de +14 jours+, puis +tous les mois pendant 3 mois+, puis +tous les 3 mois ou conformément au calendrier vaccinal+.
 
-[Infection VIH symptomatique probable]
+[Infection à VIH symptomatique probable]
 # Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
 # Donner une +prophylaxie au cotrimoxazole+,
 # Donner une supplémentation en +vitamine+ à tous les enfants à partir de l’âge de +6 mois+,
@@ -184,7 +184,7 @@
 # Donner les conseils à la mère pour les soins à domicile,
 # Revoir au bout de +14 jours+, puis +tous les mois pendant 3 mois+, puis +tous les 3 mois ou conformément au calendrier vaccinal+.
 
-[Infection VIH possible / exposition au VIH]
+[Infection à VIH possible / exposition au VIH]
 # Traiter, conseiller et suivre pour les infections communes et les infections opportunistes,
 # Donner une +prophylaxie au cotrimoxazole+,
 # Donner une supplémentation en +vitamine+ à tous les enfants à partir de l’âge de +6 mois+,
@@ -193,17 +193,17 @@
 # Référer pour prise en charge ultérieure incluant les ARV,
 # Revoir au bout de +14 jours+, puis +tous les mois pendant 3 mois+, puis +tous les 3 mois ou conformément au calendrier vaccinal+.
 
-[Infection VIH symptomatique suspecte]
+[Infection à VIH symptomatique suspecte]
 # Traiter, conseiller et suivre pour les infections existantes,
 # Conseiller la mère sur l’alimentation et sur sa propre santé,
 # Encourager à faire le test.
 
-[Infection VIH peu problable]
+[Infection à VIH peu problable]
 # Traiter, conseiller et suivre pour les infections existantes,
 # Conseiller la mère sur l’alimentation et sur sa propre santé,
 # Encourager à faire le test.
 
-[Pas d'infection du VIH]
+[Pas d'infection à VIH]
 # Traiter, conseiller et suivre pour les infections existantes,
 # Conseiller la mère sur l’alimentation et sur sa propre santé,
 # Encourager à faire le test.
