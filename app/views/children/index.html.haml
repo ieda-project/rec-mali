@@ -2,7 +2,8 @@
   - content_for :header do
     %ul.menu
       %li= link_to 'Statistiques', queries_path, :class => 'queries'
-      %li= link_to 'Utilisateurs', users_path 
+      - if current_user.admin?
+        %li= link_to 'Utilisateurs', users_path 
       - if !Csps.point? && current_user.admin?
         %li
           = link_to syncs_path, :class => 'syncs' do
