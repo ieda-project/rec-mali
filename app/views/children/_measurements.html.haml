@@ -7,4 +7,4 @@
       %td #{diagnostic.weight.round(2)} kg
       - if diagnostic.months > 6
         %th(scope='row') Périm. Brac.
-        %td #{diagnostic.mac} mm
+        %td{ class: class_for_mac(diagnostic.mac) } #{diagnostic.mac} mm

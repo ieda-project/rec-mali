@@ -33,6 +33,16 @@ module ApplicationHelper
     end
   end
 
+  def class_for_mac mac
+    if mac < 110
+      'danger'
+    elsif mac >= 125
+      'ok'
+    else
+      'low'
+    end
+  end
+
   def errors_on form, field
     render :partial => 'shared/errors', :locals => {:form => form, :field => field}
   end
