@@ -20,11 +20,9 @@
       - for c in Classification.find(@diagnostic.failed_classifications) do
         %li= c.name
 
-- for cl in @diagnostic.classifications do
-  - next if cl.treatment.blank?
+- for cl in @diagnostic.classifications.on_treatment_list do
   %section.treatment{:class => Classification::LEVELS[cl.level]}
-    %h2
-      = cl.name
+    %h2= cl.name
     != html cl.treatment
 
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit diagnostic' } do |form|
