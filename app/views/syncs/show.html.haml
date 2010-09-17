@@ -1,10 +1,15 @@
+- content_for :breadcrumbs do
+  %ul#breadcrumbs
+    %li= link_to "Recherche Patient", children_path
+    %li Synchronisations
+
 %section
-  %h1 Synchronizations
+  %h1 Synchronisations
   %table
     %thead
       %th Site
-      %th Last import
-      %th Last export
+      %th Dernier Import
+      %th Dernier Export
     %tbody
       - for zone in Zone.synced do
         %tr{ :class => zone.unsynced? ? 'unsynced' : nil }

@@ -82,8 +82,9 @@
       %nav.results
         %p 
           Le patient n'est pas dans la liste ?
-          = link_to 'Remplir sa première évaluation', new_child_path, :class => 'new-user-child-min'
-          ou
+          - if Csps.point?
+            = link_to 'Remplir sa première évaluation', new_child_path, :class => 'new-user-child-min'
+            ou
           = link_to "Faire une nouvelle recherche", children_path, :class => 'new-search-min'
     - elsif params[:q]
       .no-result
@@ -91,6 +92,7 @@
           Aucun patient ne correspond aux critères de recherches :
           = raw html_criteria @orig_name, @q
         %nav
-          = link_to 'Remplir sa première évaluation', new_child_path, :class => 'new-user-child'
-          ou
+          - if Csps.point?
+            = link_to 'Remplir sa première évaluation', new_child_path, :class => 'new-user-child'
+            ou
           = link_to "Faire une nouvelle recherche", children_path, :class => 'new-search'
