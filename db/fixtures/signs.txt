@@ -51,7 +51,7 @@ anemie|Anémie
 
 malnutrition|Etat nutritionnel
   oedemes|Rechercher des oedèmes au niveau des deux pieds|list|no;yes+;yes++;yes+++
-  test_appetit|Test d'appetit|list|pas_indique;negatif;positif
+  test_appetit|Test d'appetit|list|negatif;positif
 
 vih|VIH
   serologie_enfant|Sérologie de l'enfant|list|inconnue;positive;negative
