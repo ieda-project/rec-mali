@@ -2,14 +2,18 @@ require 'bcrypt'
 
 class User < ActiveRecord::Base
   include Csps::Exportable
-  attr_accessor :password, :password_confirmation
+  attr_reader :password, :password_confirmation
 
   validates_presence_of :name
   validates_presence_of :password, :on => :create
-  validates_confirmation_of :password
+  validates_presence_of :password_confirmation, :if => :password
+  validates_confirmation_of :password, :if => :password
   before_save :crypt_password
   
   scope :admins, :conditions => {:admin => true}
+
+  def password= pwd; @password = pwd if pwd.present?; end
+  def password_confirmation= pwd; @password_confirmation = pwd if pwd.present?; end
 
   def self.authenticate user_id, password
     if Csps.site
