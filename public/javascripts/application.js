@@ -172,6 +172,7 @@ window.addEvent('domready', function() {
     function open_illness(illness, scroll) {
       close_illness()
       illness.removeClass('closed')
+      illness.run_deps()
       current_illness = illness
       if (!illness.getElement('h2').getElement('ul'))
         validate_illness(illness)
@@ -446,7 +447,7 @@ window.addEvent('domready', function() {
         copy_value(this)
         i.run_deps()
       })
-      i.run_deps()
+      // i.run_deps()
 
       if (!first && i.getElement('.fieldWithErrors')) first = i
 
