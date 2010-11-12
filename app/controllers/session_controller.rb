@@ -24,4 +24,8 @@ class SessionController < ApplicationController
     @user = User.new
     render layout: 'lobby'
   end
+
+  def restore
+    render layout: 'lobby'
+  end
 end

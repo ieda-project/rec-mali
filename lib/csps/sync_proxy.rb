@@ -53,9 +53,11 @@ module Csps::SyncProxy
           end
 
           obj = find_or_initialize_by_global_id hash.delete('global_id')
-          obj.attributes = obj.attributes.merge hash
-          obj.zone_id = zone.id
-          obj.save!
+          if obj.new_record? || Time.parse(hash[:updated_at]) <= obj.updated_at.utc
+            obj.attributes = obj.attributes.merge hash
+            obj.zone_id = zone.id
+            obj.save!
+          end
         end
       end
     end

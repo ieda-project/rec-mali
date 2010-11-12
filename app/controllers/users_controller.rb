@@ -26,6 +26,11 @@ class UsersController < ApplicationController
       end
     end
     @user.admin = User.count.zero?
+
+    if params[:restore].present?
+      return see_other('/session/restore')
+    end
+
     if @user.save
       if !logged_in? && @user.admin
         persist_user_into_session @user

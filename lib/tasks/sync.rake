@@ -14,11 +14,10 @@ end
 
 namespace :sync do
   desc 'Synchronize'
-  task :perform => [ :export, :import ]
-
-  desc 'Read remote databases'
-  task :import => :environment do
+  task :perform => :environment do
     check_sync_conditions
+
+    # IMPORTING
     p = %r|/([a-z0-9_]+)\.csps\Z|
     puts "Starting import.."
     Zone.importable_points.each do |zone|
@@ -32,11 +31,8 @@ namespace :sync do
       end
       zone.update_attribute :last_import_at, @sync_at if imported
     end
-  end
 
-  desc 'Dump local database'
-  task :export => :environment do
-    check_sync_conditions
+    # EXPORTING
     if Zone.csps.parent_id
       # Load all models
       Dir.glob("#{Rails.root}/app/models/*.rb").each do |f|

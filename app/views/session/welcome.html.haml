@@ -1,12 +1,40 @@
-#user-session
+- content_for :head do
+  = javascript_include_tag 'welcome'
+
+.welcome
   %h1 Nouveau centre
-  %p Création du premier utilisateur
-  - form_for @user do |f|
-    %div  
-      %label Site
-      %select(name="zone_id")
-        - for title, id in Zone.root.to_select(include_self: true) do
-          %option(value=id)!= title
-    = partial 'users/form', locals: { form: f }
+
+  - unless Csps.site
+    .choose
+      %p
+        %button.new{type: 'button'} Nouvelle installation
+      %p
+        %button.restore{type: 'button'} Restauration
+
+  %div{:class => Csps.site ? nil : 'new'}
+    %h2 Création du premier utilisateur
+    - form_for @user do |f|
+      - unless Csps.site
+        %div  
+          %label Site
+          %select(name="zone_id")
+            - for title, id in Zone.root.to_select(include_self: true) do
+              %option(value=id)!= title
+      = partial 'users/form', locals: { form: f }
+
+  - unless Csps.site
+    .restore
+      - form_for @user do |f|
+        = hidden_field_tag 'restore', 'true'
+        %div  
+          %label Site
+          %select(name="zone_id")
+            - for title, id in Zone.root.to_select(include_self: true) do
+              %option(value=id)!= title
+        %div
+          %button(type="submit") Créer centre
+
+  .back
+    %p= link_to 'Retour', 'javascript:void()'
 
 %img.preload(src="/images/hourglass.png" alt="")/
