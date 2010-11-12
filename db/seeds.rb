@@ -199,13 +199,8 @@ end
 
 if ENV['OCCUPY']
   name = ENV['OCCUPY'].gsub '_', ' '
-  zones = Zone.find_all_by_name name
-  if zones[1]
-    puts "Occupying.."
-    zones.each.with_index { |i,n| puts "#{n+1}: #{i}" }
-    print "Which one? "
-    zones[gets.to_i-1].occupy!
-  elsif zone = zones[0]
+  zones = Zone.find_all_by_name(name)
+  if zone = zones[0]
     puts "Occupying #{zone.name} (##{zone.id})"
     zone.occupy!
   else
