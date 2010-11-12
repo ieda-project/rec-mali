@@ -1,6 +1,6 @@
 Csps::Application.routes.draw do |map|
   resource :session, controller: 'session' do
-    get :welcome
+    get :welcome, :restore
   end
   resource :syncs
   resources :users

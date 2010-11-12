@@ -6,19 +6,13 @@
 function $E(a,b) { return document.getElement(a,b) }
 Element.implement({
   classes: function() { return this.className.split(/\s+/) },
-  updated: function(name) {
-    if (name) Element.behaviour_builders_named.get(name).apply(this)
-    else Element.behaviour_builders.each(function (fun) { fun.apply(this) }.bind(this))
-    return this
-  }
-})
+  updated: function() {
+    Element.behaviour_builders.each(function (fun) { fun.apply(this) }.bind(this))
+    return this }})
 $extend(Element, {
   behaviour_builders: [],
-  behaviour_builders_named: new Hash(),
-  behaviour: function(a, b) {
-    var fun = typeof(a) == 'function' ? a : b
+  behaviour: function(fun) {
     this.behaviour_builders.push(fun)
-    if (typeof(a) == 'string') this.behaviour_builders_named.include(a, fun)
   }
 })
 

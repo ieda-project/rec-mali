@@ -116,11 +116,16 @@ object
 button
   cursor: pointer
 
-#user-session
-  h1, p
+.welcome
+  h1, h2, p
     color: #333
     text-align: center
-  form
+  div.new, div.restore, div.back
+    display: none
+  h2
+    font-size: 1em
+    font-weight: normal
+  .choose, form
     background-color: white
     -webkit-border-radius: 12px
     padding: 20px
