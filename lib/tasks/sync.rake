@@ -49,7 +49,7 @@ namespace :sync do
           FileUtils.mkdir_p File.dirname(path)
 
           if lastmod = klass.last_modified(zone)
-            next if File.exist?(path) and lastmod <= File.mtime(path)
+            next if File.exist?(path) && zone.ever_exported? && lastmod <= zone.last_export_at
 
             puts "Exporting #{klass.name} for #{zone.name} (#{lastmod})"
             proxy.export_for path, zone
@@ -87,7 +87,8 @@ namespace :sync do
         (:children, :created_at, :updated_at, :last_visit_at).
         (:illness_answers, :created_at, :updated_at).
         (:sign_answers, :created_at, :updated_at).
-        (:queries, :last_run_at)
+        (:queries, :last_run_at).
+        (:zones, :last_import_at, :last_export_at)
     end
   end
 end

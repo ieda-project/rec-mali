@@ -5,14 +5,16 @@ class Zone < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :parent_id
   validates_uniqueness_of :here, if: :here
 
-  scope :external, conditions: { here: false }
-  scope :used, conditions: 'id IN (SELECT DISTINCT zone_id FROM children)'
-  scope :used_villages, conditions: 'id IN (SELECT DISTINCT village_id FROM children)'
-  scope :points, conditions: { point: true }
-  scope :accessible, conditions: { accessible: true }
-  scope :importable_points, conditions: [ "point = ? AND accessible = ?", true, true ]
-  scope :exportable_points, conditions: { point: true, accessible: true }
-  scope :synced, conditions: 'last_import_at IS NOT NULL OR last_export_at IS NOT NULL'
+  scope :used, where('id IN (SELECT DISTINCT zone_id FROM children)')
+  scope :used_villages, where('id IN (SELECT DISTINCT village_id FROM children)')
+
+  scope :external, where(here: false)
+  scope :accessible, where(accessible: true)
+  scope :points, where(point: true)
+  scope :importable_points, external.accessible.points
+  scope :exportable_points, accessible.points
+
+  scope :synced, where('last_import_at IS NOT NULL OR last_export_at IS NOT NULL')
 
   def option_title; name; end
   def folder_name; name.gsub(' ', '_'); end
