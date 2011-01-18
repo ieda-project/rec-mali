@@ -67,4 +67,27 @@ namespace :sync do
   task migrate: 'db:migrate' do
     Rake::Task['db:seed'].invoke if Illness.count.zero?
   end
+
+  desc 'Offset timestamps in database after system clock change'
+  task :offset_time => :environment do
+    seconds = ENV['BY'].to_i
+    unless seconds.zero?
+      update = ->(table, *fields) do
+        for i in fields do
+          User.connection.execute "
+            UPDATE #{table}
+            SET #{i}=datetime(strftime('%s', #{i}) + #{seconds}, 'unixepoch')
+            WHERE #{i} IS NOT NULL"
+        end
+        update
+      end
+
+      update.
+        (:diagnostics, :created_at, :updated_at, :done_on).
+        (:children, :created_at, :updated_at, :last_visit_at).
+        (:illness_answers, :created_at, :updated_at).
+        (:sign_answers, :created_at, :updated_at).
+        (:queries, :last_run_at)
+    end
+  end
 end
