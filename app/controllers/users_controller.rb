@@ -57,6 +57,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if @user != current_user && @user.diagnostics.empty?
+      @user.destroy
+    end
+    see_other users_path
+  end
+
   protected
 
   def logged_in_or_first_run

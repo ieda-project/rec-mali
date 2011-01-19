@@ -12,8 +12,15 @@
       %tr
         %th Nom
         %th Administrateur
+        %th
     %tbody
       - for user in @users do
         %tr
           %td= link_to user.name, [ :edit, user ]
           %td= user.admin? ? 'Oui' : 'Non'
+          %td
+            - if user != current_user && user.diagnostics.empty?
+              - form_for user, html: { :method => :delete, :class => 'confirm', 'data-confirm' => "Supprimer #{user.name} ?" } do
+                %button{type: 'submit'} Supprimer
+            - else
+              Non autorisé à supprimer

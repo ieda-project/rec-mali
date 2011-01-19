@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   include Csps::Exportable
   attr_reader :password, :password_confirmation
 
+  globally_has_many :diagnostics, as: :author
   validates_presence_of :name
   validates_presence_of :password, :on => :create
   validates_presence_of :password_confirmation, :if => :password

@@ -29,10 +29,11 @@ module Csps::Exportable
   module ClassMethods
     def globally_has_many *args, &blk
       opts = args.extract_options!
+      n = opts.delete(:as) || name.singularize.underscore
       args.each do |i|
         has_many i, opts.merge(
           primary_key: :global_id,
-          foreign_key: "#{name.singularize.underscore}_global_id"), &blk
+          foreign_key: "#{n}_global_id"), &blk
       end
     end
 
