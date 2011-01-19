@@ -538,7 +538,7 @@ nav a
       margin: 0 0 10px
       form
         margin: 0
-      button
+      button.edit
         background: url(../images/icons/edit.gif) no-repeat 0 0
         position: absolute
         right: 5px
@@ -1194,3 +1194,19 @@ p.error
   font-weight: bold
 .ok
   color: green !important
+
+.aided-search
+  select
+    display: none
+  input
+    display: block
+    width: 100%
+    font-size: 1.5em
+  ul
+    padding: 0
+    height: 13em
+    font-size: 1.5em
+    li
+      cursor: pointer
+      &:hover
+        background-color: #ffd

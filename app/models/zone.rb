@@ -7,6 +7,7 @@ class Zone < ActiveRecord::Base
 
   scope :used, where('id IN (SELECT DISTINCT zone_id FROM children)')
   scope :used_villages, where('id IN (SELECT DISTINCT village_id FROM children)')
+  scope :villages, where(village: true)
 
   scope :external, where(here: false)
   scope :accessible, where(accessible: true)
@@ -15,6 +16,8 @@ class Zone < ActiveRecord::Base
   scope :exportable_points, accessible.points
 
   scope :synced, where('last_import_at IS NOT NULL OR last_export_at IS NOT NULL')
+
+  before_save { |rec| rec.village = rec.parent && rec.parent.point? }
 
   def option_title; name; end
   def folder_name; name.gsub(' ', '_'); end

@@ -84,6 +84,8 @@ transient = {
     } else {
       this.div.innerHTML = what
     }
+    this.div.updated();
+
     this.close_button = new Element('div', {'class': 'close-transient', 'text': 'X'})
     this.close_button.addEvent('click', function(e) {
       this.close()
@@ -101,6 +103,9 @@ transient = {
     this.div = false
   },
   ajax: function(url) {
+    new Request.HTML({
+      url: url,
+      onSuccess: function(tree) { transient.open($A(tree)) }}).get();
   }
 }
 
@@ -565,11 +570,48 @@ Element.behaviour(function() {
     this.form.getElements('.nee').set(
       'html',
       this.selectedIndex == 0 ? 'Né' : 'Née')
-  })
+  });
   this.getElements('.confirm').addEvent('click', function() {
     return confirm(this.get('data-confirm') || 'Ok?')
-  })
-})
+  });
+  this.getElements('a.transient').addEvent('click', function() {
+    transient.ajax(this.get('href'));
+    return false });
+
+  this.getElements('div.aided-search').each(function(div) {
+    var input  = div.getElement('input'),
+        ul     = div.getElement('ul'),
+        values = [], prev=null, checker=null;
+
+    input.focus();
+    div.getElements('option').each(function (option) {
+      var v = option.get('text');
+      values.push({
+        text: v,
+        lc: v.toLowerCase(),
+        id: option.get('value') }) });
+
+    ul.addEvent('click', function(e) {
+      var id = e.target.get('data-id');
+      if (id) {
+        $(div.get('data-target')).adopt(
+          new Element('option', {
+            value: id,
+            selected: 'selected',
+            text: div.get('data-prefix') + e.target.get('text') }));
+        $clear(checker);
+        transient.close() }});
+
+    checker = (function () {
+      if (!input.value) return(ul.set('html', ''));
+      if (prev != input.value) {
+        ul.set('html', '');
+        for (var i = 0, c = 0; c < 10 && values[i]; i++) {
+          var v = values[i];
+          if (v.lc.indexOf(input.value.toLowerCase()) > -1) {
+            new Element('li', { text: v.text, 'data-id': v.id }).inject(ul);
+            c++ }}
+        prev = input.value }}).periodical(500) })});
 
 function update_image(id, url) {
   if (id && id != '') {

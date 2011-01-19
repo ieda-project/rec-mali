@@ -34,7 +34,7 @@
         = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => 'Toutes les années', :selected => ((params[:q] ? params[:q][:born_on] : nil)).to_i
       .select
         %label Village
-        = f.select :village_id, Zone.used_villages.to_select, include_blank: 'Tous les villages'
+        = f.select :village_id, Zone.used_villages.to_select, include_blank: 'Tous les villages ou hors zone'
       .buttons
         %button(type='submit') Rechercher
 

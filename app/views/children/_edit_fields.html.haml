@@ -14,4 +14,9 @@
   = form.date_select(:born_on, :start_year => Date.today.year, :end_year => Date.today.year - 18, :include_blank => true)
 %p.name
   %strong Zone :
-  = form.select :village_id, Zone.csps.to_select
+  / No explicit parameter, and either no village set yet, or village is within CSPS:
+  - if !form.object.village || form.object.village.accessible?
+    = form.select :village_id, Zone.csps.to_select
+  - else
+    = form.select :village_id, Zone.csps.to_select + [["Hors zone: #{form.object.village.name}", form.object.village_id]]
+  = link_to 'Hors zone', hors_zone_children_path, :class => 'transient'

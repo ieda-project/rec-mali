@@ -113,6 +113,10 @@ class ChildrenController < ApplicationController
   def update
     display_updated @child.update_attributes(params[:child])
   end
+
+  def hors_zone
+    render layout: false if request.xhr?
+  end
   
   protected
 
