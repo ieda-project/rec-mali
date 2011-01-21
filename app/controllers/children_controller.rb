@@ -71,12 +71,15 @@ class ChildrenController < ApplicationController
   end
 
   def new
+    return see_other(children_path) unless Zone.csps.point?
     @child = Child.new
     @diagnostic = @child.diagnostics.build.prebuild
     back 'Liste des patients', children_path
   end
 
   def create
+    return see_other(children_path) unless Zone.csps.point?
+
     diag = params[:child].delete(:diagnostic)
     answers = diag.delete(:sign_answers).values
 
