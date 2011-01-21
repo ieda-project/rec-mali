@@ -17,7 +17,10 @@ class Zone < ActiveRecord::Base
 
   scope :synced, where('last_import_at IS NOT NULL OR last_export_at IS NOT NULL')
 
-  before_save { |rec| rec.village = rec.parent && rec.parent.point? }
+  before_save do |rec|
+    rec.village = rec.parent && rec.parent.point?
+    true
+  end
 
   def option_title; name; end
   def folder_name; name.gsub(' ', '_'); end
