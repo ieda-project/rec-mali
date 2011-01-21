@@ -12,7 +12,9 @@ class Zone < ActiveRecord::Base
   scope :external, where(here: false)
   scope :accessible, where(accessible: true)
   scope :points, where(point: true)
-  scope :importable_points, external.accessible.points
+  scope :restoring, where(restoring: true)
+  scope :importable_points, where(
+    "restoring = :t OR (here != :t AND accessible = :t AND point = :t)", t: true)
   scope :exportable_points, accessible.points
 
   scope :synced, where('last_import_at IS NOT NULL OR last_export_at IS NOT NULL')
@@ -46,10 +48,10 @@ class Zone < ActiveRecord::Base
   end
   protected :_to_select
 
-  def occupy!
+  def occupy! restoring=false
     transaction do
       raise 'Site already set' if Csps.site.present?
-      update_attributes here: true, accessible: true
+      update_attributes here: true, accessible: true, restoring: restoring
       descendants.update_all accessible: true
       self
     end

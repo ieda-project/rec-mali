@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110119172030) do
+ActiveRecord::Schema.define(:version => 20110121121001) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(:version => 20110119172030) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "village"
+    t.boolean  "restoring"
   end
 
 end

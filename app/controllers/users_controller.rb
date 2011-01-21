@@ -17,19 +17,18 @@ class UsersController < ApplicationController
   end
 
   def create
+    restore = User.count.zero? && params[:restore].present?
     @user = User.new params[:user]
     if Csps.site.blank?
       if params[:zone_id] and zone = Zone.find(params[:zone_id])
-        zone.occupy!
+        zone.occupy! restore
       else
         @user.errors[:base] << :no_site
       end
     end
     @user.admin = User.count.zero?
 
-    if params[:restore].present?
-      return see_other('/session/restore')
-    end
+    return see_other('/session/restore') if restore
 
     if @user.save
       if !logged_in? && @user.admin
