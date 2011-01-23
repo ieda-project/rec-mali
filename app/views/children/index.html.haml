@@ -65,7 +65,7 @@
                   %strong= link_to child.name, child
                 %td= child.born_on && l(child.born_on, :format => :long)
                 %td= child.village && child.village.name
-                %td= l child.last_visit_at if child.last_visit_at
+                %td= l child.last_visit_at.getlocal if child.last_visit_at
                 %td= link_to "Voir le dossier →", child
       %ul.pagination
         - if paged.prev?
