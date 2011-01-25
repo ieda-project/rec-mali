@@ -13,9 +13,10 @@
     #{time_ago_in_words(@diagnostic.done_on)})
   %span.by Evaluation réalisée par #{@diagnostic.author.name}
 
-- if Csps.point? or @diagnostic.classifications.any?
+- editable = Csps.point? && @diagnostic.author == current_user
+- if editable || @diagnostic.classifications.any?
   %nav
-    - if Csps.point?
+    - if editable
       = link_to 'Modifier', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
     - if @diagnostic.classifications.any?
       = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
