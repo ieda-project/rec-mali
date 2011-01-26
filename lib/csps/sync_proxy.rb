@@ -32,34 +32,45 @@ module Csps::SyncProxy
       end
     end
     return unless File.exist? path
+
+    conn = User.connection.instance_variable_get :@connection
     File.open(path, 'r') do |src|
       columns = src.gets.chomp.split(?,)
+      conn.execute "BEGIN" ##########################################
+      conn.execute "DELETE FROM #{table_name} WHERE global_id LIKE ?", "#{zone.name}/%"
       catch :end do
         get = proc { src.gets or throw(:end) }
         loop do
-          hash = {}
+          keys, placeholders, values = [], [], []
           columns.each do |col|
+            keys << col
             type, line = get.().chomp.split '',2
-            hash[col] = case type
+            value = case type
               when ?:
                 while line[-1] == "\\"
                   line = line[0...-1] + get.().chomp
                 end
                 line
-              when ?t then true
-              when ?f then false
-              when ?n then nil
+              when ?t then 't'
+              when ?f then 'f'
+              when ?n
+                placeholders << 'NULL'
+                nil
+              else raise("Bad dump")
+            end
+            if value
+              placeholders << '?'
+              values << value
             end
           end
 
-          obj = find_or_initialize_by_global_id hash.delete('global_id')
-          if obj.new_record? || Time.parse(hash[:updated_at]) <= obj.updated_at.utc
-            obj.attributes = obj.attributes.merge hash
-            obj.zone_id = zone.id
-            obj.save!
-          end
+          conn.execute(
+            "INSERT INTO #{table_name} (#{keys.join(',')}) VALUES (#{placeholders.join(',')})", 
+            *values)
         end
       end
+      conn.execute "COMMIT" #########################################
+      conn.execute "VACUUM"
     end
   end
 
