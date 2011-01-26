@@ -41,7 +41,7 @@ module Csps::SyncProxy
       catch :end do
         get = proc { src.gets or throw(:end) }
         loop do
-          keys, placeholders, values = [], [], []
+          keys, placeholders, values = %w(zone_id), %w(?), [zone.id]
           columns.each do |col|
             keys << col
             type, line = get.().chomp.split '',2
@@ -51,8 +51,7 @@ module Csps::SyncProxy
                   line = line[0...-1] + get.().chomp
                 end
                 line
-              when ?t then 't'
-              when ?f then 'f'
+              when ?t, ?f then type
               when ?n
                 placeholders << 'NULL'
                 nil
@@ -66,7 +65,7 @@ module Csps::SyncProxy
 
           conn.execute(
             "INSERT INTO #{table_name} (#{keys.join(',')}) VALUES (#{placeholders.join(',')})", 
-            *values)
+            values)
         end
       end
       conn.execute "COMMIT" #########################################

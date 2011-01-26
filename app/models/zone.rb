@@ -14,7 +14,7 @@ class Zone < ActiveRecord::Base
   scope :points, where(point: true)
   scope :restoring, where(restoring: true)
   scope :importable_points, where(
-    "restoring = :t OR (here != :t AND accessible = :t AND point = :t)", t: true)
+    "restoring = :t OR ((here != :t OR here IS NULL) AND accessible = :t AND point = :t)", t: true)
   scope :exportable_points, accessible.points
 
   scope :synced, where('last_import_at IS NOT NULL OR last_export_at IS NOT NULL')

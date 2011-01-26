@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   def login_required
     if logged_in?
       true
-    elsif User.count.zero?
+    elsif !Zone.csps || User.local.empty?
       see_other welcome_session_path
     else
       denied

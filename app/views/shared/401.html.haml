@@ -8,7 +8,7 @@
     %div
       %label(for='session_login') Utilisateur
       %select(name="session[user_id]")
-        - for id, name in User.to_login_select do
+        - for id, name in User.local.to_login_select do
           %option(value=id)!= name
     %div
       %label(for='session_password') Mot de passe
