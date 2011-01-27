@@ -30,9 +30,9 @@ namespace :sync do
         imported = true
         puts "Importing #{klass.name} from #{zone.name}"
         Csps::SyncProxy.for(klass).import_from path, zone
+        imported_per_zone[zone][klass] = true
       end
       if imported
-        imported_per_zone[zone][klass] = true
         zone.update_attributes last_import_at: @sync_at, restoring: false
       end
     end
