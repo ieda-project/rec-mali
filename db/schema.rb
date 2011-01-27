@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121121001) do
+ActiveRecord::Schema.define(:version => 20110127134639) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -137,6 +137,14 @@ ActiveRecord::Schema.define(:version => 20110121121001) do
 
   add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
+
+  create_table "serial_numbers", :force => true do |t|
+    t.integer  "zone_id"
+    t.string   "model"
+    t.integer  "value",      :default => 0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sign_answers", :force => true do |t|
     t.integer  "sign_id"

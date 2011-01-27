@@ -4,6 +4,7 @@ module Csps::Exportable
     (MODELS << model.name).uniq!
     model.send :extend, ClassMethods
     model.send :after_create, :fill_global_id
+    model.send :after_save, :register_change
     model.send :validate, :validate_csps
   end
 
@@ -24,6 +25,10 @@ module Csps::Exportable
 
   def validate_csps
     errors[:global_id] << :invalid if Csps.site.blank?
+  end
+
+  def register_change
+    zone.modified! self.class
   end
 
   module ClassMethods

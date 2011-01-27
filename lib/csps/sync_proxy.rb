@@ -35,45 +35,70 @@ module Csps::SyncProxy
 
     conn = User.connection.instance_variable_get :@connection
     File.open(path, 'r') do |src|
-      columns = src.gets.chomp.split(?,)
-      conn.execute "BEGIN" ##########################################
-      conn.execute "DELETE FROM #{table_name} WHERE global_id LIKE ?", "#{zone.name}/%"
-      catch :end do
-        get = proc { src.gets or throw(:end) }
-        loop do
-          keys, placeholders, values = %w(zone_id), %w(?), [zone.id]
-          columns.each do |col|
-            keys << col
-            type, line = get.().chomp.split '',2
-            value = case type
-              when ?:
-                while line[-1] == "\\"
-                  line = line[0...-1] + get.().chomp
-                end
-                line
-              when ?t, ?f then type
-              when ?n
-                placeholders << 'NULL'
-                nil
-              else raise("Bad dump")
-            end
-            if value
-              placeholders << '?'
-              values << value
-            end
-          end
-
-          conn.execute(
-            "INSERT INTO #{table_name} (#{keys.join(',')}) VALUES (#{placeholders.join(',')})", 
-            values)
-        end
+      serial = src.gets.chomp
+      if serial =~ /\A[0-9]+\Z/
+        serial = serial.to_i
+      else
+        raise "Bad export format"
       end
-      conn.execute "COMMIT" #########################################
-      conn.execute "VACUUM"
+      columns = src.gets.chomp.split(?,)
+
+      if serial > zone.serial_numbers[real_model]
+        conn.execute "BEGIN" ##########################################
+        conn.execute "DELETE FROM #{table_name} WHERE global_id LIKE ?", "#{zone.name}/%"
+        catch :end do
+          get = proc { src.gets or throw(:end) }
+          loop do
+            keys, placeholders, values = %w(zone_id), %w(?), [zone.id]
+            columns.each do |col|
+              keys << col
+              type, line = get.().chomp.split '',2
+              value = case type
+                when ?:
+                  while line[-1] == "\\"
+                    line = line[0...-1] + get.().chomp
+                  end
+                  line
+                when ?t, ?f then type
+                when ?n
+                  placeholders << 'NULL'
+                  nil
+                else raise("Bad dump")
+              end
+              if value
+                placeholders << '?'
+                values << value
+              end
+            end
+
+            conn.execute(
+              "INSERT INTO #{table_name} (#{keys.join(',')}) VALUES (#{placeholders.join(',')})", 
+              values)
+          end
+        end
+        zone.serial_numbers[real_model] = serial
+        conn.execute "COMMIT" #########################################
+        conn.execute "VACUUM"
+        true
+      else
+        false
+      end
     end
   end
 
   def export_for path, zone
+    serial = if File.exist?(path)
+      File.open(path, 'r') do |f|
+        f.gets.to_i # Column list will make it 0
+      end
+    else
+      0
+    end
+
+    if serial > zone.serial_numbers[real_model]
+      return false
+    end
+
     dir = File.dirname path
     (real_model.attachment_definitions || []).each do |key,data|
       Dir.glob("#{Rails.root}/public/repo/#{zone.folder_name}/*_#{real_model.name.pluralize.underscore}_#{key.to_s.pluralize}_*") do |rf|
@@ -86,6 +111,7 @@ module Csps::SyncProxy
     end
 
     File.open(path, 'w') do |out|
+      out.puts zone.serial_numbers[real_model]
       columns = (column_names - [ primary_key, 'zone_id' ]).sort
       out.puts columns.join(?,)
 
@@ -101,5 +127,6 @@ module Csps::SyncProxy
         end
       end
     end
+    true
   end
 end

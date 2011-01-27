@@ -27,10 +27,14 @@ namespace :sync do
       Dir.glob("#{ENV['REMOTE']}/#{zone.folder_name}/*.csps") do |path|
         model = path.scan(p).first.first
         klass = model.camelize.constantize rescue next
+        print "Importing #{klass.name} from #{zone.name}.."
         imported = true
-        puts "Importing #{klass.name} from #{zone.name}"
-        Csps::SyncProxy.for(klass).import_from path, zone
-        imported_per_zone[zone][klass] = true
+        if Csps::SyncProxy.for(klass).import_from(path, zone)
+          puts " done."
+          imported_per_zone[zone][klass] = true
+        else
+          puts " skipped, no change."
+        end
       end
       if imported
         zone.update_attributes last_import_at: @sync_at, restoring: false

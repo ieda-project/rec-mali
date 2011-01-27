@@ -1,6 +1,21 @@
 class Zone < ActiveRecord::Base
   acts_as_nested_set
   has_many :patients, class_name: 'Child'
+  has_many :serial_numbers do
+    def get model
+      find_or_initialize_by_model model
+    end
+    def [] model
+      get(model).value
+    end
+    def []= model, value
+      get(model).update_attributes! value: value, exported: false
+    end
+  end
+  def modified! model
+    model = model.class if model.is_a? ActiveRecord::Base
+    serial_numbers.get(model.name).modified!
+  end
 
   validates_uniqueness_of :name, scope: :parent_id
   validates_uniqueness_of :here, if: :here
