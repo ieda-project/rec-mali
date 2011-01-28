@@ -126,9 +126,7 @@ module Csps::SyncProxy
       0
     end
 
-    if serial > zone.serial_numbers[real_model]
-      return false
-    end
+    return false unless serial < zone.serial_numbers[real_model]
 
     dir = File.dirname path
     (real_model.attachment_definitions || []).each do |key,data|
