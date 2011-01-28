@@ -20,7 +20,25 @@ module Csps::SyncProxy
 
   attr_reader :real_model
 
+  def bare_connection
+    @conn ||= real_model.connection.instance_variable_get(:@connection)
+  end
+
+  def bare_exec *args
+    bare_connection.execute *args
+  end
+
+  def bare_transaction
+    bare_exec "BEGIN"
+    yield
+    bare_exec "COMMIT"
+  rescue => e
+    bare_exec "ROLLBACK"
+    raise e
+  end
+
   def import_from path, zone
+    conn, tr = User.connection.instance_variable_get(:@connection), false
     dir = File.dirname path
     (real_model.attachment_definitions || []).each do |key,data|
       Dir.glob("#{dir}/*_#{real_model.name.pluralize.underscore}_#{key.to_s.pluralize}_*") do |f|
@@ -33,7 +51,6 @@ module Csps::SyncProxy
     end
     return unless File.exist? path
 
-    conn = User.connection.instance_variable_get :@connection
     File.open(path, 'r') do |src|
       serial = src.gets.chomp
       if serial =~ /\A[0-9]+\Z/
@@ -44,41 +61,55 @@ module Csps::SyncProxy
       columns = src.gets.chomp.split(?,)
 
       if serial > zone.serial_numbers[real_model]
-        conn.execute "BEGIN" ##########################################
-        conn.execute "DELETE FROM #{table_name} WHERE global_id LIKE ?", "#{zone.name}/%"
-        catch :end do
-          get = proc { src.gets or throw(:end) }
-          loop do
-            keys, placeholders, values = %w(zone_id), %w(?), [zone.id]
-            columns.each do |col|
-              keys << col
-              type, line = get.().chomp.split '',2
-              value = case type
-                when ?:
-                  while line[-1] == "\\"
-                    line = line[0...-1] + get.().chomp
-                  end
-                  line
-                when ?t, ?f then type
-                when ?n
-                  placeholders << 'NULL'
-                  nil
-                else raise("Bad dump")
+        bare_transaction do
+          tr = true
+          bare_exec "DELETE FROM #{table_name} WHERE global_id LIKE ?", "#{zone.name}/%"
+          catch :end do
+            get = proc { src.gets or throw(:end) }
+            loop do
+              keys, placeholders, values = %w(zone_id), %w(?), [zone.id]
+              columns.each do |col|
+                keys << col
+                type, line = get.().chomp.split '',2
+                value = case type
+                  when ?:
+                    while line[-1] == "\\"
+                      line = line[0...-1] + get.().chomp
+                    end
+                    line
+                  when ?t, ?f then type
+                  when ?n
+                    placeholders << 'NULL'
+                    nil
+                  else raise("Bad dump")
+                end
+                if value
+                  placeholders << '?'
+                  values << value
+                end
               end
-              if value
-                placeholders << '?'
-                values << value
-              end
-            end
 
-            conn.execute(
-              "INSERT INTO #{table_name} (#{keys.join(',')}) VALUES (#{placeholders.join(',')})", 
-              values)
+              bare_exec(
+                "INSERT INTO #{table_name} (#{keys.join(',')}) VALUES (#{placeholders.join(',')})", 
+                values)
+            end
+          end
+
+          # zone.serial_numbers[real_model] = serial
+          sn = bare_exec(
+            "SELECT id FROM serial_numbers WHERE model=? AND zone_id=?",
+            [ real_model.name, zone.id ]).first
+          if sn
+            bare_exec(
+              "UPDATE serial_numbers SET value=?,exported=? WHERE id=?",
+              [ serial, 't', sn['id'] ])
+          else
+            bare_exec(
+              "INSERT INTO serial_numbers (model,zone_id,value,exported) VALUES (?,?,?,?)",
+              [ real_model.name, zone.id, serial, 't' ])
           end
         end
-        zone.serial_numbers[real_model] = serial
-        conn.execute "COMMIT" #########################################
-        conn.execute "VACUUM"
+        bare_exec "VACUUM"
         true
       else
         false
