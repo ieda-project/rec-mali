@@ -4,8 +4,14 @@ class CreateSerialNumbers < ActiveRecord::Migration
       t.references :zone
       t.string :model
       t.integer :value, default: 0, null: false
-      t.boolean :exported
+      t.boolean :exported, default: false, null: false
       t.timestamps
+    end
+
+    for model in Csps::Exportable.models do
+      model.select("DISTINCT zone_id").each do |i|
+        SerialNumber.create zone_id: i.zone_id, model: model.name, value: 1
+      end
     end
   end
 

@@ -6,4 +6,8 @@ class SerialNumber < ActiveRecord::Base
       update_attributes! value: value+1, exported: false
     end
   end
+
+  def exported!
+    update_attribute :exported, true
+  end
 end

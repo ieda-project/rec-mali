@@ -3,7 +3,7 @@ class Zone < ActiveRecord::Base
   has_many :patients, class_name: 'Child'
   has_many :serial_numbers do
     def get model
-      find_or_initialize_by_model model
+      find_or_initialize_by_model model.name
     end
     def [] model
       get(model).value
@@ -13,8 +13,10 @@ class Zone < ActiveRecord::Base
     end
   end
   def modified! model
-    model = model.class if model.is_a? ActiveRecord::Base
-    serial_numbers.get(model.name).modified!
+    serial_numbers.get(model).modified!
+  end
+  def exported! model
+    serial_numbers.get(model).exported!
   end
 
   validates_uniqueness_of :name, scope: :parent_id

@@ -141,7 +141,8 @@ ActiveRecord::Schema.define(:version => 20110127134639) do
   create_table "serial_numbers", :force => true do |t|
     t.integer  "zone_id"
     t.string   "model"
-    t.integer  "value",      :default => 0, :null => false
+    t.integer  "value",      :default => 0,     :null => false
+    t.boolean  "exported",   :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -6,9 +6,13 @@ module Csps::Exportable
     model.send :after_create, :fill_global_id
     model.send :after_save, :register_change
     model.send :validate, :validate_csps
+    model.send :belongs_to, :zone
   end
 
   def self.models
+    Dir.glob("#{Rails.root}/app/models/*.rb").each do |f|
+      Object.const_get File.basename(f).sub(/\.rb\Z/, '').camelize
+    end
     MODELS.map &:constantize
   end
 

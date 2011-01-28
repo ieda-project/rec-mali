@@ -16,14 +16,14 @@ namespace :sync do
   desc 'Synchronize'
   task :perform => :environment do
     check_sync_conditions
-    imported_per_zone = {}
+    ipzk = {}
 
     # IMPORTING
     p = %r|/([a-z0-9_]+)\.csps\Z|
     puts "Starting import.."
     Zone.importable_points.each do |zone|
       imported = false
-      imported_per_zone[zone] = {}
+      ipzk[zone] = {}
       Dir.glob("#{ENV['REMOTE']}/#{zone.folder_name}/*.csps") do |path|
         model = path.scan(p).first.first
         klass = model.camelize.constantize rescue next
@@ -31,7 +31,7 @@ namespace :sync do
         imported = true
         if Csps::SyncProxy.for(klass).import_from(path, zone)
           puts " done."
-          imported_per_zone[zone][klass] = true
+          ipzk[zone][klass] = true
         else
           puts " skipped, no change."
         end
@@ -43,17 +43,12 @@ namespace :sync do
 
     # EXPORTING
     if Zone.csps.parent_id
-      # Load all models
-      Dir.glob("#{Rails.root}/app/models/*.rb").each do |f|
-        Object.const_get File.basename(f).sub(/\.rb\Z/, '').camelize
-      end
-
       puts "Starting export.."
 
       Csps::Exportable.models.each do |klass|
         proxy = Csps::SyncProxy.for klass
         Zone.exportable_points.each do |zone|
-          next if imported_per_zone[zone][klass] || proxy.exportable_for(zone).empty?
+          next if (ipzk[zone] && ipzk[zone][klass]) || proxy.exportable_for(zone).empty?
           path = "#{ENV['REMOTE']}/#{zone.folder_name}/#{klass.name.underscore}.csps"
           FileUtils.mkdir_p File.dirname(path)
 

@@ -127,6 +127,7 @@ module Csps::SyncProxy
         end
       end
     end
+    zone.exported! real_model
     true
   end
 end
