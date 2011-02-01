@@ -32,7 +32,7 @@ module Csps::Exportable
   end
 
   def register_change
-    zone.modified! self.class
+    zone.modified! self.class if changed?
   end
 
   module ClassMethods

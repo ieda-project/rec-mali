@@ -25,15 +25,16 @@ namespace :sync do
       imported = false
       ipzk[zone] = {}
       Dir.glob("#{ENV['REMOTE']}/#{zone.folder_name}/*.csps") do |path|
+        puts path
         model = path.scan(p).first.first
         klass = model.camelize.constantize rescue next
-        print "Importing #{klass.name} from #{zone.name}.."
+        print "Importing #{klass.name} from #{zone.name}: "
         imported = true
         if Csps::SyncProxy.for(klass).import_from(path, zone)
-          puts " done."
+          puts "done."
           ipzk[zone][klass] = true
         else
-          puts " skipped, no change."
+          puts "skipped, no change."
         end
       end
       if imported
@@ -52,12 +53,11 @@ namespace :sync do
           path = "#{ENV['REMOTE']}/#{zone.folder_name}/#{klass.name.underscore}.csps"
           FileUtils.mkdir_p File.dirname(path)
 
-          if lastmod = klass.last_modified(zone)
-            next if File.exist?(path) && zone.ever_exported? && lastmod <= zone.last_export_at
-
-            puts "Exporting #{klass.name} for #{zone.name} (#{lastmod})"
-            proxy.export_for path, zone
-            File.utime lastmod, lastmod, path
+          print "Exporting #{klass.name} for #{zone.name}: "
+          if proxy.export_for path, zone
+            puts "done."
+          else
+            puts "skipped, no change."
           end
           zone.update_attribute :last_export_at, @sync_at
         end

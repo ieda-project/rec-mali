@@ -4,6 +4,8 @@ class SerialNumber < ActiveRecord::Base
   def modified!
     if exported?
       update_attributes! value: value+1, exported: false
+    elsif new_record?
+      save!
     end
   end
 

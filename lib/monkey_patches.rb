@@ -19,13 +19,13 @@ class Array
     each { |i| i.force_encoding enc rescue nil }
   end
 
-  def to_hash &block
+  def hashize &block
     returning Hash.new do |h|
       each { |i| h.store block.(i), i }
     end
   end
 
-  def to_rhash
+  def rhashize
     returning Hash.new do |h|
       each { |i| h[i] = true }
     end
