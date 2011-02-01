@@ -8,4 +8,5 @@ tmp/**/*
 config/database.yml
 public/stylesheets/*.css
 public/repo
+vendor/bundler
 .DS_Store
