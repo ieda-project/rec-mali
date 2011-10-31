@@ -1,11 +1,11 @@
 ﻿## Illness / Signs ##
 
 danger|Signes de danger
-  boire|Demander : l’enfant est-il *incapable* de boire ou de prendre le sein ?|boolean
-  vomit|Demander : l’enfant vomit-il *tout* ce qu’il consomme ?|boolean
-  convulsions_passe|Demander : l’enfant a-t-il eu des convulsions *récemment* ?|boolean
+  boire|Demander : l’enfant est-il *incapable* de boire ou de prendre le sein ?|boolean
+  vomit|Demander : l’enfant vomit-il *tout* ce qu’il consomme ?|boolean
+  convulsions_passe|Demander : l’enfant a-t-il eu des convulsions *récemment* ?|boolean
   lethargie|Observer : l’enfant est-il léthargique ou inconscient ?|boolean
-  convulsions_present|Observer : l’enfant convulse t-il *actuellement* ?|boolean
+  convulsions_present|Observer : l’enfant convulse t-il *actuellement* ?|boolean
 
 toux|Toux
   toux_presence|L'enfant a-t-il la toux ou des *difficultés respiratoires* ?|boolean
