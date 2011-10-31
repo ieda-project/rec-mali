@@ -6,6 +6,11 @@
       %td
         = form.text_field :height, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.months >= 2 && data.enfant.age < 5'
         %em cm
+      %th(scope='row') Temp.
+      %td
+        = form.text_field :temperature, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.months >= 6 && data.enfant.age < 5'
+        %em °C
+    %tr
       %th(scope='row') Poids
       %td
         = form.text_field :weight, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.months >= 2 && data.enfant.age < 5'

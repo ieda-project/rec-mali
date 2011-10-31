@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20110127134639) do
     t.integer  "mac"
     t.float    "height"
     t.float    "weight"
+    t.float    "temperature"
     t.text     "comments"
     t.string   "failed_classifications"
     t.datetime "created_at"
