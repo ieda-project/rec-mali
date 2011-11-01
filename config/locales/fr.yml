@@ -69,6 +69,15 @@ fr:
     lethargique_inconscient: Léthargique ou inconscient
     agite_irritable: Agité ou irritable
     normal: Normal
+    normales: Normales
+    normale: Normale
+    rapides: Rapides
+    hypothermique: Hypothermique
+    hypothermie_moderee: Hypothermie moderée
+    hypothermie_severe: Hypothermie sévère
+    fievre: Fièvre
+    nombreuses_severes: Nombreuses ou sévères
+    normalement: Normalement
     avide: Avide
     impossible: Difficilement
     lentement: Lentement
@@ -76,8 +85,15 @@ fr:
     respiration_normale: Respiration normale
     respiration_rapide: Respiration rapide
     inconnue: Inconnue
+    inconnu: Inconnu
     positive: Positive
     negative: Négative
+    pas_prise: Pas de prise de sein
+    mauvaise_prise: Mauvaise prise de sein
+    bonne_prise: Bonne prise de sein
+    pas_succion: Pas de succion du tout
+    non_efficace: Succion non efficase
+    efficace: Succion efficace
     pas_de_test: Pas de test
     positif: Positif
     negatif: Négatif
@@ -91,6 +107,12 @@ fr:
     eruption: Eruption actuelle
     antecedent: Antecedent
     pas_indique: Pas indiqué
+    normaux: Normaux
+    bouge_stimule: Mouvements seulement si stimulation
+    pas_mouvements: Pas de mouvements même si stimulation
+    faible: faible
+    tres_faible: Très faible
+    negatif_grossesse: Négatif pendant la grossesse
   indices:
     weight_age: Poids/Age
     height_age: Taille/Age
