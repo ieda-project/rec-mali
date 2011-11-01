@@ -12,7 +12,7 @@ class Classification < ActiveRecord::Base
 
   def self.run diag
     data = diag.to_hash
-    all.each { |i| i.run diag, data }
+    for_child(diag.child).each { |i| i.run diag, data }
   end
 
   def run diag, data={}
