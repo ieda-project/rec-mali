@@ -3,7 +3,7 @@ begin
   require File.expand_path('../../.bundle/environment', __FILE__)
 rescue LoadError
   require 'yaml'
-  YAML::ENGINE.yamler = 'syck'
+  YAML::ENGINE.yamler = 'syck' if defined? YAML::ENGINE
   require 'rubygems'
   require 'bundler'
   Bundler.setup
