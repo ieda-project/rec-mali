@@ -1,0 +1,3 @@
+= form_for @child, html: { class: 'new child diagnostic' } do |form|
+  = form.fields_for :diagnostic, @diagnostic do |fields|
+    = partial 'diagnostics/edit_signs', locals: { form: fields }

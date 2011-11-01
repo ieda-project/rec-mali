@@ -1,9 +1,3 @@
-GIT
-  remote: https://wopata-heroku:aiJ73Nnm@github.com/wopata/rails-wopata.git
-  revision: a6f5e349ab50a0dc7c908a9a4aaf95ca6fc5328c
-  specs:
-    rails-wopata (0.0.3.5)
-
 GEM
   remote: http://gemcutter.org/
   specs:
@@ -109,7 +103,6 @@ DEPENDENCIES
   haml (= 3.0.4)
   logging
   rails (< 3.1, >= 3)
-  rails-wopata (>= 0.0.3.4)!
   spreadsheet
   sqlite3-ruby
   thin

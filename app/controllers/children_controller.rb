@@ -77,6 +77,16 @@ class ChildrenController < ApplicationController
     back 'Liste des patients', children_path
   end
 
+  def birthdate
+    #if request.xhr?
+      @child = Child.new born_on: params[:born_on]
+      @diagnostic = @child.diagnostics.build.prebuild
+      render layout: false
+    #else
+    #  not_found
+    #end
+  end
+
   def create
     return see_other(children_path) unless Zone.csps.point?
 

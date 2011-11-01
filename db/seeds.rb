@@ -52,87 +52,96 @@ unless (children_count = ENV['CHILDREN'].to_i) < 1
 end
 =end
 
-puts 'Creating illnesses'
+for group in %w(newborn infant child) do
+  puts "==> Age group: #{group}"
+  puts 'Creating illnesses'
 
-illnesses, deps = {}, {}
+  ag = Diagnostic::AGE_GROUPS.index group
+  illnesses, deps = {}, {}
 
-File.open('db/fixtures/sign_dependencies.txt', 'r') do |f|
-  f.each_line do |line|
-    next unless line.fix!
-    deps.store *line.split('|', 2)
-  end
-end
-
-Illness.transaction do
-  File.open('db/fixtures/signs.txt', 'r') do |f|
-    illness, seq = nil, 0
+  File.open("db/fixtures/#{group}/sign_dependencies.txt", 'r') do |f|
     f.each_line do |line|
       next unless line.fix!
-      data = line.chomp.strip.split '|'
-      if line =~ /\A\s/
-        # Sign
-        hash = {
-          illness: illness,
-          key: data[0],
-          dep: deps["#{illness.key}.#{data[0]}"],
-          question: RedCloth.new(data[1], [:lite_mode]).to_html }
-        case data[2]
-          when 'integer'
-            hash[:min_value] = data[3]
-            hash[:max_value] = data[4]
-          when 'list'
-            hash[:values] = data[3]
+      deps.store *line.split('|', 2)
+    end
+  end
+
+  Illness.transaction do
+    File.open("db/fixtures/#{group}/signs.txt", 'r') do |f|
+      illness, seq = nil, 0
+      f.each_line do |line|
+        next unless line.fix!
+        data = line.chomp.strip.split '|'
+        if line =~ /\A\s/
+          # Sign
+          hash = {
+            age_group: ag,
+            illness: illness,
+            key: data[0],
+            dep: deps["#{illness.key}.#{data[0]}"],
+            question: RedCloth.new(data[1], [:lite_mode]).to_html }
+          case data[2]
+            when 'integer'
+              hash[:min_value] = data[3]
+              hash[:max_value] = data[4]
+            when 'list'
+              hash[:values] = data[3]
+          end
+          (data[2].camelize + 'Sign').constantize.create hash
+        else
+          # Illness
+          next if data[1].blank?
+          illness = Illness.create(
+            key: data[0],
+            name: data[1],
+            sequence: seq)
+          illnesses[illness.key] = illness
+          seq += 1
         end
-        (data[2].camelize + 'Sign').constantize.create hash
-      else
-        # Illness
-        next if data[1].blank?
-        illness = Illness.create(
-          key: data[0],
-          name: data[1],
-          sequence: seq)
-        illnesses[illness.key] = illness
-        seq += 1
       end
     end
   end
-end
 
-puts 'Creating treatments'
+  puts 'Creating treatments'
 
-treatments = {}
-File.open('db/fixtures/treatments.txt', 'r') do |f|
-  cl = nil
-  f.each_line do |line|
-    line.gsub! %r(/\*.*?\*/), ''
-    line.gsub! "\xC2\xA0", ' '
-    next if line.blank?
-    if line =~ /^\[(.+)\]\Z/
-      cl = $1
-    elsif cl
-      treatments[cl] ||= ''
-      treatments[cl] += line
+  treatments = {}
+  File.open("db/fixtures/#{group}/treatments.txt", 'r') do |f|
+    cl = nil
+    f.each_line do |line|
+      line.gsub! %r(/\*.*?\*/), ''
+      line.gsub! "\xC2\xA0", ' '
+      next if line.blank?
+      if line =~ /^\[(.+)\]\Z/
+        cl = $1
+      elsif cl
+        treatments[cl] ||= ''
+        treatments[cl] += line
+      end
     end
   end
-end
 
-puts 'Creating classifications'
+  puts 'Creating classifications'
 
-File.open('db/fixtures/classifications.txt', 'r') do |f|
-  f.each_line do |line|
-    next unless line.fix!
-    illness, name, level, equation = line.split '|'
-    illnesses[illness].classifications.create!(
-      name: name,
-      treatment: treatments.delete(name).try(:chomp),
-      level: Classification::LEVELS.index(level.intern),
-      equation: Csps::Formula.compile(illness, equation))
+  File.open("db/fixtures/#{group}/classifications.txt", 'r') do |f|
+    f.each_line do |line|
+      next unless line.fix!
+      illness, name, level, equation = line.split '|'
+      begin
+        illnesses[illness].classifications.create!(
+          age_group: ag,
+          name: name,
+          treatment: treatments.delete(name).try(:chomp),
+          level: Classification::LEVELS.index(level.intern),
+          equation: Csps::Formula.compile(illness, equation))
+      rescue => e
+        puts "ERROR: #{group} #{name}"
+      end
+    end
   end
-end
-
-if treatments.any?
-  STDERR.puts "WARNING: #{treatments.size} orphaned treatments!"
-  STDERR.puts "Keys: #{treatments.keys.join(', ')}."
+  if treatments.any?
+    STDERR.puts "WARNING: #{treatments.size} orphaned treatments!"
+    STDERR.puts "Keys: #{treatments.keys.join(', ')}."
+  end
 end
 
 puts 'Creating translations'

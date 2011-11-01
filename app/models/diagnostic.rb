@@ -1,5 +1,7 @@
 class Diagnostic < ActiveRecord::Base
   include Csps::Exportable
+  enum :age_group, %w(newborn infant child)
+
   serialize :failed_classifications
   globally_belongs_to :child
   globally_belongs_to :author, class_name: 'User'
@@ -45,8 +47,14 @@ class Diagnostic < ActiveRecord::Base
 
   scope :between, lambda {|d1, d2| {:conditions => ['done_on > ? and done_on <= ?', d1, d2]}}
 
-  before_create :set_date
-  after_create :update_child
+  before_create do
+    self.done_on ||= Time.now
+    self.age_group = AGE_GROUPS.index(child.age_group.to_s) if child
+  end
+
+  after_create do
+    child.update_attribute :last_visit_at, created_at
+  end
 
   validates_presence_of :child, :height, :weight
   validates_numericality_of :mac, :only_integer => true, :allow_blank => true
@@ -156,14 +164,6 @@ class Diagnostic < ActiveRecord::Base
   end
 
   protected
-
-  def update_child
-    child.update_attribute :last_visit_at, created_at
-  end
-
-  def set_date
-    self.done_on ||= Time.now
-  end
 
   def clear_classifications obj=nil
     classifications.clear

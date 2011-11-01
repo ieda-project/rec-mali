@@ -3,7 +3,7 @@ class Zone < ActiveRecord::Base
   has_many :patients, class_name: 'Child'
   has_many :serial_numbers do
     def get model
-      find_or_initialize_by_model model.class_name
+      find_or_initialize_by_model model.name
     end
     def [] model
       get(model).value

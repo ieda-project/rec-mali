@@ -13,6 +13,7 @@ class Csps::Formula
   end
 
   def self.compile illness, equation
+    return nil unless equation
     src = equation.scan(RE).map &:first
     was_eq = false
     arr = src.map.with_index do |token,i|

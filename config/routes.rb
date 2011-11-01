@@ -14,7 +14,7 @@ Csps::Application.routes.draw do |map|
 
   resources :children do
     collection do
-      get :calculations, :hors_zone
+      get :calculations, :hors_zone, :birthdate
     end
     member do
       get :indices

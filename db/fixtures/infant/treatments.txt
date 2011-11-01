@@ -1,0 +1,47 @@
+[Possibilité d'infection bactérienne grave]
+# inf bac C1
+
+[Infection bactérienne locale]
+# inf bac C2
+
+[Pas d'infection bactérienne]
+# inf bac C3
+
+[Pas de diarrhée]
+# diarrhee C1
+
+[Déshydratation sévère]
+# diarrhee C2
+
+[Signes évidents de déshydratation]
+# diarrhee C3
+
+[Pas de déshydratation]
+# diarrhee C4
+
+[Diarrhée persistante grave]
+# diarrhee C5
+
+[Sang dans les selles]
+# diarrhee C6
+
+[Incapable de se nourrir possibilité d’une infection bactérienne grave]
+# alimentation C1
+
+[Problème d’alimentation et/ou poids faible pour l’âge]
+# alimentation C2
+
+[Pas de poids faible et/ou pas de problème d’alimentation]
+# alimentation C3
+
+[Infection VIH symptomatique très probable]
+# vih C1
+
+[Infection VIH symptomatique suspecte]
+# vih C2
+
+[Infection VIH peu problable]
+# vih C3
+
+
+

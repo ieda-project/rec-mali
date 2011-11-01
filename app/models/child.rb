@@ -23,12 +23,32 @@ class Child < ActiveRecord::Base
     VACCINATIONS.select { |k,v| send(k) }.map &:last
   end
 
+  def self.age_group born_on
+    new(born_on: born_on).age_group
+  end
+
+  def age_group
+    if born_on
+      if days <= 7
+        :newborn
+      elsif months <= 2
+        :infant
+      elsif months < 60
+        :child
+      end
+    end
+  end
+
   def age
     born_on && Date.today.full_years_from(born_on)
   end
   
   def months
     born_on && Date.today.full_months_from(born_on)
+  end
+
+  def days
+    born_on && (Date.today - born_on).to_i
   end
   
   def name

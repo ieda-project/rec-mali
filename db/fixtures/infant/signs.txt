@@ -1,0 +1,49 @@
+## NOURRISSON
+
+## INFECTION BACTERIENNES
+inf_bac|Infection Bactériennes
+  qa|Demander: Le nourrisson a-t-il eu des convulsions ?|boolean	
+  qb|Compter les respirations par minute; si leur nombre est élevé, compter à nouveau (rapide => plus 60 respirations par minutes)|list|normales;rapides
+  qc|Rechercher un tirage sous-costal grave|boolean
+  qd|Rechercher un battement des ailes du nez|boolean	
+  qe|Ecouter si le nourrisson émet un geignement|boolean
+  qf|Palper la fontanelle pour sentir si elle est bombée|boolean
+  qg|Regarder s’il y a un écoulement de pus de l’oreille|boolean
+  qh|Regarder si l’ombilic est rouge ou suintant de pus|boolean
+  qi|La rougeur s'étend-elle à la peau ?|boolean
+  qj|Mesurer la température. Le nourrisson a-t-il de la ou fièvre (> 37.5) ou est-il hypothermique (< 35.5 ou froid au toucher) ?|list|normale;hypothermique;fievre
+  qk|Rechercher les pustules cutanées. Sont-elles nombreuses ou sévères?|list|absentes;presentes;nombreuses_severes
+  ql|L'enfant est-il normal, agité ou irritable, léthargique ou inconscient ?|list|normal;agite_irritable;lethargique_inconscient
+  qm|Regarder les mouvements du nourrisson : Bouge-t-il moins que la normale?|boolean
+
+## DIARRHEE
+diarrhee|Diarrhée
+  qa|L'enfant a-t-il la diarrhée ?|boolean
+  qb|Depuis combien de jours ?|integer
+  qc|Y a-t-il du sang dans les selles?|boolean
+  qd|Les yeux de l'enfant sont-ils enfoncés ?|boolean
+  qe|Pincer la peau de l’abdomen. Le pli cutané s’efface-t-il: Très lentement (plus de 2 secondes)? Ou lentement?|list|normalement;lentement;tres_lentement 
+
+## ALIMENTATION
+alimentation|Alimentation ou insuffisance pondérale
+  qa|Le nourrisson a-t-il des difficultés à se nourrir ?|boolean
+  qb|Le nourrisson est-il nourri au sein ?|boolean
+  qc|Si oui, combien de fois en 24 heures ?|integer	
+  qd|Le nourrisson reçoit-il d’habitude d’autres aliments ou d’autres boissons ?|boolean
+  qe|Si oui, combien de fois ?|integer
+  qf|Le nourrisson peut-il bien prendre le sein?|list|pas_prise;mauvaise_prise;bonne_prise
+  qg|Est-ce que le nourrisson tète efficacement (c’est-à-dire par succions profondes et lentes entrecoupées de pauses) ?|list|pas_succion;non_efficace;efficace
+  qh|Regarder la bouche pour détecter des ulcérations ou plaques blanches (muguet).|boolean
+
+## VIH
+vih|Recherche d'une infection VIH
+  qa|Lymphadénopathie persistante généralisée|boolean
+  qb|Hépatomégalie|boolean
+  qc|Splénomégalie|boolean	
+  qd|Otite moyenne chronique / récurrente|boolean
+  qe|Problèmes cutanéo-muqueux|boolean
+  qf|Fièvre > 1 mois|boolean
+  qg|Anémie|boolean
+  qh|Pneumonie grave récurrente|boolean
+  qi|Encéphalopathie|boolean
+  qj|Sérologie mère|list|inconnue;negative;positive

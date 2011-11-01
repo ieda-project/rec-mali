@@ -1,4 +1,6 @@
 class Sign < ActiveRecord::Base
+  enum :age_group, %w(newborn infant child)
+
   belongs_to :illness
   has_and_belongs_to_many :classifications
   has_many :answers, class_name: 'SignAnswer'

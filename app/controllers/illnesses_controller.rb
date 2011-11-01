@@ -13,8 +13,12 @@ class IllnessesController < ApplicationController
           else v
         end
       end
-      ret = illness.classifications.map do |cl|
-        [ cl.name, (cl.calculate(params[:d]) rescue 'error') ]
+      ret = illness.classifications.where(age_group: params[:a]).map do |cl|
+        begin
+          [ cl.name, (cl.calculate(params[:d])) ]
+        rescue
+          [ cl.name, 'error' ]
+        end
       end
       render text: ret.to_json
     else

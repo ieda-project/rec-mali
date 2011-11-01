@@ -1,0 +1,47 @@
+[Maladie grave ou infection bactérienne grave]
+# Inf bac C1
+
+[Infection bactérienne locale]
+# Inf bac C2
+
+[Hypothermie modérée]
+# Inf bac C3
+
+[Infection bactérienne peu probable et pas d'hypothermie]
+# Inf bac C4
+
+[Très faible poids]
+# poids C1
+
+[Faible poids]
+# poids C2
+
+[Pas de faible poids]
+# poids C3
+
+[Conjonctivite purulente du nouveau-né]
+# occ C1
+
+[Pas d'infection occulaire]
+# occ C2
+
+[Infection VIH symptomatique probable]
+# vih C1
+
+[Infection VIH symptomatique possible]
+# vih C2
+
+[Infection VIH peu problable]
+# vih C3
+
+[Maladie grave ou infection bactérienne grave]
+# alimentation C1
+
+[Problème d'alimentation]
+# alimentation C2
+
+[Pas de problèmes d'alimentation]
+# alimentation C3
+
+
+

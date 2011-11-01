@@ -1,0 +1,44 @@
+## NOUVEAUX NES
+
+## INFECTIONS BACTERIENNES
+inf_bac|Infection Bactérienne
+  qa|Demander: Le nourrisson a-t-il eu des convulsions ?|boolean
+  qb|Le nouveau-né est-il incapable de s'alimenter ?|boolean
+  qc|Compter les respirations par minute; si leur nombre est élevé, compter à nouveau (rapide => plus 60 cycles par minutes)|list|normales;rapides
+  qd|Rechercher un tirage sous-costal grave|boolean
+  qe|Rechercher un geignement expiratoire|boolean
+  qf|Regarder les mouvements du nouveau- né|list|normaux;bouge_stimule;pas_mouvements
+  qg|Rechercher des pustules sur la peau|boolean
+  qh|Mesurer la température axilaire (Hypothermie modérée => 35.5 <= T <= 36.6 / Hypothermique sévère => T < 35.5 / Fievre =>  T >= 37.5)|list|normale;hypothermie_moderee;hypothermie_severe;fievre
+  qi|Rechercher un ictère grave|boolean
+  qj|Regarder l'ombilic. Est-il rouge ou purulent ?|boolean
+  
+## POIDS
+poids|Recherche d'un faible poids
+  qa|Regarder le poids actuel de l'enfant (normal => p >= 2500g / faible => 1500g <= p < 2500g / très faible => p < 1500g )|list|normal;faible;tres_faible
+
+## INFECTIONS OCCULAIRES
+inf_occ|Recherche d'infections occulaires
+  qa|Inspecter les yeux du nouveau-né. Sont-ils purulents ? Sont-ils enflés ?|boolean
+
+## VIH
+vih|Recherche d'une infection VIH
+  qa|Quel est l'état sérologique de la mère ?|list|negatif_grossesse;inconnu;positif
+  qb|Hépatomégalie|boolean
+  qc|Splénomégalie|boolean
+  qd|Infection de l'oreille|boolean
+  qe|Signes d'infection cutanéo-muqueuse|boolean
+  qf|Pneumonie grave|boolean
+  qg|Faible poids de naissance|boolean
+
+## ALIMENTATION
+alimentation|Recherche de difficulté d'alimentation
+  qa|Le nourrisson a-t-il des difficultés à se nourrir ?|boolean
+  qb|Le nourrisson est-il nourri au sein ?|boolean
+  qc|Si oui, combien de fois en 24 heures ?|integer
+  qd|Le nourrisson reçoit-il d’habitude d’autres aliments ou liquides en plus du lait maternel ?|boolean
+  qe|Si oui, reçoit-il du lait artificiel ?|boolean
+  qf|Regarder la bouche du nouveau-né pour détecter un muget|boolean
+  qg|Regarder la bouche du nouveau-né pour détecter une malformation au niveau de la bouche (bec de lièvre, une fente palatine)|boolean
+  qh|Le nourrisson peut-il bien prendre le sein ?|list|bonne_prise;mauvaise_prise;pas_prise
+  qi|Est-ce que le nourrisson tête efficacement (c'est-à-dire par succions profondes et lentes entrecoupées de pauses) ?|list|efficace;non_efficace;pas_succion

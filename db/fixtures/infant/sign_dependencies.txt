@@ -1,0 +1,12 @@
+inf_bac.qi|data.inf_bac.qh
+
+diarrhee.qb|data.diarrhee.qa
+diarrhee.qc|data.diarrhee.qa
+diarrhee.qd|data.diarrhee.qa
+diarrhee.qe|data.diarrhee.qa
+
+alimentation.qc|data.alimentation.qb
+alimentation.qe|data.alimentation.qd
+alimentation.qf|data.alimentation.qb
+alimentation.qg|data.alimentation.qb
+

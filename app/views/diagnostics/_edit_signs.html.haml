@@ -1,9 +1,10 @@
 - count = 0
 - for i in Illness.order(:sequence) do
-  %section.illness{'data-classify-href' => classification_illness_path(i), 'data-key' => i.key}
+  - cs = i.classifications.for_child(@child)
+  - next if cs.empty?
+  %section.illness{'data-classify-href' => classification_illness_path(i), 'data-key' => i.key, 'data-age-group' => cs.first.age_group}
     %h2
       = i.name
-      - cs = i.classifications
       - my_cs = @diagnostic.classifications.for(i)
       %ul.classification
         - for c in cs do
