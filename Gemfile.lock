@@ -1,3 +1,11 @@
+GIT
+  remote: http://github.com/Papipo/hassle.git
+  revision: 3a12feb7ae8c94acde7bdf1cc8a34bb89ab39f44
+  specs:
+    hassle (0.0.1)
+      haml
+      rack
+
 GEM
   remote: http://gemcutter.org/
   specs:
@@ -94,6 +102,7 @@ DEPENDENCIES
   color
   faker
   haml (= 3.0.12)
+  hassle!
   logging
   pg
   rails (< 3.1, >= 3)

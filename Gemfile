@@ -18,4 +18,5 @@ end
 
 group :heroku do
   gem 'pg'
+  gem 'hassle', git: 'http://github.com/Papipo/hassle.git'
 end
