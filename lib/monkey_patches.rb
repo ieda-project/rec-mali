@@ -20,13 +20,13 @@ class Array
   end
 
   def hashize &block
-    returning Hash.new do |h|
+    {}.tap do |h|
       each { |i| h.store block.(i), i }
     end
   end
 
   def rhashize
-    returning Hash.new do |h|
+    {}.tap do |h|
       each { |i| h[i] = true }
     end
   end
@@ -48,7 +48,7 @@ class Struct
   end
 
   def to_hash
-    returning({}) do |hash|
+    {}.tap do |hash|
       members.each do |k|
         val = send(k) and hash[k] = val
       end

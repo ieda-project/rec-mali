@@ -14,7 +14,7 @@ class Sign < ActiveRecord::Base
   end
 
   def html_attributes
-    returning('data-key' => key, 'class' => kind) do |h|
+    { 'data-key' => key, 'class' => kind }.tap do |h|
       h['data-dep'] = dep if dep.present?
     end
   end

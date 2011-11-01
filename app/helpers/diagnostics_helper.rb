@@ -15,7 +15,7 @@ module DiagnosticsHelper
   end
 
   def index_style name, value, graph=true
-    returning [name] do |ret|
+    [name].tap do |ret|
       ret << 'has-graph' if graph
       if value.is_a? Float
         if value < Index::WARNING[name]

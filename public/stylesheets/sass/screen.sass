@@ -170,7 +170,7 @@ input.blank
   color: #999
 
 a
-  color = !link
+  color: $link
 
 h1
   color: maroon
@@ -528,7 +528,7 @@ nav a
     padding: 17px 20px
     width: 800px
     span.name
-      color = !link
+      color: $link
       font-size: 1.55em
       font-weight: bold
     .editable
@@ -545,7 +545,7 @@ nav a
         height: 19px
         line-height: 19px
         padding: 0 0 0 30px
-        color = !link
+        color: $link
         font-size: 1.2em
         font-weight: bold
         top: 5px
@@ -647,12 +647,12 @@ section
     float: right
     margin-bottom: 10px
     h2
-      background = !bg_th
-      color = !color_th
+      background: $bg_th
+      color: $color_th
       font-size: 1.1em
       padding: 5px 7px
       text-align: center
-      border: 2px solid !border_th
+      border: 2px solid $border_th
       -webkit-border-top-left-radius: 4px
       -webkit-border-top-right-radius: 4px
       margin: 0
@@ -718,7 +718,7 @@ section
           border-right: 2px solid #E6E6E6
           float: left
           text-align: middle
-          color: !link
+          color: $link
           &.has-graph
             cursor: pointer
           &.weight_age
@@ -794,7 +794,7 @@ section
           text-decoration: none
           background: url(../images/icons/link.png) no-repeat right 7px
           &:hover
-            background: !link url(../images/icons/link.png) no-repeat right -49px
+            background: $link url(../images/icons/link.png) no-repeat right -49px
             color: white
             .by
               color: white
@@ -948,11 +948,11 @@ section
     -webkit-border-top-left-radius: 4px
     -webkit-border-top-right-radius: 4px
   h2
-    background = !bg_th
-    color = !color_th
+    background: $bg_th
+    color: $color_th
     font-size: 1.1em
     padding: 5px 7px
-    border: 2px solid !border_th
+    border: 2px solid $border_th
     -webkit-border-top-left-radius: 4px
     -webkit-border-top-right-radius: 4px
   tr.odd
@@ -969,7 +969,7 @@ section
         background: #edfae1
         border: 2px solid #dcf4c8
         border-left: 0
-        color = !color_th
+        color: $color_th
         font-size: 1em
         padding: 5px 10px
         &:first-child
@@ -1004,8 +1004,8 @@ section
         padding: 3px 7px
         text-decoration: none
         &:hover
-          background: !link
-          border-color: !link
+          background: $link
+          border-color: $link
           color: white
            
 table

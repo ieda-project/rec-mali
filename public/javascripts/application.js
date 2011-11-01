@@ -150,6 +150,7 @@ window.addEvent('domready', function() {
             form.tree.enfant.age = (months / 12).floor();
             new Request.HTML({
               onSuccess: function(dom) {
+                console.log(dom);
                 dom[0].getElements('section.illness').each(function (sec) {
                   sec.inject(tgt) });
                 illnesses_updated();
@@ -223,7 +224,6 @@ window.addEvent('domready', function() {
           url: illness.get('data-classify-href'),
           onSuccess: function(json) {
             var ul = new Element('ul')
-            console.log(json);
             json.each(function (cl) {
               new Element(
                 'li', {
@@ -293,7 +293,6 @@ window.addEvent('domready', function() {
                 i.removeClass('disabled').disabled = false }
             } else {
               if (!i.disabled) {
-                console.log(i.name);
                 changed = true
                 i.addClass('disabled').disabled = true
                 i.valid = true
@@ -337,7 +336,7 @@ window.addEvent('domready', function() {
             w.setStyle('display', w.condition(form.tree) ? 'none' : 'block') })};
 
         var data = get_indices_data();
-        if (data) {
+        if (data && data.height && data.weight) {
           if (last_indices_data && data.every(function(value, key) { return last_indices_data[key] == value })) return
           new Request.JSON({
             url: '/children/calculations',

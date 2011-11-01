@@ -1,4 +1,4 @@
-Csps::Application.routes.draw do |map|
+Csps::Application.routes.draw do
   resource :session, controller: 'session' do
     get :welcome, :restore
   end

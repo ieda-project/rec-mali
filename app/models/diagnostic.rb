@@ -29,14 +29,14 @@ class Diagnostic < ActiveRecord::Base
           proxy_owner.send :clear_classifications
         end
       else
-        returning(sign ? sign.build_answer(data) : SignAnswer.new(data)) { |sa| push sa }
+        (sign ? sign.build_answer(data) : SignAnswer.new(data)).tap { |sa| push sa }
       end
     end
     def for illness
        select { |a| a.sign.illness_id == illness.id }
     end
     def to_hash
-      returning({}) do |hash|
+      {}.tap do |hash|
         includes(sign: :illness).each do |answer|
           hash.store answer.sign.full_key, answer.raw_value
         end

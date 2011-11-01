@@ -1,6 +1,6 @@
 module Csps::SyncProxy
   def self.for real_model
-    returning Class.new(ActiveRecord::Base) do |model|
+    Class.new(ActiveRecord::Base).tap do |model|
       model.module_eval do
         @real_model = real_model
         extend Csps::SyncProxy
