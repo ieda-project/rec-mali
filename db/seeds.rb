@@ -56,7 +56,7 @@ for group in %w(newborn infant child) do
   puts "==> Age group: #{group}"
 
   ag = Diagnostic::AGE_GROUPS.index group
-  if Illness.where(age_group: ag).any?
+  if Classification.where(age_group: ag).any?
     puts 'Skipping!'
     next
   end
