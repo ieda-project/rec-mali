@@ -2,12 +2,23 @@
   %tbody
     %tr
       %th(scope='row') Taille
-      %td #{diagnostic.height.round(1)} cm
+      - if diagnostic.height.present?
+        %td #{diagnostic.height.round(1)} cm
+      - else
+        %td -
       %th(scope='row') Temp.
-      %td #{diagnostic.temperature.round(1)} °C
+      - if diagnostic.temperature.present?
+        %td #{diagnostic.temperature.round(1)} °C
+      - else
+        %td -
     %tr
       %th(scope='row') Poids
-      %td #{diagnostic.weight.round(2)} kg
-      - if diagnostic.months > 6
-        %th(scope='row') Périm. Brac.
+      - if diagnostic.weight.present?
+        %td #{diagnostic.weight.round(2)} kg
+      - else
+        %td -
+      %th(scope='row') Périm. Brac.
+      - if diagnostic.mac.present?
         %td{ class: class_for_mac(diagnostic.mac) } #{diagnostic.mac} mm
+      - else
+        %td -

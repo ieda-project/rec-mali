@@ -56,9 +56,11 @@ class Diagnostic < ActiveRecord::Base
     child.update_attribute :last_visit_at, created_at
   end
 
-  validates_presence_of :child, :height, :weight
-  validates_numericality_of :mac, :only_integer => true, :allow_blank => true
-  validates_numericality_of :height, :weight
+  validates_presence_of :child
+  validates_presence_of :height, :weight, if: ->(diag) { diag.child && diag.child.months >= 2 }
+  validates_presence_of :temperature, if: ->(diag) { diag.child && diag.child.months >= 6 }
+  validates_numericality_of :mac, only_integer: true, allow_blank: true
+  validates_numericality_of :height, :weight, :temperature, allow_blank: true
   validate :validate_answers
 
   def to_hash
