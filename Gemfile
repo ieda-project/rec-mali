@@ -1,12 +1,12 @@
 source 'http://gemcutter.org'
 
 if Object.const_defined? :HEROKU_ROOT
-  gem 'rails', '3.0.0.beta4'
+  gem 'rails', '<3.1', '>=3'
   gem 'haml', '3.0.12'
   gem 'pg'
 else
   gem 'thin'
-  gem 'rails', '3.0.0.beta3'
+  gem 'rails', '<3.1', '>=3'
   gem 'haml', '3.0.4'
   gem 'sqlite3-ruby', require: 'sqlite3'
 end
@@ -19,3 +19,4 @@ gem 'spreadsheet'
 gem 'ziya'
 gem 'color'
 gem 'logging'
+gem 'rails-wopata', '>= 0.0.3.4', git: 'https://wopata-heroku:aiJ73Nnm@github.com/wopata/rails-wopata.git'
