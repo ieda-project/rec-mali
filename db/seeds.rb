@@ -54,10 +54,15 @@ end
 
 for group in %w(newborn infant child) do
   puts "==> Age group: #{group}"
-  puts 'Creating illnesses'
 
   ag = Diagnostic::AGE_GROUPS.index group
+  if Illness.where(age_group: ag).any?
+    puts 'Skipping!'
+    next
+  end
   illnesses, deps = {}, {}
+
+  puts 'Creating illnesses'
 
   File.open("db/fixtures/#{group}/sign_dependencies.txt", 'r') do |f|
     f.each_line do |line|
