@@ -12,11 +12,10 @@ gem 'ziya'
 gem 'color'
 gem 'logging'
 
-group :production do
-  gem 'pg'
-end
-
-group :development, :test do
+group :development, :test, :production do
   gem 'sqlite3'
 end
 
+group :heroku do
+  gem 'pg'
+end
