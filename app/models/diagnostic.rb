@@ -57,14 +57,14 @@ class Diagnostic < ActiveRecord::Base
   end
 
   validates_presence_of :child
-  validates_presence_of :height, :weight, if: ->(diag) { diag.child && diag.child.months >= 2 }
-  validates_presence_of :temperature, if: ->(diag) { diag.child && diag.child.months >= 6 }
+  validates_presence_of :height, :weight, :temperature
+  validates_presence_of :mac, if: ->(diag) { diag.child && diag.child.months >= 6 }
   validates_numericality_of :mac, only_integer: true, allow_blank: true
-  validates_numericality_of :height, :weight, :temperature, allow_blank: true
+  validates_numericality_of :height, :weight, :temperature
   validate :validate_answers
 
   def to_hash
-    returning(sign_answers.to_hash) do |hash|
+    sign_answers.to_hash.tap do |hash|
       for field in %w(age months muac wfa hfa wfh)
         hash["enfant.#{field}"] = send field
       end
