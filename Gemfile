@@ -13,6 +13,7 @@ gem 'color'
 gem 'logging'
 
 group :development, :test, :production do
+  gem 'thin'
   gem 'sqlite3'
 end
 
