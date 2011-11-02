@@ -65,7 +65,7 @@ class Diagnostic < ActiveRecord::Base
 
   def to_hash
     sign_answers.to_hash.tap do |hash|
-      for field in %w(age months muac wfa hfa wfh)
+      for field in %w(age months muac wfa hfa wfh height weight)
         hash["enfant.#{field}"] = send field
       end
     end
@@ -112,7 +112,7 @@ class Diagnostic < ActiveRecord::Base
   def index_ratio name
     if INDICES[name.to_s]
       val, i = send name
-      (val / i.y * 100).round(0) rescue '-'
+      (val / i.y * 100).round(0) #rescue '-'
     end
   end
 
