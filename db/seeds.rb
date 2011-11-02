@@ -52,6 +52,7 @@ unless (children_count = ENV['CHILDREN'].to_i) < 1
 end
 =end
 
+illnesses = {}
 for group in %w(newborn infant child) do
   puts "==> Age group: #{group}"
 
@@ -60,7 +61,7 @@ for group in %w(newborn infant child) do
     puts 'Skipping!'
     next
   end
-  illnesses, deps = {}, {}
+  deps = {}
 
   puts 'Creating illnesses'
 
