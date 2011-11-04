@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'csv'
+
 class String
   def fix!
     rstrip!
@@ -51,6 +53,19 @@ unless (children_count = ENV['CHILDREN'].to_i) < 1
   end
 end
 =end
+
+puts 'Creating medicines'
+File.open('db/fixtures/medicines.csv', 'r') do |f|
+  f.each_line do |line|
+    line.gsub! /#.*$/, ''
+    next if line.blank?
+    CSV.parse line do |row|
+      Medicine.create!(
+        key: row[0], name: row[1],
+        unit: row[2], formula: row[3])
+    end
+  end
+end
 
 illnesses = {}
 for group in %w(newborn infant child) do
@@ -108,24 +123,6 @@ for group in %w(newborn infant child) do
     end
   end
 
-  puts 'Creating treatments'
-
-  treatments = {}
-  File.open("db/fixtures/#{group}/treatments.txt", 'r') do |f|
-    cl = nil
-    f.each_line do |line|
-      line.gsub! %r(/\*.*?\*/), ''
-      line.gsub! "\xC2\xA0", ' '
-      next if line.blank?
-      if line =~ /^\[(.+)\]\Z/
-        cl = $1
-      elsif cl
-        treatments[cl] ||= ''
-        treatments[cl] += line
-      end
-    end
-  end
-
   puts 'Creating classifications'
 
   File.open("db/fixtures/#{group}/classifications.txt", 'r') do |f|
@@ -136,7 +133,6 @@ for group in %w(newborn infant child) do
         illnesses[illness].classifications.create!(
           age_group: ag,
           name: name,
-          treatment: treatments.delete(name).try(:chomp),
           level: Classification::LEVELS.index(level.intern),
           equation: Csps::Formula.compile(illness, equation))
       rescue => e
@@ -144,9 +140,47 @@ for group in %w(newborn infant child) do
       end
     end
   end
-  if treatments.any?
-    STDERR.puts "WARNING: #{treatments.size} orphaned treatments!"
-    STDERR.puts "Keys: #{treatments.keys.join(', ')}."
+
+  puts 'Creating treatments'
+
+  treatments = {}
+  File.open("db/fixtures/#{group}/treatments.csv", 'r') do |f|
+    f.each_line do |line|
+      next if line =~ /^#/ || line.blank?
+      CSV.parse line do |row|
+        treatments[row.first] = Treatment.create!(
+          name: row[1],
+          classification: Classification.find_by_name(row[2]),
+          description: row[3] && row[3].gsub('\n', "\n"))
+      end
+    end
+  end
+
+  puts 'Creating prescriptions'
+  File.open("db/fixtures/#{group}/prescriptions.csv", 'r') do |f|
+    f.each_line do |line|
+      line.gsub! /#.*$/, ''
+      next if line.blank?
+      CSV.parse line do |row|
+        treatments[row.first].prescriptions.create!(
+          medicine: Medicine.find_by_key(row[1]),
+          duration: row[2], takes: row[3], instructions: row[4])
+      end
+    end
+  end
+end
+
+puts 'Creating treatment help'
+
+File.open('db/fixtures/treatment_help.csv', 'r') do |f|
+  f.each_line do |line|
+    next if line.blank? || line =~ /^#/
+    CSV.parse line do |row|
+      TreatmentHelp.create!(
+        key: row[0],
+        title: row[1],
+        content: row[2])
+    end
   end
 end
 

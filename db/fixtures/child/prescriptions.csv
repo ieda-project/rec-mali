@@ -1,0 +1,29 @@
+## TREATMENT-MEDICINE CHILD,,,,
+##treatment key,medicine key,duration,takes,description
+pneumonie_grave,m12,,,"{{name}} (pré-référence) - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
+pneumonie_grave,m13,,,{{name}} (pré-référence) - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
+pneumonie,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+pneumonie,m2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+deshydratation_severe_pas_grave_perfusion,m20_1,1 heure,,{{name}} - {{dosage}} sur une durée de {{duration}}
+deshydratation_severe_pas_grave_perfusion,m22_1,1 heure,,{{name}} - {{dosage}} sur une durée de {{duration}}
+deshydratation_severe_pas_grave_perfusion,m20_2,5 heures,,{{name}} - {{dosage}} sur une durée de {{duration}}
+deshydratation_severe_pas_grave_perfusion,m22_2,5 heures,,{{name}} - {{dosage}} sur une durée de {{duration}}
+deshydratation_severe_pas_grave_perfusion,m21_1,30 minutes,,{{name}} - {{dosage}} sur une durée de {{duration}}
+deshydratation_severe_pas_grave_perfusion,m23_1,30 minutes,,{{name}} - {{dosage}} sur une durée de {{duration}}
+deshydratation_severe_pas_grave_perfusion,m21_2,2h30,,{{name}} - {{dosage}} sur une durée de {{duration}}
+deshydratation_severe_pas_grave_perfusion,m23_2,2h30,,{{name}} - {{dosage}} sur une durée de {{duration}}
+deshydratation_severe_pas_grave_perfusion,m24_1_3,,,après 3 à 4 heures : {{name}}
+deshydratation_severe_pas_grave_perfusion,m24_1_4,,,après 1 à 2 heures : {{name}}
+deshydratation_severe_pas_grave_perfusion,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+deshydratation_severe_pas_grave_perfusion,m4,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
+deshydratation_severe_pas_grave_sans_sng_sans_perfusion,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+deshydratation_severe_pas_grave_sans_sng_sans_perfusion,m4,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
+signes_deshydratation,m24_2,4 heures,,{{name}} - {{dosage}} pendant {{duration}}
+dysenterie,m3,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+dysenterie,m5,8 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+dysenterie,m26,14 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+diahree_persistante,m25,14 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+diahree_persistante,m26,14 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+paludisme_grave,m15_1,,,{{name}} - {{dosage}} (en IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
+paludisme_grave,m12,,,
+paludisme_grave,m13,,,
