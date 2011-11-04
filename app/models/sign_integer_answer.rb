@@ -3,6 +3,7 @@ class SignIntegerAnswer < SignAnswer
     integer_value || 0
   end
   alias raw_value value
+  alias spss_value value
 
   def applicable?
     !!integer_value
