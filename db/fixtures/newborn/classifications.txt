@@ -1,6 +1,6 @@
 inf_bac|Maladie grave ou infection bactérienne grave|high|inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi
 inf_bac|Infection bactérienne locale|medium|!(inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi) AND (inf_bac.qj OR inf_bac.qg)
-inf_bac|Hypothermie modérée|medium|!(inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi) AND !(inf_bac.qj OR inf_bac.qg) AND (inf_bac.qh == hypothermie_moderee)
+inf_bac|Hypothermie modérée|medium|!(inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qdOR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi) AND (inf_bac.qh == hypothermie_moderee)
 inf_bac|Infection bactérienne peu probable et pas d'hypothermie|low|!(inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi) AND !(inf_bac.qj OR inf_bac.qg) AND (inf_bac.qh == normale)
 
 poids|Très faible poids|high|poids.qa == tres_faible

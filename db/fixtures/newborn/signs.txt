@@ -9,7 +9,7 @@ inf_bac|Infection Bactérienne
   qe|Rechercher un geignement expiratoire|boolean
   qf|Regarder les mouvements du nouveau- né|list|normaux;bouge_stimule;pas_mouvements
   qg|Rechercher des pustules sur la peau|boolean
-  qh|Mesurer la température axilaire (Hypothermie modérée => 35.5 <= T <= 36.6 / Hypothermique sévère => T < 35.5 / Fievre =>  T >= 37.5)|list|normale;hypothermie_moderee;hypothermie_severe;fievre
+  qh|Apprécier la température axilaire (Hypothermie modérée => 35.5 <= T <= 36.6 / Hypothermique sévère => T < 35.5 / Fievre =>  T >= 37.5)|list|normale;hypothermie_moderee;hypothermie_severe;fievre
   qi|Rechercher un ictère grave|boolean
   qj|Regarder l'ombilic. Est-il rouge ou purulent ?|boolean
   

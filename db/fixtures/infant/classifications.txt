@@ -4,7 +4,7 @@ inf_bac|Pas d'infection bactérienne|low|!inf_bac.qa AND (inf_bac.qb == normales
 
 diarrhee|Pas de diarrhée|low|!diarrhee.qa	
 diarrhee|Déshydratation sévère|high|diarrhee.qa AND AT_LEAST_TWO_OF(inf_bac.ql == lethargique_inconscient, diarrhee.qd, diarrhee.qe == tres_lentement)
-diarrhee|Signes évidents de déshydratation|medium|diarrhee.qa AND AT_LEAST_TWO_OF(inf_bac.ql == agite_irritable, diarrhee.qd, diarrhee.qe == lentement)
+diarrhee|Signes évidents de déshydratation|medium|diarrhee.qa AND !AND AT_LEAST_TWO_OF(inf_bac.ql == lethargique_inconscient, diarrhee.qd, diarrhee.qe == tres_lentement) AND AT_LEAST_TWO_OF(inf_bac.ql == agite_irritable, diarrhee.qd, diarrhee.qe == lentement)
 diarrhee|Pas de déshydratation|low|diarrhee.qa AND !AT_LEAST_TWO_OF(inf_bac.ql == lethargique_inconscient, diarrhee.qd, diarrhee.qe == tres_lentement) AND !AT_LEAST_TWO_OF(inf_bac.ql == agite_irritable, diarrhee.qd, diarrhee.qe == lentement)
 diarrhee|Diarrhée persistante grave|high|diarrhee.qa AND (diarrhee.qb >= 14)
 diarrhee|Sang dans les selles|high|diarrhee.qa AND diarrhee.qc
@@ -14,7 +14,7 @@ alimentation|Problème d’alimentation et/ou poids faible pour l’âge|medium|
 alimentation|Pas de poids faible et/ou pas de problème d’alimentation|low|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qf == pas_prise) OR (alimentation.qg == pas_succion)))) AND !((alimentation.qb AND ((alimentation.qf == mauvaise_prise) OR (alimentation.qg == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qh OR ((enfant.weight < 2.5) AND (enfant.weight >= 1.5)))	
 
 vih|Infection VIH symptomatique très probable|high|(vih.qj == positive) AND AT_LEAST_TWO_OF(vih.qa, vih.qb, vih.qc, vih.qd, vih.qe, diarrhee.qa AND (diarrhee.qb >= 14), vih.qf, vih.qg, vih.qh, (enfant.weight < 1.5), alimentation.qh, vih.qi)
-vih|Infection VIH symptomatique suspecte|medium|(vih.qj == inconnue) AND AT_LEAST_TWO_OF(vih.qa, vih.qb, vih.qc, vih.qd, vih.qe, diarrhee.qa AND (diarrhee.qb >= 14), vih.qf, vih.qg, vih.qh, (enfant.weight < 1.5), alimentation.qh, vih.qi)
+vih|Infection VIH symptomatique possible|medium|(vih.qj == inconnue) AND AT_LEAST_TWO_OF(vih.qa, vih.qb, vih.qc, vih.qd, vih.qe, diarrhee.qa AND (diarrhee.qb >= 14), vih.qf, vih.qg, vih.qh, (enfant.weight < 1.5), alimentation.qh, vih.qi)
 vih|Infection VIH peu problable|low|(vih.qj == negative) OR !AT_LEAST_TWO_OF(vih.qa, vih.qb, vih.qc, vih.qd, vih.qe, diarrhee.qa AND (diarrhee.qb >= 14), vih.qf, vih.qg, vih.qh, (enfant.weight < 1.5), alimentation.qh, vih.qi)
 
 
