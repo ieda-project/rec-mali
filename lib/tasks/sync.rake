@@ -95,4 +95,52 @@ namespace :sync do
         (:zones, :last_import_at, :last_export_at)
     end
   end
+
+  desc "Export SPSS data"
+  task :spss => :environment do
+    require 'csv'
+    dir = ENV['TO'] || '.'
+    raise "No such directory: #{dir}" unless File.directory? dir
+
+    for ref in Diagnostic.select('DISTINCT type, age_group') do
+      type = ref.type.nil? ? 'base' : ref.type.sub(/Diagnostic$/, '').underscore
+      File.open("#{dir}/#{type}_#{ref.age_group_key}.spss", 'w') do |out|
+        children = if ref.type
+          Child.where(
+            'children.global_id IN (SELECT child_global_id FROM diagnostics WHERE type=? AND age_group=?)',
+            ref.type, ref.age_group)
+        else
+          Child.where(
+            'children.global_id IN (SELECT child_global_id FROM diagnostics WHERE type IS NULL AND age_group=?)',
+            ref.age_group)
+        end
+        children = children.includes(diagnostics: { sign_answers: :sign }) #.order('signs.id') is worth nothing
+
+        # Header
+        buf = %w(born gender village bcg_polio0 penta1_polio1 penta2_polio2
+          penta3_polio3 measles diag_date height weight muac temperature)
+        buf += children.first.diagnostics.first.sign_answers.sort_by(&:sign_id).map do |sa|
+          sa.sign.full_key
+        end
+        out.puts CSV.generate_line(buf)
+
+        children.find_each do |child|
+          buf = [
+            child.born_on,
+            child.gender ? 'm' : 'f',
+            child.village.name ]
+          buf += [
+            child.bcg_polio0, child.penta1_polio1, child.penta2_polio2,
+            child.penta3_polio3, child.measles ].map { |v| v ? 'oui' : 'non' }
+          child.diagnostics.each do |diag|
+            buf += [
+              diag.done_on.to_date, diag.height, diag.weight,
+              diag.mac, diag.temperature ]
+            buf += diag.sign_answers.sort_by(&:sign_id).map(&:spss_value)
+          end
+          out.puts CSV.generate_line(buf)
+        end
+      end
+    end
+  end
 end

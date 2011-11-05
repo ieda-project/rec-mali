@@ -2,6 +2,7 @@ class Classification < ActiveRecord::Base
   enum :age_group, %w(newborn infant child)
 
   belongs_to :illness
+  has_many :treatments
   has_and_belongs_to_many :diagnostics
   has_and_belongs_to_many :signs
   validates_presence_of :equation

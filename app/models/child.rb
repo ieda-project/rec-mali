@@ -5,7 +5,8 @@ class Child < ActiveRecord::Base
   globally_has_one :last_visit,
                    class_name: 'Diagnostic', order: 'global_id DESC'
   has_attached_file :photo,
-                    styles: { thumbnail: '110x130', normal: '350x350' }
+                    styles: { thumbnail: '110x130', normal: '350x350' },
+                    default_url: '/images/missing_:style.png'
 
   before_save :fill_cache_fields
   
