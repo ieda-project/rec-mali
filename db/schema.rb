@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111031151736) do
+ActiveRecord::Schema.define(:version => 20111104101803) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(:version => 20111031151736) do
     t.string   "key"
     t.string   "name"
     t.text     "equation"
-    t.text     "treatment"
     t.boolean  "in_imci"
     t.boolean  "in_gdt"
     t.integer  "level"
@@ -118,6 +117,26 @@ ActiveRecord::Schema.define(:version => 20111031151736) do
     t.datetime "updated_at"
   end
 
+  create_table "medicines", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "key"
+    t.string   "unit"
+    t.text     "formula"
+    t.text     "code"
+  end
+
+  create_table "prescriptions", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "treatment_id"
+    t.integer  "medicine_id"
+    t.text     "duration"
+    t.text     "takes"
+    t.text     "instructions"
+  end
+
   create_table "queries", :force => true do |t|
     t.string   "title"
     t.string   "klass"
@@ -187,6 +206,23 @@ ActiveRecord::Schema.define(:version => 20111031151736) do
     t.datetime "updated_at"
     t.integer  "zone_id"
     t.string   "global_id"
+  end
+
+  create_table "treatment_helps", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "key"
+    t.string   "title"
+    t.text     "content"
+    t.boolean  "image"
+  end
+
+  create_table "treatments", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "classification_id"
+    t.string   "name"
+    t.text     "description"
   end
 
   create_table "users", :force => true do |t|

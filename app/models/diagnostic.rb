@@ -9,12 +9,12 @@ class Diagnostic < ActiveRecord::Base
     def for illness
       select { |c| c.illness_id == illness.id }
     end
-    def on_treatment_list
-      level = Classification::LEVELS.index :high
-      (short = select { |c| c.level == level && c.treatment.present? }).empty? ?
-        select { |c| c.treatment.present? } :
-        short
-    end
+    #def on_treatment_list
+    #  level = Classification::LEVELS.index :high
+    #  (short = select { |c| c.level == level && c.treatment.present? }).empty? ?
+    #    select { |c| c.treatment.present? } :
+    #    short
+    #end
   end
   globally_has_many :sign_answers, include: :sign, order: 'signs.sequence',
                     after_add: :clear_classifications,

@@ -22,3 +22,7 @@ group :heroku do
   gem 'pg'
   gem 'hassle', git: 'http://github.com/Papipo/hassle.git'
 end
+
+group :test do
+  gem 'shoulda'
+end
