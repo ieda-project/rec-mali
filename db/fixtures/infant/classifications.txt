@@ -9,7 +9,7 @@ diarrhee|Pas de déshydratation|low|diarrhee.qa AND !AT_LEAST_TWO_OF(inf_bac.ql 
 diarrhee|Diarrhée persistante grave|high|diarrhee.qa AND (diarrhee.qb >= 14)
 diarrhee|Sang dans les selles|high|diarrhee.qa AND diarrhee.qc
 
-alimentation|Incapable de se nourrir possibilité d’une infection bactérienne grave|high|alimentation.qa OR (alimentation.qb AND ((alimentation.qf == pas_prise) OR (alimentation.qg == pas_succion)))
+alimentation|Incapable de se nourrir / possibilité d’une infection bactérienne grave|high|alimentation.qa OR (alimentation.qb AND ((alimentation.qf == pas_prise) OR (alimentation.qg == pas_succion)))
 alimentation|Problème d’alimentation et/ou poids faible pour l’âge|medium|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qf == pas_prise) OR (alimentation.qg == pas_succion)))) AND ((alimentation.qb AND ((alimentation.qf == mauvaise_prise) OR (alimentation.qg == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qh OR ((enfant.weight < 2.5) AND (enfant.weight >= 1.5)))
 alimentation|Pas de poids faible et/ou pas de problème d’alimentation|low|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qf == pas_prise) OR (alimentation.qg == pas_succion)))) AND !((alimentation.qb AND ((alimentation.qf == mauvaise_prise) OR (alimentation.qg == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qh OR ((enfant.weight < 2.5) AND (enfant.weight >= 1.5)))	
 
