@@ -7,7 +7,7 @@ class Prescription < ActiveRecord::Base
   end
 
   def html diag
-    dosage = diag.instance_eval "->() { #{Medicine.find(10).code} }.()"
+    dosage = diag.instance_eval "->() { #{medicine.code} }.()"
     if dosage
       out = instructions.gsub /{{(name|takes|duration)}}/ do
         send $1

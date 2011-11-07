@@ -12,7 +12,6 @@ class Medicine < ActiveRecord::Base
       begin
         self.code = generate_formula_code
       rescue => e
-        puts formula.inspect
         errors[:formula] << :invalid
       end
     end
@@ -27,8 +26,9 @@ class Medicine < ActiveRecord::Base
       f = n.to_f
       f.to_i == f ? n.to_i : f
     end
-    ruby = formula.map do |conds|
-      f = case (f = conds.pop)
+    ruby = formula.map do |entry|
+      *conds, f = entry
+      f = case f
         when /^[0-9.]+$/ then num.(f)
         when /^([0-9]+)\/([0-9]+)$/ then "Rational(#{$1}, #{$2})"
         when /^([0-9.]+)\/(#{units})$/ then "#{UNITS_VARS[$2]} * #{num.(f)}"
