@@ -54,17 +54,50 @@ unless (children_count = ENV['CHILDREN'].to_i) < 1
 end
 =end
 
+HEAD = 0
+UNIT = 1
+FORMULA = 2
+
 puts 'Creating medicines'
-File.open('db/fixtures/medicines.csv', 'r') do |f|
-  f.each_line do |line|
-    line.gsub! /#.*$/, ''
-    next if line.blank?
-    CSV.parse line do |row|
+File.open('db/fixtures/medicines.txt', 'r') do |f|
+  state = HEAD
+  name, key, unit, formula = nil
+  brk = proc do |msg,line|
+    raise "#{msg} in medicine import, #{line ? %Q(line #{line}) : 'EOF'}}"
+  end
+  save = proc do |no|
+    if formula.present?
+      # SAVE
       Medicine.create!(
-        key: row[0], name: row[1],
-        unit: row[2], formula: row[3])
+        key: key, name: name, unit: unit,
+        formula: formula)
+    else
+      brk.("No formula", no)
     end
   end
+
+  f.each_line.with_index do |line,no|
+    next if line =~ /^#/
+    case state
+      when HEAD
+        next if line.blank?
+        name, key = line.scan(/^(.+)\s+\((.+)\)/).first
+        brk.("Bad head", no) unless key
+        state = UNIT
+      when UNIT
+        brk.("Unfinished record", no) if line.blank?
+        unit = line.chomp
+        state, formula = FORMULA, []
+      when FORMULA
+        if line.blank?
+          save.(no)
+          state = HEAD
+        else
+          formula << line.split(/\s+/)
+        end
+    end
+  end
+  save.() unless state == HEAD
 end
 
 illnesses = {}
@@ -164,7 +197,7 @@ for group in %w(newborn infant child) do
       CSV.parse line do |row|
         treatments[row.first].prescriptions.create!(
           medicine: Medicine.find_by_key(row[1]),
-          duration: row[2], takes: row[3], instructions: row[4])
+          duration: row[2], takes: row[3], instructions: row[4].gsub('\n', "\n"))
       end
     end
   end
@@ -172,14 +205,15 @@ end
 
 puts 'Creating treatment help'
 
-File.open('db/fixtures/treatment_help.csv', 'r') do |f|
+File.open('db/fixtures/help.csv', 'r') do |f|
   f.each_line do |line|
     next if line.blank? || line =~ /^#/
     CSV.parse line do |row|
       TreatmentHelp.create!(
         key: row[0],
         title: row[1],
-        content: row[2])
+        image: File.exist?("public/images/help/#{row[0]}.jpg"),
+        content: row[2].gsub('\n', "\n"))
     end
   end
 end

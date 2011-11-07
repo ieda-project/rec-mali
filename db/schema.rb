@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20111104101803) do
     t.string   "key"
     t.string   "unit"
     t.text     "formula"
+    t.text     "code"
   end
 
   create_table "prescriptions", :force => true do |t|
@@ -213,6 +214,7 @@ ActiveRecord::Schema.define(:version => 20111104101803) do
     t.string   "key"
     t.string   "title"
     t.text     "content"
+    t.boolean  "image"
   end
 
   create_table "treatments", :force => true do |t|

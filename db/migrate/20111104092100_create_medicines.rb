@@ -3,7 +3,7 @@ class CreateMedicines < ActiveRecord::Migration
     create_table :medicines do |t|
       t.timestamps
       t.string :name, :key, :unit
-      t.text :formula
+      t.text :formula, :code
     end
   end
 

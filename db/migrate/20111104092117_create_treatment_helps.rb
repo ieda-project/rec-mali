@@ -4,6 +4,7 @@ class CreateTreatmentHelps < ActiveRecord::Migration
       t.timestamps
       t.string :key, :title
       t.text :content
+      t.boolean :image
     end
   end
 

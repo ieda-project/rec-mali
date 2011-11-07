@@ -103,6 +103,22 @@ editing = false;
 
 window.addEvent('domready', function() { document.body.updated() });
 window.addEvent('domready', function() {
+
+  document.getElements('a.help').addEvents({
+    mouseover: function() {
+      var pos = this.getPosition(),
+          size = this.getSize();
+          help = $(this.get('href').substr(1));
+      help.setStyles({
+        display: 'block',
+        left: (pos.x + size.x + 10)+'px',
+        top: (pos.y - (help.getSize().y / 2))+'px' }) },
+    mouseout: function() {
+      $(this.get('href').substr(1)).setStyles({
+        display: 'none',
+        top: 0, left: 0 }) },
+    click: function() { return false }});
+
   var link, next
   if (link = $E('link.auto-post')) {
     new Request.JSON({

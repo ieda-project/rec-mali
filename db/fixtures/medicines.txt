@@ -1,0 +1,164 @@
+Cotrimoxazole (m1)
+mg-smx
+20/kg
+
+Cotrimoxazole (m1_2)
+mg-smx
+40/kg
+
+Cotrimoxazole (m1_3)
+mg-smx
+15/kg
+
+Amoxiciline Orale (m2)
+mg
+15/kg
+
+Ciprofloxacine Orale (m3)
+mg
+12.5/kg
+
+Erytromycine Orale (m4)
+mg
+12.5/kg
+
+Métronidazole Oral (m5)
+mg
+7.5/kg
+
+Paracétamol Oral (m6)
+mg
+15/kg
+
+Vitamine A - Capsules 200'000 UI (m7_1)
+capsule
+[0-9k[ >=6m 1/2
+>=9k >=6m 1
+
+Vitamine A - Capsules 100'000 UI (m7_2)
+capsule
+[0-9k[ >=6m 1
+>=9k >=6m 2
+
+Fer/Folate (m8)
+comprimé
+[0-13k[ >=6m 1/2
+>=13k >=6m 1/2
+
+Mebendazole Oral (m9)
+mg
+>=12m 100
+
+Albendazole (m10)
+mg
+[0-12k[ >=12m 200
+>=12k >=12m 400
+
+Phénobartital (m11)
+mg
+15/kg
+
+Ampicilline pré référence (m12_1)
+mg
+25/kg
+
+Ampicilline (m12_2)
+mg
+25/kg
+
+Gentamicine pré référence (m13_1)
+mg
+7.5/kg
+
+Gentamicine (m13_2)
+mg
+7.5/kg
+
+Chloramphenicol Huileux (m14)
+mg
+100/kg
+
+Quinine IM - charge (m15_1)
+mg
+20/kg
+
+Quinine IM - entretien (m15_2)
+mg
+10/kg
+
+Acetylsalicylate De Lysine (m16)
+mg
+15/kg
+
+Diazepam Injectable (m17)
+mg
+0.5/kg
+
+Artémether + Luméfantrine (m18)
+mg-art
+1.5/kg
+
+Artémether + Amodiaquine (m19)
+mg-art
+1.5/kg
+
+Ringer au lactate - phase 1 (m20_1) 
+ml
+<1y 30/kg
+
+Ringer au lactate - phase 2 (m20_2)
+ml
+<1y 70/kg
+
+Ringer au lactate - phase 1 (m21_1)
+ml
+>=1y 30/kg
+
+Ringer au lactate - phase 2 (m21_2)
+ml
+>=1y 70/kg
+
+Soluté isotonique - phase 1 (m22_1)
+ml
+<1y 30/kg
+
+Soluté isotonique - phase 2 (m22_2)
+ml
+<1y 70/kg
+
+Soluté isotonique - phase 1 (m23_1)
+ml
+>=1y 30/kg
+
+Soluté isotonique - phase 2 (m23_2)
+ml
+>=1y 70/kg
+
+Solution de réhydratation orale plan C par SNG (m24_1_1)
+ml
+20/kg
+
+Solution de réhydratation orale plan C par SNG (m24_1_2)
+ml
+20/kg
+
+Solution de réhydratation orale plan C par gorgée (m24_1_3)
+ml
+1000/kg
+
+Solution de réhydratation orale plan C par gorgée (m24_1_4)
+ml
+1000/kg
+
+Solution de réhydratation orale plan B par SNG (m24_2)
+ml
+18/kg
+
+Multivitamines (m25)
+comprimé
+1
+
+Sulfate de Zinc (m26)
+mg
+<6m 10
+>=6m 20
