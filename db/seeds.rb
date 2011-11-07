@@ -183,7 +183,8 @@ for group in %w(newborn infant child) do
       CSV.parse line do |row|
         treatments[row.first] = Treatment.create!(
           name: row[1],
-          classification: Classification.find_by_name(row[2]),
+          classification: Classification.find_by_name_and_age_group(
+            row[2], ag),
           description: row[3] && row[3].gsub('\n', "\n"))
       end
     end
