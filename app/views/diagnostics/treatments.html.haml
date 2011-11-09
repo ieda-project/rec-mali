@@ -27,7 +27,7 @@
     - for t in cl.treatments do
       != t.html @diagnostic
 
-- form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit diagnostic' } do |form|
+- form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit' } do |form|
   %input(type="hidden" name="step" value="final")/
 
   %section.treatment
