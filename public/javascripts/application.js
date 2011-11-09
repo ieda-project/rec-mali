@@ -263,6 +263,11 @@ window.addEvent('domready', function() {
         warnings = $$('.profile-child .warn'),
         head_selects = document.getElements('#child_gender, select[id^=child_born_on]');
 
+    head_inputs.each(function(i) {
+      if (i.get('data-validate')) {
+        i.validate = new Function(
+          'value',
+          'try { return('+i.get('data-validate')+') } catch(err) { console.log("Validation error: "+err); return false }') }});
     head_inputs.concat(warnings).each(function(i) {
       if (i.get('data-condition')) {
         i.condition = new Function(
@@ -314,22 +319,27 @@ window.addEvent('domready', function() {
                 i.valid = true
                 i.value = '' }}}
           if (i.prev_value != i.value) {
-            changes = true
-            i.prev_value = i.value
-            var value = null
+            changes = true;
+            i.prev_value = i.value;
+            var value = null;
             if (!i.disabled) {
               if (!i) {
                 i.valid = i.hasClass('needed');
               } else if (i.hasClass('float')) {
-                value = i.value.toFloat()
-                i.valid = !isNaN(value) && i.value.trim().match(/^[0-9]*([.,][0-9]+){0,1}$/)
+                value = i.value.toFloat();
+                i.valid = !isNaN(value) &&
+                  i.value.trim().match(/^[0-9]*([.,][0-9]+){0,1}$/) &&
+                  (!i.validate || i.validate(value));
               } else if (i.hasClass('integer')) {
-                value = i.value.toInt()
-                i.valid = i.value.trim().match(/^[0-9]+$/)
+                value = i.value.toInt();
+                i.valid = !isNaN(value) &&
+                  i.value.trim().match(/^[0-9]+$/) &&
+                  (!i.validate || i.validate(value));
               } else {
-                value = i.value
+                value = i.value;
                 i.valid = value.match(/[^ ]/) }}
             var key = i.get('data-key')
+            if (!value || i.valid) { i.removeClass('invalid') } else i.addClass('invalid');
             if (key) form.tree.enfant[key] = value }
           if (!i.disabled && !i.valid) measurements_valid = false });
 
