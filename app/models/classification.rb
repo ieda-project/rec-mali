@@ -1,5 +1,5 @@
 class Classification < ActiveRecord::Base
-  enum :age_group, %w(newborn infant child)
+  enum :age_group, Csps::Age::GROUPS
 
   belongs_to :illness
   has_many :treatments
@@ -7,13 +7,13 @@ class Classification < ActiveRecord::Base
   has_and_belongs_to_many :signs
   validates_presence_of :equation
 
-  scope :for_child, ->(child) { where(age_group: Classification::AGE_GROUPS.index(child.age_group.to_s)) }
+  scope :for_child, ->(obj) { where(age_group: obj.age_group) }
   
   LEVELS = [:low, :medium, :high]
 
   def self.run diag
     data = diag.to_hash
-    for_child(diag.child).each { |i| i.run diag, data }
+    for_child(diag).each { |i| i.run diag, data }
   end
 
   def run diag, data={}
@@ -32,6 +32,7 @@ class Classification < ActiveRecord::Base
   end
 
   def calculate data
+    puts "CALCULATING: #{data}"
     if equation.present?
       Csps::Formula.new(equation).calculate(data)
     else

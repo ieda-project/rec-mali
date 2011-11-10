@@ -104,7 +104,7 @@ illnesses = {}
 for group in %w(newborn infant child) do
   puts "==> Age group: #{group}"
 
-  ag = Diagnostic::AGE_GROUPS.index group
+  ag = Csps::Age[group]
   if Classification.where(age_group: ag).any?
     puts 'Skipping!'
     next

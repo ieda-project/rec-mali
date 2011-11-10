@@ -1,6 +1,6 @@
 class Diagnostic < ActiveRecord::Base
   include Csps::Exportable
-  enum :age_group, %w(newborn infant child)
+  include Csps::Age
 
   serialize :failed_classifications
   globally_belongs_to :child
@@ -49,7 +49,13 @@ class Diagnostic < ActiveRecord::Base
 
   before_create do
     self.done_on ||= Time.now
-    self.age_group = AGE_GROUPS.index(child.age_group.to_s) if child
+    self.born_on = child.born_on if child
+  end
+
+  after_save do
+    if born_on_changed? && child && child.born_on != born_on
+      child.update_attribute :born_on, born_on
+    end
   end
 
   after_create do
@@ -73,16 +79,8 @@ class Diagnostic < ActiveRecord::Base
 
   def muac; mac; end
 
-  def reference_date
+  def age_reference_date
     done_on ? done_on.to_date : Date.today
-  end
-
-  def age
-    reference_date.full_years_from(child.born_on)
-  end
-
-  def months
-    reference_date.full_months_from(child.born_on)
   end
 
   INDICES = {

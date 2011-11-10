@@ -1,5 +1,5 @@
 class Sign < ActiveRecord::Base
-  enum :age_group, %w(newborn infant child)
+  enum :age_group, Csps::Age::GROUPS
 
   belongs_to :illness
   has_and_belongs_to_many :classifications

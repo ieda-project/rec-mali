@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111104101803) do
+ActiveRecord::Schema.define(:version => 20111109153436) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(:version => 20111104101803) do
     t.datetime "updated_at"
     t.integer  "zone_id"
     t.string   "global_id"
-    t.integer  "age_group"
+    t.date     "born_on"
   end
 
   add_index "diagnostics", ["author_global_id"], :name => "index_diagnostics_on_author_global_id"
