@@ -32,7 +32,6 @@ class Classification < ActiveRecord::Base
   end
 
   def calculate data
-    puts "CALCULATING: #{data}"
     if equation.present?
       Csps::Formula.new(equation).calculate(data)
     else

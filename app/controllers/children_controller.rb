@@ -73,14 +73,14 @@ class ChildrenController < ApplicationController
   def new
     return see_other(children_path) unless Zone.csps.point?
     @child = Child.new
-    @diagnostic = @child.diagnostics.build.prebuild
+    @diagnostic = @child.diagnostics.build # Cannot be prebuilt here!
     back 'Liste des patients', children_path
   end
 
   def birthdate
     #if request.xhr?
       @child = Child.new born_on: params[:born_on]
-      @diagnostic = @child.diagnostics.build.prebuild
+      @diagnostic = @child.diagnostics.build_with_answers
       render layout: false
     #else
     #  not_found

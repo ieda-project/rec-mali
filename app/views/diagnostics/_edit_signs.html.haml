@@ -5,9 +5,9 @@
   %section.illness{'data-classify-href' => classification_illness_path(i), 'data-key' => i.key, 'data-age-group' => cs.first.age_group}
     %h2
       = i.name
-      - my_cs = @diagnostic.classifications.for(i)
+      -# my_cs = @diagnostic.classifications.for(i)
       %ul.classification
-        - for c in cs do
+        -# for c in cs do
           %li{:class => (my_cs.include? c).inspect}
             = c.name
     %table

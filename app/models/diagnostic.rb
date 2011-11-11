@@ -131,9 +131,13 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def prebuild
-    sign_ids = sign_answers.map(&:sign_id).rhashize
-    Sign.order(:sequence).each do |sign| 
-      sign_answers << sign.answer_class.new(sign: sign) unless sign_ids[sign.id]
+    if ag = (age_group || (child && child.age_group))
+      sign_ids = sign_answers.map(&:sign_id).rhashize
+      Sign.where(age_group: ag).order(:sequence).each do |sign| 
+        sign_answers << sign.answer_class.new(sign: sign) unless sign_ids[sign.id]
+      end
+    else
+      raise 'Age group cannot be determined, diagnostic cannot be prebuilt'
     end
     self
   end

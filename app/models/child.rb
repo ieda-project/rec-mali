@@ -3,7 +3,13 @@ class Child < ActiveRecord::Base
   include Csps::Age
 
   belongs_to :village, class_name: 'Zone'
-  globally_has_many :diagnostics
+  globally_has_many :diagnostics do
+    def build_with_answers
+      diag = build
+      diag.child = proxy_owner
+      diag.prebuild
+    end
+  end
   globally_has_one :last_visit,
                    class_name: 'Diagnostic', order: 'global_id DESC'
   has_attached_file :photo,

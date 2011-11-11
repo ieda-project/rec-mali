@@ -17,10 +17,3 @@ vih|Infection VIH peu problable|low|(vih.qa == negatif_grossesse)	OR !AT_LEAST_T
 alimentation|Maladie grave ou infection bactérienne grave (alim)|high|alimentation.qa OR (alimentation.qb AND ((alimentation.qh == pas_prise) OR (alimentation.qi == pas_succion)))	
 alimentation|Problème d'alimentation|medium|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qh == pas_prise) OR (alimentation.qi == pas_succion)))) AND ((alimentation.qb AND ((alimentation.qh == mauvaise_prise) OR (alimentation.qi == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qf OR alimentation.qe OR alimentation.qg)
 alimentation|Pas de problèmes d'alimentation|low|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qh == pas_prise) OR (alimentation.qi == pas_succion)))) AND !((alimentation.qb AND ((alimentation.qh == mauvaise_prise) OR (alimentation.qi == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qf OR alimentation.qe OR alimentation.qg)
-
-
-
-
-	
-
-
