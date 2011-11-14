@@ -102,6 +102,9 @@ namespace :sync do
     dir = ENV['TO'] || '.'
     raise "No such directory: #{dir}" unless File.directory? dir
 
+    dir = "#{dir}/#{Zone.csps.folder_name}"
+    FileUtils.mkdir_p dir
+
     for ref in Diagnostic.select('DISTINCT type, age_group') do
       type = ref.type.nil? ? 'base' : ref.type.sub(/Diagnostic$/, '').underscore
       File.open("#{dir}/#{type}_#{ref.age_group_key}.spss", 'w') do |out|
