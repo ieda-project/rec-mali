@@ -21,6 +21,11 @@
     - if @diagnostic.classifications.any?
       = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
 
+- if @child.age_group != @diagnostic.age_group
+  %p.age-group-warning
+    Ce diagnostic a été réalisé lorsque le patient était dans une tranche d'âge
+    différente.
+
 %section.resume
   .measurements
     %h2 Mesures lors de la consultation

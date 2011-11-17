@@ -1,14 +1,6 @@
 %span.name= child.name
 %p
-  - if @diagnostic && @diagnostic.born_on && @diagnostic.born_on != @child.born_on
-    %strong.warning #{child.gender ? 'Né' : 'Née'} le (diagnostic):
-    %span.age{'data-age' => @diagnostic.age, 'data-months' => @diagnostic.months}
-      #{l(@diagnostic.born_on, :format => :long)}, #{months_to_text @diagnostic.months}
-    %br/
-    %strong.warning #{child.gender ? 'Né' : 'Née'} le (infant):
-  - else
-    %strong #{child.gender ? 'Né' : 'Née'} le :
-
+  %strong #{child.gender ? 'Né' : 'Née'} le :
   %span.age{'data-age' => child.age, 'data-months' => child.months}
     #{l(child.born_on, :format => :long)}, #{months_to_text child.months}
 
