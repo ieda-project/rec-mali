@@ -1,15 +1,15 @@
+- lol = ->(cl) { "#{cl.id} - #{cl.name}" }
 - count = 0
 - for i in Illness.order(:sequence) do
-  - cs = i.classifications.for_child(@child)
+  - cs = i.classifications.for_child(@diagnostic)
   - next if cs.empty?
   %section.illness{'data-classify-href' => classification_illness_path(i), 'data-key' => i.key, 'data-age-group' => cs.first.age_group}
     %h2
       = i.name
-      -# my_cs = @diagnostic.classifications.for(i)
+      - my_cs = @diagnostic.classifications.for(i).hashize &:id
       %ul.classification
-        -# for c in cs do
-          %li{:class => (my_cs.include? c).inspect}
-            = c.name
+        - for c in cs do
+          %li{:class => (my_cs[c.id].present?).inspect}= c.name
     %table
       - form.object.sign_answers.for(i).sort.each do |answer|
         = form.fields_for "sign_answers][#{count}", answer do |fields|

@@ -187,12 +187,13 @@ window.addEvent('domready', function() {
       illness.removeClass('closed');
       illness.run_deps();
       current_illness = illness;
-      if (!illness.getElement('h2').getElement('ul')) validate_illness(illness);
+      if (!illness.getElement('ul.classification')) validate_illness(illness);
+      show_hide_button();
       if (scroll != false) window.scrollTo(0, illness.getPosition().y) };
     function all_valid() { return illnesses().every(function (i) { return i.valid }) };
     function show_hide_button() {
       var is = illnesses();
-      if (is[0] && is.getLast().valid && measurements_valid && all_valid()) {
+      if (is[0] && !is.getLast().hasClass('closed') && measurements_valid && all_valid()) {
         button.removeClass('disabled');
         button.removeEvents();
         document.removeEvents('keypress');
@@ -458,7 +459,7 @@ window.addEvent('domready', function() {
         i.fields.addEvent('change', function() {
           copy_value(this);
           i.run_deps() });
-        // i.run_deps()
+        i.run_deps();
 
         if (!first && i.getElement('.fieldWithErrors')) first = i
 
