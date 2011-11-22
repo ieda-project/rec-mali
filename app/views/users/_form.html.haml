@@ -15,5 +15,3 @@
     %label Administrateur
     = form.select :admin, [ nil, 0, 1 ], {:selected => (form.object.admin? ? 1 : 0) }, :class => :boolean
     = errors_on form, :admin
-%div
-  %button(type="submit") Créer
