@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111109153436) do
+ActiveRecord::Schema.define(:version => 20111122160449) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -146,6 +146,18 @@ ActiveRecord::Schema.define(:version => 20111109153436) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "results", :force => true do |t|
+    t.integer  "classification_id"
+    t.string   "diagnostic_global_id"
+    t.integer  "zone_id"
+    t.string   "global_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "results", ["classification_id"], :name => "index_results_on_classification_id"
+  add_index "results", ["diagnostic_global_id"], :name => "index_results_on_diagnostic_global_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

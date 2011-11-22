@@ -17,7 +17,6 @@ class CreateClassifications < ActiveRecord::Migration
     create_table :classifications_diagnostics, :id => false do |t|
       t.references :classification, :diagnostic
     end
-
   end
 
   def self.down

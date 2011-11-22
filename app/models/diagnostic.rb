@@ -5,7 +5,8 @@ class Diagnostic < ActiveRecord::Base
   serialize :failed_classifications
   globally_belongs_to :child
   globally_belongs_to :author, class_name: 'User'
-  has_and_belongs_to_many :classifications do
+  globally_has_many :results
+  has_many :classifications, through: :results do
     def for illness
       select { |c| c.illness_id == illness.id }
     end
@@ -49,7 +50,7 @@ class Diagnostic < ActiveRecord::Base
 
   before_create do
     self.done_on ||= Time.now
-    self.born_on = child.born_on if child
+    self.born_on ||= child.born_on if child
   end
 
   after_save do
@@ -131,9 +132,10 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def prebuild
-    if ag = (age_group || (child && child.age_group))
+    self.born_on ||= child.born_on if child
+    if age_group
       sign_ids = sign_answers.map(&:sign_id).rhashize
-      Sign.where(age_group: ag).order(:sequence).each do |sign| 
+      Sign.where(age_group: age_group).order(:sequence).each do |sign| 
         sign_answers << sign.answer_class.new(sign: sign) unless sign_ids[sign.id]
       end
     else

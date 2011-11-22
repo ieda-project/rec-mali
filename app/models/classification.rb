@@ -3,10 +3,12 @@ class Classification < ActiveRecord::Base
 
   belongs_to :illness
   has_many :treatments
-  has_and_belongs_to_many :diagnostics
   has_and_belongs_to_many :signs
-  validates_presence_of :equation
 
+  has_many :results
+  has_many :diagnostics, through: :results
+
+  validates_presence_of :equation
   scope :for_child, ->(obj) { where(age_group: obj.age_group) }
   
   LEVELS = [:low, :medium, :high]
@@ -18,16 +20,18 @@ class Classification < ActiveRecord::Base
 
   def run diag, data={}
     if calculate(data || diag.to_hash)
-      diag.classifications << self unless diag.classifications.include?(self)
+      results.create!(diagnostic: diag) unless diag.classifications.include?(self)
     else
-      diag.classifications.delete self
+      diag.results.where(classification_id: id).destroy_all
     end
+    diag.instance_eval { @classifications = nil } # Hack to clear has_many through cache
+
     if diag.failed_classifications.present?
       diag.failed_classifications -= [id]
       diag.save if diag.changed?
     end
   rescue => e
-    diag.classifications.delete self
+    diag.results.where(classification_id: self).destroy_all
     diag.update_attribute :failed_classifications, [*diag.failed_classifications].uniq
   end
 
