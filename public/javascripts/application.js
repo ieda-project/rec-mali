@@ -102,17 +102,25 @@ transient = {
 editing = false;
 
 window.addEvent('domready', function() { document.body.updated() });
+window.addEvent('load', function() {
+  document.getElements('div.help').each(function (div) {
+    var img = null;
+    div.getElements('img').each(function(i) {
+      if (!img || img.getSize().x < i.getSize().x) img = i; });
+    if (img && div.getElement('p').getSize().x < img.getSize().x) {
+      div.setStyle('width', img.getSize().x+'px') }})});
 window.addEvent('domready', function() {
 
   document.getElements('a.help').addEvents({
     mouseover: function() {
       var pos = this.getPosition(),
           size = this.getSize();
-          help = $(this.get('href').substr(1));
+          help = $(this.get('href').substr(1)),
+          left = [ pos.x, window.getSize().x - help.getSize().x - 20 ].sort()[0];
       help.setStyles({
         display: 'block',
-        left: pos.x+'px',
-        top: (pos.y - (help.getSize().y / 2)+20)+'px' }) },
+        left: left+'px',
+        top: (pos.y + size.y - (help.getSize().y / 2)+20)+'px' }) },
     mouseout: function() {
       $(this.get('href').substr(1)).setStyles({
         display: 'none',
