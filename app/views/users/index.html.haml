@@ -7,20 +7,14 @@
 
 %section
   %h1 Utilisateurs
-  %table.results
+  %table.results.users
     %thead
       %tr
         %th Nom
         %th Administrateur
         %th
     %tbody
-      - for user in @users do
-        %tr
-          %td= link_to user.name, [ :edit, user ]
-          %td= user.admin? ? 'Oui' : 'Non'
-          %td
-            - if user != current_user && user.diagnostics.empty?
-              - form_for user, html: { :method => :delete, :class => 'confirm', 'data-confirm' => "Supprimer #{user.name} ?" } do
-                %button{type: 'submit'} Supprimer
-            - else
-              Non autorisé à supprimer
+      - for user in @users.where(zone_id: Zone.csps.id) do
+        %tr.local= partial 'user', locals: { user: user }
+      - for user in @users.where('zone_id != ?', Zone.csps.id) do
+        %tr.remote= partial 'user', locals: { user: user }
