@@ -111,8 +111,8 @@ window.addEvent('domready', function() {
           help = $(this.get('href').substr(1));
       help.setStyles({
         display: 'block',
-        left: (pos.x + size.x + 10)+'px',
-        top: (pos.y - (help.getSize().y / 2))+'px' }) },
+        left: (pos.x - size.x - 10)+'px',
+        top: (pos.y - (help.getSize().y / 2)+20)+'px' }) },
     mouseout: function() {
       $(this.get('href').substr(1)).setStyles({
         display: 'none',
