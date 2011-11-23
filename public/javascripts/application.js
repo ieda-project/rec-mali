@@ -105,10 +105,12 @@ window.addEvent('domready', function() { document.body.updated() });
 window.addEvent('load', function() {
   document.getElements('div.help').each(function (div) {
     var img = null;
+    div.setStyle('display', 'block');
     div.getElements('img').each(function(i) {
       if (!img || img.getSize().x < i.getSize().x) img = i; });
     if (img && div.getElement('p').getSize().x < img.getSize().x) {
-      div.setStyle('width', img.getSize().x+'px') }})});
+      div.setStyle('width', img.getSize().x+'px') };
+    div.setStyle('display', 'none') })});
 window.addEvent('domready', function() {
 
   document.getElements('a.help').addEvents({
