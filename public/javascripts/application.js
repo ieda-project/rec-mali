@@ -113,12 +113,12 @@ window.addEvent('domready', function() {
 
   document.getElements('a.help').addEvents({
     mouseover: function() {
+      var help = $(this.get('href').substr(1));
+      help.setStyle('display', 'block');
       var pos = this.getPosition(),
-          size = this.getSize();
-          help = $(this.get('href').substr(1)),
+          size = this.getSize(),
           left = [ pos.x, window.getSize().x - help.getSize().x - 20 ].sort()[0];
       help.setStyles({
-        display: 'block',
         left: left+'px',
         top: (pos.y + size.y - (help.getSize().y / 2)+20)+'px' }) },
     mouseout: function() {
