@@ -120,7 +120,7 @@ window.addEvent('domready', function() {
           left = [ pos.x, window.getSize().x - help.getSize().x - 20 ].sort()[0];
       help.setStyles({
         left: left+'px',
-        top: (pos.y + size.y - (help.getSize().y / 2)+20)+'px' }) },
+        top: (pos.y + size.y + 20)+'px' }) },
     mouseout: function() {
       $(this.get('href').substr(1)).setStyles({
         display: 'none',
