@@ -21,6 +21,8 @@
             - for title, id in Zone.root.to_select(include_self: true) do
               %option(value=id)!= title
       = partial 'users/form', locals: { form: f }
+      %div
+        %button(type="submit") Créer
 
   - unless Csps.site
     .restore
