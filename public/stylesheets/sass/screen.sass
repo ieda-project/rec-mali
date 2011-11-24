@@ -216,24 +216,24 @@ select + .switch
   -webkit-user-select: none
   margin: 3px 0 0 0 !important
   width: auto !important
-  &.yes
-    .yes
+  &.no
+    .no
       background-color: #51a100
       color: white
       border-color: #407e01
-    .no
+    .yes
       color: #777
-  &.no
-    .no
+  &.yes
+    .yes
       background-color: #f00
       color: white
       border-color: #ae0000
-    .yes
+    .no
       color: #777
-  &.negative.yes .yes
+  &.negative.no .no
     background-color: #f00
     border-color: #ae0000
-  &.negative.no .no
+  &.negative.yes .yes
     background-color: #51a100
     border-color: #407e01
   div
