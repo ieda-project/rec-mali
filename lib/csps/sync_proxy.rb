@@ -72,11 +72,7 @@ module Csps::SyncProxy
                 keys << col
                 type, line = get.().chomp.split '',2
                 value = case type
-                  when ?:
-                    while line[-1] == "\\"
-                      line = line[0...-1] + get.().chomp
-                    end
-                    line
+                  when ?: then eval %Q("#{line}")
                   when ?t, ?f then type
                   when ?n
                     placeholders << 'NULL'
@@ -151,7 +147,7 @@ module Csps::SyncProxy
             when true  then ?t
             when false then ?f
             when nil   then ?n
-            else ?: + v.to_s.gsub("\n", "\\\n")
+            else ?: + v.to_s.inspect[1...-1]
           end
         end
       end

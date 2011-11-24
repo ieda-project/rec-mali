@@ -11,7 +11,7 @@ module Csps::Exportable
 
   def self.models
     Dir.glob("#{Rails.root}/app/models/*.rb").each do |f|
-      Object.const_get File.basename(f).sub(/\.rb\Z/, '').camelize
+      File.basename(f)[0..-4].camelize.constantize
     end
     MODELS.map &:constantize
   end

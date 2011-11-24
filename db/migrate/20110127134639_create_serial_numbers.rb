@@ -9,6 +9,7 @@ class CreateSerialNumbers < ActiveRecord::Migration
     end
 
     for model in Csps::Exportable.models do
+      next unless model.table_exists?
       model.select("DISTINCT zone_id").each do |i|
         SerialNumber.create zone_id: i.zone_id, model: model.name, value: 1
       end

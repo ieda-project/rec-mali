@@ -10,3 +10,4 @@ public/repo
 vendor/bundler
 .DS_Store
 .rvmrc
+stick/
