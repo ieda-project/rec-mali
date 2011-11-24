@@ -82,9 +82,9 @@
           - for c in cs do
             %li= c.name
 
-- if Csps.point? or @diagnostic.classifications.any?
+- if editable || @diagnostic.classifications.any?
   %nav
-    - if Csps.point?
+    - if editable
       = link_to 'Modifier', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
     - if @diagnostic.classifications.any?
       = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
