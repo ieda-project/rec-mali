@@ -128,20 +128,22 @@ for group in %w(newborn infant child) do
         data = line.chomp.strip.split '|'
         if line =~ /\A\s/
           # Sign
+          type, *mods = data[2].split(':')
           hash = {
             age_group: ag,
             illness: illness,
             key: data[0],
             dep: deps["#{illness.key}.#{data[0]}"],
+            negative: mods.include?('neg'),
             question: RedCloth.new(data[1], [:lite_mode]).to_html }
-          case data[2]
+          case type
             when 'integer'
               hash[:min_value] = data[3]
               hash[:max_value] = data[4]
             when 'list'
               hash[:values] = data[3]
           end
-          (data[2].camelize + 'Sign').constantize.create hash
+          (type.camelize + 'Sign').constantize.create hash
         else
           # Illness
           next if data[1].blank?

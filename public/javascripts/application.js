@@ -519,6 +519,7 @@ Element.behaviour(function() {
 
   this.getElements('select.boolean').each(function (sel) {
     var button = new Element('div', { 'class': 'switch' }).injectAfter(sel);
+    if (sel.hasClass('negative')) button.addClass('negative');
     var yes = new Element('div', { 'class': 'yes', text: 'Oui' }).inject(button);
     var no = new Element('div', { 'class': 'no', text: 'Non' }).inject(button);
     button.sel = sel;
