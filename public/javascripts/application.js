@@ -16,6 +16,10 @@ $extend(Element, {
   }
 })
 
+// Globals for AS-JS communication
+
+var photo_saved, photo_params;
+
 // AlertBox
 
 var Alertbox = new Element('div', { id: 'alert' })
@@ -535,26 +539,19 @@ Element.behaviour(function() {
 
   this.getElements('.photo').addEvent('click', function() {
     if (editing || window.location.href.match(/\/(new|edit)\/*$/)) {
-      var link = $E('link[rel=photo-upload-target]')
-      var obj = new Element('object', { width: 300, height: 330 })
-      obj.adopt(new Element('param', { name: 'movie', value: '/flash/photo.swf' }))
-      obj.adopt(new Element('param', {
-        name: 'FlashVars',
-        value: 'url=' + (this.get('data-action') || window.location.href) +
-               '&field=' + this.get('data-field') +
-               (this.get('data-method') ? '&method=' + this.get('data-method') : '')+
-               '&domid=' + this.get('id')}))
-      transient.open(obj, { width: 300 })
-    } else {
-      var thmb = this.getElement('img')
-      if (thmb.src.match('missing')) return false
-      transient.open(
-        new Element('img', {
-          src: thmb.src.replace('thumbnail', 'normal'),
-          width: 300, height: 300 }),
-        { width: 300 })
-    }
-  })
+      var obj = new Element('object', { width: 340, height: 380 });
+      obj.adopt(new Element('param', { name: 'movie', value: '/flash/photo.swf' }));
+
+      var self = this;
+      photo_params = function() {
+        return {
+          action: self.get('data-action'),
+          paramName: self.get('data-field'),
+          method: self.get('data-method') || 'put' }};
+      photo_saved = function(uri) {
+        self.getElement('img').src = uri;
+        transient.close() };
+      transient.open(obj, { width: 340 }) }});
   
   this.getElements('.ratios li').addEvent('click', function(e) {
     if (this.hasClass('disabled'))

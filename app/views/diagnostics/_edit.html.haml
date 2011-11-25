@@ -1,6 +1,6 @@
 .profile-child{'data-gender' => @child.gender.to_s}
   #mugshot.photo{:"data-field" => 'child[photo]', :"data-action" => child_path(@child)}
-    %img{alt: '', src: @child.photo.url(:thumbnail)}
+    %img{alt: '', src: @child.photo.url}
   %section
     .editable
       %span.name= @child.name

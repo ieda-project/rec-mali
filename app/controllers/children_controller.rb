@@ -140,7 +140,7 @@ class ChildrenController < ApplicationController
       end
       wants.json do
         if success
-          render json: { photo: { thumbnail: @child.photo.url(:thumbnail) }}
+          render json: { photo: @child.photo.url }
         else
           render nothing: true, status: 422
         end

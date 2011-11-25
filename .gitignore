@@ -11,3 +11,4 @@ vendor/bundler
 .DS_Store
 .rvmrc
 stick/
+.*.swp
