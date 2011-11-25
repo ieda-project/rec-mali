@@ -3,7 +3,7 @@
 ## INFECTIONS BACTERIENNES
 inf_bac|Infection Bactérienne
   qa|Demander: Le nourrisson a-t-il eu des convulsions ?|boolean
-  qb|Le nouveau-né est-il incapable de s'alimenter ?|boolean
+  qb|Le nouveau-né est-il *incapable* de s'alimenter ?|boolean
   qc|Compter les respirations par minute; si leur nombre est élevé, compter à nouveau (rapide => plus 60 cycles par minutes)|list|normales;rapides
   qd|Rechercher un tirage sous-costal grave|boolean
   qe|Rechercher un geignement expiratoire|boolean
@@ -34,7 +34,7 @@ vih|Recherche d'une infection VIH
 ## ALIMENTATION
 alimentation|Recherche de difficulté d'alimentation
   qa|Le nourrisson a-t-il des difficultés à se nourrir ?|boolean
-  qb|Le nourrisson est-il nourri au sein ?|boolean
+  qb|Le nourrisson est-il nourri au sein ?|boolean:neg
   qc|Si oui, combien de fois en 24 heures ?|integer
   qd|Le nourrisson reçoit-il d’habitude d’autres aliments ou liquides en plus du lait maternel ?|boolean
   qe|Si oui, reçoit-il du lait artificiel ?|boolean
