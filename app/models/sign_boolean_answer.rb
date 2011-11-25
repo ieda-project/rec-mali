@@ -12,7 +12,9 @@ class SignBooleanAnswer < SignAnswer
     if boolean_value.nil?
       'Non applicable'
     else
-      "<div class='switch #{boolean_value ? 'yes' : 'no'}'><div class='yes'>Oui</div><div class='no'>Non</div></div>"
+      kl = boolean_value ? 'yes' : 'no'
+      kl += ' negative' if sign.negative?
+      %Q(<div class="switch #{kl}"><div class="yes">Oui</div><div class="no">Non</div></div>)
     end
   end
 
