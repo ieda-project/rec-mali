@@ -27,7 +27,7 @@ diarrhee|Diarrhée
 ## ALIMENTATION
 alimentation|Alimentation ou insuffisance pondérale
   qa|Le nourrisson a-t-il des difficultés à se nourrir ?|boolean
-  qb|Le nourrisson est-il nourri au sein ?|boolean
+  qb|Le nourrisson est-il nourri au sein ?|boolean:neg
   qc|Si oui, combien de fois en 24 heures ?|integer	
   qd|Le nourrisson reçoit-il d’habitude d’autres aliments ou d’autres boissons ?|boolean
   qe|Si oui, combien de fois ?|integer
