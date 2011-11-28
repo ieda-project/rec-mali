@@ -18,7 +18,7 @@ $extend(Element, {
 
 // Globals for AS-JS communication
 
-var photo_saved, photo_params;
+var photo_saved, photo_params, auto_answer = {};
 
 // AlertBox
 
@@ -301,14 +301,15 @@ window.addEvent('domready', function() {
       var indices = $E('div.ratios'),
           weight = $E('input[id$=diagnostic_weight]'),
           height = $E('input[id$=diagnostic_height]'),
+          temp = $E('input[id$=diagnostic_temperature]'),
           gender = $('child_gender'),
           last_indices_data = get_indices_data();
       function get_indices_data() {
         if (weight.valid && height.valid) {
           return new Hash({
             months: form.tree.enfant.months,
-            weight: weight.value.toFloat(),
-            height: height.value.toFloat(),
+            weight: form.tree.enfant.weight,
+            height: form.tree.enfant.height,
             gender: gender ? (gender.selectedIndex == 0) : $E('.profile-child').get('data-gender') })
         } else return null };
 
@@ -376,6 +377,9 @@ window.addEvent('domready', function() {
           warnings.each(function (w) {
             w.setStyle('display', w.condition(form.tree) ? 'none' : 'block') })};
 
+        form.tree.enfant.weight = weight.value.toFloat();
+        form.tree.enfant.height = height.value.toFloat();
+        form.tree.enfant.temp = temp.value.toFloat();
         var data = get_indices_data();
         if (data && data.height && data.weight) {
           if (last_indices_data && data.every(function(value, key) { return last_indices_data[key] == value })) return
@@ -404,7 +408,30 @@ window.addEvent('domready', function() {
           [ 'weight_age', 'height_age', 'weight_height' ].each(function (index) {
             var li = indices.getElement('.'+index)
             li.removeClass('alert').removeClass('warning').addClass('disabled')
-            li.getElement('.value').set('text', '-') })}}).periodical(150) })();
+            li.getElement('.value').set('text', '-') }) };
+
+        for (code in auto_answer) {
+          var res = auto_answer[code](form.tree), td = $(code);
+          if (res != null) {
+            if (typeof(res) == 'boolean') {
+              var dis = td.getElement('.switch').removeClass('disabled')
+              td.getElement(res ? '.yes' : '.no').fireEvent('click');
+              dis.addClass('disabled');
+            } else {
+              var dis = td.getElements('input[type=radio]').set('disabled', false);
+              dis.filter(function (i) { return i.value == res }).set('checked', true);
+              dis.set('disabled', true);
+              var hidden = td.getElement('input[type=hidden]') || new Element('input', { type: 'hidden', name: dis[0].name }).inject(td);
+              hidden.value = res;
+            }
+          } else {
+            td.getElements('.switch').removeClass('disabled').each(function (i) {
+              i.sel.selectedIndex = 0;
+              i.removeClass('yes').removeClass('no');
+              i.sel.fireEvent('changed') });
+            td.getElements('input[type=radio]').set('disabled', false).set('checked', false);
+            td.getElements('input[type=hidden]').dispose();
+          }}}).periodical(150) })();
 
     head_next.addEvent('click', function() {
       if (this.hasClass('disabled'))
@@ -532,6 +559,7 @@ Element.behaviour(function() {
     sel.setStyle('display', 'none');
     set_sc(sel) });
   this.getElements('select.boolean+div.switch div').addEvent('click', function(e) {
+    if (this.getParent().hasClass('disabled')) return;
     this.sel.selectedIndex = (this.hasClass('yes')) ? 2 : 1;
     this.sel.fireEvent('change');
     set_sc(this.sel);

@@ -5,6 +5,8 @@ class Sign < ActiveRecord::Base
   has_and_belongs_to_many :classifications
   has_many :answers, class_name: 'SignAnswer'
 
+  serialize :auto
+
   def full_key
     "#{illness.key}.#{key}"
   end
@@ -17,5 +19,11 @@ class Sign < ActiveRecord::Base
     { 'data-key' => key, 'class' => kind }.tap do |h|
       h['data-dep'] = dep if dep.present?
     end
+  end
+
+  def auto_js
+    "function(data) { " +
+    auto.map { |result,code| "if (#{code}) return #{result.inspect};" }.join(' ') +
+    " return null }"
   end
 end

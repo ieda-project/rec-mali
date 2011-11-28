@@ -1,0 +1,9 @@
+inf_bac.qh
+hypothermie_moderee: data.enfant.temp >= 35.5 && data.enfant.temp <= 36.6
+hypothermie_severe: data.enfant.temp < 35.5
+fievre: data.enfant.temp >= 37.5
+
+poids.qa
+normal: data.enfant.weight >= 2.5
+faible: data.enfant.weight >= 1.5 && data.enfant.weight < 2.5
+tres_faible: data.enfant.weight < 1.5

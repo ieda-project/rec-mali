@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111124000624) do
+ActiveRecord::Schema.define(:version => 20111125164359) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(:version => 20111124000624) do
     t.datetime "updated_at"
     t.integer  "age_group"
     t.boolean  "negative"
+    t.text     "auto"
   end
 
   create_table "sites", :force => true do |t|

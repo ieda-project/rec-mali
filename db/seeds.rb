@@ -156,6 +156,35 @@ for group in %w(newborn infant child) do
         end
       end
     end
+
+    if File.exist?("db/fixtures/#{group}/auto.txt")
+      File.open("db/fixtures/#{group}/auto.txt", 'r') do |f|
+        sign = nil
+        f.each_line do |line|
+          if line.blank?
+            sign.save!
+            sign = nil
+            next
+          end
+          line.strip!
+          if sign
+            key, code = line.split /:\s*/
+            if sign.is_a? BooleanSign
+              case key
+                when 'true' then key = true
+                when 'false' then key = false
+                else next
+              end
+            end
+            (sign.auto ||= {}).store key, code
+          else
+            i, s = line.split '.'
+            sign = illnesses[i].signs.find_by_key_and_age_group(s, ag) or raise "No sign: #{i}.#{s}"
+          end
+        end
+        sign.save! if sign
+      end
+    end
   end
 
   puts 'Creating classifications'

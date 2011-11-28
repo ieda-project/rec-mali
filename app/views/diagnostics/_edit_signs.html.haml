@@ -1,5 +1,5 @@
 - lol = ->(cl) { "#{cl.id} - #{cl.name}" }
-- count = 0
+- count, autos = 0, []
 - for i in Illness.order(:sequence) do
   - cs = i.classifications.for_child(@diagnostic)
   - next if cs.empty?
@@ -12,13 +12,19 @@
           %li{:class => (my_cs[c.id].present?).inspect}= c.name
     %table
       - form.object.sign_answers.for(i).sort.each do |answer|
+        - autos << answer.sign if answer.sign.auto.present?
         = form.fields_for "sign_answers][#{count}", answer do |fields|
           %tr{class: answer.errors.any? ? 'has-errors' : ''}
             %th(scope="row")
               .question!= answer.sign.question
               = fields.hidden_field :sign_id
-            %td
+            %td.answer{id: answer.sign.full_key}
               = partial "diagnostics/sign_#{answer.sign.kind}", locals: { sign: answer.sign, form: fields }
         - count += 1
     .next
       %button.next(type="button") Continuer
+
+%script
+  auto_answer = {
+  != autos.map { |a| %Q|  "#{a.full_key}": #{a.auto_js}| }.join(",\n")
+  };
