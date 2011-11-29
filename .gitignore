@@ -7,6 +7,7 @@ tmp/**/*
 config/database.yml
 public/stylesheets/*.css
 public/repo
+public/system
 vendor/bundler
 .DS_Store
 .rvmrc
