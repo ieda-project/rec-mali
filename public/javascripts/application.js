@@ -180,7 +180,6 @@ window.addEvent('domready', function() {
             form.tree.enfant.age = (months / 12).floor();
             new Request.HTML({
               onSuccess: function(dom) {
-                console.log(dom);
                 dom[0].getElements('section.illness').each(function (sec) {
                   sec.inject(tgt) });
                 illnesses_updated();
@@ -382,26 +381,26 @@ window.addEvent('domready', function() {
         form.tree.enfant.temp = temp.value.toFloat();
         var data = get_indices_data();
         if (data && data.height && data.weight) {
-          if (last_indices_data && data.every(function(value, key) { return last_indices_data[key] == value })) return
-          new Request.JSON({
-            url: '/children/calculations',
-            onSuccess: function(json) {
-              for (index in json) {
-                var v = json[index]
-                var li = $E('.ratios .'+index)
-                li.removeClass('disabled')
-                if (v[0] < v[2]) {
-                  li.addClass('alert')
-                } else {
-                  li.removeClass('alert')
-                  if (v[0] < v[1]) {
-                    li.addClass('warning') } else li.removeClass('warning') };
-                li.getElement('.value').set('text', v[0]).setStyle(
-                  'font-size', v[0] > 999 ? '0.9em' : '1em') }
-              form.tree.enfant.wfa = json.weight_age[0];
-              form.tree.enfant.hfa = json.height_age[0];
-              form.tree.enfant.wfh = json.weight_height[0];
-              last_indices_data = data }}).get({ d: data.getClean() });
+          if (!last_indices_data || !data.every(function(value, key) { return last_indices_data[key] == value })) {
+            new Request.JSON({
+              url: '/children/calculations',
+              onSuccess: function(json) {
+                for (index in json) {
+                  var v = json[index]
+                  var li = $E('.ratios .'+index)
+                  li.removeClass('disabled')
+                  if (v[0] < v[2]) {
+                    li.addClass('alert')
+                  } else {
+                    li.removeClass('alert')
+                    if (v[0] < v[1]) {
+                      li.addClass('warning') } else li.removeClass('warning') };
+                  li.getElement('.value').set('text', v[0]).setStyle(
+                    'font-size', v[0] > 999 ? '0.9em' : '1em') }
+                form.tree.enfant.wfa = json.weight_age[0];
+                form.tree.enfant.hfa = json.height_age[0];
+                form.tree.enfant.wfh = json.weight_height[0];
+                last_indices_data = data }}).get({ d: data.getClean() }) };
         } else {
           // No data
           last_indices_data = null;
