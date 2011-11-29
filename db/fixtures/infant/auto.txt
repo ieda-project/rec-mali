@@ -1,0 +1,4 @@
+inf_bac.qj
+fievre: data.enfant.temp >= 37.5
+normale: data.enfant.temp >= 35.5 && data.enfant.temp < 37.5
+hypothermique: data.enfant.temp < 35.5
