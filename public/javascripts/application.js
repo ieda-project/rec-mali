@@ -409,8 +409,11 @@ window.addEvent('domready', function() {
             li.removeClass('alert').removeClass('warning').addClass('disabled')
             li.getElement('.value').set('text', '-') }) };
 
+        var aa_change = false;
         for (code in auto_answer) {
-          var res = auto_answer[code](form.tree), td = $(code);
+          var res = auto_answer[code](form.tree), td = $(code), s = code.split('.');
+          try { if (res == form.tree[s[0]][s[1]]) continue } catch(e) {}
+          aa_change = true;
           if (res != null) {
             if (typeof(res) == 'boolean') {
               var dis = td.getElement('.switch').removeClass('disabled')
@@ -429,8 +432,8 @@ window.addEvent('domready', function() {
               i.removeClass('yes').removeClass('no');
               i.sel.fireEvent('changed') });
             td.getElements('input[type=radio]').set('disabled', false).set('checked', false);
-            td.getElements('input[type=hidden]').dispose();
-          }}}).periodical(150) })();
+            td.getElements('input[type=hidden]').dispose(); }}
+        if (aa_change) illnesses_updated() }).periodical(150) })();
 
     head_next.addEvent('click', function() {
       if (this.hasClass('disabled'))
