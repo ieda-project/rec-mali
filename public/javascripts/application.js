@@ -412,6 +412,7 @@ window.addEvent('domready', function() {
         var aa_change = false;
         for (code in auto_answer) {
           var res = auto_answer[code](form.tree), td = $(code), s = code.split('.');
+          if (!td) continue;
           try { if (res == form.tree[s[0]][s[1]]) continue } catch(e) {}
           aa_change = true;
           if (res != null) {
@@ -481,28 +482,27 @@ window.addEvent('domready', function() {
             if (s.dep) {
               var old = s.disabled;
               s.disabled = !s.dep(form.tree);
-              if (old != s.disabled) change = true;
-              var td = s.getParent();
-              if (s.disabled) {
-                if (!td.ghost) {
-                  td.ghost = new Element('input', { type: 'hidden', name: s.name, value: '' }).inject(td)
-                  td.getElements('*').each(function (el) {
-                    el.old_display = el.getStyle('display')
-                    el.setStyle('display', 'none') })
-                  td.na = new Element('div', { text: 'Non applicable' }).inject(td) }
-              } else if (td.ghost) {
-                td.ghost.dispose()
-                td.na.dispose()
-                delete td.ghost
-                delete td.na
-                td.getElements('*').each(function (el) { el.setStyle('display', el.old_display) }) }}
-          });
-          if (validate && change) validate_illness(i) }
+              if (old != s.disabled) {
+                change = true;
+                var td = s.getParent();
+                if (s.disabled) {
+                  td.getChildren().each(function (el) {
+                    el.old_display = el.getStyle('display');
+                    el.setStyle('display', 'none') });
+                  td.ghost = new Element('input', { type: 'hidden', name: s.name, value: '' }).inject(td);
+                  td.na = new Element('div', { text: 'Non applicable' }).inject(td);
+                } else {
+                  td.ghost.dispose();
+                  td.na.dispose();
+                  delete td.ghost;
+                  delete td.na;
+                  td.getChildren().each(function (el) { el.setStyle('display', el.old_display) })}}}});
+          if (validate && change) validate_illness(i) };
 
         i.fields.addEvent('change', function() {
           copy_value(this);
           i.run_deps() });
-        i.run_deps();
+        i.run_deps.delay(10, i);
 
         if (!first && i.getElement('.fieldWithErrors')) first = i
 
