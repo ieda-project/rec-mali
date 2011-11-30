@@ -160,7 +160,7 @@ window.addEvent('domready', function() {
       if (age) form.tree.enfant = {
         months: age.get('data-months').toInt(),
         age: age.get('data-age').toInt() }})($E('span.age'));
-    (function(stem) {
+    ['child_born_on', 'diagnostic_born_on'].each(function(stem) {
       var y = $(stem+'_1i');
       if (y) {
         var m = $(stem+'_2i'),
@@ -188,7 +188,7 @@ window.addEvent('domready', function() {
             }}).get(
               '/children/birthdate?born_on='+
               bd.toISOString().replace(/T.*$/,'')) } else run_all_deps(true) });
-        y.fireEvent('change') }})('child_born_on');
+        y.fireEvent('change') }});
 
     var measurements_valid = true;
     function close_illness() {

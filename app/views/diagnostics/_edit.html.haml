@@ -29,7 +29,7 @@
     .next
       %button.next(type="button") Continuer
 
-= partial 'diagnostics/edit_signs', locals: { form: form }
+.illnesses= partial 'diagnostics/edit_signs', locals: { form: form }
 
 %nav
   %button.validation(type="submit") Identifier le traitement
