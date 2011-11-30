@@ -4,8 +4,8 @@ class Child < ActiveRecord::Base
 
   belongs_to :village, class_name: 'Zone'
   globally_has_many :diagnostics do
-    def build_with_answers
-      diag = build
+    def build_with_answers data={}
+      diag = build data
       diag.child = proxy_owner
       diag.prebuild
     end

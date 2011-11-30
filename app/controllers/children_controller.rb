@@ -77,7 +77,7 @@ class ChildrenController < ApplicationController
     back 'Liste des patients', children_path
   end
 
-  def birthdate
+  def questionnaire
     #if request.xhr?
       @child = Child.new born_on: params[:born_on]
       @diagnostic = @child.diagnostics.build_with_answers

@@ -186,7 +186,8 @@ window.addEvent('domready', function() {
                 tgt.updated();
                 run_all_deps(true);
             }}).get(
-              '/children/birthdate?born_on='+
+              form.get('data-questionnaire') +
+              '?born_on='+
               bd.toISOString().replace(/T.*$/,'')) } else run_all_deps(true) });
         y.fireEvent('change') }});
 
@@ -451,7 +452,7 @@ window.addEvent('domready', function() {
           var yes = current_illness && current_illness.getAllPrevious('section.illness').some(function(ii) {
             return ii == i })
           yes ? open_illness(i) : alert_fill() })
-        i.fields = i.getElements('input[type=text], input[type=radio], select')
+        i.fields = i.getElements('input[type=text], input[type=radio], select');
         var obj = form.tree[i.get('data-key')] = {}
         function copy_value(sign) {
           var value
@@ -478,24 +479,21 @@ window.addEvent('domready', function() {
 
         i.run_deps = function(validate) {
           var change = false;
-          i.fields.each(function (s) {
+          i.getElements('td.answer').each(function (td) {
+            var flds = td.getElements('input[type=radio], input[type=text], select'), s = flds[0];
             if (s.dep) {
               var old = s.disabled;
-              s.disabled = !s.dep(form.tree);
+              flds.set('disabled', !s.dep(form.tree));
               if (old != s.disabled) {
                 change = true;
-                var td = s.getParent();
                 if (s.disabled) {
                   td.getChildren().each(function (el) {
                     el.old_display = el.getStyle('display');
                     el.setStyle('display', 'none') });
-                  td.ghost = new Element('input', { type: 'hidden', name: s.name, value: '' }).inject(td);
-                  td.na = new Element('div', { text: 'Non applicable' }).inject(td);
+                  new Element('input', { class: 'nonapp', type: 'hidden', name: s.name, value: '' }).inject(td);
+                  new Element('div', { class: 'nonapp', text: 'Non applicable' }).inject(td);
                 } else {
-                  td.ghost.dispose();
-                  td.na.dispose();
-                  delete td.ghost;
-                  delete td.na;
+                  td.getElements('.nonapp').dispose();
                   td.getChildren().each(function (el) { el.setStyle('display', el.old_display) })}}}});
           if (validate && change) validate_illness(i) };
 

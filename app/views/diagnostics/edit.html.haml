@@ -4,5 +4,5 @@
     %li= link_to @diagnostic.child.name, @diagnostic.child
     %li Evaluation
     
-- form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit diagnostic' } do |form|
+- form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit diagnostic', 'data-questionnaire' => questionnaire_child_diagnostics_path(@child) } do |form|
   = partial 'edit', locals: { form: form }

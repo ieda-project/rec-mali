@@ -6,6 +6,15 @@ class DiagnosticsController < ApplicationController
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
 
+  def questionnaire
+    #if request.xhr?
+      @diagnostic = @child.diagnostics.build_with_answers(born_on: params[:born_on])
+      render layout: false
+    #else
+    #  not_found
+    #end
+  end
+
   def show?
     %w(show treatments).include? params[:action]
   end

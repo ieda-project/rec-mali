@@ -14,7 +14,7 @@ Csps::Application.routes.draw do
 
   resources :children do
     collection do
-      get :calculations, :hors_zone, :birthdate
+      get :calculations, :hors_zone, :questionnaire
     end
     member do
       get :indices
@@ -23,6 +23,9 @@ Csps::Application.routes.draw do
       post :temp
     end
     resources :diagnostics do
+      collection do
+        get :questionnaire
+      end
       member do
         get :treatments, :wait
         post :calculations
