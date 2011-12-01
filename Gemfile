@@ -19,11 +19,13 @@ group :development, :test, :production do
   gem 'sqlite3'
 end
 
-group :heroku do
-  gem 'pg'
-  gem 'hassle', git: 'http://github.com/Papipo/hassle.git'
-end
+unless ENV['RATPOISON']
+  group :heroku do
+    gem 'pg'
+    gem 'hassle', git: 'http://github.com/Papipo/hassle.git'
+  end
 
-group :test do
-  gem 'shoulda'
+  group :test do
+    gem 'shoulda'
+  end
 end
