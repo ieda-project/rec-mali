@@ -1,8 +1,0 @@
-development:
-  :path: ":rails_root/public/repo/:global_id_:class_:attachment_:style.:extension"
-  :url: "/repo/:global_id_:class_:attachment_:style.:extension"
-  :default_url: '/images/missing_:style.png'
-production:
-  :path: ":rails_root/public/repo/:global_id_:class_:attachment_:style.:extension"
-  :url: "/repo/:global_id_:class_:attachment_:style.:extension"
-  :default_url: '/images/missing_:style.png'
