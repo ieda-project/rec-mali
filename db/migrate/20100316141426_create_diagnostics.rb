@@ -5,7 +5,7 @@ class CreateDiagnostics < ActiveRecord::Migration
       t.string :type
       t.datetime :done_on
       t.integer :mac
-      t.float :height, :weight, :temperature
+      t.float :height, :weight
       t.text :comments
       t.string :failed_classifications
       t.timestamps

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111125164359) do
+ActiveRecord::Schema.define(:version => 20111201140118) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -71,13 +71,13 @@ ActiveRecord::Schema.define(:version => 20111125164359) do
     t.integer  "mac"
     t.float    "height"
     t.float    "weight"
-    t.float    "temperature"
     t.text     "comments"
     t.string   "failed_classifications"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "zone_id"
     t.string   "global_id"
+    t.float    "temperature"
     t.date     "born_on"
   end
 
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(:version => 20111125164359) do
     t.string   "key"
     t.string   "question"
     t.string   "values"
-    t.text     "dep"
+    t.string   "dep"
     t.integer  "sequence"
     t.integer  "min_value"
     t.integer  "max_value"
