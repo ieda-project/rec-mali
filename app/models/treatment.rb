@@ -13,7 +13,7 @@ class Treatment < ActiveRecord::Base
     end
 
     helps = []
-    src.gsub! /{{help:(.+)}}/ do
+    src.gsub! /{{help:(.+?)}}/ do
       if th = TreatmentHelp.find_by_key($1)
         helps << th
         %Q[(<a class="help" href="#tr_#{id}_#{$1}">#{th.title}</a>)]
