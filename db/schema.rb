@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111201140118) do
+ActiveRecord::Schema.define(:version => 20111201144320) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(:version => 20111201140118) do
     t.string   "key"
     t.string   "question"
     t.string   "values"
-    t.string   "dep"
+    t.text     "dep"
     t.integer  "sequence"
     t.integer  "min_value"
     t.integer  "max_value"
