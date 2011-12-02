@@ -4,9 +4,7 @@ class ConvertPngs < ActiveRecord::Migration
       begin
         File.popen("find #{Rails.root}/public/repo/ -name '*_original.png'", 'r') do |pipe|
           pipe.each_line do |png|
-            puts png
             png.chomp!
-            puts "convert -quality 85 #{png} #{png.sub(/_original\.png$/, '.jpg')}"
             `convert -quality 85 #{png} #{png.sub(/_original\.png$/, '.jpg')}`
           end
         end
