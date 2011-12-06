@@ -6,7 +6,7 @@
 %nav= link_to 'Nouvel utilisateur', new_user_path, :class => 'new-user'
 
 %section
-  %h1 Utilisateurs
+  %h1 Utilisateurs de ce CSPS
   %table.results.users
     %thead
       %tr
@@ -24,6 +24,16 @@
                 %button{type: 'submit'} Supprimer
             - else
               Non autorisé à supprimer
+
+%section
+  %h1 Utilisateurs d'autres CSPS
+  %table.results.users
+    %thead
+      %tr
+        %th Nom
+        %th Administrateur
+        %th
+    %tbody
       - for user in @users.where('zone_id != ?', Zone.csps.id) do
         %tr.remote
           %td= user.name
