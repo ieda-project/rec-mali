@@ -3,6 +3,7 @@ class Zone < ActiveRecord::Base
   has_many :patients, class_name: 'Child'
   has_many :serial_numbers do
     def get model
+      model = model.superclass while model.superclass != ActiveRecord::Base
       find_or_initialize_by_model model.name
     end
     def [] model
