@@ -360,6 +360,7 @@ window.addEvent('domready', function() {
           if (!i.disabled && !i.valid) measurements_valid = false });
 
         if (!changes) return;
+        
         head_next.setStyle('visibility', 'visible');
         close_illness();
 
@@ -414,7 +415,9 @@ window.addEvent('domready', function() {
         for (code in auto_answer) {
           var res = auto_answer[code](form.tree), td = $(code), s = code.split('.');
           if (!td) continue;
-          try { if (res == form.tree[s[0]][s[1]]) continue } catch(e) {}
+          if (td.auto) {
+            try { if (res == form.tree[s[0]][s[1]]) continue } catch(e) {}
+          } else td.auto = true;
           aa_change = true;
           if (res != null) {
             if (typeof(res) == 'boolean') {
