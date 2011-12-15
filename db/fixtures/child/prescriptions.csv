@@ -27,34 +27,35 @@ diahree_persistante,m26,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{
 paludisme_grave,m15_1,,,{{name}} - {{dosage}} (en IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
 paludisme_grave,m12_1,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
 paludisme_grave,m13_1,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
-paludisme_grave,m6,tant que douleur ou empérature supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
+paludisme_grave,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
 paludisme_grave,m14,,,"{{name}} - {{dosage}} (Répéter 1 fois au bout de 48h si fièvre persiste. Ne pas dépasser 3 g par prise. Réserver pour le traitement des méningites à méningocoques  pendant les épidémies)"
 paludisme_grave,m12_2,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 paludisme_grave,m13_2,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 paludisme_grave,m1,5 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 paludisme_grave,m2,5 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-paludisme_simple,m18,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (à partir de 25kg 3coprimés par prise)
+paludisme_simple,m18,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (à partir de 25kg 3 comprimés par prise)
 paludisme_simple,m19,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+paludisme_simple,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
 rougeole_compliquee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 rougeole_compliquee,m2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 rougeole_compliquee,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-rougeole_compliquee,m7_2,2 jours,dose unique par jour,ou {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+rougeole_compliquee,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 rougeole_complications,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-rougeole_complications,m7_2,2 jours,dose unique par jour,ou {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+rougeole_complications,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 rougeole,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
-rougeole,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
+rougeole,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} {{duration}}
 rougeole,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 rougeole,m2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-antecedent_rougeole,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}} (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
-antecedent_rougeole,m7_2,2 jours,dose unique par jour,ou {{name}} - {{dosage}} - {{takes}} pendant {{duration}} (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
+antecedent_rougeole,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+antecedent_rougeole,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}} (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
 mastoidite,m12_1,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
 mastoidite,m13_1,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
 mastoidite,m6,pour calmer la douleur,dose unique,{{name}} pré référence - {{dosage}} {{takes}}
 infection_aigue_oreille,m1,5 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 infection_aigue_oreille,m6,pour calmer la douleur,dose unique,{{name}} pré référence - {{dosage}} {{takes}}
 anemie_grave,m15_1,,,{{name}} - {{dosage}} (en IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
-anemie,m8,14 jours  (renouvelable pour atteindre au total 2 à 3 mois),dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-anemie,m18,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (à partir de 25kg 3coprimés par prise)
+anemie,m8,14 jours (renouvelable pour atteindre au total 2 à 3 mois),dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+anemie,m18,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (à partir de 25kg 3 comprimés par prise)
 anemie,m19,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 anemie,m9,3 fois par jour,2 fois par jour,Donner {{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 mass,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
@@ -65,8 +66,8 @@ mass,m9,3 fois par jour,2 fois par jour,Donner {{name}} - {{dosage}} par prise -
 mass,m10,,dose unique,ou {{name}} - {{dosage}} - {{takes}} (1ère ou 2ème visite)
 mam,m9,3 fois par jour,2 fois par jour,Donner {{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (1ère ou 2ème visite)
 mam,m10,,dose unique,ou {{name}} - {{dosage}} - {{takes}} (1ère ou 2ème visite)
-pas_malnutrition,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
-pas_malnutrition,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,ou {{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
+pas_malnutrition,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
+pas_malnutrition,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
 vih_symp_confirmee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 vih_symp_confirmee,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 vih_confirmee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}

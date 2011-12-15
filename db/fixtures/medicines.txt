@@ -134,21 +134,13 @@ Soluté isotonique - phase 2 (m23_2)
 ml
 >=1y 70/kg
 
-Solution de réhydratation orale plan C par SNG (m24_1_1)
-ml
-20/kg
-
-Solution de réhydratation orale plan C par SNG (m24_1_2)
-ml
-20/kg
-
 Solution de réhydratation orale plan C par gorgée (m24_1_3)
 ml
-1000/kg
+<1y 1000/kg
 
 Solution de réhydratation orale plan C par gorgée (m24_1_4)
 ml
-1000/kg
+>=1y 1000/kg
 
 Solution de réhydratation orale plan B par SNG (m24_2)
 ml
