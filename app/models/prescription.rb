@@ -12,7 +12,7 @@ class Prescription < ActiveRecord::Base
       out = instructions.gsub /{{(name|takes|duration)}}/ do
         send $1
       end
-      out.gsub '{{dosage}}', "#{dosage} #{medicine.unit}"
+      out.gsub '{{dosage}}', "#{dosage.round(1).to_s.sub('.0', '')} #{medicine.unit}"
     end
   end
 end
