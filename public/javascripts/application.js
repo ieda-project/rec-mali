@@ -317,6 +317,7 @@ window.addEvent('domready', function() {
         var was_valid = measurements_valid, changes = false;
         measurements_valid = true;
         head_selects.each(function(i) {
+          if (!i.value) measurements_valid = false;
           if (i.prev_value != i.value) {
             changes = true
             i.prev_value = i.value }})
