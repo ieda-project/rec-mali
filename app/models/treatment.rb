@@ -8,7 +8,7 @@ class Treatment < ActiveRecord::Base
       p.medicine.key
     end
 
-    src = description.gsub(/{{med:(.+)}}/) do
+    src = description.gsub(/{{med:(.+?)}}/) do
       pres[$1].html(diag) rescue nil
     end
 
