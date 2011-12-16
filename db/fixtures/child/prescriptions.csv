@@ -18,6 +18,7 @@ deshydratation_severe_pas_grave_perfusion,m1,8 jours,2 fois par jour,{{name}} - 
 deshydratation_severe_pas_grave_perfusion,m4,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
 deshydratation_severe_pas_grave_sans_sng_sans_perfusion,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 deshydratation_severe_pas_grave_sans_sng_sans_perfusion,m4,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
+deshydratation_severe_pas_grave_sng,m25,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 signes_deshydratation,m24_2,4 heures,,{{name}} - {{dosage}} pendant {{duration}}
 dysenterie,m3,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 dysenterie,m5,8 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}

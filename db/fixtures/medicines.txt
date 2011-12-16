@@ -42,8 +42,8 @@ capsule
 
 Fer/Folate (m8)
 comprimé
-[0-13k[ >=6m 1/2
->=13k >=6m 1/2
+[0-10k[ 1/2
+>=10k 1
 
 Mebendazole Oral (m9)
 mg
