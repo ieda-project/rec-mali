@@ -2,7 +2,7 @@ class DiagnosticsController < ApplicationController
   login_required
   before_filter :fetch_child, :except => :indices
   before_filter :fetch, only: [ :show, :wait, :treatments, :calculations, :edit, :update ]
-  before_filter :author_only, only: [ :edit, :update ]
+  before_filter :author_only, only: :edit
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
 
@@ -69,6 +69,8 @@ class DiagnosticsController < ApplicationController
   end
 
   def update
+    return(see_other([ @child, @diagnostic ])) if @diagnostic.author != current_user
+
     Diagnostic.transaction do
       @child.update_attributes params[:diagnostic].delete(:child)
       (params[:diagnostic].delete(:sign_answers) || {}).each_value do |a|
