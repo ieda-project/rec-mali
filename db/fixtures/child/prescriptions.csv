@@ -2,6 +2,10 @@
 ##treatment key,medicine key,duration,takes,description
 pneumonie_grave,m12,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
 pneumonie_grave,m13,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
+pneumonie_grave,m17,,,{{name}} - {{dosage}} en intra-rectal - Répéter si nécessaire une fois
+pneumonie_grave_no_ref,m12_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+pneumonie_grave_no_ref,m13_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+pneumonie_grave_no_ref,m17,,,{{name}} - {{dosage}} en intra-rectal - Répéter si nécessaire une fois
 pneumonie,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 pneumonie,m2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 deshydratation_severe_pas_grave_perfusion,m20_1,1 heure,,{{name}} - {{dosage}} sur une durée de {{duration}}
