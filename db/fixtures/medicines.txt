@@ -74,6 +74,10 @@ Gentamicine (m13_1)
 mg
 1.5/kg
 
+Gentamicine (m13_2)
+mg
+5/kg
+
 Chloramphenicol Huileux (m14)
 mg
 100/kg
