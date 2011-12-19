@@ -71,5 +71,14 @@ pas_malnutrition,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner
 pas_malnutrition,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
 vih_symp_confirmee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 vih_symp_confirmee,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+vih_symp_confirmee,m25_1,,,Donner {{name}} - {{dosage}}
 vih_confirmee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 vih_confirmee,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+vih_confirmee,m25_1,,,Donner {{name}} - {{dosage}}
+vih_symp_probable,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+vih_symp_probable,m1_3,tous les jours,2 fois par jours,{{name}} - {{dosage}} par prise - {{takes}} - {{duration}} - ne pas arrêter sans avis médical
+vih_symp_probable,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+vih_symp_probable,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+vih_possible,m1_3,tous les jours,2 fois par jours,{{name}} - {{dosage}} par prise - {{takes}} - {{duration}} - ne pas arrêter sans avis médical
+vih_possible,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+vih_possible,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}

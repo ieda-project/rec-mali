@@ -150,6 +150,10 @@ Multivitamines (m25)
 comprimé
 1
 
+Multivitamines (m25_1)
+comprimé
+>=6m 1
+
 Sulfate de Zinc (m26)
 mg
 <6m 10
