@@ -58,7 +58,7 @@ Phénobartital (m11)
 mg
 15/kg
 
-Ampicilline pré référence (m12_1)
+Ampicilline pré référence (m12)
 mg
 25/kg
 
