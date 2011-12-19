@@ -30,7 +30,7 @@ paludisme_grave,m12,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distill
 paludisme_grave,m13_1,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
 paludisme_grave,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
 paludisme_grave,m14,,,"{{name}} - {{dosage}} (Répéter 1 fois au bout de 48h si fièvre persiste. Ne pas dépasser 3 g par prise. Réserver pour le traitement des méningites à méningocoques  pendant les épidémies)"
-paludisme_grave,m12_2,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+paludisme_grave,m12_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 paludisme_grave,m13_2,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 paludisme_grave,m1,5 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 paludisme_grave,m2,5 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}

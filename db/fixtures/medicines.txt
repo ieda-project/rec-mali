@@ -62,7 +62,7 @@ Ampicilline pré référence (m12)
 mg
 25/kg
 
-Ampicilline (m12_2)
+Ampicilline (m12_1)
 mg
 25/kg
 
