@@ -20,12 +20,10 @@
       - for c in Classification.find(@diagnostic.failed_classifications) do
         %li= c.name
 
-- for cl in @diagnostic.classifications.includes(:treatments) do
-  - next if cl.treatments.empty?
-  %section.treatment{:class => Classification::LEVELS[cl.level]}
-    %h2= cl.name
-    - for t in cl.treatments do
-      != t.html @diagnostic
+- for res in @diagnostic.results.includes(:classification, :treatment) do
+  %section.treatment{:class => Classification::LEVELS[res.classification.level]}
+    %h2= res.classification.name
+    != res.treatment.html @diagnostic
 
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit' } do |form|
   %input(type="hidden" name="step" value="final")/

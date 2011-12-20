@@ -24,11 +24,26 @@ class DiagnosticsController < ApplicationController
   end
 
   def wait
-    render layout: 'empty'
+    case @diagnostic.state
+      when 'opened'
+        see_other [:edit, @child, @diagnostic]
+      when 'filled'
+        render layout: 'empty'
+      else
+        see_other [:treatments, @child, @diagnostic]
+    end
   end
 
   def treatments
     back "Retour a l'evaluation", [ @child, @diagnostic ]
+    case @diagnostic.state
+      when 'opened'
+        see_other [@child, @diagnostic]
+      when 'filled'
+        see_other [:wait, @child, @diagnostic]
+      when 'calculated' 
+        render action: 'select_treatments'
+    end
   end
 
   def calculations
@@ -72,19 +87,22 @@ class DiagnosticsController < ApplicationController
     return(see_other([ @child, @diagnostic ])) if @diagnostic.author != current_user
 
     Diagnostic.transaction do
+      @diagnostic.sign_answers.process params[:diagnostic].delete(:sign_answers)
       @child.update_attributes params[:diagnostic].delete(:child)
-      (params[:diagnostic].delete(:sign_answers) || {}).each_value do |a|
-        @diagnostic.sign_answers.add(a)
-      end
-      final = (params[:step] == 'final')
-      if @diagnostic.update_attributes params[:diagnostic]
-        if final
-          see_other [ @child, @diagnostic ]
-        else
-          see_other [:wait, @child, @diagnostic]
+      @diagnostic.attributes = params[:diagnostic]
+      if @diagnostic.save
+        case @diagnostic.state
+          when 'filled'
+            see_other [ :wait, @child, @diagnostic ]
+          when 'calculated', 'treatments_selected'
+            see_other [ :treatments, @child, @diagnostic ]
+          when 'closed'
+            see_other [ @child, @diagnostic ]
         end
+      elsif @diagnostic.calculated? || @diagnostic.treatment_selected?
+        unprocessable action: :treatments
       else
-        unprocessable action: (final ? :treatments : :edit)
+        unprocessable action: :edit
       end
     end
   end

@@ -13,6 +13,7 @@ gem 'ziya'
 gem 'color'
 gem 'logging'
 gem 'paperclip'
+gem 'state_machine'
 
 group :development, :test, :production do
   gem 'thin'

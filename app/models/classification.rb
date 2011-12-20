@@ -28,8 +28,9 @@ class Classification < ActiveRecord::Base
 
     if diag.failed_classifications.present?
       diag.failed_classifications -= [id]
-      diag.save if diag.changed?
     end
+    diag.calculate
+    diag.save
   rescue => e
     diag.results.where(classification_id: self).destroy_all
     diag.update_attribute :failed_classifications, [*diag.failed_classifications].uniq

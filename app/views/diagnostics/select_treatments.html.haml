@@ -1,0 +1,27 @@
+- content_for :breadcrumbs do
+  %ul#breadcrumbs
+    %li= link_to "Nouvelle Recherche", children_path
+    %li= link_to @diagnostic.child.name, @diagnostic.child
+    %li= link_to "Evaluation", child_diagnostic_path(@diagnostic.child, @diagnostic)
+    %li Identification des traitements
+
+- unless @diagnostic.classifications.any?
+  - content_for :head do
+    %link{type:"application/json", rel:"calculations", href:calculations_child_diagnostic_path(@child, @diagnostic)}/
+
+= partial 'children/profile'
+
+%h2.em Choisir les traitements
+
+- form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic) do |f|
+  %section.select-treatments
+    - f.fields_for :results do |ff|
+      - cl = ff.object.classification
+      %div
+        %label= cl.name
+        = ff.select :treatment_id, cl.treatments.map { |i| [ i.name, i.id] }, include_blank: cl.treatments.size > 1
+    
+  %nav
+    - if Csps.point? && @diagnostic.author == current_user
+      = link_to "Modifier l'évaluation", edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit'
+    %button.validation(type="submit") Traitements

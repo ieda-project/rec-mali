@@ -2,6 +2,53 @@ class Diagnostic < ActiveRecord::Base
   include Csps::Exportable
   include Csps::Age
 
+  state_machine :state, initial: :opened do
+    # opened, filled, calculated, treatments_selected, closed
+    state :filled, :calculated, :treatments_selected, :closed do
+      validate do
+        validates_size_of :sign_answers, minimum: 1
+      end
+    end
+    state :calculated, :treatments_selected, :closed do
+      validate do
+        validates_size_of :results, minimum: 1
+      end
+    end
+    state :treatments_selected, :closed do
+      def treatments_required?
+        true
+      end
+    end
+    state :closed do
+    end
+
+    state :opened, :filled, :calculated do
+      def treatments_required?
+        false
+      end
+    end
+
+    event :fill do
+      transition any => :filled, if: ->(d) { d.sign_answers.any? }
+    end
+
+    event :calculate do
+      transition :filled => :calculated
+    end
+
+    event :select_treatments do
+      transition :calculated => :treatments_selected, if: ->(d) { d.results.where(treatment_id: nil).empty? }
+    end
+
+    event :close do
+      transition :treatments_selected => :closed
+    end
+
+    after_transition any => :filled do |diag|
+      diag.results.destroy_all
+    end
+  end
+
   serialize :failed_classifications
   globally_belongs_to :child
   globally_belongs_to :author, class_name: 'User'
@@ -17,20 +64,21 @@ class Diagnostic < ActiveRecord::Base
     #    short
     #end
   end
-  globally_has_many :sign_answers, include: :sign, order: 'signs.sequence',
-                    after_add: :clear_classifications,
-                    after_remove: :clear_classifications do
+  globally_has_many :sign_answers, include: :sign, order: 'signs.sequence' do
     def add data
       sign = data.delete(:sign) || Sign.find(data.delete(:sign_id)) rescue nil
       existing = detect { |i| i.sign_id == sign.id }
       if existing
-        existing.attributes = data
-        if existing.changed?
-          existing.save
-          proxy_owner.send :clear_classifications
-        end
+        existing.attributes = existing.attributes.merge(data)
+        existing.save if existing.changed?
       else
         (sign ? sign.build_answer(data) : SignAnswer.new(data)).tap { |sa| push sa }
+      end
+    end
+    def process data
+      if data.present?
+        data.each_value { |a| add a }
+        proxy_owner.fill
       end
     end
     def for illness
@@ -51,6 +99,13 @@ class Diagnostic < ActiveRecord::Base
   before_create do
     self.done_on ||= Time.now
     self.born_on ||= child.born_on if child
+    fill
+  end
+
+  before_save do
+    if state == 'calculated' && results.any? && results.all? { |r| r.treatment_id }
+      select_treatments
+    end
   end
 
   after_save do
@@ -69,6 +124,8 @@ class Diagnostic < ActiveRecord::Base
   validates_numericality_of :mac, only_integer: true, allow_blank: true
   validates_numericality_of :height, :weight, :temperature
   validate :validate_answers
+
+  accepts_nested_attributes_for :results
 
   def to_hash
     sign_answers.to_hash.tap do |hash|
@@ -170,10 +227,6 @@ class Diagnostic < ActiveRecord::Base
   end
 
   protected
-
-  def clear_classifications obj=nil
-    classifications.clear
-  end
 
   def validate_answers
     errors[:sign_answers] << :invalid if prebuild.sign_answers.reject(&:valid?).any?
