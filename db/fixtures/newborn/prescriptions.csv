@@ -1,9 +1,12 @@
 ## TREATMENT-MEDICINE NEWBORN
 ##treatment key,medicine key,duration,takes,description
-infection_grave,m12_1,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
-infection_grave,m13_1,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
+infection_grave,m12,,,{{name}} - {{dosage}}
+infection_grave,m13,,,{{name}} - {{dosage}}
 infection_grave,m11,,,{{name}} pré référence - {{dosage}} en prise unique
+infection_grave_no_ref,m12_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+infection_grave_no_ref,m13_2,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+infection_grave_no_ref,m11,,,{{name}} pré référence - {{dosage}} en prise unique
 infection_locale,m2,8 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 infection_locale,m4,8 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-maladie_grave,m12_1,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
-maladie_grave,m13_1,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
+maladie_grave,m12,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
+maladie_grave,m13,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)

@@ -1,7 +1,11 @@
 ## TREATMENT-MEDICINE CHILD
 ##treatment key,medicine key,duration,takes,description
-pneumonie_grave,m12_1,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
-pneumonie_grave,m13_1,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
+pneumonie_grave,m12,,,{{name}} - {{dosage}}
+pneumonie_grave,m13,,,{{name}} - {{dosage}}
+pneumonie_grave,m17,,,{{name}} - {{dosage}} en intra-rectal - Répéter si nécessaire une fois
+pneumonie_grave_no_ref,m12_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+pneumonie_grave_no_ref,m13_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+pneumonie_grave_no_ref,m17,,,{{name}} - {{dosage}} en intra-rectal - Répéter si nécessaire une fois
 pneumonie,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 pneumonie,m2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 deshydratation_severe_pas_grave_perfusion,m20_1,1 heure,,{{name}} - {{dosage}} sur une durée de {{duration}}
@@ -26,12 +30,12 @@ dysenterie,m26,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} p
 diahree_persistante,m25,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 diahree_persistante,m26,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 paludisme_grave,m15_1,,,{{name}} - {{dosage}} (en IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
-paludisme_grave,m12_1,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
-paludisme_grave,m13_1,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
+paludisme_grave,m12,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
+paludisme_grave,m13,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
 paludisme_grave,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
 paludisme_grave,m14,,,"{{name}} - {{dosage}} (Répéter 1 fois au bout de 48h si fièvre persiste. Ne pas dépasser 3 g par prise. Réserver pour le traitement des méningites à méningocoques  pendant les épidémies)"
-paludisme_grave,m12_2,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-paludisme_grave,m13_2,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+paludisme_grave,m12_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+paludisme_grave,m13_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 paludisme_grave,m1,5 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 paludisme_grave,m2,5 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 paludisme_simple,m18,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (à partir de 25kg 3 comprimés par prise)
@@ -49,8 +53,8 @@ rougeole,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} 
 rougeole,m2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 antecedent_rougeole,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 antecedent_rougeole,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}} (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
-mastoidite,m12_1,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
-mastoidite,m13_1,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
+mastoidite,m12,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
+mastoidite,m13,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
 mastoidite,m6,pour calmer la douleur,dose unique,{{name}} pré référence - {{dosage}} {{takes}}
 infection_aigue_oreille,m1,5 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 infection_aigue_oreille,m6,pour calmer la douleur,dose unique,{{name}} pré référence - {{dosage}} {{takes}}
@@ -71,5 +75,14 @@ pas_malnutrition,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner
 pas_malnutrition,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
 vih_symp_confirmee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 vih_symp_confirmee,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+vih_symp_confirmee,m25_1,,,Donner {{name}} - {{dosage}}
 vih_confirmee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 vih_confirmee,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+vih_confirmee,m25_1,,,Donner {{name}} - {{dosage}}
+vih_symp_probable,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+vih_symp_probable,m1_3,tous les jours,2 fois par jours,{{name}} - {{dosage}} par prise - {{takes}} - {{duration}} - ne pas arrêter sans avis médical
+vih_symp_probable,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+vih_symp_probable,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+vih_possible,m1_3,tous les jours,2 fois par jours,{{name}} - {{dosage}} par prise - {{takes}} - {{duration}} - ne pas arrêter sans avis médical
+vih_possible,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+vih_possible,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}

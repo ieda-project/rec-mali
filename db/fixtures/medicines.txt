@@ -58,21 +58,25 @@ Phénobartital (m11)
 mg
 15/kg
 
-Ampicilline pré référence (m12_1)
+Ampicilline pré référence (m12)
 mg
 25/kg
 
-Ampicilline (m12_2)
+Ampicilline (m12_1)
 mg
 25/kg
 
-Gentamicine pré référence (m13_1)
+Gentamicine pré référence (m13)
 mg
-7.5/kg
+2.5/kg
+
+Gentamicine (m13_1)
+mg
+1.5/kg
 
 Gentamicine (m13_2)
 mg
-7.5/kg
+5/kg
 
 Chloramphenicol Huileux (m14)
 mg
@@ -149,6 +153,10 @@ ml
 Multivitamines (m25)
 comprimé
 1
+
+Multivitamines (m25_1)
+comprimé
+>=6m 1
 
 Sulfate de Zinc (m26)
 mg
