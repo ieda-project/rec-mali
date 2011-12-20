@@ -75,8 +75,11 @@ div.query-graph
   position: fixed
   -webkit-box-shadow: 0 1px 0.5em rgba(0, 0, 0, 0.6)
   -webkit-border-radius: 3px
-  padding: 25px 10px 5px 10px
-  overflow: hidden
+  padding: 0
+  max-height: 80%
+  &>.content
+    overflow: auto
+    padding: 25px 10px 5px 10px
   .close-transient
     position: absolute
     top: 0px
@@ -1236,16 +1239,6 @@ section.resume .measurements table.indices
 
 div.help
   display: none
-  position: absolute
-  background-color: white
-  -webkit-border-radius: 8px
-  padding: 8px
-  font-size: 80%
-  width: 30%
-  font-weight: normal
-  top: 0
-  left: 0
-  z-index: 4000
 
 p.age-group-warning
   color: red

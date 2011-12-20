@@ -74,21 +74,28 @@ transient = {
   div: null,
   open: function(what, style) {
     if (!this.div) {
-      this.div = new Element('div', { id: 'transient' }).inject(document.body) };
-    this.div.innerHTML = '';
+      this.div = new Element('div', { id: 'transient' }).inject(document.body)
+      this.content = new Element('div', { class: 'content' }).inject(this.div)
+      this.close_button = new Element('div', {'class': 'close-transient', 'text': 'X'});
+      this.close_button.addEvent('click', function(e) { this.close() }.bind(this));
+      this.close_button.inject(this.div) };
+
     this.div.setStyles({
-      width: (style && style.width ? style.width : '400')+'px',
+      display: 'block',
+      width: ((style && style.width) ? style.width : 'auto'),
       visibility: 'hidden' });
+    this.div.addEvent('mousewheel', function(e) { e.stopPropagation() });
 
     if (typeof(what) == 'object') {
       if (!what.each) what = [what];
-      what.each(function(i) { this.div.adopt(i) }.bind(this));
-    } else this.div.innerHTML = what;
-    this.div.updated();
-
-    this.close_button = new Element('div', {'class': 'close-transient', 'text': 'X'});
-    this.close_button.addEvent('click', function(e) { this.close() }.bind(this));
-    this.close_button.inject(this.div);
+      what.each(function(i) { this.content.adopt(i) }.bind(this));
+    } else this.content.innerHTML = what;
+    this.content.updated();
+    this.content.setStyle(
+      'height',
+      (this.div.getSize().y -
+       this.content.getStyle('padding-bottom').toInt() -
+       this.content.getStyle('padding-top').toInt()) + 'px');
 
     var size = this.div.getSize();
     this.div.setStyles({
@@ -96,8 +103,8 @@ transient = {
       top: ((window.innerHeight - size.y) / 2) + 'px',
       visibility: 'visible' }) },
   close: function() {
-    this.div.dispose();
-    this.div = false },
+    this.content.innerHTML = '';
+    this.div.setStyle('display', 'none') },
   ajax: function(url) {
     new Request.HTML({
       url: url,
@@ -106,32 +113,10 @@ transient = {
 editing = false;
 
 window.addEvent('domready', function() { document.body.updated() });
-window.addEvent('load', function() {
-  document.getElements('div.help').each(function (div) {
-    var img = null;
-    div.setStyle('display', 'block');
-    div.getElements('img').each(function(i) {
-      if (!img || img.getSize().x < i.getSize().x) img = i; });
-    if (img && div.getElement('p').getSize().x < img.getSize().x) {
-      div.setStyle('width', img.getSize().x+'px') };
-    div.setStyle('display', 'none') })});
 window.addEvent('domready', function() {
 
-  document.getElements('a.help').addEvents({
-    mouseover: function() {
-      var help = $(this.get('href').substr(1));
-      help.setStyle('display', 'block');
-      var pos = this.getPosition(),
-          size = this.getSize(),
-          left = [ pos.x, window.getSize().x - help.getSize().x - 20 ].sort()[0];
-      help.setStyles({
-        left: left+'px',
-        top: (pos.y + size.y + 20)+'px' }) },
-    mouseout: function() {
-      $(this.get('href').substr(1)).setStyles({
-        display: 'none',
-        top: 0, left: 0 }) },
-    click: function() { return false }});
+  document.getElements('a.help').addEvent('click', function() {
+    transient.open($(this.get('href').substr(1)).get('html'), { width: '650px' }) });
 
   var link, next
   if (link = $E('link.auto-post')) {
@@ -412,14 +397,14 @@ window.addEvent('domready', function() {
             li.removeClass('alert').removeClass('warning').addClass('disabled')
             li.getElement('.value').set('text', '-') }) };
 
-        var aa_change = false;
+        var aa_illnesses = {};
         for (code in auto_answer) {
           var res = auto_answer[code](form.tree), td = $(code), s = code.split('.');
           if (!td) continue;
           if (td.auto) {
             try { if (res == form.tree[s[0]][s[1]]) continue } catch(e) {}
           } else td.auto = true;
-          aa_change = true;
+          aa_illnesses[s[0]] = true;
           if (res != null) {
             if (typeof(res) == 'boolean') {
               var dis = td.getElement('.switch').removeClass('disabled')
@@ -439,7 +424,8 @@ window.addEvent('domready', function() {
               i.sel.fireEvent('changed') });
             td.getElements('input[type=radio]').set('disabled', false).set('checked', false);
             td.getElements('input[type=hidden]').dispose(); }}
-        if (aa_change) illnesses_updated() }).periodical(150) })();
+        ilnesses().each(function(i) {
+          if (aa_illnesses[i.get('data-key')]) validate_illness(i, true) })}).periodical(150) })();
 
     head_next.addEvent('click', function() {
       if (this.hasClass('disabled'))
