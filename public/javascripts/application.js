@@ -140,6 +140,7 @@ window.addEvent('domready', function() {
     form.tree = { enfant: {} };
     function run_all_deps(validate) { return };
     function illnesses() { return form.getElements('section.illness') };
+    illnesses().each(function (i) { i.protect = !!i.getElement('li.true') });
 
     (function(age) {
       if (age) form.tree.enfant = {
@@ -211,10 +212,14 @@ window.addEvent('domready', function() {
       alert('Veuillez répondre à toutes les questions avant de poursuivre') };
     function invalidate_illness(illness, close) {
       illness.valid = false;
+      console.log('invalidating '+illness.get('data-key'));
       var h2 = illness.getElement('h2');
       h2.getElements('img, ul').dispose();
       if (close) close_illness() };
     function validate_illness(illness, calculate) {
+      if (illness.protect) {
+        (function () { illness.protect = false }).delay(10);
+        return };
       if (calculate != false) invalidate_illness(illness);
       illness.valid = illness.fields.every(function(i) {
         if (i.disabled || i.get('type') == 'hidden') {
@@ -236,6 +241,7 @@ window.addEvent('domready', function() {
 
         keys.each(function(key) {
           for (var subkey in form.tree[key]) data[key+'.'+subkey] = form.tree[key][subkey] });
+        console.log('req for '+illness.get('data-key'));
         new Request.JSON({
           url: illness.get('data-classify-href'),
           onSuccess: function(json) {
@@ -298,7 +304,7 @@ window.addEvent('domready', function() {
             gender: gender ? (gender.selectedIndex == 0) : $E('.profile-child').get('data-gender') })
         } else return null };
 
-      (function() {
+      var f = function() {
         var was_valid = measurements_valid, changes = false;
         measurements_valid = true;
         head_selects.each(function(i) {
@@ -424,8 +430,9 @@ window.addEvent('domready', function() {
               i.sel.fireEvent('changed') });
             td.getElements('input[type=radio]').set('disabled', false).set('checked', false);
             td.getElements('input[type=hidden]').dispose(); }}
-        ilnesses().each(function(i) {
-          if (aa_illnesses[i.get('data-key')]) validate_illness(i, true) })}).periodical(150) })();
+        illnesses().each(function(i) {
+          if (aa_illnesses[i.get('data-key')]) validate_illness(i, true) })};
+      f(); f.periodical(150) })();
 
     head_next.addEvent('click', function() {
       if (this.hasClass('disabled'))
@@ -506,7 +513,8 @@ window.addEvent('domready', function() {
           i.getAllNext('section.illness').each(function(j) { invalidate_illness(j) })
           validate_illness(i) });
         validate_illness(i, false) })};
-  illnesses_updated() })});
+  illnesses_updated();
+  })});
 
 Element.behaviour(function() {
   function pending() {
