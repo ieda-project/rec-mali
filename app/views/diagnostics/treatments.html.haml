@@ -26,8 +26,6 @@
     != res.treatment.html @diagnostic
 
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit' } do |form|
-  %input(type="hidden" name="step" value="final")/
-
   - if @diagnostic.author == current_user
     %section.treatment
       %h2 Autres observations
@@ -41,6 +39,7 @@
     - if Csps.point? && @diagnostic.author == current_user
       = link_to "Modifier l'évaluation", edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit'
     - if @diagnostic.author == current_user
+      %input{type: 'hidden', name: 'diagnostic[state]', value:'closed'}/
       %button.validation(type="submit") Terminer l'évaluation
     - else
       = link_to "Terminer l'évaluation", [ @child, @diagnostic ], :class => 'validation'

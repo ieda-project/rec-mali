@@ -6,12 +6,15 @@ class CreateResults < ActiveRecord::Migration
   class Result < ActiveRecord::Base
     set_table_name 'results'
     belongs_to :classification, primary_key: :global_id, foreign_key: :classification_global_id
-    belongs_to :diagnostic, primary_key: :global_id, foreign_key: :diagnostic_global_id
+    belongs_to :diagnostic, primary_key: :global_id, foreign_key: :diagnostic_global_id, class_name: 'CreateResults::Diagnostic'
   end
 
   class Diagnostic < ActiveRecord::Base
     set_table_name 'diagnostics'
     has_and_belongs_to_many :classifications, join_table: 'classifications_diagnostics'
+    def treatments_required?
+      false
+    end
   end
 
   # --------------
@@ -27,12 +30,14 @@ class CreateResults < ActiveRecord::Migration
     add_index :results, :diagnostic_global_id
     add_index :results, :classification_id
 
+    ::Result.send :globally_belongs_to, :diagnostic, :class_name => 'CreateResults::Diagnostic'
     Diagnostic.includes(:classifications).find_each do |diag|
       diag.classifications.each do |clx|
         # Keep the double colon, here we need the Result class from the app!
-        ::Result.create!(diagnostic_global_id: diag.global_id, classification: clx)
+        ::Result.create!(diagnostic: diag, classification: clx)
       end
     end
+    ::Result.send :globally_belongs_to, :diagnostic
   end
 
   def self.down

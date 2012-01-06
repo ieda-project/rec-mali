@@ -74,7 +74,8 @@ transient = {
   div: null,
   open: function(what, style) {
     if (!this.div) {
-      this.div = new Element('div', { id: 'transient' }).inject(document.body)
+      this.div = new Element('div', { id: 'transient' }).inject(document.body);
+      this.div.addEvent('mousewheel', function(e) { e.stopPropagation() });
       this.content = new Element('div', { class: 'content' }).inject(this.div)
       this.close_button = new Element('div', {'class': 'close-transient', 'text': 'X'});
       this.close_button.addEvent('click', function(e) { this.close() }.bind(this));
@@ -82,18 +83,23 @@ transient = {
 
     this.div.setStyles({
       display: 'block',
+      height: 'auto',
       width: ((style && style.width) ? style.width : 'auto'),
       visibility: 'hidden' });
-    this.div.addEvent('mousewheel', function(e) { e.stopPropagation() });
+    this.content.setStyle('height', 'auto');
 
     if (typeof(what) == 'object') {
       if (!what.each) what = [what];
       what.each(function(i) { this.content.adopt(i) }.bind(this));
     } else this.content.innerHTML = what;
     this.content.updated();
+    var sh = this.content.getScrollSize().y;
+    document.title = sh;
+    if (sh > 300) sh = 300;
+    this.div.setStyle('height', sh+'px');
     this.content.setStyle(
       'height',
-      (this.div.getSize().y -
+      (sh -
        this.content.getStyle('padding-bottom').toInt() -
        this.content.getStyle('padding-top').toInt()) + 'px');
 

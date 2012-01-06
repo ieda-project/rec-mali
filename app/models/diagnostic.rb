@@ -37,7 +37,7 @@ class Diagnostic < ActiveRecord::Base
     end
 
     event :select_treatments do
-      transition :calculated => :treatments_selected, if: ->(d) { d.results.where(treatment_id: nil).empty? }
+      transition :calculated => :treatments_selected, if: ->(d) { d.results.all? &:treatment_id }
     end
 
     event :close do
@@ -99,12 +99,12 @@ class Diagnostic < ActiveRecord::Base
   before_create do
     self.done_on ||= Time.now
     self.born_on ||= child.born_on if child
-    fill
+    fill false
   end
 
   before_save do
     if state == 'calculated' && results.any? && results.all? { |r| r.treatment_id }
-      select_treatments
+      select_treatments false
     end
   end
 

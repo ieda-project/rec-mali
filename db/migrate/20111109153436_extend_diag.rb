@@ -1,4 +1,9 @@
 class ExtendDiag < ActiveRecord::Migration
+  class Diagnostic < ActiveRecord::Base
+    include Csps::Exportable
+    globally_belongs_to :child
+  end
+
   def self.up
     add_column :diagnostics, :temperature, :float
     add_column :diagnostics, :born_on, :date

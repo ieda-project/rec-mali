@@ -73,6 +73,7 @@ class DiagnosticsController < ApplicationController
     answers.each { |a| @diagnostic.sign_answers.add(a) }
 
     if @diagnostic.save
+      puts 'diag saved'
       see_other [:wait, @child, @diagnostic]
     else
       unprocessable action: :new
@@ -100,7 +101,7 @@ class DiagnosticsController < ApplicationController
             see_other [ @child, @diagnostic ]
         end
       elsif @diagnostic.calculated? || @diagnostic.treatment_selected?
-        unprocessable action: :treatments
+        treatments || unprocessable(action: :treatments)
       else
         unprocessable action: :edit
       end
