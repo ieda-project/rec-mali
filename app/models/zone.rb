@@ -44,6 +44,13 @@ class Zone < ActiveRecord::Base
 
   def option_title; name; end
   def folder_name; name.gsub(' ', '_'); end
+  alias file_name folder_name
+
+  def hostname; name.gsub(' ', '-').downcase; end
+
+  def upchain
+    parent ? [ parent, *parent.upchain ] : []
+  end
 
   def ever_imported?; last_import_at?; end
   def ever_exported?; last_export_at?; end
