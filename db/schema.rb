@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(:version => 20111220172719) do
     t.string   "key"
     t.string   "question"
     t.string   "values"
-    t.string   "dep"
+    t.text     "dep"
     t.integer  "sequence"
     t.integer  "min_value"
     t.integer  "max_value"
