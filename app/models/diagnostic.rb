@@ -37,7 +37,7 @@ class Diagnostic < ActiveRecord::Base
     end
 
     event :select_treatments do
-      transition :calculated => :treatments_selected, if: ->(d) { d.results.all? &:treatment_id }
+      transition :calculated => :treatments_selected, if: ->(d) { d.results.all? &:finalized? }
     end
 
     event :close do
@@ -103,7 +103,7 @@ class Diagnostic < ActiveRecord::Base
   end
 
   before_save do
-    if state == 'calculated' && results.any? && results.all? { |r| r.treatment_id }
+    if state == 'calculated' && results.any? && results.all? { |r| r.finalized? }
       select_treatments false
     end
   end

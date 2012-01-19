@@ -20,7 +20,7 @@
       - for c in Classification.find(@diagnostic.failed_classifications) do
         %li= c.name
 
-- for res in @diagnostic.results.includes(:classification, :treatment) do
+- for res in @diagnostic.results.with_treatment do
   %section.treatment{:class => Classification::LEVELS[res.classification.level]}
     %h2= res.classification.name
     != res.treatment.html @diagnostic

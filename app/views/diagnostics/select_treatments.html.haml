@@ -16,6 +16,7 @@
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic) do |f|
   %section.select-treatments
     - f.fields_for :results do |ff|
+      - next if ff.object.classification.treatments.empty?
       - cl = ff.object.classification
       %div
         %label= cl.name
