@@ -13,3 +13,5 @@ vendor/bundler
 .rvmrc
 stick/
 .*.swp
+app.pid
+config/gpg
