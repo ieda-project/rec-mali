@@ -60,11 +60,11 @@ mg
 
 Ampicilline pré référence (m12)
 mg
-25/kg
+50/kg
 
 Ampicilline (m12_1)
 mg
-25/kg
+50/kg
 
 Gentamicine pré référence (m13)
 mg
@@ -76,7 +76,7 @@ mg
 
 Gentamicine (m13_2)
 mg
-5/kg
+2.5/kg
 
 Chloramphenicol Huileux (m14)
 mg
