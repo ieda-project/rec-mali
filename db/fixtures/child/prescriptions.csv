@@ -30,14 +30,17 @@ dysenterie,m26,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} p
 diahree_persistante,m25,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 diahree_persistante,m26,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 paludisme_grave,m15_1,,,{{name}} - {{dosage}} (en IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
-paludisme_grave,m12,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
-paludisme_grave,m13,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
+paludisme_grave,m12,,,{{name}} - {{dosage}}
+paludisme_grave,m13,,,{{name}} - {{dosage}}
 paludisme_grave,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
-paludisme_grave,m14,,,"{{name}} - {{dosage}} (Répéter 1 fois au bout de 48h si fièvre persiste. Ne pas dépasser 3 g par prise. Réserver pour le traitement des méningites à méningocoques  pendant les épidémies)"
-paludisme_grave,m12_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-paludisme_grave,m13_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-paludisme_grave,m1,5 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-paludisme_grave,m2,5 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+paludisme_grave,m17,,,{{name}} - {{dosage}} en intra-rectal - Répéter si nécessaire une fois
+paludisme_grave,m14,,,{{name}} - {{dosage}} (Répéter 1 fois au bout de 48h si fièvre persiste. Ne pas dépasser 3 g par prise. Réserver pour le traitement des méningites à méningocoques  pendant les épidémies)
+paludisme_grave_no_ref,m15_1,,,{{name}} - {{dosage}} (en IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
+paludisme_grave_no_ref,m15_2,2 à 3 jours,2 fois par jour (espacé de 12h), {{name}} (12h après la dose de charge) - {{dosage}} - {{takes}} pendant {{duration}} (En IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
+paludisme_grave_no_ref,m12_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+paludisme_grave_no_ref,m13_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+paludisme_grave_no_ref,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
+paludisme_grave_no_ref,m14,,,{{name}} - {{dosage}} (Répéter 1 fois au bout de 48h si fièvre persiste. Ne pas dépasser 3 g par prise. Réserver pour le traitement des méningites à méningocoques  pendant les épidémies)
 paludisme_simple,m18,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (à partir de 25kg 3 comprimés par prise)
 paludisme_simple,m19,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 paludisme_simple,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
