@@ -412,11 +412,13 @@ window.addEvent('domready', function() {
         for (code in auto_answer) {
           var res = auto_answer[code](form.tree), td = $(code), s = code.split('.');
           if (!td) continue;
+          if (!form.tree[s[0]]) form.tree[s[0]] = {};
           if (td.auto) {
             try { if (res == form.tree[s[0]][s[1]]) continue } catch(e) {}
           } else td.auto = true;
           aa_illnesses[s[0]] = true;
           if (res != null) {
+            form.tree[s[0]][s[1]] = res;
             if (typeof(res) == 'boolean') {
               var dis = td.getElement('.switch').removeClass('disabled')
               td.getElement(res ? '.yes' : '.no').fireEvent('click');
@@ -429,6 +431,7 @@ window.addEvent('domready', function() {
               hidden.value = res;
             }
           } else {
+            form.tree[s[0]][s[1]] = null;
             td.getElements('.switch').removeClass('disabled').each(function (i) {
               i.sel.selectedIndex = 0;
               i.removeClass('yes').removeClass('no');
