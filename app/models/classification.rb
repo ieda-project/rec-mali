@@ -21,10 +21,7 @@ class Classification < ActiveRecord::Base
 
   def run diag, data={}
     if calculate(data || diag.to_hash)
-      unless diag.classifications.include?(self)
-        res = results.new(diagnostic: diag) 
-        res.save!
-      end
+      results.create!(diagnostic: diag) unless diag.classifications.include?(self)
     else
       diag.results.where(classification_id: id).destroy_all
     end
