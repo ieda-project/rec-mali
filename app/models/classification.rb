@@ -16,11 +16,15 @@ class Classification < ActiveRecord::Base
   def self.run diag
     data = diag.to_hash
     for_child(diag).each { |i| i.run diag, data }
+    diag.finish_calculations
   end
 
   def run diag, data={}
     if calculate(data || diag.to_hash)
-      results.create!(diagnostic: diag) unless diag.classifications.include?(self)
+      unless diag.classifications.include?(self)
+        res = results.new(diagnostic: diag) 
+        res.save!
+      end
     else
       diag.results.where(classification_id: id).destroy_all
     end
@@ -29,7 +33,6 @@ class Classification < ActiveRecord::Base
     if diag.failed_classifications.present?
       diag.failed_classifications -= [id]
     end
-    diag.calculate
     diag.save
   rescue => e
     diag.results.where(classification_id: self).destroy_all

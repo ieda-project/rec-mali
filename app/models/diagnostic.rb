@@ -32,7 +32,8 @@ class Diagnostic < ActiveRecord::Base
       transition any => :filled, if: ->(d) { d.sign_answers.any? }
     end
 
-    event :calculate do
+    event :finish_calculations do
+      transition :filled => :treatments_selected, if: ->(d) { d.results.all? &:finalized? }
       transition :filled => :calculated
     end
 
@@ -100,12 +101,6 @@ class Diagnostic < ActiveRecord::Base
     self.done_on ||= Time.now
     self.born_on ||= child.born_on if child
     fill false
-  end
-
-  before_save do
-    if state == 'calculated' && results.any? && results.all? { |r| r.finalized? }
-      select_treatments false
-    end
   end
 
   after_save do

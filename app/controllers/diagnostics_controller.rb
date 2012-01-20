@@ -95,7 +95,10 @@ class DiagnosticsController < ApplicationController
         case @diagnostic.state
           when 'filled'
             see_other [ :wait, @child, @diagnostic ]
-          when 'calculated', 'treatments_selected'
+          when 'calculated'
+            @diagnostic.select_treatments
+            see_other [ :treatments, @child, @diagnostic ]
+          when 'treatments_selected'
             see_other [ :treatments, @child, @diagnostic ]
           when 'closed'
             see_other [ @child, @diagnostic ]

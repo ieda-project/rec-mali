@@ -4,13 +4,17 @@ class Result < ActiveRecord::Base
   belongs_to :classification
   belongs_to :treatment
 
-  validates_presence_of :treatment, if: ->(r) { r.diagnostic.treatments_required? }
+  validates_presence_of :treatment, if: ->(r) { r.diagnostic.treatments_required? && r.can_have_treatment? }
 
   scope :with_treatment,
     where('treatment_id IS NOT NULL').
     includes(:classification, :treatment)
 
   def finalized?
-    treatment.present? || classification.treatments.empty?
+    treatment.present? || !can_have_treatment?
+  end
+
+  def can_have_treatment?
+    classification.treatments.any?
   end
 end
