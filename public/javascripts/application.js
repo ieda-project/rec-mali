@@ -218,12 +218,12 @@ window.addEvent('domready', function() {
       alert('Veuillez répondre à toutes les questions avant de poursuivre') };
     function invalidate_illness(illness, close) {
       illness.valid = false;
-      console.log('invalidating '+illness.get('data-key'));
       var h2 = illness.getElement('h2');
       h2.getElements('img, ul').dispose();
       if (close) close_illness() };
     function validate_illness(illness, calculate) {
       if (illness.protect) {
+        illness.valid = true;
         (function () { illness.protect = false }).delay(10);
         return };
       if (calculate != false) invalidate_illness(illness);
@@ -247,7 +247,6 @@ window.addEvent('domready', function() {
 
         keys.each(function(key) {
           for (var subkey in form.tree[key]) data[key+'.'+subkey] = form.tree[key][subkey] });
-        console.log('req for '+illness.get('data-key'));
         new Request.JSON({
           url: illness.get('data-classify-href'),
           onSuccess: function(json) {
@@ -413,11 +412,13 @@ window.addEvent('domready', function() {
         for (code in auto_answer) {
           var res = auto_answer[code](form.tree), td = $(code), s = code.split('.');
           if (!td) continue;
+          if (!form.tree[s[0]]) form.tree[s[0]] = {};
           if (td.auto) {
             try { if (res == form.tree[s[0]][s[1]]) continue } catch(e) {}
           } else td.auto = true;
           aa_illnesses[s[0]] = true;
           if (res != null) {
+            form.tree[s[0]][s[1]] = res;
             if (typeof(res) == 'boolean') {
               var dis = td.getElement('.switch').removeClass('disabled')
               td.getElement(res ? '.yes' : '.no').fireEvent('click');
@@ -430,6 +431,7 @@ window.addEvent('domready', function() {
               hidden.value = res;
             }
           } else {
+            form.tree[s[0]][s[1]] = null;
             td.getElements('.switch').removeClass('disabled').each(function (i) {
               i.sel.selectedIndex = 0;
               i.removeClass('yes').removeClass('no');
