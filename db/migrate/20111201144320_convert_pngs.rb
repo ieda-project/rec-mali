@@ -2,10 +2,12 @@ class ConvertPngs < ActiveRecord::Migration
   def self.up
     Child.transaction do
       begin
-        File.popen("find #{Rails.root}/public/repo/ -name '*_original.png'", 'r') do |pipe|
-          pipe.each_line do |png|
-            png.chomp!
-            `convert -quality 85 #{png} #{png.sub(/_original\.png$/, '.jpg')}`
+        if File.directory? "#{Rails.root}/public/repo"
+          File.popen("find #{Rails.root}/public/repo/ -name '*_original.png'", 'r') do |pipe|
+            pipe.each_line do |png|
+              png.chomp!
+              `convert -quality 85 #{png} #{png.sub(/_original\.png$/, '.jpg')}`
+            end
           end
         end
 
@@ -16,11 +18,15 @@ class ConvertPngs < ActiveRecord::Migration
           child.save!
         end
       rescue
-        system "find #{Rails.root}/public/repo/ -name '*.jpg' -exec rm -f {} +"
+        if File.directory? "#{Rails.root}/public/repo"
+          system "find #{Rails.root}/public/repo/ -name '*.jpg' -exec rm -f {} +"
+        end
         raise
       end
     end
-    system "find #{Rails.root}/public/repo/ -name '*.png' -exec rm -f {} +"
+    if File.directory? "#{Rails.root}/public/repo"
+      system "find #{Rails.root}/public/repo/ -name '*.png' -exec rm -f {} +"
+    end
   end
 
   def self.down

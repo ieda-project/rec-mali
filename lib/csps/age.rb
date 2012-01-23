@@ -9,6 +9,12 @@ module Csps
       GROUPS.index key
     end
 
+    included do
+      before_save do
+        self.saved_age_group = age_group if respond_to? :saved_age_group
+      end
+    end
+
     module ClassMethods
       def age_group born_on
         new(born_on: born_on).age_group

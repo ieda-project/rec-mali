@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20111220172719) do
     t.datetime "updated_at"
     t.integer  "zone_id"
     t.string   "global_id"
+    t.integer  "saved_age_group"
     t.float    "temperature"
     t.date     "born_on"
     t.string   "state"

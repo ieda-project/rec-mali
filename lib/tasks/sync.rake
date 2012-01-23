@@ -188,16 +188,16 @@ namespace :sync do
     dir = "#{dir}/#{Zone.csps.folder_name}"
     FileUtils.mkdir_p dir
 
-    for ref in Diagnostic.select('DISTINCT type, age_group') do
+    for ref in Diagnostic.select('DISTINCT type, saved_age_group') do
       type = ref.type.nil? ? 'base' : ref.type.sub(/Diagnostic$/, '').underscore
-      File.open("#{dir}/#{type}_#{ref.age_group_key}.spss", 'w') do |out|
+      File.open("#{dir}/#{type}_#{Csps::Age[ref.saved_age_group]}.spss", 'w') do |out|
         children = if ref.type
           Child.where(
-            'children.global_id IN (SELECT child_global_id FROM diagnostics WHERE type=? AND age_group=?)',
+            'children.global_id IN (SELECT child_global_id FROM diagnostics WHERE type=? AND saved_age_group=?)',
             ref.type, ref.age_group)
         else
           Child.where(
-            'children.global_id IN (SELECT child_global_id FROM diagnostics WHERE type IS NULL AND age_group=?)',
+            'children.global_id IN (SELECT child_global_id FROM diagnostics WHERE type IS NULL AND saved_age_group=?)',
             ref.age_group)
         end
         children = children.includes(diagnostics: { sign_answers: :sign }) #.order('signs.id') is worth nothing
