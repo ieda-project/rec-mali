@@ -22,7 +22,7 @@
 
 - for res in @diagnostic.results.with_treatment do
   %section.treatment{:class => Classification::LEVELS[res.classification.level]}
-    %h2= res.classification.name
+    %h2= res.treatment.name
     != res.treatment.html @diagnostic
 
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit' } do |form|
