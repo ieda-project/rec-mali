@@ -33,9 +33,9 @@ namespace :sync do
         b.close_write
       end
 
-      puts "Exporting key for signing"
-      FileUtils.mkdir_p remote('sign')
-      `#{gpg} --armor --export #{Zone.csps.name} > #{remote}/sign/#{Zone.csps.name}`
+      puts "Exporting key"
+      FileUtils.mkdir_p remote('keys')
+      `#{gpg} --armor --export #{Zone.csps.name} > #{remote}/keys/#{Zone.csps.name}`
     end
 
     # Import ALL the keys!
@@ -45,15 +45,8 @@ namespace :sync do
     end
 
     if Zone.csps.root?
-      # Sign ALL the keys!
-      Dir.glob("#{remote}/sign/*") do |path|
-        n = File.basename path
-        `#{gpg} --import #{path}`
-        `#{gpg} --sign-key #{n}`
-        FileUtils.rm_f path if $?.success?
-      end
-
-      # Now export ALL the keys!
+      # Export ALL the keys!
+      puts "Exporting keys"
       `#{gpg} -k --with-colons`.each_line do |line|
         line = line.split ':'
         next unless line[0] == 'pub'
