@@ -80,22 +80,25 @@ transient = {
       this.close_button = new Element('div', {'class': 'close-transient', 'text': 'X'});
       this.close_button.addEvent('click', function(e) { this.close() }.bind(this));
       this.close_button.inject(this.div) };
+    this.div.set('class', style.class);
+    delete style.class;
 
     this.div.setStyles({
       display: 'block',
       height: 'auto',
-      width: ((style && style.width) ? style.width : 'auto'),
+      width: ((style && style.width) ?
+        (style.width + this.content.getStyle('padding-left').toInt() + this.content.getStyle('padding-right').toInt()) + 'px' :
+        'auto'),
       visibility: 'hidden' });
-    this.content.setStyle('height', 'auto');
+    this.content.setStyle('height', ((style && style.height) ? style.height : 'auto'));
 
     if (typeof(what) == 'object') {
       if (!what.each) what = [what];
       what.each(function(i) { this.content.adopt(i) }.bind(this));
     } else this.content.innerHTML = what;
     this.content.updated();
-    var sh = this.content.getScrollSize().y;
-    document.title = sh;
-    if (sh > 300) sh = 300;
+    var sh = this.content.getScrollSize().y + this.content.getStyle('padding-bottom').toInt();
+    if (sh > 400) sh = 400;
     this.div.setStyle('height', sh+'px');
     this.content.setStyle(
       'height',
@@ -122,7 +125,7 @@ window.addEvent('domready', function() { document.body.updated() });
 window.addEvent('domready', function() {
 
   document.getElements('a.help').addEvent('click', function() {
-    transient.open($(this.get('href').substr(1)).get('html'), { width: '650px' }) });
+    transient.open($(this.get('href').substr(1)).get('html'), { width: '650px', class: 'treatment-help' }) });
 
   var link, next
   if (link = $E('link.auto-post')) {
@@ -585,7 +588,7 @@ Element.behaviour(function() {
       photo_saved = function(uri) {
         self.getElement('img').src = uri;
         transient.close() };
-      transient.open(obj, { width: 340 }) }});
+      transient.open(obj, { width: 340, height: 380 }) }});
   
   this.getElements('.ratios li').addEvent('click', function(e) {
     if (this.hasClass('disabled'))
