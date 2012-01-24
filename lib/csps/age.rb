@@ -13,6 +13,9 @@ module Csps
       before_save do
         self.saved_age_group = age_group if respond_to? :saved_age_group
       end
+      validate do
+        errors.add :born_on, :invalid if born_on > Date.today
+      end
     end
 
     module ClassMethods

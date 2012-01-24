@@ -165,8 +165,9 @@ window.addEvent('domready', function() {
         $$('select[id^='+stem+'_]').addEvent('change', function() {
           tgt.set('html', '');
           if (!y.value || !m.value || !d.value) return run_all_deps(true);
-          var bd = new Date(y.value+'-'+m.value+'-'+d.value);
-          if (bd.toString() != 'Invalid Date') {
+          var bd = new Date(y.value+'-'+m.value+'-'+d.value),
+              today = new Date();
+          if (bd.getDate() == d.value && bd < today) {
             months = ((today.getFullYear() - y.value.toInt())*12) +
                          (today.getMonth()+1 - m.value.toInt()) -
                          (d.value.toInt() <= today.getDate() ? 0 : 1);
@@ -183,7 +184,12 @@ window.addEvent('domready', function() {
             }}).get(
               form.get('data-questionnaire') +
               '?born_on='+
-              bd.toISOString().replace(/T.*$/,'')) } else run_all_deps(true) });
+              bd.toISOString().replace(/T.*$/,''))
+            } else {
+              delete form.tree.enfant.days;
+              delete form.tree.enfant.months;
+              delete form.tree.enfant.age;
+              run_all_deps(true) }});
         y.fireEvent('change') }});
 
     var measurements_valid = true;
@@ -530,24 +536,6 @@ window.addEvent('domready', function() {
   })});
 
 Element.behaviour(function() {
-  function pending() {
-    if ($E('html').hasClass('pending')) return false;
-    $E('html').addClass('pending');
-    new Element('div', {
-      'class': 'page-loader',
-      'styles': { top: (document.body.scrollTop + 100) + 'px' }}).inject(document.body);
-    return true };
-  this.getElements('nav a, ul.menu a, ul#breadcrumbs a, a.wait').addEvent('click', function() {
-    if (pending()) {
-      this.addClass('clicked');
-      return true } else return false });
-  this.getElements('form').addEvent('submit', function() {
-    if (pending()) {
-      $$('button[type=submit]').each(function(i) {
-        i.addClass('clicked')
-        i.disabled = true });
-      return true } else return false });
-
   this.getElements('form.new_child input[type=text]').addEvent('focus', function() {
     if (this.value == this.get('data-label')) this.value = '';
     this.removeClass('blank')
@@ -598,12 +586,21 @@ Element.behaviour(function() {
     var graph = this.getElement('div.graph').clone()
     transient.open(graph, { width: 420 })});
 
-  
   this.getElements('.editable').each(function (div) {
     div.getElements('button.edit').addEvent('click', function() {
       new Request.HTML({
         link: 'ignore', update: div,
         onSuccess: function() {
+          div.getElement('form').addEvent('submit', function(e) {
+            console.log('subm');
+            var flds = this.getElements('select[id^=child_born_on_]'),
+                bd = new Date(flds[2].value, flds[1].value, flds[0].value),
+                today = new Date();
+            if (!flds[0].value || bd.getDate() != flds[0].value || bd > today || today - bd > 155520000000) {
+              alert("L'âge de l'enfant doit être compris entre 0 et 59 mois.");
+              this.stop = true;
+              return false };
+            this.stop = false });
           div.updated();
           editing = true }}).get(div.get('data-edit-href')) })});
 
@@ -650,7 +647,26 @@ Element.behaviour(function() {
           if (v.lc.indexOf(input.value.toLowerCase()) > -1) {
             new Element('li', { text: v.text, 'data-id': v.id }).inject(ul);
             c++ }}
-        prev = input.value }}).periodical(500) })});
+        prev = input.value }}).periodical(500) });
+        
+  function pending() {
+    if ($E('html').hasClass('pending')) return false;
+    $E('html').addClass('pending');
+    new Element('div', {
+      'class': 'page-loader',
+      'styles': { top: (document.body.scrollTop + 100) + 'px' }}).inject(document.body);
+    return true };
+  this.getElements('nav a, ul.menu a, ul#breadcrumbs a, a.wait').addEvent('click', function() {
+    if (pending()) {
+      this.addClass('clicked');
+      return true } else return false });
+  this.getElements('form').addEvent('submit', function() {
+    if (this.stop) return;
+    if (pending()) {
+      $$('button[type=submit]').each(function(i) {
+        i.addClass('clicked')
+        i.disabled = true });
+      return true } else return false })});
 
 function update_image(id, url) {
   if (id && id != '') {
