@@ -13,17 +13,19 @@ class ExtendDiag < ActiveRecord::Migration
 
     sign = Sign.where(
       key: 'fievre_presence',
-      age_group: Csps::Age['child']).first.id
-    subselect = SignAnswer.
-      select(:diagnostic_global_id).
-      where(sign_id: sign, boolean_value: true)
+      age_group: Csps::Age['child']).first
+    if sign
+      subselect = SignAnswer.
+        select(:diagnostic_global_id).
+        where(sign_id: sign.id, boolean_value: true)
 
-    Sign.connection.execute(
-      "UPDATE diagnostics SET temperature=38
-       WHERE global_id IN (#{subselect.to_sql})")
-    Sign.connection.execute(
-      'UPDATE diagnostics SET temperature=37.5
-       WHERE temperature IS NULL')
+      Sign.connection.execute(
+        "UPDATE diagnostics SET temperature=38
+         WHERE global_id IN (#{subselect.to_sql})")
+      Sign.connection.execute(
+        'UPDATE diagnostics SET temperature=37.5
+         WHERE temperature IS NULL')
+    end
   end
 
   def self.down
