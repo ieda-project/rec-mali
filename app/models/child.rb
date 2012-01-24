@@ -50,17 +50,19 @@ class Child < ActiveRecord::Base
     grs = {}
     signs = {}
     while Date.today.next_month.beginning_of_month >= d2
-      diagnosticed = Diagnostic.between(d1, d2).includes(:classifications).all
+      diagnosed = Diagnostic.between(d1, d2).includes(results: :classification)#.all
       conds.each do |cond|
         case cond['field']
         when 'classifications' then
-          diagnosticed = diagnosticed.select {|d| d.classifications.map(&:name).send(cond['operator'], cond['value'])}
+          diagnosed = diagnosed.select do |d|
+            d.results.map { |r| r.classification.name }.send(cond['operator'], cond['value'])
+          end
         when /sign_answers\[\w+\]/ then
           # get wanted sign (with caching)
           sign_key = cond['field'].scan(/sign_answers\[(\w+)\]/).first.first
           signs[sign_key] ||= Sign.find_by_key(sign_key)
           # get answer
-          diagnosticed = diagnosticed.select do |d|
+          diagnosed = diagnosed.select do |d|
             answer = d.sign_answers.find_by_sign_id(signs[sign_key].id)
             if answer
               answer.raw_value.send(cond['operator'], answer.class.cast(cond['value']))
@@ -70,7 +72,7 @@ class Child < ActiveRecord::Base
           end
         end
       end
-      diagnosticed = diagnosticed.map &:child_global_id
+      diagnosed = diagnosed.map &:child_global_id
       k = dates2key(d1)
       grs[k] = 0
       rs.each do |r|
@@ -78,9 +80,9 @@ class Child < ActiveRecord::Base
         when 'new' then
           grs[k] += 1 if r.created_at >= d1 and r.created_at < d2
         when 'old' then
-          grs[k] += 1 if r.created_at < d1 and diagnosticed.include? r.global_id
+          grs[k] += 1 if r.created_at < d1 and diagnosed.include? r.global_id
         when 'follow' then
-          grs[k] += 1 if diagnosticed.include? r.global_id
+          grs[k] += 1 if diagnosed.include? r.global_id
         end
       end
       d1 = d1.next_month
