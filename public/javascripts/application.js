@@ -149,7 +149,7 @@ window.addEvent('domready', function() {
     form.tree = { enfant: {} };
     function run_all_deps(validate) { return };
     function illnesses() { return form.getElements('section.illness') };
-    illnesses().each(function (i) { i.protect = !!i.getElement('li.true') });
+    illnesses().each(function (i) { i.protect = !!(i.getElement('li.true') || i.getElement('li.false')) });
 
     (function(age) {
       if (age) form.tree.enfant = {
@@ -320,6 +320,7 @@ window.addEvent('domready', function() {
           if (i.prev_value != i.value) {
             changes = true
             i.prev_value = i.value }})
+
         head_inputs.each(function(i) {
           if (i.condition) {
             if (i.condition(form.tree)) {
@@ -371,6 +372,7 @@ window.addEvent('domready', function() {
           close_illness();
           head_next.setStyle('visibility', 'visible');
           head_next.addClass('disabled'); }
+
         if (was_valid != measurements_valid) show_hide_button();
         if (measurements_valid) {
           warnings.setStyle('display', 'none')
