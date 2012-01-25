@@ -23,19 +23,19 @@ namespace :sync do
     gpg = "gpg --homedir #{Rails.root}/config/gpg"
 
     if `#{gpg} --list-secret-keys --with-colons` == ''
-      puts "Creating secret key for #{Zone.csps.name} <csps+#{Zone.csps.hostname}@tdh.ch>"
+      puts "Creating secret key for #{Zone.csps.folder_name} <csps+#{Zone.csps.folder_name}@tdh.ch>"
       IO.popen("#{gpg} --batch --gen-key -", 'w') do |b|
         b.puts 'Key-Type: RSA'
         b.puts 'Key-Length: 2048'
-        b.puts "Name-Real: #{Zone.csps.name}"
-        b.puts "Name-Email: csps+#{Zone.csps.hostname}@tdh.ch"
+        b.puts "Name-Real: #{Zone.csps.folder_name}"
+        b.puts "Name-Email: csps+#{Zone.csps.folder_name}@tdh.ch"
         b.puts "Expire-Date: 0"
         b.close_write
       end
 
       puts "Exporting key"
       FileUtils.mkdir_p remote('keys')
-      `#{gpg} --armor --export #{Zone.csps.name} > #{remote}/keys/#{Zone.csps.name}`
+      `#{gpg} --armor --export #{Zone.csps.folder_name} > #{remote}/keys/#{Zone.csps.folder_name}`
     end
 
     # Import ALL the keys!
@@ -134,9 +134,9 @@ namespace :sync do
           keys << l[9].sub(/ .*$/, '') if l[0] == 'pub'
         end
         Zone.exportable_points.each do |zone|
-          opts = ["-r #{Zone.csps.hostname}"]
+          opts = ["-r #{Zone.csps.folder_name}"]
           zone.upchain.each do |z|
-            opts << "-r #{z.hostname}" if keys.include? z.hostname
+            opts << "-r #{z.folder_name}" if keys.include? z.folder_name
           end
           Dir.chdir "#{tmp}/#{zone.folder_name}" do
             `tar czf - *|#{gpg} --yes -e --output #{remote}/#{zone.folder_name}.tgz.gpg #{opts.join(' ')}`
