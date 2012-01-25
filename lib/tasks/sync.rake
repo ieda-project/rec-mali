@@ -106,41 +106,56 @@ namespace :sync do
         end
       end
 
+      keys = []
+      `#{gpg} -k --with-colons`.each_line do |l|
+        l = l.split ':'
+        keys << l[9].sub(/ .*$/, '') if l[0] == 'pub'
+      end
+
       # EXPORTING
       if Zone.csps.parent_id
-        puts "Starting export.."
-        Zone.exportable_points.each { |zone| unpack.(zone) }
-
-        Csps::Exportable.models.each do |klass|
-          proxy = Csps::SyncProxy.for klass
-          Zone.exportable_points.each do |zone|
-            next if (ipzk[zone] && ipzk[zone][klass]) || proxy.exportable_for(zone).empty?
-            path = "#{tmp}/#{zone.folder_name}/#{klass.name.underscore}.csps"
-
-            print "Exporting #{klass.name} for #{zone.name}: "
-            if proxy.export_for path, zone
-              puts "done."
-            else
-              puts "skipped, no change."
-            end
-            zone.update_attribute :last_export_at, @sync_at
-          end
-        end
-
-        # PACKING UP
-        keys = []
-        `#{gpg} -k --with-colons`.each_line do |l|
-          l = l.split ':'
-          keys << l[9].sub(/ .*$/, '') if l[0] == 'pub'
-        end
+        zones = []
         Zone.exportable_points.each do |zone|
-          opts = ["-r #{Zone.csps.folder_name}"]
-          zone.upchain.each do |z|
-            opts << "-r #{z.folder_name}" if keys.include? z.folder_name
+          next unless keys.include?(zone.folder_name)
+          unpack.(zone)
+          zones << zone
+        end
+
+        if zones.any?
+          puts "Starting export.."
+          exported = {}
+          Csps::Exportable.models.each do |klass|
+            proxy = Csps::SyncProxy.for klass
+            zones.each do |zone|
+              next if (ipzk[zone] && ipzk[zone][klass]) || proxy.exportable_for(zone).empty?
+              path = "#{tmp}/#{zone.folder_name}/#{klass.name.underscore}.csps"
+
+              print "Exporting #{klass.name} for #{zone.name}: "
+              if proxy.export_for path, zone
+                exported[zone] = true
+                puts "done."
+              else
+                puts "skipped, no change."
+              end
+              zone.update_attribute :last_export_at, @sync_at
+            end
           end
-          Dir.chdir "#{tmp}/#{zone.folder_name}" do
-            `tar czf - *|#{gpg} --yes -e --output #{remote}/#{zone.folder_name}.tgz.gpg #{opts.join(' ')}`
+
+          # PACKING UP
+          zones.each do |zone|
+            next unless exported[zone]
+            print "Packing and encrypting for #{zone.name}: "
+            opts = ["-r #{Zone.csps.folder_name}"]
+            zone.upchain.each do |z|
+              opts << "-r #{z.folder_name}" if keys.include? z.folder_name
+            end
+            Dir.chdir "#{tmp}/#{zone.folder_name}" do
+              `tar czf - *|#{gpg} --yes -e --output #{remote}/#{zone.folder_name}.tgz.gpg #{opts.join(' ')}`
+            end
+            puts 'ok.'
           end
+        else
+          puts "No zones to export to (public keys lacking)."
         end
       else
         puts 'No need to export at the root level.'
