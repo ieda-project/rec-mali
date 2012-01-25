@@ -147,7 +147,6 @@ window.addEvent('domready', function() {
         button = form.getElement('button[type=submit]').addClass('disabled');
 
     form.tree = { enfant: {} };
-    function run_all_deps(validate) { return };
     function illnesses() { return form.getElements('section.illness') };
     illnesses().each(function (i) { i.protect = !!(i.getElement('li.true') || i.getElement('li.false')) });
 
@@ -164,7 +163,7 @@ window.addEvent('domready', function() {
             today = new Date();
         $$('select[id^='+stem+'_]').addEvent('change', function() {
           tgt.set('html', '');
-          if (!y.value || !m.value || !d.value) return run_all_deps(true);
+          if (!y.value || !m.value || !d.value) return;
           var bd = new Date(y.value+'-'+m.value+'-'+d.value),
               today = new Date();
           if (bd.getDate() == d.value && bd < today) {
@@ -180,16 +179,15 @@ window.addEvent('domready', function() {
                   sec.inject(tgt) });
                 illnesses_updated();
                 tgt.updated();
-                run_all_deps(true);
             }}).get(
               form.get('data-questionnaire') +
               '?born_on='+
               bd.toISOString().replace(/T.*$/,''))
-            } else {
-              delete form.tree.enfant.days;
-              delete form.tree.enfant.months;
-              delete form.tree.enfant.age;
-              run_all_deps(true) }});
+          } else {
+            console.log('deps');
+            delete form.tree.enfant.days;
+            delete form.tree.enfant.months;
+            delete form.tree.enfant.age }});
         y.fireEvent('change') }});
 
     var measurements_valid = true;
@@ -321,11 +319,13 @@ window.addEvent('domready', function() {
       var f = function() {
         var was_valid = measurements_valid, changes = false;
         measurements_valid = true;
-        head_selects.each(function(i) {
-          if (!i.value) measurements_valid = false;
-          if (i.prev_value != i.value) {
-            changes = true
-            i.prev_value = i.value }})
+        if (form.age) {
+          head_selects.each(function(i) {
+            if (!i.value) measurements_valid = false;
+            if (i.prev_value != i.value) {
+              changes = true
+              i.prev_value = i.value }})
+        } else measurements_valid = false;
 
         head_inputs.each(function(i) {
           if (i.condition) {
