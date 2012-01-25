@@ -73,7 +73,6 @@ class DiagnosticsController < ApplicationController
     answers.each { |a| @diagnostic.sign_answers.add(a) }
 
     if @diagnostic.save
-      puts 'diag saved'
       see_other [:wait, @child, @diagnostic]
     else
       unprocessable action: :new

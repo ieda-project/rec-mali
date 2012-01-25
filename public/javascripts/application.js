@@ -319,7 +319,7 @@ window.addEvent('domready', function() {
       var f = function() {
         var was_valid = measurements_valid, changes = false;
         measurements_valid = true;
-        if (form.age) {
+        if (form.tree.enfant.age) {
           head_selects.each(function(i) {
             if (!i.value) measurements_valid = false;
             if (i.prev_value != i.value) {
