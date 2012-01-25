@@ -166,11 +166,11 @@ window.addEvent('domready', function() {
           tgt.set('html', '');
           if (!y.value || !m.value || !d.value) return;
           var bd = new Date(y.value+'-'+m.value+'-'+d.value),
-              today = new Date();
-          if (bd.getDate() == d.value && bd < today) {
-            months = ((today.getFullYear() - y.value.toInt())*12) +
-                         (today.getMonth()+1 - m.value.toInt()) -
-                         (d.value.toInt() <= today.getDate() ? 0 : 1);
+              today = new Date(), months;
+          if (bd.getDate() == d.value && bd < today &&
+             (months = ((today.getFullYear() - y.value.toInt())*12) +
+                        (today.getMonth()+1 - m.value.toInt()) -
+                        (d.value.toInt() <= today.getDate() ? 0 : 1)) < 60) {
             form.tree.enfant.days = Math.floor((today.getTime() - bd.getTime()) / 86400000);
             form.tree.enfant.months = months;
             form.tree.enfant.age = (months / 12).floor();
@@ -185,7 +185,6 @@ window.addEvent('domready', function() {
               '?born_on='+
               bd.toISOString().replace(/T.*$/,''))
           } else {
-            console.log('deps');
             delete form.tree.enfant.days;
             delete form.tree.enfant.months;
             delete form.tree.enfant.age }});
@@ -320,13 +319,12 @@ window.addEvent('domready', function() {
       var f = function() {
         var was_valid = measurements_valid, changes = false;
         measurements_valid = true;
-        if (form.tree.enfant.months >= 0 && form.tree.months < 60) {
-          head_selects.each(function(i) {
-            if (!i.value) measurements_valid = false;
-            if (i.prev_value != i.value) {
-              changes = true
-              i.prev_value = i.value }})
-        } else measurements_valid = false;
+        if (!(form.tree.enfant.months >= 0) || form.tree.months >= 60) measurements_valid = false;
+        head_selects.each(function(i) {
+          if (!i.value) measurements_valid = false;
+          if (i.prev_value != i.value) {
+            changes = true
+            i.prev_value = i.value }});
 
         head_inputs.each(function(i) {
           if (i.condition) {
@@ -368,6 +366,12 @@ window.addEvent('domready', function() {
           if (!i.disabled && !i.valid) measurements_valid = false });
 
         if (!changes) return;
+
+        if (measurements_valid) {
+          warnings.setStyle('display', 'none')
+        } else {
+          warnings.each(function (w) {
+            w.setStyle('display', w.condition(form.tree) ? 'none' : 'block') })};
         
         head_next.setStyle('visibility', 'visible');
         close_illness();
@@ -381,11 +385,6 @@ window.addEvent('domready', function() {
           head_next.addClass('disabled'); }
 
         if (was_valid != measurements_valid) show_hide_button();
-        if (measurements_valid) {
-          warnings.setStyle('display', 'none')
-        } else {
-          warnings.each(function (w) {
-            w.setStyle('display', w.condition(form.tree) ? 'none' : 'block') })};
 
         form.tree.enfant.weight = weight.value.toFloat();
         form.tree.enfant.height = height.value.toFloat();
