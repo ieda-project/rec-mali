@@ -2,6 +2,9 @@ class Child < ActiveRecord::Base
   include Csps::Exportable
   include Csps::Age
 
+  validates_presence_of :first_name, :last_name
+  validates_inclusion_of :gender, in: [true, false]
+
   belongs_to :village, class_name: 'Zone'
   globally_has_many :diagnostics do
     def build_with_answers data={}

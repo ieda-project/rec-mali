@@ -592,7 +592,14 @@ Element.behaviour(function() {
         link: 'ignore', update: div,
         onSuccess: function() {
           div.getElement('form').addEvent('submit', function(e) {
-            console.log('subm');
+            if (div.getElements('.required').some(function (i) {
+              if (!i.value) {
+                alert("Un champ obligatoire est manquant.");
+                i.focus();
+                return true;
+              } else return false })) {
+                this.stop = true;
+                return false };
             var flds = this.getElements('select[id^=child_born_on_]'),
                 bd = new Date(flds[2].value + '-' + flds[1].value + '-' + flds[0].value),
                 today = new Date();
