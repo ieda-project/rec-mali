@@ -594,7 +594,7 @@ Element.behaviour(function() {
           div.getElement('form').addEvent('submit', function(e) {
             console.log('subm');
             var flds = this.getElements('select[id^=child_born_on_]'),
-                bd = new Date(flds[2].value, flds[1].value, flds[0].value),
+                bd = new Date(flds[2].value, flds[1] ? flds[1].value-1 : null, flds[0].value),
                 today = new Date();
             if (!flds[0].value || bd.getDate() != flds[0].value || bd > today || today - bd > 155520000000) {
               alert("L'âge de l'enfant doit être compris entre 0 et 59 mois.");
