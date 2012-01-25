@@ -320,7 +320,7 @@ window.addEvent('domready', function() {
       var f = function() {
         var was_valid = measurements_valid, changes = false;
         measurements_valid = true;
-        if (form.tree.enfant.age >= 0) {
+        if (form.tree.enfant.months >= 0 && form.tree.months < 60) {
           head_selects.each(function(i) {
             if (!i.value) measurements_valid = false;
             if (i.prev_value != i.value) {
