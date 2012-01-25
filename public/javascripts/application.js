@@ -80,8 +80,9 @@ transient = {
       this.close_button = new Element('div', {'class': 'close-transient', 'text': 'X'});
       this.close_button.addEvent('click', function(e) { this.close() }.bind(this));
       this.close_button.inject(this.div) };
-    this.div.set('class', style.class);
-    delete style.class;
+    if (style && style.class) {
+      this.div.set('class', style.class);
+      delete style.class };
 
     this.div.setStyles({
       display: 'block',
