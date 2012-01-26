@@ -45,9 +45,10 @@ namespace :sync do
     puts "Importing others' public keys"
     updated_keys = []
     Dir.glob("#{remote}/keys/*") do |path|
-      unless `#{gpg} --import #{path} 2>&1`.include?('not changed')
+      puts(res = `#{gpg} --import #{path} 2>&1`)
+      unless res.include?('not changed')
         name = File.basename path
-        `gpg --yes --sign-key #{name}`
+        system "#{gpg} --yes --sign-key #{name}"
         updated_keys << name
       end
     end
@@ -158,12 +159,9 @@ namespace :sync do
           zones.each do |zone|
             next unless exported[zone]
             print "Packing and encrypting for #{zone.name}: "
-            opts = ["-r #{Zone.csps.folder_name}"]
-            zone.upchain.each do |z|
-              opts << "-r #{z.folder_name}" if keys.include? z.folder_name
-            end
+            tgts = [ zone, Zone.csps, *zone.upchain ].map(&:folder_name).uniq & keys
             Dir.chdir "#{tmp}/#{zone.folder_name}" do
-              `tar czf - *|#{gpg} --yes -e --output #{remote}/#{zone.folder_name}.tgz.gpg #{opts.join(' ')}`
+              `tar czf - *|#{gpg} --yes -e --output #{remote}/#{zone.folder_name}.tgz.gpg -r #{tgts.join(' -r ')}`
             end
             puts 'ok.'
           end
