@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'fileutils'
 
 def check_sync_conditions
@@ -17,10 +18,12 @@ def remote sub=''
 end
 
 namespace :sync do
-  desc 'Sync PGP keys'
-  task :keys => :environment do
-    check_sync_conditions
+  desc 'Synchronize'
+  task :perform => :environment do
+    require 'fileutils'
     gpg = "gpg --homedir #{Rails.root}/config/gpg"
+
+    # ----------- STEP 1 -----------
 
     if `#{gpg} --list-secret-keys --with-colons` == ''
       puts "Creating secret key for #{Zone.csps.folder_name} <csps+#{Zone.csps.folder_name}@tdh.ch>"
@@ -32,16 +35,21 @@ namespace :sync do
         b.puts "Expire-Date: 0"
         b.close_write
       end
-
-      puts "Exporting key"
-      FileUtils.mkdir_p remote('keys')
-      `#{gpg} --armor --export #{Zone.csps.folder_name} > #{remote}/keys/#{Zone.csps.folder_name}`
     end
+
+    puts "Exporting key"
+    FileUtils.mkdir_p remote('keys')
+    `#{gpg} --armor --export #{Zone.csps.folder_name} > #{remote}/keys/#{Zone.csps.folder_name}`
 
     # Import ALL the keys!
     puts "Importing others' public keys"
+    updated_keys = []
     Dir.glob("#{remote}/keys/*") do |path|
-      `#{gpg} --import #{path}`
+      unless `#{gpg} --import #{path} 2>&1`.include?('not changed')
+        name = File.basename path
+        `gpg --yes --sign-key #{name}`
+        updated_keys << name
+      end
     end
 
     if Zone.csps.root?
@@ -54,15 +62,10 @@ namespace :sync do
         `#{gpg} --armor --export #{n} > #{remote}/keys/#{n}`
       end
     end
-  end
 
-  desc 'Synchronize'
-  task :perform => :keys do
-    require 'fileutils'
-    gpg = "gpg --homedir #{Rails.root}/config/gpg"
+    # ----------- STEP 2 -----------
 
     begin
-      check_sync_conditions
       ipzk = {}
       tmp = "#{Dir.tmpdir}/sync.#{$$}"
 
@@ -75,10 +78,12 @@ namespace :sync do
         if File.exist? "#{remote}/#{zone.folder_name}.tgz.gpg"
           `#{gpg} --output #{tmp}/#{zone.folder_name}.tgz -d #{remote}/#{zone.folder_name}.tgz.gpg`
           unless $?.success?
-            puts "#{zone.name} CANNOT BE DECRYPTED!"
+            puts "#{zone.name} cannot be decrypted, sync with a center please!"
+            puts "#{zone.name} ne peut pas être décrypté. Synchronisez avec un District !"
             return false
           end
           `tar xzf #{tmp}/#{zone.folder_name}.tgz -C #{dir}`
+          FileUtils.rm "#{tmp}/#{zone.folder_name}.tgz"
           dir
         end
       end
@@ -106,6 +111,9 @@ namespace :sync do
         end
       end
 
+      # Reset tempdir
+      FileUtils.rm_rf "#{tmp}/*"
+
       keys = []
       `#{gpg} -k --with-colons`.each_line do |l|
         l = l.split ':'
@@ -117,7 +125,11 @@ namespace :sync do
         zones = []
         Zone.exportable_points.each do |zone|
           next unless keys.include?(zone.folder_name)
-          unpack.(zone)
+          if (updated_keys & keys).any?
+            puts "Forcing export of #{zone}, public key has changed."
+          else
+            unpack.(zone)
+          end
           zones << zone
         end
 
