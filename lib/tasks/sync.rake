@@ -127,6 +127,7 @@ namespace :sync do
           next unless keys.include?(zone.folder_name)
           if (updated_keys & keys).any?
             puts "Forcing export of #{zone}, public key has changed."
+            FileUtils.mkdir_p "#{tmp}/#{zone.folder_name}"
           else
             unpack.(zone)
           end
