@@ -9,7 +9,10 @@ class SignListAnswer < SignAnswer
   def raw_value
     list_value
   end
-  alias spss_value raw_value
+
+  def spss_value
+    list_value || ''
+  end
 
   def applicable?
     list_value.present?

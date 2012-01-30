@@ -2,8 +2,10 @@ class SignIntegerAnswer < SignAnswer
   def value
     integer_value || 0
   end
+  def spss_value
+    integer_value || ''
+  end
   alias raw_value value
-  alias spss_value value
 
   def applicable?
     !!integer_value

@@ -236,7 +236,7 @@ namespace :sync do
         end
         out.puts CSV.generate_line(buf)
 
-        children.find_each do |child|
+        children.find_each(batch_size: 100) do |child|
           buf = [
             child.born_on,
             child.gender ? 'm' : 'f',

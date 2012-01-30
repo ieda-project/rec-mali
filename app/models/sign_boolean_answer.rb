@@ -6,7 +6,14 @@ class SignBooleanAnswer < SignAnswer
       when nil then 'n/a'
     end
   end
-  alias spss_value value
+
+  def spss_value
+    case boolean_value
+      when true then 'oui'
+      when false then 'non'
+      when nil then ''
+    end
+  end
 
   def html_value
     if boolean_value.nil?
