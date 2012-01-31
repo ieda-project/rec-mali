@@ -10,17 +10,20 @@ def check_sync_conditions
     STDERR.puts 'Error: Please specify a data directory with REMOTE'
     exit 1
   end
+  @remote = File.expand_path ENV['REMOTE']
   @sync_at ||= Time.at Time.now.to_i # (shaving off microseconds)
 end
 
 def remote sub=''
-  ENV['REMOTE'] + (sub.present? ? "/#{sub}" : '')
+  @remote + (sub.present? ? "/#{sub}" : '')
 end
 
 namespace :sync do
   desc 'Synchronize'
   task :perform => :environment do
+    check_sync_conditions
     require 'fileutils'
+    FileUtils.chmod '700'.to_i(8), "#{Rails.root}/config/gpg"
     gpg = "gpg --homedir #{Rails.root}/config/gpg"
 
     # ----------- STEP 1 -----------
@@ -45,8 +48,26 @@ namespace :sync do
     puts "Importing others' public keys"
     updated_keys = []
     Dir.glob("#{remote}/keys/*") do |path|
-      puts(res = `#{gpg} --import #{path} 2>&1`)
+      res = `#{gpg} --import #{path} 2>&1`
+      displayed = false
       unless res.include?('not changed')
+        fpr = res.scan(/gpg: key ([0-9A-F]+)/).first.first
+        kn = File.basename path
+        `#{gpg} --list-keys --with-colons #{kn}`.each_line do |line|
+          next unless line =~ /^pub:/
+          u,trust,u,u,sig = line.split ':'
+          next if trust.in?(%w(o - q n)) && sig.include?(fpr)
+          unless displayed
+            puts ".--------------------------------"
+            puts "| REMOVING #{kn} (#{sig}), SIGNING NEW KEY"
+            puts "|"
+            puts "| If you are sure that the key has legitimately changed,"
+            puts "| say yes to the following questions!"
+            puts "`--------------------------------"
+            displayed = true
+          end
+          `#{gpg} --yes --delete-key #{sig}`
+        end
         name = File.basename path
         system "#{gpg} --yes --sign-key #{name}"
         updated_keys << name
@@ -127,7 +148,7 @@ namespace :sync do
         Zone.exportable_points.each do |zone|
           next unless keys.include?(zone.folder_name)
           if (updated_keys & keys).any?
-            puts "Forcing export of #{zone}, public key has changed."
+            puts "Forcing export of #{zone.name}, public key has changed."
             FileUtils.mkdir_p "#{tmp}/#{zone.folder_name}"
           else
             unpack.(zone)
