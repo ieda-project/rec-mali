@@ -48,11 +48,12 @@ namespace :sync do
     puts "Importing others' public keys"
     updated_keys = []
     Dir.glob("#{remote}/keys/*") do |path|
+      kn = File.basename path
+      next if kn == Zone.csps.folder_name
       res = `#{gpg} --import #{path} 2>&1`
       displayed = false
       unless res.include?('not changed')
         fpr = res.scan(/gpg: key ([0-9A-F]+)/).first.first
-        kn = File.basename path
         `#{gpg} --list-keys --with-colons #{kn}`.each_line do |line|
           next unless line =~ /^pub:/
           u,trust,u,u,sig = line.split ':'
