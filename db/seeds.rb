@@ -104,7 +104,7 @@ Illness.transaction do
   end
 
   has_treatments, illnesses = Treatment.any?, {}
-  for group in %w(newborn infant child) do
+  for group in %w(child newborn infant) do
     puts "==> Checking age group: #{group}"
 
     ag = Csps::Age[group]
