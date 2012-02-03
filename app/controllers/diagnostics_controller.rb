@@ -84,7 +84,9 @@ class DiagnosticsController < ApplicationController
   end
 
   def update
-    return(see_other([ @child, @diagnostic ])) if @diagnostic.author != current_user
+    if @diagnostic.author != current_user && params[:diagnostic].keys != %w(results_attributes)
+      return(see_other([ @child, @diagnostic ]))
+    end
 
     Diagnostic.transaction do
       @diagnostic.sign_answers.process params[:diagnostic].delete(:sign_answers)
