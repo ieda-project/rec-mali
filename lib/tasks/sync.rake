@@ -145,8 +145,15 @@ namespace :sync do
 
       # EXPORTING
       if Zone.csps.parent_id
-        zones = []
-        Zone.exportable_points.each do |zone|
+        all, zones = Zone.exportable_points, []
+
+        if File.exist?(remote('export.list'))
+          all = all.where(
+            'name IN (?)', 
+            File.read(remote('export.list')).gsub(/#.*$/, '').split("\n").select(&:present?))
+        end
+
+        for zone in all do
           next unless keys.include?(zone.folder_name)
           if (updated_keys & keys).any?
             puts "Forcing export of #{zone.name}, public key has changed."
@@ -188,7 +195,7 @@ namespace :sync do
             puts 'ok.'
           end
         else
-          puts "No zones to export to (public keys lacking)."
+          puts "No zones to export to."
         end
       else
         puts 'No need to export at the root level.'
