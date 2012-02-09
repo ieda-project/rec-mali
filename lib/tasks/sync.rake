@@ -23,6 +23,17 @@ namespace :sync do
   task :perform => :environment do
     check_sync_conditions
     require 'fileutils'
+
+    list = if File.exist?(remote('export.list'))
+      File.read(remote('export.list')).gsub(/#.*$/, '').split("\n").select(&:present?)
+    end
+    if Zone.csps.parent_id && (!list || !list.include?(Zone.csps.name))
+      File.open(remote('export.list'), 'a') do |f|
+        f.puts Zone.csps.name
+      end
+      list << Zone.csps.name
+    end
+
     FileUtils.chmod '700'.to_i(8), "#{Rails.root}/config/gpg"
     gpg = "gpg --homedir #{Rails.root}/config/gpg"
 
@@ -144,14 +155,9 @@ namespace :sync do
       end
 
       # EXPORTING
-      if Zone.csps.parent_id
+      if Zone.csps.parent_id && (!list || list.any?)
         all, zones = Zone.exportable_points, []
-
-        if File.exist?(remote('export.list'))
-          all = all.where(
-            'name IN (?)', 
-            File.read(remote('export.list')).gsub(/#.*$/, '').split("\n").select(&:present?))
-        end
+        all = all.where('name IN (?)', list) if list
 
         for zone in all do
           next unless keys.include?(zone.folder_name)
@@ -184,9 +190,10 @@ namespace :sync do
             end
           end
 
+          puts "Nothing to export." if exported.empty?
+
           # PACKING UP
-          zones.each do |zone|
-            next unless exported[zone]
+          exported.keys.each do |zone|
             print "Packing and encrypting for #{zone.name}: "
             tgts = [ zone, Zone.csps, *zone.upchain ].map(&:folder_name).uniq & keys
             Dir.chdir "#{tmp}/#{zone.folder_name}" do
@@ -197,8 +204,10 @@ namespace :sync do
         else
           puts "No zones to export to."
         end
+      elsif Zone.csps.parent_id
+        puts "No export: list empty."
       else
-        puts 'No need to export at the root level.'
+        puts "No export: root level."
       end
     ensure
       FileUtils.rm_rf tmp
