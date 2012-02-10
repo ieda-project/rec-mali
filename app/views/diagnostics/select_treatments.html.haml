@@ -3,7 +3,7 @@
     %li= link_to "Nouvelle Recherche", children_path
     %li= link_to @diagnostic.child.name, @diagnostic.child
     %li= link_to "Evaluation", child_diagnostic_path(@diagnostic.child, @diagnostic)
-    %li Identification des traitements
+    %li Choisir les traitements
 
 - unless @diagnostic.classifications.any?
   - content_for :head do
