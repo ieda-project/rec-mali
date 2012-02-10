@@ -31,7 +31,7 @@ namespace :sync do
       File.open(remote('export.list'), 'a') do |f|
         f.puts Zone.csps.name
       end
-      list << Zone.csps.name
+      list << Zone.csps.name if list
     end
 
     FileUtils.chmod '700'.to_i(8), "#{Rails.root}/config/gpg"
