@@ -24,15 +24,23 @@ namespace :sync do
     check_sync_conditions
     require 'fileutils'
 
+    # Export list handling
+
     list = if File.exist?(remote('export.list'))
       File.read(remote('export.list')).gsub(/#.*$/, '').split("\n").select(&:present?)
     end
-    if Zone.csps.parent_id && (!list || !list.include?(Zone.csps.name))
+    if !list || !list.include?(Zone.csps.name)
       File.open(remote('export.list'), 'a') do |f|
         f.puts Zone.csps.name
       end
       list << Zone.csps.name if list
     end
+    if (list & Zone.csps.upchain.map(&:name)).any?
+      # Export all if anybody from the upchain is looking.
+      list = nil
+    end
+
+    # Export list handling over
 
     FileUtils.chmod '700'.to_i(8), "#{Rails.root}/config/gpg"
     gpg = "gpg --homedir #{Rails.root}/config/gpg"
