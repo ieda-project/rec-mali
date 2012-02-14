@@ -35,7 +35,7 @@ namespace :sync do
       end
       list << Zone.csps.name if list
     end
-    if (list & Zone.csps.upchain.map(&:name)).any?
+    if list && (list & Zone.csps.upchain.map(&:name)).any?
       # Export all if anybody from the upchain is looking.
       list = nil
     end
