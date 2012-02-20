@@ -301,4 +301,46 @@ namespace :sync do
       end
     end
   end
+
+  desc "Export Excel data"
+  task :excel => :environment do
+    require 'csv'
+    dir = ENV['TO'] || '.'
+    raise "No such directory: #{dir}" unless File.directory? dir
+
+    dir = "#{dir}/#{Zone.csps.folder_name}"
+    FileUtils.mkdir_p dir
+
+    for ref in Diagnostic.select('DISTINCT type, saved_age_group') do
+      type = ref.type.nil? ? 'base' : ref.type.sub(/Diagnostic$/, '').underscore
+      File.open("#{dir}/#{type}_#{Csps::Age::GROUPS[ref.saved_age_group]}.csv", 'w') do |out|
+        diags = ref.class.where(saved_age_group: ref.saved_age_group).includes(:child, sign_answers: :sign)
+
+        # Header
+        buf = %w(global_id last_name first_name born gender village bcg_polio0 penta1_polio1 penta2_polio2
+          penta3_polio3 measles diag_date height weight muac temperature)
+        buf += diags.first.sign_answers.sort_by(&:sign_id).map do |sa|
+          sa.sign.full_key
+        end
+        out.puts CSV.generate_line(buf)
+
+        diags.find_each(batch_size: 100) do |diag|
+          child = diag.child
+          buf = [
+            child.global_id, child.last_name, child.first_name,
+            child.born_on,
+            child.gender ? 'm' : 'f',
+            child.village.name ]
+          buf += [
+            child.bcg_polio0, child.penta1_polio1, child.penta2_polio2,
+            child.penta3_polio3, child.measles ].map { |v| v ? 'oui' : 'non' }
+          buf += [
+            diag.done_on.to_date, diag.height, diag.weight,
+            diag.mac, diag.temperature ]
+          buf += diag.sign_answers.sort_by(&:sign_id).map(&:spss_value)
+          out.puts CSV.generate_line(buf)
+        end
+      end
+    end
+  end
 end
