@@ -1,5 +1,5 @@
 Burkina Faso
-	Seguenega	
+	Seguenega 
 		Bema*
 			Bema-SM
 			Bema Mossi
@@ -244,7 +244,7 @@ Burkina Faso
 			Sia
 			Bassagoulo
 		Bonou*
-			Bonou  
+			Bonou	 
 			Toaga
 			Bompela
 			Namassa
@@ -346,7 +346,198 @@ Burkina Faso
 			Nillare
 			Torosso
 		Debe*
-			Debe  
+			Debe	
 			Touroukoro
 			Tani
 			Werin
+	Kaya
+		Dibilou*
+			Dibilou
+			Boulga
+			Boyé
+			Gomnaore
+			Nanga
+			Nobouli
+			Ouèdega 1
+			Ouèdega 2
+			Roffenega
+			Sorboulgou
+			Paira
+			Pilfou
+		Basnere*
+			Basnéré
+			Tibtenga
+			Roumtenga
+			Baobokin
+			Tiffou
+			Bandaga
+			Gnagado
+			Balbou
+			Gnoranga
+		Delga*
+			Bakouta
+			Bandagan 
+			Bandagap
+			Delga
+			Dem
+			Dembilam
+			Dembilap
+			Koutoulay
+			Tougri
+			Zandogo
+			Zorkoum
+		Secteur 1*
+			Dahisma
+			Kanrtenga
+			Koulogho
+			Tanhiba
+			Secteur1
+			Secteur2
+		Namsigui*
+			Gah
+			Foura
+			Pampa
+			Dapologho
+			Oualga
+			Namsigui
+		Secteur 4*
+			Secteur 4
+		Mane*
+			Bangrin 
+			Bouidi
+			Goudrin
+			Komestenga
+			Itaoré  
+			Koankin
+			Nonguin
+			Noungou
+			Wenané
+			Tanlargo
+			Sect1
+			Sect2 
+			Sect3
+			Sect4
+			Sect5
+		Zincko*
+			Abra
+			Boulsikome
+			Débéré
+			Enaba
+			Goassa
+			Gosbila
+			Guinsa
+			Ignogo
+			Kuibanka
+			Léssitenga
+			Niogsin
+			Zincko
+		Secteur 6*
+			Basbriké
+			Bissiga
+			Dondollé
+			Fanka
+			Konéan
+			Silmiougou
+			Secteur6
+		Secteur 7*
+			Secteur 7
+			Secteur 3
+			Secteur 5
+			Zablo 
+			Foulou-Yarcé
+		Ziga*
+			Gandin
+			Ziga
+			Soubeira N
+			Wagoulé
+			Koupéné
+			Pissiga
+			Saambtenga
+			Bissiga
+			Pissa
+			Tansèga
+			Kinkinrgo
+			Daffolé
+		Pissila Doungou*
+			Karka
+			Térin
+			Pissila Centre
+			Bangassom
+			Ouidlao
+			Solomnoré
+			Thiou
+			Tikato
+			Touroum
+		Noaka*
+			Noaka
+			Nongtenga
+			Zarin-Peulh
+			Zarin-Mossi
+			Kodogo
+			Dawaka
+			Sanbin-N
+		Forgui*
+			Boulsin
+			Forgui
+			K. Goudrin
+			Nakourtenga
+			Oualgtenga
+			Soma-Peulh
+		Boussouma*
+			Secteur 1
+			Secteur 2
+			Secteur 3
+			Secteur 4
+			Secteur 5
+			Séra
+			Gangargui
+		Nessemtenga*
+			Nessemtenga
+			Goragui/Nawatenga/S
+			Balbo-Peulh
+			Foutrigui
+			Gofila
+			Songondin
+		Imiougou*
+			Ipalla
+			Imiougou
+			Konlebsé
+			Zourtenga
+			Dollin
+			Toulguéré
+		Sabouri Natenga*
+			Natenga
+			Bagabin-Noungou
+			Kirbaka
+			Sonkin
+			Kienpalogo
+			Poécin
+			Baskoudré-Peulh
+			Tansgo
+			Tansin
+			Tansablogo
+		Korsimoro*
+			Ouédsé
+			Poécin
+			Goudrin
+			Nababouly
+			Tangpoorin
+			Raguitenga
+			Goerba
+			Koécin
+			Médérin-Peulh
+			Foula
+			Koupéla
+			Yahoguin
+		Pibaore*
+			Pibaoré
+			Kaogo
+			Niangré-Tansoaba
+			Sous-Sargo
+			Gandi
+			Nobi-Sargo
+			Niniogo
+			Bagadogo
+			Bagdin 
+			Mastenga
+			Peotenga

@@ -12,21 +12,31 @@ class String
 end
 
 Illness.transaction do
-  unless Zone.any?
-    puts 'Creating villages'
+  skip = Zone.count
+  if skip.zero?
+    puts '==> Creating villages'
+  else
+    puts '==> Adding new villages if needed'
+  end
 
-    File.open('db/fixtures/zones.txt', 'r') do |f|
-      idents = {}
-      f.each_line do |line|
-        next unless line.fix!
-        ident = line.match(/^\s*/).to_s.size
-        point = if line[-1] == '*'
-          line[-1] = ''
-          true
-        else
-          false
-        end
-        idents[ident] = Zone.create name: line.lstrip, parent: idents[ident-1], point: point
+  File.open('db/fixtures/zones.txt', 'r') do |f|
+    idents = {}
+    f.each_line do |line|
+      next unless line.fix!
+      ident = line.match(/^\s*/).to_s.size
+      point = if line[-1] == '*'
+        line[-1] = ''
+        true
+      else
+        false
+      end
+
+      name, parent = line.lstrip, idents[ident-1]
+      if skip > 0
+        idents[ident] = Zone.where(name: name, parent_id: parent && parent.id).first or raise "Corrupt zone import file!"
+        skip -= 1
+      else
+        idents[ident] = Zone.create name: name, parent: parent, point: point
       end
     end
   end
@@ -59,7 +69,7 @@ Illness.transaction do
   FORMULA = 2
 
   unless Medicine.any?
-    puts 'Creating medicines'
+    puts '==> Creating medicines'
 
     File.open('db/fixtures/medicines.txt', 'r') do |f|
       state = HEAD
@@ -246,7 +256,7 @@ Illness.transaction do
   end
 
   unless TreatmentHelp.any?
-    puts 'Creating treatment help'
+    puts '==> Creating treatment help'
 
     File.open('db/fixtures/help.csv', 'r') do |f|
       f.each_line do |line|
@@ -263,7 +273,7 @@ Illness.transaction do
   end
 
   unless Query.any?
-    puts 'Loading translations'
+    puts '==> Loading translations'
 
     t = {}
     File.open('db/fixtures/queries_translations.txt', 'r') do |f|
@@ -275,7 +285,7 @@ Illness.transaction do
       end
     end
 
-    puts 'Creating queries'
+    puts '==> Creating queries'
 
     stats = File.read(File.join('db', 'fixtures', 'queries.txt'))
     stats.split('@').each do |s|
@@ -291,7 +301,7 @@ Illness.transaction do
   end
 
   unless Index.any?
-    puts 'Creating indices'
+    puts '==> Creating indices'
 
     Index::NAMES.each do |name|
       %w(boys girls).each do |gender|
