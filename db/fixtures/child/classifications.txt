@@ -27,6 +27,7 @@ anemie|Pas d'anémie|low|anemie.paleur_palmaire == absente
 anemie|Anémie|medium|anemie.paleur_palmaire == legere
 anemie|Anémie grave|high|anemie.paleur_palmaire == severe
 
+malnutrition|Non applicable : enfant de moins de 6 mois|low|enfant.months < 6
 malnutrition|Pas de malnutrition|low|(enfant.months >= 6) AND (enfant.muac >= 135) AND (enfant.wfh >= 85) AND (malnutrition.oedemes == no)
 malnutrition|A risque de malnuttrition|low|(enfant.months >= 6) AND (((enfant.muac >= 125) AND (enfant.muac < 135) AND (enfant.wfh >= 80)) OR ((enfant.wfh >= 80) AND (enfant.wfh < 85) AND (enfant.muac >= 125))) AND (malnutrition.oedemes == no)
 malnutrition|MAM|medium|(enfant.months >= 6) AND (((enfant.muac >= 115) AND (enfant.wfh >= 70) AND (enfant.wfh < 80)) OR ((enfant.wfh >= 70) AND (enfant.muac >= 115) AND (enfant.muac < 125))) AND (malnutrition.oedemes == no)
