@@ -20,9 +20,9 @@ fievre.choc|data.fievre.fievre_presence
 fievre.eruption_cutanee|data.fievre.fievre_presence 
 fievre.ecoulement_nasal|data.fievre.fievre_presence 
 fievre.yeux_rouge|data.fievre.fievre_presence 
-fievre.ecoulement_oculaire|data.fievre.fievre_presence 
-fievre.ulcerations|data.fievre.fievre_presence 
-fievre.cornee|data.fievre.fievre_presence 
+fievre.ecoulement_oculaire|data.fievre.fievre_presence && ((data.fievre.eruption_cutanee == 'eruption') || (data.fievre.eruption_cutanee == 'antecedent'))
+fievre.ulcerations|data.fievre.fievre_presence  && ((data.fievre.eruption_cutanee == 'eruption') || (data.fievre.eruption_cutanee == 'antecedent'))
+fievre.cornee|data.fievre.fievre_presence  && ((data.fievre.eruption_cutanee == 'eruption') || (data.fievre.eruption_cutanee == 'antecedent'))
 
 oreille.oreille_douleur|data.oreille.oreille_probleme 
 oreille.oreille_ecoulement|data.oreille.oreille_probleme 
@@ -30,4 +30,4 @@ oreille.oreille_ecoulement_duree|data.oreille.oreille_probleme && data.oreille.o
 oreille.oreille_gonflement|data.oreille.oreille_probleme 
 
 malnutrition.oedemes|data.enfant.months >= 6 
-malnutrition.test_appetit|(data.enfant.months >= 6) && ((data.enfant.muac < 110) || (data.enfant.wfh < 70)) && !((data.danger.boire || data.danger.vomit || data.danger.convulsions_passe || data.danger.lethargie || data.danger.convulsions_present) || (data.toux.toux_presence && (data.danger.boire || data.danger.vomit || data.danger.convulsions_passe || data.danger.lethargie || data.danger.convulsions_present || data.toux.tirage || data.toux.stridor)) || (data.diarrhee.diarrhee_presence && (((data.diarrhee.conscience_agitation == 'lethargique_inconscient') + (data.diarrhee.soif == 'impossible') + data.diarrhee.yeux_enfonces + (data.diarrhee.pli_cutane == 'tres_lentement')) >= 2)) || (data.diarrhee.diarrhee_presence && (data.diarrhee.diarrhee_presence_duree >= 14) && (((data.diarrhee.conscience_agitation == 'agite_irritable') + data.diarrhee.yeux_enfonces + (data.diarrhee.soif == 'avide') + (data.diarrhee.pli_cutane == 'lentement') >= 2) || (((data.diarrhee.conscience_agitation == 'lethargique_inconscient') + (data.diarrhee.soif == 'impossible') + data.diarrhee.yeux_enfonces + (data.diarrhee.pli_cutane == 'tres_lentement')) >= 2))) || (data.fievre.fievre_presence && ((data.fievre.eruption_cutanee == 'antecedent') || ((data.fievre.eruption_cutanee == 'eruption') && (data.fievre.ecoulement_nasal || data.fievre.yeux_rouge || data.toux.toux_presence))) && (data.fievre.cornee || (data.fievre.ulcerations == 'profondes_etendues') || data.danger.boire || data.danger.vomit || data.danger.convulsions_passe || data.danger.lethargie || data.danger.convulsions_present)) || (data.fievre.fievre_presence && (data.fievre.raideur_nuque || data.fievre.urines_foncees || data.fievre.saignements_anormaux || data.fievre.ictere || data.fievre.choc || data.danger.boire || data.danger.vomit || data.danger.convulsions_passe || data.danger.lethargie || data.danger.convulsions_present || data.anemie.paleur_palmaire == 'severe')) || (data.oreille.oreille_probleme && data.oreille.oreille_gonflement) || (data.anemie.paleur_palmaire == 'severe'))
+malnutrition.test_appetit|(data.enfant.months >= 6) && ((data.enfant.muac < 115) || (data.enfant.wfh < 70))
