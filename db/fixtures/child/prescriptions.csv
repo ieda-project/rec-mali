@@ -23,6 +23,8 @@ deshydratation_severe_pas_grave_perfusion,m4,5 jours,4 fois par jour,{{name}} - 
 deshydratation_severe_pas_grave_sans_sng_sans_perfusion,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 deshydratation_severe_pas_grave_sans_sng_sans_perfusion,m4,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
 deshydratation_severe_pas_grave_sng,m25,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+deshydratation_severe_pas_grave_sng,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+deshydratation_severe_pas_grave_sng,m4,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
 signes_deshydratation,m24_2,4 heures,,{{name}} - {{dosage}} pendant {{duration}}
 dysenterie,m3,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 dysenterie,m5,8 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
@@ -70,10 +72,11 @@ mass,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - 
 mass,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 mass,m1,7 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 mass,m2,7 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-mass,m9,3 jours,2 fois par jour,Donner {{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (1ère ou 2ème visite)
-mass,m10,,dose unique,+OU+ {{name}} - {{dosage}} - {{takes}} (1ère ou 2ème visite)
-mam,m9,3 jours,2 fois par jour,Donner {{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (1ère ou 2ème visite)
-mam,m10,,dose unique,+OU+ {{name}} - {{dosage}} - {{takes}} (1ère ou 2ème visite)
+mass,m9,3 jours,2 fois par jour,Donner {{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (2ème visite)
+mam,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
+mam,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
+mam,m9,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (1ère ou 2ème visite)
+mam,m8,14 jours (renouvelable pour atteindre au total 2 à 3 mois),dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 pas_malnutrition,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
 pas_malnutrition,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
 vih_symp_confirmee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}

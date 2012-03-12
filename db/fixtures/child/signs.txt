@@ -12,7 +12,7 @@ toux|Toux
   toux_presence_duree|Depuis combien de jours ?|integer
   mouv_resp|Compter les mouvements respiratoires par minute (Respiration rapide = FR > 40 pour enfants > 12 mois / FR > 50 pour enfants entre 2 et 12 mois)|list|respiration_normale;respiration_rapide
   tirage|Rechercher : L'enfant a-t-il un tirage *sous-costal* (inspiratoire) ?|boolean
-  stridor|Ecouter : l'enfant a-t-il a un stridor (inspiratoire) ?|boolean
+  stridor|Écouter : l’enfant a-t-il un stridor ou un sifflement de la respiration (inspiration) ou un geignement (expiration)|boolean
 
 diarrhee|Diarrhée
   diarrhee_presence|L'enfant a-t-il la diarrhée ?|boolean
@@ -35,9 +35,9 @@ fievre|Fièvre
   eruption_cutanee|Signe de rougeole : L'enfant a-t-il une éruption généralisée de type rougeole ou eu une rougeole au cours des 3 derniers mois ?|list|aucun;eruption;antecedent
   ecoulement_nasal|Signe de rougeole : L'enfant a-t-il un ecoulement nasal ?|boolean
   yeux_rouge|Signe de rougeole : L'enfant a-t-il les yeux rouges ?|boolean
-  ecoulement_oculaire|Signe de rougeole : L'enfant a-t-il un écoulement oculaire de pus ?|boolean
-  ulcerations|Signe de rougeole : L'enfant a-t-il des ulcérations dans la bouche ?|list|absentes;presentes;profondes_etendues
-  cornee|Signe de rougeole : L'enfant a-t-il une opacité de la cornée ?|boolean
+  ecoulement_oculaire|Signe de complication de rougeole : L'enfant a-t-il un écoulement oculaire de pus ?|boolean
+  ulcerations|Signe de complication de rougeole : L'enfant a-t-il des ulcérations dans la bouche ?|list|absentes;presentes;profondes_etendues
+  cornee|Signe de complication de rougeole : L'enfant a-t-il une opacité de la cornée ?|boolean
 
 oreille|Affection de l'oreille
   oreille_probleme|L'enfant a-t-il un problème à l'oreille ?|boolean
