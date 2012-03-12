@@ -317,7 +317,7 @@ namespace :sync do
         diags = ref.class.where(saved_age_group: ref.saved_age_group).includes(:child, sign_answers: :sign)
 
         # Header
-        buf = %w(global_id last_name first_name born gender village bcg_polio0 penta1_polio1 penta2_polio2
+        buf = %w(global_id born gender village bcg_polio0 penta1_polio1 penta2_polio2
           penta3_polio3 measles diag_date height weight muac temperature)
         buf += diags.first.sign_answers.sort_by(&:sign_id).map do |sa|
           sa.sign.full_key
@@ -327,7 +327,7 @@ namespace :sync do
         diags.find_each(batch_size: 100) do |diag|
           child = diag.child
           buf = [
-            child.global_id, child.last_name, child.first_name,
+            child.global_id,
             child.born_on,
             child.gender ? 'm' : 'f',
             child.village.name ]
