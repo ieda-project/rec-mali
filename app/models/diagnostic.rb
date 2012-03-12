@@ -53,7 +53,16 @@ class Diagnostic < ActiveRecord::Base
   serialize :failed_classifications
   globally_belongs_to :child
   globally_belongs_to :author, class_name: 'User'
-  globally_has_many :results
+  globally_has_many :results do
+    def to_display
+      high = Classification::LEVELS.index :high
+      with_treatment.to_a.tap do |out|
+        if out.any? { |r| r.classification.level == high }
+          out.reject! { |r| r.classification.level != high }
+        end
+      end
+    end
+  end
   has_many :classifications, through: :results do
     def for illness
       select { |c| c.illness_id == illness.id }
