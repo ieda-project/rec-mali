@@ -1,3 +1,0 @@
-fievre.fievre_presence
-true: data.enfant.temp >= 38
-false: data.enfant.temp < 38
