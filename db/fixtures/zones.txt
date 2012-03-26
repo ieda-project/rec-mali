@@ -376,13 +376,13 @@ Burkina Faso
 			Gnoranga
 		Delga*
 			Bakouta
-			Bandagan 
-			Bandagap
+			BandagaN
+			BandagaP
 			Delga
 			Dem
-			Dembilam
-			Dembilap
-			Koutoulay
+			DembilaM
+			DembilaP
+			KoutoulaY
 			Tougri
 			Zandogo
 			Zorkoum
@@ -395,6 +395,8 @@ Burkina Faso
 			Secteur2
 		Namsigui*
 			Gah
+			Légouré
+			Zegdnoogo/Sagoème
 			Foura
 			Pampa
 			Dapologho
@@ -458,10 +460,15 @@ Burkina Faso
 			Tansèga
 			Kinkinrgo
 			Daffolé
-		Pissila Doungou*
+		Pissila*
+			Doungou
 			Karka
 			Térin
-			Pissila Centre
+			Secteur 1
+			Secteur 2
+			Secteur 3
+			Secteur 4
+			Secteur 5
 			Bangassom
 			Ouidlao
 			Solomnoré
@@ -505,7 +512,7 @@ Burkina Faso
 			Zourtenga
 			Dollin
 			Toulguéré
-		Sabouri Natenga*
+		Sabouri*
 			Natenga
 			Bagabin-Noungou
 			Kirbaka
