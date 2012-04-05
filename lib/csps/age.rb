@@ -35,9 +35,9 @@ module Csps
 
       def age_group
         if born_on
-          if days <= 7
+          if days < 7
             0 # newborn
-          elsif months <= 2
+          elsif months < 2
             1 # infant
           elsif months < 60
             2 # child

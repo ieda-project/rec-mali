@@ -3,6 +3,13 @@
   parseFloat = function(i) { return _saved(i.replace(',', '.')) }
 })()
 
+Date.prototype.fullMonthsFrom = function(a) {
+  var diff;
+  diff = this.getMonth() - a.getMonth();
+  diff += (this.getYear() - a.getYear()) * 12;
+  if (this.getDate() < a.getDate()) diff -= 1;
+  return diff }
+
 function $E(a,b) { return document.getElement(a,b) }
 Element.implement({
   classes: function() { return this.className.split(/\s+/) },
@@ -603,7 +610,7 @@ Element.behaviour(function() {
             var flds = this.getElements('select[id^=child_born_on_]'),
                 bd = new Date(flds[2].value + '-' + flds[1].value + '-' + flds[0].value),
                 today = new Date();
-            if (!flds[0].value || bd.getDate() != flds[0].value || bd > today || today - bd > 155520000000) {
+            if (!flds[0].value || bd.getDate() != flds[0].value || bd > today || today.fullMonthsFrom(bd) > 59) {
               alert("L'âge de l'enfant doit être compris entre 0 et 59 mois.");
               this.stop = true;
               return false };
