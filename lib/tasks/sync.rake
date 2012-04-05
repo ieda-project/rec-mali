@@ -286,7 +286,7 @@ namespace :sync do
           buf = [
             child.born_on,
             child.gender ? 'm' : 'f',
-            child.village.name ]
+            child.village && child.village.name ]
           buf += [
             child.bcg_polio0, child.penta1_polio1, child.penta2_polio2,
             child.penta3_polio3, child.measles ].map { |v| v ? 'oui' : 'non' }
@@ -330,7 +330,7 @@ namespace :sync do
             child.global_id,
             child.born_on,
             child.gender ? 'm' : 'f',
-            child.village.name ]
+            child.village && child.village.name ]
           buf += [
             child.bcg_polio0, child.penta1_polio1, child.penta2_polio2,
             child.penta3_polio3, child.measles ].map { |v| v ? 'oui' : 'non' }
