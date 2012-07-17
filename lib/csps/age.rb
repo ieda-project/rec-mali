@@ -3,7 +3,9 @@ require 'date'
 module Csps
   module Age
     extend ActiveSupport::Concern
-    GROUPS = %w(newborn infant child)
+    (GROUPS = %w(newborn infant child)).each.with_index do |name,i|
+      const_set name.upcase, i
+    end
 
     def self.[] key
       GROUPS.index key
@@ -36,11 +38,11 @@ module Csps
       def age_group
         if born_on
           if days < 7
-            0 # newborn
+            NEWBORN
           elsif months < 2
-            1 # infant
+            INFANT
           elsif months < 60
-            2 # child
+            CHILD
           end
         end
       end
@@ -51,6 +53,10 @@ module Csps
 
       def age
         born_on && age_reference_date.full_years_from(born_on)
+      end
+
+      def of_valid_age?
+        months < 60
       end
       
       def months

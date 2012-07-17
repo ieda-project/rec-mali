@@ -62,7 +62,11 @@ class DiagnosticsController < ApplicationController
 
   def new
     back 'Liste des evaluations', @child
-    @diagnostic = @child.diagnostics.new.prebuild
+    if @child.of_valid_age?
+      @diagnostic = @child.diagnostics.new.prebuild
+    else
+      not_found
+    end
   end
 
   def create

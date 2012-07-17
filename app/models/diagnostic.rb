@@ -129,7 +129,13 @@ class Diagnostic < ActiveRecord::Base
   validates_presence_of :mac, if: ->(diag) { diag.child && diag.child.months >= 6 }
   validates_numericality_of :mac, only_integer: true, allow_blank: true
   validates_numericality_of :height, :weight, :temperature
-  validate :validate_answers
+  validate do
+    if of_valid_age?
+      errors[:sign_answers] << :invalid if prebuild.sign_answers.reject(&:valid?).any?
+    elsif done_on.to_date < born_on || done_on > Time.now
+      errors[:done_on] << :invalid
+    end
+  end
 
   accepts_nested_attributes_for :results
 
@@ -230,11 +236,5 @@ class Diagnostic < ActiveRecord::Base
       end
       grs
     end
-  end
-
-  protected
-
-  def validate_answers
-    errors[:sign_answers] << :invalid if prebuild.sign_answers.reject(&:valid?).any?
   end
 end
