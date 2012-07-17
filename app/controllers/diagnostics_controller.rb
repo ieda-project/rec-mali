@@ -2,7 +2,7 @@ class DiagnosticsController < ApplicationController
   login_required
   before_filter :fetch_child, :except => :indices
   before_filter :fetch, only: [ :show, :wait, :treatments, :calculations, :edit, :update ]
-  before_filter :author_only, only: :edit
+  before_filter :editable_only, only: [:edit, :update]
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
 
@@ -128,7 +128,7 @@ class DiagnosticsController < ApplicationController
     not_found
   end
 
-  def author_only
-    @diagnostic.author == current_user or denied
+  def editable_only
+    @diagnostic.editable_by? current_user or denied
   end
 end

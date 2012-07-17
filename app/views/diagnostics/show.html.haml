@@ -13,7 +13,7 @@
     #{time_ago_in_words(@diagnostic.done_on)})
   %span.by Evaluation réalisée par #{@diagnostic.author.name}
 
-- editable = Csps.point? && @diagnostic.author == current_user
+- editable = @diagnostic.editable_by? current_user
 - if editable || @diagnostic.classifications.any?
   %nav
     - if editable

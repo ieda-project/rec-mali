@@ -139,6 +139,14 @@ class Diagnostic < ActiveRecord::Base
 
   accepts_nested_attributes_for :results
 
+  def last?
+    child.diagnostics.order('done_on DESC').select('id').first.id == id
+  end
+
+  def editable_by? user
+    Csps.point? and author == user and last?
+  end
+
   def to_hash
     sign_answers.to_hash.tap do |hash|
       for field in %w(age months muac wfa hfa wfh height weight)
