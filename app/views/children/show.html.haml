@@ -1,7 +1,7 @@
 - content_for :breadcrumbs do
   %ul#breadcrumbs
     %li= link_to "Nouvelle Recherche", children_path
-    %li= @child.name
+    %li= @child.sortable_name
     
 %nav
   - if Csps.point?

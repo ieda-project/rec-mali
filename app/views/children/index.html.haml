@@ -62,7 +62,7 @@
             - if child.born_on
               %tr{ :class => cycle("odd", "even") }
                 %td
-                  %strong= link_to child.name, child
+                  %strong= link_to child.sortable_name, child
                 %td= child.born_on && l(child.born_on, :format => :long)
                 %td= child.village && child.village.name
                 %td= l child.last_visit_at.getlocal if child.last_visit_at

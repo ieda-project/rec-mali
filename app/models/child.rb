@@ -40,6 +40,10 @@ class Child < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def sortable_name
+    "#{last_name}, #{first_name}"
+  end
+
   delegate :index, :index_ratio, to: :last_visit, allow_nil: true
   for name, ratio in Diagnostic::INDICES do
     delegate name, ratio, to: :last_visit, allow_nil: true
