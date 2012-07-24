@@ -15,7 +15,7 @@ class QueriesController < ApplicationController
   def show
     back 'Afficher une autre statistique', queries_path
     @query = Query.find(params[:id])
-    @results, errors = @query.run
+    @results = @query.run
     respond_to do |format|
       format.html
       format.xml do

@@ -59,7 +59,9 @@ class Query < ActiveRecord::Base
       end
     end
 
-    return rel.group(MONTH[ca].(aref)).count('DISTINCT child_global_id'), nil
+    rel.group(MONTH[ca].(aref)).count('DISTINCT child_global_id').tap do
+      update_attribute :last_run_at, Time.now
+    end
   end
 
   def self.latest_run limit=4
