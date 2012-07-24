@@ -1,5 +1,3 @@
-require 'ruby-prof'
-
 module Csps::SyncProxy
   def self.for real_model
     Class.new(ActiveRecord::Base).tap do |model|
