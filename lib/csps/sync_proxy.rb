@@ -140,7 +140,7 @@ module Csps::SyncProxy
       columns = (column_names - [ primary_key, 'zone_id' ]).sort
       out.puts columns.join(?,)
 
-      exportable_for(zone).order(:created_at).each do |record|
+      exportable_for(zone).find_each do |record|
         columns.each do |col|
           v = record.send col
           out.puts case v

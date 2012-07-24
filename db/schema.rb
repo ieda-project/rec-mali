@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723200206) do
+ActiveRecord::Schema.define(:version => 20120724104128) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120723200206) do
   end
 
   add_index "children", ["global_id"], :name => "index_children_on_global_id"
+  add_index "children", ["temporary", "zone_id"], :name => "index_children_on_temporary_and_zone_id"
 
   create_table "classifications", :force => true do |t|
     t.datetime "created_at"
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20120723200206) do
   add_index "diagnostics", ["child_global_id"], :name => "index_diagnostics_on_child_global_id"
   add_index "diagnostics", ["type", "global_id"], :name => "index_diagnostics_on_type_and_global_id"
   add_index "diagnostics", ["type", "id"], :name => "index_diagnostics_on_type_and_id"
+  add_index "diagnostics", ["zone_id"], :name => "index_diagnostics_on_zone_id"
 
   create_table "illness_answers", :force => true do |t|
     t.string   "illness_global_id"
@@ -161,6 +163,7 @@ ActiveRecord::Schema.define(:version => 20120723200206) do
 
   add_index "results", ["classification_id"], :name => "index_results_on_classification_id"
   add_index "results", ["diagnostic_global_id"], :name => "index_results_on_diagnostic_global_id"
+  add_index "results", ["zone_id"], :name => "index_results_on_zone_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -198,6 +201,8 @@ ActiveRecord::Schema.define(:version => 20120723200206) do
     t.integer  "zone_id"
     t.string   "global_id"
   end
+
+  add_index "sign_answers", ["zone_id"], :name => "index_sign_answers_on_zone_id"
 
   create_table "signs", :force => true do |t|
     t.integer  "illness_id"
@@ -251,6 +256,8 @@ ActiveRecord::Schema.define(:version => 20120723200206) do
     t.integer  "zone_id"
     t.string   "global_id"
   end
+
+  add_index "users", ["zone_id"], :name => "index_users_on_zone_id"
 
   create_table "zones", :force => true do |t|
     t.integer  "parent_id"
