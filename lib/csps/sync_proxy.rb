@@ -1,3 +1,5 @@
+require 'ruby-prof'
+
 module Csps::SyncProxy
   def self.for real_model
     Class.new(ActiveRecord::Base).tap do |model|
@@ -38,7 +40,6 @@ module Csps::SyncProxy
   end
 
   def import_from path, zone
-    conn, tr = User.connection.instance_variable_get(:@connection), false
     dir = File.dirname path
     (real_model.attachment_definitions || []).each do |key,data|
       Dir.glob("#{dir}/*_#{real_model.name.pluralize.underscore}_#{key.to_s.pluralize}_*") do |f|
@@ -62,22 +63,22 @@ module Csps::SyncProxy
 
       if serial > zone.serial_numbers[real_model]
         bare_transaction do
-          tr = true
           bare_exec "DELETE FROM #{table_name} WHERE global_id LIKE ?", "#{zone.name}/%"
+          l = 1
           catch :end do
-            get = proc { src.gets or throw(:end) }
+            get = proc { l += 1; src.gets or throw(:end) }
             loop do
               keys, placeholders, values = %w(zone_id), %w(?), [zone.id]
               columns.each do |col|
                 keys << col
                 type, line = get.().chomp.split '',2
                 value = case type
-                  when ?: then eval %Q("#{line}")
+                  when ?: then JSON.parse(%Q(["#{line}"])).first
                   when ?t, ?f then type
                   when ?n
                     placeholders << 'NULL'
                     nil
-                  else raise("Bad dump")
+                  else raise("Bad dump at line #{l}")
                 end
                 if value
                   placeholders << '?'
@@ -135,23 +136,37 @@ module Csps::SyncProxy
       end
     end
 
-    File.open(path, 'w') do |out|
-      out.puts zone.serial_numbers[real_model]
-      columns = (column_names - [ primary_key, 'zone_id' ]).sort
-      out.puts columns.join(?,)
-
-      exportable_for(zone).find_each do |record|
-        columns.each do |col|
-          v = record.send col
-          out.puts case v
-            when true  then ?t
-            when false then ?f
-            when nil   then ?n
-            else ?: + v.to_s.inspect[1...-1]
-          end
+    columns = columns_hash.map do |name,data|
+      next if %w(id zone_id).include? name
+      name = name.dup # unfreeze
+      if data.type == :boolean
+        def name.export v; (v.nil? || v == '') ? 'n' : v; end
+      else
+        def name.export v
+          v ? ":#{v.to_s.inspect[1...-1]}" : 'n'
         end
       end
+      name
+    end.compact.sort
+
+    File.open path, 'w' do |out|
+      out.puts zone.serial_numbers[real_model]
+      out.puts columns.join(?,)
+
+      w, lastid = 0, 0
+      sql = exportable_for(zone).order('id ASC').limit(500).where('id > %ID%').to_sql
+      loop do
+        list = connection.execute(sql.sub('%ID%', lastid.to_s))
+        break if list.empty?
+        list.each do |r|
+          columns.each do |col|
+            out.puts col.export(r[col])
+          end
+        end
+        lastid = list.last['id']
+      end
     end
+
     zone.exported! real_model
     true
   end
