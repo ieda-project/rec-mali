@@ -161,6 +161,10 @@ class Diagnostic < ActiveRecord::Base
     done_on ? done_on.to_date : Date.today
   end
 
+  def self.age_reference_field
+    :done_on
+  end
+
   INDICES = {
     'weight_age' => 'wfa',
     'height_age' => 'hfa',

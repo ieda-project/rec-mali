@@ -2,8 +2,9 @@ class Child < ActiveRecord::Base
   include Csps::Exportable
   include Csps::Age
 
-  validates_presence_of :first_name, :last_name
-  validates_inclusion_of :gender, in: [true, false]
+  validates_presence_of :village
+  validates_presence_of :first_name, :last_name, :if => :final?
+  validates_inclusion_of :gender, in: [true, false], :if => :final?
 
   belongs_to :village, class_name: 'Zone'
   globally_has_many :diagnostics do
@@ -44,58 +45,13 @@ class Child < ActiveRecord::Base
     "#{last_name}, #{first_name}"
   end
 
+  def final?
+    not temporary?
+  end
+
   delegate :index, :index_ratio, to: :last_visit, allow_nil: true
   for name, ratio in Diagnostic::INDICES do
     delegate name, ratio, to: :last_visit, allow_nil: true
-  end
-  
-  def self.group_stats_by status, rs, conds
-    m = self.minimum(:created_at)
-    return {} if m.nil?
-    d1 = m.beginning_of_month
-    d2 = d1.next_month.to_date
-    grs = {}
-    signs = {}
-    while Date.today.next_month.beginning_of_month >= d2
-      diagnosed = Diagnostic.between(d1, d2).includes(results: :classification)#.all
-      conds.each do |cond|
-        case cond['field']
-        when 'classifications' then
-          diagnosed = diagnosed.select do |d|
-            d.results.map { |r| r.classification.name }.send(cond['operator'], cond['value'])
-          end
-        when /sign_answers\[\w+\]/ then
-          # get wanted sign (with caching)
-          sign_key = cond['field'].scan(/sign_answers\[(\w+)\]/).first.first
-          signs[sign_key] ||= Sign.find_by_key(sign_key)
-          # get answer
-          diagnosed = diagnosed.select do |d|
-            answer = d.sign_answers.find_by_sign_id(signs[sign_key].id)
-            if answer
-              answer.raw_value.send(cond['operator'], answer.class.cast(cond['value']))
-            else
-              false
-            end
-          end
-        end
-      end
-      diagnosed = diagnosed.map &:child_global_id
-      k = dates2key(d1)
-      grs[k] = 0
-      rs.each do |r|
-        case status
-        when 'new' then
-          grs[k] += 1 if r.created_at >= d1 and r.created_at < d2
-        when 'old' then
-          grs[k] += 1 if r.created_at < d1 and diagnosed.include? r.global_id
-        when 'follow' then
-          grs[k] += 1 if diagnosed.include? r.global_id
-        end
-      end
-      d1 = d1.next_month
-      d2 = d2.next_month
-    end
-    grs
   end
   
   def self.dates2key d

@@ -7,15 +7,18 @@
 %section
   %h1
     = @query.title
-  %h2 Graphique
-  %div.query-graph!= ziya_chart query_url(@query, format: :xml), size: '1200x300'
-  %table.results
-    %thead
-      %tr
-        %th{:colspan => 4}
-          Valeurs
-    %tbody
-      - @results.keys.sort.reverse.each do |k|
-        %tr{ :class => cycle("odd", "even") }
-          %td= k
-          %td= @results[k]
+  - if @results.any?
+    %h2 Graphique
+    %div.query-graph!= ziya_chart query_url(@query, format: :xml), size: '1200x300'
+    %table.results
+      %thead
+        %tr
+          %th{:colspan => 4}
+            Valeurs
+      %tbody
+        - @results.keys.sort.reverse.each do |k|
+          %tr{ :class => cycle("odd", "even") }
+            %td= k
+            %td= @results[k]
+  - else
+    %p Pas de données affichables

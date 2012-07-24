@@ -2,6 +2,10 @@ class SignIntegerAnswer < SignAnswer
   def value
     integer_value || 0
   end
+  def self.field
+    :integer_value
+  end
+
   def spss_value
     integer_value || ''
   end

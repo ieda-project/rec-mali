@@ -19,13 +19,17 @@ class QueriesController < ApplicationController
     respond_to do |format|
       format.html
       format.xml do
-        chart = Ziya::Charts::Column.new
-        chart.add :theme, 'pimp'
-        labels = @results.keys.sort
-        labels = labels.map { |k| k[-2..-1] == '01' ? k[0..3] : '' } if labels.size > 12
-        chart.add :axis_category_text, labels
-        chart.add :series, '', @results.keys.sort.map { |k| @results[k] }
-        render xml: chart.to_xml
+        if @results.any?
+          chart = Ziya::Charts::Column.new
+          chart.add :theme, 'pimp'
+          labels = @results.keys.sort
+          labels = labels.map { |k| k[-2..-1] == '01' ? k[0..3] : '' } if labels.size > 12
+          chart.add :axis_category_text, labels
+          chart.add :series, '', @results.keys.sort.map { |k| @results[k] }
+          render xml: chart.to_xml
+        else
+          render nothing: true
+        end
       end
     end
   end

@@ -2,111 +2,79 @@ require 'json'
 
 class Query < ActiveRecord::Base
   enum :case_status, %w{new old follow}
+  NEW = 0
+  OLD = 1
+  FOLLOW = 2
+
+  MONTH = {
+    'SQLite' => ->(f) { "strftime('%Y-%m', #{f})" }}
+  AGE = {
+    'SQLite' => ->(ref, age) { "date(#{ref}, '-#{age} months')" }}
+
   validates_presence_of :title, :case_status, :klass
 
   def run
-    errors, ar_conditions, ar_params = [], [], []
-    conditions = JSON.parse(self.conditions)
-    ruby_conds = []
-    conditions.each do |data|
-      q_attr, operator, value, type = data['attribute'], data['operator'], data['value'], data['type']
-      if type == 'ruby'
-        ruby_conds << data
-        next
-      end
-      klass = self.klass.constantize
-      sql = ["id IN (SELECT #{klass.table_name}.id FROM #{klass.table_name}"]
-      q_attr.split('.').each do |path_item|
-        reflection = klass.reflect_on_association(path_item.intern)
-        case (reflection && reflection.macro)
-        when :has_many
-          sql << "LEFT JOIN #{reflection.table_name} ON #{klass.table_name}.id = #{reflection.table_name}.#{reflection.primary_key_name}"
-          klass = reflection.class_name.constantize
-        when :belongs_to
-          sql << "LEFT JOIN #{reflection.table_name} ON #{reflection.table_name}.id = #{klass.table_name}.#{reflection.primary_key_name}"
-          klass = reflection.class_name.constantize
-        when :has_one
-          sql << "LEFT JOIN #{reflection.table_name} ON #{reflection.table_name}.#{reflection.primary_key_name} = #{klass.table_name}.id"
-          klass = reflection.class_name.constantize
-        else
-          cols = klass.columns_hash.values
-          if cols.map(&:name).include?(path_item)
-            col = klass.columns_hash[path_item]
-            col_type = type || col.type
-            path_item = 'born_on' if path_item == 'age'
-            # /UGLY
-            sql_cond, sql_params, sql_error = self.send("build_#{col_type.to_s.downcase}_sql", klass, path_item, operator, value)
-            sql << "WHERE #{sql_cond}"
-            ar_params << sql_params
+    k = klass.constantize
+    rel, aref = k, k.age_reference_field
+    ca = connection.adapter_name
+
+    sub = "(SELECT min(global_id) FROM diagnostics GROUP BY child_global_id)"
+    rel = case case_status
+      when NEW then rel.where "global_id IN #{sub}"
+      when OLD then rel.where "global_id NOT IN #{sub}"
+      else rel
+    end
+
+    for cond in Array(JSON.parse(conditions))
+      rel = case cond['type']
+        when 'age'
+          rel.where "#{AGE[ca].(aref, cond['value'].to_i)} #{cond['operator']} #{k.table_name}.born_on"
+        when 'field', 'boolean'
+          path = cond['attribute'].split '.'
+          inkl, model, field = nil, k, path.pop
+
+          if cond['type'] == 'boolean'
+            val = cond['value'] == 'true'
+            op = '='
           else
-            raise "Invalid path item '#{path_item}'"
+            val = cond['value']
+            op =  cond['operator']
           end
-        end
-      end
-      sql << ')'
-      ar_conditions << sql.join("\n")
-    end
-    ar_conditions = ar_conditions.join(' AND ')
-    rs = if ar_conditions.blank?
-      self.klass.constantize.all
-    else
-      self.klass.constantize.all(:conditions => ar_params.reverse.push(ar_conditions).reverse)
-    end
-    grs = klass.constantize.group_stats_by(case_status_key, rs, ruby_conds)
-    update_attribute :last_run_at, Time.now
-    return grs, nil
-  end
 
-  def build_float_sql klass, kattr, operator, value
-    if %w(< <= = >= >).include?(operator)
-      return "#{klass.table_name}.#{kattr} #{operator} ?", value, nil
-    else
-      return nil, nil, 'invalid operator'
-    end
-  end
+          path.each do |i|
+            i = i.intern
+            model = model.reflections[i].klass
+            inkl = build_include_hash inkl, i
+          end
 
-  def build_boolean_sql klass, kattr, operator, value
-    if operator == '='
-      return "#{klass.table_name}.#{kattr} = ?", value == 'true', nil
-    else
-      return "#{klass.table_name}.#{kattr} != ?", value == 'true', nil
-    end
-  end
-
-  def build_enumeration_sql klass, kattr, operator, values
-    k = klass.const_get(kattr.pluralize.upcase)
-    "#{klass.table_name}.#{kattr} IN (#{values.split(' ').map { |v| k.index(v) }.join(',')})"
-  end
-
-  def build_string_sql klass, kattr, operator, values
-    return "#{klass.table_name}.#{kattr} IN (?)", values.split(' '), nil
-  end
-
-  def build_integer_sql klass, kattr, operator, value
-    if klass.constants.include?(kattr.pluralize.upcase)
-      return build_enumeration_sql(klass, kattr, operator, value)
-    else
-      if %w(< <= = >= >).include?(operator)
-        return "#{klass.table_name}.#{kattr} #{operator} ?", value, nil
-      else
-        return nil, nil, 'invalid operator'
+          rel = rel.includes(inkl) if inkl
+          rel.where("#{model.table_name}.#{field} #{op} ?", val)
+        when 'sign'
+          raise "Sign is only supported by Diagnostic" if k != Diagnostic
+          sign = Sign.find_by_key cond['sign']
+          rel.where(
+            "global_id IN (
+              SELECT diagnostic_global_id FROM sign_answers
+              WHERE sign_id=? AND #{sign.answer_class.field} #{cond['operator']} ?)", sign.id, cond['value'])
       end
     end
-  end
 
-  def build_age_sql klass, kattr, operator, value
-    age = value.to_i
-    case operator
-    when '<', '<=', '>=', '>'
-      return "? #{operator} #{klass.table_name}.#{kattr}", age.months.ago, nil
-    when '='
-      return "#{klass.table_name}.#{kattr} >= ? AND #{klass.table_name}.#{kattr} < ?", [age.years.ago, (age+1).years.ago - 1.day], nil
-    else
-      return nil, nil, 'invalid operator'
-    end
+    return rel.group(MONTH[ca].(aref)).count('DISTINCT child_global_id'), nil
   end
 
   def self.latest_run limit=4
     all(:order => 'last_run_at DESC', :limit => limit, :conditions => ['last_run_at IS NOT NULL'])
+  end
+
+  protected
+
+  def build_include_hash incl, n
+    case incl
+      when nil then n
+      when Symbol then { incl => n }
+      when Hash
+        key, value = incl.first
+        { key => build_include_hash(value, n) }
+    end
   end
 end

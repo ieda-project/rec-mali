@@ -6,6 +6,9 @@ class SignBooleanAnswer < SignAnswer
       when nil then 'n/a'
     end
   end
+  def self.field
+    :boolean_value
+  end
 
   def spss_value
     case boolean_value

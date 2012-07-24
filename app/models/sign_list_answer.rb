@@ -5,6 +5,9 @@ class SignListAnswer < SignAnswer
   def value
     applicable? ? I18n.t("signs.#{list_value}") : 'n/a'
   end
+  def self.field
+    :list_value
+  end
 
   def raw_value
     list_value
