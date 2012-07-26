@@ -1,4 +1,12 @@
 module Csps::SyncProxy
+  if `which java`.present?
+    JAVA = 'java'
+  elsif File.exist?('/opt/jre')
+    JAVA = '/opt/jre/bin/java'
+  else
+    JAVA = false
+  end
+
   def self.for real_model
     Class.new(ActiveRecord::Base).tap do |model|
       model.module_eval do
@@ -135,8 +143,8 @@ module Csps::SyncProxy
       end
     end
 
-    if connection.adapter_name == 'SQLite'
-      system('java',
+    if JAVA && connection.adapter_name == 'SQLite'
+      system(JAVA,
         '-classpath', 'java/sqlite3.jar:java/dumper.jar', 'Dumper',
         zone.serial_numbers[real_model].to_s,
         Rails.configuration.database_configuration[Rails.env][:database],
