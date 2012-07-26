@@ -1,528 +1,509 @@
 @new children 0-11 months
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"new",
   "conds": [{
     "type":"age",
-    "attribute":"born_on",
     "operator":"<=",
-    "value":"11"
+    "value":11
   }]
 }
 
 @new children 12-23 months
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"new",
   "conds": [{
     "type":"age",
-    "attribute":"born_on",
     "operator":">=",
-    "value":"12"
+    "value":12
   }, {
     "type":"age",
-    "attribute":"born_on",
     "operator":"<=",
-    "value":"23"
+    "value":23
   }]
 }
 
 @new children 24-59 months
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"new",
   "conds": [{
     "type":"age",
-    "attribute":"born_on",
     "operator":">=",
-    "value":"24"
+    "value":24
   }, {
     "type":"age",
-    "attribute":"born_on",
     "operator":"<=",
-    "value":"59"
+    "value":59
   }]
 }
 
 @old children 0-11 months
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"old",
   "conds": [{
     "type":"age",
-    "attribute":"born_on",
     "operator":"<=",
-    "value":"11"
+    "value":11
   }]
 }
 
 @old children 12-23 months
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"old",
   "conds": [{
     "type":"age",
-    "attribute":"born_on",
     "operator":">=",
-    "value":"12"
+    "value":12
   }, {
     "type":"age",
-    "attribute":"born_on",
     "operator":"<=",
-    "value":"23"
+    "value":23
   }]
 }
 
 @old children 24-59 months
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"old",
   "conds": [{
     "type":"age",
-    "attribute":"born_on",
     "operator":">=",
-    "value":"24"
+    "value":24
   }, {
     "type":"age",
-    "attribute":"born_on",
     "operator":"<=",
-    "value":"59"
+    "value":59
   }]
 }
 
 @follow children 0-11 months
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
     "type":"age",
-    "attribute":"born_on",
     "operator":"<=",
-    "value":"11"
+    "value":11
   }]
 }
 
 @follow children 12-23 months
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
     "type":"age",
-    "attribute":"born_on",
     "operator":">=",
-    "value":"12"
+    "value":12
   }, {
     "type":"age",
-    "attribute":"born_on",
     "operator":"<=",
-    "value":"23"
+    "value":23
   }]
 }
 
 @follow children 24-59 months
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
     "type":"age",
-    "attribute":"born_on",
     "operator":">=",
-    "value":"24"
+    "value":24
   }, {
     "type":"age",
-    "attribute":"born_on",
     "operator":"<=",
-    "value":"59"
+    "value":59
   }]
 }
 
 @follow children pas de pneumonie
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "attribute": "classifications.name",
+    "operator": "=",
     "value": "Pas de pneumonie: toux ou rhume"
   }]
 }
 
 @follow children pneumonie
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Pneumonie"
   }]
 }
 
 @follow children pneumonie grave
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Pneumonie grave ou maladie très grave"
   }]
 }
 
 @follow children signes deshydratation
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Signes évidents de déshydratation"
   }]
 }
 
 @follow children deshydratation severe
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Déshydratation sévère"
   }]
 }
 
 @follow children diarrhee persistente
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Diarrhée persistente"
   }]
 }
 
 @follow children diarrhee severe
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Diarrhée persistente sévère"
   }]
 }
 
 @follow children dysenterie
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Dysenterie"
   }]
 }
 
 @follow children antecedent rougeole
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Antécédent de rougeole"
   }]
 }
 
 @follow children rougeole
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Rougeole"
   }]
 }
 
 @follow children rougeole complication
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Rougeole avec complication aux yeux ou à la bouche"
   }]
 }
 
 @follow children rougeole grave
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Rougeole grave et compliquée"
   }]
 }
 
 @follow children infection chronique
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Infection chronique"
   }]
 }
 
 @follow children infection aigue
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Infection aiguë"
   }]
 }
 
 @follow children mastoidite
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Mastoïdïte"
   }]
 }
 
 @follow children anemie
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Anémie"
   }]
 }
 
 @follow children anemie grave
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Anémie grave"
   }]
 }
 
 @follow children mam
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "MAM"
   }]
 }
 
 @follow children mass
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "MASs"
   }]
 }
 
 @follow children masc
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "MASc"
   }]
 }
 
 @follow children vih pru probable
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Infection VIH peu problable"
   }]
 }
 
 @follow children vih symp suspecte
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Infection VIH symptomatique suspecte"
   }]
 }
 
 @follow children vih exposition
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Infection VIH possible / exposition au VIH"
   }]
 }
 
 @follow children vih symp probable
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Infection VIH symptomatique probable"
   }]
 }
 
 @follow children vih confirmee
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Infection VIH confirmée"
   }]
 }
 
 @follow children vih symp confirmee
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Infection VIH symptomatique confirmée"
   }]
 }
 
 @follow children boy paludisme
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
     "type":"boolean",
-    "attribute":"gender",
-    "operator":"=",
-    "value":"true"
+    "attribute":"child.gender",
+    "value":true
   }, {
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Paludisme simple"
   }]
 }
 
 @follow children girl paludisme
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
     "type":"boolean",
-    "attribute":"gender",
-    "operator":"=",
-    "value":"false"
+    "attribute":"child.gender",
+    "value":false
   }, {
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Paludisme simple"
   }]
 }
 
 @follow children boy paludisme grave
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
     "type":"boolean",
-    "attribute":"gender",
-    "operator":"=",
-    "value":"true"
+    "attribute":"child.gender",
+    "value":true
   }, {
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Maladie fébrile très grave ou paludisme grave"
   }]
 }
 
 @follow children girl paludisme grave
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
     "type":"boolean",
     "attribute":"gender",
-    "operator":"=",
-    "value":"false"
+    "value":false
   }, {
-    "type": "ruby",
-    "field": "classifications",
-    "operator": "include?",
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
     "value": "Maladie fébrile très grave ou paludisme grave"
   }]
 }
 
 @follow children fievre 14
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "sign_answers[fievre_presence_duree]",
+    "type": "sign",
+    "sign": "fievre_presence_duree",
     "operator": ">",
     "value": 14
   }]
@@ -530,11 +511,11 @@
 
 @follow children ulcerations
 {
-  "klass":"Child",
+  "klass":"Diagnostic",
   "case_status":"follow",
   "conds": [{
-    "type": "ruby",
-    "field": "sign_answers[ulcerations]",
+    "type": "sign",
+    "sign": "ulcerations",
     "operator": "!=",
     "value": "absentes"
   }]
