@@ -159,8 +159,9 @@ namespace :sync do
       keys = []
       `#{gpg} -k --with-colons`.each_line do |l|
         l = l.split ':'
-        keys << l[9].sub(/ .*$/, '') if l[0] == 'pub'
+        keys << l[9].sub(/ .*$/, '') if %w(pub uid).include? l[0]
       end
+      keys.uniq!
 
       # EXPORTING
       if Zone.csps.parent_id && (!list || list.any?)
