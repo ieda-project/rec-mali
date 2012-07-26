@@ -76,7 +76,8 @@ module Csps::SyncProxy
                   when ?n
                     placeholders << 'NULL'
                     nil
-                  else raise("Bad dump at line #{l}")
+                  else
+                    raise("Bad dump at line #{l}")
                 end
                 if value
                   placeholders << '?'
@@ -134,34 +135,44 @@ module Csps::SyncProxy
       end
     end
 
-    columns = columns_hash.map do |name,data|
-      next if %w(id zone_id).include? name
-      name = name.dup # unfreeze
-      if data.type == :boolean
-        def name.export v; (v.nil? || v == '') ? 'n' : v; end
-      else
-        def name.export v
-          v ? ":#{v.to_s.inspect[1...-1]}" : 'n'
-        end
-      end
-      name
-    end.compact.sort
-
-    File.open path, 'w' do |out|
-      out.puts zone.serial_numbers[real_model]
-      out.puts columns.join(?,)
-
-      w, lastid = 0, 0
-      sql = exportable_for(zone).order('id ASC').limit(500).where('id > %ID%').to_sql
-      loop do
-        list = connection.execute(sql.sub('%ID%', lastid.to_s))
-        break if list.empty?
-        list.each do |r|
-          columns.each do |col|
-            out.puts col.export(r[col])
+    if connection.adapter_name == 'SQLite'
+      system('java',
+        '-classpath', 'java/sqlite3.jar:java/dumper.jar', 'Dumper',
+        zone.serial_numbers[real_model].to_s,
+        Rails.configuration.database_configuration[Rails.env][:database],
+        table_name,
+        exportable_for(zone).to_sql.sub(/^.*WHERE\s+/, ''),
+        path)
+    else
+      columns = columns_hash.map do |name,data|
+        next if %w(id zone_id).include? name
+        name = name.dup # unfreeze
+        if data.type == :boolean
+          def name.export v; (v.nil? || v == '') ? 'n' : v; end
+        else
+          def name.export v
+            v ? ":#{v.to_s.inspect[1...-1]}" : 'n'
           end
         end
-        lastid = list.last['id']
+        name
+      end.compact.sort
+
+      File.open path, 'w' do |out|
+        out.puts zone.serial_numbers[real_model]
+        out.puts columns.join(?,)
+
+        lastid = 0
+        sql = exportable_for(zone).order('id ASC').limit(500).where('id > %ID%').to_sql
+        loop do
+          list = connection.execute(sql.sub('%ID%', lastid.to_s))
+          break if list.empty?
+          list.each do |r|
+            columns.each do |col|
+              out.puts col.export(r[col])
+            end
+          end
+          lastid = list.last['id']
+        end
       end
     end
 
