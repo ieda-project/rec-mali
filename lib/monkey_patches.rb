@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Date
   def full_months_from other
     (year - other.year)*12 + (month - other.month) - (other.day <= day ? 0 : 1)
@@ -59,9 +61,16 @@ end
 require 'iconv'
 
 class String
+  @@iconv_cacheize = Iconv.new('ASCII//IGNORE//TRANSLIT', 'UTF-8')
+  CACHEIZE_FROM = "áàâäçéèêëíîïóòôöúùûüÿÁÀÂÄÇÉÈÊËÍÎÏÓÒÔÖÚÙÛÜŸ"
+  CACHEIZE_INTO = "aaaaceeeeiiioooouuuuyaaaaceeeeiiioooouuuuy"
+
   def cacheize
-    Iconv.new('ASCII//IGNORE//TRANSLIT', encoding.name).iconv(
-      gsub(/[-'\s]+/, ' ')).downcase.gsub(/[^a-z ]/, '').split(' ').sort.join(' ')
+    @@iconv_cacheize.iconv(
+      tr(CACHEIZE_FROM, CACHEIZE_INTO).
+      gsub(/[œŒ]/, 'oe').
+      gsub(/[-'\s]+/, ' ')).
+    downcase.gsub(/[^a-z ]/, '').split(' ').sort.join(' ')
   end
   def cacheize!
     self[0..-1] = cacheize
