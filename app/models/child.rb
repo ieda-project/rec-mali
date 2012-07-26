@@ -60,7 +60,6 @@ class Child < ActiveRecord::Base
 
   protected
 
-  @@iconv = Iconv.new('ASCII//IGNORE//TRANSLIT', 'UTF-8')
   def fill_cache_fields
     self.cache_name = name.cacheize
   end
