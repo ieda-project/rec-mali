@@ -7,9 +7,11 @@ class Query < ActiveRecord::Base
   FOLLOW = 2
 
   MONTH = {
-    'SQLite' => ->(f) { "strftime('%Y-%m', #{f})" }}
+    'SQLite' => ->(f) { "strftime('%Y-%m', #{f})" },
+    'PostgreSQL' => ->(f) { "to_char(#{f}, 'YYYY-MM')" }}
   AGE = {
-    'SQLite' => ->(ref, age) { "date(#{ref}, '-#{age} months')" }}
+    'SQLite' => ->(ref, age) { "date(#{ref}, '-#{age} months')" },
+    'PostgreSQL' => ->(ref, age) { "(#{ref} - interval '#{age} months')" }}
 
   validates_presence_of :title, :case_status, :klass
 
