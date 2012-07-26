@@ -73,9 +73,8 @@ class Dumper {
 
     PreparedStatement st = db.prepareStatement(
       "SELECT * FROM "+ args[2] +
-      " WHERE " + args[3] + " AND id > ? ORDER BY id ASC LIMIT ?");
+      " WHERE " + args[3] + " AND id > ? ORDER BY id ASC LIMIT 500");
     st.setInt(1, 0);
-    st.setInt(2, 500);
     int lastid = 0;
     while (true) {
       ResultSet res = st.executeQuery();
