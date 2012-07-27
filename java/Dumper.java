@@ -55,19 +55,21 @@ class Dumper {
     List<Column> columns = new ArrayList<Column>(32);
     boolean first = true;
     while (colset.next()) {
-      Column col = null;
       String n = colset.getString(4);
-      String type = colset.getString(6);
-      out.write(first ? n : ","+n); first = false;
+      if (!n.equals("id") && !n.equals("zone_id")) {
+        Column col = null;
+        String type = colset.getString(6);
+        out.write(first ? n : ","+n); first = false;
 
-      if (type.equals("BOOLEAN")) {
-        col = new BooleanColumn(n);
-      } else if (type.equals("TEXT")) {
-        col = new TextColumn(n);
-      } else {
-        col = new OtherColumn(n);
+        if (type.equals("BOOLEAN")) {
+          col = new BooleanColumn(n);
+        } else if (type.equals("TEXT")) {
+          col = new TextColumn(n);
+        } else {
+          col = new OtherColumn(n);
+        }
+        columns.add(col);
       }
-      columns.add(col);
     }
     out.newLine();
 
