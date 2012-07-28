@@ -203,8 +203,8 @@ namespace :sync do
 
           # PACKING UP
           exported.keys.each do |zone|
-            print "Packing and encrypting for #{zone.name}: "
             tgts = [ zone, Zone.csps, *zone.upchain ].map(&:folder_name).uniq & keys
+            print "Packing and encrypting targets #{tgts.join(', ')}: "
             Dir.chdir "#{tmp}/#{zone.folder_name}" do
               `tar czf - *|#{gpg} --yes -e --output #{remote}/#{zone.folder_name}.tgz.gpg -r #{tgts.join(' -r ')}`
             end

@@ -79,7 +79,12 @@ module Csps::SyncProxy
                 keys << col
                 type, line = get.().chomp.split '',2
                 value = case type
-                  when ?: then JSON.parse(%Q(["#{line}"])).first
+                  when ?:
+                    begin
+                      JSON.parse(%Q(["#{line}"])).first
+                    rescue => e
+                      raise "#{e.message} at line #{l}"
+                    end
                   when ?t, ?f then type
                   when ?n
                     placeholders << 'NULL'
