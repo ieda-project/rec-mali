@@ -12,9 +12,16 @@
           %br/
           %span.warning Ne modifiez la date que si celle-ci est incorrecte !
         - else
-          #{l @diagnostic.born_on},
-          %span.age{'data-age' => @diagnostic.age, 'data-months' => @diagnostic.months}<= months_to_text @diagnostic.months
+          = l @diagnostic.born_on
+          %span.remark (date saisie le jour de consultation)
         %br/
+
+        - unless @diagnostic.new_record?
+          %strong Age :
+          %span.age{'data-age' => @diagnostic.age, 'data-months' => @diagnostic.months}<= months_to_text @diagnostic.months
+          %span.remark (à la date de consultation : #{l @diagnostic.done_on.to_date})
+          %br/
+
         %strong Zone : #{@child.village.try(:name) || '-'}
 
     .measurements= partial 'diagnostics/edit_measurements', locals: { form: form }
