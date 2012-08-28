@@ -58,70 +58,85 @@ module Csps::SyncProxy
     end
     return unless File.exist? path
 
-    File.open(path, 'r') do |src|
-      serial = src.gets.chomp
-      if serial =~ /\A[0-9]+\Z/
-        serial = serial.to_i
-      else
-        raise "Bad export format"
-      end
-      columns = src.gets.chomp.split(?,)
+    if JAVA && connection.adapter_name == 'SQLite'
+      sn = zone.serial_numbers[real_model].to_s
+      bare_exec 'BEGIN TRANSACTION'
+      bare_exec 'COMMIT'
 
-      if serial > zone.serial_numbers[real_model]
-        bare_transaction do
-          bare_exec "DELETE FROM #{table_name} WHERE global_id LIKE ?", "#{zone.name}/%"
-          l = 1
-          catch :end do
-            get = proc { l += 1; src.gets or throw(:end) }
-            loop do
-              keys, placeholders, values = %w(zone_id), %w(?), [zone.id]
-              columns.each do |col|
-                keys << col
-                type, line = get.().chomp.split '',2
-                value = case type
-                  when ?:
-                    begin
-                      JSON.parse(%Q(["#{line}"])).first
-                    rescue => e
-                      raise "#{e.message} at line #{l}"
-                    end
-                  when ?t, ?f then type
-                  when ?n
-                    placeholders << 'NULL'
-                    nil
-                  else
-                    raise("Bad dump at line #{l}")
+      system(JAVA,
+        '-classpath', 'java/sqlite3.jar:java', 'Loader',
+        sn,
+        Rails.configuration.database_configuration[Rails.env][:database],
+        table_name,
+        real_model.name,
+        zone.name,
+        path)
+    else
+      File.open(path, 'r') do |src|
+        serial = src.gets.chomp
+        if serial =~ /\A[0-9]+\Z/
+          serial = serial.to_i
+        else
+          raise "Bad export format"
+        end
+        columns = src.gets.chomp.split(?,)
+
+        if serial > zone.serial_numbers[real_model]
+          bare_transaction do
+            bare_exec "DELETE FROM #{table_name} WHERE global_id LIKE ?", "#{zone.name}/%"
+            l = 1
+            catch :end do
+              get = proc { l += 1; src.gets or throw(:end) }
+              loop do
+                keys, placeholders, values = %w(zone_id), %w(?), [zone.id]
+                columns.each do |col|
+                  keys << col
+                  type, line = get.().chomp.split '',2
+                  value = case type
+                    when ?:
+                      begin
+                        JSON.parse(%Q(["#{line}"])).first
+                      rescue => e
+                        raise "#{e.message} at line #{l}"
+                      end
+                    when ?t, ?f then type
+                    when ?n
+                      placeholders << 'NULL'
+                      nil
+                    else
+                      raise("Bad dump at line #{l}")
+                  end
+                  if value
+                    placeholders << '?'
+                    values << value
+                  end
                 end
-                if value
-                  placeholders << '?'
-                  values << value
-                end
+
+                bare_exec(
+                  "INSERT INTO #{table_name} (#{keys.join(',')}) VALUES (#{placeholders.join(',')})", 
+                  values)
               end
+            end
 
+            # zone.serial_numbers[real_model] = serial
+            sn = bare_exec(
+              "SELECT id FROM serial_numbers WHERE model=? AND zone_id=?",
+              [ real_model.name, zone.id ]).first
+            if sn
               bare_exec(
-                "INSERT INTO #{table_name} (#{keys.join(',')}) VALUES (#{placeholders.join(',')})", 
-                values)
+                "UPDATE serial_numbers SET value=?,exported=? WHERE id=?",
+                [ serial, 't', sn['id'] ])
+            else
+              bare_exec(
+                "INSERT INTO serial_numbers (model,zone_id,value,exported) VALUES (?,?,?,?)",
+                [ real_model.name, zone.id, serial, 't' ])
             end
           end
-
-          # zone.serial_numbers[real_model] = serial
-          sn = bare_exec(
-            "SELECT id FROM serial_numbers WHERE model=? AND zone_id=?",
-            [ real_model.name, zone.id ]).first
-          if sn
-            bare_exec(
-              "UPDATE serial_numbers SET value=?,exported=? WHERE id=?",
-              [ serial, 't', sn['id'] ])
-          else
-            bare_exec(
-              "INSERT INTO serial_numbers (model,zone_id,value,exported) VALUES (?,?,?,?)",
-              [ real_model.name, zone.id, serial, 't' ])
-          end
+          bare_exec "VACUUM"
+          true
+        else
+          false
         end
-        bare_exec "VACUUM"
-        true
-      else
-        false
       end
     end
   end
