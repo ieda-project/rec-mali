@@ -14,15 +14,12 @@ gem 'color'
 gem 'logging'
 gem 'paperclip'
 gem 'state_machine'
+gem 'pg'
+gem 'uuid'
 
 group :development, :test, :production do
   gem 'thin'
   gem 'sqlite3'
-end
-
-group :heroku do
-  gem 'pg'
-  gem 'hassle', git: 'http://github.com/Papipo/hassle.git'
 end
 
 group :test do
