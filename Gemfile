@@ -2,7 +2,7 @@ source 'http://gemcutter.org'
 
 gem 'rails', '>=3', '<3.1'
 gem 'haml'
-gem 'sass'
+gem 'sass', require: false
 gem 'rake', '0.8.7'
 
 gem 'bcrypt-ruby', require: 'bcrypt'
