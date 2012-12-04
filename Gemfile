@@ -23,8 +23,7 @@ group :development, :test, :production do
 end
 
 group :heroku do
-  #gem 'compass-rails'
-  gem 'hassle'
+  gem 'hassle', git: 'http://github.com/Papipo/hassle.git'
   gem 'pg'
 end
 
