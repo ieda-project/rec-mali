@@ -68,7 +68,7 @@ Illness.transaction do
   UNIT = 1
   FORMULA = 2
 
-  unless Medicine.any?
+  unless Medicine.count > 0
     puts '==> Creating medicines'
 
     File.open('db/fixtures/medicines.txt', 'r') do |f|
@@ -113,7 +113,8 @@ Illness.transaction do
     end
   end
 
-  has_treatments, illnesses = Treatment.any?, {}
+  has_treatments = Treatment.count > 0
+  illnesses = {}
   for group in %w(child newborn infant) do
     puts "==> Checking age group: #{group}"
 
@@ -255,7 +256,7 @@ Illness.transaction do
     end
   end
 
-  unless TreatmentHelp.any?
+  unless TreatmentHelp.count > 0
     puts '==> Creating treatment help'
 
     File.open('db/fixtures/help.csv', 'r') do |f|
@@ -272,7 +273,7 @@ Illness.transaction do
     end
   end
 
-  unless Query.any?
+  unless Query.count > 0
     puts '==> Loading translations'
 
     t = {}
@@ -300,7 +301,7 @@ Illness.transaction do
     end
   end
 
-  unless Index.any?
+  unless Index.count > 0
     puts '==> Creating indices'
 
     Index::NAMES.each do |name|
