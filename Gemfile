@@ -14,12 +14,16 @@ gem 'color'
 gem 'logging'
 gem 'paperclip'
 gem 'state_machine'
-gem 'pg'
 gem 'uuid'
+gem 'thin'
 
 group :development, :test, :production do
-  gem 'thin'
   gem 'sqlite3'
+end
+
+group :heroku do
+  gem 'hassle'
+  gem 'pg'
 end
 
 group :test do
