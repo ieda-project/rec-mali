@@ -1,8 +1,8 @@
 source 'http://gemcutter.org'
 
 gem 'rails', '>=3', '<3.1'
-gem 'haml'
-gem 'sass', require: false
+gem 'haml', '3.1.4'
+gem 'sass', '3.1.15'
 gem 'rake', '0.8.7'
 
 gem 'bcrypt-ruby', require: 'bcrypt'
@@ -23,7 +23,7 @@ group :development, :test, :production do
 end
 
 group :heroku do
-  gem 'compass-rails'
+  #gem 'compass-rails'
   gem 'hassle'
   gem 'pg'
 end
