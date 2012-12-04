@@ -1,6 +1,6 @@
 class RerunSeedingIfNeeded < ActiveRecord::Migration
   def self.up
-    if Illness.any?
+    if Illness.count > 0
       ActiveRecord::Base.subclasses.each &:reset_column_information
       load "#{File.dirname(__FILE__)}/../seeds.rb"
     end
