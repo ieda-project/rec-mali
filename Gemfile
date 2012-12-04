@@ -23,6 +23,7 @@ group :development, :test, :production do
 end
 
 group :heroku do
+  gem 'compass-rails'
   gem 'hassle'
   gem 'pg'
 end
