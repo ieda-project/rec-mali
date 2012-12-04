@@ -103,7 +103,7 @@ class Zone < ActiveRecord::Base
 
     def unsynced
       Zone.where(
-        '(last_import_at AND last_import_at < :old) OR (last_export_at AND last_export_at < :old)',
+        '(last_import_at IS NOT NULL AND last_import_at < :old) OR (last_export_at IS NOT NULL AND last_export_at < :old)',
         old: 90.days.ago).count
     end
   end
