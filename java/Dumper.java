@@ -63,7 +63,7 @@ class Dumper {
 
         if (type.equals("BOOLEAN")) {
           col = new BooleanColumn(n);
-        } else if (type.equals("TEXT")) {
+        } else if (type.indexOf("VARCHAR") >= 0) {
           col = new TextColumn(n);
         } else {
           col = new OtherColumn(n);
