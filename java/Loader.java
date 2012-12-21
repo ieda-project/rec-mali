@@ -53,7 +53,7 @@ class Loader {
     }
 
     db.setAutoCommit(false);
-    db.begin();
+    //db.begin();
 
     try {
       db.createStatement().executeUpdate("DELETE FROM "+args[2]+" WHERE global_id LIKE '%"+args[4]+"/%'");
@@ -62,9 +62,27 @@ class Loader {
 
       while (sc.hasNext()) {
         for (int i = 1; i <= flen; i++) {
-          String line = sc.next();
+          StringBuffer buf = new StringBuffer();
+          while (true) {
+            String tmp = sc.next();
+            int l = tmp.length() - 1;
+            if (l == -1) break;
+            if (tmp.charAt(l) == '\r') {
+              buf.append(tmp.substring(0, l));
+              buf.append("\\n");
+            } else {
+              buf.append(tmp);
+              break;
+            }
+          }
+
+          String line = buf.toString();
           switch (line.charAt(0)) {
-            case ':': st.setString(i, line.substring(1)); break;
+            case ':':
+              st.setString(
+                i,
+                line.substring(1).replace("\\n", "\n").replace("\\\"", "\""));
+              break;
             case 't': st.setBoolean(i, true); break;
             case 'f': st.setBoolean(i, false); break;
             case 'n': st.setNull(i, types[i-1]); break;
