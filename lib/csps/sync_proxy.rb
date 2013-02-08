@@ -45,6 +45,11 @@ module Csps::SyncProxy
     raise e
   end
 
+  def dbname
+    dbcfg = Rails.configuration.database_configuration[Rails.env]
+    dbcfg['database'] || dbcfg[:database]
+  end
+
   def import_from path, zone
     dir = File.dirname path
     (real_model.attachment_definitions || []).each do |key,data|
@@ -66,7 +71,7 @@ module Csps::SyncProxy
       system(JAVA,
         '-classpath', 'java/sqlite3.jar:java', 'Loader',
         sn,
-        Rails.configuration.database_configuration[Rails.env][:database],
+        dbname,
         table_name,
         real_model.name,
         zone.name,
@@ -167,7 +172,7 @@ module Csps::SyncProxy
       system(JAVA,
         '-classpath', 'java/sqlite3.jar:java', 'Dumper',
         zone.serial_numbers[real_model].to_s,
-        Rails.configuration.database_configuration[Rails.env][:database],
+        dbname,
         table_name,
         exportable_for(zone).to_sql.sub(/^.*WHERE\s+/, ''),
         path)
