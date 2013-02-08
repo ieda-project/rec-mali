@@ -27,7 +27,7 @@ class Dumper {
     public String dump(ResultSet res) throws SQLException {
       String value = res.getString(name);
       return value == null ? "n" : ":" +
-        value.replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "").replaceAll("\\p{Cntrl}", " ").trim();
+        value.replaceAll("\"", "\\\"").replaceAll("\n", "\\n").replaceAll("\r", "").replaceAll("\\p{Cntrl}", " ").trim();
     }
   }
 
