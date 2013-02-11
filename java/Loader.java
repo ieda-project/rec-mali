@@ -32,10 +32,15 @@ class Loader {
     // Getting the zone id
     int zoneid;
     {
-      PreparedStatement st = db.prepareStatement("SELECT id FROM zones WHERE name=?");
+      PreparedStatement st = db.prepareStatement("SELECT id FROM zones WHERE name=? AND point=?");
       st.setString(1, args[4]);
+      st.setString(2, "t"); // Wow. This seems to work more often than not.
       ResultSet rs = st.executeQuery();
-      if (!rs.next()) throw new ArgumentException("No such zone: "+args[4]);
+      if (!rs.next()) {
+        st.setBoolean(2, true); // Fallback to how it actually should work.
+        rs = st.executeQuery();
+        if (!rs.next()) throw new ArgumentException("No such zone: "+args[4]);
+      }
       zoneid = rs.getInt("id");
     }
 
@@ -58,7 +63,8 @@ class Loader {
     try {
       db.createStatement().executeUpdate("DELETE FROM "+args[2]+" WHERE global_id LIKE '%"+args[4]+"/%'");
       PreparedStatement st = db.prepareStatement(
-        "INSERT INTO "+args[2]+" ("+fieldlist+") VALUES ("+placeholders(flen)+")");
+        "INSERT INTO "+args[2]+" ("+fieldlist+",zone_id) VALUES ("+placeholders(flen+1)+")");
+      st.setInt(flen+1, zoneid);
 
       while (sc.hasNext()) {
         for (int i = 1; i <= flen; i++) {
