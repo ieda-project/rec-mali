@@ -26,15 +26,18 @@ namespace :sync do
 
     # Export list handling
 
-    list = if File.exist?(remote('export.list'))
+    list = raw_list = if File.exist?(remote('export.list'))
       File.read(remote('export.list')).gsub(/#.*$/, '').split("\n").select(&:present?)
     end
     if !list || !list.include?(Zone.csps.name)
       File.open(remote('export.list'), 'a') do |f|
         f.puts Zone.csps.name
       end
-      list << Zone.csps.name if list
+
+      # Do not use << here, that would update raw_list too:
+      list = [ *list, Zone.csps.name ] if list
     end
+
     if list && (list & Zone.csps.upchain.map(&:name)).any?
       # Export all if anybody from the upchain is looking.
       list = nil
@@ -173,7 +176,11 @@ namespace :sync do
           if (updated_keys & keys).any?
             puts "Forcing export of #{zone.name}, public key has changed."
             FileUtils.mkdir_p "#{tmp}/#{zone.folder_name}"
+          elsif zone != Zone.csps && raw_list.include?(zone.name) && !File.exist?("#{remote}/#{zone.folder_name}.tgz.gpg")
+            puts "Forcing export of #{zone.name}, data file is not present."
+            FileUtils.mkdir_p "#{tmp}/#{zone.folder_name}"
           else
+            puts "Unpacking for #{zone.name}"
             unpack.(zone)
           end
           zones << zone
