@@ -27,7 +27,10 @@ class Dumper {
     public String dump(ResultSet res) throws SQLException {
       String value = res.getString(name);
       return value == null ? "n" : ":" +
-        value.replaceAll("\"", "\\\"").replaceAll("\n", "\\n").replaceAll("\r", "").replaceAll("\\p{Cntrl}", " ").trim();
+        value.replaceAll("\"", "\\\"").
+              replaceAll("\n", "\\n").
+              replaceAll("\r", "").
+              replaceAll("\\p{Cntrl}", " ").trim();
     }
   }
 
@@ -63,7 +66,7 @@ class Dumper {
 
         if (type.equals("BOOLEAN")) {
           col = new BooleanColumn(n);
-        } else if (type.indexOf("VARCHAR") >= 0) {
+        } else if (type.indexOf("VARCHAR") >= 0 || type.indexOf("TEXT") >= 0) {
           col = new TextColumn(n);
         } else {
           col = new OtherColumn(n);
