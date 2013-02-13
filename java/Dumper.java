@@ -66,7 +66,7 @@ class Dumper {
 
         if (type.equals("BOOLEAN")) {
           col = new BooleanColumn(n);
-        } else if (type.indexOf("VARCHAR") >= 0 || type.indexOf("TEXT") >= 0) {
+        } else if (type.indexOf("VARCHAR") >= 0 || type.equals("TEXT")) {
           col = new TextColumn(n);
         } else {
           col = new OtherColumn(n);
