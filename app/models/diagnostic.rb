@@ -63,7 +63,12 @@ class Diagnostic < ActiveRecord::Base
       end
     end
   end
-  has_many :classifications, through: :results do
+
+  def classifications
+    results.includes(:classification).map(&:classification)
+  end
+
+  has_many :classifications, finder_sql: ->(wut) { ["SELECT c.* FROM classifications c INNER JOIN results r ON c.id = r.classification_id WHERE r.diagnostic_global_id = ?", global_id] } do
     def for illness
       select { |c| c.illness_id == illness.id }
     end
@@ -74,6 +79,7 @@ class Diagnostic < ActiveRecord::Base
     #    short
     #end
   end
+
   globally_has_many :sign_answers, include: :sign, order: 'signs.sequence' do
     def add data
       sign = data.delete(:sign) || Sign.find(data.delete(:sign_id)) rescue nil
