@@ -45,8 +45,10 @@ namespace :sync do
 
     # Export list handling over
 
-    FileUtils.chmod '700'.to_i(8), "#{Rails.root}/config/gpg"
-    gpg = "gpg --homedir #{Rails.root}/config/gpg"
+    gpgdir = "#{Rails.root}/config/gpg"
+    FileUtils.chmod 0700, gpgdir unless File.symlink?(gpgdir)
+    FileUtils.chmod 0600, Dir.glob("#{gpgdir}/*")
+    gpg = "gpg --homedir #{gpgdir}"
 
     # ----------- STEP 1 -----------
 
@@ -176,7 +178,7 @@ namespace :sync do
           if (updated_keys & keys).any?
             puts "Forcing export of #{zone.name}, public key has changed."
             FileUtils.mkdir_p "#{tmp}/#{zone.folder_name}"
-          elsif zone != Zone.csps && raw_list.include?(zone.name) && !File.exist?("#{remote}/#{zone.folder_name}.tgz.gpg")
+          elsif raw_list && zone != Zone.csps && raw_list.include?(zone.name) && !File.exist?("#{remote}/#{zone.folder_name}.tgz.gpg")
             puts "Forcing export of #{zone.name}, data file is not present."
             FileUtils.mkdir_p "#{tmp}/#{zone.folder_name}"
           else
