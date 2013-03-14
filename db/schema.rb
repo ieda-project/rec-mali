@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726101312) do
+ActiveRecord::Schema.define(:version => 20130314172952) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -209,7 +209,7 @@ ActiveRecord::Schema.define(:version => 20120726101312) do
     t.string   "key"
     t.string   "question"
     t.string   "values"
-    t.text     "dep"
+    t.string   "dep"
     t.integer  "sequence"
     t.integer  "min_value"
     t.integer  "max_value"
