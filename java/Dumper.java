@@ -16,9 +16,13 @@ class Dumper {
   static class BooleanColumn extends Column {
     public BooleanColumn(String n) { super(n); }
     public String dump(ResultSet res) throws SQLException {
-      boolean value = res.getBoolean(name);
+      String s = res.getString(name);
       if (res.wasNull()) return "n";
-      return value ? "t" : "f";
+      if (s.equals("t") || s.equals("f")) {
+        return s;
+      } else {
+        return res.getBoolean(name) ? "t" : "f";
+      }
     }
   }
 
