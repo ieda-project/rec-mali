@@ -1,7 +1,7 @@
 class Result < ActiveRecord::Base
   include Csps::Exportable
   globally_belongs_to :diagnostic
-  belongs_to :classification
+  belongs_to :classification, primary_key: :key, foreign_key: :classification_key
   belongs_to :treatment
 
   validates_presence_of :treatment, if: ->(r) { r.diagnostic.treatments_required? && r.can_have_treatment? }

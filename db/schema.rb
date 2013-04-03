@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314172952) do
+ActiveRecord::Schema.define(:version => 20130403144309) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20130314172952) do
     t.integer  "sequence"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "age_group"
   end
 
   create_table "indices", :force => true do |t|
@@ -151,16 +152,15 @@ ActiveRecord::Schema.define(:version => 20130314172952) do
   end
 
   create_table "results", :force => true do |t|
-    t.integer  "classification_id"
     t.string   "diagnostic_global_id"
     t.integer  "zone_id"
     t.string   "global_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "treatment_id"
+    t.string   "classification_key"
   end
 
-  add_index "results", ["classification_id"], :name => "index_results_on_classification_id"
   add_index "results", ["diagnostic_global_id"], :name => "index_results_on_diagnostic_global_id"
   add_index "results", ["zone_id"], :name => "index_results_on_zone_id"
 

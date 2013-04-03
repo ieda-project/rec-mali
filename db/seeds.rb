@@ -160,6 +160,7 @@ Illness.transaction do
             # Illness
             next if data[1].blank?
             illness = Illness.create(
+              age_group: ag,
               key: data[0],
               name: data[1],
               sequence: seq)
@@ -174,10 +175,12 @@ Illness.transaction do
       File.open("db/fixtures/#{group}/classifications.txt", 'r') do |f|
         f.each_line do |line|
           next unless line.fix!
-          illness, name, level, equation = line.split '|'
+          illness, seq, name, level, equation = line.split '|'
           begin
-            illnesses[illness].classifications.create!(
+            il = illnesses[illness]
+            il.classifications.create!(
               age_group: ag,
+              key: "#{ag}.#{il.sequence}.#{seq.to_i}",
               name: name,
               level: Classification::LEVELS.index(level.intern),
               equation: Csps::Formula.compile(illness, equation))

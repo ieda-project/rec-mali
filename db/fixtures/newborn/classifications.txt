@@ -1,19 +1,19 @@
-inf_bac|Maladie grave ou infection bactérienne grave|high|inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi
-inf_bac|Infection bactérienne locale|medium|!(inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi) AND (inf_bac.qj OR inf_bac.qg)
-inf_bac|Hypothermie modérée|medium|!(inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qdOR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi) AND (inf_bac.qh == hypothermie_moderee)
-inf_bac|Infection bactérienne peu probable et pas d'hypothermie|low|!(inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi) AND !(inf_bac.qj OR inf_bac.qg) AND (inf_bac.qh == normale)
+inf_bac|1|Maladie grave ou infection bactérienne grave|high|inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi
+inf_bac|2|Infection bactérienne locale|medium|!(inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi) AND (inf_bac.qj OR inf_bac.qg)
+inf_bac|3|Hypothermie modérée|medium|!(inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qdOR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi) AND (inf_bac.qh == hypothermie_moderee)
+inf_bac|4|Infection bactérienne peu probable et pas d'hypothermie|low|!(inf_bac.qa OR inf_bac.qb OR (inf_bac.qc == rapides) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi) AND !(inf_bac.qj OR inf_bac.qg) AND (inf_bac.qh == normale)
 
-poids|Très faible poids|high|poids.qa == tres_faible
-poids|Faible poids|medium|poids.qa == faible
-poids|Pas de faible poids|low|poids.qa == normal
+poids|1|Très faible poids|high|poids.qa == tres_faible
+poids|2|Faible poids|medium|poids.qa == faible
+poids|3|Pas de faible poids|low|poids.qa == normal
 
-inf_occ|Conjonctivite purulente du nouveau-né|medium|inf_occ.qa
-inf_occ|Pas d'infection occulaire|low|!inf_occ.qa
+inf_occ|1|Conjonctivite purulente du nouveau-né|medium|inf_occ.qa
+inf_occ|2|Pas d'infection occulaire|low|!inf_occ.qa
 
-vih|Infection VIH symptomatique probable|high|(vih.qa == positif) AND AT_LEAST_TWO_OF(vih.qb, vih.qc, vih.qd, vih.qe, vih.qf, vih.qg)
-vih|Infection VIH symptomatique possible|medium|(vih.qa == inconnu) AND AT_LEAST_TWO_OF(vih.qb, vih.qc, vih.qd, vih.qe, vih.qf, vih.qg)
-vih|Infection VIH peu problable|low|(vih.qa == negatif_grossesse)	OR !AT_LEAST_TWO_OF(vih.qb, vih.qc, vih.qd, vih.qe, vih.qf, vih.qg)
+vih|1|Infection VIH symptomatique probable|high|(vih.qa == positif) AND AT_LEAST_TWO_OF(vih.qb, vih.qc, vih.qd, vih.qe, vih.qf, vih.qg)
+vih|2|Infection VIH symptomatique possible|medium|(vih.qa == inconnu) AND AT_LEAST_TWO_OF(vih.qb, vih.qc, vih.qd, vih.qe, vih.qf, vih.qg)
+vih|3|Infection VIH peu problable|low|(vih.qa == negatif_grossesse)	OR !AT_LEAST_TWO_OF(vih.qb, vih.qc, vih.qd, vih.qe, vih.qf, vih.qg)
 
-alimentation|Maladie grave ou infection bactérienne grave (alim)|high|alimentation.qa OR (alimentation.qb AND ((alimentation.qh == pas_prise) OR (alimentation.qi == pas_succion)))	
-alimentation|Problème d'alimentation|medium|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qh == pas_prise) OR (alimentation.qi == pas_succion)))) AND ((alimentation.qb AND ((alimentation.qh == mauvaise_prise) OR (alimentation.qi == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qf OR alimentation.qe OR alimentation.qg)
-alimentation|Pas de problèmes d'alimentation|low|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qh == pas_prise) OR (alimentation.qi == pas_succion)))) AND !((alimentation.qb AND ((alimentation.qh == mauvaise_prise) OR (alimentation.qi == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qf OR alimentation.qe OR alimentation.qg)
+alimentation|1|Maladie grave ou infection bactérienne grave (alim)|high|alimentation.qa OR (alimentation.qb AND ((alimentation.qh == pas_prise) OR (alimentation.qi == pas_succion)))	
+alimentation|2|Problème d'alimentation|medium|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qh == pas_prise) OR (alimentation.qi == pas_succion)))) AND ((alimentation.qb AND ((alimentation.qh == mauvaise_prise) OR (alimentation.qi == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qf OR alimentation.qe OR alimentation.qg)
+alimentation|3|Pas de problèmes d'alimentation|low|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qh == pas_prise) OR (alimentation.qi == pas_succion)))) AND !((alimentation.qb AND ((alimentation.qh == mauvaise_prise) OR (alimentation.qi == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qf OR alimentation.qe OR alimentation.qg)
