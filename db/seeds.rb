@@ -372,37 +372,40 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
   end # }}}
 
   # Indices {{{
+  head "Indices"
   for name in Index::NAMES - %w(weight-height)
     for gender in %w(boys girls)
-      for age in %w(above-2y under-2y)
-        ImportVersion.process "indices/#{name}-#{age}-#{gender}.txt" do |f|
-          h = {
-            above_2yrs: age == 'above-2y',
-            for_boys: gender == 'boys',
-            name: Index::NAMES.index(name) }
+      ImportVersion.process "indices/#{name}-#{gender}.txt" do |f|
+        info "Loading #{name} for #{gender}"
+        h = {
+          for_boys: gender == 'boys',
+          name: Index::NAMES.index(name) }
 
-          Index.destroy_all h
-          f.each_line do |line|
-            next unless line.fix!
-            x, y = line.split ','
-            i = Index.new h.merge(x: x, y: y)
-            info i.errors.inspect unless i.save
-          end
+        Index.destroy_all h
+        f.each_line do |line|
+          next unless line.fix!
+          x, y = line.split ','
+          i = Index.new h.merge(x: x, y: y)
+          info i.errors.inspect unless i.save
         end
       end
     end
   end
 
   for gender in %w(boys girls)
-    ImportVersion.process "indices/weight-height-#{gender}.txt" do |f|
-      h = {
-        for_boys: gender == 'boys',
-        name: Index::NAMES.index('weight-height') }
-      f.each_line do |line|
-        next unless line.fix!
-        x, y = line.split ','
-        i = Index.new h.merge(x: x, y: y)
-        info i.errors.inspect unless i.save
+    for age in %w(above-2y under-2y)
+      ImportVersion.process "indices/weight-height-#{age}-#{gender}.txt" do |f|
+        info "Loading weight-height for #{gender} #{age.sub('-', ' ')}"
+        h = {
+          above_2yrs: age == 'above-2y',
+          for_boys: gender == 'boys',
+          name: Index::NAMES.index('weight-height') }
+        f.each_line do |line|
+          next unless line.fix!
+          x, y = line.split ','
+          i = Index.new h.merge(x: x, y: y)
+          info i.errors.inspect unless i.save
+        end
       end
     end
   end # }}}

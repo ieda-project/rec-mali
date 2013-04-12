@@ -25,7 +25,8 @@ class ImportVersion < ActiveRecord::Base
     def process *fnames
       files, vers, go = [], {}, false
       fnames.each do |fn|
-        f = if File.exist?(fn) && File.size(fn) > 0
+        raise "No such file: #{fn}" unless File.exist?(fn)
+        f = if File.size(fn) > 0
           File.open fn, 'r'
         else
           DUMMY
