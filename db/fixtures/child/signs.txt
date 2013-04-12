@@ -1,4 +1,5 @@
-﻿## Illness / Signs ##
+$version 1
+## Illness / Signs ##
 
 danger|Signes de danger
   boire|Demander : l’enfant est-il *incapable* de boire ou de prendre le sein ?|boolean

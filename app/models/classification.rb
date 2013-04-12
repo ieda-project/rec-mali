@@ -9,7 +9,6 @@ class Classification < ActiveRecord::Base
   has_many :diagnostics, through: :results
 
   validates_presence_of :equation
-  validates_uniqueness_of :key
 
   scope :for_child, ->(obj) { where(age_group: obj.age_group) }
   

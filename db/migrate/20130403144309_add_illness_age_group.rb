@@ -12,5 +12,6 @@ class AddIllnessAgeGroup < ActiveRecord::Migration
   end
 
   def self.down
+    remove_column :illnesses, :age_group
   end
 end

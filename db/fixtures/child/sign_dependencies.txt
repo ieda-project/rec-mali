@@ -1,3 +1,4 @@
+$version 1
 toux.toux_presence_duree|data.toux.toux_presence 
 toux.mouv_resp|data.toux.toux_presence 
 toux.tirage|data.toux.toux_presence

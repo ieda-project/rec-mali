@@ -1,3 +1,4 @@
+$version 1
 Cotrimoxazole (m1)
 mg-smx
 20/kg

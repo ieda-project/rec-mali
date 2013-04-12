@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403144309) do
+ActiveRecord::Schema.define(:version => 20130404144533) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -111,6 +111,13 @@ ActiveRecord::Schema.define(:version => 20130403144309) do
     t.integer  "age_group"
   end
 
+  create_table "import_versions", :force => true do |t|
+    t.string   "key"
+    t.string   "version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "indices", :force => true do |t|
     t.float    "x"
     t.float    "y"
@@ -152,15 +159,16 @@ ActiveRecord::Schema.define(:version => 20130403144309) do
   end
 
   create_table "results", :force => true do |t|
+    t.integer  "classification_id"
     t.string   "diagnostic_global_id"
     t.integer  "zone_id"
     t.string   "global_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "treatment_id"
-    t.string   "classification_key"
   end
 
+  add_index "results", ["classification_id"], :name => "index_results_on_classification_id"
   add_index "results", ["diagnostic_global_id"], :name => "index_results_on_diagnostic_global_id"
   add_index "results", ["zone_id"], :name => "index_results_on_zone_id"
 
@@ -244,6 +252,7 @@ ActiveRecord::Schema.define(:version => 20130403144309) do
     t.integer  "classification_id"
     t.string   "name"
     t.text     "description"
+    t.string   "key"
   end
 
   create_table "users", :force => true do |t|

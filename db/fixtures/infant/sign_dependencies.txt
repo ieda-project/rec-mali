@@ -1,3 +1,4 @@
+$version 1
 inf_bac.qi|data.inf_bac.qh
 
 diarrhee.qb|data.diarrhee.qa

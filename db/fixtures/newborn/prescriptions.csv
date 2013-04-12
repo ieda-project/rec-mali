@@ -1,3 +1,4 @@
+$version 1
 ## TREATMENT-MEDICINE NEWBORN
 ##treatment key,medicine key,duration,takes,description
 infection_grave,m12,,,{{name}} - {{dosage}}
