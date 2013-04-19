@@ -5,7 +5,7 @@ class Classification < ActiveRecord::Base
   has_many :treatments
   has_and_belongs_to_many :signs
 
-  has_many :results, foreign_key: :classification_key, primary_key: :key
+  has_many :results
   has_many :diagnostics, through: :results
 
   validates_presence_of :equation
