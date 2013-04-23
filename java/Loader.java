@@ -61,8 +61,11 @@ class Loader {
     //db.begin();
 
     try {
-      db.createStatement().executeUpdate("DELETE FROM "+args[2]+" WHERE global_id LIKE '%"+args[4]+"/%'");
-      PreparedStatement st = db.prepareStatement(
+      PreparedStatement st = db.prepareStatement("DELETE FROM "+args[2]+ " WHERE zone_id=?");
+      st.setInt(1, zoneid);
+      st.executeUpdate();
+
+      st = db.prepareStatement(
         "INSERT INTO "+args[2]+" ("+fieldlist+",zone_id) VALUES ("+placeholders(flen+1)+")");
       st.setInt(flen+1, zoneid);
 
