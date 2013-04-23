@@ -76,7 +76,10 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
   # Zones {{{
   ImportVersion.process "zones.txt" do |f|
     head 'Creating villages'
-    csps = Zone.csps.try :name
+    if csps = Zone.csps
+      rest = csps.restoring
+      csps = csps.name
+    end
     Zone.purge
 
     indents = {}
@@ -93,10 +96,10 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
       n = line.lstrip
       indents[indent] = Zone.create(
         name: n,
-        here: (point && n == csps) ? true : nil,
         parent: indents[indent-1],
         point: point)
     end
+    Zone.where(name: csps).sort_by(&:level).first.occupy!(rest) if csps
   end # }}}
 
   # Medicines {{{
@@ -415,8 +418,7 @@ end
 # Occupy {{{
 if ENV['OCCUPY']
   name = ENV['OCCUPY'].gsub '_', ' '
-  zones = Zone.find_all_by_name(name)
-  if zone = zones[0]
+  if zone = Zone.where(name: name).sort_by(&:level).first
     head "Occupying #{zone.name} (##{zone.id})"
     zone.occupy!
   else
