@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   attr_reader :password, :password_confirmation
 
   globally_has_many :diagnostics, as: :author
+  has_many :events
+
   validates_presence_of :name
   validates_presence_of :password, :on => :create
   validates_presence_of :password_confirmation, :if => :password

@@ -3,7 +3,10 @@ Csps::Application.routes.draw do
     get :welcome, :restore
   end
   resource :syncs
-  resources :users
+  resources :users do
+    get :logins, on: :member, to: :user_logins
+    get :logins, on: :collection
+  end
   resources :queries do
     get :export, on: :member
   end

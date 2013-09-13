@@ -1,0 +1,24 @@
+- paged = @logins.paginate @page, window: 15
+
+- content_for :breadcrumbs do
+  %ul#breadcrumbs
+    %li= link_to "Recherche Patient", children_path
+    %li= link_to 'Utilisateurs', '/users'
+    %li Dernières connexions 
+
+%section
+  %h1 Dernières connexions
+  = render partial: 'logins', locals: { logins: paged }
+
+  %ul.pagination
+    - if paged.prev?
+      %li.em= link_to "< Précédente", url_for(request.query_parameters.merge(:page => @page - 1))
+    - 1.upto(paged.pages) do |p|
+      - if p == @page
+        %li= @page || 1
+      - elsif (@page - p).abs < 4 || p == 1 || p == paged.pages 
+        %li= link_to p, url_for(request.query_parameters.merge(:page => p))
+      - elsif (@page - p).abs < 5
+        %li ...
+    - if paged.next?
+      %li.em= link_to "Suivante >", url_for(request.query_parameters.merge(:page => @page + 1))

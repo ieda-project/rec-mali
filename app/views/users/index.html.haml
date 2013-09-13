@@ -24,6 +24,11 @@
                 %button{type: 'submit'} Supprimer
             - else
               Non autorisé à supprimer
+%section
+  %h1 Dernières connexions
+  = render partial: 'logins', locals: { logins: @logins }
+  %p.next
+    = link_to 'Toutes les connexions', logins_users_path
 
 %section
   %h1 Utilisateurs d'autres CSPS

@@ -4,7 +4,7 @@
     %li= link_to @diagnostic.child.name, @diagnostic.child
     %li= link_to "Evaluation", child_diagnostic_path(@diagnostic.child, @diagnostic)
     %li Traitements
-    
+
 - unless @diagnostic.classifications.any?
   - content_for :head do
     %link{type:"application/json", rel:"calculations", href:calculations_child_diagnostic_path(@child, @diagnostic)}/
@@ -34,7 +34,7 @@
     %section.treatment
       %h2 Autres observations
       %div= @diagnostic.comments
-    
+
   %nav
     - if Csps.point? && @diagnostic.author == current_user
       = link_to "Modifier l'évaluation", edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit'

@@ -1,0 +1,10 @@
+%table.results.users
+  %thead
+    %tr
+      %th Nom
+      %th Connecté(e) à
+  %tbody
+    - for ev in logins do
+      %tr.remote
+        %td= link_to ev.user.name, [ :logins, ev.user ]
+        %td= l(ev.created_at.getlocal)

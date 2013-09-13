@@ -1,14 +1,16 @@
 class UsersController < ApplicationController
-  login_required only: [ :index, :show ]
+  login_required only: [ :index, :show, :logins, :user_logins ]
   before_filter :logged_in_or_first_run, except: [ :index, :show ]
   before_filter :admin_or_first_run
-  fetch 'User'
+  before_filter :paged, only: [ :logins, :user_logins ]
+  fetch 'User', also: [ :user_logins ]
 
   layout :decide_layout
 
   def index
     back 'Rechercher un patient', children_path
     @users = User.order('admin DESC, name ASC')
+    @logins = Event.logins.history.joins(:user).limit(10)
   end
 
   def new
@@ -63,7 +65,19 @@ class UsersController < ApplicationController
     see_other users_path
   end
 
+  def logins
+    @logins = Event.logins.history.joins(:user)
+  end
+
+  def user_logins
+    @logins = @user.events.logins.history
+  end
+
   protected
+
+  def paged
+    @page = (params[:page] || '1').to_i
+  end
 
   def logged_in_or_first_run
     User.count.zero? || logged_in? || denied

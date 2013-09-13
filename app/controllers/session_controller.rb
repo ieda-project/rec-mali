@@ -7,6 +7,7 @@ class SessionController < ApplicationController
     @user_id = data[:user_id]
 
     if data.respond_to?(:[]) && user = User.authenticate(@user_id, data[:password])
+      user.events.create kind_key: :login
       persist_user_into_session user
       see_other @to
     else
@@ -16,6 +17,7 @@ class SessionController < ApplicationController
   end
 
   def destroy
+    current_user.events.create kind: :logout
     remove_user_from_session
     see_other '/'
   end

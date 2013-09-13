@@ -53,6 +53,10 @@ module Wopata::ActiveRecord::Enumeration
         #{field}.present? && ::#{name}::#{c}[#{field}]
       end", __FILE__, __LINE__
 
+      class_eval "def #{field}_key= value
+        self.#{field} = #{c}.index(value.to_s)
+      end", __FILE__, __LINE__
+
       class_eval "def #{field}_name
         #{field} && I18n.t(\"#{opt_path}.\#{::#{name}::#{c}[#{field}]}\")
       end", __FILE__, __LINE__
