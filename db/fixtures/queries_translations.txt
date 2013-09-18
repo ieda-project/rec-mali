@@ -1,15 +1,15 @@
-$version 1
-new children 0-11 months	Nombre de nouveaux enfants suivi de 0-11 mois
-new children 12-23 months	Nombre de nouveaux enfants suivi de 12-23 mois
-new children 24-59 months	Nombre de nouveaux enfants suivi de 24-59 mois
+$version 2
+new children 0-11 months	Nombre de nouveaux enfants de 0-11 mois
+new children 12-23 months	Nombre de nouveaux enfants de 12-23 mois
+new children 24-59 months	Nombre de nouveaux enfants de 24-59 mois
 
-old children 0-11 months	Nombre d'anciens enfants suivi de 0-11 mois
-old children 12-23 months	Nombre d'anciens enfants suivi de 12-23 mois
-old children 24-59 months	Nombre d'anciens enfants suivi de 24-59 mois
+old children 0-11 months	Nombre d'anciens enfants de 0-11 mois
+old children 12-23 months	Nombre d'anciens enfants de 12-23 mois
+old children 24-59 months	Nombre d'anciens enfants de 24-59 mois
 
-follow children 0-11 months	Nombre total d'enfants suivi de 0-11 mois
-follow children 12-23 months	Nombre total d'enfants suivi de 12-23 mois
-follow children 24-59 months	Nombre total d'enfants suivi de 24-59 mois
+follow children 0-11 months	Nombre total d'enfants de 0-11 mois
+follow children 12-23 months	Nombre total d'enfants de 12-23 mois
+follow children 24-59 months	Nombre total d'enfants de 24-59 mois
 
 follow children pas de pneumonie	Pas de pneumonie: toux ou rhume
 follow children pneumonie	Pneumonie
@@ -38,10 +38,10 @@ follow children vih symp probable	Infection VIH symptomatique probable
 follow children vih confirmee	Infection VIH confirmée
 follow children vih symp confirmee	Infection VIH symptomatique confirmée
 
-follow children boy paludisme	Nombre d'enfants suivi, garcons avec la classification de paludisme simple
-follow children girl paludisme	Nombre d'enfants suivi, filles avec la classification de paludisme simple
-follow children boy paludisme grave	Nombre d'enfants suivi, garcons avec la classification de paludisme grave
-follow children girl paludisme grave	Nombre d'enfants suivi, filles avec la classification de paludisme grave
+follow children boy paludisme	Nombre d'enfants, garcons avec la classification de paludisme simple
+follow children girl paludisme	Nombre d'enfants, filles avec la classification de paludisme simple
+follow children boy paludisme grave	Nombre d'enfants, garcons avec la classification de paludisme grave
+follow children girl paludisme grave	Nombre d'enfants, filles avec la classification de paludisme grave
 
-follow children fievre 14	Nombre d'enfants suivi avec une fièvre de plus de 14 jours
-follow children ulcerations	Nombre d'enfants suivi avec des ulcérations dans la bouche
+follow children fievre 14	Nombre d'enfants avec une fièvre de plus de 14 jours
+follow children ulcerations	Nombre d'enfants avec des ulcérations dans la bouche
