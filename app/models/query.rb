@@ -43,7 +43,12 @@ class Query < ActiveRecord::Base
       end
     end
 
-    rel.group(:month).count('DISTINCT child_uqid')
+    rel.group(:month).count('DISTINCT child_uqid').tap do |h|
+      h.keys.each do |k|
+        s = k.to_s
+        h.store "#{s[0,4]}/#{s[4,2]}", h.delete(k)
+      end
+    end
   ensure
     update_attribute :last_run_at, Time.now
   end
