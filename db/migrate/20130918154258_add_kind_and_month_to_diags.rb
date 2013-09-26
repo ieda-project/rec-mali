@@ -11,7 +11,7 @@ class AddKindAndMonthToDiags < ActiveRecord::Migration
 
     sql = case Diagnostic.connection.adapter_name
       when 'SQLite' then "strftime('%Y%m', done_on)"
-      when 'PostgreSQL' then "to_char(done_on, 'YYYYMM')"
+      when 'PostgreSQL' then "extract(year from done_on)*100 + extract(month from done_on)"
       else raise 'Unsupported database'
     end
     execute "UPDATE diagnostics SET month=#{sql}"
