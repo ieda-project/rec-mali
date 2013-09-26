@@ -76,6 +76,7 @@ module Csps::SyncProxy
         real_model.name,
         zone.name,
         path)
+      exit 1 unless $?.success?
     else
       File.open(path, 'r') do |src|
         serial = src.gets.chomp
@@ -176,6 +177,7 @@ module Csps::SyncProxy
         table_name,
         exportable_for(zone).to_sql.sub(/^.*WHERE\s+/, ''),
         path)
+      exit 1 unless $?.success?
     else
       columns = columns_hash.map do |name,data|
         next if %w(id zone_id).include? name

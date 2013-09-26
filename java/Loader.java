@@ -14,6 +14,12 @@ class Loader {
     public ArgumentException(String msg) { super(msg); }
   }
 
+  private static void die(String msg) {
+    System.err.println("ERROR RUNNING LOADER!");
+    System.err.println(msg);
+    System.exit(1);
+  }
+
   //       0       1            2      3      4     5
   // Args: serial, sqlite_file, table, model, zone, inputfile
   public static void main(String args[]) throws Exception {
@@ -22,8 +28,10 @@ class Loader {
     int serial = sc.nextInt();
     if (serial <= Integer.parseInt(args[0])) System.exit(0);
 
-    String fieldlist = sc.next(); // TODO: check with regexp
-    String[] fields = fieldlist.split(",");
+    String fieldList = sc.next(); // TODO: check with regexp
+    if (fieldList.indexOf("global_id") > -1) die("Illegal dump version: has global_id. Please get a newer one!");
+
+    String[] fields = fieldList.split(",");
     int flen = fields.length;
 
     Class.forName("org.sqlite.JDBC");
@@ -39,7 +47,7 @@ class Loader {
       if (!rs.next()) {
         st.setBoolean(2, true); // Fallback to how it actually should work.
         rs = st.executeQuery();
-        if (!rs.next()) throw new ArgumentException("No such zone: "+args[4]);
+        if (!rs.next()) die("No such zone: "+args[4]);
       }
       zoneid = rs.getInt("id");
     }
@@ -52,6 +60,7 @@ class Loader {
       ResultSet cols = db.getMetaData().getColumns(null, null, args[2], null);
       while (cols.next()) {
         String name = cols.getString(4);
+        if (name.equals("global_id")) die("Illegal schema version: has global_id. Please run migrations!");
         if (indexes.containsKey(name))
           types[indexes.get(name)] = new Integer(cols.getString(5));
       }
@@ -66,7 +75,7 @@ class Loader {
       st.executeUpdate();
 
       st = db.prepareStatement(
-        "INSERT INTO "+args[2]+" ("+fieldlist+",zone_id) VALUES ("+placeholders(flen+1)+")");
+        "INSERT INTO "+args[2]+" ("+fieldList+",zone_id) VALUES ("+placeholders(flen+1)+")");
       st.setInt(flen+1, zoneid);
 
       while (sc.hasNext()) {

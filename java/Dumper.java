@@ -46,7 +46,13 @@ class Dumper {
     }
   }
 
-  // Args: header, file, table, where, outputfile
+  private static void die(String msg) {
+    System.err.println("ERROR RUNNING DUMPER!");
+    System.err.println(msg);
+    System.exit(1);
+  }
+
+  // Args: header, dbfile, table, where, outputfile
   public static void main(String args[]) throws Exception {
     BufferedWriter out = new BufferedWriter(
       new OutputStreamWriter(
@@ -63,6 +69,7 @@ class Dumper {
     boolean first = true;
     while (colset.next()) {
       String n = colset.getString(4);
+      if (n.equals("global_id")) die("Illegal schema version: has global_id. Please run migrations!");
       if (!n.equals("id") && !n.equals("zone_id")) {
         Column col = null;
         String type = colset.getString(6);
