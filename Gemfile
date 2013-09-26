@@ -28,7 +28,7 @@ group :development, :test, :production do
 end
 
 group :heroku do
-  gem 'hassle', git: 'http://github.com/Papipo/hassle.git'
+  gem 'hassle' #, git: 'http://github.com/Papipo/hassle.git'
 end
 
 group :test do
