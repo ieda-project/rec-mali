@@ -27,7 +27,7 @@ class ImportVersion < ActiveRecord::Base
       fnames.each do |fn|
         raise "No such file: #{fn}" unless File.exist?(fn)
         f = if File.size(fn) > 0
-          File.open fn, 'r'
+          File.open fn, 'r:UTF-8'
         else
           DUMMY
         end

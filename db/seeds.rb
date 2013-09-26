@@ -374,7 +374,7 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
         :title => t[title],
         :case_status => status,
         :klass => klass,
-        :conditions => h['conds'].to_json)
+        :conditions => h['conds'].to_yaml[5..-1])
       info "Error importing #{title}: q.errors" unless q.save
     end
   end # }}}

@@ -269,7 +269,7 @@ $version 3
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Infection aiguë"
+    "value": "Infection aiguë de l'oreille"
   }]
 }
 

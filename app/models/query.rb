@@ -15,7 +15,7 @@ class Query < ActiveRecord::Base
     aref = k.age_reference_field
     rel = case_status ? k.where(kind: case_status) : k
 
-    for cond in Array(JSON.parse(conditions))
+    for cond in Array(YAML.load(conditions))
       rel = case cond['type']
         when 'age'
           rel.where "#{AGE[ca].(aref, cond['value'].to_i)} #{cond['operator']} #{k.table_name}.born_on"
