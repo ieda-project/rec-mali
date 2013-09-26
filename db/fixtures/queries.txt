@@ -1,4 +1,4 @@
-$version 1
+$version 3
 @new children 0-11 months
 {
   "klass":"Diagnostic",
@@ -81,10 +81,9 @@ $version 1
   }]
 }
 
-@follow children 0-11 months
+@total children 0-11 months
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type":"age",
     "operator":"<=",
@@ -92,10 +91,9 @@ $version 1
   }]
 }
 
-@follow children 12-23 months
+@total children 12-23 months
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -107,10 +105,9 @@ $version 1
   }]
 }
 
-@follow children 24-59 months
+@total children 24-59 months
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -122,22 +119,20 @@ $version 1
   }]
 }
 
-@follow children pas de pneumonie
+@total children pas de pneumonie
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "attribute": "classifications.name",
     "operator": "=",
-    "value": "Pas de pneumonie: toux ou rhume"
+    "value": "Pas de pneumonie : toux ou rhume"
   }]
 }
 
-@follow children pneumonie
+@total children pneumonie
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -146,10 +141,9 @@ $version 1
   }]
 }
 
-@follow children pneumonie grave
+@total children pneumonie grave
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -158,10 +152,9 @@ $version 1
   }]
 }
 
-@follow children signes deshydratation
+@total children signes deshydratation
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -170,10 +163,9 @@ $version 1
   }]
 }
 
-@follow children deshydratation severe
+@total children deshydratation severe
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -182,10 +174,9 @@ $version 1
   }]
 }
 
-@follow children diarrhee persistente
+@total children diarrhee persistente
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -194,10 +185,9 @@ $version 1
   }]
 }
 
-@follow children diarrhee severe
+@total children diarrhee severe
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -206,10 +196,9 @@ $version 1
   }]
 }
 
-@follow children dysenterie
+@total children dysenterie
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -218,10 +207,9 @@ $version 1
   }]
 }
 
-@follow children antecedent rougeole
+@total children antecedent rougeole
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -230,10 +218,9 @@ $version 1
   }]
 }
 
-@follow children rougeole
+@total children rougeole
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -242,10 +229,9 @@ $version 1
   }]
 }
 
-@follow children rougeole complication
+@total children rougeole complication
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -254,10 +240,9 @@ $version 1
   }]
 }
 
-@follow children rougeole grave
+@total children rougeole grave
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -266,10 +251,9 @@ $version 1
   }]
 }
 
-@follow children infection chronique
+@total children infection chronique
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -278,10 +262,9 @@ $version 1
   }]
 }
 
-@follow children infection aigue
+@total children infection aigue
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -290,10 +273,9 @@ $version 1
   }]
 }
 
-@follow children mastoidite
+@total children mastoidite
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -302,10 +284,9 @@ $version 1
   }]
 }
 
-@follow children anemie
+@total children anemie
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -314,10 +295,9 @@ $version 1
   }]
 }
 
-@follow children anemie grave
+@total children anemie grave
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -326,10 +306,9 @@ $version 1
   }]
 }
 
-@follow children mam
+@total children mam
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -338,10 +317,9 @@ $version 1
   }]
 }
 
-@follow children mass
+@total children mass
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -350,10 +328,9 @@ $version 1
   }]
 }
 
-@follow children masc
+@total children masc
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -362,10 +339,9 @@ $version 1
   }]
 }
 
-@follow children vih pru probable
+@total children vih pru probable
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -374,10 +350,9 @@ $version 1
   }]
 }
 
-@follow children vih symp suspecte
+@total children vih symp suspecte
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -386,10 +361,9 @@ $version 1
   }]
 }
 
-@follow children vih exposition
+@total children vih exposition
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -398,10 +372,9 @@ $version 1
   }]
 }
 
-@follow children vih symp probable
+@total children vih symp probable
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -410,10 +383,9 @@ $version 1
   }]
 }
 
-@follow children vih confirmee
+@total children vih confirmee
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -422,10 +394,9 @@ $version 1
   }]
 }
 
-@follow children vih symp confirmee
+@total children vih symp confirmee
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -434,10 +405,9 @@ $version 1
   }]
 }
 
-@follow children boy paludisme
+@total children boy paludisme
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type":"boolean",
     "attribute":"child.gender",
@@ -450,10 +420,9 @@ $version 1
   }]
 }
 
-@follow children girl paludisme
+@total children girl paludisme
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type":"boolean",
     "attribute":"child.gender",
@@ -466,10 +435,9 @@ $version 1
   }]
 }
 
-@follow children boy paludisme grave
+@total children boy paludisme grave
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type":"boolean",
     "attribute":"child.gender",
@@ -482,10 +450,9 @@ $version 1
   }]
 }
 
-@follow children girl paludisme grave
+@total children girl paludisme grave
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type":"boolean",
     "attribute":"gender",
@@ -498,10 +465,9 @@ $version 1
   }]
 }
 
-@follow children fievre 14
+@total children fievre 14
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "sign",
     "sign": "fievre_presence_duree",
@@ -510,10 +476,9 @@ $version 1
   }]
 }
 
-@follow children ulcerations
+@total children ulcerations
 {
   "klass":"Diagnostic",
-  "case_status":"follow",
   "conds": [{
     "type": "sign",
     "sign": "ulcerations",

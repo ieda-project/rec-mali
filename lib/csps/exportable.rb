@@ -1,12 +1,18 @@
+require 'set'
+
 module Csps::Exportable
-  MODELS = []
-  def self.included model
-    (MODELS << model.name).uniq!
-    model.send :extend, ClassMethods
-    model.send :after_create, :fill_global_id
-    model.send :after_save, :register_change
-    model.send :validate, :validate_csps
-    model.send :belongs_to, :zone
+  extend ActiveSupport::Concern
+  MODELS = Set.new
+
+  included do
+    MODELS << name
+    @gbt = Set.new
+
+    before_save :fill_uqid
+    after_save :register_change
+    validate :validate_csps
+    belongs_to :zone
+    scope :with_global_refs, ->() { includes(*global_refs) }
   end
 
   def self.models
@@ -16,19 +22,23 @@ module Csps::Exportable
     MODELS.map &:constantize
   end
 
-  def globalid; global_id; end
+  def zone_name
+    zone.name
+  end
 
   protected
 
-  def fill_global_id
-    if global_id.blank?
-      update_attributes global_id: UUID.generate, zone_id: Zone.csps.id
+  def fill_uqid
+    if uqid.blank?
+      zid = Zone.csps.id
+      self.uqid = (zid << 48) | (Time.now.to_f * 1000).to_i
+      self.zone_id = zid
     end
     true
   end
 
   def validate_csps
-    errors[:global_id] << :invalid if Csps.site.blank?
+    errors[:uqid] << :invalid if Csps.site.blank?
   end
 
   def register_change
@@ -36,13 +46,17 @@ module Csps::Exportable
   end
 
   module ClassMethods
+    def global_refs
+      @gbt.to_a
+    end
+
     def globally_has_many *args, &blk
       opts = args.extract_options!
       n = opts.delete(:as) || name.singularize.underscore
       args.each do |i|
         has_many i, opts.merge(
-          primary_key: :global_id,
-          foreign_key: "#{n}_global_id"), &blk
+          primary_key: :uqid,
+          foreign_key: "#{n}_uqid"), &blk
       end
     end
 
@@ -50,22 +64,23 @@ module Csps::Exportable
       opts = args.extract_options!
       args.each do |i|
         has_one i, opts.merge(
-          primary_key: :global_id,
-          foreign_key: "#{name.underscore}_global_id"), &blk
+          primary_key: :uqid,
+          foreign_key: "#{name.underscore}_uqid"), &blk
       end
     end
 
     def globally_belongs_to *args, &blk
       opts = args.extract_options!
+      @gbt += args
       args.each do |i|
         belongs_to i, opts.merge(
-          primary_key: :global_id,
-          foreign_key: "#{i}_global_id"), &blk
+          primary_key: :uqid,
+          foreign_key: "#{i}_uqid"), &blk
       end
     end
 
     def last_modified zone
-      Time.at where('global_id LIKE ?', "#{zone.name}/%").order('updated_at DESC').first.updated_at.to_i
+      Time.at where(zone_id: zone_id).order('updated_at DESC').first.updated_at.to_i
     rescue
       nil
     end

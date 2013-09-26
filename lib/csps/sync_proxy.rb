@@ -88,7 +88,7 @@ module Csps::SyncProxy
 
         if serial > zone.serial_numbers[real_model]
           bare_transaction do
-            bare_exec "DELETE FROM #{table_name} WHERE global_id LIKE ?", "#{zone.name}/%"
+            bare_exec "DELETE FROM #{table_name} WHERE zone_id = ?", zone.id
             l = 1
             catch :end do
               get = proc { l += 1; src.gets or throw(:end) }

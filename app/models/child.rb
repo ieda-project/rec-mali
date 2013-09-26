@@ -15,10 +15,10 @@ class Child < ActiveRecord::Base
     end
   end
   globally_has_one :last_visit,
-                   class_name: 'Diagnostic', order: 'global_id DESC'
+                   class_name: 'Diagnostic', order: 'done_on DESC'
   has_attached_file :photo,
-                    path: ':rails_root/public/repo/:global_id_:class_:attachment.:extension',
-                    url: '/repo/:global_id_:class_:attachment.:extension',
+                    path: ':rails_root/public/repo/:zone_name/:uqid_:class_:attachment.:extension',
+                    url: '/repo/:zone_name/:uqid_:class_:attachment.:extension',
                     default_url: '/images/missing.png'
 
   before_save :fill_cache_fields

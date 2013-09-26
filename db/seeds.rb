@@ -348,6 +348,7 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
   # Queries {{{
   ImportVersion.process "queries_translations.txt", "queries.txt" do |tf,f|
     head "Loading queries"
+    Query.purge
 
     t = {}
     tf.each_line do |line|
@@ -363,11 +364,15 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
       title = s.split("\n").first.strip
       source = s.split("\n")[1..-1].join("\n")
       h = JSON.parse(source)
-      case_status = Query::CASE_STATUSES.index(h.delete('case_status'))
+
+      # Nil is allowed
+      status = h.delete 'case_status'
+      status = Query::CASE_STATUSES.index(status) if status
+
       klass = h.delete('klass')
       q = Query.new(
         :title => t[title],
-        :case_status => case_status,
+        :case_status => status,
         :klass => klass,
         :conditions => h['conds'].to_json)
       info "Error importing #{title}: q.errors" unless q.save

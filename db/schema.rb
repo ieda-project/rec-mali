@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913114749) do
+ActiveRecord::Schema.define(:version => 20130925232734) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -32,11 +32,11 @@ ActiveRecord::Schema.define(:version => 20130913114749) do
     t.datetime "updated_at"
     t.boolean  "temporary"
     t.integer  "zone_id"
-    t.string   "global_id"
+    t.integer  "uqid"
   end
 
-  add_index "children", ["global_id"], :name => "index_children_on_global_id"
   add_index "children", ["temporary", "zone_id"], :name => "index_children_on_temporary_and_zone_id"
+  add_index "children", ["uqid"], :name => "index_children_on_uqid"
 
   create_table "classifications", :force => true do |t|
     t.datetime "created_at"
@@ -64,8 +64,6 @@ ActiveRecord::Schema.define(:version => 20130913114749) do
   end
 
   create_table "diagnostics", :force => true do |t|
-    t.string   "child_global_id"
-    t.string   "author_global_id"
     t.string   "type"
     t.datetime "done_on"
     t.integer  "mac"
@@ -76,17 +74,23 @@ ActiveRecord::Schema.define(:version => 20130913114749) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "zone_id"
-    t.string   "global_id"
     t.integer  "saved_age_group"
     t.float    "temperature"
     t.date     "born_on"
     t.string   "state"
+    t.integer  "kind"
+    t.integer  "month"
+    t.integer  "uqid"
+    t.integer  "child_uqid"
+    t.integer  "author_uqid"
   end
 
-  add_index "diagnostics", ["author_global_id"], :name => "index_diagnostics_on_author_global_id"
-  add_index "diagnostics", ["child_global_id"], :name => "index_diagnostics_on_child_global_id"
-  add_index "diagnostics", ["type", "global_id"], :name => "index_diagnostics_on_type_and_global_id"
+  add_index "diagnostics", ["author_uqid"], :name => "index_diagnostics_on_author_uqid"
+  add_index "diagnostics", ["child_uqid"], :name => "index_diagnostics_on_child_uqid"
+  add_index "diagnostics", ["kind"], :name => "index_diagnostics_on_kind"
+  add_index "diagnostics", ["month"], :name => "index_diagnostics_on_month"
   add_index "diagnostics", ["type", "id"], :name => "index_diagnostics_on_type_and_id"
+  add_index "diagnostics", ["type", "uqid"], :name => "index_diagnostics_on_type_and_uqid"
   add_index "diagnostics", ["zone_id"], :name => "index_diagnostics_on_zone_id"
 
   create_table "events", :force => true do |t|
@@ -99,17 +103,15 @@ ActiveRecord::Schema.define(:version => 20130913114749) do
   add_index "events", ["kind"], :name => "index_events_on_kind"
 
   create_table "illness_answers", :force => true do |t|
-    t.string   "illness_global_id"
-    t.string   "diagnostic_global_id"
     t.boolean  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "zone_id"
-    t.string   "global_id"
+    t.integer  "uqid"
+    t.integer  "diagnostic_uqid"
   end
 
-  add_index "illness_answers", ["diagnostic_global_id"], :name => "index_illness_answers_on_diagnostic_global_id"
-  add_index "illness_answers", ["illness_global_id"], :name => "index_illness_answers_on_illness_global_id"
+  add_index "illness_answers", ["diagnostic_uqid"], :name => "index_illness_answers_on_diagnostic_uqid"
 
   create_table "illnesses", :force => true do |t|
     t.string   "key"
@@ -169,16 +171,16 @@ ActiveRecord::Schema.define(:version => 20130913114749) do
 
   create_table "results", :force => true do |t|
     t.integer  "classification_id"
-    t.string   "diagnostic_global_id"
     t.integer  "zone_id"
-    t.string   "global_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "treatment_id"
+    t.integer  "uqid"
+    t.integer  "diagnostic_uqid"
   end
 
   add_index "results", ["classification_id"], :name => "index_results_on_classification_id"
-  add_index "results", ["diagnostic_global_id"], :name => "index_results_on_diagnostic_global_id"
+  add_index "results", ["diagnostic_uqid"], :name => "index_results_on_diagnostic_uqid"
   add_index "results", ["zone_id"], :name => "index_results_on_zone_id"
 
   create_table "roles", :force => true do |t|
@@ -207,7 +209,6 @@ ActiveRecord::Schema.define(:version => 20130913114749) do
 
   create_table "sign_answers", :force => true do |t|
     t.integer  "sign_id"
-    t.string   "diagnostic_global_id"
     t.string   "type"
     t.string   "list_value"
     t.boolean  "boolean_value"
@@ -215,7 +216,8 @@ ActiveRecord::Schema.define(:version => 20130913114749) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "zone_id"
-    t.string   "global_id"
+    t.integer  "uqid"
+    t.integer  "diagnostic_uqid"
   end
 
   add_index "sign_answers", ["zone_id"], :name => "index_sign_answers_on_zone_id"
@@ -271,7 +273,7 @@ ActiveRecord::Schema.define(:version => 20130913114749) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "zone_id"
-    t.string   "global_id"
+    t.integer  "uqid"
   end
 
   add_index "users", ["zone_id"], :name => "index_users_on_zone_id"

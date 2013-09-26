@@ -120,6 +120,7 @@ GEM
     tzinfo (0.3.35)
     uuid (2.3.6)
       macaddr (~> 1.0)
+    xray (1.1)
     ziya (2.3.0)
 
 PLATFORMS
@@ -145,4 +146,5 @@ DEPENDENCIES
   state_machine
   thin
   uuid
+  xray
   ziya

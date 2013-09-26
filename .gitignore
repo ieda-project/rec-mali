@@ -15,3 +15,5 @@ stick/
 .*.swp
 app.pid
 config/gpg
+.swo
+.swp

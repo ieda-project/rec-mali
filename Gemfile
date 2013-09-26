@@ -1,5 +1,6 @@
 source 'http://gemcutter.org'
 
+gem 'xray'
 gem 'rails', '>=3', '<3.1'
 gem 'haml', '3.1.4'
 gem 'sass', '3.1.15'
@@ -18,13 +19,16 @@ gem 'state_machine'
 gem 'uuid'
 gem 'thin'
 
+group :development, :heroku do
+  gem 'pg'
+end
+
 group :development, :test, :production do
   gem 'sqlite3'
 end
 
 group :heroku do
   gem 'hassle', git: 'http://github.com/Papipo/hassle.git'
-  gem 'pg'
 end
 
 group :test do

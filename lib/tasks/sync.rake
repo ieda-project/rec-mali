@@ -140,12 +140,12 @@ namespace :sync do
       puts "Starting import.."
       Zone.importable_points.each do |zone|
         next unless dir = unpack.(zone)
-        imported, ipzk[zone] = false, {}
+        imported, ipzk[zone] = [], {}
         Dir.glob("#{dir}/*.csps") do |path|
           model = path.scan(p).first.first
           klass = model.camelize.constantize rescue next
           print "Importing #{klass.name} from #{zone.name}: "
-          imported = true
+          imported << klass
           if Csps::SyncProxy.for(klass).import_from(path, zone)
             puts "done."
             ipzk[zone][klass] = true
@@ -153,7 +153,8 @@ namespace :sync do
             puts "skipped, no change."
           end
         end
-        if imported
+
+        if imported.any?
           zone.update_attributes last_import_at: @sync_at, restoring: false
         end
       end
@@ -275,11 +276,11 @@ namespace :sync do
       File.open("#{dir}/#{type}_#{Csps::Age::GROUPS[ref.saved_age_group]}.spss", 'w') do |out|
         children = if ref.type
           Child.where(
-            'children.global_id IN (SELECT child_global_id FROM diagnostics WHERE type=? AND saved_age_group=?)',
+            'children.uqid IN (SELECT child_uqid FROM diagnostics WHERE type=? AND saved_age_group=?)',
             ref.type, ref.saved_age_group)
         else
           Child.where(
-            'children.global_id IN (SELECT child_global_id FROM diagnostics WHERE type IS NULL AND saved_age_group=?)',
+            'children.uqid IN (SELECT child_uqid FROM diagnostics WHERE type IS NULL AND saved_age_group=?)',
             ref.saved_age_group)
         end
         children = children.includes(diagnostics: { sign_answers: :sign }) #.order('signs.id') is worth nothing
@@ -327,7 +328,7 @@ namespace :sync do
         diags = ref.class.where(saved_age_group: ref.saved_age_group).includes(:child, sign_answers: :sign)
 
         # Header
-        buf = %w(global_id born gender village bcg_polio0 penta1_polio1 penta2_polio2
+        buf = %w(uqid born gender village bcg_polio0 penta1_polio1 penta2_polio2
           penta3_polio3 measles diag_date height weight muac temperature)
         buf += diags.first.sign_answers.sort_by(&:sign_id).map do |sa|
           sa.sign.full_key
@@ -337,7 +338,7 @@ namespace :sync do
         diags.find_each(batch_size: 100) do |diag|
           child = diag.child
           buf = [
-            child.global_id,
+            child.uqid,
             child.born_on,
             child.gender ? 'm' : 'f',
             child.village && child.village.name ]

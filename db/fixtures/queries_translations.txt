@@ -1,4 +1,4 @@
-$version 2
+$version 3
 new children 0-11 months	Nombre de nouveaux enfants de 0-11 mois
 new children 12-23 months	Nombre de nouveaux enfants de 12-23 mois
 new children 24-59 months	Nombre de nouveaux enfants de 24-59 mois
@@ -7,41 +7,41 @@ old children 0-11 months	Nombre d'anciens enfants de 0-11 mois
 old children 12-23 months	Nombre d'anciens enfants de 12-23 mois
 old children 24-59 months	Nombre d'anciens enfants de 24-59 mois
 
-follow children 0-11 months	Nombre total d'enfants de 0-11 mois
-follow children 12-23 months	Nombre total d'enfants de 12-23 mois
-follow children 24-59 months	Nombre total d'enfants de 24-59 mois
+total children 0-11 months	Nombre total d'enfants de 0-11 mois
+total children 12-23 months	Nombre total d'enfants de 12-23 mois
+total children 24-59 months	Nombre total d'enfants de 24-59 mois
 
-follow children pas de pneumonie	Pas de pneumonie: toux ou rhume
-follow children pneumonie	Pneumonie
-follow children pneumonie grave	Pneumonie grave ou maladie très grave
-follow children signes deshydratation	Signes évidents de déshydratation
-follow children deshydratation severe	Déshydratation sévère
-follow children diarrhee persistente	Diarrhée persistente
-follow children diarrhee severe	Diarrhée persistente sévère
-follow children dysenterie	Dysenterie
-follow children antecedent rougeole	Antécédent de rougeole
-follow children rougeole	Rougeole
-follow children rougeole complication	Rougeole avec complication aux yeux ou à la bouche
-follow children rougeole grave	Rougeole grave et compliquée
-follow children infection chronique	Infection chronique
-follow children infection aigue	Infection aiguë
-follow children mastoidite	Mastoïdïte
-follow children anemie	Anémie
-follow children anemie grave	Anémie grave
-follow children mam	MAM
-follow children mass	MASs
-follow children masc	MASc
-follow children vih pru probable	Infection VIH peu problable
-follow children vih symp suspecte	Infection VIH symptomatique suspecte
-follow children vih exposition	Infection VIH possible / exposition au VIH
-follow children vih symp probable	Infection VIH symptomatique probable
-follow children vih confirmee	Infection VIH confirmée
-follow children vih symp confirmee	Infection VIH symptomatique confirmée
+total children pas de pneumonie	Pas de pneumonie: toux ou rhume
+total children pneumonie	Pneumonie
+total children pneumonie grave	Pneumonie grave ou maladie très grave
+total children signes deshydratation	Signes évidents de déshydratation
+total children deshydratation severe	Déshydratation sévère
+total children diarrhee persistente	Diarrhée persistente
+total children diarrhee severe	Diarrhée persistente sévère
+total children dysenterie	Dysenterie
+total children antecedent rougeole	Antécédent de rougeole
+total children rougeole	Rougeole
+total children rougeole complication	Rougeole avec complication aux yeux ou à la bouche
+total children rougeole grave	Rougeole grave et compliquée
+total children infection chronique	Infection chronique
+total children infection aigue	Infection aiguë
+total children mastoidite	Mastoïdïte
+total children anemie	Anémie
+total children anemie grave	Anémie grave
+total children mam	MAM
+total children mass	MASs
+total children masc	MASc
+total children vih pru probable	Infection VIH peu problable
+total children vih symp suspecte	Infection VIH symptomatique suspecte
+total children vih exposition	Infection VIH possible / exposition au VIH
+total children vih symp probable	Infection VIH symptomatique probable
+total children vih confirmee	Infection VIH confirmée
+total children vih symp confirmee	Infection VIH symptomatique confirmée
 
-follow children boy paludisme	Nombre d'enfants, garcons avec la classification de paludisme simple
-follow children girl paludisme	Nombre d'enfants, filles avec la classification de paludisme simple
-follow children boy paludisme grave	Nombre d'enfants, garcons avec la classification de paludisme grave
-follow children girl paludisme grave	Nombre d'enfants, filles avec la classification de paludisme grave
+total children boy paludisme	Nombre d'enfants, garcons avec la classification de paludisme simple
+total children girl paludisme	Nombre d'enfants, filles avec la classification de paludisme simple
+total children boy paludisme grave	Nombre d'enfants, garcons avec la classification de paludisme grave
+total children girl paludisme grave	Nombre d'enfants, filles avec la classification de paludisme grave
 
-follow children fievre 14	Nombre d'enfants avec une fièvre de plus de 14 jours
-follow children ulcerations	Nombre d'enfants avec des ulcérations dans la bouche
+total children fievre 14	Nombre d'enfants avec une fièvre de plus de 14 jours
+total children ulcerations	Nombre d'enfants avec des ulcérations dans la bouche

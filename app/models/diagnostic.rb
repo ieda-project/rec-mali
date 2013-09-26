@@ -2,6 +2,8 @@ class Diagnostic < ActiveRecord::Base
   include Csps::Exportable
   include Csps::Age
 
+  enum :kind, %w(first initial follow)
+
   state_machine :state, initial: :opened do
     # opened, filled, calculated, treatments_selected, closed
     state :filled, :calculated, :treatments_selected, :closed do
@@ -64,7 +66,7 @@ class Diagnostic < ActiveRecord::Base
     end
   end
 
-  has_many :classifications, finder_sql: ->(wut) { ["SELECT c.* FROM classifications c INNER JOIN results r ON c.id = r.classification_id WHERE r.diagnostic_global_id = ?", global_id] } do
+  has_many :classifications, finder_sql: ->(wut) { ["SELECT c.* FROM classifications c INNER JOIN results r ON c.id = r.classification_id WHERE r.diagnostic_uqid = ?", uqid] } do
     def for illness
       select { |c| c.illness_id == illness.id }
     end
@@ -163,10 +165,6 @@ class Diagnostic < ActiveRecord::Base
     done_on ? done_on.to_date : Date.today
   end
 
-  def self.age_reference_field
-    :done_on
-  end
-
   INDICES = {
     'weight_age' => 'wfa',
     'height_age' => 'hfa',
@@ -201,7 +199,7 @@ class Diagnostic < ActiveRecord::Base
   for name, ratio in INDICES
     module_eval "def #{ratio}; index_ratio :#{name}; end", __FILE__, __LINE__
   end
-  
+
   def height= val
     write_attribute :height, val.to_s.gsub(',', '.')
   end
@@ -218,7 +216,7 @@ class Diagnostic < ActiveRecord::Base
     self.born_on ||= child.born_on if child
     if age_group
       sign_ids = sign_answers.map(&:sign_id).rhashize
-      Sign.where(age_group: age_group).order(:sequence).each do |sign| 
+      Sign.where(age_group: age_group).order(:sequence).each do |sign|
         sign_answers << sign.answer_class.new(sign: sign) unless sign_ids[sign.id]
       end
     else
@@ -231,7 +229,7 @@ class Diagnostic < ActiveRecord::Base
     def search_columns
       column_names
     end
-    
+
     def group_stats_by case_status, rs
       # TODO
       m = self.minimum :done_on
@@ -249,6 +247,23 @@ class Diagnostic < ActiveRecord::Base
         d2 = d2.next_month
       end
       grs
+    end
+
+    def age_reference_field
+      :done_on
+    end
+
+    def rewrite_query_conditions cond
+      att, val = cond['field'], cond['value']
+      if att == 'classifications.name'
+        if c = Classification.find_by_name(val)
+          [ 'results.classification_id', c.id ]
+        else
+          raise "No such classification: #{val}"
+        end
+      else
+        [ att, val ]
+      end
     end
   end
 end

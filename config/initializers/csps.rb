@@ -13,8 +13,12 @@ module Csps
   end
 end
 
-Paperclip.interpolates :global_id do |attachment, style_name|
-  attachment.instance.global_id
+Paperclip.interpolates :uqid do |attachment, style_name|
+  attachment.instance.uqid
+end
+
+Paperclip.interpolates :zone_name do |attachment, style_name|
+  attachment.instance.zone_name
 end
 
 Haml::Template.options[:format] = :xhtml

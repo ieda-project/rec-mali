@@ -1,48 +1,30 @@
 require 'json'
 
 class Query < ActiveRecord::Base
+  # These correspond to diag kinds "first", "initial" and "follow" in this order.
   enum :case_status, %w{new old follow}
-  NEW = 0
-  OLD = 1
-  FOLLOW = 2
 
-  MONTH = {
-    'SQLite' => ->(f) { "strftime('%Y-%m', #{f})" },
-    'PostgreSQL' => ->(f) { "to_char(#{f}, 'YYYY-MM')" }}
   AGE = {
     'SQLite' => ->(ref, age) { "date(#{ref}, '-#{age} months')" },
     'PostgreSQL' => ->(ref, age) { "(#{ref} - interval '#{age} months')" }}
 
-  validates_presence_of :title, :case_status, :klass
+  validates_presence_of :title, :klass
 
   def run
-    k = klass.constantize
-    rel, aref = k, k.age_reference_field
-    ca = connection.adapter_name
-
-    sub = "(SELECT min(global_id) FROM diagnostics GROUP BY child_global_id)"
-    rel = case case_status
-      when NEW then rel.where "global_id IN #{sub}"
-      when OLD then rel.where "global_id NOT IN #{sub}"
-      else rel
-    end
+    k, ca = klass.constantize, connection.adapter_name
+    aref = k.age_reference_field
+    rel = case_status ? k.where(kind: case_status) : k
 
     for cond in Array(JSON.parse(conditions))
       rel = case cond['type']
         when 'age'
           rel.where "#{AGE[ca].(aref, cond['value'].to_i)} #{cond['operator']} #{k.table_name}.born_on"
         when 'field', 'boolean'
-          path = cond['attribute'].split '.'
+          att, val = k.rewrite_query_conditions cond
+          op = (cond['type'] == 'boolean') ? '=' : cond['operator']
+
+          path = att.split '.'
           inkl, model, field = nil, k, path.pop
-
-          if cond['type'] == 'boolean'
-            val = cond['value'] == 'true'
-            op = '='
-          else
-            val = cond['value']
-            op =  cond['operator']
-          end
-
           path.each do |i|
             i = i.intern
             model = model.reflections[i].klass
@@ -55,15 +37,15 @@ class Query < ActiveRecord::Base
           raise "Sign is only supported by Diagnostic" if k != Diagnostic
           sign = Sign.find_by_key cond['sign']
           rel.where(
-            "global_id IN (
-              SELECT diagnostic_global_id FROM sign_answers
+            "uqid IN (
+              SELECT diagnostic_uqid FROM sign_answers
               WHERE sign_id=? AND #{sign.answer_class.field} #{cond['operator']} ?)", sign.id, cond['value'])
       end
     end
 
-    rel.group(MONTH[ca].(aref)).count('DISTINCT child_global_id').tap do
-      update_attribute :last_run_at, Time.now
-    end
+    rel.group(:month).count('DISTINCT child_uqid')
+  ensure
+    update_attribute :last_run_at, Time.now
   end
 
   def self.latest_run limit=4
