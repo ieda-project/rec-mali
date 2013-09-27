@@ -124,7 +124,7 @@ $version 3
   "klass":"Diagnostic",
   "conds": [{
     "type": "field",
-    "attribute": "classifications.name",
+    "field": "classifications.name",
     "operator": "=",
     "value": "Pas de pneumonie : toux ou rhume"
   }]
@@ -410,7 +410,7 @@ $version 3
   "klass":"Diagnostic",
   "conds": [{
     "type":"boolean",
-    "attribute":"child.gender",
+    "field":"child.gender",
     "value":true
   }, {
     "type": "field",
@@ -425,7 +425,7 @@ $version 3
   "klass":"Diagnostic",
   "conds": [{
     "type":"boolean",
-    "attribute":"child.gender",
+    "field":"child.gender",
     "value":false
   }, {
     "type": "field",
@@ -440,7 +440,7 @@ $version 3
   "klass":"Diagnostic",
   "conds": [{
     "type":"boolean",
-    "attribute":"child.gender",
+    "field":"child.gender",
     "value":true
   }, {
     "type": "field",
@@ -455,7 +455,7 @@ $version 3
   "klass":"Diagnostic",
   "conds": [{
     "type":"boolean",
-    "attribute":"gender",
+    "field":"gender",
     "value":false
   }, {
     "type": "field",
