@@ -19,16 +19,12 @@ gem 'state_machine'
 gem 'uuid'
 gem 'thin'
 
-group :development, :heroku do
+group :heroku do
   gem 'pg'
 end
 
 group :development, :test, :production do
   gem 'sqlite3'
-end
-
-group :heroku do
-  gem 'hassle' #, git: 'http://github.com/Papipo/hassle.git'
 end
 
 group :test do
