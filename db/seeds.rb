@@ -64,7 +64,7 @@ class ActiveRecord::Base
     case connection.adapter_name
       when 'SQLite' then connection.execute(
         "DELETE FROM sqlite_sequence WHERE name='#{table_name}'")
-      when 'PostgreSQL' then connection-execute(
+      when 'PostgreSQL' then connection.execute(
         "ALTER SEQUENCE #{table_name}_#{primary_key}_seq RESTART WITH 1")
     end
   end
