@@ -38,7 +38,7 @@ class RemoveGidColumns < ActiveRecord::Migration
         dump = StringIO.new
         old_dump.each_line do |line|
           case line
-            when /illness_global_id/ then next
+            when /illness_global_id/, /add_index.*\["global_id"\]/ then next
             when /add_index.*global_id/ then line.gsub!('global_id', 'uqid')
             when /global_id/ then next
           end
