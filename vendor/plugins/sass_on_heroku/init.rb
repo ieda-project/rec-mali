@@ -1,3 +1,3 @@
-if Rails.env == 'production'
+if Rails.env == 'heroku'
 	Rails::Application.middleware.use SassOnHeroku
 end
