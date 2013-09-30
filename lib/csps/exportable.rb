@@ -5,7 +5,9 @@ module Csps::Exportable
   MODELS = Set.new
 
   included do
-    MODELS << name
+    # Ignore namespaced models (temporary ones only for migration)
+    MODELS << name unless name.include?('::')
+
     @gbt = Set.new
 
     before_save :fill_uqid
