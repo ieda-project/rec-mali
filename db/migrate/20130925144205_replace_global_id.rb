@@ -23,12 +23,14 @@ class ReplaceGlobalId < ActiveRecord::Migration
       puts ".. #{m.name}"
       tbl = m.table_name
 
-      add_column tbl, :uqid, sql_type, unique: true
+      add_column tbl, :uqid, sql_type
+      add_index tbl, [:uqid], unique: true
       m.reset_column_information
 
       # Create fake models for the same tables, and add them to our
       # Bogus module so they have names.
       mm = Class.new ActiveRecord::Base
+      mm.inheritance_column = :_none
       mm.table_name = tbl
       Bogus.const_set m.name, mm
       fakes[m] = mm
