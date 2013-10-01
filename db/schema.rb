@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130925232734) do
     t.datetime "updated_at"
     t.boolean  "temporary"
     t.integer  "zone_id"
-    t.integer  "uqid",               :limit => 8
+    t.integer  "uqid"
   end
 
   add_index "children", ["temporary", "zone_id"], :name => "index_children_on_temporary_and_zone_id"
@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(:version => 20130925232734) do
     t.string   "state"
     t.integer  "kind"
     t.integer  "month"
-    t.integer  "uqid",                   :limit => 8
-    t.integer  "child_uqid",             :limit => 8
-    t.integer  "author_uqid",            :limit => 8
+    t.integer  "uqid"
+    t.integer  "child_uqid"
+    t.integer  "author_uqid"
   end
 
   add_index "diagnostics", ["author_uqid"], :name => "index_diagnostics_on_author_uqid"
@@ -107,8 +107,8 @@ ActiveRecord::Schema.define(:version => 20130925232734) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "zone_id"
-    t.integer  "uqid",            :limit => 8
-    t.integer  "diagnostic_uqid", :limit => 8
+    t.integer  "uqid"
+    t.integer  "diagnostic_uqid"
   end
 
   add_index "illness_answers", ["diagnostic_uqid"], :name => "index_illness_answers_on_diagnostic_uqid"
@@ -175,8 +175,8 @@ ActiveRecord::Schema.define(:version => 20130925232734) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "treatment_id"
-    t.integer  "uqid",              :limit => 8
-    t.integer  "diagnostic_uqid",   :limit => 8
+    t.integer  "uqid"
+    t.integer  "diagnostic_uqid"
   end
 
   add_index "results", ["classification_id"], :name => "index_results_on_classification_id"
@@ -216,8 +216,8 @@ ActiveRecord::Schema.define(:version => 20130925232734) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "zone_id"
-    t.integer  "uqid",            :limit => 8
-    t.integer  "diagnostic_uqid", :limit => 8
+    t.integer  "uqid"
+    t.integer  "diagnostic_uqid"
   end
 
   add_index "sign_answers", ["zone_id"], :name => "index_sign_answers_on_zone_id"
@@ -273,7 +273,7 @@ ActiveRecord::Schema.define(:version => 20130925232734) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "zone_id"
-    t.integer  "uqid",             :limit => 8
+    t.integer  "uqid"
   end
 
   add_index "users", ["zone_id"], :name => "index_users_on_zone_id"
