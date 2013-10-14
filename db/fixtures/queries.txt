@@ -258,7 +258,7 @@ $version 3
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Infection chronique"
+    "value": "Infection chronique de l'oreille"
   }]
 }
 
@@ -280,7 +280,7 @@ $version 3
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Mastoïdïte"
+    "value": "Mastoïdite"
   }]
 }
 
@@ -357,7 +357,7 @@ $version 3
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Infection VIH symptomatique suspecte"
+    "value": "Infection à VIH symptomatique suspecte"
   }]
 }
 
@@ -368,7 +368,7 @@ $version 3
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Infection VIH possible / exposition au VIH"
+    "value": "Infection à VIH possible / exposition au VIH"
   }]
 }
 
@@ -390,7 +390,7 @@ $version 3
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Infection VIH confirmée"
+    "value": "Infection à VIH confirmée"
   }]
 }
 
@@ -455,7 +455,7 @@ $version 3
   "klass":"Diagnostic",
   "conds": [{
     "type":"boolean",
-    "field":"gender",
+    "field":"child.gender",
     "value":false
   }, {
     "type": "field",
