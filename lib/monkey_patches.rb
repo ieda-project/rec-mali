@@ -14,6 +14,14 @@ class Hash
   def force_encoding enc
     each { |k,v| v.force_encoding enc rescue nil }
   end
+
+  def keep *these
+    {}.tap do |out|
+      these.flatten.each do |key|
+        out[key] = self[key]
+      end
+    end
+  end
 end
 
 class Array

@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
-  login_required only: [ :index, :show, :logins, :user_logins ]
-  before_filter :logged_in_or_first_run, except: [ :index, :show ]
-  before_filter :admin_or_first_run
+  admin_required except: [:create, :password, :update]
+  login_required only: [:password, :update], expire: false
+
+  before_filter :admin_or_first_run, only: :create
   before_filter :paged, only: [ :logins, :user_logins ]
+
   fetch 'User', also: [ :user_logins ]
 
   layout :decide_layout
@@ -28,7 +30,11 @@ class UsersController < ApplicationController
         @user.errors[:base] << :no_site
       end
     end
-    @user.admin = User.count.zero?
+    if User.count.zero?
+      @user.admin = true
+    elsif @user.admin
+      @user.password_expired_at = Time.now
+    end
 
     return see_other('/session/restore') if restore
 
@@ -51,10 +57,29 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes params[:user]
-      see_other users_path
+    data = params[:user]
+    if @user == current_user && @user.password_expired?
+      puts "first"
+      data = data.keep %w(password password_confirmation)
+      data[:password_expired_at] = nil
+      act = 'password'
+      ret = nil
+    elsif @user.password_expired?
+      puts 'second'
+      return see_other('/user/password')
+    elsif admin?
+      puts 'third'
+      act = 'edit'
+      ret = users_path
     else
-      render action: 'edit'
+      puts 'fourth'
+      return denied
+    end
+
+    if @user.update_attributes data
+      see_other(ret || session.delete(:after_change) || '/')
+    else
+      render action: act
     end
   end
 
@@ -71,6 +96,9 @@ class UsersController < ApplicationController
 
   def user_logins
     @logins = @user.events.logins.history
+  end
+
+  def password
   end
 
   protected

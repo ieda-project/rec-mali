@@ -5,7 +5,7 @@ Csps::Application.routes.draw do
   resource :syncs
   resources :users do
     get :logins, on: :member, to: :user_logins
-    get :logins, on: :collection
+    get :logins, :password, on: :collection
   end
   resources :queries do
     get :export, on: :member

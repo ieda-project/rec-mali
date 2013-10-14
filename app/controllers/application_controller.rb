@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
             #{fp.join("\n")}
           end", __FILE__, __LINE__
         module_eval "
-          def fetch 
+          def fetch
             @object = @#{model.underscore} =
             (@parent ?
              @parent.#{model.underscore.pluralize} :
@@ -64,6 +64,21 @@ class ApplicationController < ActionController::Base
 
   def login_required
     if logged_in?
+      if current_user.password_expired?
+        session[:after_change] = request.fullpath
+        see_other '/users/password'
+      else
+        true
+      end
+    elsif !Zone.csps || User.local.empty?
+      see_other welcome_session_path
+    else
+      denied
+    end
+  end
+
+  def login_required_no_expire
+    if logged_in?
       true
     elsif !Zone.csps || User.local.empty?
       see_other welcome_session_path
@@ -71,12 +86,46 @@ class ApplicationController < ActionController::Base
       denied
     end
   end
-  
+
+  def admin_required
+    ret = login_required
+    if ret == true
+      admin? or denied
+    else
+      ret
+    end
+  end
+
+  def admin_required_no_expire
+    ret = login_required_no_expire
+    if ret == true
+      admin? or denied
+    else
+      ret
+    end
+  end
+
   def admin?
     current_user.admin?
   end
 
-  [ :login_required ].each do |filter|
-    class_eval "def self.#{filter} *args; before_filter :#{filter}, *args; end", __FILE__, __LINE__
+  class << self
+    def login_required *args
+      opts = args.first
+      if opts && opts.delete(:expire) == false
+        before_filter :login_required_no_expire, opts
+      else
+        before_filter :login_required, *args
+      end
+    end
+
+    def admin_required *args
+      opts = args.first
+      if opts && opts.delete(:expire) == false
+        before_filter :admin_required_no_expire, opts
+      else
+        before_filter :admin_required, *args
+      end
+    end
   end
 end

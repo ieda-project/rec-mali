@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
     select('id, name').map { |u| [ u.id, u.name ] }
   end
 
+  def password_expired?
+    password_expired_at && password_expired_at < Time.now
+  end
+
   protected
 
   def crypt_password
