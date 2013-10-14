@@ -110,7 +110,7 @@ class UsersController < ApplicationController
   def logged_in_or_first_run
     User.count.zero? || logged_in? || denied
   end
-  
+
   def admin_or_first_run
     User.count.zero? || (logged_in? and admin?) || denied
   end

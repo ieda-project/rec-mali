@@ -3,7 +3,14 @@
     %li= link_to "Recherche Patient", children_path
     %li= link_to "Utilisateurs", users_path
     %li Nouvel Utilisateur
-    
+
+:javascript
+  window.addEvent('domready', function() {
+    $('new_user').validate = function() {
+      if ($('user_admin').value == '1')
+        return confirm('Vous ne serez plus administrateur après la première connexion du nouvel administrateur.\n\nVoulez-vous continuer ?');
+      return true }});
+
 .welcome
   %h1 Nouvel utilisateur
   = partial 'new'

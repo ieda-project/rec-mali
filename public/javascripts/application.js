@@ -676,6 +676,7 @@ Element.behaviour(function() {
       return true } else return false });
   this.getElements('form').addEvent('submit', function() {
     if (this.stop) return;
+    if (this.validate && !this.validate()) return false;
     if (pending()) {
       $$('button[type=submit]').each(function(i) {
         i.addClass('clicked')
