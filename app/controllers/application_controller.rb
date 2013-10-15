@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :params_are_utf8
+  before_filter :prepare_everything
 
   include Wopata::ActionController::Statuses
   authenticate_from :session
@@ -24,7 +24,8 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def params_are_utf8
+  def prepare_everything
+    Zone.reload_csps
     params.force_encoding Encoding::UTF_8
   end
 

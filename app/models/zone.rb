@@ -96,8 +96,12 @@ class Zone < ActiveRecord::Base
       roots.each &:traverse
     end
 
+    def reload_csps
+      @csps = find_by_here(true)
+    end
+
     def csps
-      find_by_here true
+      @csps || find_by_here(true)
     end
     alias here csps
 
