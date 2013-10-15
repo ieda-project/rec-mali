@@ -39,10 +39,6 @@ class User < ActiveRecord::Base
     password_expired_at && password_expired_at < Time.now
   end
 
-  def first_password_change?
-    password_expired? && events.logins.size == 1
-  end
-
   protected
 
   def crypt_password
