@@ -3,7 +3,7 @@ module ChildrenHelper
     if ch.village
       ch.village.name
     elsif ch.village_name.present?
-      "#{ch.village_name} (Hors zone)"
+      "#{ch.village_name} (hors zone)"
     else
       '-'
     end
@@ -12,7 +12,7 @@ module ChildrenHelper
   def zone_select_for_child ch
     Zone.csps.to_select.tap do |out|
       out << [
-        "Hors zone: #{ch.village_name}",
+        "#{ch.village_name} (hors zone)",
         nil,
         { 'data-village' => ch.village_name, selected: true }] if ch.village_name.present?
       out << ['Hors zone', nil]
