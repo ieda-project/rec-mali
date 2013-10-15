@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password_confirmation, :if => :password
   validates_confirmation_of :password, :if => :password
   before_save :crypt_password
-  
+
   scope :admins, :conditions => {:admin => true}
   scope :local, ->() { Zone.csps ? where(zone_id: Zone.csps.id) : where(id: 0) }
 
