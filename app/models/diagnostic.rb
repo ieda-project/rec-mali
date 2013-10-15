@@ -220,6 +220,10 @@ class Diagnostic < ActiveRecord::Base
     write_attribute :weight, val.to_s.gsub(',', '.')
   end
 
+  def temperature= val
+    write_attribute :temperature, val.to_s.gsub(',', '.')
+  end
+
   def type_name
     '-'
   end
