@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     end
 
     if @user == current_user && data['password'].present?
-      unless @user.authenticate(params[:password])
+      unless @user.first_password_change? || @user.authenticate(params[:password])
         @pw_error = true
         return render(action: (pw ? 'password' : 'edit'))
       end

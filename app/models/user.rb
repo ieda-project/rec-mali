@@ -30,13 +30,17 @@ class User < ActiveRecord::Base
   def authenticate password
     BCrypt::Password.new(crypted_password) == password
   end
-  
+
   def self.to_login_select
     select('id, name').map { |u| [ u.id, u.name ] }
   end
 
   def password_expired?
     password_expired_at && password_expired_at < Time.now
+  end
+
+  def first_password_change?
+    password_expired? && events.logins.size == 1
   end
 
   protected
