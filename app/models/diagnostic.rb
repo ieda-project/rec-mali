@@ -114,6 +114,7 @@ class Diagnostic < ActiveRecord::Base
     if new_record?
       self.done_on ||= Time.now
       self.born_on ||= child.born_on if child
+      self.kind_key ||= (child && child.diagnostics.count > 0) ? 'initial' : 'first'
       fill false
     end
   end

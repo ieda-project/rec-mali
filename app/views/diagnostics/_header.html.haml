@@ -3,4 +3,5 @@
     = l(diagnostic.done_on.getlocal, :format => :long)
     (#{t(:from, :scope => :datetime)}
     #{time_ago_in_words(diagnostic.done_on)})
+  = image_tag 'icons/follow-icon.png', class: 'kind' if diagnostic.kind_key == 'follow'
   %span.by Evaluation réalisée par #{diagnostic.author.name}
