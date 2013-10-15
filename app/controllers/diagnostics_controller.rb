@@ -64,6 +64,7 @@ class DiagnosticsController < ApplicationController
     back 'Liste des evaluations', @child
     if @child.of_valid_age?
       @diagnostic = @child.diagnostics.new.prebuild
+      @diagnostic.kind = Diagnostic::KINDS.index(params[:kind])
     else
       not_found
     end

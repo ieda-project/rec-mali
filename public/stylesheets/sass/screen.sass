@@ -195,11 +195,13 @@ h2
     &.show
       font-size: 1.5em
       & + nav
-        margin-top: -42px
+        margin-top: -60px
       .by
         font-weight: normal
         display: block
         font-size: 0.9em
+        line-height: 2em
+        vertical-align: top
 h3
   float: left
 
@@ -382,6 +384,8 @@ nav
     background: #f6f6f6
     padding: 15px 0
     -webkit-border-radius: 5px
+  &.child
+    text-align: left
   &#prev
     float: left
     line-height: 43px
@@ -403,7 +407,7 @@ nav
     font-size: 1.15em
     height: 29px
     line-height: 29px
-    margin: 0
+    margin: 8px 0 0 13px
     padding: 0 7px
     -webkit-border-radius: 6px
 nav a, nav button, section button[type=submit]
@@ -421,6 +425,7 @@ nav a, nav button, section button[type=submit]
   background: url(../images/bnl.png)
   color: white
   &.new-diagnostic
+    float: right
     background: url(../images/backgrounds/button-new-diagnostic.gif)
     font-size: 1.4em
     font-weight: bold
@@ -429,6 +434,18 @@ nav a, nav button, section button[type=submit]
     padding: 0 7px 0 50px
     &:after
       background: url(../images/backgrounds/button-new-diagnostic.gif) right -46px no-repeat
+      height: 46px
+      width: 10px
+  &.follow-diagnostic
+    float: right
+    background: url(../images/backgrounds/button-follow-diagnostic.gif)
+    font-size: 1.4em
+    font-weight: bold
+    height: 46px
+    line-height: 46px
+    padding: 0 7px 0 50px
+    &:after
+      background: url(../images/backgrounds/button-follow-diagnostic.gif) right -46px no-repeat
       height: 46px
       width: 10px
   &.new-user
@@ -823,6 +840,10 @@ section
             .by
               color: white
               border-color: white
+        img.kind
+          float: right
+          margin: -6px 25px 0 0
+          opacity: 0.2
         &.odd
           background: #f4f4f4
         .by

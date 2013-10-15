@@ -36,6 +36,15 @@
     .next
       %button.next(type="button") Continuer
 
+%h2.em.show
+  %span.by
+    - if @diagnostic.kind_key == 'follow'
+      = image_tag 'icons/follow-icon.png'
+      Consultation de suivi
+    - else
+      = image_tag 'icons/new-icon.png'
+      Nouvelle consultation
+= form.hidden_field :kind
 .illnesses= partial 'diagnostics/edit_signs', locals: { form: form }
 
 %nav
