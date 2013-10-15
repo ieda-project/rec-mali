@@ -1,8 +1,0 @@
-%h1 Hors zone
-
-.aided-search{'data-target' => 'child_village_id', 'data-prefix' => 'Hors zone: '}
-  %select
-    - for v in Zone.villages do
-      %option{value: v.id} #{v.name}
-  %input{type: 'text'}
-  %ul

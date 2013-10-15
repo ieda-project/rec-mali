@@ -2,9 +2,11 @@ class Child < ActiveRecord::Base
   include Csps::Exportable
   include Csps::Age
 
-  validates_presence_of :village
   validates_presence_of :first_name, :last_name, :if => :final?
   validates_inclusion_of :gender, in: [true, false], :if => :final?
+
+  validates_presence_of :village_name, unless: :village
+  validates_presence_of :village, if: proc { |u| u.village_name.blank? }
 
   belongs_to :village, class_name: 'Zone'
   globally_has_many :diagnostics do
@@ -21,8 +23,8 @@ class Child < ActiveRecord::Base
                     url: '/repo/:zone_name/:uqid_:class_:attachment.:extension',
                     default_url: '/images/missing.png'
 
-  before_save :fill_cache_fields
-  
+  before_save :fill_fields
+
   scope :unfilled, conditions: { first_name: nil, last_name: nil }
   scope :temporary, conditions: { temporary: true }
 
@@ -53,14 +55,15 @@ class Child < ActiveRecord::Base
   for name, ratio in Diagnostic::INDICES do
     delegate name, ratio, to: :last_visit, allow_nil: true
   end
-  
+
   def self.dates2key d
     "#{d.year}-#{sprintf("%02d", d.month)}"
   end
 
   protected
 
-  def fill_cache_fields
+  def fill_fields
+    self.village_name = nil if village_name.blank?
     self.cache_name = name.cacheize
   end
 end

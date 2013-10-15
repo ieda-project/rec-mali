@@ -5,7 +5,7 @@
     #{l(child.born_on, :format => :long)}, #{months_to_text child.months}
 
   %br/
-  %strong Village : 
-  #{child.village.try(:name) || '-'}
+  %strong Village :
+  = village child
 - if Csps.point?
   %button.edit(type="button") Modifier

@@ -51,16 +51,16 @@ $extend(Alertbox, {
     })
     return this
   },
-	xpos: function() {
-		return Math.round(
+  xpos: function() {
+    return Math.round(
       document.body.scrollLeft +
       (window.getWidth() - this.getWidth()) / 2);
-	},
-	ypos: function() {
-		return Math.round(
+  },
+  ypos: function() {
+    return Math.round(
       document.body.scrollTop +
       (window.getHeight() - this.getHeight()) / 2)
-	},
+  },
   hide_unless_delayed: function() {
     if (!this.timeout && this.getStyle('opacity') > 0) this.hide()
   },
@@ -76,7 +76,7 @@ window.addEvent('domready', function() {
   Alertbox.inject(document.body)
   window._alert = window.alert
   window.alert = function(message) { Alertbox.display(message) }});
-    
+
 transient = {
   div: null,
   open: function(what, style) {
@@ -243,7 +243,7 @@ window.addEvent('domready', function() {
       if (calculate != false) invalidate_illness(illness);
       illness.valid = illness.fields.every(function(i) {
         if (i.disabled || i.get('type') == 'hidden') {
-          return true        
+          return true
         } else if (i.get('type') == 'radio') {
           return i.getParent().getElements('input').some(function(x) { return x.checked })
         } else {
@@ -379,7 +379,7 @@ window.addEvent('domready', function() {
         } else {
           warnings.each(function (w) {
             w.setStyle('display', w.condition(form.tree) ? 'none' : 'block') })};
-        
+
         head_next.setStyle('visibility', 'visible');
         close_illness();
 
@@ -543,6 +543,30 @@ window.addEvent('domready', function() {
   })});
 
 Element.behaviour(function() {
+  this.getElements('#child_village_id').addEvent('change', function() {
+    var name;
+    if (this.value) {
+      name = null;
+    } else {
+      name = this.selectedOptions[0].get('data-village');
+      if (!name) {
+        name = prompt("Nom du village:");
+        if (name) {
+          $A(this.options).each(function(i) {
+            if (i.get('data-village')) i.dispose() });
+          document.createElement('option').
+            set('data-village', name).
+            set('value', null).
+            set('text', 'Hors zone: '+name).
+            injectBefore(this.getElement('option:last-child'));
+          this.selectedIndex = this.options.length - 2;
+        } else {
+          this.selectedIndex = 0;
+          alert('Entrée invalide, valeur remis à '+this.selectedOptions[0].get('text'));
+          name = null }}}
+    $('child_village_name').value = name;
+  });
+
   this.getElements('form.new_child input[type=text]').addEvent('focus', function() {
     if (this.value == this.get('data-label')) this.value = '';
     this.removeClass('blank')
@@ -586,7 +610,7 @@ Element.behaviour(function() {
         self.getElement('img').src = uri;
         transient.close() };
       transient.open(obj, { width: 340, height: 380 }) }});
-  
+
   this.getElements('.ratios li').addEvent('click', function(e) {
     if (this.hasClass('disabled'))
       return;
@@ -662,7 +686,7 @@ Element.behaviour(function() {
             new Element('li', { text: v.text, 'data-id': v.id }).inject(ul);
             c++ }}
         prev = input.value }}).periodical(500) });
-        
+
   function pending() {
     if ($E('html').hasClass('pending')) return false;
     $E('html').addClass('pending');

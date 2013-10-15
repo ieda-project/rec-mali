@@ -17,7 +17,7 @@ Csps::Application.routes.draw do
 
   resources :children do
     collection do
-      get :calculations, :hors_zone, :questionnaire
+      get :calculations, :questionnaire
     end
     member do
       get :indices
