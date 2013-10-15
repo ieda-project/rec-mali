@@ -4,21 +4,21 @@
     %tr
       %th(scope='row') Taille
       %td
-        = form.text_field :height, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.age < 5', 'data-validate' => 'value >= 40 && value <= 170'
+        = form.text_field :height, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.age < 5', 'data-validate' => 'value >= 35 && value <= 140'
         %em cm
       %th(scope='row') Temp.
       %td
-        = form.text_field :temperature, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.age < 5', 'data-validate' => 'value >= 13 && value <= 47'
+        = form.text_field :temperature, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.age < 5', 'data-validate' => 'value >= 33 && value <= 46'
         %em °C
     %tr
       %th(scope='row') Poids
       %td
-        = form.text_field :weight, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.age < 5', 'data-validate' => 'value >= 1 && value <= 40'
+        = form.text_field :weight, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.age < 5', 'data-validate' => 'value >= 2 && value <= 30'
         %em kg
       - if form.object.new_record? or (form.object.months > 6 and form.object.months < 60)
         %th(scope='row') Périm. Brac.
         %td
-          = form.text_field :mac, size: 4, class: 'integer needed', 'data-condition' => 'data.enfant.months >= 6 && data.enfant.age < 5', 'data-key' => 'muac', 'data-validate' => 'value >= 50 && value <= 200'
+          = form.text_field :mac, size: 4, class: 'integer needed', 'data-condition' => 'data.enfant.months >= 6 && data.enfant.age < 5', 'data-key' => 'muac', 'data-validate' => 'value >= 50 && value <= 250'
           %em mm
 .ratios
   %ul
