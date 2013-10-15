@@ -1,7 +1,7 @@
 class DiagnosticsController < ApplicationController
   login_required
   before_filter :fetch_child, :except => :indices
-  before_filter :fetch, only: [ :show, :wait, :treatments, :calculations, :edit, :update ]
+  before_filter :fetch, only: [ :show, :wait, :treatments, :calculations, :edit, :update, :destroy ]
   before_filter :editable_only, only: [:edit, :update]
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
@@ -116,14 +116,23 @@ class DiagnosticsController < ApplicationController
     end
   end
 
+  def destroy
+    if @diagnostic.deletable_by? current_user
+      @diagnostic.destroy
+      see_other child_path(@child)
+    else
+      denied
+    end
+  end
+
   protected
 
   def fetch_child
-    @child = Child.find(params[:child_id]) or not_found
+    @child = Child.find(params[:child_id]) rescue not_found
   end
 
   def fetch
-    @diagnostic = @child.diagnostics.find_by_id params[:id]
+    @diagnostic = @child.diagnostics.find params[:id]
   rescue ActiveRecord::RecordNotFound
     not_found
   end

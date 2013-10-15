@@ -54,6 +54,10 @@ class Zone < ActiveRecord::Base
   def ever_exported?; last_export_at?; end
   def ever_synced?; last_import_at? || last_export_at?; end
 
+  def last_sync_op_at
+    @last_sync_op_at ||= [ last_import_at, last_export_at ].compact.max
+  end
+
   def to_select opts={}
     if opts[:include_self]
       [[ name, id ], *_to_select(2) ]

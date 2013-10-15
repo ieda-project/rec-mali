@@ -55,7 +55,7 @@ class Diagnostic < ActiveRecord::Base
   serialize :failed_classifications
   globally_belongs_to :child
   globally_belongs_to :author, class_name: 'User'
-  globally_has_many :results do
+  globally_has_many :results, dependent: :destroy do
     def to_display
       high = Classification::LEVELS.index :high
       with_treatment.to_a.tap do |out|
@@ -78,7 +78,7 @@ class Diagnostic < ActiveRecord::Base
     #end
   end
 
-  globally_has_many :sign_answers, include: :sign, order: 'signs.sequence' do
+  globally_has_many :sign_answers, dependent: :destroy, include: :sign, order: 'signs.sequence' do
     def add data
       sign = data.delete(:sign) || Sign.find(data.delete(:sign_id)) rescue nil
       existing = detect { |i| i.sign_id == sign.id }
@@ -106,7 +106,7 @@ class Diagnostic < ActiveRecord::Base
       end
     end
   end
-  globally_has_many :illness_answers
+  globally_has_many :illness_answers, dependent: :destroy
 
   scope :between, lambda {|d1, d2| {:conditions => ['done_on > ? and done_on <= ?', d1, d2]}}
 
@@ -149,6 +149,18 @@ class Diagnostic < ActiveRecord::Base
 
   def editable_by? user
     Csps.point? and author == user and last?
+  end
+
+  def deletable_by? user
+    if Csps.point? && author == user
+      if lsoa = Zone.csps.last_sync_op_at 
+        created_at > lsoa
+      else
+        true
+      end
+    else
+      false
+    end
   end
 
   def to_hash

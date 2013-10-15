@@ -78,6 +78,7 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
     head 'Creating villages'
     if csps = Zone.csps
       rest = csps.restoring
+      keep = csps.attributes.keep %w(last_import_at last_export_at)
       csps = csps.name
     end
     Zone.purge
@@ -99,7 +100,11 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
         parent: indents[indent-1],
         point: point)
     end
-    Zone.where(name: csps).sort_by(&:level).first.occupy!(rest) if csps
+    if csps
+      csps = Zone.where(name: csps).sort_by(&:level).first
+      csps.update_attributes keep
+      csps.occupy! rest
+    end
   end # }}}
 
   # Medicines {{{

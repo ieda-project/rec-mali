@@ -3,8 +3,8 @@
     %ul.menu
       %li= link_to 'Statistiques', queries_path, :class => 'queries'
       - if current_user.admin?
-        %li= link_to 'Utilisateurs', users_path 
-      %li= link_to 'Changer mot de passe', password_users_path 
+        %li= link_to 'Utilisateurs', users_path
+      %li= link_to 'Changer mot de passe', password_users_path
       - if !Csps.point? && current_user.admin?
         %li
           = link_to syncs_path, :class => 'syncs' do
@@ -22,9 +22,9 @@
   - unless params[:q]
     %h1 Rechercher un patient
     %p.tip
-      Un patient vient se présenter au 
+      Un patient vient se présenter au
       %strong centre de santé.
-      Veuillez tout d'abord rechercher son dossier afin de pouvoir remplir son 
+      Veuillez tout d'abord rechercher son dossier afin de pouvoir remplir son
       %strong évaluation PCIME.
     - search_form do |f|
       %div
@@ -48,7 +48,7 @@
           %strong= paged.size
           de
         %strong= paged.total
-        patient(s) trouvé(s) pour les critères de recherches : 
+        patient(s) trouvé(s) pour les critères de recherches :
         = raw html_criteria @orig_name, @q
       %table.results
         %thead
@@ -74,14 +74,14 @@
         - 1.upto(paged.pages) do |p|
           - if p == @page
             %li= @page || 1
-          - elsif (@page - p).abs < 4 || p == 1 || p == paged.pages 
+          - elsif (@page - p).abs < 4 || p == 1 || p == paged.pages
             %li= link_to p, url_for(request.query_parameters.merge(:page => p))
           - elsif (@page - p).abs < 5
             %li ...
         - if paged.next?
           %li.em= link_to "Suivante >", url_for(request.query_parameters.merge(:page => @page + 1))
       %nav.results
-        %p 
+        %p
           Le patient n'est pas dans la liste ?
           - if Csps.point?
             = link_to 'Remplir sa première évaluation', new_child_path, :class => 'new-user-child-min'
@@ -89,7 +89,7 @@
           = link_to "Faire une nouvelle recherche", children_path, :class => 'new-search-min'
     - elsif params[:q]
       .no-result
-        %p 
+        %p
           Aucun patient ne correspond aux critères de recherches :
           = raw html_criteria @orig_name, @q
         %nav
