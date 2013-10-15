@@ -57,29 +57,34 @@ class UsersController < ApplicationController
   end
 
   def update
-    data = params[:user]
-    if @user == current_user && @user.password_expired?
-      puts "first"
-      data = data.keep %w(password password_confirmation)
-      data[:password_expired_at] = nil
-      act = 'password'
-      ret = nil
-    elsif @user.password_expired?
-      puts 'second'
+    if @user.password_expired? && @user != current_user
       return see_other('/user/password')
-    elsif admin?
-      puts 'third'
-      act = 'edit'
-      ret = users_path
-    else
-      puts 'fourth'
-      return denied
+    end
+
+    data = params[:user]
+    pw = request.referer =~ /password/
+
+    unless admin?
+      return denied if @user != current_user
+      data = data.keep %w(password password_confirmation)
+    end
+
+    if @user == current_user && data['password'].present?
+      unless @user.authenticate(params[:password])
+        @pw_error = true
+        return render(action: (pw ? 'password' : 'edit'))
+      end
+      data[:password_expired_at] = nil
     end
 
     if @user.update_attributes data
-      see_other(ret || session.delete(:after_change) || '/')
+      if pw
+        see_other session.delete(:after_change) || '/'
+      else
+        see_other users_path
+      end
     else
-      render action: act
+      render(action: (pw ? 'password' : 'edit'))
     end
   end
 
