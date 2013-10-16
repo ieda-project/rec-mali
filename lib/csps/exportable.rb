@@ -28,6 +28,18 @@ module Csps::Exportable
     zone.name
   end
 
+  def deletable_by? user=nil
+    if Csps.point? && zone == Zone.csps
+      if lsoa = Zone.csps.last_sync_op_at 
+        created_at > lsoa
+      else
+        true
+      end
+    else
+      false
+    end
+  end
+
   protected
 
   def fill_uqid

@@ -127,6 +127,15 @@ class ChildrenController < ApplicationController
     display_updated @child.update_attributes(params[:child])
   end
 
+  def destroy
+    if @child.deletable_by? current_user
+      @child.destroy
+      see_other children_path
+    else
+      denied
+    end
+  end
+
   protected
 
   def display_updated success

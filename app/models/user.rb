@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def deletable_by? user
+    user.admin? && super
+  end
+
   def authenticate password
     BCrypt::Password.new(crypted_password) == password
   end
