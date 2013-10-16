@@ -26,13 +26,13 @@ class ChildrenController < ApplicationController
     gender = (data[:gender] == 'true')
     render json: {
       weight_age: [
-        ((weight / Index.weight_age.gender(gender).near(months).y * 100).round(0) rescue nil),
+        *Diagnostic.scores('weight_age', gender, months, weight, height),
         Index::WARNING['weight_age'], Index::ALERT['weight_age']],
       height_age: [
-        ((height / Index.height_age.gender(gender).near(months).y * 100).round(0) rescue nil),
+        *Diagnostic.scores('height_age', gender, months, weight, height),
         Index::WARNING['height_age'], Index::ALERT['height_age']],
       weight_height: [
-        ((weight / Index.weight_height.gender(gender).age_in_months(months).near(height).y * 100).round(0) rescue nil),
+        *Diagnostic.scores('weight_height', gender, months, weight, height),
         Index::WARNING['weight_height'], Index::ALERT['weight_height']] }
   end
 
@@ -51,6 +51,12 @@ class ChildrenController < ApplicationController
     chart.add :axis_category_text, labels
     chart.add(:series, '', curve.map do |c|
       {:value => c.y}
+    end)
+    chart.add(:series, '', curve.map do |c|
+      {:value => c.sd4neg}
+    end)
+    chart.add(:series, '', curve.map do |c|
+      {:value => c.sd4}
     end)
     chart.add(:series, '', curve.map do |c|
       if c == i

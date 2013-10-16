@@ -406,14 +406,18 @@ window.addEvent('domready', function() {
                   var v = json[index]
                   var li = $E('.ratios .'+index)
                   li.removeClass('disabled')
-                  if (v[0] < v[2]) {
+                  if (v[0] < v[3]) {
                     li.addClass('alert')
                   } else {
                     li.removeClass('alert')
-                    if (v[0] < v[1]) {
-                      li.addClass('warning') } else li.removeClass('warning') };
+                    if (v[0] < v[2]) {
+                      li.addClass('warning') }
+                    else li.removeClass('warning')
+                  };
                   li.getElement('.value').set('text', v[0]).setStyle(
-                    'font-size', v[0] > 999 ? '0.9em' : '1em') }
+                    'font-size', v[0] > 999 ? '0.9em' : '1em')
+                  li.getElement('.score').set('text', v[1]).setStyle(
+                    'font-size', v[1] > 999 ? '0.9em' : '1em') }
                 form.tree.enfant.wfa = json.weight_age[0];
                 form.tree.enfant.hfa = json.height_age[0];
                 form.tree.enfant.wfh = json.weight_height[0];
@@ -424,7 +428,8 @@ window.addEvent('domready', function() {
           [ 'weight_age', 'height_age', 'weight_height' ].each(function (index) {
             var li = indices.getElement('.'+index)
             li.removeClass('alert').removeClass('warning').addClass('disabled')
-            li.getElement('.value').set('text', '-') }) };
+            li.getElement('.value').set('text', '-')
+            li.getElement('.score').set('text', '-') }) };
 
         var aa_illnesses = {};
         for (code in auto_answer) {
