@@ -11,12 +11,12 @@ class SessionController < ApplicationController
       persist_user_into_session user
 
       if user.admin
-        old = User.where('admin = ? AND created_at < ?', true, user.created_at)
+        old = User.where('admin_at < ?', user.admin_at)
         if old.any?
           # There are admins that had been created before this user.
           # They have to be demoted. Then our new user will need to have their
           # password changed.
-          old.update_all admin: false
+          old.update_all admin_at: nil
         end
       end
 

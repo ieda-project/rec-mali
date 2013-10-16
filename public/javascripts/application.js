@@ -705,7 +705,18 @@ Element.behaviour(function() {
       $$('button[type=submit]').each(function(i) {
         i.addClass('clicked')
         i.disabled = true });
-      return true } else return false })});
+      return true } else return false })
+
+  var admin_switch = this.getElement('select#user_admin')
+  if (admin_switch) {
+    var form = admin_switch.getParent('form')
+    form.validate = function() {
+      if ($('user_admin').value == '1')
+        return confirm(form.get('data-admin-confirm'));
+      return true
+    }
+  }
+});
 
 function update_image(id, url) {
   if (id && id != '') {
