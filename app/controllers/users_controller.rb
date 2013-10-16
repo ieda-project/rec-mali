@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def index
     back 'Rechercher un patient', children_path
-    @users = User.order('admin DESC, name ASC')
+    @users = User.order('admin_at DESC, name ASC')
     @logins = Event.logins.history.joins(:user).limit(10)
   end
 

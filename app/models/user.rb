@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :if => :password
   before_save :crypt_password
 
-  scope :admins, :conditions => {:admin => true}
+  scope :admins, :conditions => ['admin_at IS NOT NULL AND admin_at <= ?', Time.now]
   scope :local, ->() { Zone.csps ? where(zone_id: Zone.csps.id) : where(id: 0) }
 
   def password= pwd; @password = pwd if pwd.present?; end
@@ -37,6 +37,24 @@ class User < ActiveRecord::Base
 
   def password_expired?
     password_expired_at && password_expired_at < Time.now
+  end
+
+  def admin
+    admin_at.present?
+  end
+  alias admin? admin
+  def admin_was
+    admin_at_was && admin_at_was <= updated_at_was
+  end
+  alias was_admin? admin_was
+  def admin= value
+    if value && value != 'false' && value != '0'
+      self.admin_at = Time.now.utc unless admin
+      true
+    else
+      self.admin_at = nil
+      false
+    end
   end
 
   protected

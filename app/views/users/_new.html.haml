@@ -1,4 +1,4 @@
-- form_for @user do |f|
+- form_for @user, html: { :'data-admin-confirm' => "Vous ne serez plus administrateur après la première connexion du nouvel administrateur.\n\nVoulez-vous continuer ?" } do |f|
   = partial 'users/form', locals: { form: f }
   %div
     %button(type="submit") Créer

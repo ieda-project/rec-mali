@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131016073910) do
+ActiveRecord::Schema.define(:version => 20131016125946) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20131016073910) do
   end
 
   add_index "children", ["temporary", "zone_id"], :name => "index_children_on_temporary_and_zone_id"
+  add_index "children", ["uqid"], :name => "index_children_on_uqid", :unique => true
 
   create_table "classifications", :force => true do |t|
     t.datetime "created_at"
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20131016073910) do
   add_index "diagnostics", ["month"], :name => "index_diagnostics_on_month"
   add_index "diagnostics", ["type", "id"], :name => "index_diagnostics_on_type_and_id"
   add_index "diagnostics", ["type", "uqid"], :name => "index_diagnostics_on_type_and_uqid"
+  add_index "diagnostics", ["uqid"], :name => "index_diagnostics_on_uqid", :unique => true
   add_index "diagnostics", ["zone_id"], :name => "index_diagnostics_on_zone_id"
 
   create_table "events", :force => true do |t|
@@ -112,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20131016073910) do
   end
 
   add_index "illness_answers", ["diagnostic_uqid"], :name => "index_illness_answers_on_diagnostic_uqid"
+  add_index "illness_answers", ["uqid"], :name => "index_illness_answers_on_uqid", :unique => true
 
   create_table "illnesses", :force => true do |t|
     t.string   "key"
@@ -183,6 +186,7 @@ ActiveRecord::Schema.define(:version => 20131016073910) do
 
   add_index "results", ["classification_id"], :name => "index_results_on_classification_id"
   add_index "results", ["diagnostic_uqid"], :name => "index_results_on_diagnostic_uqid"
+  add_index "results", ["uqid"], :name => "index_results_on_uqid", :unique => true
   add_index "results", ["zone_id"], :name => "index_results_on_zone_id"
 
   create_table "roles", :force => true do |t|
@@ -222,6 +226,7 @@ ActiveRecord::Schema.define(:version => 20131016073910) do
     t.integer  "diagnostic_uqid"
   end
 
+  add_index "sign_answers", ["uqid"], :name => "index_sign_answers_on_uqid", :unique => true
   add_index "sign_answers", ["zone_id"], :name => "index_sign_answers_on_zone_id"
 
   create_table "signs", :force => true do |t|
@@ -230,7 +235,7 @@ ActiveRecord::Schema.define(:version => 20131016073910) do
     t.string   "key"
     t.string   "question"
     t.string   "values"
-    t.string   "dep"
+    t.text     "dep"
     t.integer  "sequence"
     t.integer  "min_value"
     t.integer  "max_value"
@@ -271,14 +276,15 @@ ActiveRecord::Schema.define(:version => 20131016073910) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "crypted_password"
-    t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "zone_id"
     t.integer  "uqid"
     t.datetime "password_expired_at"
+    t.datetime "admin_at"
   end
 
+  add_index "users", ["uqid"], :name => "index_users_on_uqid", :unique => true
   add_index "users", ["zone_id"], :name => "index_users_on_zone_id"
 
   create_table "zones", :force => true do |t|
