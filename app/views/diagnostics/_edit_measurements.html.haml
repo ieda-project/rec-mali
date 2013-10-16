@@ -25,3 +25,11 @@
     = partial 'diagnostics/index', locals: { name: 'weight_height', diagnostic: @diagnostic, graph: false }
     = partial 'diagnostics/index', locals: { name: 'height_age', diagnostic: @diagnostic, graph: false }
     = partial 'diagnostics/index', locals: { name: 'weight_age', diagnostic: @diagnostic, graph: false }
+  .abnormal_ranges
+    .switch.negative.no
+      .yes Oui
+      .no Non
+    %strong
+      Les indices ont des valeurs extrêmes.
+      %br
+      Les mesures sont-elles correctes ?

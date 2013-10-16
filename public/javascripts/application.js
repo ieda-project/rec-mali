@@ -198,6 +198,7 @@ window.addEvent('domready', function() {
         y.fireEvent('change') }});
 
     var measurements_valid = true;
+    var scores_valid = true;
     function close_illness() {
       if (current_illness) {
         current_illness.addClass('closed');
@@ -326,6 +327,11 @@ window.addEvent('domready', function() {
       var f = function() {
         var was_valid = measurements_valid, changes = false;
         measurements_valid = true;
+        var abnormal_ranges = $$('.abnormal_ranges')[0];
+        var was_score_valid = scores_valid
+        scores_valid = abnormal_ranges.getElement('.switch').hasClass('yes');
+        if (was_score_valid != scores_valid)
+          changes = true
         if (!(form.tree.enfant.months >= 0) || form.tree.months >= 60) measurements_valid = false;
         head_selects.each(function(i) {
           if (!i.value) measurements_valid = false;
@@ -383,10 +389,10 @@ window.addEvent('domready', function() {
         head_next.setStyle('visibility', 'visible');
         close_illness();
 
-        if (!was_valid && measurements_valid) {
+        if ((!was_valid || !was_score_valid) && measurements_valid && scores_valid) {
           head_next.setStyle('visibility', 'visible');
           head_next.removeClass('disabled');
-        } else if (was_valid && !measurements_valid) {
+        } else if ((was_valid || was_score_valid) && (!measurements_valid || !scores_valid)) {
           close_illness();
           head_next.setStyle('visibility', 'visible');
           head_next.addClass('disabled'); }
@@ -396,6 +402,7 @@ window.addEvent('domready', function() {
         form.tree.enfant.weight = weight.value.toFloat();
         form.tree.enfant.height = height.value.toFloat();
         form.tree.enfant.temp = temp.value.toFloat();
+        var abnormal_score = false;
         var data = get_indices_data();
         if (data && data.height && data.weight) {
           if (!last_indices_data || !data.every(function(value, key) { return last_indices_data[key] == value })) {
@@ -414,10 +421,14 @@ window.addEvent('domready', function() {
                       li.addClass('warning') }
                     else li.removeClass('warning')
                   };
+                  if (Math.abs(v[1]) >= 3) abnormal_score = true;
                   li.getElement('.value').set('text', v[0]).setStyle(
                     'font-size', v[0] > 999 ? '0.9em' : '1em')
                   li.getElement('.score').set('text', v[1]).setStyle(
                     'font-size', v[1] > 999 ? '0.9em' : '1em') }
+                abnormal_ranges.getElement('.switch').removeClass('yes').removeClass('no').addClass(abnormal_score ? 'no' : 'yes')
+                abnormal_ranges.setStyle('display', abnormal_score ? 'block' : 'none')
+
                 form.tree.enfant.wfa = json.weight_age[0];
                 form.tree.enfant.hfa = json.height_age[0];
                 form.tree.enfant.wfh = json.weight_height[0];
@@ -574,6 +585,9 @@ Element.behaviour(function() {
     this.sel.selectedIndex = (this.hasClass('yes')) ? 2 : 1;
     this.sel.fireEvent('change');
     set_sc(this.sel);
+    return false });
+  this.getElements('.abnormal_ranges div.switch div').addEvent('click', function(e) {
+    this.getParent().removeClass('yes').removeClass('no').addClass(this.get('class'))
     return false });
 
   this.getElements('.photo').addEvent('click', function() {
