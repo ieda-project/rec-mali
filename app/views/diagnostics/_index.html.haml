@@ -2,11 +2,15 @@
 - diagnostic ||= nil
 - graph = true if graph.nil?
 - value = diagnostic ? index_value(diagnostic, name) : nil
+- score = diagnostic ? index_score(diagnostic, name) : nil
 %li{:class => index_style(name, value, graph), 'data-key' => name}
-  %span= t(name, :scope => :indices)
+  %div
+    %span= t(name, :scope => :indices)
   %strong
     %span.value= value ? value.to_i : '-'
     \%
+    %span.score= score ? score : '-'
+    \(z)
   - if graph && value && child
     %div.graph
       %h2= t(name, :scope => :indices)

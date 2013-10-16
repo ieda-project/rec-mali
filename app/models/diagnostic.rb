@@ -205,8 +205,34 @@ class Diagnostic < ActiveRecord::Base
   def index_ratio name
     if INDICES[name.to_s]
       val, i = send name
-      (val / i.y * 100).round(0) #rescue '-'
+      Diagnostic.index_ratio val, i
     end
+  end
+
+  def z_score name
+    if INDICES[name.to_s]
+      val, i = send name
+      Diagnostic.z_score val, i
+    end
+  end
+
+  def self.index_ratio value, index
+    (value / index.y * 100).round(0)
+  end
+  def self.z_score value, index
+    n = value - index.y
+    n4 = n <=0 ? index.sd4-index.y : index.y-index.sd4neg
+    (n * 4 / n4).round(1)
+  end
+
+  def self.scores name, gender, months, weight, height
+    i, val = case name
+      when 'height_age' then [Index.height_age.gender(gender).near(months), height]
+      when 'weight_age' then [Index.weight_age.gender(gender).near(months), weight]
+      when 'weight_height' then [Index.weight_height.gender(gender).age_in_months(months).near(height), weight]
+      else nil
+    end
+    [Diagnostic.index_ratio(val, i), Diagnostic.z_score(val, i)]
   end
 
   for name, ratio in INDICES

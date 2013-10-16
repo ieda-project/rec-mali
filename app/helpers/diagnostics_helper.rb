@@ -14,6 +14,14 @@ module DiagnosticsHelper
     end
   end
 
+  def index_score diagnostic, name
+    if @scores
+      @scores[name]
+    elsif diagnostic && !diagnostic.new_record?
+      diagnostic.z_score(name)
+    end
+  end
+
   def index_style name, value, graph=true
     [name].tap do |ret|
       ret << 'has-graph' if graph

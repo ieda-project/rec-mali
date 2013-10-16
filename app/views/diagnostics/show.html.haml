@@ -63,8 +63,12 @@
         %tr
           - %w(weight_height height_age weight_age).each do |name|
             - value = @diagnostic ? index_value(@diagnostic, name) : nil
+            - score = @diagnostic ? index_score(@diagnostic, name) : nil
             %th= t(name, :scope => :indices)
-            %td= value ? value.to_i.to_s+' %' : '-'
+            %td
+              = value ? value.to_i.to_s+' %' : '-'
+              = ' '
+              = score ? score.to_s+' (z)' : '-'
   - if @diagnostic.failed_classifications.try :any?
     %section.warning
       %h3 Les classifications suivante on échoués:

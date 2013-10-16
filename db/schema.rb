@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131015191050) do
+ActiveRecord::Schema.define(:version => 20131016073910) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -137,6 +137,8 @@ ActiveRecord::Schema.define(:version => 20131015191050) do
     t.boolean  "above_2yrs"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "sd4neg"
+    t.float    "sd4"
   end
 
   create_table "medicines", :force => true do |t|
