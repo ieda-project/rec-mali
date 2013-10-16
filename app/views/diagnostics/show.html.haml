@@ -12,8 +12,12 @@
     (#{t(:from, :scope => :datetime)}
     #{time_ago_in_words(@diagnostic.done_on)})
   %span.by
-    = image_tag @diagnostic.kind_key == 'follow' ? 'icons/follow-icon.png' : 'icons/new-icon.png'
-    Evaluation réalisée par #{@diagnostic.author.name}
+    - if @diagnostic.kind_key == 'follow'
+      = image_tag 'icons/follow-icon.png'
+      Evaluation de suivi réalisée par #{@diagnostic.author.name}
+    - else
+      = image_tag 'icons/new-icon.png'
+      Nouvelle évaluation réalisée par #{@diagnostic.author.name}
   - if @diagnostic.deletable_by? current_user
     - form_tag child_diagnostic_path(@child, @diagnostic), method: 'delete' do
       %button.confirm.delete(type="submit" data-confirm="Etes vous sûr de vouloir supprimer cette évaluation?") Supprimer

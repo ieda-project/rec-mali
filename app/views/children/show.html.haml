@@ -6,7 +6,7 @@
 %nav.child
   - if Csps.point? && @child.of_valid_age?
     %p.hint Le patient se présente t-il à nouveau au dispensaire ?
-    = link_to 'Nouvelle évaluation', new_child_diagnostic_path(@child), :class => 'new-diagnostic'
+    = link_to 'Nouvelle consultation', new_child_diagnostic_path(@child), :class => 'new-diagnostic'
     = link_to 'Consultation de suivi', new_child_diagnostic_path(@child, kind: 'follow'), :class => 'follow-diagnostic'
 
 = partial 'children/profile'
