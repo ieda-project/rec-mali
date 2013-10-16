@@ -61,8 +61,10 @@ class Query < ActiveRecord::Base
   protected
 
   def fill_in_gaps data
-    time = Time.parse data.keys.sort.first
-    while time < Time.now.beginning_of_month do
+    ks = data.keys.sort
+    time = Time.parse ks.first
+    finish = Time.parse ks.last
+    while time < finish do
       key = time.strftime('%Y/%m')
       data[key] ||= 0
       time += 1.month
