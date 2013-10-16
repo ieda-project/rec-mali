@@ -209,6 +209,15 @@ class Diagnostic < ActiveRecord::Base
     end
   end
 
+  def z_score name
+    if INDICES[name.to_s]
+      val, i = send name
+      n = val - i.y
+      n4 = n <=0 ? i.sd4-i.y : i.y-i.sd4neg
+      (n * 4 / n4).round(1)
+    end
+  end
+
   for name, ratio in INDICES
     module_eval "def #{ratio}; index_ratio :#{name}; end", __FILE__, __LINE__
   end

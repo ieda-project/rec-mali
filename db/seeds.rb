@@ -397,8 +397,8 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
         Index.destroy_all h
         f.each_line do |line|
           next unless line.fix!
-          x, y = line.split ','
-          i = Index.new h.merge(x: x, y: y)
+          x, sd4neg, y, sd4 = line.split ','
+          i = Index.new h.merge(x: x, y: y, sd4neg: sd4neg, sd4: sd4)
           info i.errors.inspect unless i.save
         end
       end
@@ -413,10 +413,12 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
           above_2yrs: age == 'above-2y',
           for_boys: gender == 'boys',
           name: Index::NAMES.index('weight-height') }
+
+        Index.destroy_all h
         f.each_line do |line|
           next unless line.fix!
-          x, y = line.split ','
-          i = Index.new h.merge(x: x, y: y)
+          x, sd4neg, y, sd4 = line.split ','
+          i = Index.new h.merge(x: x, y: y, sd4neg: sd4neg, sd4: sd4)
           info i.errors.inspect unless i.save
         end
       end
