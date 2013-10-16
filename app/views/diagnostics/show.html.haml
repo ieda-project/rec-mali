@@ -14,17 +14,15 @@
   %span.by
     = image_tag @diagnostic.kind_key == 'follow' ? 'icons/follow-icon.png' : 'icons/new-icon.png'
     Evaluation réalisée par #{@diagnostic.author.name}
-  - if @diagnostic.deletable_by? current_user
-    - form_tag child_diagnostic_path(@child, @diagnostic), method: 'delete' do
-      %button.confirm.delete(type="submit" data-confirm="Etes vous sûr de vouloir supprimer cette évaluation?") Supprimer
 
-- editable = @diagnostic.editable_by? current_user
-- if editable || @diagnostic.classifications.any?
-  %nav
-    - if editable
-      = link_to 'Modifier', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
-    - if @diagnostic.classifications.any?
-      = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
+%nav
+  - if @diagnostic.editable_by?(current_user)
+    = link_to 'Modifier', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
+  - if @diagnostic.deletable_by?(current_user)
+    - form_tag child_diagnostic_path(@child, @diagnostic), method: 'delete' do
+      %button.confirm.delete(type="submit" data-confirm="Etes vous sûr de vouloir supprimer cette évaluation ?") Supprimer
+  - if @diagnostic.classifications.any?
+    = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
 
 - if @child.age_group != @diagnostic.age_group
   %p.age-group-warning
@@ -87,9 +85,11 @@
           - for c in cs do
             %li= c.name
 
-- if editable || @diagnostic.classifications.any?
-  %nav
-    - if editable
-      = link_to 'Modifier', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
-    - if @diagnostic.classifications.any?
-      = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
+%nav
+  - if @diagnostic.editable_by?(current_user)
+    = link_to 'Modifier', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
+  - if @diagnostic.deletable_by?(current_user)
+    - form_tag child_diagnostic_path(@child, @diagnostic), method: 'delete' do
+      %button.confirm.delete(type="submit" data-confirm="Etes vous sûr de vouloir supprimer cette évaluation?") Supprimer
+  - if @diagnostic.classifications.any?
+    = link_to 'Traitements', treatments_child_diagnostic_path(@child, @diagnostic), :class => 'validation'
