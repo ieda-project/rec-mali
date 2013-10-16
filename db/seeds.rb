@@ -374,13 +374,16 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
       status = h.delete 'case_status'
       status = Query::CASE_STATUSES.index(status) if status
 
+      group = h.delete('group') || title
+
       klass = h.delete('klass')
       q = Query.new(
         :title => t[title],
         :case_status => status,
+        :group_title => t[group],
         :klass => klass,
         :conditions => h['conds'].to_yaml[5..-1])
-      info "Error importing #{title}: q.errors" unless q.save
+      info "Error importing #{title}: #{q.errors}" unless q.save
     end
   end # }}}
 

@@ -3,10 +3,13 @@
     %li= link_to "Recherche Patient", children_path
     %li Statistiques
 
-- queries = Query.order(:id)
+- queries = Query.order(:id).select('group_title, id, min(id)').group(:group_title)
 
 %section.illness.list-arrow
-  %h2 #{queries.size} statistiques
+  %h2 #{Query.count} statistiques
   %ul
     - queries.each do |q|
-      %li{ :class => cycle("odd", "even") }= link_to q.title, query_path(q)
+      %li.query{ :class => cycle("odd", "even") }
+        = link_to query_path(q) do
+          = q.group_title
+          %span= "(#{Query.where(group_title: q.group_title).count} statistiques)"

@@ -2,6 +2,8 @@ class Child < ActiveRecord::Base
   include Csps::Exportable
   include Csps::Age
 
+  enum :distance, %w(0_4 5_9 10)
+
   validates_presence_of :first_name, :last_name, :if => :final?
   validates_inclusion_of :gender, in: [true, false], :if => :final?
 

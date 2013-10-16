@@ -7,5 +7,9 @@
   %br/
   %strong Village :
   = village child
+  - if child.distance
+    %br/
+    %strong Distance :
+    = child.distance_name
 - if Csps.point?
   %button.edit(type="button") Modifier

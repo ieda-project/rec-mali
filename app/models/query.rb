@@ -7,6 +7,9 @@ class Query < ActiveRecord::Base
   AGE = {
     'SQLite' => ->(ref, age) { "date(#{ref}, '-#{age} months')" },
     'PostgreSQL' => ->(ref, age) { "(#{ref} - interval '#{age} months')" }}
+  DAYS = {
+    'SQLite' => ->(ref, age) { "date(#{ref}, '-#{age} days')" },
+    'PostgreSQL' => ->(ref, age) { "(#{ref} - interval '#{age} days')" }}
 
   validates_presence_of :title, :klass
 
@@ -19,6 +22,8 @@ class Query < ActiveRecord::Base
       rel = case cond['type']
         when 'age'
           rel.where "#{AGE[ca].(aref, cond['value'].to_i)} #{cond['operator']} #{k.table_name}.born_on"
+        when 'days'
+          rel.where "#{DAYS[ca].(aref, cond['value'].to_i)} #{cond['operator']} #{k.table_name}.born_on"
         when 'field', 'boolean'
           att, val = k.rewrite_query_conditions cond
           op = (cond['type'] == 'boolean') ? '=' : cond['operator']
@@ -61,6 +66,8 @@ class Query < ActiveRecord::Base
   protected
 
   def fill_in_gaps data
+    return data if data.blank?
+    
     ks = data.keys.sort
     time = Time.parse ks.first
     finish = Time.parse ks.last
