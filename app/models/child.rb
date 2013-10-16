@@ -9,7 +9,7 @@ class Child < ActiveRecord::Base
   validates_presence_of :village, if: proc { |u| u.village_name.blank? }
 
   belongs_to :village, class_name: 'Zone'
-  globally_has_many :diagnostics do
+  globally_has_many :diagnostics, dependent: :destroy do
     def build_with_answers data={}
       diag = build data
       diag.child = proxy_owner

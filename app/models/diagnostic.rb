@@ -153,15 +153,7 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def deletable_by? user
-    if Csps.point? && author == user
-      if lsoa = Zone.csps.last_sync_op_at 
-        created_at > lsoa
-      else
-        true
-      end
-    else
-      false
-    end
+    author == user && super
   end
 
   def to_hash

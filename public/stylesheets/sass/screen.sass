@@ -194,8 +194,6 @@ h2
     text-shadow: 0 1px 0 rgba(250, 250, 250, 1)
     &.show
       font-size: 1.5em
-      & + nav
-        margin-top: -60px
       .by
         font-weight: normal
         display: block
@@ -377,6 +375,9 @@ nav
   text-align: center
   overflow: hidden
   margin: 0 0 15px
+  form
+    display: inline-block
+    float: left
   &.results
     color: #555
     margin: 20px 0 0
@@ -519,22 +520,28 @@ nav a, nav button, section button[type=submit]
       background: url(../images/backgrounds/button-validation.gif) right -46px no-repeat
       height: 46px
       width: 40px
-  &.edit
-    background: url(../images/backgrounds/button-edit.gif)
+  &.edit, &.delete
     float: left
     font-size: 1.4em
     font-weight: bold
     height: 46px
     line-height: 46px
     padding: 0 8px 0 47px
+    &:after
+      height: 46px
+      width: 15px
+  &.edit
+    background: url(../images/backgrounds/button-edit.gif)
+    &:after
+      background: url(../images/backgrounds/button-edit.gif) right -46px no-repeat
     &.em
       background: url(../images/backgrounds/button-edit-light.gif)
       &:after
         background: url(../images/backgrounds/button-edit-light.gif) right -46px no-repeat
+  &.delete
+    background: url(../images/backgrounds/button-delete.gif)
     &:after
-      background: url(../images/backgrounds/button-edit.gif) right -46px no-repeat
-      height: 46px
-      width: 15px
+      background: url(../images/backgrounds/button-delete.gif) right -46px no-repeat
   &:after
     display: block
     position: absolute
@@ -1290,11 +1297,3 @@ table.users tr.remote
 
 span.remark
   font-size: 90%
-
-button.delete
-  display: inline-block
-  background: -webkit-linear-gradient(top, #d8002b 0%,#b7032a 44%,#a50023 100%)
-  border: solid 1px #c10029
-  border-radius: 5px
-  color: white
-  font-weight: bold
