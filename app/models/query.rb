@@ -43,12 +43,13 @@ class Query < ActiveRecord::Base
       end
     end
 
-    rel.group(:month).count('DISTINCT child_uqid').tap do |h|
+    results = rel.group(:month).count('DISTINCT child_uqid').tap do |h|
       h.keys.each do |k|
         s = k.to_s
         h.store "#{s[0,4]}/#{s[4,2]}", h.delete(k)
       end
     end
+    fill_in_gaps results
   ensure
     update_attribute :last_run_at, Time.now
   end
@@ -58,6 +59,16 @@ class Query < ActiveRecord::Base
   end
 
   protected
+
+  def fill_in_gaps data
+    time = Time.parse data.keys.sort.first
+    while time < Time.now.beginning_of_month do
+      key = time.strftime('%Y/%m')
+      data[key] ||= 0
+      time += 1.month
+    end
+    data
+  end
 
   def build_include_hash incl, n
     case incl
