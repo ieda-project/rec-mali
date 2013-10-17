@@ -17,7 +17,7 @@ class Csps::Formula
     src = equation.scan(RE).map &:first
     was_eq = false
     arr = src.map.with_index do |token,i|
-      if was_eq 
+      if was_eq
         was_eq = false
         (token =~ /[a-z]/ ?  "'#{token}'" : token) + ')'
       elsif EQ.include? token

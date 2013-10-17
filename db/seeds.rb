@@ -216,8 +216,9 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
     head "Loading classifications"
     Classification.purge
 
-    ill = {}
+    ill, mac = {}, {}
     each_age_group do |agn,ag|
+      mac[ag] = []
       ill[ag] = Hash.new do |h,k|
         h[k] = Illness.find_by_key_and_age_group k, ag
       end
@@ -226,13 +227,30 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
     cycle_files *fs do |f,agn,ag|
       until_yield f do |line|
         next unless line.fix!
-        iname, name, level, equation = line.split '|'
-        illness = ill[ag][iname]
-        illness.classifications.create!(
-          age_group: ag,
-          name: name,
-          level: Classification::LEVELS.index(level.intern),
-          equation: Csps::Formula.compile(illness, equation))
+        if line[0] == ?@
+          # Macro
+          mname, msign, mdef = line.split(/\s+/, 3)
+          raise "Format error" unless msign == ?=
+          mdef.strip!
+          mac[ag] << [ mname, (mdef =~ /\A\(.*\)\Z/ ? mdef : "(#{mdef})") ]
+          mac[ag].sort_by! { |k,v| -k.size }
+        else
+          # Classification
+          iname, name, level, equation = line.split '|'
+
+          mac[ag].each do |name,dfn|
+            equation.gsub! name, dfn
+          end
+          raise "Unresolved macro" if equation.include?(?@)
+          equation.gsub! /\A\((.*)\)\Z/, '\1'
+
+          illness = ill[ag][iname]
+          illness.classifications.create!(
+            age_group: ag,
+            name: name,
+            level: Classification::LEVELS.index(level.intern),
+            equation: Csps::Formula.compile(illness, equation))
+        end
       end
     end
   end # }}}
