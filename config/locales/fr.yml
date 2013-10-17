@@ -61,6 +61,12 @@ fr:
       over_x_years:
         one:   "plus d'un an"
         other: "plus de %{count} ans"
+  opt:
+    child:
+      distance:
+        0_4: 0 - 4km
+        5_9: 5 - 9km
+        '10': 10km et +
   signs:
     'no': Non
     medium: Moyen

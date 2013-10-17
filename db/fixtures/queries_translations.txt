@@ -1,16 +1,89 @@
-$version 3
+$version 4
+new_children_by_age	Nombre de nouveaux enfants par âge
 new children 0-11 months	Nombre de nouveaux enfants de 0-11 mois
 new children 12-23 months	Nombre de nouveaux enfants de 12-23 mois
 new children 24-59 months	Nombre de nouveaux enfants de 24-59 mois
 
+new_children_by_distance	Nombre de nouveaux enfants par distance
+new children 0-4 km	Nombre de nouveaux enfants entre 0 et 4km
+new children 5-9 km	Nombre de nouveaux enfants entre 5 et 9km
+new children 10 km	Nombre de nouveaux enfants à plus de 10km
+
+new_consult_by_age	Nombre de nouvelles consultations par âge
+new consult 0-7 days	Nombre de nouvelles consultations entre 0 et 7 jours
+new consult 7 days - 2months	Nombre de nouvelles consultations entre 7 jours et 2 mois
+new consult 2-59 months	Nombre de nouvelles consultations entre 2 et 59 mois
+new consult 0-59 months	Nombre de nouvelles consultations entre 0 et 59 mois
+new consult 0-11 months	Nombre de nouvelles consultations entre 0 et 11 mois
+new consult 12-59 months	Nombre de nouvelles consultations entre 12 et 59 mois
+
+old_children_by_age	Nombre d'anciens enfants par âge
 old children 0-11 months	Nombre d'anciens enfants de 0-11 mois
 old children 12-23 months	Nombre d'anciens enfants de 12-23 mois
 old children 24-59 months	Nombre d'anciens enfants de 24-59 mois
 
+old_consult_by_age	Nombre d'anciennes consultations par âge
+old consult 0-7 days	Nombre d'anciennes consultations entre 0 et 7 jours
+old consult 7 days - 2months	Nombre d'anciennes consultations entre 7 jours et 2 mois
+old consult 2-59 months	Nombre d'anciennes consultations entre 2 et 59 mois
+old consult 0-59 months	Nombre d'anciennes consultations entre 0 et 59 mois
+old consult 0-11 months	Nombre d'anciennes consultations entre 0 et 11 mois
+old consult 12-59 months	Nombre d'anciennes consultations entre 12 et 59 mois
+
+total_children_by_age	Nombre de total d'enfants par âge
 total children 0-11 months	Nombre total d'enfants de 0-11 mois
 total children 12-23 months	Nombre total d'enfants de 12-23 mois
 total children 24-59 months	Nombre total d'enfants de 24-59 mois
 
+total_consult_by_age	Nombre total de consultations par âge
+total consult 0-7 days	Nombre total de consultations entre 0 et 7 jours
+total consult 7 days - 2months	Nombre total de consultations entre 7 jours et 2 mois
+total consult 2-59 months	Nombre total de consultations entre 2 et 59 mois
+total consult 0-59 months	Nombre total de consultations entre 0 et 59 mois
+total consult 0-11 months	Nombre total de consultations entre 0 et 11 mois
+total consult 12-59 months	Nombre total de consultations entre 12 et 59 mois
+
+total_children_by_gender	Nombre d'enfant par sexe (masculin ou féminin)
+total children boy	Nombre de garçons
+total children girl	Nombre de filles
+
+new_children_by_pcime	Nombre de nouveaux enfants par classification PCIME
+new children pas de pneumonie	Pas de pneumonie: toux ou rhume
+new children pneumonie	Pneumonie
+new children pneumonie grave	Pneumonie grave ou maladie très grave
+new children signes deshydratation	Signes évidents de déshydratation
+new children deshydratation severe	Déshydratation sévère
+new children diarrhee persistente	Diarrhée persistente
+new children diarrhee severe	Diarrhée persistente sévère
+new children dysenterie	Dysenterie
+new children antecedent rougeole	Antécédent de rougeole
+new children rougeole	Rougeole
+new children rougeole complication	Rougeole avec complication aux yeux ou à la bouche
+new children rougeole grave	Rougeole grave et compliquée
+new children infection chronique	Infection chronique
+new children infection aigue	Infection aiguë
+new children mastoidite	Mastoïdïte
+new children anemie	Anémie
+new children anemie grave	Anémie grave
+new children mam	MAM
+new children mass	MASs
+new children masc	MASc
+new children vih pru probable	Infection VIH peu problable
+new children vih symp suspecte	Infection VIH symptomatique suspecte
+new children vih exposition	Infection VIH possible / exposition au VIH
+new children vih symp probable	Infection VIH symptomatique probable
+new children vih confirmee	Infection VIH confirmée
+new children vih symp confirmee	Infection VIH symptomatique confirmée
+
+new children boy paludisme	Nombre d'enfants, garcons avec la classification de paludisme simple
+new children girl paludisme	Nombre d'enfants, filles avec la classification de paludisme simple
+new children boy paludisme grave	Nombre d'enfants, garcons avec la classification de paludisme grave
+new children girl paludisme grave	Nombre d'enfants, filles avec la classification de paludisme grave
+
+new children fievre 14	Nombre d'enfants avec une fièvre de plus de 14 jours
+new children ulcerations	Nombre d'enfants avec des ulcérations dans la bouche
+
+total_children_by_pcime	Nombre total d'enfants par classification PCIME
 total children pas de pneumonie	Pas de pneumonie: toux ou rhume
 total children pneumonie	Pneumonie
 total children pneumonie grave	Pneumonie grave ou maladie très grave
@@ -45,3 +118,4 @@ total children girl paludisme grave	Nombre d'enfants, filles avec la classificat
 
 total children fievre 14	Nombre d'enfants avec une fièvre de plus de 14 jours
 total children ulcerations	Nombre d'enfants avec des ulcérations dans la bouche
+

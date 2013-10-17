@@ -119,6 +119,10 @@ class Diagnostic < ActiveRecord::Base
     end
   end
 
+  before_save do
+    self.month ||= done_on.year*100 + done_on.month
+  end
+
   after_save do
     if born_on_changed? && child && child.born_on != born_on
       child.update_attribute :born_on, born_on

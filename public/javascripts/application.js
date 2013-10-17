@@ -735,6 +735,13 @@ Element.behaviour(function() {
       return true
     }
   }
+
+  this.getElements('select.autolink').each(function(select) {
+    url = select.get('data-url')
+    this.addEvent('change', function(e) {
+      window.location.href = select.value
+    })
+  })
 });
 
 function update_image(id, url) {

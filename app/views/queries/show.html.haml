@@ -2,13 +2,21 @@
   %ul#breadcrumbs
     %li= link_to "Recherche Patient", children_path
     %li= link_to "Statistiques", queries_path
-    %li= @query.title
+    %li= @query.group_title
 
 %section
   %h1
-    = @query.title
+    = @query.group_title
+
+  - if group_title = @query.group_title
+    .query-selector
+      %form
+        %select.autolink{ data: { url: 'queries/' } }
+          - Query.where(group_title: group_title).each do |q|
+            %option{ value: q.id, selected: q == @query }= q.title
+
   - if @results.any?
-    %h2 Graphique
+    %h2= @query.title
     %div.query-graph!= ziya_chart query_url(@query, format: :xml), size: '1200x300'
     %table.results
       %thead

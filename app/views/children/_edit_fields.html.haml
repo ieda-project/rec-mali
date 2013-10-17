@@ -16,3 +16,6 @@
   %strong Zone :
   = form.hidden_field :village_name
   = form.select :village_id, zone_select_for_child(form.object)
+%p.name
+  %strong Distance :
+  = form.select :distance, Child::DISTANCES.to_select
