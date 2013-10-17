@@ -7,6 +7,11 @@ require 'csv'
 def head msg; puts "==> #{msg}"; end
 def info msg; puts "    #{msg}"; end
 
+def die msg, file, line=nil
+  line = line ? " line #{line}" : ''
+  raise "ERROR: #{msg} in file #{file.path}#{line}"
+end
+
 module Enumerable
   def mapcat
     reduce [] { |m,i| m + yield(i) }
@@ -116,9 +121,6 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
     FORMULA = 2
     state = HEAD
     name, key, unit, formula = nil
-    brk = proc do |msg,line|
-      raise "#{msg} in medicine import, #{line ? %Q(line #{line}) : 'EOF'}}"
-    end
     save = proc do |no|
       if formula.present?
         # SAVE
@@ -126,7 +128,7 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
           key: key, name: name, unit: unit,
           formula: formula)
       else
-        brk.("No formula", no)
+        die "No formula", f, no
       end
     end
 
@@ -136,10 +138,10 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
         when HEAD
           next if line.blank?
           name, key = line.scan(/^(.+)\s+\((.+)\)/).first
-          brk.("Bad head", no) unless key
+          die "Bad head", f, no unless key
           state = UNIT
         when UNIT
-          brk.("Unfinished record", no) if line.blank?
+          die "Unfinished record", f, no if line.blank?
           unit = line.chomp
           state, formula = FORMULA, []
         when FORMULA
@@ -225,23 +227,32 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
     end
 
     cycle_files *fs do |f,agn,ag|
+      macex = proc do |src|
+        begin
+          change = false
+          mac[ag].each do |name,dfn|
+            change = true if src.gsub!(name, dfn)
+          end
+        end while change
+        die "Unresolved macro", f if src.include?(?@)
+      end
+
       until_yield f do |line|
         next unless line.fix!
         if line[0] == ?@
           # Macro
           mname, msign, mdef = line.split(/\s+/, 3)
-          raise "Format error" unless msign == ?=
+          die "Format error in macro definition", f unless msign == ?=
           mdef.strip!
-          mac[ag] << [ mname, (mdef =~ /\A\(.*\)\Z/ ? mdef : "(#{mdef})") ]
-          mac[ag].sort_by! { |k,v| -k.size }
+          macex.(mdef)
+          mac[ag] << [
+            Regexp.new("#{mname}([^a-z_]|\\Z)"),
+            (mdef =~ /\A\(.*\)\Z/ ? mdef : "(#{mdef})") ]
         else
           # Classification
           iname, name, level, equation = line.split '|'
 
-          mac[ag].each do |name,dfn|
-            equation.gsub! name, dfn
-          end
-          raise "Unresolved macro" if equation.include?(?@)
+          macex.(equation)
           equation.gsub! /\A\((.*)\)\Z/, '\1'
 
           illness = ill[ag][iname]
