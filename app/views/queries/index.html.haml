@@ -3,7 +3,7 @@
     %li= link_to "Recherche Patient", children_path
     %li Statistiques
 
-- queries = Query.order(:id).select('group_title, id, min(id)').group(:group_title)
+- queries = Query.order(:id).select('group_title, min(id) AS id').group(:group_title)
 
 %section.illness.list-arrow
   %h2 #{Query.count} statistiques
