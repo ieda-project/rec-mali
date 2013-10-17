@@ -173,7 +173,6 @@ ActiveRecord::Schema.define(:version => 20131016161045) do
     t.datetime "last_run_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "group"
     t.string   "group_title"
   end
 
