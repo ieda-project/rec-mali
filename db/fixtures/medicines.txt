@@ -107,7 +107,7 @@ Artémether + Amodiaquine (m19)
 mg-art
 1.5/kg
 
-Ringer au lactate - phase 1 (m20_1) 
+Ringer au lactate - phase 1 (m20_1)
 ml
 <1y 30/kg
 

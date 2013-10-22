@@ -17,6 +17,10 @@ class Medicine < ActiveRecord::Base
     end
   end
 
+  def group_key
+    key.sub /:.*$/, ''
+  end
+
   protected
 
   def generate_formula_code

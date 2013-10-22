@@ -4,6 +4,7 @@ class Result < ActiveRecord::Base
   globally_belongs_to :diagnostic
   belongs_to :classification
   belongs_to :treatment
+  has_many :prescriptions, through: :treatment
 
   validates_presence_of :treatment, if: ->(r) { r.diagnostic.treatments_required? && r.can_have_treatment? }
 

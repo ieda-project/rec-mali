@@ -6,22 +6,56 @@ class Diagnostic < ActiveRecord::Base
 
   state_machine :state, initial: :opened do
     # opened, filled, calculated, treatments_selected, closed
-    state :filled, :calculated, :treatments_selected, :closed do
+    state :filled, :calculated, :treatments_selected, :medicines_selected, :closed do
       validate do
         validates_size_of :sign_answers, minimum: 1
       end
     end
-    state :calculated, :treatments_selected, :closed do
+
+    state :calculated, :treatments_selected, :medicines_selected, :closed do
       validate do
         validates_size_of :results, minimum: 1
       end
     end
-    state :treatments_selected, :closed do
+
+    state :treatments_selected, :medicines_selected, :closed do
       def treatments_required?
         true
       end
     end
-    state :closed do
+
+    state :medicines_selected, :closed do
+      validate do
+        dupes_grouped.each do |gr|
+          unless gr.any? { |i| ordonnance.include?(i.id) }
+            errors.add :ordonnance, :invalid
+          end
+        end
+      end
+    end
+
+    state :treatments_selected, :medicines_selected, :closed do
+      def optional_prescriptions
+        Set.new(all_prescriptions.reject(&:mandatory))
+      end
+
+      def dupe_prescriptions
+        dupes_grouped.inject(Set.new) { |m,i| m + i }
+      end
+
+      def all_prescriptions
+        @all_prescriptions ||= results.includes(prescriptions: :medicine).mapcat(&:prescriptions)
+      end
+
+      def dupes_grouped
+        {}.tap do |h|
+          results.includes(prescriptions: :medicine).each do |res|
+            res.prescriptions.each do |p|
+              (h[p.medicine.group_key] ||= []) << p
+            end
+          end
+        end.values.select { |i| i[1] }
+      end
     end
 
     state :opened, :filled, :calculated do
@@ -43,8 +77,12 @@ class Diagnostic < ActiveRecord::Base
       transition :calculated => :treatments_selected, if: ->(d) { d.results.all? &:finalized? }
     end
 
+    event :select_medicines do
+      transition :treatments_selected => :medicines_selected, if: ->(d) { d.results.all? &:finalized? }
+    end
+
     event :close do
-      transition :treatments_selected => :closed
+      transition :medicines_selected => :closed
     end
 
     after_transition any => :filled do |diag|
@@ -52,7 +90,37 @@ class Diagnostic < ActiveRecord::Base
     end
   end
 
+  def ordonnance
+    @ordonnance ||=
+    begin
+      if ord = read_attribute(:ordonnance)
+        Set.new(ord.split(' ').map(&:to_i))
+      else
+        Set.new
+      end
+    end
+  end
+
+  def ordonnance= arr
+    case arr
+      when Set
+        @ordonnance = arr
+        arr = arr.to_a
+      when Hash
+        arr = arr.values.map &:to_i
+        @ordonnance = Set.new(arr)
+      else
+        @ordonnance = Set.new(arr)
+    end
+    write_attribute :ordonnance, arr.join(' ')
+  end
+
+  def prescriptions
+    @prescriptions ||= Prescription.find(*ordonnance)
+  end
+
   serialize :failed_classifications
+
   globally_belongs_to :child
   globally_belongs_to :author, class_name: 'User'
   globally_has_many :results, dependent: :destroy do

@@ -1,5 +1,11 @@
 # encoding: UTF-8
 
+module Enumerable
+  def mapcat
+    reduce [] { |m,i| m + yield(i) }
+  end
+end
+
 class Date
   def full_months_from other
     (year - other.year)*12 + (month - other.month) - (other.day <= day ? 0 : 1)
@@ -82,5 +88,14 @@ class String
   end
   def cacheize!
     self[0..-1] = cacheize
+  end
+end
+
+module ActiveRecord
+  class ConnectionAdapters::TableDefinition
+    def globally_belongs_to *list
+      opts = list.extract_options!
+      integer(*list.map { |n| "#{n}_uqid" }, opts)
+    end
   end
 end
