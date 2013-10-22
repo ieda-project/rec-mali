@@ -11,6 +11,10 @@ class Prescription < ActiveRecord::Base
     medicine.name
   end
 
+  def valid_for? diag
+    !!amount(diag)
+  end
+
   def amount diag
     diag.instance_eval "->() { #{medicine.code} }.()"
   end

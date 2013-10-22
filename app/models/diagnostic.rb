@@ -44,17 +44,28 @@ class Diagnostic < ActiveRecord::Base
       end
 
       def all_prescriptions
-        @all_prescriptions ||= results.includes(prescriptions: :medicine).mapcat(&:prescriptions)
+        @all_prescriptions ||= results.includes(prescriptions: :medicine).inject([]) do |m,i|
+          m + i.prescriptions.select { |p| p.valid_for? self }
+        end
       end
 
       def dupes_grouped
         {}.tap do |h|
           results.includes(prescriptions: :medicine).each do |res|
             res.prescriptions.each do |p|
+              next unless p.valid_for?(self)
               (h[p.medicine.group_key] ||= []) << p
             end
           end
         end.values.select { |i| i[1] }
+      end
+    end
+
+    state :medicines_selected, :closed do
+      def listed_prescriptions
+        results.includes(prescriptions: :medicine).inject([]) do |m,i|
+          m + i.prescriptions.select { |p| p.valid_for?(self) && (p.mandatory? || ordonnance.include?(p.id)) }
+        end
       end
     end
 
