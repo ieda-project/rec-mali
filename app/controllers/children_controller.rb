@@ -1,3 +1,6 @@
+require 'stringio'
+require 'base64'
+
 class ChildrenController < ApplicationController
   login_required
   fetch 'Child', :also => :indices
@@ -130,7 +133,15 @@ class ChildrenController < ApplicationController
   end
 
   def update
-    display_updated @child.update_attributes(params[:child])
+    data = params[:child]
+    if data['photo'].is_a?(String)
+      sio = StringIO.new(Base64.decode64(data.delete('photo').tr(' ', '+')))
+      def sio.content_type; 'image/png'; end
+      def sio.original_filename; 'hcam.png'; end
+      puts "CTRL #{sio}"
+      data['photo'] = sio
+    end
+    display_updated @child.update_attributes(data)
   end
 
   def destroy

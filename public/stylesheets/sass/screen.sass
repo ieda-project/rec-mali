@@ -561,11 +561,21 @@ nav a, nav button, section button[type=submit]
 .profile-child
   overflow: hidden
   .photo
+    position: relative
+    -webkit-border-radius: 6px
     margin: 10px 0 0 13px
     float: left
     cursor: pointer
+    width: 110px
+    height: 110px
+    overflow: hidden
+    div
+      position: absolute
+      left: 50%
+      margin-left: -320px
+      width: 640px
+      text-align: center
     img
-      width: 110px
       height: 110px
 
   section
@@ -1299,3 +1309,39 @@ table.users tr.remote
 
 span.remark
   font-size: 90%
+
+.html-camera
+  width: 340px
+  height: 380px
+  position: relative
+  video
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    width: 340px
+    height: 340px
+  canvas
+    display: none
+  button
+    font-size: 1.6em
+    background-color: transparent
+    border: none
+    display: block
+    position: absolute
+    height: 40px
+    line-height: 40px
+    bottom: 0
+    &.take
+      text-align: center
+      left: 0
+      width: 340px
+    &.retake, &.save
+      display: none
+      width: 170px
+    &.retake
+      left: 0
+      text-align: left
+    &.save
+      right: 0
+      text-align: right
