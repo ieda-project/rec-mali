@@ -38,13 +38,17 @@ module DiagnosticsHelper
   end
 
   def for_selection
+    @last_checkbox ||= 0
     dupes, opts = @diagnostic.dupe_prescriptions, @diagnostic.optional_prescriptions
     lambda do |p,txt|
-      checked = @diagnostic.ordonnance.include?(p.id) ? ' checked="checked"' : nil
       if dupes.include?(p)
-        %Q(<input type="radio" name="diagnostic[ordonnance][#{p.medicine_id}]" value="#{p.id}"#{checked}><label>#{txt}</label>)
+        checked = @diagnostic.ordonnance.include?(p.id) ? ' checked="checked"' : nil
+        cbid = "med_#{(@last_checkbox += 1)}"
+        %Q(<input id="#{cbid}" type="radio" name="diagnostic[ordonnance][#{p.medicine_id}]" value="#{p.id}"#{checked}><label for="#{cbid}">#{txt}</label>)
       elsif opts.include?(p)
-        %Q(<input type="checkbox" name="diagnostic[ordonnance][#{p.medicine_id}]" value="#{p.id}"#{checked}><label>#{txt}</label>)
+        checked = @diagnostic.ordonnance.include?(p.id) ? ' checked="checked"' : nil
+        cbid = "med_#{(@last_checkbox += 1)}"
+        %Q(<input id="#{cbid}" type="checkbox" name="diagnostic[ordonnance][#{p.medicine_id}]" value="#{p.id}"#{checked}><label for="#{cbid}">#{txt}</label>)
       else
         txt
       end

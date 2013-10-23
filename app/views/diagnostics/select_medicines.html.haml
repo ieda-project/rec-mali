@@ -7,18 +7,12 @@
 
 = partial 'children/profile'
 
--# Count 1, mandatory: blurred checkbox
--# Count 1, optional: active checkbox
--# Count n, one mandatory: radio, disabled, mandatory selected
--# Count n, n mandatory: radio, mandatories active, optionals disabled
--# Count n, all mandatory: radio, active
--# Count n, all optional: radio, active
-
 %h2.em Choisir les médicaments
 
-- if @diagnostic.errors[:ordonnance]
-  .errors
-    L'ordonnance est incomplète
+- if @diagnostic.errors[:ordonnance].any?
+  %section.treatment.warning
+    %h2 Erreur: l'ordonnance est incomplète
+    %p Veuillez sélectionner une posologie par médicament obligatoire
 
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic) do |f|
   - for res in @diagnostic.results.to_display do
@@ -31,6 +25,6 @@
       = link_to "Modifier l'évaluation", edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit'
     - if @diagnostic.author == current_user
       %input{type: 'hidden', name: 'diagnostic[state]', value:'medicines_selected'}/
-      %button.validation(type="submit") Ordonnance
+      %button.validation(type="submit") Voir l'ordonnance
     - else
-      = link_to "Terminer l'évaluation", [ @child, @diagnostic ], :class => 'validation'
+      = link_to "Voir l'ordonnance", [ @child, @diagnostic ], :class => 'validation'

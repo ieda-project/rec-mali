@@ -131,9 +131,27 @@ editing = false;
 
 window.addEvent('domready', function() { document.body.updated() });
 window.addEvent('domready', function() {
-
   document.getElements('a.help').addEvent('click', function() {
     transient.open($(this.get('href').substr(1)).get('html'), { width: '650px', class: 'treatment-help' }) });
+
+  document.getElements('section.treatment label').addEvents({
+    mouseover: function() {
+      if (this.checked) {
+        this.title = null
+      } else {
+        var other=null;
+        $$('input[name="'+$(this.get('for')).name+'"]').some(function (i) {
+          if (i.checked) {
+            other = i;
+            return true }});
+        if (other) {
+          this.title =
+            'Médicament sélectionné pour la classification "'+
+            other.getParent('section').getElement('h2').get('text') + '"'
+        } else this.title = 'Médicament non sélectionné' }},
+    mouseout: function() {
+      this.title = null;
+    }});
 
   var link, next
   if (link = $E('link.auto-post')) {
