@@ -135,7 +135,9 @@ class ChildrenController < ApplicationController
   def update
     data = params[:child]
     if data['photo'].is_a?(String)
-      sio = StringIO.new(Base64.decode64(data.delete('photo').tr(' ', '+')))
+      raw = data.delete('photo')
+      raw.tr! ' ', '+'
+      sio = StringIO.new(Base64.decode64(raw))
       def sio.content_type; 'image/png'; end
       def sio.original_filename; 'hcam.png'; end
       data['photo'] = sio
