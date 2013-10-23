@@ -635,7 +635,10 @@ Element.behaviour(function() {
           lms = stream;
         }, console.log);
 
-        closer = function() { if (lms) lms.stop() }
+        closer = function() {
+          if (lms) {
+            lms.stop();
+            lms = null }}
 
         take.addEvent('click', function() {
           if (lms) {
