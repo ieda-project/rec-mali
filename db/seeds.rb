@@ -429,8 +429,8 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
         Index.destroy_all h
         f.each_line do |line|
           next unless line.fix!
-          x, sd4neg, y, sd4 = line.split ','
-          i = Index.new h.merge(x: x, y: y, sd4neg: sd4neg, sd4: sd4)
+          x, sd4neg, sd3neg, sd2neg, sd1neg, y, sd1, sd2, sd3, sd4 = line.split ','
+          i = Index.new h.merge(x: x, y: y, sd4neg: sd4neg, sd3neg: sd3neg, sd2neg: sd2neg, sd1neg: sd1neg, sd1: sd1, sd2: sd2, sd3: sd3, sd4: sd4)
           info i.errors.inspect unless i.save
         end
       end
@@ -449,8 +449,8 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
         Index.destroy_all h
         f.each_line do |line|
           next unless line.fix!
-          x, sd4neg, y, sd4 = line.split ','
-          i = Index.new h.merge(x: x, y: y, sd4neg: sd4neg, sd4: sd4)
+          x, sd4neg, sd3neg, sd2neg, sd1neg, y, sd1, sd2, sd3, sd4 = line.split ','
+          i = Index.new h.merge(x: x, y: y, sd4neg: sd4neg, sd3neg: sd3neg, sd2neg: sd2neg, sd1neg: sd1neg, sd1: sd1, sd2: sd2, sd3: sd3, sd4: sd4)
           info i.errors.inspect unless i.save
         end
       end
