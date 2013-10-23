@@ -16,7 +16,7 @@ class DiagnosticsController < ApplicationController
   end
 
   def show?
-    %w(show treatments).include? params[:action]
+    %w(show treatments update).include? params[:action]
   end
 
   def show
@@ -41,8 +41,10 @@ class DiagnosticsController < ApplicationController
         see_other [@child, @diagnostic]
       when 'filled'
         see_other [:wait, @child, @diagnostic]
-      when 'calculated' 
+      when 'calculated'
         render action: 'select_treatments'
+      when 'treatments_selected'
+        render action: 'select_medicines'
     end
   end
 
@@ -105,11 +107,16 @@ class DiagnosticsController < ApplicationController
             @diagnostic.select_treatments
             see_other [ :treatments, @child, @diagnostic ]
           when 'treatments_selected'
+            @diagnostic.select_medicines
+            see_other [ :treatments, @child, @diagnostic ]
+          when 'medicines_selected'
             see_other [ :treatments, @child, @diagnostic ]
           when 'closed'
             see_other [ @child, @diagnostic ]
         end
-      elsif @diagnostic.calculated? || @diagnostic.treatment_selected?
+      elsif @diagnostic.state_was == 'treatments_selected' && @diagnostic.medicines_selected?
+        unprocessable action: :select_medicines
+      elsif @diagnostic.calculated? || @diagnostic.treatments_selected?
         treatments || unprocessable(action: :treatments)
       else
         unprocessable action: :edit

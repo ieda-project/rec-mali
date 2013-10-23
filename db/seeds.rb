@@ -12,12 +12,6 @@ def die msg, file, line=nil
   raise "ERROR: #{msg} in file #{file.path}#{line}"
 end
 
-module Enumerable
-  def mapcat
-    reduce [] { |m,i| m + yield(i) }
-  end
-end
-
 # Legacy, don't change this one!
 GROUPS = %w(child newborn infant)
 
@@ -315,9 +309,15 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
         line.gsub! /#.*$/, ''
         next if line.blank?
         CSV.parse line do |row|
-          tre[ag][row.first].prescriptions.create!(
-            medicine: medicines[row[1]],
-            duration: row[2], takes: row[3], instructions: row[4].gsub('\n', "\n"))
+          mand, tkey, mkey, duration, takes, desc = row
+          mand = case mand
+            when 'm' then true
+            when 'o' then false
+            else die "Illegal format: no mandatory flag", f
+          end
+          tre[ag][tkey].prescriptions.create!(
+            medicine: medicines[mkey], mandatory: mand,
+            duration: duration, takes: takes, instructions: desc.gsub('\n', "\n"))
         end
       end
     end

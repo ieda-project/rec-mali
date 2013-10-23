@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20131023102050) do
     t.integer  "uqid"
     t.integer  "child_uqid"
     t.integer  "author_uqid"
+    t.string   "ordonnance"
   end
 
   add_index "diagnostics", ["author_uqid"], :name => "index_diagnostics_on_author_uqid"
@@ -169,6 +170,7 @@ ActiveRecord::Schema.define(:version => 20131023102050) do
     t.text     "duration"
     t.text     "takes"
     t.text     "instructions"
+    t.boolean  "mandatory"
   end
 
   create_table "queries", :force => true do |t|
@@ -179,7 +181,6 @@ ActiveRecord::Schema.define(:version => 20131023102050) do
     t.datetime "last_run_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "group"
     t.string   "group_title"
   end
 

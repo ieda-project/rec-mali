@@ -11,7 +11,7 @@ class Classification < ActiveRecord::Base
   validates_presence_of :equation
 
   scope :for_child, ->(obj) { where(age_group: obj.age_group) }
-  
+
   LEVELS = [:low, :medium, :high]
 
   def self.run diag

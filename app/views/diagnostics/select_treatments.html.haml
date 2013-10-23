@@ -21,7 +21,7 @@
       %div
         %label= cl.name
         = ff.select :treatment_id, cl.treatments.map { |i| [ i.name, i.id] }, include_blank: cl.treatments.size > 1
-    
+
   %nav
     - if Csps.point? && @diagnostic.author == current_user
       = link_to "Modifier l'évaluation", edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit'

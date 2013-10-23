@@ -3,13 +3,27 @@ class Treatment < ActiveRecord::Base
   has_many :prescriptions
   has_many :medicines, through: :prescriptions
 
-  def html diag
+  def html diag, &blk
     pres = prescriptions.includes(:medicine).hashize do |p|
       p.medicine.key
     end
 
-    src = description.gsub(/{{med:(.+?)}}/) do
-      pres[$1].html(diag) rescue nil
+    src = description.gsub(/^(.*){{med:(.+?)}}(.*$\n*)/) do
+      if p = pres[$2]
+        pfx, sfx = $1, $3
+        mid = p.html(diag)
+
+        if blk
+          ret = blk.(p, mid)
+          mid = case ret
+            when true, '' then mid
+            when false, nil then nil
+            when String then ret
+          end
+        end
+
+        "#{pfx}#{mid}#{sfx}" if mid
+      end
     end
 
     helps = []
