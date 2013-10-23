@@ -319,6 +319,7 @@ window.addEvent('domready', function() {
         if (weight.valid && height.valid) {
           return new Hash({
             months: form.tree.enfant.months,
+            days: form.tree.enfant.days,
             weight: form.tree.enfant.weight,
             height: form.tree.enfant.height,
             gender: gender ? (gender.selectedIndex == 0) : $E('.profile-child').get('data-gender') })

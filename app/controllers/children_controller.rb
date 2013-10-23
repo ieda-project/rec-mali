@@ -22,17 +22,17 @@ class ChildrenController < ApplicationController
     data = params[:d]
     weight = data[:weight].to_f
     height = data[:height].to_f
-    months = data[:months].to_f
+    days = data[:days].to_f
     gender = (data[:gender] == 'true')
     render json: {
       weight_age: [
-        *Diagnostic.scores('weight_age', gender, months, weight, height),
+        *Diagnostic.scores('weight_age', gender, days, weight, height),
         Index::WARNING['weight_age'], Index::ALERT['weight_age']],
       height_age: [
-        *Diagnostic.scores('height_age', gender, months, weight, height),
+        *Diagnostic.scores('height_age', gender, days, weight, height),
         Index::WARNING['height_age'], Index::ALERT['height_age']],
       weight_height: [
-        *Diagnostic.scores('weight_height', gender, months, weight, height),
+        *Diagnostic.scores('weight_height', gender, days, weight, height),
         Index::WARNING['weight_height'], Index::ALERT['weight_height']] }
   end
 
@@ -47,16 +47,20 @@ class ChildrenController < ApplicationController
     curve = Index.where(:name => Index::NAMES.index(name.gsub('_', '-'))).gender(@child.gender).age_in_months(@child.months).order(:x).all
     chart = Ziya::Charts::Line.new
     chart.add :theme, 'pimp'
-    labels = curve.map(&:x).map {|e| ((e%6)==0 ? e : '')}
+    labels = if name == 'weight_height'
+      curve.map(&:x).map {|e| ((e%6)==0 ? e : '')}
+    else
+      curve.map(&:x).map {|e| ((e%200)==0 ? (e/30).round : '')}
+    end
     chart.add :axis_category_text, labels
     chart.add(:series, '', curve.map do |c|
       {:value => c.y}
     end)
     chart.add(:series, '', curve.map do |c|
-      {:value => c.sd4neg}
+      {:value => c.sd3neg}
     end)
     chart.add(:series, '', curve.map do |c|
-      {:value => c.sd4}
+      {:value => c.sd3}
     end)
     chart.add(:series, '', curve.map do |c|
       if c == i

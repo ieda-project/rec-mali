@@ -15,6 +15,7 @@ class Index < ActiveRecord::Base
   scope :girls, conditions: { for_boys: false }
   scope :gender, ->(gender) {{ conditions: { for_boys: gender }}}
   scope :age_in_months, ->(months) {{ conditions: ['above_2yrs IS NULL OR above_2yrs = ?', (months >= 24)]}}
+  scope :age_in_days, ->(days) {{ conditions: ['above_2yrs IS NULL OR above_2yrs = ?', (days > 730.5)]}}
     
   def self.near arg
     order("abs(x - #{arg.to_f})").first
@@ -22,6 +23,16 @@ class Index < ActiveRecord::Base
   
   def for_girls?
     not for_boys?
+  end
+
+  def score value
+    cols = [sd4neg, sd3neg, sd2neg, sd1neg, y, sd1, sd2, sd3, sd4]
+    scores = [sd4neg, sd3neg, sd2neg, sd1neg, y, sd1, sd2, sd3, sd4, value]
+    index = scores.sort.index(value)
+    index = index == 0 ? 1 : index == 9 ? 8 : index
+    n = cols[index] - value
+    m = cols[index-1] - cols[index]
+    (n / m + index-4).round(1)
   end
 end
 

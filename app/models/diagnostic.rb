@@ -181,17 +181,17 @@ class Diagnostic < ActiveRecord::Base
 
   def weight_age
     [ weight,
-      Index.weight_age.gender(child.gender).near(months) ]
+      Index.weight_age.gender(child.gender).near(days) ]
   end
 
   def height_age
     [ height,
-      Index.height_age.gender(child.gender).near(months) ]
+      Index.height_age.gender(child.gender).near(days) ]
   end
 
   def weight_height
     [ weight,
-      Index.weight_height.gender(child.gender).age_in_months(child.months).near(height) ]
+      Index.weight_height.gender(child.gender).age_in_months(child.days).near(height) ]
   end
 
   def index name
@@ -216,16 +216,14 @@ class Diagnostic < ActiveRecord::Base
     (value / index.y * 100).round(0)
   end
   def self.z_score value, index
-    n = value - index.y
-    n4 = n <=0 ? index.sd4-index.y : index.y-index.sd4neg
-    (n * 4 / n4).round(1)
+    index.score value
   end
 
-  def self.scores name, gender, months, weight, height
+  def self.scores name, gender, days, weight, height
     i, val = case name
-      when 'height_age' then [Index.height_age.gender(gender).near(months), height]
-      when 'weight_age' then [Index.weight_age.gender(gender).near(months), weight]
-      when 'weight_height' then [Index.weight_height.gender(gender).age_in_months(months).near(height), weight]
+      when 'height_age' then [Index.height_age.gender(gender).near(days), height]
+      when 'weight_age' then [Index.weight_age.gender(gender).near(days), weight]
+      when 'weight_height' then [Index.weight_height.gender(gender).age_in_days(days).near(height), weight]
       else nil
     end
     [Diagnostic.index_ratio(val, i), Diagnostic.z_score(val, i)]
