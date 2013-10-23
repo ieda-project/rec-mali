@@ -3,38 +3,38 @@ $version 2
 ## mandatory,treatment key,medicine key,duration,takes,description
 m,pneumonie_grave,m12,,,{{name}} - {{dosage}}
 m,pneumonie_grave,m13,,,{{name}} - {{dosage}}
-m,pneumonie_grave,m17,,,{{name}} - {{dosage}} en intra-rectal - Répéter si nécessaire une fois
+o,pneumonie_grave,m17,,,{{name}} - {{dosage}} en intra-rectal - Répéter si nécessaire une fois
 m,pneumonie_grave_no_ref,m12_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,pneumonie_grave_no_ref,m13_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,pneumonie_grave_no_ref,m17,,,{{name}} - {{dosage}} en intra-rectal - Répéter si nécessaire une fois
-m,pneumonie,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,pneumonie,m2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,deshydratation_severe_pas_grave_perfusion,m20_1,1 heure,,{{name}} - {{dosage}} sur une durée de {{duration}}
-m,deshydratation_severe_pas_grave_perfusion,m22_1,1 heure,,{{name}} - {{dosage}} sur une durée de {{duration}}
-m,deshydratation_severe_pas_grave_perfusion,m20_2,5 heures,,{{name}} - {{dosage}} sur une durée de {{duration}}
-m,deshydratation_severe_pas_grave_perfusion,m22_2,5 heures,,{{name}} - {{dosage}} sur une durée de {{duration}}
-m,deshydratation_severe_pas_grave_perfusion,m21_1,30 minutes,,{{name}} - {{dosage}} sur une durée de {{duration}}
-m,deshydratation_severe_pas_grave_perfusion,m23_1,30 minutes,,{{name}} - {{dosage}} sur une durée de {{duration}}
-m,deshydratation_severe_pas_grave_perfusion,m21_2,2h30,,{{name}} - {{dosage}} sur une durée de {{duration}}
-m,deshydratation_severe_pas_grave_perfusion,m23_2,2h30,,{{name}} - {{dosage}} sur une durée de {{duration}}
+o,pneumonie_grave_no_ref,m17,,,{{name}} - {{dosage}} en intra-rectal - Répéter si nécessaire une fois
+m,pneumonie,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,pneumonie,antibio:2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,deshydratation_severe_pas_grave_perfusion,perfusion_p1_a:ringer,1 heure,,{{name}} - {{dosage}} sur une durée de {{duration}}
+m,deshydratation_severe_pas_grave_perfusion,perfusion_p1_a:iso,1 heure,,{{name}} - {{dosage}} sur une durée de {{duration}}
+m,deshydratation_severe_pas_grave_perfusion,perfusion_p2_a:ringer,5 heures,,{{name}} - {{dosage}} sur une durée de {{duration}}
+m,deshydratation_severe_pas_grave_perfusion,perfusion_p2_a:iso,5 heures,,{{name}} - {{dosage}} sur une durée de {{duration}}
+m,deshydratation_severe_pas_grave_perfusion,perfusion_p1_b:ringer,30 minutes,,{{name}} - {{dosage}} sur une durée de {{duration}}
+m,deshydratation_severe_pas_grave_perfusion,perfusion_p1_b:iso,30 minutes,,{{name}} - {{dosage}} sur une durée de {{duration}}
+m,deshydratation_severe_pas_grave_perfusion,perfusion_p2_b:ringer,2h30,,{{name}} - {{dosage}} sur une durée de {{duration}}
+m,deshydratation_severe_pas_grave_perfusion,perfusion_p2_b:iso,2h30,,{{name}} - {{dosage}} sur une durée de {{duration}}
 m,deshydratation_severe_pas_grave_perfusion,m24_1_3,,,après 3 à 4 heures : {{name}}
 m,deshydratation_severe_pas_grave_perfusion,m24_1_4,,,après 1 à 2 heures : {{name}}
-m,deshydratation_severe_pas_grave_perfusion,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,deshydratation_severe_pas_grave_perfusion,m4,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
-m,deshydratation_severe_pas_grave_sans_sng_sans_perfusion,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,deshydratation_severe_pas_grave_sans_sng_sans_perfusion,m4,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
+m,deshydratation_severe_pas_grave_perfusion,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,deshydratation_severe_pas_grave_perfusion,antibio:3,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
+m,deshydratation_severe_pas_grave_sans_sng_sans_perfusion,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,deshydratation_severe_pas_grave_sans_sng_sans_perfusion,antibio:3,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
 m,deshydratation_severe_pas_grave_sng,m25,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,signes_deshydratation,m24_2,4 heures,,{{name}} - {{dosage}} pendant {{duration}}
 m,dysenterie,m3,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,dysenterie,m5,8 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+o,dysenterie,m5,8 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,dysenterie,m26,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,diahree_persistante,m25,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,diahree_persistante,m26,14 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,paludisme_grave,m15_1,,,{{name}} - {{dosage}} (en IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
 m,paludisme_grave,m12,,,{{name}} - {{dosage}}
 m,paludisme_grave,m13,,,{{name}} - {{dosage}}
-m,paludisme_grave,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
-m,paludisme_grave,m16,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
+o,paludisme_grave,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
+o,paludisme_grave,m16,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
 m,paludisme_grave,m14,,,{{name}} - {{dosage}} (Répéter 1 fois au bout de 48h si fièvre persiste. Ne pas dépasser 3 g par prise. Réserver pour le traitement des méningites à méningocoques  pendant les épidémies)
 m,paludisme_grave_no_ref,m15_1,,,{{name}} - {{dosage}} (en IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
 m,paludisme_grave_no_ref,m15_2,2 à 3 jours,2 fois par jour (espacé de 12h), {{name}} (12h après la dose de charge) - {{dosage}} - {{takes}} pendant {{duration}} (En IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
@@ -42,54 +42,54 @@ m,paludisme_grave_no_ref,m12_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par 
 m,paludisme_grave_no_ref,m13_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,paludisme_grave_no_ref,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
 m,paludisme_grave_no_ref,m14,,,{{name}} - {{dosage}} (Répéter 1 fois au bout de 48h si fièvre persiste. Ne pas dépasser 3 g par prise. Réserver pour le traitement des méningites à méningocoques  pendant les épidémies)
-m,paludisme_simple,m18,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (à partir de 25kg 3 comprimés par prise)
-m,paludisme_simple,m19,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,paludisme_simple,artemether:lumefantrine,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (à partir de 25kg 3 comprimés par prise)
+m,paludisme_simple,artemether:amodiaquine,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,paludisme_simple,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
-m,rougeole_compliquee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,rougeole_compliquee,m2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,rougeole_compliquee,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,rougeole_compliquee,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,rougeole_complications,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,rougeole_complications,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,rougeole,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
-m,rougeole,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} {{duration}}
-m,rougeole,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,rougeole,m2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,antecedent_rougeole,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,antecedent_rougeole,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}} (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
+m,rougeole_compliquee,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,rougeole_compliquee,antibio:2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,rougeole_compliquee,vitamine_a:200,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole_compliquee,vitamine_a:100,2 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole_complications,vitamine_a:200,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole_complications,vitamine_a:100,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
+m,rougeole,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
+m,rougeole,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,rougeole,antibio:2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,antecedent_rougeole,vitamine_a:200,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,antecedent_rougeole,vitamine_a:100,2 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}} (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
 m,mastoidite,m12,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
 m,mastoidite,m13,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
 m,mastoidite,m6,pour calmer la douleur,dose unique,{{name}} pré référence - {{dosage}} {{takes}}
-m,infection_aigue_oreille,m1,5 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,infection_aigue_oreille,antibio:1,5 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,infection_aigue_oreille,m6,pour calmer la douleur,dose unique,{{name}} pré référence - {{dosage}} {{takes}}
 m,anemie_grave,m15_1,,,{{name}} - {{dosage}} (en IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
 m,anemie,m8,14 jours (renouvelable pour atteindre au total 2 à 3 mois),dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,anemie,m18,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (à partir de 25kg 3 comprimés par prise)
-m,anemie,m19,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,anemie,artemether:lumefantrine,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (à partir de 25kg 3 comprimés par prise)
+m,anemie,artemether:amodiaquine,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,anemie,m9,3 jours,2 fois par jour,Donner {{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,mass,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
-m,mass,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,mass,m1,7 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,mass,m2,7 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,mass,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
+m,mass,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mass,antibio:1,7 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,mass,antibio:2,7 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,mass,m9,3 jours,2 fois par jour,Donner {{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (2ème visite)
 m,mam,m9,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (1ère ou 2ème visite)
-m,pas_malnutrition,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
-m,pas_malnutrition,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
-m,vih_symp_confirmee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,pas_malnutrition,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
+m,pas_malnutrition,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
+m,vih_symp_confirmee,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,vih_symp_confirmee,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,vih_symp_confirmee,m25_1,,,Donner {{name}} - {{dosage}}
-m,vih_confirmee,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,vih_confirmee,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,vih_confirmee,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,vih_confirmee,m25_1,,,Donner {{name}} - {{dosage}}
 m,vih_symp_probable,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,vih_symp_probable,m1_3,tous les jours,2 fois par jours,{{name}} - {{dosage}} par prise - {{takes}} - {{duration}} - ne pas arrêter sans avis médical
-m,vih_symp_probable,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,vih_symp_probable,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_symp_probable,vitamine_a:200,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_symp_probable,vitamine_a:100,2 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,vih_possible,m1_3,tous les jours,2 fois par jours,{{name}} - {{dosage}} par prise - {{takes}} - {{duration}} - ne pas arrêter sans avis médical
-m,vih_possible,m7_1,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,vih_possible,m7_2,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,deshydratation_severe_pas_grave_sng,m1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,deshydratation_severe_pas_grave_sng,m4,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
-m,mam,m7_1,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
-m,mam,m7_2,"au jour 1, jour 2 et jour 14",dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
+m,vih_possible,vitamine_a:200,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_possible,vitamine_a:100,2 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,deshydratation_severe_pas_grave_sng,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+m,deshydratation_severe_pas_grave_sng,antibio:3,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
+m,mam,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
+m,mam,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
 m,mam,m8,14 jours (renouvelable pour atteindre au total 2 à 3 mois),dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
