@@ -632,7 +632,6 @@ Element.behaviour(function() {
 
         navigator.webkitGetUserMedia({video: true}, function(stream) {
           vid.src = window.URL.createObjectURL(stream);
-          console.log(vid.src);
           lms = stream;
         }, console.log);
 
