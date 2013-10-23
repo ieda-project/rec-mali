@@ -79,11 +79,12 @@ window.addEvent('domready', function() {
 
 transient = {
   div: null,
-  open: function(what, style) {
+  open: function(what, style, closer) {
     if (!this.div) {
       this.div = new Element('div', { id: 'transient' }).inject(document.body);
       this.div.addEvent('mousewheel', function(e) { e.stopPropagation() });
       this.content = new Element('div', { class: 'content' }).inject(this.div)
+      this.closer = closer;
       this.close_button = new Element('div', {'class': 'close-transient', 'text': 'X'});
       this.close_button.addEvent('click', function(e) { this.close() }.bind(this));
       this.close_button.inject(this.div) };
@@ -120,6 +121,7 @@ transient = {
       top: ((window.innerHeight - size.y) / 2) + 'px',
       visibility: 'visible' }) },
   close: function() {
+    if (this.closer) this.closer();
     this.content.innerHTML = '';
     this.div.setStyle('display', 'none') },
   ajax: function(url) {
@@ -617,19 +619,71 @@ Element.behaviour(function() {
 
   this.getElements('.photo').addEvent('click', function() {
     if (editing || window.location.href.match(/\/(new|edit)\/*$/)) {
-      var obj = new Element('object', { width: 340, height: 380 });
-      obj.adopt(new Element('param', { name: 'movie', value: '/flash/photo.swf' }));
+      var obj, closer=null, self=this;
+      if (navigator.webkitGetUserMedia) {
+        // HTML5 Camera
+        obj = new Element('div', {class: 'html-camera'});
+        var lms,
+            vid = new Element('video', {autoplay: true}).inject(obj),
+            cnv = new Element('canvas').inject(obj),
+            take = new Element('button', {text: 'Prendre', class: 'take'}).inject(obj),
+            retake = new Element('button', {text: 'Reprendre', class: 'retake'}).inject(obj),
+            save = new Element('button', {text: 'Sauver', class: 'save'}).inject(obj),
+            ctx = cnv.getContext('2d');
 
-      var self = this;
-      photo_params = function() {
-        return {
-          action: self.get('data-action'),
-          paramName: self.get('data-field'),
-          method: self.get('data-method') || 'put' }};
-      photo_saved = function(uri) {
-        self.getElement('img').src = uri;
-        transient.close() };
-      transient.open(obj, { width: 340, height: 380 }) }});
+        navigator.webkitGetUserMedia({video: true}, function(stream) {
+          vid.src = window.URL.createObjectURL(stream);
+          lms = stream;
+        }, console.log);
+
+        closer = function() {
+          if (lms) {
+            lms.stop();
+            lms = null }}
+
+        take.addEvent('click', function() {
+          if (lms) {
+            cnv.width = vid.videoWidth; cnv.height = vid.videoHeight;
+            ctx.drawImage(vid, 0, 0);
+            vid.pause();
+            take.setStyle('display', 'none');
+            retake.setStyle('display', 'block');
+            save.setStyle('display', 'block') }});
+
+        retake.addEvent('click', function() {
+          vid.play();
+          take.setStyle('display', 'block');
+          retake.setStyle('display', 'none');
+          save.setStyle('display', 'none') });
+
+        save.addEvent('click', function() {
+          var data = cnv.toDataURL('image/png');
+          img = new Image(cnv.width, cnv.height);
+          img.src = data;
+          new Request.JSON({
+            method: self.get('data-method') || 'put',
+            onSuccess: function(json) {
+              self.getElement('img').src = json.photo;
+              transient.close();
+            },
+            data: self.get('data-field')+'='+data.substr(data.indexOf(',')+1),
+            url: self.get('data-action') }).send(); });
+      } else {
+        // Flash camera
+        obj = new Element('object', { width: 340, height: 380 });
+        obj.adopt(new Element('param', { name: 'movie', value: '/flash/photo.swf' }));
+
+        photo_params = function() {
+          return {
+            action: self.get('data-action'),
+            paramName: self.get('data-field'),
+            method: self.get('data-method') || 'put' }};
+        photo_saved = function(uri) {
+          self.getElement('img').src = uri;
+          transient.close() };
+      }
+      transient.open(obj, { width: 340, height: 380 }, closer);
+    }});
 
   this.getElements('.ratios li').addEvent('click', function(e) {
     if (this.hasClass('disabled'))
