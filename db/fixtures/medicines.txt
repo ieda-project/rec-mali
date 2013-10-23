@@ -1,4 +1,4 @@
-$version 1
+$version 2
 Cotrimoxazole (antibio:1)
 mg-smx
 20/kg

@@ -1,4 +1,4 @@
-$version 1
+$version 2
 ##TREATMENT INFANT
 ##key,title,classification,description
 infection_grave,Possibilité d’Infection Bactérienne Grave,Possibilité d'infection bactérienne grave,"# Donner la première dose en intramusculaire de : {{med:m12}}\n# Donner la première dose en intramusculaire de : {{med:m13}}\n# Traiter l'enfant pour prévenir l'hypoglycémie :\n** Si l’enfant est capable de téter {{help:a8_1}}\n** Si l’enfant est incapable de téter mais est capable d’avaler {{help:a8_2}}\n** Si l’enfant est incapable d’avaler {{help:a8_3}}\n# Transférer d’urgence au centre de référence"

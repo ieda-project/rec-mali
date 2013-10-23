@@ -1,4 +1,4 @@
-$version 1
+$version 2
 ## TREATMENT-MEDICINE NEWBORN
 ## mandatory, treatment key,medicine key,duration,takes,description
 m,infection_grave,m12,,,{{name}} - {{dosage}}

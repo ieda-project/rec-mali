@@ -1,4 +1,4 @@
-$version 1
+$version 2
 ## TREATMENT-MEDICINE CHILD
 ## mandatory, treatment key,medicine key,duration,takes,description
 m,pneumonie_grave,m12,,,{{name}} - {{dosage}}
