@@ -44,7 +44,7 @@ module DiagnosticsHelper
       if dupes.include?(p)
         checked = @diagnostic.ordonnance.include?(p.id) ? ' checked="checked"' : nil
         cbid = "med_#{(@last_checkbox += 1)}"
-        %Q(<input id="#{cbid}" type="radio" name="diagnostic[ordonnance][#{p.medicine_id}]" value="#{p.id}"#{checked}><label for="#{cbid}">#{txt}</label>)
+        %Q(<input id="#{cbid}" type="radio" name="diagnostic[ordonnance][#{p.medicine.group_key}]" value="#{p.id}"#{checked}><label for="#{cbid}">#{txt}</label>)
       elsif opts.include?(p)
         checked = @diagnostic.ordonnance.include?(p.id) ? ' checked="checked"' : nil
         cbid = "med_#{(@last_checkbox += 1)}"

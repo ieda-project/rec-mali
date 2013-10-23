@@ -13,6 +13,7 @@
   %section.treatment.warning
     %h2 Erreur: l'ordonnance est incomplète
     %p Veuillez sélectionner une posologie par médicament obligatoire
+    %pre= @diagnostic.ordonnance.to_a
 
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic) do |f|
   - for res in @diagnostic.results.to_display do

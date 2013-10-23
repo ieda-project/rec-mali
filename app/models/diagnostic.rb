@@ -29,6 +29,7 @@ class Diagnostic < ActiveRecord::Base
         dupes_grouped.each do |gr|
           unless gr.any? { |i| ordonnance.include?(i.id) }
             errors.add :ordonnance, :invalid
+            break
           end
         end
       end
@@ -44,14 +45,17 @@ class Diagnostic < ActiveRecord::Base
       end
 
       def all_prescriptions
-        @all_prescriptions ||= results.includes(prescriptions: :medicine).inject([]) do |m,i|
-          m + i.prescriptions.select { |p| p.valid_for? self }
-        end
+        @all_prescriptions ||=
+          begin
+            results.to_display(prescriptions: :medicine).inject([]) do |m,i|
+              m + i.prescriptions.select { |p| p.valid_for? self }
+            end
+          end
       end
 
       def dupes_grouped
         {}.tap do |h|
-          results.includes(prescriptions: :medicine).each do |res|
+          results.to_display(prescriptions: :medicine).each do |res|
             res.prescriptions.each do |p|
               next unless p.valid_for?(self)
               (h[p.medicine.group_key] ||= []) << p
@@ -63,7 +67,7 @@ class Diagnostic < ActiveRecord::Base
 
     state :medicines_selected, :closed do
       def listed_prescriptions
-        results.includes(prescriptions: :medicine).inject([]) do |m,i|
+        results.to_display(prescriptions: :medicine).inject([]) do |m,i|
           m + i.prescriptions.select { |p| p.valid_for?(self) && (p.mandatory? || ordonnance.include?(p.id)) }
         end
       end
@@ -135,9 +139,11 @@ class Diagnostic < ActiveRecord::Base
   globally_belongs_to :child
   globally_belongs_to :author, class_name: 'User'
   globally_has_many :results, dependent: :destroy do
-    def to_display
+    def to_display incl=nil
       high = Classification::LEVELS.index :high
-      with_treatment.to_a.tap do |out|
+      set = with_treatment
+      set = set.includes(incl) if incl
+      set.to_a.tap do |out|
         if out.any? { |r| r.classification.level == high }
           out.reject! { |r| r.classification.level != high }
         end
