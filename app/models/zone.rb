@@ -22,6 +22,12 @@ class Zone < ActiveRecord::Base
 
   validates_uniqueness_of :name, scope: :parent_id
   validates_uniqueness_of :here, if: :here
+  validates_inclusion_of :custom, in: [true, false]
+  validates_presence_of :parent_id, if: :custom?
+
+  validate do
+    errors[:base] << "Level too deep" if parent && parent.level >= 3
+  end
 
   scope :used, where('id IN (SELECT DISTINCT zone_id FROM children)')
   scope :used_villages, where('id IN (SELECT DISTINCT village_id FROM children)')
@@ -36,10 +42,35 @@ class Zone < ActiveRecord::Base
   scope :exportable_points, accessible.points
 
   scope :synced, where('last_import_at IS NOT NULL OR last_export_at IS NOT NULL')
+  scope :custom, where(custom: true)
 
   before_save do |rec|
     rec.village = rec.parent && rec.parent.point?
     true
+  end
+
+  def tagged_name
+    if point?
+      "#{name}*"
+    else
+      name
+    end
+  end
+
+  def exported?
+    !!exported_at
+  end
+
+  def editable?
+    custom? && !exported_at
+  end
+
+  def path
+    if root?
+      [self]
+    else
+      [ *parent.path, self ]
+    end
   end
 
   def option_title; name; end
@@ -59,19 +90,22 @@ class Zone < ActiveRecord::Base
   end
 
   def to_select opts={}
+    max = opts[:depth]
+    max = 2*max if max
     if opts[:include_self]
-      [[ name, id ], *_to_select(2) ]
+      [[ name, id ], *_to_select(2, max) ]
     else
-      _to_select 0
+      _to_select 0, max
     end
   end
 
-  def _to_select indent
-    children.order(:name).inject [] do |buf,i|
-      [ *buf,
-        ['&nbsp;'*indent + i.name, i.id],
-        *i._to_select(indent+2) ]
+  def _to_select indent, max
+    buf = []
+    children.order(:name).each do |i|
+      buf << ["\u00a0"*indent + i.name, i.id]
+      buf += i._to_select(indent+2, max) unless max && max <= indent
     end
+    buf
   end
   protected :_to_select
 

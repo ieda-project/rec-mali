@@ -3,6 +3,7 @@ Csps::Application.routes.draw do
     get :welcome, :restore
   end
   resource :syncs
+  resources :zones
   resources :users do
     get :logins, on: :member, to: :user_logins
     get :logins, :password, on: :collection
@@ -22,7 +23,7 @@ Csps::Application.routes.draw do
     member do
       get :indices
     end
-    collection do 
+    collection do
       post :temp
     end
     resources :diagnostics do

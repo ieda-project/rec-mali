@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131023102050) do
+ActiveRecord::Schema.define(:version => 20131024092403) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -311,6 +311,10 @@ ActiveRecord::Schema.define(:version => 20131023102050) do
     t.datetime "updated_at"
     t.boolean  "village"
     t.boolean  "restoring"
+    t.boolean  "custom"
+    t.datetime "exported_at"
   end
+
+  add_index "zones", ["custom"], :name => "index_zones_on_custom"
 
 end

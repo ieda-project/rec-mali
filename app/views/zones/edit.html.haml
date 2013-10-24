@@ -1,0 +1,12 @@
+- content_for :breadcrumbs do
+  %ul#breadcrumbs
+    %li= link_to "Recherche Patient", children_path
+    %li= link_to "Zones", zones_path
+    %li= @zone.name
+
+.welcome
+  %h1 Editer la zone
+  - form_for @zone do |f|
+    = render partial: 'form', locals: { form: f }
+    %div
+      %button(type="submit") Sauvegarder

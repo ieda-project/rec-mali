@@ -1,0 +1,33 @@
+- content_for :breadcrumbs do
+  %ul#breadcrumbs
+    %li= link_to "Recherche Patient", children_path
+    %li Zones
+
+%nav= link_to 'Nouvelle zone', new_zone_path, :class => 'new-user'
+
+%section
+  %h1 Les zones personnalisées
+  - if Zone.custom.any?
+    %table.results
+      %thead
+        %tr
+          %th Nom
+          %th
+      %tbody
+        - for zone in Zone.custom.order(:created_at) do
+          %tr
+            %td
+              %small= zone.parent.path.map(&:tagged_name).join(' / ')
+              %br/
+              - if zone.editable?
+                %strong= link_to zone.tagged_name, edit_zone_path(zone)
+              - else
+                %strong= zone.tagged_name
+            %td
+              - if zone.editable?
+                - form_for zone, html: { :method => :delete, :class => 'confirm', 'data-confirm' => "Supprimer #{zone.name} ?" } do
+                  %button{type: 'submit'} Supprimer
+              - else
+                Déjà synchronisée
+  - else
+    %p Pas de zones
