@@ -1,4 +1,3 @@
-$version 1
 # vim: noexpandtab ts=2 sw=2
 Burkina Faso
 	Seguenega

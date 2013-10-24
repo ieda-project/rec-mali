@@ -7,9 +7,13 @@ require 'csv'
 def head msg; puts "==> #{msg}"; end
 def info msg; puts "    #{msg}"; end
 
-def die msg, file, line=nil
-  line = line ? " line #{line}" : ''
-  raise "ERROR: #{msg} in file #{file.path}#{line}"
+def die msg, file=nil, line=nil
+  if file
+    line = line ? " line #{line}" : ''
+    raise "ERROR: #{msg} in file #{file.path}#{line}"
+  else
+    raise "ERROR: #{msg}"
+  end
 end
 
 # Legacy, don't change this one!
@@ -70,53 +74,62 @@ class ActiveRecord::Base
 end
 # }}}
 
-Dir.chdir "#{Rails.root}/db/fixtures" do
+# Zones {{{
+if Zone.count > 0
+  # Update
+  if ENV['ZONE_PATH'] && File.exist?(fn = File.join(ENV['ZONE_PATH'], 'zone_update.txt'))
+    head 'Updating villages'
+    File.open(fn, 'r') do |f|
+      f.each_line do |line|
+        next unless line.fix!
+        pname, name = line.split('/')
+        die "Bad format", f unless name.present?
 
-  # Zones {{{
-  ImportVersion.process "zones.txt" do |f|
-    head 'Creating villages'
-    if csps = Zone.csps
-      rest = csps.restoring
-      keep = csps.attributes.keep %w(last_import_at last_export_at)
-      csps = csps.name
-    end
-    Zone.purge
+        pname.strip!
+        name.strip!
 
-    last_id, indents = 0, {}
-    f.each_line do |line|
-      next unless line.fix!
-      indent = line.match(/^\s*/).to_s.size
-      point = if line[-1] == '*'
-        line[-1] = ''
-        true
-      else
-        false
+        parent = Zone.where(point: !!pname.sub!(/\*$/, ''), name: pname)
+        die "No such zone: #{pname}", f unless parent.any?
+
+        parent = parent.sort_by(&:level).first
+        die "Cannot add children to a village", f if parent.level > 2
+
+        point = !!name.sub!(/\*$/, '')
+        next if parent.children.where(name: name).any?
+
+        parent.children.create(
+          name: name,
+          point: point,
+          custom: true)
       end
-
-      n = line.lstrip
-      n.sub! /^([0-9]+):/, ''
-
-      # Use the ID from the line or do our version of auto-incrementing
-      # We need to do that, because the SQLite3 sequence would jump to
-      # the newly inserted ID, but that is no good for us.
-      newid = $1
-      newid ||= (last_id += 1)
-
-      z = Zone.new(
-        name: n,
-        parent: indents[indent-1],
-        point: point,
-        custom: false)
-      z.id = newid if newid
-      z.save!
-      indents[indent] = z
     end
-    if csps
-      csps = Zone.where(name: csps).sort_by(&:level).first
-      csps.update_attributes keep
-      csps.occupy! rest
+  else
+    head 'No village update present (not a problem)'
+  end
+elsif ENV['ZONE_DIR']
+  # New install
+  head 'Creating villages (scratch)'
+  File.open(File.join(ENV['ZONE_PATH'], 'zones.txt'), 'r') do |f|
+    Zone.transaction do
+      indents = {}
+      f.each_line do |line|
+        next unless line.fix!
+        indent = line.match(/^\s*/).to_s.size
+        line.strip!
+
+        indents[indent] = Zone.create(
+          point: !!line.sub!(/\*$/, ''),
+          name: line,
+          parent: indents[indent-1],
+          custom: false)
+      end
     end
-  end # }}}
+  end
+else
+  die "No stick location specified!"
+end # }}}
+
+Dir.chdir "#{Rails.root}/db/fixtures" do
 
   # Medicines {{{
   ImportVersion.process "medicines.txt" do |f|
@@ -430,9 +443,11 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
 
   # Indices {{{
   head "Indices"
+  indices_imported = false
   for name in Index::NAMES - %w(weight-height)
     for gender in %w(boys girls)
       ImportVersion.process "indices/#{name}-#{gender}.txt" do |f|
+        indices_imported = true
         info "Loading #{name} for #{gender}"
         h = {
           for_boys: gender == 'boys',
@@ -452,6 +467,7 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
   for gender in %w(boys girls)
     for age in %w(above-2y under-2y)
       ImportVersion.process "indices/weight-height-#{age}-#{gender}.txt" do |f|
+        indices_imported = true
         info "Loading weight-height for #{gender} #{age.sub('-', ' ')}"
         h = {
           above_2yrs: age == 'above-2y',
@@ -467,7 +483,10 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
         end
       end
     end
-  end # }}}
+  end
+
+  info "All indices are up to date" unless indices_imported
+  # }}}
 
 end
 
