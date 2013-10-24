@@ -24,30 +24,32 @@ class ImportVersion < ActiveRecord::Base
 
     def process *fnames
       files, vers, go = [], {}, false
-      fnames.each do |fn|
-        raise "No such file: #{fn}" unless File.exist?(fn)
-        f = if File.size(fn) > 0
-          File.open fn, 'r:UTF-8'
-        else
-          DUMMY
-        end
-        files << f
+      transaction do
+        fnames.each do |fn|
+          raise "No such file: #{fn}" unless File.exist?(fn)
+          f = if File.size(fn) > 0
+            File.open fn, 'r:UTF-8'
+          else
+            DUMMY
+          end
+          files << f
 
-        v = begin
-          l = f.gets and l.chomp.scan(/^\$version (.+)$/).first.first
-        rescue NoMethodError
-          raise "Bad import file format: #{fn}"
+          v = begin
+            l = f.gets and l.chomp.scan(/^\$version (.+)$/).first.first
+          rescue NoMethodError
+            raise "Bad import file format: #{fn}"
+          end
+
+          if v && get(fn) != v
+            go = true
+            vers[fn] = v
+          end
         end
 
-        if v && get(fn) != v
-          go = true
-          vers[fn] = v
+        if go
+          yield *files
+          vers.each { |k,v| set(k, v) }
         end
-      end
-
-      if go
-        yield *files
-        vers.each { |k,v| set(k, v) }
       end
     ensure
       files.each { |f| f.close rescue nil } if files
