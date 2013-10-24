@@ -108,7 +108,7 @@ if Zone.count > 0
       head 'No village update present (not a problem)'
     end
   end
-elsif ENV['ZONE_DIR']
+elsif ENV['ZONE_PATH']
   # New install
   head 'Creating villages (scratch)'
   File.open(File.join(ENV['ZONE_PATH'], 'zones.txt'), 'r') do |f|
