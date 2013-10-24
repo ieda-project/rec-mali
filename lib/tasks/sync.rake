@@ -235,6 +235,7 @@ namespace :sync do
         zones = Zone.custom
 
         if zones.any?
+          puts "Exporting custom zones"
           File.open(outf, 'w') do |f|
             zones.includes(:parent).each do |zone|
               f.puts "#{zone.parent.tagged_name}/#{zone.tagged_name}"
