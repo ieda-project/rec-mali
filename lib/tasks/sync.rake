@@ -240,6 +240,7 @@ namespace :sync do
               f.puts "#{zone.parent.tagged_name}/#{zone.tagged_name}"
             end
           end
+          zones.update_all exported_at: Time.now
         else
           FileUtils.rm_f outf
         end
