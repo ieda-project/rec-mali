@@ -22,6 +22,7 @@ class Zone < ActiveRecord::Base
 
   validates_uniqueness_of :name, scope: :parent_id
   validates_uniqueness_of :here, if: :here
+  validates_inclusion_of :custom, in: [true, false]
 
   scope :used, where('id IN (SELECT DISTINCT zone_id FROM children)')
   scope :used_villages, where('id IN (SELECT DISTINCT village_id FROM children)')

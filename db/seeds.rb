@@ -82,7 +82,7 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
     end
     Zone.purge
 
-    indents = {}
+    last_id, indents = 0, {}
     f.each_line do |line|
       next unless line.fix!
       indent = line.match(/^\s*/).to_s.size
@@ -94,10 +94,22 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
       end
 
       n = line.lstrip
-      indents[indent] = Zone.create(
+      n.sub! /^([0-9]+):/, ''
+
+      # Use the ID from the line or do our version of auto-incrementing
+      # We need to do that, because the SQLite3 sequence would jump to
+      # the newly inserted ID, but that is no good for us.
+      newid = $1
+      newid ||= (last_id += 1)
+
+      z = Zone.new(
         name: n,
         parent: indents[indent-1],
-        point: point)
+        point: point,
+        custom: false)
+      z.id = newid if newid
+      z.save!
+      indents[indent] = z
     end
     if csps
       csps = Zone.where(name: csps).sort_by(&:level).first

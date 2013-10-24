@@ -1,6 +1,7 @@
 $version 1
+# vim: noexpandtab ts=2 sw=2
 Burkina Faso
-	Seguenega 
+	Seguenega
 		Bema*
 			Bema-SM
 			Bema Mossi
@@ -245,7 +246,7 @@ Burkina Faso
 			Sia
 			Bassagoulo
 		Bonou*
-			Bonou	 
+			Bonou
 			Toaga
 			Bompela
 			Namassa
@@ -276,7 +277,7 @@ Burkina Faso
 			Ouelle
 			Gamba
 		Rassouly*
-			Rassouly 
+			Rassouly
 		Lanfiera*
 			Lanfiera
 			Guedougou
@@ -285,7 +286,7 @@ Burkina Faso
 			Ban
 			Kourani
 		Di*
-			Di 
+			Di
 			Koroni
 			Benkadi
 			Tomakoura
@@ -312,7 +313,7 @@ Burkina Faso
 			Toere
 			Toungourou
 		Niassan*
-			Niassan 
+			Niassan
 			Bosse
 			Lo
 		Tiao*
@@ -406,18 +407,18 @@ Burkina Faso
 		Secteur 4*
 			Secteur 4
 		Mane*
-			Bangrin 
+			Bangrin
 			Bouidi
 			Goudrin
 			Komestenga
-			Itaoré  
+			Itaoré
 			Koankin
 			Nonguin
 			Noungou
 			Wenané
 			Tanlargo
 			Sect1
-			Sect2 
+			Sect2
 			Sect3
 			Sect4
 			Sect5
@@ -446,7 +447,7 @@ Burkina Faso
 			Secteur 7
 			Secteur 3
 			Secteur 5
-			Zablo 
+			Zablo
 			Foulou-Yarcé
 		Ziga*
 			Gandin
@@ -546,6 +547,6 @@ Burkina Faso
 			Nobi-Sargo
 			Niniogo
 			Bagadogo
-			Bagdin 
+			Bagdin
 			Mastenga
 			Peotenga
