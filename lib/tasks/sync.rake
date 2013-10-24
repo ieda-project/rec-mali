@@ -231,7 +231,7 @@ namespace :sync do
 
       # EXPORTING ZONES (root only)
       if Zone.csps && Zone.csps.root?
-        outf = remote('app/zone_update.txt')
+        outf = remote('zone_update.txt')
         zones = Zone.custom
 
         if zones.any?
