@@ -315,4 +315,6 @@ ActiveRecord::Schema.define(:version => 20131024092403) do
     t.datetime "exported_at"
   end
 
+  add_index "zones", ["custom"], :name => "index_zones_on_custom"
+
 end
