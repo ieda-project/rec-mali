@@ -228,11 +228,27 @@ namespace :sync do
       else
         puts "No export: root level."
       end
+
+      # EXPORTING ZONES (root only)
+      if Zone.csps && Zone.csps.root?
+        outf = remote('app/zone_update.txt')
+        zones = Zone.custom
+
+        if zones.any?
+          File.open(outf, 'w') do |f|
+            zones.includes(:parent).each do |zone|
+              f.puts "#{zone.parent.tagged_name}/#{zone.tagged_name}"
+            end
+          end
+        else
+          FileUtils.rm_f outf
+        end
+      end
     ensure
       FileUtils.rm_rf tmp
     end
   end
-  
+
   desc 'Migrate database with seed if needed'
   task migrate: 'db:migrate' do
     Rake::Task['db:seed'].invoke if Illness.count.zero?
