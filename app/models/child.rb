@@ -7,8 +7,8 @@ class Child < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :if => :final?
   validates_inclusion_of :gender, in: [true, false], :if => :final?
 
-  validates_presence_of :village_name, unless: :village
-  validates_presence_of :village, if: proc { |u| u.village_name.blank? }
+  validates_presence_of :village_name, unless: proc { |u| u.temporary? || u.village }
+  validates_presence_of :village, unless: proc { |u| u.temporary? || u.village_name.present? }
 
   belongs_to :village, class_name: 'Zone'
   globally_has_many :diagnostics, dependent: :destroy do

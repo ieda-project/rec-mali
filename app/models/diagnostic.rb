@@ -388,4 +388,9 @@ class Diagnostic < ActiveRecord::Base
       end
     end
   end
+
+  # Needed by Csps::Age
+  def temporary?
+    false
+  end
 end

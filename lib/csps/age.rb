@@ -15,8 +15,10 @@ module Csps
       before_save do
         self.saved_age_group = age_group if respond_to? :saved_age_group
       end
+
+      validates_presence_of :born_on, unless: :temporary?
       validate do
-        errors.add :born_on, :invalid if born_on > Date.today
+        errors.add :born_on, :invalid if !temporary? && born_on > Date.today
       end
     end
 
