@@ -38,6 +38,7 @@ module Csps
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters << :password
+    config.filter_parameters << :photo
 
     config.session_store :cookie_store, key: '_csps_session'
     config.secret_token = "gr5pi7fw5vmpus3cqzwe78pybb65zmtk5hhv"

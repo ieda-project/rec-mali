@@ -8,6 +8,8 @@ class ChildrenController < ApplicationController
   helper Wopata::Ziya::HtmlHelpersFix
   Search = Struct.new(:name, :born_on, :village_id)
 
+  before_filter :rewrite_photo, only: [:update, :temp]
+
   def index
     # Clean empty children (only photo)
     Child.unfilled.destroy_all
@@ -137,15 +139,6 @@ class ChildrenController < ApplicationController
   end
 
   def update
-    data = params[:child]
-    if data['photo'].is_a?(String)
-      raw = data.delete('photo')
-      raw.tr! ' ', '+'
-      sio = StringIO.new(Base64.decode64(raw))
-      def sio.content_type; 'image/png'; end
-      def sio.original_filename; 'hcam.png'; end
-      data['photo'] = sio
-    end
     display_updated @child.update_attributes(data)
   end
 
@@ -159,6 +152,19 @@ class ChildrenController < ApplicationController
   end
 
   protected
+
+  def rewrite_photo
+    data = params[:child]
+    if data && data['photo'].is_a?(String)
+      raw = data.delete('photo')
+      raw.tr! ' ', '+'
+      sio = StringIO.new(Base64.decode64(raw))
+      def sio.content_type; 'image/png'; end
+      def sio.original_filename; 'hcam.png'; end
+      data['photo'] = sio
+    end
+    true
+  end
 
   def display_updated success
     respond_to do |wants|
