@@ -12,6 +12,8 @@ namespace :sync do
     dir = "#{dir}/#{Zone.csps.folder_name}"
     FileUtils.mkdir_p dir
 
+    sign_cache = ListSign.all.hashize(&:id)
+
     for ref in Diagnostic.select('DISTINCT type, saved_age_group') do
       type = ref.type.nil? ? 'base' : ref.type.sub(/Diagnostic$/, '').underscore
       ag = ref.saved_age_group
@@ -53,7 +55,7 @@ namespace :sync do
 
           buf = [
             Zone.csps.name,
-            child.uqid, child.born_on, child.gender ? 'm' : 'f', child.village && child.village.name,
+            child.uqid, child.born_on, child.gender ? 1 : 2, child.village && child.village.name,
             diag.index_ratio('weight_height'), diag.index_ratio('height_age'), diag.index_ratio('weight_age'),
             diag.z_score('weight_height'), diag.z_score('height_age'), diag.z_score('weight_age'),
             diag.kind == 2 ? 1 : 0, diag.author.name ]
@@ -63,7 +65,10 @@ namespace :sync do
           buf += [
             diag.done_on.to_date, diag.height, diag.weight,
             diag.mac, diag.temperature ]
-          buf += diag.sign_answers.sort_by(&:sign_id).map(&:spss_value)
+          buf += diag.sign_answers.sort_by(&:sign_id).map do |sa|
+            sa.sign = sign_cache[sa.sign_id] if sa.is_a?(SignListAnswer)
+            sa.spss_value
+          end
           buf += all_cs.map { |c| cs.include?(c.id) ? 1 : 0 }
           buf += all_meds.map { |m| meds.include?(m.id) ? 1 : 0 }
           out.puts CSV.generate_line(buf)
@@ -111,7 +116,7 @@ namespace :sync do
             child.village && child.village.name ]
           buf += [
             child.bcg_polio0, child.penta1_polio1, child.penta2_polio2,
-            child.penta3_polio3, child.measles ].map { |v| v ? 'oui' : 'non' }
+            child.penta3_polio3, child.measles ].map { |v| v ? 1 : 0 }
           child.diagnostics.each do |diag|
             buf += [
               diag.done_on.to_date, diag.height, diag.weight,

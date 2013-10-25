@@ -14,7 +14,7 @@ class SignListAnswer < SignAnswer
   end
 
   def spss_value
-    list_value || ''
+    list_value && sign.options.index(list_value)
   end
 
   def applicable?
@@ -30,7 +30,7 @@ class SignListAnswer < SignAnswer
   def handle_na
     self.list_value = nil if list_value.blank?
   end
-  
+
   def self.cast v
     v.to_s
   end
