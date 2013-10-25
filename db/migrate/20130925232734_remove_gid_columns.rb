@@ -55,6 +55,8 @@ class RemoveGidColumns < ActiveRecord::Migration
         # For future migrations
         m.reset_column_information
       end
+
+      execute "VACUUM FULL"
     end
 
     def postgresql
