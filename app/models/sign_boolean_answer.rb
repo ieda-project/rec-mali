@@ -12,8 +12,8 @@ class SignBooleanAnswer < SignAnswer
 
   def spss_value
     case boolean_value
-      when true then 'oui'
-      when false then 'non'
+      when true then 1
+      when false then 0
       when nil then ''
     end
   end

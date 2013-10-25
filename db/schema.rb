@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131024092403) do
+ActiveRecord::Schema.define(:version => 20131025095417) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20131024092403) do
   add_index "diagnostics", ["child_uqid"], :name => "index_diagnostics_on_child_uqid"
   add_index "diagnostics", ["kind"], :name => "index_diagnostics_on_kind"
   add_index "diagnostics", ["month"], :name => "index_diagnostics_on_month"
+  add_index "diagnostics", ["saved_age_group", "state"], :name => "index_diagnostics_on_saved_age_group_and_state"
   add_index "diagnostics", ["type", "id"], :name => "index_diagnostics_on_type_and_id"
   add_index "diagnostics", ["type", "uqid"], :name => "index_diagnostics_on_type_and_uqid"
   add_index "diagnostics", ["uqid"], :name => "index_diagnostics_on_uqid", :unique => true

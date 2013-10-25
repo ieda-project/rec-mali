@@ -8,6 +8,6 @@ class ListSign < Sign
   end
 
   def options
-    values.split(';')
+    @options ||= values.split(';')
   end
 end
