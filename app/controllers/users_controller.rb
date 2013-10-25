@@ -32,9 +32,9 @@ class UsersController < ApplicationController
     end
     if User.count.zero?
       @user.admin = true
+    else
+      @user.password_expired_at = Time.now
     end
-
-    @user.password_expired_at = Time.now
 
     return see_other('/session/restore') if restore
 
