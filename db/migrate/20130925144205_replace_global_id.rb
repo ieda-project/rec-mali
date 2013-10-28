@@ -91,8 +91,8 @@ class ReplaceGlobalId < ActiveRecord::Migration
       Dir.chdir dir do
         Dir.glob '*_children_*' do |fn|
           gid, rest = fn.split('_', 2)
-          ch = Child.find_by_global_id("#{zone}/#{gid}").select(:uqid)
-          system "mv #{fn} #{ch.uqid}_#{rest}"
+          ch = Child.where(global_id: "#{zone}/#{gid}").select(:uqid).first
+          system "mv #{fn} #{ch.uqid}_#{rest}" if ch
         end
       end
     end
