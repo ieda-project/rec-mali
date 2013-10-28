@@ -3,10 +3,10 @@
   = form.text_field :name
   = errors_on form, :name
 %div
-  %label Site
+  %label Zone
   = form.select :parent_id, Zone.root.to_select(include_self: true, depth: 3)
   = errors_on form, :parent_id
 %div
-  %label Site
+  %label Cette zone est un CSPS ?
   = form.select :point, [ nil, 0, 1 ], {:selected => (form.object.point? ? 1 : 0) }, :class => :boolean
   = errors_on form, :point
