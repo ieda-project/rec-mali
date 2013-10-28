@@ -24,6 +24,7 @@ class Zone < ActiveRecord::Base
   validates_uniqueness_of :here, if: :here
   validates_inclusion_of :custom, in: [true, false]
   validates_presence_of :parent_id, if: :custom?
+  validates_inclusion_of :point, in: [false], if: :root?
 
   validate do
     errors[:base] << "Level too deep" if parent && parent.level >= 3

@@ -14,7 +14,7 @@ class ZonesController < ApplicationController
   end
 
   def create
-    if Zone.create params[:zone].keep(%w(name parent_id)).merge(custom: true)
+    if Zone.create params[:zone].keep(%w(name parent_id point)).merge(custom: true)
       see_other zones_path
     else
       render action: :new
@@ -25,7 +25,7 @@ class ZonesController < ApplicationController
   end
 
   def update
-    if @zone.update_attributes params[:zone].keep(%w(name parent_id))
+    if @zone.update_attributes params[:zone].keep(%w(name parent_id point))
       see_other zones_path
     else
       render action: :new

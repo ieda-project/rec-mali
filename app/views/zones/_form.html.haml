@@ -6,3 +6,7 @@
   %label Site
   = form.select :parent_id, Zone.root.to_select(include_self: true, depth: 3)
   = errors_on form, :parent_id
+%div
+  %label Site
+  = form.select :point, [ nil, 0, 1 ], {:selected => (form.object.point? ? 1 : 0) }, :class => :boolean
+  = errors_on form, :point
