@@ -23,7 +23,7 @@
 - for res in @diagnostic.results.to_display do
   %section.treatment{:class => Classification::LEVELS[res.classification.level]}
     %h2= res.treatment.name
-    != res.treatment.html @diagnostic
+    != res.treatment.html @diagnostic, &for_display
 
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit' } do |form|
   - if @diagnostic.author == current_user
