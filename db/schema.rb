@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131025095417) do
+ActiveRecord::Schema.define(:version => 20131028205912) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(:version => 20131025095417) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "group_title"
+    t.string   "distinct"
   end
 
   create_table "results", :force => true do |t|

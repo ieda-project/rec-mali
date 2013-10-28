@@ -48,7 +48,7 @@ class Query < ActiveRecord::Base
       end
     end
 
-    results = rel.group(:month).count('DISTINCT child_uqid').tap do |h|
+    results = rel.group(:month).count(distinct && "DISTINCT #{distinct}").tap do |h|
       h.keys.each do |k|
         s = k.to_s
         h.store "#{s[0,4]}/#{s[4,2]}", h.delete(k)

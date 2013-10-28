@@ -1,9 +1,10 @@
-$version 4
+$version 5
 @new children 0-11 months
 {
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":"<=",
@@ -16,6 +17,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -32,6 +34,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -48,6 +51,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_distance",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "child.distance",
@@ -61,6 +65,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_distance",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "child.distance",
@@ -74,6 +79,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_distance",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "child.distance",
@@ -183,6 +189,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"old",
   "group":"old_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":"<=",
@@ -195,6 +202,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"old",
   "group":"old_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -211,6 +219,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"old",
   "group":"old_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -322,6 +331,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":"<=",
@@ -333,6 +343,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -348,6 +359,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -453,6 +465,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_gender",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -464,6 +477,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_gender",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -476,6 +490,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -489,6 +504,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -502,6 +518,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -515,6 +532,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -528,6 +546,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -541,6 +560,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -554,6 +574,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -567,6 +588,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -580,6 +602,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -593,6 +616,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -606,6 +630,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -619,6 +644,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -632,6 +658,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -645,6 +672,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -658,6 +686,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -671,6 +700,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -684,6 +714,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -697,6 +728,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -710,6 +742,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -723,6 +756,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -736,6 +770,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -749,6 +784,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -762,6 +798,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -775,6 +812,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -788,6 +826,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -801,6 +840,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -814,6 +854,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -831,6 +872,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -848,6 +890,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -865,6 +908,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -882,6 +926,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "sign",
     "sign": "fievre_presence_duree",
@@ -895,6 +940,7 @@ $version 4
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "sign",
     "sign": "ulcerations",
@@ -907,6 +953,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -919,6 +966,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -931,6 +979,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -943,6 +992,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -955,6 +1005,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -967,6 +1018,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -979,6 +1031,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -991,6 +1044,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1003,6 +1057,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1015,6 +1070,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1027,6 +1083,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1039,6 +1096,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1051,6 +1109,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1063,6 +1122,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1075,6 +1135,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1087,6 +1148,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1099,6 +1161,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1111,6 +1174,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1123,6 +1187,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1135,6 +1200,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1147,6 +1213,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1159,6 +1226,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1171,6 +1239,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1183,6 +1252,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1195,6 +1265,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1207,6 +1278,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -1219,6 +1291,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -1235,6 +1308,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -1251,6 +1325,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -1267,6 +1342,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -1283,6 +1359,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "sign",
     "sign": "fievre_presence_duree",
@@ -1295,6 +1372,7 @@ $version 4
 {
   "klass":"Diagnostic",
   "group":"total_children_by_pcime",
+  "distinct":"child_uqid",
   "conds": [{
     "type": "sign",
     "sign": "ulcerations",
