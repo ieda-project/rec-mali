@@ -1,4 +1,4 @@
-$version 5
+$version 6
 @new children 0-11 months
 {
   "klass":"Diagnostic",
@@ -7,8 +7,8 @@ $version 5
   "distinct":"child_uqid",
   "conds": [{
     "type":"age",
-    "operator":"<=",
-    "value":11
+    "operator":"<",
+    "value":12
   }]
 }
 
@@ -24,8 +24,8 @@ $version 5
     "value":12
   }, {
     "type":"age",
-    "operator":"<=",
-    "value":23
+    "operator":"<",
+    "value":24
   }]
 }
 
@@ -39,10 +39,6 @@ $version 5
     "type":"age",
     "operator":">=",
     "value":24
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
   }]
 }
 
@@ -88,23 +84,19 @@ $version 5
   }]
 }
 
-@new consult 0-7 days
+@new consult 0-6 days
 {
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_consult_by_age",
   "conds": [{
     "type":"days",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"days",
-    "operator":"<=",
+    "operator":"<",
     "value":7
   }]
 }
 
-@new consult 7 days - 2months
+@new consult 7 days - 1 months
 {
   "klass":"Diagnostic",
   "case_status":"new",
@@ -115,7 +107,7 @@ $version 5
     "value":7
   }, {
     "type":"age",
-    "operator":"<=",
+    "operator":"<",
     "value":2
   }]
 }
@@ -129,10 +121,6 @@ $version 5
     "type":"age",
     "operator":">=",
     "value":2
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
   }]
 }
 
@@ -159,12 +147,8 @@ $version 5
   "group":"new_consult_by_age",
   "conds": [{
     "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":11
+    "operator":"<",
+    "value":12
   }]
 }
 
@@ -177,10 +161,6 @@ $version 5
     "type":"age",
     "operator":">=",
     "value":12
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
   }]
 }
 
@@ -192,8 +172,8 @@ $version 5
   "distinct":"child_uqid",
   "conds": [{
     "type":"age",
-    "operator":"<=",
-    "value":11
+    "operator":"<",
+    "value":12
   }]
 }
 
@@ -209,8 +189,8 @@ $version 5
     "value":12
   }, {
     "type":"age",
-    "operator":"<=",
-    "value":23
+    "operator":"<",
+    "value":24
   }]
 }
 
@@ -224,30 +204,22 @@ $version 5
     "type":"age",
     "operator":">=",
     "value":24
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
   }]
 }
 
-@old consult 0-7 days
+@old consult 0-6 days
 {
   "klass":"Diagnostic",
   "case_status":"old",
   "group":"old_consult_by_age",
   "conds": [{
     "type":"days",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"days",
-    "operator":"<=",
+    "operator":"<",
     "value":7
   }]
 }
 
-@old consult 7 days - 2months
+@old consult 7 days - 1 month
 {
   "klass":"Diagnostic",
   "case_status":"old",
@@ -258,7 +230,7 @@ $version 5
     "value":7
   }, {
     "type":"age",
-    "operator":"<=",
+    "operator":"<",
     "value":2
   }]
 }
@@ -272,10 +244,6 @@ $version 5
     "type":"age",
     "operator":">=",
     "value":2
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
   }]
 }
 
@@ -302,12 +270,8 @@ $version 5
   "group":"old_consult_by_age",
   "conds": [{
     "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":11
+    "operator":"<",
+    "value":12
   }]
 }
 
@@ -320,10 +284,6 @@ $version 5
     "type":"age",
     "operator":">=",
     "value":12
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
   }]
 }
 
@@ -334,8 +294,8 @@ $version 5
   "distinct":"child_uqid",
   "conds": [{
     "type":"age",
-    "operator":"<=",
-    "value":11
+    "operator":"<",
+    "value":12
   }]
 }
 
@@ -350,8 +310,8 @@ $version 5
     "value":12
   }, {
     "type":"age",
-    "operator":"<=",
-    "value":23
+    "operator":"<",
+    "value":24
   }]
 }
 
@@ -364,29 +324,21 @@ $version 5
     "type":"age",
     "operator":">=",
     "value":24
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
   }]
 }
 
-@total consult 0-7 days
+@total consult 0-6 days
 {
   "klass":"Diagnostic",
   "group":"total_consult_by_age",
   "conds": [{
     "type":"days",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"days",
-    "operator":"<=",
+    "operator":"<",
     "value":7
   }]
 }
 
-@total consult 7 days - 2months
+@total consult 7 days - 1 month
 {
   "klass":"Diagnostic",
   "group":"total_consult_by_age",
@@ -396,7 +348,7 @@ $version 5
     "value":7
   }, {
     "type":"age",
-    "operator":"<=",
+    "operator":"<",
     "value":2
   }]
 }
@@ -409,10 +361,6 @@ $version 5
     "type":"age",
     "operator":">=",
     "value":2
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
   }]
 }
 
@@ -437,12 +385,8 @@ $version 5
   "group":"total_consult_by_age",
   "conds": [{
     "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":11
+    "operator":"<",
+    "value":12
   }]
 }
 
@@ -454,10 +398,6 @@ $version 5
     "type":"age",
     "operator":">=",
     "value":12
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
   }]
 }
 

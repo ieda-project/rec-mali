@@ -1,51 +1,51 @@
-$version 4
+$version 5
 new_children_by_age	Nombre de nouveaux enfants par âge
-new children 0-11 months	Nombre de nouveaux enfants de 0-11 mois
-new children 12-23 months	Nombre de nouveaux enfants de 12-23 mois
-new children 24-59 months	Nombre de nouveaux enfants de 24-59 mois
+new children 0-11 months	0 - 11 mois
+new children 12-23 months	12 - 23 mois
+new children 24-59 months	24 - 59 mois
 
 new_children_by_distance	Nombre de nouveaux enfants par distance
-new children 0-4 km	Nombre de nouveaux enfants entre 0 et 4km
-new children 5-9 km	Nombre de nouveaux enfants entre 5 et 9km
-new children 10 km	Nombre de nouveaux enfants à plus de 10km
+new children 0-4 km	0 - 4km
+new children 5-9 km	5 - 9km
+new children 10 km	10km et plus
 
 new_consult_by_age	Nombre de nouvelles consultations par âge
-new consult 0-7 days	Nombre de nouvelles consultations entre 0 et 7 jours
-new consult 7 days - 2months	Nombre de nouvelles consultations entre 7 jours et 2 mois
-new consult 2-59 months	Nombre de nouvelles consultations entre 2 et 59 mois
-new consult 0-59 months	Nombre de nouvelles consultations entre 0 et 59 mois
-new consult 0-11 months	Nombre de nouvelles consultations entre 0 et 11 mois
-new consult 12-59 months	Nombre de nouvelles consultations entre 12 et 59 mois
+new consult 0-6 days	0 - 6 jours
+new consult 7 days - 1 months	7 jours - 1 mois
+new consult 2-59 months	2 - 59 mois
+new consult 0-59 months	0 - 59 mois
+new consult 0-11 months	0 - 11 mois
+new consult 12-59 months	12 - 59 mois
 
 old_children_by_age	Nombre d'anciens enfants par âge
-old children 0-11 months	Nombre d'anciens enfants de 0-11 mois
-old children 12-23 months	Nombre d'anciens enfants de 12-23 mois
-old children 24-59 months	Nombre d'anciens enfants de 24-59 mois
+old children 0-11 months	0 - 11 mois
+old children 12-23 months	12 - 23 mois
+old children 24-59 months	24 - 59 mois
 
 old_consult_by_age	Nombre d'anciennes consultations par âge
-old consult 0-7 days	Nombre d'anciennes consultations entre 0 et 7 jours
-old consult 7 days - 2months	Nombre d'anciennes consultations entre 7 jours et 2 mois
-old consult 2-59 months	Nombre d'anciennes consultations entre 2 et 59 mois
-old consult 0-59 months	Nombre d'anciennes consultations entre 0 et 59 mois
-old consult 0-11 months	Nombre d'anciennes consultations entre 0 et 11 mois
-old consult 12-59 months	Nombre d'anciennes consultations entre 12 et 59 mois
+old consult 0-6 days	0 - 6 jours
+old consult 7 days - 1 month	7 jours - 1 mois
+old consult 2-59 months	2 - 59 mois
+old consult 0-59 months	0 - 59 mois
+old consult 0-11 months	0 - 11 mois
+old consult 12-59 months	12 - 59 mois
 
 total_children_by_age	Nombre de total d'enfants par âge
-total children 0-11 months	Nombre total d'enfants de 0-11 mois
-total children 12-23 months	Nombre total d'enfants de 12-23 mois
-total children 24-59 months	Nombre total d'enfants de 24-59 mois
+total children 0-11 months	0 - 11 mois
+total children 12-23 months	12 - 23 mois
+total children 24-59 months	24 - 59 mois
 
 total_consult_by_age	Nombre total de consultations par âge
-total consult 0-7 days	Nombre total de consultations entre 0 et 7 jours
-total consult 7 days - 2months	Nombre total de consultations entre 7 jours et 2 mois
-total consult 2-59 months	Nombre total de consultations entre 2 et 59 mois
-total consult 0-59 months	Nombre total de consultations entre 0 et 59 mois
-total consult 0-11 months	Nombre total de consultations entre 0 et 11 mois
-total consult 12-59 months	Nombre total de consultations entre 12 et 59 mois
+total consult 0-6 days	0 - 6 jours
+total consult 7 days - 1 month	7 jours - 2 mois
+total consult 2-59 months	2 - 59 mois
+total consult 0-59 months	0 - 59 mois
+total consult 0-11 months	0 - 11 mois
+total consult 12-59 months	12 - 59 mois
 
 total_children_by_gender	Nombre d'enfant par sexe (masculin ou féminin)
-total children boy	Nombre de garçons
-total children girl	Nombre de filles
+total children boy	Garçons
+total children girl	Filles
 
 new_children_by_pcime	Nombre de nouveaux enfants par classification PCIME
 new children pas de pneumonie	Pas de pneumonie: toux ou rhume
