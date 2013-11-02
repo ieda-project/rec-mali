@@ -77,6 +77,7 @@ module Csps::SyncProxy
         zone.name,
         path)
       exit 1 unless $?.success?
+      true
     else
       File.open(path, 'r') do |src|
         serial = src.gets.chomp
@@ -119,7 +120,7 @@ module Csps::SyncProxy
                 end
 
                 bare_exec(
-                  "INSERT INTO #{table_name} (#{keys.join(',')}) VALUES (#{placeholders.join(',')})", 
+                  "INSERT INTO #{table_name} (#{keys.join(',')}) VALUES (#{placeholders.join(',')})",
                   values)
               end
             end

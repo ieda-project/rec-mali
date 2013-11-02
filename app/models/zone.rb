@@ -75,7 +75,16 @@ class Zone < ActiveRecord::Base
   end
 
   def option_title; name; end
-  def folder_name; name.gsub(' ', '_').downcase; end
+  def folder_name
+    pfx = if root?
+      'root'
+    elsif point?
+      'entry'
+    else
+      'other'
+    end
+    "#{pfx}_#{name.cacheize.gsub(' ', '_')}"
+  end
   alias file_name folder_name
 
   def upchain

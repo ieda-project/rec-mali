@@ -84,7 +84,7 @@ class String
       tr(CACHEIZE_FROM, CACHEIZE_INTO).
       gsub(/[œŒ]/, 'oe').
       gsub(/[-'\s]+/, ' ')).
-    downcase.gsub(/[^a-z ]/, '').split(' ').sort.join(' ')
+    downcase.gsub(/[^a-z0-9 ]/, '').split(' ').sort.join(' ')
   end
   def cacheize!
     self[0..-1] = cacheize

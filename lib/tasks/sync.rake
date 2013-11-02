@@ -170,7 +170,7 @@ namespace :sync do
       keys.uniq!
 
       # EXPORTING
-      if Zone.csps.parent_id && (!list || list.any?)
+      if !list || list.any?
         all, zones = Zone.exportable_points, []
         all = all.where('name IN (?)', list) if list
 
@@ -223,10 +223,8 @@ namespace :sync do
         else
           puts "No zones to export to."
         end
-      elsif Zone.csps.parent_id
-        puts "No export: list empty."
       else
-        puts "No export: root level."
+        puts "No export: list empty."
       end
 
       # EXPORTING ZONES (root only)
