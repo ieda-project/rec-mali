@@ -31,8 +31,8 @@ class Dumper {
     public String dump(ResultSet res) throws SQLException {
       String value = res.getString(name);
       return value == null ? "n" : ":" +
-        value.replaceAll("\"", "\\\"").
-              replaceAll("\n", "\\n").
+        value.replaceAll("\"", "\\\\\"").
+              replaceAll("\n", "\\\\n").
               replaceAll("\r", "").
               replaceAll("\\p{Cntrl}", " ").trim();
     }
