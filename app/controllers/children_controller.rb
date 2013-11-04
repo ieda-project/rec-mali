@@ -126,7 +126,7 @@ class ChildrenController < ApplicationController
 
   def temp
     Child.temporary.destroy_all
-    @child = Child.new params[:child].merge(temporary: true)
+    @child = Child.new @data.merge(temporary: true)
     display_updated @child.save
   end
 
@@ -139,7 +139,7 @@ class ChildrenController < ApplicationController
   end
 
   def update
-    display_updated @child.update_attributes(data)
+    display_updated @child.update_attributes(@data)
   end
 
   def destroy
@@ -154,7 +154,7 @@ class ChildrenController < ApplicationController
   protected
 
   def rewrite_photo
-    data = params[:child]
+    @data = data = params[:child]
     if data && data['photo'].is_a?(String)
       raw = data.delete('photo')
       raw.tr! ' ', '+'
