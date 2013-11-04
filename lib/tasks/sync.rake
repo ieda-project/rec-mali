@@ -48,13 +48,20 @@ namespace :sync do
     gpgdir = "#{Rails.root}/config/gpg"
     FileUtils.chmod 0700, gpgdir unless File.symlink?(gpgdir)
     FileUtils.chmod 0600, Dir.glob("#{gpgdir}/*")
-    gpg = "gpg --homedir #{gpgdir}"
+
+    gpg_cmd = "gpg --homedir #{gpgdir}"
+    gpg = proc do |cmd|
+      saved_lang, ENV['LANG'] = ENV['LANG'], 'en_US.UTF-8'
+      `#{gpg_cmd} #{cmd}`.tap do
+        ENV['LANG'] = saved_lang
+      end
+    end
 
     # ----------- STEP 1 -----------
 
-    if `#{gpg} --list-secret-keys --with-colons` == ''
+    if gpg.('--list-secret-keys --with-colons') == ''
       puts "Creating secret key for #{Zone.csps.folder_name} <csps+#{Zone.csps.folder_name}@tdh.ch>"
-      IO.popen("#{gpg} --batch --gen-key -", 'w') do |b|
+      IO.popen("#{gpg_cmd} --batch --gen-key -", 'w') do |b|
         b.puts 'Key-Type: RSA'
         b.puts 'Key-Length: 2048'
         b.puts "Name-Real: #{Zone.csps.folder_name}"
@@ -66,7 +73,7 @@ namespace :sync do
 
     puts "Exporting key"
     FileUtils.mkdir_p remote('keys')
-    `#{gpg} --armor --export #{Zone.csps.folder_name} > #{remote}/keys/#{Zone.csps.folder_name}`
+    gpg.("--armor --export #{Zone.csps.folder_name} > #{remote}/keys/#{Zone.csps.folder_name}")
 
     # Import ALL the keys!
     puts "Importing others' public keys"
@@ -74,11 +81,11 @@ namespace :sync do
     Dir.glob("#{remote}/keys/*") do |path|
       kn = File.basename path
       next if kn == Zone.csps.folder_name
-      res = `#{gpg} --import #{path} 2>&1`
+      res = gpg.("--import #{path} 2>&1")
       displayed = false
       unless res.include?('not changed')
         fpr = res.scan(/gpg: key ([0-9A-F]+)/).first.first
-        `#{gpg} --list-keys --with-colons #{kn}`.each_line do |line|
+        gpg.("--list-keys --with-colons #{kn}").each_line do |line|
           next unless line =~ /^pub:/
           u,trust,u,u,sig = line.split ':'
           next if trust.in?(%w(o - q n)) && sig.include?(fpr)
@@ -91,10 +98,10 @@ namespace :sync do
             puts "`--------------------------------"
             displayed = true
           end
-          `#{gpg} --yes --delete-key #{sig}`
+          gpg.("--yes --delete-key #{sig}")
         end
         name = File.basename path
-        system "#{gpg} --yes --sign-key #{name}"
+        gpg.("--yes --sign-key #{name}")
         updated_keys << name
       end
     end
@@ -102,11 +109,11 @@ namespace :sync do
     if Zone.csps.root?
       # Export ALL the keys!
       puts "Exporting keys"
-      `#{gpg} -k --with-colons`.each_line do |line|
+      gpg.("-k --with-colons").each_line do |line|
         line = line.split ':'
         next unless line[0] == 'pub'
         n = line[9].sub(/ .*$/, '')
-        `#{gpg} --armor --export #{n} > #{remote}/keys/#{n}`
+        gpg.("--armor --export #{n} > #{remote}/keys/#{n}")
       end
     end
 
@@ -123,7 +130,7 @@ namespace :sync do
         dir = "#{tmp}/#{zone.folder_name}"
         FileUtils.mkdir_p dir
         if File.exist? "#{remote}/#{zone.folder_name}.tgz.gpg"
-          `#{gpg} --output #{tmp}/#{zone.folder_name}.tgz -d #{remote}/#{zone.folder_name}.tgz.gpg`
+          gpg.("--output #{tmp}/#{zone.folder_name}.tgz -d #{remote}/#{zone.folder_name}.tgz.gpg")
           unless $?.success?
             puts "#{zone.name} cannot be decrypted, sync with a center please!"
             puts "#{zone.name} ne peut pas être décrypté. Synchronisez avec un District !"
@@ -163,7 +170,7 @@ namespace :sync do
       FileUtils.rm_rf "#{tmp}/*"
 
       keys = []
-      `#{gpg} -k --with-colons`.each_line do |l|
+      gpg.("-k --with-colons").each_line do |l|
         l = l.split ':'
         keys << l[9].sub(/ .*$/, '') if %w(pub uid).include? l[0]
       end
@@ -216,7 +223,7 @@ namespace :sync do
             tgts = [ zone, Zone.csps, *zone.upchain ].map(&:folder_name).uniq & keys
             print "Packing and encrypting targets #{tgts.join(', ')}: "
             Dir.chdir "#{tmp}/#{zone.folder_name}" do
-              `tar czf - *|#{gpg} --yes -e --output #{remote}/#{zone.folder_name}.tgz.gpg -r #{tgts.join(' -r ')}`
+              `tar czf - *|#{gpg_cmd} --yes -e --output #{remote}/#{zone.folder_name}.tgz.gpg -r #{tgts.join(' -r ')}`
             end
             puts 'ok.'
           end
