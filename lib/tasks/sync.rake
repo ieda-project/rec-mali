@@ -81,7 +81,7 @@ namespace :sync do
     Dir.glob("#{remote}/keys/*") do |path|
       kn = File.basename path
       next if kn == Zone.csps.folder_name
-      res = gpg.("--import #{path} 2>&1")
+      res = gpg.("--ignore-time-conflict --import #{path} 2>&1")
       displayed = false
       unless res.include?('not changed')
         fpr = res.scan(/gpg: key ([0-9A-F]+)/).first.first
