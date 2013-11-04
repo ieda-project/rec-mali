@@ -585,7 +585,8 @@ Element.behaviour(function() {
     if (this.value) {
       name = null;
     } else {
-      name = this.selectedOptions[0].get('data-village');
+      var opt = this.getElements('option')[this.selectedIndex];
+      name = opt.get('data-village');
       if (!name) {
         name = prompt("Nom du village:");
         if (name) {
@@ -599,7 +600,7 @@ Element.behaviour(function() {
           this.selectedIndex = this.options.length - 2;
         } else {
           this.selectedIndex = 0;
-          alert('Entrée invalide, valeur remis à '+this.selectedOptions[0].get('text'));
+          alert('Entrée invalide, valeur remis à '+opt.get('text'));
           name = null }}}
     $('child_village_name').value = name;
   });
