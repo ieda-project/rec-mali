@@ -105,6 +105,11 @@ class Diagnostic < ActiveRecord::Base
     end
   end
 
+  # A scope for each state
+  state_machine.states.each do |state|
+    scope state.name, where('state = ?', state.name)
+  end
+
   def ordonnance
     @ordonnance ||=
     begin

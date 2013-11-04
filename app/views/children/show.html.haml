@@ -6,14 +6,12 @@
 = partial 'children/profile'
 
 %nav.child
+  - if @child.deletable_by? current_user
+    - form_tag child_path(@child), method: 'delete' do
+      %button.confirm.delete(type="submit" data-confirm="Etes vous sûr de vouloir supprimer cet enfant ?") Supprimer
   - if Csps.point? && @child.of_valid_age?
-    - if @child.deletable_by? current_user
-      - form_tag child_path(@child), method: 'delete' do
-        %button.confirm.delete(type="submit" data-confirm="Etes vous sûr de vouloir supprimer cet enfant ?") Supprimer
-    - else
-      %p.hint Le patient se présente t-il à nouveau au dispensaire ?
     = link_to 'Nouvelle consultation', new_child_diagnostic_path(@child), :class => 'new-diagnostic'
-    - if @child.diagnostics.any?
+    - if @child.diagnostics.closed.any?
       = link_to 'Consultation de suivi', new_child_diagnostic_path(@child, kind: 'follow'), :class => 'follow-diagnostic'
 
 %h2.em Liste des évaluations

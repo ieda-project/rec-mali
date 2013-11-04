@@ -30,7 +30,7 @@ module Csps::Exportable
 
   def deletable_by? user=nil
     if Csps.point? && zone == Zone.csps
-      if lsoa = Zone.csps.last_sync_op_at 
+      if lsoa = Zone.csps.last_sync_op_at
         created_at > lsoa
       else
         true
