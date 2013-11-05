@@ -2,7 +2,8 @@ require 'json'
 
 class Query < ActiveRecord::Base
   # These correspond to diag kinds "first", "initial" and "follow" in this order.
-  enum :case_status, %w{new old follow}
+  enum :case_status, %w{first initial follow new old}
+  CASE_STATUSES.each.with_index { |n,i| const_set n.upcase, i }
 
   AGE = {
     'SQLite' => ->(ref, age) { "date(#{ref}, '-#{age} months')" },
@@ -17,6 +18,13 @@ class Query < ActiveRecord::Base
     k, ca = klass.constantize, connection.adapter_name
     aref = k.age_reference_field
     rel = case_status ? k.where(kind: case_status) : k
+
+    rel = case case_status
+      when NEW              then k.where('kind IN (?)', [FIRST, INITIAL])
+      when OLD              then k.where('kind IN (?)', [INITIAL, FOLLOW])
+      when FIRST..FOLLOW    then k.where(kind: case_status)
+      else k
+    end
 
     for cond in Array(YAML.load(conditions))
       rel = case cond['type']
@@ -67,7 +75,7 @@ class Query < ActiveRecord::Base
 
   def fill_in_gaps data
     return data if data.blank?
-    
+
     ks = data.keys.sort
     time = Time.parse ks.first
     finish = Time.parse ks.last
