@@ -247,7 +247,7 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def deletable_by? user
-    author == user && super
+    author == user && last? && super
   end
 
   def to_hash
