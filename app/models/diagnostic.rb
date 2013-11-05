@@ -243,7 +243,7 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def editable_by? user
-    Csps.point? and author == user and last?
+    Csps.point? and author == user and !closed?
   end
 
   def deletable_by? user

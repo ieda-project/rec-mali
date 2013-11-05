@@ -11,7 +11,7 @@
       %button.confirm.delete(type="submit" data-confirm="Etes vous sûr de vouloir supprimer cet enfant ?") Supprimer
   - if Csps.point? && @child.of_valid_age?
     = link_to 'Nouvelle consultation', new_child_diagnostic_path(@child), :class => 'new-diagnostic'
-    - if @child.diagnostics.closed.any?
+    - if @child.diagnostics.any?
       = link_to 'Consultation de suivi', new_child_diagnostic_path(@child, kind: 'follow'), :class => 'follow-diagnostic'
 
 %h2.em Liste des évaluations
