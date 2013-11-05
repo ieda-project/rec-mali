@@ -20,8 +20,8 @@ class Loader {
     System.exit(1);
   }
 
-  //       0       1            2      3      4     5
-  // Args: serial, sqlite_file, table, model, zone, inputfile
+  //       0       1            2      3      4       5
+  // Args: serial, sqlite_file, table, model, zoneid, inputfile
   public static void main(String args[]) throws Exception {
     Scanner sc = new Scanner(new File(args[5]), "UTF-8").useDelimiter("\n");
 
@@ -38,19 +38,7 @@ class Loader {
     Connection db = DriverManager.getConnection("jdbc:sqlite:"+args[1]);
 
     // Getting the zone id
-    int zoneid;
-    {
-      PreparedStatement st = db.prepareStatement("SELECT id FROM zones WHERE name=? AND point=?");
-      st.setString(1, args[4]);
-      st.setString(2, "t"); // Wow. This seems to work more often than not.
-      ResultSet rs = st.executeQuery();
-      if (!rs.next()) {
-        st.setBoolean(2, true); // Fallback to how it actually should work.
-        rs = st.executeQuery();
-        if (!rs.next()) die("No such zone: "+args[4]);
-      }
-      zoneid = rs.getInt("id");
-    }
+    int zoneid = Integer.parseInt(args[4]);
 
     // Types of the fields in the header
     int[] types = new int[flen];
@@ -150,7 +138,7 @@ class Loader {
     while (iter.hasNext()) {
       builder.append(iter.next());
       if (!iter.hasNext()) {
-        break;                  
+        break;
       }
       builder.append(delimiter);
     }

@@ -74,7 +74,7 @@ module Csps::SyncProxy
         dbname,
         table_name,
         real_model.name,
-        zone.name,
+        zone.id.to_s,
         path)
       exit 1 unless $?.success?
       true

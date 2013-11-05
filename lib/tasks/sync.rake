@@ -49,7 +49,7 @@ namespace :sync do
     FileUtils.chmod 0700, gpgdir unless File.symlink?(gpgdir)
     FileUtils.chmod 0600, Dir.glob("#{gpgdir}/*")
 
-    gpg_cmd = "gpg --homedir #{gpgdir}"
+    gpg_cmd = "gpg --ignore-time-conflict --homedir #{gpgdir}"
     gpg = proc do |cmd|
       saved_lang, ENV['LANG'] = ENV['LANG'], 'en_US.UTF-8'
       `#{gpg_cmd} #{cmd}`.tap do
@@ -81,7 +81,7 @@ namespace :sync do
     Dir.glob("#{remote}/keys/*") do |path|
       kn = File.basename path
       next if kn == Zone.csps.folder_name
-      res = gpg.("--ignore-time-conflict --import #{path} 2>&1")
+      res = gpg.("--import #{path} 2>&1")
       displayed = false
       unless res.include?('not changed')
         fpr = res.scan(/gpg: key ([0-9A-F]+)/).first.first
