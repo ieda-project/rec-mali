@@ -136,7 +136,20 @@ window.addEvent('domready', function() {
   document.getElements('a.help').addEvent('click', function() {
     transient.open($(this.get('href').substr(1)).get('html'), { width: '650px', class: 'treatment-help' }) });
 
+  document.getElements('section.treatment input[type=radio]').addEvents({
+    mousedown: function() {
+      if (this.checked) this.clear = true;
+    },
+    click: function() {
+      if (this.clear) {
+        this.clear = false;
+        this.checked = false }}});
+
   document.getElements('section.treatment label').addEvents({
+    mousedown: function() {
+      var radio = $(this.get('for'))
+      if (radio.checked) radio.clear = true;
+    },
     mouseover: function() {
       if (this.checked) {
         this.title = null

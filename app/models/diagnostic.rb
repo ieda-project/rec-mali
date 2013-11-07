@@ -27,6 +27,7 @@ class Diagnostic < ActiveRecord::Base
     state :medicines_selected, :closed do
       validate do
         dupes_grouped.each do |gr|
+          next if gr.none?(&:mandatory)
           unless gr.any? { |i| ordonnance.include?(i.id) }
             errors.add :ordonnance, :invalid
             break
