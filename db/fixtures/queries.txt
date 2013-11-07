@@ -1,93 +1,9 @@
-$version 7
-@new children 0-11 months
-{
-  "klass":"Diagnostic",
-  "case_status":"first",
-  "group":"new_children_by_age",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type":"age",
-    "operator":"<",
-    "value":12
-  }]
-}
-
-@new children 12-23 months
-{
-  "klass":"Diagnostic",
-  "case_status":"first",
-  "group":"new_children_by_age",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type":"age",
-    "operator":">=",
-    "value":12
-  }, {
-    "type":"age",
-    "operator":"<",
-    "value":24
-  }]
-}
-
-@new children 24-59 months
-{
-  "klass":"Diagnostic",
-  "case_status":"first",
-  "group":"new_children_by_age",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type":"age",
-    "operator":">=",
-    "value":24
-  }]
-}
-
-@new children 0-4 km
-{
-  "klass":"Diagnostic",
-  "case_status":"first",
-  "group":"new_children_by_distance",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "child.distance",
-    "operator":"=",
-    "value":0
-  }]
-}
-
-@new children 5-9 km
-{
-  "klass":"Diagnostic",
-  "case_status":"first",
-  "group":"new_children_by_distance",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "child.distance",
-    "operator":"=",
-    "value":1
-  }]
-}
-
-@new children 10 km
-{
-  "klass":"Diagnostic",
-  "case_status":"first",
-  "group":"new_children_by_distance",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "child.distance",
-    "operator":"=",
-    "value":2
-  }]
-}
+$version 8
 
 @new consult 0-6 days
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_consult_by_age",
   "conds": [{
     "type":"days",
@@ -99,7 +15,7 @@ $version 7
 @new consult 7 days - 1 months
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_consult_by_age",
   "conds": [{
     "type":"days",
@@ -115,47 +31,47 @@ $version 7
 @new consult 2-59 months
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_consult_by_age",
   "conds": [{
     "type":"age",
     "operator":">=",
     "value":2
-  }]
-}
-
-@new consult 0-59 months
-{
-  "klass":"Diagnostic",
-  "case_status":"first",
-  "group":"new_consult_by_age",
-  "conds": [{
-    "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
   }]
 }
 
 @new consult 0-11 months
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_consult_by_age",
   "conds": [{
     "type":"age",
     "operator":"<",
     "value":12
+  }]
+}
+
+@new consult 12-23 months
+{
+  "klass":"Diagnostic",
+  "case_status":"new",
+  "group":"new_consult_by_age",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":12
+  }, {
+    "type":"age",
+    "operator":"<",
+    "value":24
   }]
 }
 
 @new consult 12-59 months
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_consult_by_age",
   "conds": [{
     "type":"age",
@@ -164,42 +80,11 @@ $version 7
   }]
 }
 
-@old children 0-11 months
+@new consult 24-59 months
 {
   "klass":"Diagnostic",
-  "case_status":"old",
-  "group":"old_children_by_age",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type":"age",
-    "operator":"<",
-    "value":12
-  }]
-}
-
-@old children 12-23 months
-{
-  "klass":"Diagnostic",
-  "case_status":"old",
-  "group":"old_children_by_age",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type":"age",
-    "operator":">=",
-    "value":12
-  }, {
-    "type":"age",
-    "operator":"<",
-    "value":24
-  }]
-}
-
-@old children 24-59 months
-{
-  "klass":"Diagnostic",
-  "case_status":"old",
-  "group":"old_children_by_age",
-  "distinct":"child_uqid",
+  "case_status":"new",
+  "group":"new_consult_by_age",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -207,51 +92,11 @@ $version 7
   }]
 }
 
-@old consult 0-6 days
+@new consult 0-59 months
 {
   "klass":"Diagnostic",
-  "case_status":"old",
-  "group":"old_consult_by_age",
-  "conds": [{
-    "type":"days",
-    "operator":"<",
-    "value":7
-  }]
-}
-
-@old consult 7 days - 1 month
-{
-  "klass":"Diagnostic",
-  "case_status":"old",
-  "group":"old_consult_by_age",
-  "conds": [{
-    "type":"days",
-    "operator":">=",
-    "value":7
-  }, {
-    "type":"age",
-    "operator":"<",
-    "value":2
-  }]
-}
-
-@old consult 2-59 months
-{
-  "klass":"Diagnostic",
-  "case_status":"old",
-  "group":"old_consult_by_age",
-  "conds": [{
-    "type":"age",
-    "operator":">=",
-    "value":2
-  }]
-}
-
-@old consult 0-59 months
-{
-  "klass":"Diagnostic",
-  "case_status":"old",
-  "group":"old_consult_by_age",
+  "case_status":"new",
+  "group":"new_consult_by_age",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -263,35 +108,51 @@ $version 7
   }]
 }
 
-@old consult 0-11 months
+@follow up consult 0-6 days
 {
   "klass":"Diagnostic",
-  "case_status":"old",
-  "group":"old_consult_by_age",
+  "case_status":"follow",
+  "group":"follow_up_consult_by_age",
   "conds": [{
-    "type":"age",
+    "type":"days",
     "operator":"<",
-    "value":12
+    "value":7
   }]
 }
 
-@old consult 12-59 months
+@follow up consult 7 days - 1 month
 {
   "klass":"Diagnostic",
-  "case_status":"old",
-  "group":"old_consult_by_age",
+  "case_status":"follow",
+  "group":"follow_up_consult_by_age",
+  "conds": [{
+    "type":"days",
+    "operator":">=",
+    "value":7
+  }, {
+    "type":"age",
+    "operator":"<",
+    "value":2
+  }]
+}
+
+@follow up consult 2-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"follow",
+  "group":"follow_up_consult_by_age",
   "conds": [{
     "type":"age",
     "operator":">=",
-    "value":12
+    "value":2
   }]
 }
 
-@total children 0-11 months
+@follow up consult 0-11 months
 {
   "klass":"Diagnostic",
-  "group":"total_children_by_age",
-  "distinct":"child_uqid",
+  "case_status":"follow",
+  "group":"follow_up_consult_by_age",
   "conds": [{
     "type":"age",
     "operator":"<",
@@ -299,11 +160,11 @@ $version 7
   }]
 }
 
-@total children 12-23 months
+@follow up consult 12-23 months
 {
   "klass":"Diagnostic",
-  "group":"total_children_by_age",
-  "distinct":"child_uqid",
+  "case_status":"follow",
+  "group":"follow_up_consult_by_age",
   "conds": [{
     "type":"age",
     "operator":">=",
@@ -315,15 +176,43 @@ $version 7
   }]
 }
 
-@total children 24-59 months
+@follow up consult 12-59 months
 {
   "klass":"Diagnostic",
-  "group":"total_children_by_age",
-  "distinct":"child_uqid",
+  "case_status":"follow",
+  "group":"follow_up_consult_by_age",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":12
+  }]
+}
+
+@follow up consult 24-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"follow",
+  "group":"follow_up_consult_by_age",
   "conds": [{
     "type":"age",
     "operator":">=",
     "value":24
+  }]
+}
+
+@follow up consult 0-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"follow",
+  "group":"follow_up_consult_by_age",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -364,6 +253,54 @@ $version 7
   }]
 }
 
+@total consult 0-11 months
+{
+  "klass":"Diagnostic",
+  "group":"total_consult_by_age",
+  "conds": [{
+    "type":"age",
+    "operator":"<",
+    "value":12
+  }]
+}
+
+@total consult 12-23 months
+{
+  "klass":"Diagnostic",
+  "group":"total_consult_by_age",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":12
+  }, {
+    "type":"age",
+    "operator":"<",
+    "value":24
+  }]
+}
+
+@total consult 12-59 months
+{
+  "klass":"Diagnostic",
+  "group":"total_consult_by_age",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":12
+  }]
+}
+
+@total consult 24-59 months
+{
+  "klass":"Diagnostic",
+  "group":"total_consult_by_age",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":24
+  }]
+}
+
 @total consult 0-59 months
 {
   "klass":"Diagnostic",
@@ -379,10 +316,55 @@ $version 7
   }]
 }
 
-@total consult 0-11 months
+@new children 0-6 days
 {
   "klass":"Diagnostic",
-  "group":"total_consult_by_age",
+  "case_status":"first",
+  "group":"new_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"days",
+    "operator":"<",
+    "value":7
+  }]
+}
+
+@new children 7 days - 1 month
+{
+  "klass":"Diagnostic",
+  "case_status":"first",
+  "group":"new_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"days",
+    "operator":">=",
+    "value":7
+  }, {
+    "type":"age",
+    "operator":"<",
+    "value":2
+  }]
+}
+
+@new children 2-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"first",
+  "group":"new_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":2
+  }]
+}
+
+@new children 0-11 months
+{
+  "klass":"Diagnostic",
+  "case_status":"first",
+  "group":"new_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":"<",
@@ -390,14 +372,329 @@ $version 7
   }]
 }
 
-@total consult 12-59 months
+@new children 12-23 months
 {
   "klass":"Diagnostic",
-  "group":"total_consult_by_age",
+  "case_status":"first",
+  "group":"new_children_by_age",
+  "distinct":"child_uqid",
   "conds": [{
     "type":"age",
     "operator":">=",
     "value":12
+  }, {
+    "type":"age",
+    "operator":"<",
+    "value":24
+  }]
+}
+
+@new children 12-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"first",
+  "group":"new_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":12
+  }]
+}
+
+@new children 24-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"first",
+  "group":"new_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":24
+  }]
+}
+
+@new children 0-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"first",
+  "group":"new_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
+  }]
+}
+
+@returning children 0-6 days
+{
+  "klass":"Diagnostic",
+  "case_status":"old",
+  "group":"returning_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"days",
+    "operator":"<",
+    "value":7
+  }]
+}
+
+@returning children 7 days - 1 month
+{
+  "klass":"Diagnostic",
+  "case_status":"old",
+  "group":"returning_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"days",
+    "operator":">=",
+    "value":7
+  }, {
+    "type":"age",
+    "operator":"<",
+    "value":2
+  }]
+}
+
+@returning children 2-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"old",
+  "group":"returning_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":2
+  }]
+}
+
+@returning children 0-11 months
+{
+  "klass":"Diagnostic",
+  "case_status":"old",
+  "group":"returning_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":"<",
+    "value":12
+  }]
+}
+
+@returning children 12-23 months
+{
+  "klass":"Diagnostic",
+  "case_status":"old",
+  "group":"returning_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":12
+  }, {
+    "type":"age",
+    "operator":"<",
+    "value":24
+  }]
+}
+
+@returning children 12-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"old",
+  "group":"returning_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":12
+  }]
+}
+
+@returning children 24-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"old",
+  "group":"returning_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":24
+  }]
+}
+
+@returning children 0-59 months
+{
+  "klass":"Diagnostic",
+  "case_status":"old",
+  "group":"returning_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
+  }]
+}
+
+@new children 0-4 km
+{
+  "klass":"Diagnostic",
+  "case_status":"new",
+  "group":"new_children_by_distance",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type": "field",
+    "field": "child.distance",
+    "operator":"=",
+    "value":0
+  }]
+}
+
+@new children 5-9 km
+{
+  "klass":"Diagnostic",
+  "case_status":"new",
+  "group":"new_children_by_distance",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type": "field",
+    "field": "child.distance",
+    "operator":"=",
+    "value":1
+  }]
+}
+
+@new children 10 km
+{
+  "klass":"Diagnostic",
+  "case_status":"new",
+  "group":"new_children_by_distance",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type": "field",
+    "field": "child.distance",
+    "operator":"=",
+    "value":2
+  }]
+}
+
+@total children 0-6 days
+{
+  "klass":"Diagnostic",
+  "group":"total_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"days",
+    "operator":"<",
+    "value":7
+  }]
+}
+
+@total children 7 days - 1 month
+{
+  "klass":"Diagnostic",
+  "group":"total_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"days",
+    "operator":">=",
+    "value":7
+  }, {
+    "type":"age",
+    "operator":"<",
+    "value":2
+  }]
+}
+
+@total children 2-59 months
+{
+  "klass":"Diagnostic",
+  "group":"total_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":2
+  }]
+}
+
+@total children 0-11 months
+{
+  "klass":"Diagnostic",
+  "group":"total_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":"<",
+    "value":12
+  }]
+}
+
+@total children 12-23 months
+{
+  "klass":"Diagnostic",
+  "group":"total_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":12
+  }, {
+    "type":"age",
+    "operator":"<",
+    "value":24
+  }]
+}
+
+@total children 12-59 months
+{
+  "klass":"Diagnostic",
+  "group":"total_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":12
+  }]
+}
+
+@total children 24-59 months
+{
+  "klass":"Diagnostic",
+  "group":"total_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":24
+  }]
+}
+
+@total children 0-59 months
+{
+  "klass":"Diagnostic",
+  "group":"total_children_by_age",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -428,7 +725,7 @@ $version 7
 @new children pas de pneumonie
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
   "distinct":"child_uqid",
   "conds": [{
@@ -442,9 +739,8 @@ $version 7
 @new children pneumonie
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -456,9 +752,8 @@ $version 7
 @new children pneumonie grave
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -470,9 +765,8 @@ $version 7
 @new children signes deshydratation
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -484,9 +778,8 @@ $version 7
 @new children deshydratation severe
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -498,9 +791,8 @@ $version 7
 @new children diarrhee persistente
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -512,9 +804,8 @@ $version 7
 @new children diarrhee severe
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -526,9 +817,8 @@ $version 7
 @new children dysenterie
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -540,9 +830,8 @@ $version 7
 @new children antecedent rougeole
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -554,9 +843,8 @@ $version 7
 @new children rougeole
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -568,9 +856,8 @@ $version 7
 @new children rougeole complication
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -582,9 +869,8 @@ $version 7
 @new children rougeole grave
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -596,9 +882,9 @@ $version 7
 @new children infection chronique
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -610,9 +896,9 @@ $version 7
 @new children infection aigue
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -624,9 +910,9 @@ $version 7
 @new children mastoidite
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -638,9 +924,9 @@ $version 7
 @new children anemie
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -652,9 +938,9 @@ $version 7
 @new children anemie grave
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -663,12 +949,12 @@ $version 7
   }]
 }
 
-@total children mam
+@new children mam
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -680,9 +966,9 @@ $version 7
 @new children mass
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -694,9 +980,9 @@ $version 7
 @new children masc
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -708,9 +994,9 @@ $version 7
 @new children vih pru probable
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -722,9 +1008,9 @@ $version 7
 @new children vih symp suspecte
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -736,9 +1022,9 @@ $version 7
 @new children vih exposition
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -750,9 +1036,9 @@ $version 7
 @new children vih symp probable
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -764,9 +1050,8 @@ $version 7
 @new children vih confirmee
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -778,9 +1063,8 @@ $version 7
 @new children vih symp confirmee
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "field",
     "field": "classifications.name",
@@ -792,9 +1076,8 @@ $version 7
 @new children boy paludisme
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -810,9 +1093,8 @@ $version 7
 @new children girl paludisme
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -828,9 +1110,8 @@ $version 7
 @new children boy paludisme grave
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -846,9 +1127,8 @@ $version 7
 @new children girl paludisme grave
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type":"boolean",
     "field":"child.gender",
@@ -864,9 +1144,8 @@ $version 7
 @new children fievre 14
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "sign",
     "sign": "fievre_presence_duree",
@@ -878,9 +1157,8 @@ $version 7
 @new children ulcerations
 {
   "klass":"Diagnostic",
-  "case_status":"first",
+  "case_status":"new",
   "group":"new_children_by_pcime",
-  "distinct":"child_uqid",
   "conds": [{
     "type": "sign",
     "sign": "ulcerations",
@@ -888,436 +1166,3 @@ $version 7
     "value": "absentes"
   }]
 }
-
-@total children pas de pneumonie
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Pas de pneumonie : toux ou rhume"
-  }]
-}
-
-@total children pneumonie
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Pneumonie"
-  }]
-}
-
-@total children pneumonie grave
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Pneumonie grave ou maladie très grave"
-  }]
-}
-
-@total children signes deshydratation
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Signes évidents de déshydratation"
-  }]
-}
-
-@total children deshydratation severe
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Déshydratation sévère"
-  }]
-}
-
-@total children diarrhee persistente
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Diarrhée persistente"
-  }]
-}
-
-@total children diarrhee severe
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Diarrhée persistente sévère"
-  }]
-}
-
-@total children dysenterie
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Dysenterie"
-  }]
-}
-
-@total children antecedent rougeole
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Antécédent de rougeole"
-  }]
-}
-
-@total children rougeole
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Rougeole"
-  }]
-}
-
-@total children rougeole complication
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Rougeole avec complication aux yeux ou à la bouche"
-  }]
-}
-
-@total children rougeole grave
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Rougeole grave et compliquée"
-  }]
-}
-
-@total children infection chronique
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Infection chronique de l'oreille"
-  }]
-}
-
-@total children infection aigue
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Infection aiguë de l'oreille"
-  }]
-}
-
-@total children mastoidite
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Mastoïdite"
-  }]
-}
-
-@total children anemie
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Anémie"
-  }]
-}
-
-@total children anemie grave
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Anémie grave"
-  }]
-}
-
-@total children mam
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "MAM"
-  }]
-}
-
-@total children mass
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "MASs"
-  }]
-}
-
-@total children masc
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "MASc"
-  }]
-}
-
-@total children vih pru probable
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Infection VIH peu problable"
-  }]
-}
-
-@total children vih symp suspecte
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Infection à VIH symptomatique suspecte"
-  }]
-}
-
-@total children vih exposition
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Infection à VIH possible / exposition au VIH"
-  }]
-}
-
-@total children vih symp probable
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Infection VIH symptomatique probable"
-  }]
-}
-
-@total children vih confirmee
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Infection à VIH confirmée"
-  }]
-}
-
-@total children vih symp confirmee
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Infection VIH symptomatique confirmée"
-  }]
-}
-
-@total children boy paludisme
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type":"boolean",
-    "field":"child.gender",
-    "value":true
-  }, {
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Paludisme simple"
-  }]
-}
-
-@total children girl paludisme
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type":"boolean",
-    "field":"child.gender",
-    "value":false
-  }, {
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Paludisme simple"
-  }]
-}
-
-@total children boy paludisme grave
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type":"boolean",
-    "field":"child.gender",
-    "value":true
-  }, {
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Maladie fébrile très grave ou paludisme grave"
-  }]
-}
-
-@total children girl paludisme grave
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type":"boolean",
-    "field":"child.gender",
-    "value":false
-  }, {
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Maladie fébrile très grave ou paludisme grave"
-  }]
-}
-
-@total children fievre 14
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "sign",
-    "sign": "fievre_presence_duree",
-    "operator": ">",
-    "value": 14
-  }]
-}
-
-@total children ulcerations
-{
-  "klass":"Diagnostic",
-  "group":"total_children_by_pcime",
-  "distinct":"child_uqid",
-  "conds": [{
-    "type": "sign",
-    "sign": "ulcerations",
-    "operator": "!=",
-    "value": "absentes"
-  }]
-}
-
