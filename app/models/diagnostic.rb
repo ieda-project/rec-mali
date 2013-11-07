@@ -238,6 +238,10 @@ class Diagnostic < ActiveRecord::Base
 
   accepts_nested_attributes_for :results
 
+  def open?
+    not closed?
+  end
+
   def last?
     child.diagnostics.order('done_on DESC').select('id').first.id == id
   end

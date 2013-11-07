@@ -38,8 +38,8 @@
   %nav
     - if Csps.point? && @diagnostic.author == current_user
       = link_to "Modifier l'évaluation", edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit'
-    - if @diagnostic.author == current_user
+    - if @diagnostic.open? && @diagnostic.author == current_user
       %input{type: 'hidden', name: 'diagnostic[state]', value:'closed'}/
       %button.validation(type="submit") Terminer l'évaluation
     - else
-      = link_to "Terminer l'évaluation", [ @child, @diagnostic ], :class => 'validation'
+      = link_to "Voir l'évaluation", [ @child, @diagnostic ], :class => 'validation'
