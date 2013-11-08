@@ -75,60 +75,59 @@ end
 # }}}
 
 # Zones {{{
-if Zone.count > 0
-  # Update
-  unless Zone.csps && Zone.csps.root?
-    if ENV['DATA_PATH'] && File.exist?(fn = File.join(ENV['DATA_PATH'], 'zone_update.txt'))
-      head 'Updating villages'
-      File.open(fn, 'r') do |f|
+if Zone.count.zero?
+  if ENV['TAR_PATH']
+    # New install
+    head 'Creating villages (scratch)'
+    File.open(File.join(ENV['TAR_PATH'], 'zones.txt'), 'r') do |f|
+      Zone.transaction do
+        indents = {}
         f.each_line do |line|
           next unless line.fix!
-          pname, name = line.split('/')
-          die "Bad format", f unless name.present?
+          indent = line.match(/^\s*/).to_s.size
+          line.strip!
 
-          pname.strip!
-          name.strip!
-
-          parent = Zone.where(point: !!pname.sub!(/\*$/, ''), name: pname)
-          die "No such zone: #{pname}", f unless parent.any?
-
-          parent = parent.sort_by(&:level).first
-          die "Cannot add children to a village", f if parent.level > 2
-
-          point = !!name.sub!(/\*$/, '')
-          next if parent.children.where(name: name).any?
-
-          parent.children.create(
-            name: name,
-            point: point,
-            custom: true)
+          indents[indent] = Zone.create(
+            point: !!line.sub!(/\*$/, ''),
+            name: line,
+            parent: indents[indent-1],
+            custom: false)
         end
       end
-    else
-      head 'No village update present (not a problem)'
     end
+  else
+    die "No stick location specified!"
   end
-elsif ENV['TAR_PATH']
-  # New install
-  head 'Creating villages (scratch)'
-  File.open(File.join(ENV['TAR_PATH'], 'zones.txt'), 'r') do |f|
-    Zone.transaction do
-      indents = {}
-      f.each_line do |line|
-        next unless line.fix!
-        indent = line.match(/^\s*/).to_s.size
-        line.strip!
+end
 
-        indents[indent] = Zone.create(
-          point: !!line.sub!(/\*$/, ''),
-          name: line,
-          parent: indents[indent-1],
-          custom: false)
-      end
+die "No zones defined" if Zone.count.zero?
+
+if (!Zone.csps || !Zone.csps.root?) && ENV['DATA_PATH'] && File.exist?(fn = File.join(ENV['DATA_PATH'], 'zone_update.txt'))
+  head 'Updating villages'
+  File.open(fn, 'r') do |f|
+    f.each_line do |line|
+      next unless line.fix!
+      pname, name = line.split('/')
+      die "Bad format", f unless name.present?
+
+      pname.strip!
+      name.strip!
+
+      parent = Zone.where(point: !!pname.sub!(/\*$/, ''), name: pname)
+      die "No such zone: #{pname}", f unless parent.any?
+
+      parent = parent.sort_by(&:level).first
+      die "Cannot add children to a village", f if parent.level > 2
+
+      point = !!name.sub!(/\*$/, '')
+      next if parent.children.where(name: name).any?
+
+      parent.children.create(
+        name: name,
+        point: point,
+        custom: true)
     end
   end
-else
-  die "No stick location specified!"
 end # }}}
 
 Dir.chdir "#{Rails.root}/db/fixtures" do
