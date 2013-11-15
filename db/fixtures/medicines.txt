@@ -1,4 +1,4 @@
-$version 2
+$version 3
 Cotrimoxazole (antibio:1)
 mg-smx
 20/kg
@@ -79,7 +79,7 @@ Gentamicine (m13_2)
 mg
 2.5/kg
 
-Chloramphenicol Huileux (m14)
+Chloramphénicol Huileux (m14)
 mg
 100/kg
 
@@ -103,7 +103,7 @@ Artémether + Luméfantrine (artemether:lumefantrine)
 mg-art
 1.5/kg
 
-Artémether + Amodiaquine (artemether:amodiaquine)
+Artésunate + Amodiaquine (artemether:amodiaquine)
 mg-art
 1.5/kg
 
