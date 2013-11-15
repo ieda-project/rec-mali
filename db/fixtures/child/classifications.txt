@@ -1,4 +1,4 @@
-$version 1
+$version 2
 danger|Pas de signe général de danger|low|!(danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulsions_present)
 danger|Signe général de danger présent|high|danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulsions_present
 
@@ -44,4 +44,4 @@ vih|Infection à VIH symptomatique confirmée|medium|(((vih.serologie_enfant == 
 
 yield
 
-malnutrition|A risque de malnutrition|low|(enfant.months >= 6) AND (((enfant.muac >= 125) AND (enfant.muac < 135) AND (enfant.wfh >= 80)) OR ((enfant.wfh >= 80) AND (enfant.wfh < 85) AND (enfant.muac >= 125))) AND (malnutrition.oedemes == no)
+malnutrition|A risque de malnutrition|low|1=0
