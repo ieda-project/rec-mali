@@ -1,4 +1,4 @@
-$version 8
+$version 10
 
 @new consult 0-6 days
 {
@@ -37,6 +37,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":2
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -77,6 +81,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":12
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -89,6 +97,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":24
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -145,6 +157,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":2
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -185,6 +201,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":12
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -197,6 +217,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":24
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -250,6 +274,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":2
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -287,6 +315,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":12
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -298,6 +330,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":24
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -356,6 +392,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":2
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -399,6 +439,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":12
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -412,6 +456,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":24
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -472,6 +520,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":2
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -515,6 +567,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":12
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -528,6 +584,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":24
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -559,6 +619,14 @@ $version 8
     "field": "child.distance",
     "operator":"=",
     "value":0
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -573,6 +641,14 @@ $version 8
     "field": "child.distance",
     "operator":"=",
     "value":1
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -587,6 +663,14 @@ $version 8
     "field": "child.distance",
     "operator":"=",
     "value":2
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -627,6 +711,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":2
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -667,6 +755,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":12
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -679,6 +771,10 @@ $version 8
     "type":"age",
     "operator":">=",
     "value":24
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -707,6 +803,14 @@ $version 8
     "type":"boolean",
     "field":"child.gender",
     "value":true
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -719,6 +823,14 @@ $version 8
     "type":"boolean",
     "field":"child.gender",
     "value":false
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -733,6 +845,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Pas de pneumonie : toux ou rhume"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -746,6 +866,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Pneumonie"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -759,6 +887,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Pneumonie grave ou maladie très grave"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -772,6 +908,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Signes évidents de déshydratation"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -785,6 +929,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Déshydratation sévère"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -798,6 +950,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Diarrhée persistente"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -811,6 +971,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Diarrhée persistente sévère"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -824,6 +992,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Dysenterie"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -837,6 +1013,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Antécédent de rougeole"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -850,6 +1034,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Rougeole"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -863,6 +1055,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Rougeole avec complication aux yeux ou à la bouche"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -876,6 +1076,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Rougeole grave et compliquée"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -890,6 +1098,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Infection chronique de l'oreille"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -904,6 +1120,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Infection aiguë de l'oreille"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -918,6 +1142,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Mastoïdite"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -932,6 +1164,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Anémie"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -946,6 +1186,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Anémie grave"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -960,6 +1208,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "MAM"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -974,6 +1230,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "MASs"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -988,6 +1252,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "MASc"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1002,6 +1274,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Infection VIH peu problable"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1016,6 +1296,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Infection à VIH symptomatique suspecte"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1030,6 +1318,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Infection à VIH possible / exposition au VIH"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1044,6 +1340,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Infection VIH symptomatique probable"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1057,6 +1361,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Infection à VIH confirmée"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1070,6 +1382,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Infection VIH symptomatique confirmée"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1087,6 +1407,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Paludisme simple"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1104,6 +1432,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Paludisme simple"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1121,6 +1457,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Maladie fébrile très grave ou paludisme grave"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1138,6 +1482,14 @@ $version 8
     "field": "classifications.name",
     "operator": "=",
     "value": "Maladie fébrile très grave ou paludisme grave"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1151,6 +1503,14 @@ $version 8
     "sign": "fievre_presence_duree",
     "operator": ">",
     "value": 14
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }
 
@@ -1164,5 +1524,13 @@ $version 8
     "sign": "ulcerations",
     "operator": "!=",
     "value": "absentes"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
   }]
 }

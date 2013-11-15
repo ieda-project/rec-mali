@@ -1,6 +1,6 @@
-$version 6
+$version 7
 
-new_consult_by_age	Nombre de nouvelles consultations par âge
+new_consult_by_age	Nombre de nouveaux consultants par âge
 new consult 0-6 days	0 - 6 jours (PCIME)
 new consult 7 days - 1 months	7 jours - 1 mois (PCIME)
 new consult 2-59 months	2 - 59 mois (PCIME)
@@ -10,7 +10,7 @@ new consult 12-59 months	12 - 59 mois
 new consult 24-59 months	24 - 59 mois
 new consult 0-59 months	0 - 59 mois
 
-follow_up_consult_by_age	Nombre de consultations de suivi par âge
+follow_up_consult_by_age	Nombre d’anciens consultants par âge
 follow up consult 0-6 days	0 - 6 jours (PCIME)
 follow up consult 7 days - 1 month	7 jours - 1 mois (PCIME)
 follow up consult 2-59 months	2 - 59 mois (PCIME)
@@ -20,7 +20,7 @@ follow up consult 12-59 months	12 - 59 mois
 follow up consult 24-59 months	24 - 59 mois
 follow up consult 0-59 months	0 - 59 mois
 
-total_consult_by_age	Nombre total de consultations par âge
+total_consult_by_age	Nombre total de consultants par âge
 total consult 0-6 days	0 - 6 jours (PCIME)
 total consult 7 days - 1 month	7 jours - 2 mois (PCIME)
 total consult 2-59 months	2 - 59 mois (PCIME)
@@ -30,7 +30,7 @@ total consult 12-59 months	12 - 59 mois
 total consult 24-59 months	24 - 59 mois
 total consult 0-59 months	0 - 59 mois
 
-new_children_by_age	Nombre de nouveaux enfants par âge (première visite au csps)
+new_children_by_age	Nombre d'enfants venus pour la première fois au CSPS par âge
 new children 0-6 days	0 - 6 jours (PCIME)
 new children 7 days - 1 month	7 jours - 1 mois (PCIME)
 new children 2-59 months	2 - 59 mois (PCIME)
@@ -40,7 +40,7 @@ new children 12-59 months	12 - 59 mois
 new children 24-59 months	24 - 59 mois
 new children 0-59 months	0 - 59 mois
 
-returning_children_by_age	Nombre d'anciens enfants par âge (déjà venus au CSPS au moins une fois)
+returning_children_by_age	Nombre d’enfants venus plus d’une fois au CSPS
 returning children 0-6 days	0 - 6 jours (PCIME)
 returning children 7 days - 1 month	7 jours - 1 mois (PCIME)
 returning children 2-59 months	2 - 59 mois (PCIME)
@@ -55,7 +55,7 @@ new children 0-4 km	0 - 4km
 new children 5-9 km	5 - 9km
 new children 10 km	10km et plus
 
-total_children_by_age	Nombre de total d'enfants par âge
+total_children_by_age	Nombre total d'enfants par âge
 total children 0-6 days	0 - 6 jours (PCIME)
 total children 7 days - 1 month	7 jours - 1 mois (PCIME)
 total children 2-59 months	2 - 59 mois (PCIME)
@@ -69,7 +69,7 @@ total_children_by_gender	Nombre total d'enfants par sexe
 total children boy	Garçons
 total children girl	Filles
 
-new_children_by_pcime	Nombre de classifications PCIME pour nouveaux épisodes de maladie
+new_children_by_pcime	Nombre de classifications PCIME pour les nouveaux consultants
 new children pas de pneumonie	Pas de pneumonie: toux ou rhume
 new children pneumonie	Pneumonie
 new children pneumonie grave	Pneumonie grave ou maladie très grave
