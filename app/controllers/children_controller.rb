@@ -6,20 +6,35 @@ class ChildrenController < ApplicationController
   fetch 'Child', :also => :indices
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
-  Search = Struct.new(:name, :born_on, :village_id)
+
+  class Search < Struct.new(:name, :born_on, :village_id)
+    def to_params_hash
+      @hash ||= {}.tap do |h|
+        h[:name] = name if name.present?
+        h[:born] = born_on if born_on.present?
+        h[:village] = village_id if village_id.present?
+      end
+    end
+  end
 
   before_filter :rewrite_photo, only: [:update, :temp]
 
   def index
     # Clean empty children (only photo)
     Child.unfilled.destroy_all
-    @orig_name = params[:q][:name].dup if params[:q]
-    @q = Search.from_hash params[:q]
+
+    @q = Search.new params[:name], params[:born], params[:village]
+    @orig_name = @q.name.dup if @q.name
+
     if params[:o].blank?
-      params[:o] = 'last_visit_at'
+      order = 'last_visit_at'
       params[:d] = 'd'
+    elsif params[:o] == 'zone'
+      order = 'zones.name, children.village_name'
+    else
+      order = params[:o]
     end
-    @children = model.search(@q, params[:o], params[:d])
+    @children = model.search(@q, order, params[:d])
     @page = (params[:page] || '1').to_i
   end
 

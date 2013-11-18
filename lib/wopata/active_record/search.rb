@@ -35,7 +35,7 @@ module Wopata::ActiveRecord
       end
       ret = where c.join(' AND '), *d
 
-      if order.present? && order =~ /\A[a-z._]+\Z/
+      if order.present? && order =~ /\A[a-z._, ]+\Z/
         ret.order "#{order} #{(dir.in?(%w(d desc DESC)) ? ' DESC' : '')}"
       else
         ret

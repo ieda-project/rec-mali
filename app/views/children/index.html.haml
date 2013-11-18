@@ -24,23 +24,23 @@
       %li Résultat de la recherche
 
 %section
-  - unless params[:q]
+  - if @q.all?(&:blank?)
     %h1 Rechercher un patient
     %p.tip
       Un patient vient se présenter au
       %strong centre de santé.
       Veuillez tout d'abord rechercher son dossier afin de pouvoir remplir son
       %strong évaluation PCIME.
-    - search_form do |f|
+    - form_tag nil, method: 'get', class: 'search' do
       %div
         %label Nom et/ou prénom
-        = f.text_field :name
+        = text_field_tag :name
       .select
         %label Année de naissance
-        = f.select :born_on, (0..20).to_a.map {|y| [Date.today.year - y]*2}, :include_blank => 'Toutes les années', :selected => ((params[:q] ? params[:q][:born_on] : nil)).to_i
+        = select_tag :born, options_for_select((0..20).to_a.map {|y| [Date.today.year - y]*2}), :include_blank => 'Toutes les années'
       .select
         %label Village
-        = f.select :village_id, Zone.used_villages.to_select, include_blank: 'Tous les villages ou hors zone'
+        = select_tag :village, options_for_select(Zone.used_villages.to_select), include_blank: 'Tous les villages ou hors zone'
       .buttons
         %button(type='submit') Rechercher
 
@@ -60,7 +60,7 @@
           %tr
             %th!= sortable_header 'Nom', 'last_name'
             %th!= sortable_header 'Date de naissance', 'born_on'
-            %th!= sortable_header 'Village', 'zones.name'
+            %th!= sortable_header 'Village', 'zone'
             %th!= sortable_header 'Dernière évaluation', 'last_visit_at'
             %th Dossier
         %tbody
@@ -70,7 +70,7 @@
                 %td
                   %strong= link_to child.sortable_name, child
                 %td= child.born_on && l(child.born_on, :format => :long)
-                %td= child.village && child.village.name
+                %td= child.village ? child.village.name : "Hors zone: #{child.village_name}"
                 %td= l child.last_visit_at.getlocal if child.last_visit_at
                 %td= link_to "Voir le dossier →", child
       %ul.pagination

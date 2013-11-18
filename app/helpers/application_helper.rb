@@ -9,7 +9,8 @@ module ApplicationHelper
         params[:d] == 'd' ? :unshift : :push,
         '')
     end
-    %Q(#{name} <a#{a} href="?o=#{label}">↓</a> <a#{d} href="?o=#{label}&d=d">↑</a>)
+    prms = @q.to_params_hash.merge(o: label).to_param
+    %Q(#{name} <a#{a} href="?#{prms}">↓</a> <a#{d} href="?#{prms}&d=d">↑</a>)
   end
 
   def partial name, opts={}
@@ -17,7 +18,7 @@ module ApplicationHelper
   end
 
   def search_form &block
-    form_for :q, html: { method: 'get', class: 'search' }, &block
+    form_tag({}, method: 'get', class: 'search', &block)
   end
 
   def html textile
@@ -46,7 +47,7 @@ module ApplicationHelper
   def errors_on form, field
     render :partial => 'shared/errors', :locals => {:form => form, :field => field}
   end
-  
+
   def html_criteria orig_name, q
     ret = []
     ret << "<strong>#{orig_name}</strong>" unless orig_name.blank?
