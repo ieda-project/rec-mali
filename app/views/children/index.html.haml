@@ -24,7 +24,7 @@
       %li Résultat de la recherche
 
 %section
-  - if @q.all?(&:blank?)
+  - unless params[:name]
     %h1 Rechercher un patient
     %p.tip
       Un patient vient se présenter au
@@ -92,7 +92,7 @@
             = link_to 'Remplir sa première évaluation', new_child_path, :class => 'new-user-child-min'
             ou
           = link_to "Faire une nouvelle recherche", children_path, :class => 'new-search-min'
-    - elsif params[:q]
+    - elsif params[:name]
       .no-result
         %p
           Aucun patient ne correspond aux critères de recherches :
