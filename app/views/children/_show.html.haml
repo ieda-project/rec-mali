@@ -1,7 +1,7 @@
 %span.name= child.sortable_name
 %p
   %strong #{child.gender ? 'Né' : 'Née'} le :
-  %span.age{'data-age' => child.age, 'data-months' => child.months}
+  %span.age{'data-age' => child.age, 'data-months' => child.months, 'data-days' => child.days}
     #{l(child.born_on, :format => :long)}, #{months_to_text child.months}
 
   %br/

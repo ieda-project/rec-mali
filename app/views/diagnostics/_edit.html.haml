@@ -18,7 +18,7 @@
 
         - unless @diagnostic.new_record?
           %strong Age :
-          %span.age{'data-age' => @diagnostic.age, 'data-months' => @diagnostic.months}<= months_to_text @diagnostic.months
+          %span.age{'data-age' => @diagnostic.age, 'data-months' => @diagnostic.months, 'data-days' => @diagnostic.days, 'data-diag-date' => @diagnostic.done_on}<= months_to_text @diagnostic.months
           %span.remark (à la date de consultation : #{l @diagnostic.done_on.to_date})
           %br/
 

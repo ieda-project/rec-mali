@@ -25,7 +25,7 @@ $extend(Element, {
 
 // Globals for AS-JS communication
 
-var photo_saved, photo_params, auto_answer = {};
+var today, photo_saved, photo_params, auto_answer = {};
 
 // AlertBox
 
@@ -131,7 +131,6 @@ transient = {
 
 editing = false;
 
-window.addEvent('domready', function() { document.body.updated() });
 window.addEvent('domready', function() {
   document.getElements('a.help').addEvent('click', function() {
     transient.open($(this.get('href').substr(1)).get('html'), { width: '650px', class: 'treatment-help' }) });
@@ -192,21 +191,25 @@ window.addEvent('domready', function() {
     illnesses().each(function (i) { i.protect = !!(i.getElement('li.true') || i.getElement('li.false')) });
 
     (function(age) {
-      if (age) form.tree.enfant = {
-        months: age.get('data-months').toInt(),
-        age: age.get('data-age').toInt() }})($E('span.age'));
+      if (age) {
+        var temp = age.get('data-diag-date');
+        if (temp) today = new Date(temp);
+        form.tree.enfant = {
+          days: age.get('data-days').toInt(),
+          months: age.get('data-months').toInt(),
+          age: age.get('data-age').toInt() }}})($E('span.age'));
+
+    if (!today) today = new Date();
     ['child_born_on', 'diagnostic_born_on'].each(function(stem) {
       var y = $(stem+'_1i');
       if (y) {
         var m = $(stem+'_2i'),
             d = $(stem+'_3i'),
-            tgt = form.getElement('div.illnesses'),
-            today = new Date();
+            tgt = form.getElement('div.illnesses');
         $$('select[id^='+stem+'_]').addEvent('change', function() {
           tgt.set('html', '');
           if (!y.value || !m.value || !d.value) return;
-          var bd = new Date(y.value+'-'+m.value+'-'+d.value),
-              today = new Date(), months;
+          var bd = new Date(y.value+'-'+m.value+'-'+d.value), months;
           if (bd.getDate() == d.value && bd < today &&
              (months = ((today.getFullYear() - y.value.toInt())*12) +
                         (today.getMonth()+1 - m.value.toInt()) -
@@ -457,9 +460,11 @@ window.addEvent('domready', function() {
                   };
                   if (Math.abs(v[1]) >= 3) abnormal_score = true;
                   li.getElement('.value').set('text', v[0]).setStyle(
-                    'font-size', v[0] > 999 ? '0.9em' : '1em')
-                  li.getElement('.score').set('text', v[1]).setStyle(
-                    'font-size', v[1] > 999 ? '0.9em' : '1em') }
+                    'font-size', v[0] > 999 ? '0.9em' : '1em');
+                  var score = v[1].toString();
+                  if (score.indexOf('.') == -1) score += '.0';
+                  li.getElement('.score').set('text', score).setStyle(
+                    'font-size', score.length > 3 ? '0.9em' : '1em') }
                 abnormal_ranges.getElement('.switch').removeClass('yes').removeClass('no').addClass(abnormal_score ? 'no' : 'yes')
                 abnormal_ranges.setStyle('display', abnormal_score ? 'block' : 'none')
 
@@ -591,6 +596,8 @@ window.addEvent('domready', function() {
         validate_illness(i, false) })};
   illnesses_updated();
   })});
+
+window.addEvent('domready', function() { document.body.updated() });
 
 Element.behaviour(function() {
   this.getElements('#child_village_id').addEvent('change', function() {
@@ -724,6 +731,7 @@ Element.behaviour(function() {
     transient.open(graph, { width: 420 })});
 
   this.getElements('.editable').each(function (div) {
+    if (!today) today = new Date();
     div.getElements('button.edit').addEvent('click', function() {
       new Request.HTML({
         link: 'ignore', update: div,
@@ -738,8 +746,7 @@ Element.behaviour(function() {
                 this.stop = true;
                 return false };
             var flds = this.getElements('select[id^=child_born_on_]'),
-                bd = new Date(flds[2].value + '-' + flds[1].value + '-' + flds[0].value),
-                today = new Date();
+                bd = new Date(flds[2].value + '-' + flds[1].value + '-' + flds[0].value);
             if (!flds[0].value || bd.getDate() != flds[0].value || bd > today || today.fullMonthsFrom(bd) > 59) {
               alert("L'âge de l'enfant doit être compris entre 0 et 59 mois.");
               this.stop = true;
