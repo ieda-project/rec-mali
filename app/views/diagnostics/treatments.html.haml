@@ -36,7 +36,7 @@
       %div= @diagnostic.comments
 
   %nav
-    - if Csps.point? && @diagnostic.author == current_user
+    - if @diagnostic.editable_by?(current_user)
       = link_to "Modifier l'évaluation", edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit'
     - if @diagnostic.open? && @diagnostic.author == current_user
       %input{type: 'hidden', name: 'diagnostic[state]', value:'closed'}/
