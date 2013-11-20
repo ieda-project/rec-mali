@@ -44,4 +44,4 @@ vih|Infection à VIH symptomatique confirmée|medium|(((vih.serologie_enfant == 
 
 yield
 
-malnutrition|A risque de malnutrition|low|1=0
+malnutrition|A risque de malnutrition|low|REMOVED

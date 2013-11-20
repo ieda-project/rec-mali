@@ -269,15 +269,21 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
         else
           # Classification
           iname, name, level, equation = line.split '|'
-
-          macex.(equation)
-
           illness = ill[ag][iname]
+
+          h = if equation == 'REMOVED'
+            { removed: true }
+          else
+            macex.(equation)
+            { removed: false,
+              equation: Csps::Formula.compile(illness, equation) }
+          end
+
           illness.classifications.create!(
-            age_group: ag,
-            name: name,
-            level: Classification::LEVELS.index(level.intern),
-            equation: Csps::Formula.compile(illness, equation))
+            h.merge(
+              age_group: ag,
+              name: name,
+              level: Classification::LEVELS.index(level.intern)))
         end
       end
     end

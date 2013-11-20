@@ -8,9 +8,9 @@ class Classification < ActiveRecord::Base
   has_many :results
   has_many :diagnostics, through: :results
 
-  validates_presence_of :equation
+  validates_presence_of :equation, unless: :removed?
 
-  scope :for_child, ->(obj) { where(age_group: obj.age_group) }
+  scope :for_child, ->(obj) { where('age_group = ? AND removed != ?', obj.age_group, true) }
 
   LEVELS = [:low, :medium, :high]
 

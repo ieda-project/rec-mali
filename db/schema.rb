@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118191906) do
+ActiveRecord::Schema.define(:version => 20131120103508) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -51,8 +51,10 @@ ActiveRecord::Schema.define(:version => 20131118191906) do
     t.boolean  "in_gdt"
     t.integer  "level"
     t.integer  "age_group"
+    t.boolean  "removed"
   end
 
+  add_index "classifications", ["age_group", "removed"], :name => "index_classifications_on_age_group_and_removed"
   add_index "classifications", ["illness_id"], :name => "index_classifications_on_illness_id"
 
   create_table "classifications_diagnostics", :id => false, :force => true do |t|
