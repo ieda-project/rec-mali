@@ -18,7 +18,7 @@ module Csps
 
       validates_presence_of :born_on, unless: :temporary?
       validate do
-        errors.add :born_on, :invalid if !temporary? && born_on > Date.today
+        errors.add :born_on, :invalid if !temporary? && born_on && born_on > Date.today
       end
     end
 
@@ -60,7 +60,7 @@ module Csps
       def of_valid_age?
         months < 60
       end
-      
+
       def months
         born_on && age_reference_date.full_months_from(born_on)
       end

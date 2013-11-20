@@ -265,15 +265,12 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
           die "Format error in macro definition", f unless msign == ?=
           mdef.strip!
           macex.(mdef)
-          mac[ag] << [
-            Regexp.new("#{mname}([^a-z_]|\\Z)"),
-            (mdef =~ /\A\(.*\)\Z/ ? mdef : "(#{mdef})") ]
+          mac[ag] << [ Regexp.new("#{mname}([^a-z_]|\\Z)"), "(#{mdef})" ]
         else
           # Classification
           iname, name, level, equation = line.split '|'
 
           macex.(equation)
-          equation.gsub! /\A\((.*)\)\Z/, '\1'
 
           illness = ill[ag][iname]
           illness.classifications.create!(

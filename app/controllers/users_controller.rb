@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     end
 
     data = params[:user]
-    pw = request.referer =~ /password/
+    pw = !!params[:pwchange]
 
     unless admin?
       return denied if @user != current_user

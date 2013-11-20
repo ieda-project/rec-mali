@@ -89,8 +89,8 @@ class Loader {
                 i,
                 line.substring(1).replace("\\n", "\n").replace("\\\"", "\""));
               break;
-            case 't': st.setBoolean(i, true); break;
-            case 'f': st.setBoolean(i, false); break;
+            case 't': st.setString(i, "t"); break;
+            case 'f': st.setString(i, "f"); break;
             case 'n': st.setNull(i, types[i-1]); break;
             default: throw new ImportException("Illegal format: "+line);
           }
