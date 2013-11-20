@@ -730,30 +730,32 @@ Element.behaviour(function() {
     var graph = this.getElement('div.graph').clone()
     transient.open(graph, { width: 420 })});
 
-  this.getElements('.editable').each(function (div) {
-    if (!today) today = new Date();
-    div.getElements('button.edit').addEvent('click', function() {
-      new Request.HTML({
-        link: 'ignore', update: div,
-        onSuccess: function() {
-          div.getElement('form').addEvent('submit', function(e) {
-            if (div.getElements('.required').some(function (i) {
-              if (!i.value) {
-                alert("Un champ obligatoire est manquant.");
-                i.focus();
-                return true;
-              } else return false })) {
+  var editables = this.getElements('.editable');
+  if (editables[0] && !today) {
+    today = new Date();
+    editables.each(function (div) {
+      div.getElements('button.edit').addEvent('click', function() {
+        new Request.HTML({
+          link: 'ignore', update: div,
+          onSuccess: function() {
+            div.getElement('form').addEvent('submit', function(e) {
+              if (div.getElements('.required').some(function (i) {
+                if (!i.value) {
+                  alert("Un champ obligatoire est manquant.");
+                  i.focus();
+                  return true;
+                } else return false })) {
+                  this.stop = true;
+                  return false };
+              var flds = this.getElements('select[id^=child_born_on_]'),
+                  bd = new Date(flds[2].value + '-' + flds[1].value + '-' + flds[0].value);
+              if (!flds[0].value || bd.getDate() != flds[0].value || bd > today || today.fullMonthsFrom(bd) > 59) {
+                alert("L'âge de l'enfant doit être compris entre 0 et 59 mois.");
                 this.stop = true;
                 return false };
-            var flds = this.getElements('select[id^=child_born_on_]'),
-                bd = new Date(flds[2].value + '-' + flds[1].value + '-' + flds[0].value);
-            if (!flds[0].value || bd.getDate() != flds[0].value || bd > today || today.fullMonthsFrom(bd) > 59) {
-              alert("L'âge de l'enfant doit être compris entre 0 et 59 mois.");
-              this.stop = true;
-              return false };
-            this.stop = false });
-          div.updated();
-          editing = true }}).get(div.get('data-edit-href')) })});
+              this.stop = false });
+            div.updated();
+            editing = true }}).get(div.get('data-edit-href')) })})};
 
   this.getElements('#child_gender').addEvent('change', function() {
     this.form.getElements('.nee').set(
