@@ -1,19 +1,39 @@
-$version 1
-inf_bac|Possibilité d'infection bactérienne grave|high|inf_bac.qa OR (inf_bac.qb == rapides) OR inf_bac.qc OR inf_bac.qd OR inf_bac.qe OR inf_bac.qf OR inf_bac.qg OR (inf_bac.qh AND inf_bac.qi) OR (inf_bac.qj != normale) OR (inf_bac.qk == nombreuses_severes) OR (inf_bac.ql == lethargique_inconscient) OR inf_bac.qm
-inf_bac|Infection bactérienne locale|medium|!(inf_bac.qa OR (inf_bac.qb == rapides) OR inf_bac.qc OR inf_bac.qd OR inf_bac.qe OR inf_bac.qf OR inf_bac.qg OR (inf_bac.qh AND inf_bac.qi) OR (inf_bac.qj != normale) OR (inf_bac.qk == nombreuses_severes) OR (inf_bac.ql == lethargique_inconscient) OR inf_bac.qm) AND (inf_bac.qh OR (inf_bac.qk == presentes))
-inf_bac|Pas d'infection bactérienne|low|!inf_bac.qa AND (inf_bac.qb == normales) AND !inf_bac.qc AND !inf_bac.qd AND !inf_bac.qe AND !inf_bac.qf AND !inf_bac.qg AND !inf_bac.qh AND !inf_bac.qi AND (inf_bac.qj == normale) AND (inf_bac.qk == absentes) AND ((inf_bac.ql == normal) OR (inf_bac.ql == agite_irritable)) AND !inf_bac.qm
+$version 2
 
-diarrhee|Pas de diarrhée|low|!diarrhee.qa	
-diarrhee|Déshydratation sévère|high|diarrhee.qa AND AT_LEAST_TWO_OF(inf_bac.ql == lethargique_inconscient, diarrhee.qd, diarrhee.qe == tres_lentement)
-diarrhee|Signes évidents de déshydratation|medium|diarrhee.qa AND !AT_LEAST_TWO_OF(inf_bac.ql == lethargique_inconscient, diarrhee.qd, diarrhee.qe == tres_lentement) AND AT_LEAST_TWO_OF(inf_bac.ql == agite_irritable, diarrhee.qd, diarrhee.qe == lentement)
-diarrhee|Pas de déshydratation|low|diarrhee.qa AND !AT_LEAST_TWO_OF(inf_bac.ql == lethargique_inconscient, diarrhee.qd, diarrhee.qe == tres_lentement) AND !AT_LEAST_TWO_OF(inf_bac.ql == agite_irritable, diarrhee.qd, diarrhee.qe == lentement)
+@infection_bac_grave = inf_bac.qa OR (inf_bac.qb == rapides) OR inf_bac.qc OR inf_bac.qd OR inf_bac.qe OR inf_bac.qf OR inf_bac.qg OR (inf_bac.qh AND inf_bac.qi) OR (inf_bac.qj != normale) OR (inf_bac.qk == nombreuses_severes) OR (inf_bac.ql == lethargique_inconscient) OR inf_bac.qm
+@infection_bac_locale = !@infection_bac_grave AND (inf_bac.qh OR (inf_bac.qk == presentes))
+
+inf_bac|Possibilité d'infection bactérienne grave|high|@infection_bac_grave
+inf_bac|Infection bactérienne locale|medium|@infection_bac_locale
+inf_bac|Pas d'infection bactérienne|low|!@infection_bac_grave AND !@infection_bac_locale
+
+
+
+@signes_deshy_severe = AT_LEAST_TWO_OF(inf_bac.ql == lethargique_inconscient, diarrhee.qd, diarrhee.qe == tres_lentement)
+@signes_deshy_evident = AT_LEAST_TWO_OF(inf_bac.ql == agite_irritable, diarrhee.qd, diarrhee.qe == lentement)
+
+diarrhee|Pas de diarrhée|low|!diarrhee.qa
+diarrhee|Déshydratation sévère|high|diarrhee.qa AND @signes_deshy_severe
+diarrhee|Signes évidents de déshydratation|medium|diarrhee.qa AND !@signes_deshy_severe AND @signes_deshy_evident
+diarrhee|Pas de déshydratation|low|diarrhee.qa AND !@signes_deshy_severe AND !@signes_deshy_evident
 diarrhee|Diarrhée persistante grave|high|diarrhee.qa AND (diarrhee.qb >= 14)
 diarrhee|Sang dans les selles|high|diarrhee.qa AND diarrhee.qc
 
-alimentation|Incapable de se nourrir / possibilité d’une infection bactérienne grave|high|alimentation.qa OR (alimentation.qb AND ((alimentation.qf == pas_prise) OR (alimentation.qg == pas_succion)))
-alimentation|Problème d’alimentation et/ou poids faible pour l’âge|medium|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qf == pas_prise) OR (alimentation.qg == pas_succion)))) AND ((alimentation.qb AND ((alimentation.qf == mauvaise_prise) OR (alimentation.qg == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qh OR ((enfant.weight < 2.5) AND (enfant.weight >= 1.5)))
-alimentation|Pas de poids faible et/ou pas de problème d’alimentation|low|!(alimentation.qa OR (alimentation.qb AND ((alimentation.qf == pas_prise) OR (alimentation.qg == pas_succion)))) AND !((alimentation.qb AND ((alimentation.qf == mauvaise_prise) OR (alimentation.qg == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qh OR ((enfant.weight < 2.5) AND (enfant.weight >= 1.5)))	
 
-vih|Infection VIH symptomatique très probable|high|(vih.qj == positive) AND AT_LEAST_TWO_OF(vih.qa, vih.qb, vih.qc, vih.qd, vih.qe, diarrhee.qa AND (diarrhee.qb >= 14), vih.qf, vih.qg, vih.qh, (enfant.weight < 1.5), alimentation.qh, vih.qi)
-vih|Infection VIH symptomatique possible|medium|(vih.qj == inconnue) AND AT_LEAST_TWO_OF(vih.qa, vih.qb, vih.qc, vih.qd, vih.qe, diarrhee.qa AND (diarrhee.qb >= 14), vih.qf, vih.qg, vih.qh, (enfant.weight < 1.5), alimentation.qh, vih.qi)
-vih|Infection VIH peu problable|low|(vih.qj == negative) OR !AT_LEAST_TWO_OF(vih.qa, vih.qb, vih.qc, vih.qd, vih.qe, diarrhee.qa AND (diarrhee.qb >= 14), vih.qf, vih.qg, vih.qh, (enfant.weight < 1.5), alimentation.qh, vih.qi)
+
+
+@incapable_nourir = alimentation.qa OR (alimentation.qb AND ((alimentation.qf == pas_prise) OR (alimentation.qg == pas_succion)))
+@signes_pb_alim = (alimentation.qb AND ((alimentation.qf == mauvaise_prise) OR (alimentation.qg == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qh OR ((enfant.weight < 2.5) AND (enfant.weight >= 1.5))
+
+alimentation|Incapable de se nourrir / possibilité d’une infection bactérienne grave|high|@incapable_nourir
+alimentation|Problème d’alimentation et/ou poids faible pour l’âge|medium|!@incapable_nourir AND @signes_pb_alim
+alimentation|Pas de poids faible et/ou pas de problème d’alimentation|low|!@incapable_nourir AND !@signes_pb_alim
+
+
+
+
+@signes_vih = AT_LEAST_TWO_OF(vih.qa, vih.qb, vih.qc, vih.qd, vih.qe, diarrhee.qa AND (diarrhee.qb >= 14), vih.qf, vih.qg, vih.qh, (enfant.weight < 1.5), alimentation.qh, vih.qi)
+
+vih|Infection VIH symptomatique très probable|high|(vih.qj == positive) AND @signes_vih
+vih|Infection VIH symptomatique possible|medium|(vih.qj == inconnue) AND @signes_vih
+vih|Infection VIH peu problable|low|(vih.qj == negative) OR !@signes_vih
