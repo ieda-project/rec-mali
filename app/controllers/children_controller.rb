@@ -7,12 +7,13 @@ class ChildrenController < ApplicationController
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
 
-  class Search < Struct.new(:name, :born_on, :village_id)
+  class Search < Struct.new(:name, :born_on, :village_id, :identifier)
     def to_params_hash
       @hash ||= {}.tap do |h|
         h[:name] = name if name.present?
         h[:born] = born_on if born_on.present?
         h[:village] = village_id if village_id.present?
+        h[:identifier] = identifier if identifier.present?
       end
     end
   end
@@ -23,7 +24,7 @@ class ChildrenController < ApplicationController
     # Clean empty children (only photo)
     Child.unfilled.destroy_all
 
-    @q = Search.new params[:name], params[:born], params[:village]
+    @q = Search.from_hash params
     @orig_name = @q.name.dup if @q.name
 
     if params[:o].blank?
@@ -34,7 +35,15 @@ class ChildrenController < ApplicationController
     else
       order = params[:o]
     end
-    @children = model.search(@q, order, params[:d])
+
+    @children =
+      begin
+        model.search(@q, order, params[:d])
+      rescue => e
+        @error = e.message
+        []
+      end
+
     @page = (params[:page] || '1').to_i
   end
 

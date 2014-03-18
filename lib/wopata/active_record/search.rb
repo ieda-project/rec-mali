@@ -1,3 +1,5 @@
+require 'base32'
+
 module Wopata::ActiveRecord
   module Search
     def search q, order=nil, dir=nil
@@ -9,6 +11,14 @@ module Wopata::ActiveRecord
         if col = columns_hash["cache_#{key}"]
           value.cacheize!
         else
+          if key == :identifier
+            key = :uqid
+            begin
+              value = Base32.decode(value)
+            rescue ArgumentError
+              raise "Identifiant incorrect: #{value}"
+            end
+          end
           next unless col = columns_hash[key.to_s]
         end
 

@@ -41,11 +41,16 @@
       .select
         %label Village
         = select_tag :village, options_for_select(Zone.used_villages.to_select), include_blank: 'Tous les villages ou hors zone'
+      %div
+        %label Identifiant
+        = text_field_tag :identifier, nil, placeholder: "Par exemple: #{example_identifier}"
       .buttons
         %button(type='submit') Rechercher
 
   - else
     %h1 Résultat de la recherche
+    - if @error
+      %p.error= @error
     - if @children.any?
       - paged = @children.includes(:village).paginate(@page, window: 15)
       %p.result-count

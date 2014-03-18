@@ -1,4 +1,4 @@
-require 'base58'
+require 'base32'
 
 class Child < ActiveRecord::Base
   include Csps::Exportable
@@ -45,7 +45,7 @@ class Child < ActiveRecord::Base
   end
 
   def identifier
-    Base58.encode(uqid).readable
+    Base32.encode(uqid).readable
   end
 
   def name

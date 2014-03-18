@@ -18,7 +18,6 @@ gem 'logging'
 gem 'paperclip'
 gem 'state_machine'
 gem 'uuid'
-gem 'base58'
 gem 'thin'
 
 group :heroku do

@@ -18,4 +18,12 @@ module ChildrenHelper
       out << ['Hors zone', nil]
     end
   end
+
+  def example_identifier
+    if ch = Child.first
+      ch.identifier
+    else
+      "ABCD-EFGH-JK"
+    end
+  end
 end
