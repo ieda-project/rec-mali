@@ -323,7 +323,7 @@ window.addEvent('domready', function() {
 
     var head_inputs = document.getElements('.profile-child input[type=text]'),
         warnings = $$('.profile-child .warn'),
-        head_selects = document.getElements('#child_gender, select[id^=child_born_on]');
+        head_selects = document.getElements('#child_gender, select[id^=child_born_on], #child_village_id, #child_distance');
 
     head_inputs.each(function(i) {
       if (i.get('data-validate')) {
@@ -371,10 +371,11 @@ window.addEvent('domready', function() {
           changes = true
         if (!(form.tree.enfant.months >= 0) || form.tree.months >= 60) measurements_valid = false;
         head_selects.each(function(i) {
-          if (!i.value) measurements_valid = false;
-          if (i.prev_value != i.value) {
+          var opt = i.selectedOptions[0]
+          if (!i.value && (!opt || !opt.get('data-village'))) measurements_valid = false; // HACK HACK
+          if (i.prev_opt != opt) {
             changes = true
-            i.prev_value = i.value }});
+            i.prev_opt = opt }});
 
         head_inputs.each(function(i) {
           if (i.condition) {
@@ -602,7 +603,7 @@ window.addEvent('domready', function() { document.body.updated() });
 Element.behaviour(function() {
   this.getElements('#child_village_id').addEvent('change', function() {
     var name;
-    if (this.value) {
+    if (this.value || this.selectedIndex == 0) {
       name = null;
     } else {
       var opt = this.getElements('option')[this.selectedIndex];
@@ -740,7 +741,9 @@ Element.behaviour(function() {
           onSuccess: function() {
             div.getElement('form').addEvent('submit', function(e) {
               if (div.getElements('.required').some(function (i) {
-                if (!i.value) {
+                var opt=null;
+                if (i.selectedOptions) opt=i.selectedOptions[0];
+                if (!i.value && (!opt || !opt.get('data-village'))) {
                   alert("Un champ obligatoire est manquant.");
                   i.focus();
                   return true;
@@ -757,10 +760,10 @@ Element.behaviour(function() {
             div.updated();
             editing = true }}).get(div.get('data-edit-href')) })})};
 
+  var nee = [ "Né/e", "Né", "Née" ];
+
   this.getElements('#child_gender').addEvent('change', function() {
-    this.form.getElements('.nee').set(
-      'html',
-      this.selectedIndex == 0 ? 'Né' : 'Née') });
+    this.form.getElements('.nee').set('html', nee[this.selectedIndex]) });
   this.getElements('.confirm').addEvent('click', function() {
     return confirm(this.get('data-confirm') || 'Ok?') });
   this.getElements('a.transient').addEvent('click', function() {

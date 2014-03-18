@@ -9,16 +9,16 @@
   = form.text_field :mother, 'data-label' => 'Nom de la mère', size: 30, class: 'required'
 %p.name
   %strong Sexe :
-  = form.select :gender, [ %w(Masculin 1), %w(Féminin 0) ], selected: (form.object.gender ? '1' : '0')
+  = form.select :gender, [ [], %w(Masculin 1), %w(Féminin 0) ], { selected: form_gender(form.object.gender) }, class: 'required'
 %p.name
   %strong
-    %span.nee= form.object.gender ? 'Né' : 'Née'
+    %span.nee= nee form.object.gender
     le :
   = form.date_select(:born_on, :start_year => Date.today.year, :end_year => Date.today.year - 18, :include_blank => true)
 %p.name
   %strong Zone :
   = form.hidden_field :village_name
-  = form.select :village_id, zone_select_for_child(form.object)
+  = form.select :village_id, [ [], *zone_select_for_child(form.object) ], {}, class: 'required'
 %p.name
   %strong Distance :
-  = form.select :distance, Child::DISTANCES.to_select
+  = form.select :distance, [ [], *Child::DISTANCES.to_select ], {}, class: 'required'

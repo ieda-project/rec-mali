@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module ChildrenHelper
   def village ch
     if ch.village
@@ -24,6 +26,22 @@ module ChildrenHelper
       ch.identifier
     else
       "ABCD-EFGH-JK"
+    end
+  end
+
+  def form_gender val
+    case val
+    when true then '1'
+    when false then '0'
+    else ''
+    end
+  end
+
+  def nee gender
+    case gender
+    when true then "Née"
+    when false then "Né"
+    else "Né/e"
     end
   end
 end
