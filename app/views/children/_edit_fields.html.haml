@@ -5,6 +5,9 @@
   %strong Prénom :
   = form.text_field :first_name, 'data-label' => 'Prénom', size: 30, class: 'required'
 %p.name
+  %strong Nom de la mère :
+  = form.text_field :mother, 'data-label' => 'Nom de la mère', size: 30, class: 'required'
+%p.name
   %strong Sexe :
   = form.select :gender, [ %w(Masculin 1), %w(Féminin 0) ], selected: (form.object.gender ? '1' : '0')
 %p.name

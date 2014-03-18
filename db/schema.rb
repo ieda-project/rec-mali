@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131120103508) do
+ActiveRecord::Schema.define(:version => 20140318191039) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20131120103508) do
     t.integer  "uqid"
     t.string   "village_name"
     t.integer  "distance"
+    t.string   "mother"
   end
 
   add_index "children", ["temporary", "zone_id"], :name => "index_children_on_temporary_and_zone_id"

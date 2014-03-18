@@ -86,8 +86,20 @@ class String
       gsub(/[-'\s]+/, ' ')).
     downcase.gsub(/[^a-z0-9 ]/, '').split(' ').sort.join(' ')
   end
+
   def cacheize!
     self[0..-1] = cacheize
+  end
+
+  def readable sep='-', c=4
+    i, s = 4, StringIO.new
+    s << self[0,4]
+    while part = self[i,4]
+      s << sep
+      s << part
+      i += 4
+    end
+    s.string
   end
 end
 

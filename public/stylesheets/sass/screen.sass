@@ -585,9 +585,12 @@ nav a, nav button, section button[type=submit]
     padding: 17px 20px
     width: 800px
     span.name
+      display: block
       color: $link
       font-size: 1.55em
       font-weight: bold
+    span.identifier
+      font-family: monospace
     .editable
       width: 350px
       float: left
@@ -1039,6 +1042,10 @@ section
       border-bottom: 2px solid #efefef
       -webkit-border-bottom-left-radius: 5px
       -webkit-border-bottom-right-radius: 5px
+      span.identifier
+        display: block
+        font-size: 70%
+        font-family: monospace
       th
         background: #edfae1
         border: 2px solid #dcf4c8

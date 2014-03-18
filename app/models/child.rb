@@ -1,3 +1,5 @@
+require 'base58'
+
 class Child < ActiveRecord::Base
   include Csps::Exportable
   include Csps::Age
@@ -9,6 +11,7 @@ class Child < ActiveRecord::Base
 
   validates_presence_of :village_name, unless: proc { |u| u.temporary? || u.village }
   validates_presence_of :village, unless: proc { |u| u.temporary? || u.village_name.present? }
+  validates_presence_of :mother, on: :create
 
   belongs_to :village, class_name: 'Zone'
   globally_has_many :diagnostics, dependent: :destroy do
@@ -39,6 +42,10 @@ class Child < ActiveRecord::Base
 
   def vaccinations
     VACCINATIONS.select { |k,v| send(k) }.map &:last
+  end
+
+  def identifier
+    Base58.encode(uqid).readable
   end
 
   def name
