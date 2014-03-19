@@ -150,8 +150,13 @@ class ChildrenController < ApplicationController
 
   def temp
     Child.temporary.destroy_all
-    @child = Child.new @data.merge(temporary: true)
-    display_updated @child.save
+    if @data['photo']
+      @child = Child.new @data.merge(temporary: true)
+      display_updated @child.save
+    else
+      @child = Child.new
+      display_updated true
+    end
   end
 
   def edit
@@ -180,12 +185,16 @@ class ChildrenController < ApplicationController
   def rewrite_photo
     @data = data = params[:child]
     if data && data['photo'].is_a?(String)
-      raw = data.delete('photo')
-      raw.tr! ' ', '+'
-      sio = StringIO.new(Base64.decode64(raw))
-      def sio.content_type; 'image/png'; end
-      def sio.original_filename; 'hcam.png'; end
-      data['photo'] = sio
+      raw = data['photo']
+      if raw.present?
+        raw.tr! ' ', '+'
+        sio = StringIO.new(Base64.decode64(raw))
+        def sio.content_type; 'image/png'; end
+        def sio.original_filename; 'hcam.png'; end
+        data['photo'] = sio
+      else
+        data['photo'] = nil
+      end
     end
     true
   end
@@ -197,7 +206,7 @@ class ChildrenController < ApplicationController
       end
       wants.json do
         if success
-          render json: { photo: @child.photo.url }
+          render json: { photo: @child.photo.url, present: @child.photo.present? }
         else
           render nothing: true, status: 422
         end

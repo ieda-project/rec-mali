@@ -7,7 +7,7 @@ class Child < ActiveRecord::Base
 
   validates_presence_of :village_name, unless: proc { |u| u.temporary? || u.village }
   validates_presence_of :village, unless: proc { |u| u.temporary? || u.village_name.present? }
-  validates_presence_of :mother, on: :create
+  validates_presence_of :mother, on: :create, unless: :temporary?
 
   belongs_to :village, class_name: 'Zone'
   globally_has_many :diagnostics, dependent: :destroy do

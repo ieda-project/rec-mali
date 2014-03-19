@@ -129,8 +129,6 @@ transient = {
       url: url,
       onSuccess: function(tree) { transient.open($A(tree)) }}).get() }};
 
-editing = false;
-
 window.addEvent('domready', function() {
   document.getElements('a.help').addEvent('click', function() {
     transient.open($(this.get('href').substr(1)).get('html'), { width: '650px', class: 'treatment-help' }) });
@@ -657,8 +655,21 @@ Element.behaviour(function() {
     this.getParent().removeClass('yes').removeClass('no').addClass(this.get('class'))
     return false });
 
+  this.getElements('.photo button').addEvent('click', function(e) {
+    e.stopPropagation();
+    var self = this.getParent();
+    new Request.JSON({
+      method: self.get('data-method'),
+        onSuccess: function(json) {
+          self.getElement('img').src = json.photo;
+          if (!json.present) self.removeClass('present').addClass('absent');
+        },
+        data: self.get('data-field')+'=',
+        url: self.get('data-action') }).send();
+  });
+
   this.getElements('.photo').addEvent('click', function() {
-    if (editing || window.location.href.match(/\/(new|edit)\/*$/)) {
+    if (this.hasClass('editing')) {
       var obj, closer=null, self=this;
       if (navigator.webkitGetUserMedia) {
         // HTML5 Camera
@@ -704,6 +715,7 @@ Element.behaviour(function() {
             method: self.get('data-method') || 'put',
             onSuccess: function(json) {
               self.getElement('img').src = json.photo;
+              self.removeClass('absent').addClass('present');
               transient.close();
             },
             data: self.get('data-field')+'='+data.substr(data.indexOf(',')+1),
@@ -758,7 +770,7 @@ Element.behaviour(function() {
                 return false };
               this.stop = false });
             div.updated();
-            editing = true }}).get(div.get('data-edit-href')) })})};
+            $$('.photo').addClass('editing'); }}).get(div.get('data-edit-href')) })})};
 
   var nee = [ "Né/e", "Né", "Née" ];
 

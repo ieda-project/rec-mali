@@ -582,6 +582,19 @@ nav a, nav button, section button[type=submit]
     width: 110px
     height: 110px
     overflow: hidden
+    &.editing.present button
+      display: block
+    button
+      display: none
+      position: absolute
+      bottom: 0
+      width: 100%
+      background-color: #770000
+      text-align: center
+      color: white
+      margin: 0
+      border: none
+      border-top: solid 1px rgba(255,255,255,0.5)
     div
       position: absolute
       left: 50%

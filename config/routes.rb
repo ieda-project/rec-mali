@@ -19,12 +19,10 @@ Csps::Application.routes.draw do
   resources :children do
     collection do
       get :calculations, :questionnaire
+      post :temp
     end
     member do
       get :indices
-    end
-    collection do
-      post :temp
     end
     resources :diagnostics do
       collection do

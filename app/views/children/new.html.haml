@@ -4,8 +4,7 @@
     %li Nouveau Patient
 = form_for @child, html: { class: 'new child diagnostic', 'data-questionnaire' => '/children/questionnaire' } do |form|
   .profile-child
-    %div#mugshot.photo{'data-field' => 'child[photo]', 'data-method' => 'post', 'data-action' => temp_children_path}
-      %img{alt: '', src: @child.photo.url}
+    = partial 'mugshot', locals: { child: @child, action: temp_children_path, klass: 'editing', method: :post}
     %section
       %div.editable= partial 'edit_fields', locals: { form: form }
       = form.fields_for :diagnostic, @diagnostic do |fields|

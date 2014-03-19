@@ -1,0 +1,7 @@
+- klass = klass ? "#{klass} " : ''
+- klass += @child.photo.present? ? 'present' : 'absent'
+- method ||= :put
+#mugshot.photo{:"data-field" => 'child[photo]', :"data-action" => action, :"data-method" => method, :class => klass}
+  %div
+    %img{alt: '', src: child.photo.url}
+  %button(type="button") Supprimer
