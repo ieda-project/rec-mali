@@ -1,5 +1,7 @@
-.welcome
-  %h1 Connexion
+.welcome.login
+  %h1
+    %strong #{Zone.csps.name}
+    Connexion
   %form#login(method='post' action=session_path)
     - if @error
       %p.error= @error
@@ -8,6 +10,7 @@
     %div
       %label(for='session_login') Utilisateur
       %select(name="session[user_id]")
+        %option
         - for id, name in User.local.to_login_select do
           %option(value=id)!= name
     %div
