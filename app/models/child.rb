@@ -1,5 +1,3 @@
-require 'base32'
-
 class Child < ActiveRecord::Base
   include Csps::Exportable
   include Csps::Age
@@ -42,10 +40,6 @@ class Child < ActiveRecord::Base
 
   def vaccinations
     VACCINATIONS.select { |k,v| send(k) }.map &:last
-  end
-
-  def identifier
-    Base32.encode(uqid).readable
   end
 
   def name

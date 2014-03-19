@@ -1,4 +1,5 @@
 require 'set'
+require 'base32'
 
 module Csps::Exportable
   extend ActiveSupport::Concern
@@ -40,10 +41,14 @@ module Csps::Exportable
     end
   end
 
+  def identifier
+    Base32.encode(uqid).readable
+  end
+
   protected
 
   def fill_uqid
-    if uqid.blank?
+    if uqid.blank? || uqid.zero?
       zid = Zone.csps.id
       self.uqid = (zid << 48) | (Time.now.to_f * 1000).to_i
       self.zone_id = zid
