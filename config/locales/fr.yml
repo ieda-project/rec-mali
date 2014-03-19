@@ -62,7 +62,7 @@ fr:
         one:   "plus d'un an"
         other: "plus de %{count} ans"
   opt:
-    child:
+    diagnostic:
       distance:
         0_4: 0 - 4km
         5_9: 5 - 9km

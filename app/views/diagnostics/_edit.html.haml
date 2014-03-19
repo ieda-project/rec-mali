@@ -22,7 +22,11 @@
           %span.remark (à la date de consultation : #{l @diagnostic.done_on.to_date})
           %br/
 
-        %strong Zone : #{@child.village.try(:name) || '-'}
+        %strong Village :
+        = village @child
+        %br/
+        %strong Distance :
+        = form.select :distance, [ [], *Diagnostic::DISTANCES.to_select ], {}, class: 'required'
 
     .measurements= partial 'diagnostics/edit_measurements', locals: { form: form }
     .vaccinations

@@ -3,6 +3,7 @@ class Diagnostic < ActiveRecord::Base
   include Csps::Age
 
   enum :kind, %w(first initial follow)
+  enum :distance, %w(0_4 5_9 10)
 
   state_machine :state, initial: :opened do
     # opened, filled, calculated, treatments_selected, closed

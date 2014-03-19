@@ -1,7 +1,7 @@
 - content_for :breadcrumbs do
   %ul#breadcrumbs
     %li= link_to "Nouvelle Recherche", children_path
-    %li= link_to @diagnostic.child.name, @diagnostic.child
+    %li= link_to @diagnostic.child.sortable_name, @diagnostic.child
     %li Evaluation
 
 = partial 'children/profile'
@@ -35,10 +35,12 @@
 
 %section.resume
   .measurements
-    %h2 Mesures lors de la consultation
+    %h2 Distance et mesures lors de la consultation
     %table
       %tbody
         %tr
+          %th Distance
+          %td= @diagnostic.distance_name
           %th Taille
           - if @diagnostic.height.present?
             %td #{@diagnostic.height.round(1)} cm
@@ -71,6 +73,7 @@
               = value ? value.to_i.to_s+' %' : '-'
               = ' '
               = score ? score.to_s+' (z)' : '-'
+
   - if @diagnostic.failed_classifications.try :any?
     %section.warning
       %h3 Les classifications suivante on échoués:
