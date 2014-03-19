@@ -18,6 +18,7 @@ def export_age_group out, ag, diag_sep # {{{
   # Header
   buf = %w(
     csps uqid born gender village
+    distance
     weight_height_p height_age_p weight_age_p
     weight_height_z height_age_z weight_age_z
     followup number last author
@@ -53,6 +54,7 @@ def export_age_group out, ag, diag_sep # {{{
       meds = Set.new(diag.listed_prescriptions.map(&:medicine_id))
 
       buf = [
+        diag.distance_name,
         diag.index_ratio('weight_height'), diag.index_ratio('height_age'), diag.index_ratio('weight_age'),
         diag.z_score('weight_height'), diag.z_score('height_age'), diag.z_score('weight_age'),
         diag.kind == 2 ? 1 : 0, num, last ? 1 : 0,
