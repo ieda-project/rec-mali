@@ -24,12 +24,13 @@ class UsersController < ApplicationController
     restore = User.count.zero? && params[:restore].present?
     @user = User.new params[:user]
     if Csps.site.blank?
-      if params[:zone_id] and zone = Zone.find(params[:zone_id])
+      if params[:zone_id] && zone = Zone.find(params[:zone_id])
         zone.occupy! restore
       else
         @user.errors[:base] << :no_site
       end
     end
+
     if User.count.zero?
       @user.admin = true
     else

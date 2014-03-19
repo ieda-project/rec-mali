@@ -99,21 +99,32 @@ class Zone < ActiveRecord::Base
     @last_sync_op_at ||= [ last_import_at, last_export_at ].compact.max
   end
 
-  def to_select opts={}
-    max = opts[:depth]
-    max = 2*max if max
-    if opts[:include_self]
-      [[ name, id ], *_to_select(2, max) ]
-    else
-      _to_select 0, max
+  def html_class
+    if point?
+      'point'
+    elsif village?
+      'village'
     end
   end
 
-  def _to_select indent, max
+  def to_select opts={}
+    max = opts[:depth]
+    max = 2*max if max
+    villages = opts[:include_villages]
+    if opts[:include_self]
+      [[ name, id, html_class ], *_to_select(2, max, villages) ]
+    else
+      _to_select 0, max, villages
+    end
+  end
+
+  def _to_select indent, max, villages
     buf = []
-    children.order(:name).each do |i|
-      buf << ["\u00a0"*indent + i.name, i.id]
-      buf += i._to_select(indent+2, max) unless max && max <= indent
+    list = children.order(:name)
+    list = list.where(village: false) if villages == false
+    list.each do |i|
+      buf << ["\u00a0"*indent + i.name, i.id, i.html_class]
+      buf += i._to_select(indent+2, max, villages) unless max && max <= indent
     end
     buf
   end

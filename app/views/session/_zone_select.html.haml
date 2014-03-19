@@ -1,0 +1,5 @@
+%div
+  %label Site
+  %select.zone(name="zone_id")
+    - for title, id, klass in Zone.root.to_select(include_self: true, include_villages: false) do
+      %option{value: id, class: klass}!= title
