@@ -25,7 +25,8 @@ $extend(Element, {
 
 // Globals for AS-JS communication
 
-var today, photo_saved, photo_params, auto_answer = {};
+var today, photo_saved, photo_params, auto_answer = {},
+    sel_classes = { dunno: 0, yes: 2, no: 1 };
 
 // AlertBox
 
@@ -321,7 +322,7 @@ window.addEvent('domready', function() {
 
     var head_inputs = document.getElements('.profile-child input[type=text]'),
         warnings = $$('.profile-child .warn'),
-        head_selects = document.getElements('#child_gender, select[id^=child_born_on], #child_village_id, #child_distance');
+        head_selects = document.getElements('#child_gender, select[id^=child_born_on], #child_village_id, #diagnostic_distance');
 
     head_inputs.each(function(i) {
       if (i.get('data-validate')) {
@@ -365,10 +366,10 @@ window.addEvent('domready', function() {
         var abnormal_ranges = $$('.abnormal_ranges')[0];
         var was_score_valid = scores_valid
         scores_valid = abnormal_ranges.getElement('.switch').hasClass('yes');
-        if (was_score_valid != scores_valid)
-          changes = true
+        if (was_score_valid != scores_valid) changes = true;
         if (!(form.tree.enfant.months >= 0) || form.tree.months >= 60) measurements_valid = false;
         head_selects.each(function(i) {
+          console.log(i);
           var opt = i.selectedOptions[0]
           if (!i.value && (!opt || !opt.get('data-village'))) measurements_valid = false; // HACK HACK
           if (i.prev_opt != opt) {
@@ -639,6 +640,10 @@ Element.behaviour(function() {
     var button = new Element('div', { 'class': 'switch' }).injectAfter(sel);
     if (sel.hasClass('negative')) button.addClass('negative');
     var yes = new Element('div', { 'class': 'yes', text: 'Oui' }).inject(button);
+    if (sel.hasClass('nullable')) {
+      var dunno = new Element('div', { 'class': 'dunno', text: '?' }).inject(button);
+      dunno.sel = sel;
+    }
     var no = new Element('div', { 'class': 'no', text: 'Non' }).inject(button);
     button.sel = sel;
     yes.sel = sel;
@@ -647,7 +652,7 @@ Element.behaviour(function() {
     set_sc(sel) });
   this.getElements('select.boolean+div.switch div').addEvent('click', function(e) {
     if (this.getParent().hasClass('disabled')) return;
-    this.sel.selectedIndex = (this.hasClass('yes')) ? 2 : 1;
+    this.sel.selectedIndex = sel_classes[this.className];
     this.sel.fireEvent('change');
     set_sc(this.sel);
     return false });
@@ -864,10 +869,10 @@ function update_image(id, url) {
   transient.close()
 }
 function set_sc(sel) {
+  var div = sel.getNext();
   switch (sel.selectedIndex) {
-    case 1: sel.getNext().removeClass('yes'); sel.getNext().addClass('no'); break;
-    case 2: sel.getNext().removeClass('no'); sel.getNext().addClass('yes'); break;
-    default: sel.getNext().removeClass('yes'); sel.getNext().removeClass('no')
+    case 1: div.removeClass('yes').removeClass('dunno').addClass('no'); break;
+    case 2: div.removeClass('no').removeClass('dunno').addClass('yes'); break;
+    default: div.removeClass('yes').removeClass('no').addClass('dunno');
   }
 }
-

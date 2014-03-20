@@ -1,6 +1,13 @@
 # encoding: utf-8
 
 module ChildrenHelper
+  def bool_to_select val
+    case val
+    when true then 1
+    when false then 0
+    end
+  end
+
   def village ch
     if ch.village
       ch.village.name
@@ -42,6 +49,14 @@ module ChildrenHelper
     when true then "Née"
     when false then "Né"
     else "Né/e"
+    end
+  end
+
+  def vacc_class val
+    case val
+    when true then 'yes'
+    when false then 'no'
+    else 'dunno'
     end
   end
 end

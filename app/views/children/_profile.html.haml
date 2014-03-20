@@ -1,5 +1,5 @@
 .profile-child
-  = partial 'mugshot', locals: { child: @child, action: child_path(@child) }
+  = partial 'children/mugshot', locals: { child: @child, action: child_path(@child) }
   %section
     .editable{'data-edit-href' => edit_child_path(@child)}
       = partial 'children/'+(show? ? 'show' : 'edit'), locals: { child: @child }
@@ -12,9 +12,8 @@
         %p Never measured.
     .vaccinations
       %h3 Etat vaccinal :
-      %ul
-        - Child::VACCINATIONS.each do |k,n|
-          - if @child.send(k)
-            %li.yes= n
-          - else
-            %li.no= n
+      %table
+        - Child::VACCINATIONS.each_slice(3) do |slice|
+          %tr
+            - for key, name in slice
+              %td{:class => vacc_class(@child.send(key))}= name

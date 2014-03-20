@@ -233,7 +233,7 @@ select + .switch
   display: inline-block
   color: #666
   font-weight: bold
-  font-size: 1.1em !important
+  font-size: 1.1em
   background: url(../images/backgrounds/bg-switch.gif) repeat-x 0 0
   padding: 1px 1px
   -webkit-border-radius: 5px
@@ -241,20 +241,21 @@ select + .switch
   -webkit-user-select: none
   margin: 3px 0 0 0 !important
   width: auto !important
+  &.dunno
+    .dunno
+      background-color: #ffb300
+      color: white
+      border-color: #c99722
   &.no
     .no
       background-color: #51a100
       color: white
       border-color: #407e01
-    .yes
-      color: #777
   &.yes
     .yes
       background-color: #f00
       color: white
       border-color: #ae0000
-    .no
-      color: #777
   &.negative.no .no
     background-color: #f00
     border-color: #ae0000
@@ -263,7 +264,7 @@ select + .switch
     border-color: #407e01
   div
     -webkit-border-radius: 4px
-    font-size: 10px !important
+    font-size: 10px
     padding: 3px 2px
     display: inline-block
     width: 3em !important
@@ -272,13 +273,17 @@ select + .switch
     background-color: #ededed
     color: #777
     text-transform: uppercase
-    margin: 0 !important
+    margin: 0
     &:last-child
       margin: 0 3px 0 0 !important
+  .dunno
+    margin-right: 3px
   .no
     float: left
-  .yes
+  .yes, .dunno
     float: right
+.profile-child .switch div
+  font-size: 8px
 
 header
   position: relative
@@ -716,22 +721,23 @@ section
     label
       font-size: 1.1em
     h3
-      float: left
-      font-size: 1.1em
-      margin: 0
-    ul
-      font-size: 1.1em
-      list-style: none
-      padding: 0
-      margin: 0
-      overflow: hidden
-      li
-        background: url(../images/icons/check.gif) no-repeat 0 2px
-        float: left
-        margin: 0 5px 0 10px
-        padding: 0 0 0 20px
-        &.no
-          background: url(../images/icons/no.gif) no-repeat 0 2px
+      float: none
+    td
+      text-align: right
+      &.dunno, &.yes, &.no
+        text-align: left
+        padding-left: 20px
+        background-position: center left
+        background-repeat: no-repeat
+      &.dunno
+        background-image: url(../images/icons/dunno.gif)
+        background-position: 1px
+      &.yes
+        background-image: url(../images/icons/check.gif)
+      &.no
+        background-image: url(../images/icons/no.gif)
+    th
+      padding-right: 10px
   .measurements
     width: 440px
     float: right

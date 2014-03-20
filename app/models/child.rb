@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Child < ActiveRecord::Base
   include Csps::Exportable
   include Csps::Age
@@ -30,11 +32,19 @@ class Child < ActiveRecord::Base
   scope :temporary, conditions: { temporary: true }
 
   VACCINATIONS = {
-    bcg_polio0: 'BCG/Polio-0',
-    penta1_polio1: 'PENTA-1/Polio-1',
-    penta2_polio2: 'PENTA-2/Polio-2',
-    penta3_polio3: 'PENTA-3/Polio-3',
-    measles: 'Antirougeoleux' }
+    v_bcg: 'BCG',
+    v_rota: 'Rotavirus',
+    v_polio0: 'Polio-0',
+    v_polio1: 'Polio-1',
+    v_polio2: 'Polio-2',
+    v_polio3: 'Polio-3',
+    v_penta1: 'Penta-1',
+    v_penta2: 'Penta-2',
+    v_penta3: 'Penta-3',
+    v_measles: 'Antirougeoleux',
+    v_measles_r16: 'Rappel rougeole à 16 mois',
+    v_meningitis: 'Méningite',
+  }
 
   def vaccinations
     VACCINATIONS.select { |k,v| send(k) }.map &:last

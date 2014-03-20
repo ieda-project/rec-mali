@@ -28,12 +28,8 @@
         = form.select :distance, [ [], *Diagnostic::DISTANCES.to_select ], {}, class: 'required'
 
     .measurements= partial 'diagnostics/edit_measurements', locals: { form: form }
-    .vaccinations
-      %h3 Etat vaccinal :
-      = form.fields_for :child do |fields|
-        - for key, name in Child::VACCINATIONS do
-          = fields.check_box key, checked: @child.send(key)
-          = fields.label key, name
+    = form.fields_for :child do |fields|
+      .vaccinations= partial 'children/edit_vaccinations', locals: { form: fields, child: @child }
     .warn{'data-condition' => 'data.enfant.age < 5'}
       L'âge de l'enfant doit être compris entre 0 et 59 mois.
     .next

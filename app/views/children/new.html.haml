@@ -8,12 +8,8 @@
     %section
       %div.editable= partial 'edit_fields', locals: { form: form }
       = form.fields_for :diagnostic, @diagnostic do |fields|
-        %div.measurements= partial 'diagnostics/edit_measurements', locals: { form: fields }
-        .vaccinations
-          %h3 Etat vaccinal :
-          - for key, name in Child::VACCINATIONS do
-            = form.check_box key, checked: @child.send(key)
-            = form.label key, name
+        .measurements= partial 'diagnostics/edit_measurements', locals: { form: fields }
+        .vaccinations= partial 'edit_vaccinations', locals: { form: form, child: @child }
       .warn{'data-condition' => 'data.enfant.age < 5'}
         L'âge de l'enfant doit être compris entre 0 et 59 mois.
       .next

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140319000402) do
+ActiveRecord::Schema.define(:version => 20140320000914) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -22,11 +22,6 @@ ActiveRecord::Schema.define(:version => 20140319000402) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
-    t.boolean  "bcg_polio0"
-    t.boolean  "penta1_polio1"
-    t.boolean  "penta2_polio2"
-    t.boolean  "penta3_polio3"
-    t.boolean  "measles"
     t.string   "cache_name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -35,6 +30,18 @@ ActiveRecord::Schema.define(:version => 20140319000402) do
     t.integer  "uqid"
     t.string   "village_name"
     t.string   "mother"
+    t.boolean  "v_meningitis"
+    t.boolean  "v_rota"
+    t.boolean  "v_measles_r16"
+    t.boolean  "v_bcg"
+    t.boolean  "v_polio0"
+    t.boolean  "v_penta1"
+    t.boolean  "v_polio1"
+    t.boolean  "v_penta2"
+    t.boolean  "v_polio2"
+    t.boolean  "v_penta3"
+    t.boolean  "v_polio3"
+    t.boolean  "v_measles"
   end
 
   add_index "children", ["temporary", "zone_id"], :name => "index_children_on_temporary_and_zone_id"
