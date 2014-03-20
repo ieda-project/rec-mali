@@ -21,9 +21,9 @@ def export_age_group out, ag, diag_sep # {{{
     distance
     weight_height_p height_age_p weight_age_p
     weight_height_z height_age_z weight_age_z
-    followup number last author
-    bcg_polio0 penta1_polio1 penta2_polio2
-    penta3_polio3 measles diag_date height weight muac temperature)
+    followup number last author)
+  buf += Child::VACCINATIONS.keys
+  buf += %w(diag_date height weight muac temperature)
   buf += Diagnostic.where(state: 'closed', saved_age_group: ag).first.sign_answers.sort_by(&:sign_id).map do |sa|
     sa.sign.full_key
   end
@@ -59,9 +59,13 @@ def export_age_group out, ag, diag_sep # {{{
         diag.z_score('weight_height'), diag.z_score('height_age'), diag.z_score('weight_age'),
         diag.kind == 2 ? 1 : 0, num, last ? 1 : 0,
         diag.author.name ]
-      buf += [
-        child.bcg_polio0, child.penta1_polio1, child.penta2_polio2,
-        child.penta3_polio3, child.measles ].map { |v| v ? 1 : 0 }
+      buf += Child::VACCINATIONS.keys.map do |k|
+        case child.send(k)
+          when true then '1'
+          when false then '0'
+          else ''
+        end
+      end
       buf += [
         diag.done_on.to_date, diag.height, diag.weight,
         diag.mac, diag.temperature ]
