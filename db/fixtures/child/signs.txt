@@ -1,4 +1,4 @@
-$version 1
+$version 2
 ## Illness / Signs ##
 
 danger|Signes de danger
@@ -9,11 +9,11 @@ danger|Signes de danger
   convulsions_present|Observer : l’enfant convulse t-il *actuellement* ?|boolean
 
 toux|Toux
-  toux_presence|L'enfant a-t-il la toux ou des *difficultés respiratoires* ?|boolean
-  toux_presence_duree|Depuis combien de jours ?|integer
-  mouv_resp|Compter les mouvements respiratoires par minute (Respiration rapide = FR > 40 pour enfants > 12 mois / FR > 50 pour enfants entre 2 et 12 mois)|list|respiration_normale;respiration_rapide
-  tirage|Rechercher : L'enfant a-t-il un tirage *sous-costal* (inspiratoire) ?|boolean
-  stridor|Écouter : l’enfant a-t-il un stridor ou un sifflement de la respiration (inspiration) ou un geignement (expiration)|boolean
+  1:toux_presence|L'enfant a-t-il la toux ou des *difficultés respiratoires* ?|boolean
+  2:toux_presence_duree|Depuis combien de jours ?|integer
+  ---mouv_resp|Compter les mouvements respiratoires par minute (Respiration rapide = FR > 40 pour enfants > 12 mois / FR > 50 pour enfants entre 2 et 12 mois)|list|respiration_normale;respiration_rapide
+  4:tirage|Rechercher : L'enfant a-t-il un tirage *sous-costal* (inspiratoire) ?|boolean
+  5:stridor|Écouter : l’enfant a-t-il un stridor ou un sifflement de la respiration (inspiration) ou un geignement (expiration)|boolean
 
 diarrhee|Diarrhée
   diarrhee_presence|L'enfant a-t-il la diarrhée ?|boolean
@@ -64,3 +64,8 @@ vih|VIH
   augmentation_glande_parotide|Augmentation du volume de la glande parotide|boolean
   test_mere|Test virologique pour la mère|list|pas_de_test;positif;negatif
   serologie_mere|Sérologie de la mère|list|inconnue;positive;negative
+
+yield
+
+toux|Toux
+  3:freq_resp|Fréquence respiratoire|integer|10|120

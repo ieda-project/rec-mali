@@ -170,7 +170,7 @@ class Diagnostic < ActiveRecord::Base
     #end
   end
 
-  globally_has_many :sign_answers, dependent: :destroy, include: :sign, order: 'signs.sequence' do
+  globally_has_many :sign_answers, dependent: :destroy, include: :sign, order: 'signs.sequence, signs.id' do
     def add data
       sign = data.delete(:sign) || Sign.find(data.delete(:sign_id)) rescue nil
       existing = detect { |i| i.sign_id == sign.id }
@@ -188,7 +188,7 @@ class Diagnostic < ActiveRecord::Base
       end
     end
     def for illness
-       select { |a| a.sign.illness_id == illness.id }
+      select { |a| a.sign.illness_id == illness.id }
     end
     def to_hash
       {}.tap do |hash|
@@ -248,8 +248,12 @@ class Diagnostic < ActiveRecord::Base
     child.diagnostics.order('done_on DESC').select('id').first.id == id
   end
 
+  def retired_signs?
+    sign_answers.includes(:sign).any? { |sa| sa.sign.retired? }
+  end
+
   def editable_by? user
-    Csps.point? and author == user and !closed?
+    Csps.point? && author == user && !closed? && !retired_signs?
   end
 
   def deletable_by? user
@@ -349,7 +353,7 @@ class Diagnostic < ActiveRecord::Base
     self.born_on ||= child.born_on if child
     if age_group
       sign_ids = sign_answers.map(&:sign_id).rhashize
-      Sign.where(age_group: age_group).order(:sequence).each do |sign|
+      Sign.where(age_group: age_group, retired: false).order(:sequence).each do |sign|
         sign_answers << sign.answer_class.new(sign: sign) unless sign_ids[sign.id]
       end
     else

@@ -203,10 +203,13 @@ Dir.chdir "#{Rails.root}/db/fixtures" do
         if line =~ /\A\s/
           # Sign
           type, *mods = data[2].split(':')
+          seq = data[0].scan(/^[0-9]+/).first
           hash = {
             age_group: ag,
             illness: illness,
-            key: data[0],
+            key: data[0].gsub(/^(-+|[0-9]+:)/, ''),
+            retired: (data[0][0] == ?-),
+            sequence: seq && seq.to_i,
             dep: deps[ag]["#{illness.key}.#{data[0]}"],
             negative: mods.include?('neg'),
             question: RedCloth.new(data[1], [:lite_mode]).to_html }

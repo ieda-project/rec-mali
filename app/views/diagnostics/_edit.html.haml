@@ -2,7 +2,7 @@
   = partial 'children/mugshot', locals: { child: @child, action: child_path(@child), klass: 'editing'}
   %section
     .editable
-      %span.name= @child.name
+      %span.name= @child.sortable_name
       %p
         %strong< #{@child.gender ? 'Né' : 'Née'} le :
         - if @diagnostic.new_record?

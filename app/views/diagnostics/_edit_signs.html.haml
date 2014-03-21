@@ -11,7 +11,7 @@
         - for c in cs do
           %li{:class => (my_cs[c.id].present?).inspect}= c.name
     %table
-      - form.object.sign_answers.for(i).sort.each do |answer|
+      - form.object.sign_answers.for(i).each do |answer|
         - autos << answer.sign if answer.sign.auto.present?
         = form.fields_for "sign_answers][#{count}", answer do |fields|
           %tr{class: answer.errors.any? ? 'has-errors' : ''}

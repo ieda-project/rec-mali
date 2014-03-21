@@ -1,7 +1,7 @@
 - content_for :breadcrumbs do
   %ul#breadcrumbs
     %li= link_to "Nouvelle Recherche", children_path
-    %li= link_to @diagnostic.child.name, @diagnostic.child
+    %li= link_to @diagnostic.child.sortable_name, @diagnostic.child
     %li Evaluation
     
 - form_for @diagnostic, url: child_diagnostic_path(@child, @diagnostic), html: { class: 'edit diagnostic', 'data-questionnaire' => questionnaire_child_diagnostics_path(@child) } do |form|

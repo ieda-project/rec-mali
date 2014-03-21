@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140320000914) do
+ActiveRecord::Schema.define(:version => 20140320162014) do
 
   create_table "children", :force => true do |t|
     t.integer  "village_id"
@@ -266,7 +266,10 @@ ActiveRecord::Schema.define(:version => 20140320000914) do
     t.integer  "age_group"
     t.boolean  "negative"
     t.text     "auto"
+    t.boolean  "retired"
   end
+
+  add_index "signs", ["retired"], :name => "index_signs_on_retired"
 
   create_table "sites", :force => true do |t|
     t.text     "locations"

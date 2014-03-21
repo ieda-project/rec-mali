@@ -280,10 +280,19 @@ window.addEvent('domready', function() {
       illness.valid = illness.fields.every(function(i) {
         if (i.disabled || i.get('type') == 'hidden') {
           return true
+        } else if (i.type == 'select-one') {
+          return i.selectedIndex > 0;
         } else if (i.get('type') == 'radio') {
           return i.getParent().getElements('input').some(function(x) { return x.checked })
         } else {
-          return i.value.trim().match(/^[0-9]+$/) && parseInt(i.value) >= 0 }});
+          var intv, mm;
+          if (!i.value.trim().match(/^[0-9]+$/) || (intv = parseInt(i.value)) < 0) return false;
+          mm = parseInt(i.get('data-min'));
+          if (mm && intv < mm) return false;
+          mm = parseInt(i.get('data-max'));
+          if (mm && intv > mm) return false;
+          return true;
+        }});
       if (calculate != false && illness.valid) {
         var h2 = illness.getElement('h2'),
             data = {}, keys = ['enfant'];
@@ -369,7 +378,6 @@ window.addEvent('domready', function() {
         if (was_score_valid != scores_valid) changes = true;
         if (!(form.tree.enfant.months >= 0) || form.tree.months >= 60) measurements_valid = false;
         head_selects.each(function(i) {
-          console.log(i);
           var opt = i.selectedOptions[0]
           if (!i.value && (!opt || !opt.get('data-village'))) measurements_valid = false; // HACK HACK
           if (i.prev_opt != opt) {

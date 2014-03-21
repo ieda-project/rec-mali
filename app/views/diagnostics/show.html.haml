@@ -82,7 +82,7 @@
           %li= c.name
 
   - for i in Illness.order(:sequence) do
-    - answers = @diagnostic.sign_answers.for(i).sort.select {|a| a.applicable?}
+    - answers = @diagnostic.sign_answers.for(i).select(&:applicable?)
     - if answers.any?
       %section.consultation
         %h2.consultation= i.name

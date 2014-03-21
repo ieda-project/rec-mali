@@ -1,8 +1,9 @@
-$version 1
+$version 2
 toux.toux_presence_duree|data.toux.toux_presence 
 toux.mouv_resp|data.toux.toux_presence 
 toux.tirage|data.toux.toux_presence
 toux.stridor|data.toux.toux_presence 
+toux.freq_resp|data.toux.toux_presence 
 
 diarrhee.diarrhee_presence_duree|data.diarrhee.diarrhee_presence 
 diarrhee.sang_selles|data.diarrhee.diarrhee_presence 
