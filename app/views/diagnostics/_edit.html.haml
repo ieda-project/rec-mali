@@ -46,5 +46,9 @@
 = form.hidden_field :kind
 .illnesses= partial 'diagnostics/edit_signs', locals: { form: form }
 
+%section.treatment
+  %h2 Autres problèmes de santé
+  = form.text_area :other_problems, cols:20, rows:5
+
 %nav
   %button.validation(type="submit") Choisir les traitements

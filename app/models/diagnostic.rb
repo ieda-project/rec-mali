@@ -203,6 +203,11 @@ class Diagnostic < ActiveRecord::Base
   scope :between, lambda {|d1, d2| {:conditions => ['done_on > ? and done_on <= ?', d1, d2]}}
 
   before_validation do
+    for i in [:comments, :other_problems]
+      val = read_attribute(i)
+      val = val.strip.gsub("\r", '') if val.present?
+      write_attribute i, val.blank? ? nil : val
+    end
     if new_record?
       self.done_on ||= Time.now
       self.born_on ||= child.born_on if child

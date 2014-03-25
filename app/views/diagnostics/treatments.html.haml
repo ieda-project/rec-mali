@@ -33,7 +33,7 @@
   - elsif @diagnostic.comments.present?
     %section.treatment
       %h2 Autres observations
-      %div= @diagnostic.comments
+      != html @diagnostic.comments
 
   %nav
     - if @diagnostic.editable_by?(current_user)
