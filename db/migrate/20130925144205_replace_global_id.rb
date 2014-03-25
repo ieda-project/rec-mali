@@ -10,7 +10,7 @@ class ReplaceGlobalId < ActiveRecord::Migration
     case db.adapter_name
       when 'SQLite'
         sql_type = :integer
-        set = "cast((cast(strftime('%s', created_at) as real) + cast(strftime('%f', created_at) as real) - cast(strftime('%S', created_at) as real)) * 1000 as integer) | (zone_id << 48)"
+        set = "(cast((cast(strftime('%s', created_at) as real) + cast(strftime('%f', created_at) as real) - cast(strftime('%S', created_at) as real)) * 1000 as integer)-id) | (zone_id << 48)"
       when 'PostgreSQL'
         sql_type = :bigint
         set = 'round(extract(epoch from created_at) * 1000)::bigint | (zone_id::bigint << 48)'
