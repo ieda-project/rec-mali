@@ -67,10 +67,6 @@ class Child < ActiveRecord::Base
     delegate name, ratio, to: :last_visit, allow_nil: true
   end
 
-  def self.dates2key d
-    "#{d.year}-#{sprintf("%02d", d.month)}"
-  end
-
   protected
 
   def fill_fields

@@ -212,7 +212,11 @@ class Diagnostic < ActiveRecord::Base
   end
 
   before_save do
-    self.month ||= done_on.year*100 + done_on.month
+    self.month ||=
+      begin
+        ref = (done_on.day >= 26) ? done_on + 6.days : done_on
+        ref.year*100 + ref.month
+      end
   end
 
   after_save do
