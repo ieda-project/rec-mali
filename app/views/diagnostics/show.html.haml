@@ -20,7 +20,7 @@
       Nouvelle évaluation réalisée par #{@diagnostic.author.name}
 
 %nav
-  - if @diagnostic.editable_by?(current_user)
+  - if @diagnostic.editable_by?(current_user) && !@diagnostic.retired_signs?
     = link_to 'Modifier', edit_child_diagnostic_path(@child, @diagnostic), :class => 'edit em'
   - if @diagnostic.deletable_by?(current_user)
     - form_tag child_diagnostic_path(@child, @diagnostic), method: 'delete' do

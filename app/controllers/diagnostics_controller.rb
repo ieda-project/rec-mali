@@ -87,10 +87,15 @@ class DiagnosticsController < ApplicationController
   end
 
   def edit
+    return see_other([@child, @diagnostic]) if @diagnostic.retired_signs?
     back "L'evaluation", [@child, @diagnostic]
   end
 
   def update
+    if @diagnostic.retired_signs? && params[:diagnostic][:sign_answers].present?
+      return(see_other([ @child, @diagnostic ]))
+    end
+
     if @diagnostic.author != current_user && params[:diagnostic].keys != %w(results_attributes)
       return(see_other([ @child, @diagnostic ]))
     end
@@ -105,6 +110,7 @@ class DiagnosticsController < ApplicationController
             see_other [ :wait, @child, @diagnostic ]
           when 'calculated'
             @diagnostic.select_treatments
+            @diagnostic.select_medicines unless @diagnostic.medicine_options?
             see_other [ :treatments, @child, @diagnostic ]
           when 'treatments_selected'
             @diagnostic.select_medicines

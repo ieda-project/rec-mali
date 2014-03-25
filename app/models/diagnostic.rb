@@ -38,12 +38,16 @@ class Diagnostic < ActiveRecord::Base
     end
 
     state :treatments_selected, :medicines_selected, :closed do
+      def medicine_options?
+        optional_prescriptions.any? || dupe_prescriptions.any?
+      end
+
       def optional_prescriptions
         Set.new(all_prescriptions.reject(&:mandatory))
       end
 
       def dupe_prescriptions
-        dupes_grouped.inject(Set.new) { |m,i| m + i }
+        @dupe_prescriptions ||= dupes_grouped.inject(Set.new) { |m,i| m + i }
       end
 
       def all_prescriptions
@@ -262,7 +266,7 @@ class Diagnostic < ActiveRecord::Base
   end
 
   def editable_by? user
-    Csps.point? && author == user && !closed? && !retired_signs?
+    Csps.point? && author == user && !closed?
   end
 
   def deletable_by? user
