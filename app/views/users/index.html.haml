@@ -32,17 +32,18 @@
     %p.next
       = link_to 'Toutes les connexions', logins_users_path
 
-%section
-  %h1 Utilisateurs d'autres CSPS
-  %table.results.users
-    %thead
-      %tr
-        %th Nom
-        %th Administrateur
-        %th
-    %tbody
-      - for user in @users.where('zone_id != ?', Zone.csps.id) do
-        %tr.remote
-          %td= user.name
-          %td= user.admin? ? 'Oui' : 'Non'
-          %td Non autorisé à supprimer
+- if (others = @users.where('zone_id != ?', Zone.csps.id)).any?
+  %section
+    %h1 Utilisateurs d'autres CSPS
+    %table.results.users
+      %thead
+        %tr
+          %th Nom
+          %th Administrateur
+          %th
+      %tbody
+        - for user in others
+          %tr.remote
+            %td= user.name
+            %td= user.admin? ? 'Oui' : 'Non'
+            %td Non autorisé à supprimer

@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_presence_of :password_confirmation, :if => :password
   validates_confirmation_of :password, :if => :password
+  validates_uniqueness_of :name, scope: :zone_id
   before_save :crypt_password
 
   scope :admins, :conditions => ['admin_at IS NOT NULL AND admin_at <= ?', Time.now]
