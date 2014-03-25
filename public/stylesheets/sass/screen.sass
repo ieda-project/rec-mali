@@ -109,6 +109,31 @@ li.query span
     -webkit-box-shadow: 0 0 7px rgba(255, 0, 0, 0.8)
   .graph
     margin: -40px -40px -20px -50px !important
+    ul.legend
+      display: block
+      padding: 0
+      position: absolute
+      left: 50%
+      bottom: 1em
+      width: 184px
+      margin: 0 0 0 -92px
+      li
+        font-size: 80%
+        display: block
+        float: left
+        width: 60px
+        padding: 0
+        margin-left: 1px
+        text-align: center
+        color: white
+        background-color: green
+        font-weight: bold
+        line-height: 1.8em
+        &:first-child
+          background-color: red
+          margin: 0
+        &:last-child
+          background-color: purple
   h2
     position: absolute
     top: 1em

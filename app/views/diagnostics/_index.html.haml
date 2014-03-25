@@ -15,3 +15,7 @@
     %div.graph
       %h2= t(name, :scope => :indices)
       != ziya_chart indices_child_path(child, :diagnostic => diagnostic,:name => name,:format => :xml), :size => '500x400'
+      %ul.legend
+        %li sd3
+        %li sd0
+        %li sd3neg
