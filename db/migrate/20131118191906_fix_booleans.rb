@@ -1,5 +1,7 @@
 class FixBooleans < ActiveRecord::Migration
   def self.up
+    return unless Child.connection.adapter_name == 'SQLite'
+
     fixes = {
       'children' =>
         %w(gender bcg_polio0 penta1_polio1 penta2_polio2 penta3_polio3 measles temporary),
