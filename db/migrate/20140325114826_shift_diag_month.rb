@@ -23,7 +23,7 @@ class ShiftDiagMonth < ActiveRecord::Migration
         SET month=diagmonth(done_on + interval '6 days')
         WHERE extract(day from done_on) >= 26"
     ensure
-      execute "DROP FUNCTION IF EXISTS diagmonth"
+      execute "DROP FUNCTION IF EXISTS diagmonth(timestamp)"
     end
   end
 end
