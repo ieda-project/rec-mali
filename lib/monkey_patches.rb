@@ -94,7 +94,7 @@ class String
   def readable sep='-', c=4
     i, s = 4, StringIO.new
     s << self[0,4]
-    while part = self[i,4]
+    while (part = self[i,4]).present?
       s << sep
       s << part
       i += 4
