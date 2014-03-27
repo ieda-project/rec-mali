@@ -1,6 +1,6 @@
 %h3 Etat vaccinal :
 %table
-  - Child::VACCINATIONS.each_slice(3) do |slice|
+  - child.form_vaccinations.each_slice(3) do |slice|
     %tr
       - for key, name in slice do
         %td= form.select key, [nil, 0, 1], { selected: bool_to_select(child.send(key)) }, :class => 'boolean nullable negative'

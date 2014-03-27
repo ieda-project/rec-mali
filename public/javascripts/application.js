@@ -202,13 +202,20 @@ window.addEvent('domready', function() {
     ['child_born_on', 'diagnostic_born_on'].each(function(stem) {
       var y = $(stem+'_1i');
       if (y) {
-        var m = $(stem+'_2i'),
+        var vacc = $E('.vaccinations'),
+            m = $(stem+'_2i'),
             d = $(stem+'_3i'),
             tgt = form.getElement('div.illnesses');
         $$('select[id^='+stem+'_]').addEvent('change', function() {
           tgt.set('html', '');
-          if (!y.value || !m.value || !d.value) return;
-          var bd = new Date(y.value+'-'+m.value+'-'+d.value), months;
+          if (!y.value || !m.value || !d.value) {
+            vacc.set('html', '');
+            return
+          }
+
+          var bd = new Date(y.value+'-'+m.value+'-'+d.value), months,
+              iso = bd.toISOString().replace(/T.*$/, '');
+
           if (bd.getDate() == d.value && bd < today &&
              (months = ((today.getFullYear() - y.value.toInt())*12) +
                         (today.getMonth()+1 - m.value.toInt()) -
@@ -218,15 +225,20 @@ window.addEvent('domready', function() {
             form.tree.enfant.age = (months / 12).floor();
             new Request.HTML({
               onSuccess: function(dom) {
+                vacc.set('html', '')
+                dom[0].getElements('.vaccinations>*').each(function (el) {
+                  el.inject(vacc) });
                 dom[0].getElements('section.illness').each(function (sec) {
                   sec.inject(tgt) });
+                vacc.updated();
                 illnesses_updated();
                 tgt.updated();
             }}).get(
               form.get('data-questionnaire') +
               '?born_on='+
-              bd.toISOString().replace(/T.*$/,''))
+              iso);
           } else {
+            vacc.set('html', '');
             delete form.tree.enfant.days;
             delete form.tree.enfant.months;
             delete form.tree.enfant.age }});

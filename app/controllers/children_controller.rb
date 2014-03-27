@@ -117,13 +117,9 @@ class ChildrenController < ApplicationController
   end
 
   def questionnaire
-    #if request.xhr?
-      @child = Child.new born_on: params[:born_on]
-      @diagnostic = @child.diagnostics.build_with_answers
-      render layout: false
-    #else
-    #  not_found
-    #end
+    @child = Child.new born_on: params[:born_on]
+    @diagnostic = @child.diagnostics.build_with_answers
+    render layout: false
   end
 
   def create

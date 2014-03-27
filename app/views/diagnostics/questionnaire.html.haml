@@ -1,2 +1,4 @@
 = form_for [@child, @diagnostic], html: { class: 'new diagnostic' } do |form|
+  = form.fields_for :child do |fields|
+    .vaccinations= partial 'children/edit_vaccinations', locals: { form: fields, child: @child }
   = partial 'diagnostics/edit_signs', locals: { form: form }

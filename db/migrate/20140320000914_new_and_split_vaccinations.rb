@@ -8,13 +8,13 @@ class NewAndSplitVaccinations < ActiveRecord::Migration
     'penta3_polio3' => %w(v_penta3 v_polio3),
   }
 
-  RENAMES = { 'measles' => 'v_measles' }
+  RENAMES = { 'measles' => 'v_measles1' }
 
-  NEW = %w(v_meningitis v_rota v_measles_r16)
+  NEW = %w(v_pneumo v_rota v_measles_r16)
 
   class << self
     def up
-      for col in (NEW + SPLITS.values.flatten)
+      for col in (Child::VACCINATIONS.keys.map(&:to_s) - RENAMES.values)
         add_column :children, col, :boolean
       end
 

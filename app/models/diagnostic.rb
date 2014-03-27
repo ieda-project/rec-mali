@@ -221,6 +221,9 @@ class Diagnostic < ActiveRecord::Base
   end
 
   before_save do
+    if born_on_changed? && child && child.born_on != born_on
+      child.born_on = born_on
+    end
     self.month ||=
       begin
         ref = (done_on.day >= 26) ? done_on + 6.days : done_on

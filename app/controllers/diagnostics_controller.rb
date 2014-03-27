@@ -7,12 +7,9 @@ class DiagnosticsController < ApplicationController
   helper Wopata::Ziya::HtmlHelpersFix
 
   def questionnaire
-    #if request.xhr?
-      @diagnostic = @child.diagnostics.build_with_answers(born_on: params[:born_on])
-      render layout: false
-    #else
-    #  not_found
-    #end
+    @diagnostic = @child.diagnostics.build_with_answers(born_on: params[:born_on])
+    @child.born_on = @diagnostic.born_on # for vaccinations
+    render layout: false
   end
 
   def show?

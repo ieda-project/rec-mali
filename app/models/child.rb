@@ -11,6 +11,10 @@ class Child < ActiveRecord::Base
   validates_presence_of :village, unless: proc { |u| u.temporary? || u.village_name.present? }
   validates_presence_of :mother, on: :create, unless: :temporary?
 
+  validate do
+    errors.add_on_blank form_vaccinations.keys
+  end
+
   belongs_to :village, class_name: 'Zone'
   globally_has_many :diagnostics, dependent: :destroy do
     def build_with_answers data={}
@@ -33,7 +37,6 @@ class Child < ActiveRecord::Base
 
   VACCINATIONS = {
     v_bcg: 'BCG',
-    v_rota: 'Rotavirus',
     v_polio0: 'Polio-0',
     v_polio1: 'Polio-1',
     v_polio2: 'Polio-2',
@@ -41,13 +44,70 @@ class Child < ActiveRecord::Base
     v_penta1: 'Penta-1',
     v_penta2: 'Penta-2',
     v_penta3: 'Penta-3',
-    v_measles: 'Antirougeoleux',
-    v_measles_r16: 'Rappel rougeole à 16 mois',
-    v_meningitis: 'Méningite',
+    v_pneumo1: 'Pneumo-1',
+    v_pneumo2: 'Pneumo-2',
+    v_pneumo3: 'Pneumo-3',
+    v_rota1: 'Rotavirus-1',
+    v_rota2: 'Rotavirus-2',
+    v_rota3: 'Rotavirus-3',
+    v_measles1: 'Antirougeoleux',
+    v_measles2: 'Rappel rougeole à 16 mois',
+    v_yellow: 'Fiẻvre Jaune'
   }
 
+  VACCINATION_AGES = {
+    v_bcg: 0,
+    v_polio0: 0, # to 14 days
+    v_polio1: 8.weeks,
+    v_polio2: 12.weeks,
+    v_polio3: 16.weeks,
+    v_penta1: 8.weeks,
+    v_penta2: 12.weeks,
+    v_penta3: 16.weeks,
+    v_pneumo1: 8.weeks,
+    v_pneumo2: 12.weeks,
+    v_pneumo3: 16.weeks,
+    v_rota1: 8.weeks,
+    v_rota2: 12.weeks,
+    v_rota3: 16.weeks,
+    v_measles1: 9.months,
+    v_measles2: 15.months,
+    v_yellow: 9.months
+  }
+
+  VACCINATION_TOP_AGES = {
+    v_polio0: 14.days
+  }
+
+  def displayed_vaccinations
+    if born_on
+      born = born_on.to_time
+      now = Time.now
+      VACCINATIONS.select do |k,v|
+        va = VACCINATION_AGES[k]
+        va.zero? || born + va < now
+      end
+    else
+      {}
+    end
+  end
+
+  def form_vaccinations
+    if born_on
+      born = born_on.to_time
+      now = Time.now
+      VACCINATIONS.select do |k,v|
+        va = VACCINATION_AGES[k]
+        vta = VACCINATION_TOP_AGES[k]
+        (va.zero? || born + va < now) && (!vta || born + vta < now)
+      end
+    else
+      {}
+    end
+  end
+
   def vaccinations
-    VACCINATIONS.select { |k,v| send(k) }.map &:last
+    VACCINATIONS.select { |k,v| send(k) }.values
   end
 
   def name
