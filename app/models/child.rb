@@ -12,7 +12,11 @@ class Child < ActiveRecord::Base
   validates_presence_of :mother, on: :create, unless: :temporary?
 
   validate do
-    errors.add_on_blank form_vaccinations.keys
+    errors.add_on_blank form_vaccinations.keys unless @skip_vaccination_validations
+  end
+
+  after_save do
+    remove_instance_variable :@skip_vaccination_validations if defined?(@skip_vaccination_validations)
   end
 
   belongs_to :village, class_name: 'Zone'
@@ -78,6 +82,10 @@ class Child < ActiveRecord::Base
   VACCINATION_TOP_AGES = {
     v_polio0: 14.days
   }
+
+  def skip_vaccination_validations!
+    @skip_vaccination_validations = true
+  end
 
   def displayed_vaccinations
     if born_on

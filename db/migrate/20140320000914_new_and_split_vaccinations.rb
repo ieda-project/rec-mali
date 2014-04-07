@@ -1,31 +1,30 @@
 require 'stringio'
 
 class NewAndSplitVaccinations < ActiveRecord::Migration
-  SPLITS = {
+  CHANGES = {
     'bcg_polio0'    => %w(v_bcg v_polio0),
     'penta1_polio1' => %w(v_penta1 v_polio1),
     'penta2_polio2' => %w(v_penta2 v_polio2),
     'penta3_polio3' => %w(v_penta3 v_polio3),
+    'measles'       => %w(v_measles1)
   }
-
-  RENAMES = { 'measles' => 'v_measles1' }
 
   NEW = %w(v_pneumo v_rota v_measles_r16)
 
   class << self
     def up
-      for col in (Child::VACCINATIONS.keys.map(&:to_s) - RENAMES.values)
-        add_column :children, col, :boolean
+      for col in Child::VACCINATIONS.keys
+        add_column :children, col, :integer
       end
 
-      sets = []
-      SPLITS.each do |from, to|
-        to.each do |i|
-          sets << "#{i}=#{from}"
-        end
+      for src, dst in CHANGES
+        y = dst.map { |i| "#{i}=1" }.join(',')
+        n = dst.map { |i| "#{i}=0" }.join(',')
+        execute "UPDATE children SET #{y} WHERE #{src}='t'"
+        execute "UPDATE children SET #{n} WHERE #{src}='f'"
       end
 
-      send Child.connection.adapter_name.downcase, sets
+      send Child.connection.adapter_name.downcase
 
       Child.reset_column_information
     end
@@ -36,29 +35,17 @@ class NewAndSplitVaccinations < ActiveRecord::Migration
 
     protected
 
-    def postgresql sets
-      execute "UPDATE children SET #{sets.join(',')}"
-
-      RENAMES.each do |from, to|
-        execute "ALTER TABLE children RENAME COLUMN #{from} TO #{to}"
-      end
-
-      SPLITS.keys.each { |i| remove_column :children, i }
+    def postgresql
+      CHANGES.keys.each { |i| remove_column :children, i }
     end
 
-    def sqlite sets
-      RENAMES.each do |from, to|
-        add_column :children, to, :boolean
-        sets << "#{to}=#{from}"
-      end
-      execute "UPDATE children SET #{sets.join(',')}"
-
+    def sqlite
       meta = Class.new ActiveRecord::Base
       meta.table_name = 'sqlite_master'
       meta.inheritance_column = :bogus
 
       Child.reset_column_information
-      cols = (Child.column_names - RENAMES.keys - SPLITS.keys).join(',')
+      cols = (Child.column_names - CHANGES.keys).join(',')
       old = ruby_schema
 
       meta.where(type: 'index', tbl_name: 'children').each do |idx|
@@ -72,7 +59,7 @@ class NewAndSplitVaccinations < ActiveRecord::Migration
     end
 
     def ruby_schema
-      re = Regexp.new %Q|"(#{(RENAMES.keys + SPLITS.keys).join('|')})"|
+      re = Regexp.new %Q|"(#{(CHANGES.keys).join('|')})"|
       out = StringIO.new
       ActiveRecord::SchemaDumper.send(:new, Child.connection).send(:table, "children", StringIO.new).tap do |sio|
         sio.rewind

@@ -26,7 +26,7 @@ $extend(Element, {
 // Globals for AS-JS communication
 
 var today, photo_saved, photo_params, auto_answer = {},
-    sel_classes = { dunno: 0, yes: 2, no: 1 };
+    sel_classes = { dunno: 3, yes: 2, no: 1 }; // order!
 
 // AlertBox
 
@@ -230,6 +230,7 @@ window.addEvent('domready', function() {
                   el.inject(vacc) });
                 dom[0].getElements('section.illness').each(function (sec) {
                   sec.inject(tgt) });
+                head_selects = document.getElements('.profile-child select');
                 vacc.updated();
                 illnesses_updated();
                 tgt.updated();
@@ -343,7 +344,7 @@ window.addEvent('domready', function() {
 
     var head_inputs = document.getElements('.profile-child input[type=text]'),
         warnings = $$('.profile-child .warn'),
-        head_selects = document.getElements('#child_gender, select[id^=child_born_on], #child_village_id, #diagnostic_distance');
+        head_selects = document.getElements('.profile-child select');
 
     head_inputs.each(function(i) {
       if (i.get('data-validate')) {
@@ -893,6 +894,6 @@ function set_sc(sel) {
   switch (sel.selectedIndex) {
     case 1: div.removeClass('yes').removeClass('dunno').addClass('no'); break;
     case 2: div.removeClass('no').removeClass('dunno').addClass('yes'); break;
-    default: div.removeClass('yes').removeClass('no').addClass('dunno');
+    case 3: div.removeClass('yes').removeClass('no').addClass('dunno');
   }
 }

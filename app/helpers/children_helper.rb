@@ -54,9 +54,9 @@ module ChildrenHelper
 
   def vacc_class val
     case val
-    when true then 'yes'
-    when false then 'no'
-    else 'dunno'
+    when 0 then 'no'
+    when 1 then 'yes'
+    when 2 then 'dunno'
     end
   end
 end

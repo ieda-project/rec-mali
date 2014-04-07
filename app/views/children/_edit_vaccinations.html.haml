@@ -3,5 +3,5 @@
   - child.form_vaccinations.each_slice(3) do |slice|
     %tr
       - for key, name in slice do
-        %td= form.select key, [nil, 0, 1], { selected: bool_to_select(child.send(key)) }, :class => 'boolean nullable negative'
+        %td= form.select key, [nil, 0, 1, 2], { selected: bool_to_select(child.send(key)) }, :class => 'boolean nullable negative'
         %th= form.label key, name

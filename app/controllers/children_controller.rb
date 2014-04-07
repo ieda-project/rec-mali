@@ -164,7 +164,9 @@ class ChildrenController < ApplicationController
   end
 
   def update
+    @child.skip_vaccination_validations!
     display_updated @child.update_attributes(@data)
+    puts @child.errors
   end
 
   def destroy
