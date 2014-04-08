@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   globally_has_many :diagnostics, as: :author
   has_many :events
 
+  before_validation do
+    self.name = name.strip.gsub(/\s+/, ' ') if name.present?
+  end
+
   validates_presence_of :name
   validates_presence_of :password, :on => :create
   validates_presence_of :password_confirmation, :if => :password
