@@ -7,10 +7,11 @@ class ChildrenController < ApplicationController
   helper Ziya::HtmlHelpers::Charts
   helper Wopata::Ziya::HtmlHelpersFix
 
-  class Search < Struct.new(:name, :born_on, :village_id, :identifier)
+  class Search < Struct.new(:name, :mother, :born_on, :village_id, :identifier)
     def to_params_hash
       @hash ||= {}.tap do |h|
         h[:name] = name if name.present?
+        h[:mother] = mother if mother.present?
         h[:born] = born_on if born_on.present?
         h[:village] = village_id if village_id.present?
         h[:identifier] = identifier if identifier.present?

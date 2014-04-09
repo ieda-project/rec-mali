@@ -35,6 +35,9 @@
       %div
         %label Nom et/ou prénom
         = text_field_tag :name
+      %div
+        %label Nom de la mère
+        = text_field_tag :mother
       .select
         %label Année de naissance
         = select_tag :born, options_for_select((0..20).to_a.map {|y| [Date.today.year - y]*2}), :include_blank => 'Toutes les années'
