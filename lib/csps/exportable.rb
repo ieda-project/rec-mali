@@ -11,6 +11,7 @@ module Csps::Exportable
 
     @gbt = Set.new
 
+    before_validation :fill_uqid
     before_save :fill_uqid
     after_save :register_change
     validate :validate_csps
