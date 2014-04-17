@@ -12,18 +12,34 @@ module Csps::Exportable
     @gbt = Set.new
 
     before_validation :fill_uqid
-    before_save :fill_uqid
+    before_save :fill_uqid # (in case validations are deliberately skipped)
     after_save :register_change
     validate :validate_csps
     belongs_to :zone
     scope :with_global_refs, ->() { includes(*global_refs) }
   end
 
-  def self.models
-    Dir.glob("#{Rails.root}/app/models/*.rb").each do |f|
-      File.basename(f)[0..-4].camelize.constantize
+  @mutex = Mutex.new
+  @t = 0
+
+  class << self
+    def models
+      Dir.glob("#{Rails.root}/app/models/*.rb").each do |f|
+        File.basename(f)[0..-4].camelize.constantize
+      end
+      MODELS.map &:constantize
     end
-    MODELS.map &:constantize
+
+    def uqid_time
+      t = (Time.now.to_f*1000).to_i
+      @mutex.synchronize do
+        if t > @t
+          @t = t
+        else
+          @t += 1
+        end
+      end
+    end
   end
 
   def zone_name
@@ -51,7 +67,7 @@ module Csps::Exportable
   def fill_uqid
     if uqid.blank? || uqid.zero?
       zid = Zone.csps.id
-      self.uqid = (zid << 48) | (Time.now.to_f * 1000).to_i
+      self.uqid = (zid << 48) | Csps::Exportable.uqid_time
       self.zone_id = zid
     end
     true
