@@ -6,10 +6,12 @@ danger|Pas de signe général de danger|low|!@signes_danger
 danger|Signe général de danger présent|high|@signes_danger
 
 
-@pneumonie_grave = toux.toux_presence AND (@signes_danger OR toux.tirage OR toux.stridor)
 
-toux|Pas de pneumonie : toux ou rhume|low|toux.toux_presence AND (toux.freq_resp <= 40) AND !toux.tirage AND !toux.stridor AND !@signes_danger
-toux|Pneumonie|medium|toux.toux_presence AND (toux.freq_resp > 40) AND !toux.tirage AND !toux.stridor AND !@signes_danger
+@pneumonie_grave = toux.toux_presence AND (@signes_danger OR toux.tirage OR toux.stridor)
+@frequence_elevee = ((enfant.months >= 12) AND (toux.freq_resp >= 40)) OR ((enfant.months < 12) AND (toux.freq_resp >= 50))
+
+toux|Pas de pneumonie : toux ou rhume|low|toux.toux_presence AND !@frequence_elevee AND !toux.tirage AND !toux.stridor AND !@signes_danger
+toux|Pneumonie|medium|toux.toux_presence AND @frequence_elevee AND !toux.tirage AND !toux.stridor AND !@signes_danger
 toux|Pneumonie grave ou maladie très grave|high|@pneumonie_grave
 
 
