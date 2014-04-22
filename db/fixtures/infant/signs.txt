@@ -1,21 +1,21 @@
-$version 1
+$version 2
 ## NOURRISSON
 
 ## INFECTION BACTERIENNES
 inf_bac|Infection Bactériennes
-  qa|Demander: Le nourrisson a-t-il eu des convulsions ?|boolean	
-  qb|Compter les respirations par minute; si leur nombre est élevé, compter à nouveau (rapide => plus 60 respirations par minutes)|list|normales;rapides
-  qc|Rechercher un tirage sous-costal grave|boolean
-  qd|Rechercher un battement des ailes du nez|boolean	
-  qe|Ecouter si le nourrisson émet un geignement|boolean
-  qf|Palper la fontanelle pour sentir si elle est bombée|boolean
-  qg|Regarder s’il y a un écoulement de pus de l’oreille|boolean
-  qh|Regarder si l’ombilic est rouge ou suintant de pus|boolean
-  qi|La rougeur s'étend-elle à la peau ?|boolean
-  qj|Mesurer la température. Le nourrisson a-t-il de la ou fièvre (> 37.5) ou est-il hypothermique (< 35.5 ou froid au toucher) ?|list|normale;hypothermique;fievre
-  qk|Rechercher les pustules cutanées. Sont-elles nombreuses ou sévères?|list|absentes;presentes;nombreuses_severes
-  ql|L'enfant est-il normal, agité ou irritable, léthargique ou inconscient ?|list|normal;agite_irritable;lethargique_inconscient
-  qm|Regarder les mouvements du nourrisson : Bouge-t-il moins que la normale?|boolean
+  1:qa|Demander: Le nourrisson a-t-il eu des convulsions ?|boolean	
+  ---qb|Compter les respirations par minute; si leur nombre est élevé, compter à nouveau (rapide => plus 60 respirations par minutes)|list|normales;rapides
+  3:qc|Rechercher un tirage sous-costal grave|boolean
+  4:qd|Rechercher un battement des ailes du nez|boolean	
+  5:qe|Ecouter si le nourrisson émet un geignement|boolean
+  6:qf|Palper la fontanelle pour sentir si elle est bombée|boolean
+  7:qg|Regarder s’il y a un écoulement de pus de l’oreille|boolean
+  8:qh|Regarder si l’ombilic est rouge ou suintant de pus|boolean
+  9;qi|La rougeur s'étend-elle à la peau ?|boolean
+  10:qj|Mesurer la température. Le nourrisson a-t-il de la ou fièvre (> 37.5) ou est-il hypothermique (< 35.5 ou froid au toucher) ?|list|normale;hypothermique;fievre
+  11:qk|Rechercher les pustules cutanées. Sont-elles nombreuses ou sévères?|list|absentes;presentes;nombreuses_severes
+  12:ql|L'enfant est-il normal, agité ou irritable, léthargique ou inconscient ?|list|normal;agite_irritable;lethargique_inconscient
+  13:qm|Regarder les mouvements du nourrisson : Bouge-t-il moins que la normale?|boolean
 
 ## DIARRHEE
 diarrhee|Diarrhée
@@ -48,3 +48,8 @@ vih|Recherche d'une infection VIH
   qh|Pneumonie grave récurrente|boolean
   qi|Encéphalopathie|boolean
   qj|Sérologie mère|list|inconnue;negative;positive
+
+yield
+
+inf_bac|Infection Bactériennes
+  2:freq_resp|Compter la fréquence respiratoire|integer|10|120

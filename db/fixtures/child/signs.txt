@@ -1,4 +1,4 @@
-$version 2
+$version 3
 ## Illness / Signs ##
 
 danger|Signes de danger
@@ -68,4 +68,4 @@ vih|VIH
 yield
 
 toux|Toux
-  3:freq_resp|Fréquence respiratoire|integer|10|120
+  3:freq_resp|Compter la fréquence respiratoire|integer|10|120
