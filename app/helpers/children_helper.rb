@@ -57,6 +57,7 @@ module ChildrenHelper
     when 0 then 'no'
     when 1 then 'yes'
     when 2 then 'dunno'
+    else 'missing'
     end
   end
 end
