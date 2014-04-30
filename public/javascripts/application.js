@@ -391,7 +391,7 @@ window.addEvent('domready', function() {
         if (was_score_valid != scores_valid) changes = true;
         if (!(form.tree.enfant.months >= 0) || form.tree.months >= 60) measurements_valid = false;
         head_selects.each(function(i) {
-          var opt = i.selectedOptions[0]
+          var opt = i.getChildren('option')[i.selectedIndex];
           if (!i.value && (!opt || !opt.get('data-village'))) measurements_valid = false; // HACK HACK
           if (i.prev_opt != opt) {
             changes = true
@@ -779,8 +779,7 @@ Element.behaviour(function() {
           onSuccess: function() {
             div.getElement('form').addEvent('submit', function(e) {
               if (div.getElements('.required').some(function (i) {
-                var opt=null;
-                if (i.selectedOptions) opt=i.selectedOptions[0];
+                var opt=i.getElements('option')[i.selectedIndex];
                 if (!i.value && (!opt || !opt.get('data-village'))) {
                   alert("Un champ obligatoire est manquant.");
                   i.focus();
