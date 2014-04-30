@@ -185,7 +185,7 @@ button
     margin: auto
     border: 3px solid #d3d3d0
     -webkit-border-radius: 12px
-    div>*
+    button, input, select
       display: inline-block
       width: 200px
       font-size: 1.3em
@@ -740,7 +740,7 @@ section
     clear: both
     margin: 10px 0 0
     overflow: hidden
-    color: #666
+    color: #676767
     input
       margin: 0 0 0 5px
     label
@@ -750,19 +750,19 @@ section
     table
       background-color: white
     td
-      text-align: right
-      &.dunno, &.yes, &.no
-        text-align: left
-        padding-left: 20px
-        background-position: center left
-        background-repeat: no-repeat
-      &.dunno
+      text-align: left
+      padding-left: 20px
+      background-position: center left
+      background-repeat: no-repeat
+      &.dunno, &.missing
         background-image: url(../images/icons/dunno.gif)
         background-position: 1px
       &.yes
         background-image: url(../images/icons/check.gif)
       &.no
         background-image: url(../images/icons/no.gif)
+      &.missing
+        color: #ff6767
     th
       padding-right: 10px
   .measurements
