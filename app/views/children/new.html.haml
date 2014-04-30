@@ -14,6 +14,12 @@
         L'âge de l'enfant doit être compris entre 0 et 59 mois.
       .next
         %button.next(type="button") Continuer
-  %div.illnesses
+  .illnesses
+
+  %section.other
+    %h2 Autres problèmes de santé
+    = form.fields_for :diagnostic, @diagnostic do |fields|
+      = fields.text_area :other_problems, cols:20, rows:5
+
   %nav
     %button.validation(type="submit") Choisir les traitements

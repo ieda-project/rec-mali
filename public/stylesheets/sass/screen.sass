@@ -956,7 +956,7 @@ section
     h2.resume
       cursor: auto
       background-position: 0 -168px
-  &.treatment
+  &.treatment, &.other
     font-weight: bold
     color: black
     line-height: 1.4em
@@ -996,7 +996,7 @@ section
     h2
       cursor: auto !important
 
-  &.illness, &.consultation, &.resume, &.treatment
+  &.illness, &.consultation, &.resume, &.treatment, &.other
     &.list-arrow
       ul
         margin: 10px 0 0
@@ -1416,3 +1416,6 @@ span.remark
 
 .form-errors
   background-color: #ffd
+
+#new_child section.other
+  display: none

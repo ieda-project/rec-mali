@@ -183,7 +183,8 @@ window.addEvent('domready', function() {
 
   document.getElements('form.diagnostic').each(function (form) {
     var current_illness = null, first = null, illnesses_updated = null,
-        button = form.getElement('button[type=submit]').addClass('disabled');
+        button = form.getElement('button[type=submit]').addClass('disabled'),
+        other = $$('form#new_child section.other');
 
     form.tree = { enfant: {} };
     function illnesses() { return form.getElements('section.illness') };
@@ -208,6 +209,7 @@ window.addEvent('domready', function() {
             tgt = form.getElement('div.illnesses');
         $$('select[id^='+stem+'_]').addEvent('change', function() {
           tgt.set('html', '');
+          other.setStyle('display', 'none');
           if (!y.value || !m.value || !d.value) {
             vacc.set('html', '');
             return
@@ -225,6 +227,7 @@ window.addEvent('domready', function() {
             form.tree.enfant.age = (months / 12).floor();
             new Request.HTML({
               onSuccess: function(dom) {
+                other.setStyle('display', 'block');
                 vacc.set('html', '')
                 dom[0].getElements('.vaccinations>*').each(function (el) {
                   el.inject(vacc) });
