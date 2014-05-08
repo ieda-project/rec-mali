@@ -7,9 +7,11 @@ class DiagnosticsController < ApplicationController
   helper Wopata::Ziya::HtmlHelpersFix
 
   def questionnaire
-    @diagnostic = @child.diagnostics.build_with_answers(born_on: params[:born_on])
+    @diagnostic = @child.diagnostics.build_with_answers(born_on: params[:born_on], done_on: params[:done_on])
     @child.born_on = @diagnostic.born_on # for vaccinations
-    render layout: false
+    @child.with_date_as @diagnostic.done_on do
+      render layout: false
+    end
   end
 
   def show?
@@ -86,6 +88,9 @@ class DiagnosticsController < ApplicationController
   def edit
     return see_other([@child, @diagnostic]) if @diagnostic.retired_signs?
     back "L'evaluation", [@child, @diagnostic]
+    @child.with_date_as @diagnostic.done_on do
+      render
+    end
   end
 
   def update
@@ -99,8 +104,13 @@ class DiagnosticsController < ApplicationController
 
     Diagnostic.transaction do
       @diagnostic.sign_answers.process params[:diagnostic].delete(:sign_answers)
-      @child.update_attributes params[:diagnostic].delete(:child)
+
+      chattrs = params[:diagnostic].delete(:child)
       @diagnostic.attributes = params[:diagnostic]
+      @child.with_date_as @diagnostic.done_on do
+        @child.update_attributes chattrs
+      end
+
       if @diagnostic.save
         case @diagnostic.state
           when 'filled'

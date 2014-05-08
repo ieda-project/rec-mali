@@ -103,15 +103,21 @@ class Child < ActiveRecord::Base
   def form_vaccinations
     if born_on
       born = born_on.to_time
-      now = Time.now
+      now = @now || Time.now
       VACCINATIONS.select do |k,v|
         va = VACCINATION_AGES[k]
         vta = VACCINATION_TOP_AGES[k]
-        (va.zero? || born + va < now) && (!vta || born + vta < now)
+        (va.zero? || born + va < now) && (!vta || born + vta > now)
       end
     else
       {}
     end
+  end
+
+  def with_date_as now
+    @now = now
+    yield
+    remove_instance_variable :@now
   end
 
   def vaccinations
