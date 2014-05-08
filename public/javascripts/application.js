@@ -10,6 +10,10 @@ Date.prototype.fullMonthsFrom = function(a) {
   if (this.getDate() < a.getDate()) diff -= 1;
   return diff }
 
+Date.prototype.toISODateString = function() {
+  return this.toISOString().substr(0,10);
+}
+
 function $E(a,b) { return document.getElement(a,b) }
 Element.implement({
   classes: function() { return this.className.split(/\s+/) },
@@ -166,7 +170,7 @@ window.addEvent('domready', function() {
       this.title = null;
     }});
 
-  var link, next
+  var link, next;
   if (link = $E('link.auto-post')) {
     new Request.JSON({
       url: link.get('href'),
@@ -215,8 +219,7 @@ window.addEvent('domready', function() {
             return
           }
 
-          var bd = new Date(y.value+'-'+m.value+'-'+d.value), months,
-              iso = bd.toISOString().replace(/T.*$/, '');
+          var bd = new Date(y.value+'-'+m.value+'-'+d.value), months;
 
           if (bd.getDate() == d.value && bd < today &&
              (months = ((today.getFullYear() - y.value.toInt())*12) +
@@ -239,8 +242,8 @@ window.addEvent('domready', function() {
                 tgt.updated();
             }}).get(
               form.get('data-questionnaire') +
-              '?born_on='+
-              iso);
+              '?born_on='+bd.toISODateString()+
+              '&done_on='+today.toISODateString());
           } else {
             vacc.set('html', '');
             delete form.tree.enfant.days;
@@ -549,13 +552,14 @@ window.addEvent('domready', function() {
     illnesses_updated = function() {
       var is = illnesses();
       is.each(function (i,j) {
+        var iKey = i.get('data-key');
         i.addClass('closed').getElement('h2').addEvent('click', function() {
           if (current_illness == i) return
           var yes = current_illness && current_illness.getAllPrevious('section.illness').some(function(ii) {
             return ii == i })
           yes ? open_illness(i) : alert_fill() })
         i.fields = i.getElements('input[type=text], input[type=radio], select');
-        var obj = form.tree[i.get('data-key')] = {}
+        var obj = form.tree[iKey] = {}
         function copy_value(sign) {
           var value
           switch (sign.type) {
@@ -583,18 +587,21 @@ window.addEvent('domready', function() {
           var change = false;
           i.getElements('td.answer').each(function (td) {
             var flds = td.getElements('input[type=radio], input[type=text], select'), s = flds[0];
+
             if (s.dep) {
               var old = s.disabled;
               flds.set('disabled', !s.dep(form.tree));
               if (old != s.disabled) {
                 change = true;
                 if (s.disabled) {
+                  delete obj[s.get('data-key')];
                   td.getChildren().each(function (el) {
                     el.old_display = el.getStyle('display');
                     el.setStyle('display', 'none') });
                   new Element('input', { class: 'nonapp', type: 'hidden', name: s.name, value: '' }).inject(td);
                   new Element('div', { class: 'nonapp', text: 'Non applicable' }).inject(td);
                 } else {
+                  copy_value(s);
                   td.getElements('.nonapp').dispose();
                   td.getChildren().each(function (el) { el.setStyle('display', el.old_display) })}}}});
           if (validate && change) validate_illness(i) };
