@@ -1,4 +1,4 @@
-$version 2
+$version 5
 ## NOURRISSON
 
 ## INFECTION BACTERIENNES
@@ -38,18 +38,22 @@ alimentation|Alimentation ou insuffisance pondérale
 
 ## VIH
 vih|Recherche d'une infection VIH
-  qa|Lymphadénopathie persistante généralisée|boolean
-  qb|Hépatomégalie|boolean
-  qc|Splénomégalie|boolean	
-  qd|Otite moyenne chronique / récurrente|boolean
-  qe|Problèmes cutanéo-muqueux|boolean
-  qf|Fièvre > 1 mois|boolean
-  qg|Anémie|boolean
-  qh|Pneumonie grave récurrente|boolean
-  qi|Encéphalopathie|boolean
-  qj|Sérologie mère|list|inconnue;negative;positive
+  1:qa|Lymphadénopathie persistante généralisée|boolean
+  2:qb|Hépatomégalie|boolean
+  3:qc|Splénomégalie|boolean	
+  4:qd|Otite moyenne chronique / récurrente|boolean
+  5:qe|Problèmes cutanéo-muqueux|boolean
+  6:qf|Fièvre > 1 mois|boolean
+  7:qg|Anémie|boolean
+  8:qh|Pneumonie grave récurrente|boolean
+  9:qi|Encéphalopathie|boolean
+  11:qj|Sérologie mère|list|inconnue;negative;positive
 
 yield
 
 inf_bac|Infection Bactériennes
   2:freq_resp|Compter la fréquence respiratoire|integer|10|120
+
+vih|Recherche d'une infection VIH
+  10:qk|Muguet buccal (hors période néonatale)|boolean
+  11:ql|PCR Enfant|list|inconnue;negative;positive

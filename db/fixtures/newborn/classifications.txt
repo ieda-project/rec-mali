@@ -1,4 +1,4 @@
-$version 3
+$version 4
 
 @maladie_grave = inf_bac.qa OR inf_bac.qb OR (inf_bac.freq_resp >= 60) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi
 @infection_locale = inf_bac.qj OR inf_bac.qg
@@ -23,7 +23,7 @@ inf_occ|Pas d'infection occulaire|low|!inf_occ.qa
 
 @signes_vih = AT_LEAST_TWO_OF(vih.qb, vih.qc, vih.qd, vih.qe, vih.qf, vih.qg)
 
-vih|Infection VIH symptomatique probable|high|(vih.qa == positif) AND @signes_vih
+vih|Infection VIH symptomatique probable|medium|(vih.qa == positif) AND @signes_vih
 vih|Infection VIH symptomatique possible|medium|(vih.qa == inconnu) AND @signes_vih
 vih|Infection VIH peu problable|low|(vih.qa == negatif_grossesse) OR !@signes_vih
 

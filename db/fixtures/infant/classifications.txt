@@ -1,4 +1,4 @@
-$version 2
+$version 7
 
 @infection_bac_grave = inf_bac.qa OR (inf_bac.freq_resp >= 60) OR inf_bac.qc OR inf_bac.qd OR inf_bac.qe OR inf_bac.qf OR inf_bac.qg OR (inf_bac.qh AND inf_bac.qi) OR (inf_bac.qj != normale) OR (inf_bac.qk == nombreuses_severes) OR (inf_bac.ql == lethargique_inconscient) OR inf_bac.qm
 
@@ -34,8 +34,13 @@ alimentation|Pas de poids faible et/ou pas de problème d’alimentation|low|!@i
 
 
 
-@signes_vih = AT_LEAST_TWO_OF(vih.qa, vih.qb, vih.qc, vih.qd, vih.qe, diarrhee.qa AND (diarrhee.qb >= 14), vih.qf, vih.qg, vih.qh, (enfant.weight < 1.5), alimentation.qh, vih.qi)
+@au_moins_deux_signes_vih = AT_LEAST_TWO_OF(vih.qa, vih.qb, vih.qc, vih.qd, vih.qe, diarrhee.qa AND (diarrhee.qb >= 14), vih.qf, vih.qg, vih.qh, (enfant.weight < 1.5), alimentation.qh, vih.qi, vih.qk)
 
-vih|Infection VIH symptomatique très probable|high|(vih.qj == positive) AND @signes_vih
-vih|Infection VIH symptomatique possible|medium|(vih.qj == inconnue) AND @signes_vih
-vih|Infection VIH peu problable|low|(vih.qj == negative) OR !@signes_vih
+@pas_signes_vih = !vih.qa AND !vih.qb AND !vih.qc AND !vih.qd AND !vih.qe AND !(diarrhee.qa AND (diarrhee.qb >= 14)) AND !vih.qf AND !vih.qg AND !vih.qh AND !(enfant.weight < 1.5) AND !alimentation.qh AND !vih.qi AND !vih.qk
+
+vih|Infection VIH symptomatique très probable|high|REMOVED
+vih|Infection VIH symptomatique confirmée|medium|(vih.qj == positive) AND (vih.ql == positive) AND @au_moins_deux_signes_vih
+vih|Infection VIH asymptomatique confirmée|medium|(vih.qj == positive) AND (vih.ql == positive) AND @pas_signes_vih
+vih|Infection VIH symptomatique possible|medium|(vih.qj == inconnue) AND @au_moins_deux_signes_vih
+vih|Infection VIH peu problable|low|(vih.qj == negative) AND @au_moins_deux_signes_vih AND (vih.ql != negative)
+vih|Pas d'infection VIH|low|(vih.qj == negative) AND (vih.ql == negative)

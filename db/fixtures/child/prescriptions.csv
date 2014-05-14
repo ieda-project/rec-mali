@@ -103,5 +103,5 @@ m,signes_deshydratation,m26,10 jours,,{{name}} - {{dosage}} pendant {{duration}}
 m,paludisme_simple,artemether:lumefantrine_enfant,,,{{name}} - 2cp par jour pendant 3 jours
 m,paludisme_simple,artemether:amodiaquine_enfant,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,anemie,artemether:lumefantrine_enfant,,,{{name}} - 2cp par jour pendant 3 jours
-m,anemie,artemether:amodiaquine_enfant,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,anemie,artemether:amodi\n_enfant,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,pas_deshydratation,m26,10 jours,,{{name}} - {{dosage}} pendant {{duration}}
