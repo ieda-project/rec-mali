@@ -1,4 +1,4 @@
-$version 18
+$version 21
 
 @signes_danger = danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulsions_present
 
@@ -64,7 +64,7 @@ anemie|Anémie grave|high|@anemie_grave
 
 
 
-@classifications_graves = @signes_danger OR @pneumonie_grave OR @deshydratation_severe OR @diarrhee_persistente_severe OR @rougeole_compliquee OR @paludisme_grave
+@classifications_graves = @signes_danger OR @pneumonie_grave OR @deshydratation_severe OR @diarrhee_persistente_severe OR @rougeole_compliquee OR @paludisme_grave OR @anemie_grave OR @mastoidite
 
 
 
