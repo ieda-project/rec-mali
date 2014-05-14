@@ -1,4 +1,4 @@
-$version 14
+$version 17
 
 @signes_danger = danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulsions_present
 
@@ -30,8 +30,9 @@ diarrhee|Diarrhée persistente sévère|high|@diarrhee_persistente_severe
 diarrhee|Dysenterie|medium|diarrhee.diarrhee_presence AND diarrhee.sang_selles
 
 
-
+@tdr_ok = (fievre.tdr == tdr+) OR (fievre.tdr == non_disponible)
 @paludisme_grave = fievre.fievre_presence AND (fievre.raideur_nuque OR fievre.urines_foncees OR fievre.saignements_anormaux OR fievre.ictere OR fievre.choc OR @signes_danger)
+
 @signes_rougeole = (fievre.eruption_cutanee == eruption) AND (fievre.ecoulement_nasal OR fievre.yeux_rouge OR toux.toux_presence)
 @rougeole_ou_antecedent = (fievre.eruption_cutanee == antecedent) OR @signes_rougeole
 @rougeole_compliquee = fievre.fievre_presence AND @rougeole_ou_antecedent AND (fievre.cornee OR (fievre.ulcerations == profondes_etendues) OR @signes_danger)
@@ -40,8 +41,11 @@ fievre|Antécédent de rougeole|low|fievre.fievre_presence AND (fievre.eruption_
 fievre|Rougeole|medium|fievre.fievre_presence AND @signes_rougeole AND !fievre.cornee AND !fievre.ecoulement_oculaire AND (fievre.ulcerations == absentes) AND !@signes_danger
 fievre|Rougeole avec complication aux yeux ou à la bouche|medium|fievre.fievre_presence AND @rougeole_ou_antecedent AND ((fievre.ecoulement_oculaire OR (fievre.ulcerations == presentes))) AND !@rougeole_compliquee
 fievre|Rougeole grave et compliquée|high|@rougeole_compliquee
-fievre|Paludisme simple|medium|fievre.fievre_presence AND !@paludisme_grave
-fievre|Maladie fébrile très grave ou paludisme grave|high|@paludisme_grave
+
+fievre|TDR négatif|medium|fievre.fievre_presence AND !@tdr_ok AND !@paludisme_grave
+fievre|Paludisme simple|medium|fievre.fievre_presence AND @tdr_ok AND !@paludisme_grave
+fievre|Maladie fébrile très grave et TDR négatif|high|@paludisme_grave AND !@tdr_ok
+fievre|Maladie fébrile très grave ou paludisme grave|high|@paludisme_grave AND @tdr_ok
 
 
 
@@ -70,8 +74,11 @@ anemie|Anémie grave|high|@anemie_grave
 
 malnutrition|Non applicable : enfant de moins de 6 mois|low|enfant.months < 6
 malnutrition|Pas de malnutrition|low|(enfant.months >= 6) AND @ma_normal AND (malnutrition.oedemes == no)
+
 malnutrition|MAM|medium|(enfant.months >= 6) AND @ma_mam AND (malnutrition.oedemes == no)
+
 malnutrition|MASs|medium|(enfant.months >= 6) AND @ma_mas AND (malnutrition.test_appetit == positif) AND (malnutrition.oedemes == no) AND !@classifications_graves
+
 malnutrition|MASc|high|(enfant.months >= 6) AND ((malnutrition.oedemes != no) OR (@ma_mas AND ((malnutrition.test_appetit == negatif)) OR @classifications_graves))
 
 

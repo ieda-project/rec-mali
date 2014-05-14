@@ -1,4 +1,4 @@
-$version 3
+$version 4
 Cotrimoxazole (antibio:1)
 mg-smx
 20/kg
@@ -33,13 +33,13 @@ mg
 
 Vitamine A - Capsules 200'000 UI (vitamine_a:200)
 capsule
-[0-9k[ >=6m 1/2
->=9k >=6m 1
+[6-12m[ 1/2
+>=12m 1
 
 Vitamine A - Capsules 100'000 UI (vitamine_a:100)
 capsule
-[0-9k[ >=6m 1
->=9k >=6m 2
+[6-12m[ 1
+>=12m 2
 
 Fer/Folate (m8)
 comprimé
@@ -99,13 +99,21 @@ Diazepam Injectable (m17)
 mg
 0.5/kg
 
-Artémether + Luméfantrine (artemether:lumefantrine)
-mg-art
-1.5/kg
+Artémether + Luméfantrine (artemether:lumefantrine_nourrisson)
+comprimé
+<12m 1
 
-Artésunate + Amodiaquine (artemether:amodiaquine)
-mg-art
-1.5/kg
+Artémether + Luméfantrine (artemether:lumefantrine_enfant)
+comprimé
+>=12m 1
+
+Artésunate + Amodiaquine - Forme Nourrisson (artemether:amodiaquine_nourrisson)
+comprimé
+[2-12m[ 1
+
+Artésunate + Amodiaquine - Forme Petit Enfant (artemether:amodiaquine_enfant)
+comprimé
+>=12m 1
 
 Ringer au lactate - phase 1 (perfusion_p1_a:ringer) 
 ml

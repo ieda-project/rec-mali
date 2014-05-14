@@ -1,4 +1,4 @@
-$version 3
+$version 8
 ## Illness / Signs ##
 
 danger|Signes de danger
@@ -25,20 +25,20 @@ diarrhee|Diarrhée
   pli_cutane|Pincer la peau de l’abdomen. Le pli cutané s’efface-t-il lentement ou très lentement (plus de 2 secondes) ?|list|normal;lentement;tres_lentement
 
 fievre|Fièvre
-  fievre_presence|L'enfant a-t-il de la fièvre (antécédents ou chaud au toucher ou temperature axillaire de plus 38°C ou température rectale de plus 37,5°C) ?|boolean
-  fievre_presence_duree|Depuis combien de jours ?|integer
-  fievre_presence_longue|Si depuis plus de 7 jours, la fièvre a-t-elle été présente tous les jours ?|boolean
-  urines_foncees|Signes de paludisme grave : L'enfant a t-il les urines foncées (Coca-Cola) ?|boolean
-  saignements_anormaux|Signes de paludisme grave : L’enfant a t-il eu des saignements ?|boolean
-  raideur_nuque|Signes de paludisme grave : Observer et rechercher une raideur de la nuque|boolean
-  ictere|Signes de paludisme grave : L'enfant a-t-il un ictère (yeux jaunes) ?|boolean
-  choc|Signes de paludisme grave : L'enfant est-il en choc (pouls rapide, extrémités froides) ?|boolean
-  eruption_cutanee|Signe de rougeole : L'enfant a-t-il une éruption généralisée de type rougeole ou eu une rougeole au cours des 3 derniers mois ?|list|aucun;eruption;antecedent
-  ecoulement_nasal|Signe de rougeole : L'enfant a-t-il un ecoulement nasal ?|boolean
-  yeux_rouge|Signe de rougeole : L'enfant a-t-il les yeux rouges ?|boolean
-  ecoulement_oculaire|Signe de complication de rougeole : L'enfant a-t-il un écoulement oculaire de pus ?|boolean
-  ulcerations|Signe de complication de rougeole : L'enfant a-t-il des ulcérations dans la bouche ?|list|absentes;presentes;profondes_etendues
-  cornee|Signe de complication de rougeole : L'enfant a-t-il une opacité de la cornée ?|boolean
+  1:fievre_presence|L'enfant a-t-il de la fièvre (antécédents ou chaud au toucher ou temperature axillaire de plus 38°C ou température rectale de plus 37,5°C) ?|boolean
+  2:fievre_presence_duree|Depuis combien de jours ?|integer
+  3:fievre_presence_longue|Si depuis plus de 7 jours, la fièvre a-t-elle été présente tous les jours ?|boolean
+  5:urines_foncees|Signes de paludisme grave : L'enfant a t-il les urines foncées (Coca-Cola) ?|boolean
+  6:saignements_anormaux|Signes de paludisme grave : L’enfant a t-il eu des saignements ?|boolean
+  7:raideur_nuque|Signes de paludisme grave : Observer et rechercher une raideur de la nuque|boolean
+  8:ictere|Signes de paludisme grave : L'enfant a-t-il un ictère (yeux jaunes) ?|boolean
+  9:choc|Signes de paludisme grave : L'enfant est-il en choc (pouls rapide, extrémités froides) ?|boolean
+  10:eruption_cutanee|Signe de rougeole : L'enfant a-t-il une éruption généralisée de type rougeole ou eu une rougeole au cours des 3 derniers mois ?|list|aucun;eruption;antecedent
+  11:ecoulement_nasal|Signe de rougeole : L'enfant a-t-il un ecoulement nasal ?|boolean
+  12:yeux_rouge|Signe de rougeole : L'enfant a-t-il les yeux rouges ?|boolean
+  13:ecoulement_oculaire|Signe de complication de rougeole : L'enfant a-t-il un écoulement oculaire de pus ?|boolean
+  14:ulcerations|Signe de complication de rougeole : L'enfant a-t-il des ulcérations dans la bouche ?|list|absentes;presentes;profondes_etendues
+  15:cornee|Signe de complication de rougeole : L'enfant a-t-il une opacité de la cornée ?|boolean
 
 oreille|Affection de l'oreille
   oreille_probleme|L'enfant a-t-il un problème à l'oreille ?|boolean
@@ -69,3 +69,6 @@ yield
 
 toux|Toux
   3:freq_resp|Compter la fréquence respiratoire|integer|10|120
+
+fievre|Fièvre
+  4:tdr|Réaliser un TDR|list|tdr+;tdr-;non_disponible

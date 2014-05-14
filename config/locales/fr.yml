@@ -122,6 +122,9 @@ fr:
     faible: faible
     tres_faible: Très faible
     negatif_grossesse: Négatif pendant la grossesse
+    tdr+: "Positif"
+    tdr-: "Négatif"
+    non_disponible: "Non disponible"
   indices:
     weight_age: Poids/Age
     height_age: Taille/Age
