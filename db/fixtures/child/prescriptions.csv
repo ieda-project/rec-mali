@@ -1,4 +1,4 @@
-$version 6
+$version 22
 ## TREATMENT-MEDICINE CHILD
 ## mandatory,treatment key,medicine key,duration,takes,description
 m,pneumonie_grave,m12,,,{{name}} - {{dosage}}
@@ -44,18 +44,18 @@ o,paludisme_grave_no_ref,m6,tant que douleur ou température supérieure à 38°
 o,paludisme_grave_no_ref,m14,,,{{name}} - {{dosage}} (Répéter 1 fois au bout de 48h si fièvre persiste. Ne pas dépasser 3 g par prise. Réserver pour le traitement des méningites à méningocoques  pendant les épidémies)
 m,paludisme_simple,artemether:lumefantrine_nourrisson,,,{{name}} - 2cp le jour 1, 1cp le jour 2, 1cp le jour 3
 m,paludisme_simple,artemether:amodiaquine_nourrisson,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,paludisme_simple,m6,tant que douleur ou température supérieure à 38°5,4 fois par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
+o,paludisme_simple,m6,,,{{name}} - une dose au dispensaire si la température est de 38.5°C - {{dosage}}
 m,rougeole_compliquee,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,rougeole_compliquee,antibio:2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,rougeole_compliquee,vitamine_a:200,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole_compliquee,vitamine_a:200,2 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,rougeole_compliquee,vitamine_a:100,2 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,rougeole_complications,vitamine_a:200,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,rougeole_complications,vitamine_a:100,2 jours,dose unique par jour,+OU+ {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,rougeole,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
+m,rougeole_complications,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
+m,rougeole_complications,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
+m,rougeole,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
 m,rougeole,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
 m,rougeole,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,rougeole,antibio:2,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-o,antecedent_rougeole,vitamine_a:200,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,antecedent_rougeole,vitamine_a:200,2 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}} (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
 o,antecedent_rougeole,vitamine_a:100,2 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}} (si l’enfant n’en a pas reçu au cours des 3 derniers mois)
 m,mastoidite,m12,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
 m,mastoidite,m13,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)
@@ -64,17 +64,20 @@ m,infection_aigue_oreille,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}
 m,infection_aigue_oreille,m6,pour calmer la douleur,dose unique,{{name}} pré référence - {{dosage}} {{takes}}
 m,anemie_grave,m15_1,,,{{name}} - {{dosage}} (en IM faire la dilution pour obtenir 60mg de sel de quinine par ml. Risque de nécrose si dilution trop concentrée)
 m,anemie,m8,14 jours (renouvelable pour atteindre au total 2 à 3 mois),dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,anemie,artemether:lumefantrine_nourrisson,,,{{name}} - 2cp le jour 1, 1cp le jour 2, 1cp le jour 3
-m,anemie,artemether:amodiaquine_nourrisson,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,anemie,m9,3 jours,2 fois par jour,Donner {{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
+o,anemie,artemether:lumefantrine_nourrisson,,,{{name}} - 2cp le jour 1, 1cp le jour 2, 1cp le jour 3
+o,anemie,artemether:amodiaquine_nourrisson,3 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,anemie,deparasitage:mebendazole,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} si l'enfant n'en a pas reçu pendant les 6 mois précédents
+o,anemie,deparasitage:albendazole,,,{{name}} - {{dosage}} en dose unique si l'enfant n'en a pas reçu pendant les 6 mois précédents
 o,mass,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
 o,mass,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
 m,mass,antibio:1,7 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,mass,antibio:2,7 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,mass,m9,3 jours,2 fois par jour,Donner {{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (2ème visite)
-m,mam,m9,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} (1ère ou 2ème visite)
-o,pas_malnutrition,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} {{duration}}
-o,pas_malnutrition,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
+o,mass,deparasitage:mebendazole,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} si l'enfant n'en a pas reçu pendant les 6 mois précédents
+o,mass,deparasitage:albendazole,,,{{name}} - {{dosage}} en dose unique si l'enfant n'en a pas reçu pendant les 6 mois précédents
+o,mam,deparasitage:mebendazole,3 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} si l'enfant n'en a pas reçu pendant les 6 mois précédents
+o,mam,deparasitage:albendazole,,,{{name}} - {{dosage}} en dose unique si l'enfant n'en a pas reçu pendant les 6 mois précédents
+o,pas_malnutrition,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
+o,pas_malnutrition,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
 m,vih_symp_confirmee,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,vih_symp_confirmee,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,vih_symp_confirmee,m25_1,,,Donner {{name}} - {{dosage}}
@@ -84,12 +87,11 @@ m,vih_confirmee,m25_1,,,Donner {{name}} - {{dosage}}
 m,vih_symp_probable,m1_2,3 semaines,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 m,vih_symp_probable,m1_3,tous les jours,2 fois par jours,{{name}} - {{dosage}} par prise - {{takes}} - {{duration}} - ne pas arrêter sans avis médical
 m,vih_possible,m1_3,tous les jours,2 fois par jours,{{name}} - {{dosage}} par prise - {{takes}} - {{duration}} - ne pas arrêter sans avis médical
-m,vih_possible,vitamine_a:200,2 jours,dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
-m,vih_possible,vitamine_a:100,2 jours,dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_possible,m25_1,,,Donner {{name}} - {{dosage}}
 o,deshydratation_severe_pas_grave_sng,antibio:1,8 jours,2 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
 o,deshydratation_severe_pas_grave_sng,antibio:3,5 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}} - ne pas administrer avec la théophylline
-m,mam,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} {{duration}}
-m,mam,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
+o,mam,vitamine_a:200,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
+o,mam,vitamine_a:100,"au jour 1, jour 2 et jour 14",dose unique par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}} si l’enfant n’en a pas reçu dans les 6 mois précédents
 m,mam,m8,14 jours (renouvelable pour atteindre au total 2 à 3 mois),dose unique par jour,Donner {{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 m,vih_symp_probable,m25_1,,,{{name}} - {{dosage}}
 m,paludisme_grave_tdr_negatif,m12,,,{{name}} - {{dosage}}

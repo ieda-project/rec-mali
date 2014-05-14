@@ -1,4 +1,4 @@
-$version 17
+$version 18
 
 @signes_danger = danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulsions_present
 
@@ -79,7 +79,7 @@ malnutrition|MAM|medium|(enfant.months >= 6) AND @ma_mam AND (malnutrition.oedem
 
 malnutrition|MASs|medium|(enfant.months >= 6) AND @ma_mas AND (malnutrition.test_appetit == positif) AND (malnutrition.oedemes == no) AND !@classifications_graves
 
-malnutrition|MASc|high|(enfant.months >= 6) AND ((malnutrition.oedemes != no) OR (@ma_mas AND ((malnutrition.test_appetit == negatif)) OR @classifications_graves))
+malnutrition|MASc|high|(enfant.months >= 6) AND ((malnutrition.oedemes != no) OR (@ma_mas AND ((malnutrition.test_appetit == negatif) OR @classifications_graves)))
 
 
 @au_moins_deux_maladies = AT_LEAST_TWO_OF(@pneumonie_grave, vih.pneumonie_recidivante, vih.diarrhee_dernierement, oreille.oreille_ecoulement, (enfant.months >= 6) AND !@ma_normal, vih.candidose_buccale, vih.hypertrophie_ganglions_lymphatiques, vih.augmentation_glande_parotide, @diarrhee_persistente OR @diarrhee_persistente_severe)
@@ -87,11 +87,17 @@ malnutrition|MASc|high|(enfant.months >= 6) AND ((malnutrition.oedemes != no) OR
 @au_plus_une_maladie = AT_MOST_ONE_OF(@pneumonie_grave, vih.pneumonie_recidivante, vih.diarrhee_dernierement, oreille.oreille_ecoulement, (enfant.months >= 6) AND !@ma_normal, vih.candidose_buccale, vih.hypertrophie_ganglions_lymphatiques, vih.augmentation_glande_parotide, @diarrhee_persistente)
 
 vih|Pas d'infection à VIH|low|(vih.serologie_enfant == negative) AND (vih.serologie_mere == negative) AND @au_plus_une_maladie
+
 vih|Infection à VIH peu problable|low|(vih.serologie_enfant == inconnue) AND (vih.serologie_mere == inconnue) AND @au_plus_une_maladie
+
 vih|Infection à VIH symptomatique suspecte|medium|(vih.serologie_enfant == inconnue) AND (vih.serologie_mere == inconnue) AND @au_moins_deux_maladies
+
 vih|Infection à VIH possible / exposition au VIH|medium|(((vih.serologie_mere == positive) AND (vih.serologie_enfant == inconnue)) OR ((enfant.months < 18) AND (vih.serologie_enfant == positive))) AND @au_plus_une_maladie
+
 vih|Infection à VIH symptomatique probable|medium|((vih.serologie_enfant == positive) AND (enfant.months < 18)) AND @au_moins_deux_maladies
+
 vih|Infection à VIH confirmée|medium|(((vih.serologie_enfant == positive) AND (enfant.months >= 18)) OR (vih.test_enfant == positif)) AND @au_plus_une_maladie
+
 vih|Infection à VIH symptomatique confirmée|medium|(((vih.serologie_enfant == positive) AND (enfant.months >= 18)) OR (vih.test_enfant == positif)) AND @au_moins_deux_maladies
 
 yield

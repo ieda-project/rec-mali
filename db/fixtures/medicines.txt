@@ -1,4 +1,4 @@
-$version 4
+$version 5
 Cotrimoxazole (antibio:1)
 mg-smx
 20/kg
@@ -46,14 +46,14 @@ comprimé
 [0-10k[ 1/2
 >=10k 1
 
-Mebendazole Oral (m9)
+Mebendazole Oral (deparasitage:mebendazole)
 mg
 >=12m 100
 
-Albendazole (m10)
+Albendazole (deparasitage:albendazole)
 mg
-[0-12k[ >=12m 200
->=12k >=12m 400
+[12-24m[ 200
+>=24m 400
 
 Phénobartital (m11)
 mg
