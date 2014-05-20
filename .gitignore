@@ -3,9 +3,8 @@ bundle
 .bundle
 db/*.sqlite3
 log/*.log
-log
 tmp/**/*
-config/database.yml
+!tmp/.gitkeep
 public/stylesheets/*.css
 public/repo
 public/system
