@@ -1,4 +1,4 @@
-$version 10
+$version 11
 
 @new consult 0-6 days
 {
@@ -616,7 +616,7 @@ $version 10
   "distinct":"child_uqid",
   "conds": [{
     "type": "field",
-    "field": "child.distance",
+    "field": "distance",
     "operator":"=",
     "value":0
   }, {
@@ -638,7 +638,7 @@ $version 10
   "distinct":"child_uqid",
   "conds": [{
     "type": "field",
-    "field": "child.distance",
+    "field": "distance",
     "operator":"=",
     "value":1
   }, {
@@ -660,7 +660,7 @@ $version 10
   "distinct":"child_uqid",
   "conds": [{
     "type": "field",
-    "field": "child.distance",
+    "field": "distance",
     "operator":"=",
     "value":2
   }, {
