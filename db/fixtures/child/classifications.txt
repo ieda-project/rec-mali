@@ -1,4 +1,4 @@
-$version 23
+$version 24
 
 @signes_danger = danger.boire OR danger.vomit OR danger.convulsions_passe OR danger.lethargie OR danger.convulsions_present
 
@@ -42,9 +42,7 @@ fievre|Rougeole|medium|fievre.fievre_presence AND @signes_rougeole AND !fievre.c
 fievre|Rougeole avec complication aux yeux ou à la bouche|medium|fievre.fievre_presence AND @rougeole_ou_antecedent AND ((fievre.ecoulement_oculaire OR (fievre.ulcerations == presentes))) AND !@rougeole_compliquee
 fievre|Rougeole grave et compliquée|high|@rougeole_compliquee
 
-fievre|TDR négatif|medium|fievre.fievre_presence AND !@tdr_ok AND !@paludisme_grave
 fievre|Paludisme simple|medium|fievre.fievre_presence AND @tdr_ok AND !@paludisme_grave
-fievre|Maladie fébrile très grave et TDR négatif|high|@paludisme_grave AND !@tdr_ok
 fievre|Maladie fébrile très grave ou paludisme grave|high|@paludisme_grave AND @tdr_ok
 
 
@@ -94,3 +92,5 @@ vih|Infection à VIH symptomatique confirmée|medium|(((vih.serologie_enfant == 
 yield
 
 malnutrition|A risque de malnutrition|low|REMOVED
+fievre|Maladie fébrile très grave et TDR négatif|high|@paludisme_grave AND !@tdr_ok
+fievre|TDR négatif|medium|fievre.fievre_presence AND !@tdr_ok AND !@paludisme_grave
