@@ -1,4 +1,4 @@
-$version 2
+$version 50
 ## TREATMENT-MEDICINE INFANT
 ## mandatory, treatment key,medicine key,duration,takes,description
 m,infection_grave,m12,,,{{name}} - {{dosage}}

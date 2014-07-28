@@ -1,4 +1,4 @@
-$version 7
+$version 50
 
 @infection_bac_grave = inf_bac.qa OR (inf_bac.freq_resp >= 60) OR inf_bac.qc OR inf_bac.qd OR inf_bac.qe OR inf_bac.qf OR inf_bac.qg OR (inf_bac.qh AND inf_bac.qi) OR (inf_bac.qj != normale) OR (inf_bac.qk == nombreuses_severes) OR (inf_bac.ql == lethargique_inconscient) OR inf_bac.qm
 

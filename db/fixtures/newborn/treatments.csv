@@ -1,4 +1,4 @@
-$version 14
+$version 50
 ##TREATMENT NEWBORN
 ##key,title,classification,description
 infection_grave,Maladie grave ou infection bactérienne grave,Maladie grave ou infection bactérienne grave,"# Administrer la première dose pre-transfert d’antibiotiques en IM : {{med:m12}}\n# Administrer la première dose pre-transfert d’antibiotiques en IM : {{med:m13}}\n# Si le nouveau-né convulse donner {{med:m11}} {{help:a25}}\n# Rechauffer le nouveau-né si hypothermie\n# Prévenir l’hypoglycémie\n** Si l’enfant est capable de téter {{help:a8_1}}\n** Si l’enfant est incapable de téter mais est capable d’avaler {{help:a8_2}}\n** Si l’enfant est incapable d’avaler {{help:a8_3}}\n# Expliquer à la mère comment garder le nouveau-né au chaud pendant l’évacuation {{help:a18}} et {{help:a19}}\n# Référer le bébé vers l’hôpital"

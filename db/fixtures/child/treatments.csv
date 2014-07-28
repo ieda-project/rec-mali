@@ -1,4 +1,4 @@
-$version 33
+$version 50
 ##TREATMENT CHILD
 ##key,title,classification,description
 pneumonie_grave,Pneumonie grave ou maladie très grave,Pneumonie grave ou maladie très grave,"# Donner la première dose en intramusculaire de : {{med:m12}}\n# Donner la première dose en intramusculaire de : {{med:m13}}\n# Traiter l'enfant pour prévenir l'hypoglycémie\n** Si l’enfant est capable de téter {{help:a8_1}}\n** Si l’enfant est incapable de téter mais est capable d’avaler {{help:a8_2}}\n** Si l’enfant est incapable d’avaler {{help:a8_3}}\n# Si l’enfant n’a pas, d’autre classification grave, donner un bronchodilateur en inhalation si respiration sifflante\n# Si convultions donner {{med:m17}} {{help:a7}}\n# Transférer d’urgence au centre de référence"
