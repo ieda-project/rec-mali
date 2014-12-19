@@ -1,36 +1,41 @@
-$version 50
-toux.toux_presence_duree|data.toux.toux_presence 
-toux.mouv_resp|data.toux.toux_presence 
+$version 1
+toux.toux_presence_duree|data.toux.toux_presence
+toux.freq_resp|data.toux.toux_presence
 toux.tirage|data.toux.toux_presence
-toux.stridor|data.toux.toux_presence 
-toux.freq_resp|data.toux.toux_presence 
+toux.stridor|data.toux.toux_presence
+toux.resp_sifflance|data.toux.toux_presence
 
-diarrhee.diarrhee_presence_duree|data.diarrhee.diarrhee_presence 
-diarrhee.sang_selles|data.diarrhee.diarrhee_presence 
-diarrhee.conscience_agitation|data.diarrhee.diarrhee_presence 
-diarrhee.yeux_enfonces|data.diarrhee.diarrhee_presence 
-diarrhee.soif|data.diarrhee.diarrhee_presence 
-diarrhee.pli_cutane|data.diarrhee.diarrhee_presence 
+diarrhee.diarrhee_presence_duree|data.diarrhee.diarrhee_presence
+diarrhee.sang_selles|data.diarrhee.diarrhee_presence
+diarrhee.conscience_agitation|data.diarrhee.diarrhee_presence
+diarrhee.yeux_enfonces|data.diarrhee.diarrhee_presence
+diarrhee.soif|data.diarrhee.diarrhee_presence
+diarrhee.pli_cutane|data.diarrhee.diarrhee_presence
 
 fievre.fievre_presence_duree|data.fievre.fievre_presence
-fievre.tdr|data.fievre.fievre_presence
 fievre.fievre_presence_longue|data.fievre.fievre_presence && data.fievre.fievre_presence_duree >= 7
-fievre.urines_foncees|data.fievre.fievre_presence 
-fievre.saignements_anormaux|data.fievre.fievre_presence 
-fievre.raideur_nuque|data.fievre.fievre_presence 
-fievre.ictere|data.fievre.fievre_presence 
-fievre.choc|data.fievre.fievre_presence 
-fievre.eruption_cutanee|data.fievre.fievre_presence 
-fievre.ecoulement_nasal|data.fievre.fievre_presence 
-fievre.yeux_rouge|data.fievre.fievre_presence 
-fievre.ecoulement_oculaire|data.fievre.fievre_presence && ((data.fievre.eruption_cutanee == 'eruption') || (data.fievre.eruption_cutanee == 'antecedent'))
-fievre.ulcerations|data.fievre.fievre_presence  && ((data.fievre.eruption_cutanee == 'eruption') || (data.fievre.eruption_cutanee == 'antecedent'))
-fievre.cornee|data.fievre.fievre_presence  && ((data.fievre.eruption_cutanee == 'eruption') || (data.fievre.eruption_cutanee == 'antecedent'))
+fievre.urines_foncees|data.fievre.fievre_presence
+fievre.raideur_nuque|data.fievre.fievre_presence
+fievre.fontanelle|data.fievre.fievre_presence
+fievre.tdr|data.fievre.fievre_presence
+fievre.comportement|data.fievre.fievre_presence
+fievre.prostration|data.fievre.fievre_presence
+fievre.choc|data.fievre.fievre_presence
+fievre.ictere|data.fievre.fievre_presence
+fievre.saignements_spontanes|data.fievre.fievre_presence
+fievre.paleur_severe|data.fievre.fievre_presence
+fievre.antecedent_rougeole|data.fievre.fievre_presence
+fievre.eruptions|data.fievre.fievre_presence
+fievre.ecoulement_nasal|data.fievre.fievre_presence && (data.fievre.eruptions || data.fievre.antecedent_rougeole)
+fievre.yeux_rouge|data.fievre.fievre_presence && (data.fievre.eruptions || data.fievre.antecedent_rougeole)
+fievre.ecoulement_oculaire|data.fievre.fievre_presence && (data.fievre.eruptions || data.fievre.antecedent_rougeole)
+fievre.ulcerations|data.fievre.fievre_presence && (data.fievre.eruptions || data.fievre.antecedent_rougeole)
+fievre.cornee|data.fievre.fievre_presence && (data.fievre.eruptions || data.fievre.antecedent_rougeole)
 
-oreille.oreille_douleur|data.oreille.oreille_probleme 
-oreille.oreille_ecoulement|data.oreille.oreille_probleme 
-oreille.oreille_ecoulement_duree|data.oreille.oreille_probleme && data.oreille.oreille_ecoulement 
-oreille.oreille_gonflement|data.oreille.oreille_probleme 
-
-malnutrition.oedemes|data.enfant.months >= 6 
-malnutrition.test_appetit|(data.enfant.months >= 6) && ((data.enfant.muac < 115) || (data.enfant.wfh < 70))
+# oreille.oreille_douleur|data.oreille.oreille_probleme
+# oreille.oreille_ecoulement|data.oreille.oreille_probleme
+# oreille.oreille_ecoulement_duree|data.oreille.oreille_probleme && data.oreille.oreille_ecoulement
+# oreille.oreille_gonflement|data.oreille.oreille_probleme
+#
+# malnutrition.oedemes|data.enfant.months >= 6
+# malnutrition.test_appetit|(data.enfant.months >= 6) && ((data.enfant.muac < 115) || (data.enfant.wfh < 70))

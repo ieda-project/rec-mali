@@ -76,10 +76,11 @@ fr:
     'yes+++': 'Oui +++'
     none: Aucun
     lethargique_inconscient: Léthargique ou inconscient
-    agite_irritable: Agité ou irritable
+    agite_irritable: Agité et irritable
     normal: Normal
     normales: Normales
     normale: Normale
+    normalement: Normalement
     rapides: Rapides
     hypothermique: Hypothermique
     hypothermie_moderee: Hypothermie moderée
@@ -87,10 +88,10 @@ fr:
     fievre: Fièvre
     nombreuses_severes: Nombreuses ou sévères
     normalement: Normalement
-    avide: Avide
-    impossible: Difficilement
+    avide: "Avidement / Assoiffé"
+    impossible: Difficilement / Impossible
     lentement: Lentement
-    tres_lentement: Très lentement
+    tres_lentement: Très lentement (> 2s)
     respiration_normale: Respiration normale
     respiration_rapide: Respiration rapide
     inconnue: Inconnue
@@ -117,6 +118,7 @@ fr:
     antecedent: Antecedent
     pas_indique: Pas indiqué
     normaux: Normaux
+    de_lui_meme: Normalement / De lui même
     bouge_stimule: Mouvements seulement si stimulation
     pas_mouvements: Pas de mouvements même si stimulation
     faible: faible
@@ -125,6 +127,9 @@ fr:
     tdr+: "Positif"
     tdr-: "Négatif"
     non_disponible: "Non disponible"
+    non_faite: Non faite
+    negative_allaitement: Négative sous allaitement
+    negative_pas_allaitement: Négative sans allaitement
   indices:
     weight_age: Poids/Age
     height_age: Taille/Age
