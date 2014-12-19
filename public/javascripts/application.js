@@ -498,6 +498,18 @@ window.addEvent('domready', function() {
                 form.tree.enfant.wfa = json.weight_age[0];
                 form.tree.enfant.hfa = json.height_age[0];
                 form.tree.enfant.wfh = json.weight_height[0];
+                
+                // comparisons with negative values of the zscore do not work in the equations.
+                // moving the '0' to '100' so that we are sure that we compare with positive values
+                // -3 => 97
+                // -2 => 98
+                // -1 => 99
+                // 0 => 100
+                // 2 => 102
+                // 3 => 103
+                form.tree.enfant.wfa_z = json.weight_age[1] + 100;
+                form.tree.enfant.hfa_z = json.height_age[1] + 100;
+                form.tree.enfant.wfh_z = json.weight_height[1] + 100;
                 last_indices_data = data }}).get({ d: data.getClean() }) };
         } else {
           // No data

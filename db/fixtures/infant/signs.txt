@@ -1,59 +1,50 @@
-$version 50
-## NOURRISSON
+$version 1
+## NOUVEAUX NES
 
-## INFECTION BACTERIENNES
-inf_bac|Infection Bactériennes
-  1:qa|Demander: Le nourrisson a-t-il eu des convulsions ?|boolean	
-  ---qb|Compter les respirations par minute; si leur nombre est élevé, compter à nouveau (rapide => plus 60 respirations par minutes)|list|normales;rapides
-  3:qc|Rechercher un tirage sous-costal grave|boolean
-  4:qd|Rechercher un battement des ailes du nez|boolean	
-  5:qe|Ecouter si le nourrisson émet un geignement|boolean
-  6:qf|Palper la fontanelle pour sentir si elle est bombée|boolean
-  7:qg|Regarder s’il y a un écoulement de pus de l’oreille|boolean
-  8:qh|Regarder si l’ombilic est rouge ou suintant de pus|boolean
-  9;qi|La rougeur s'étend-elle à la peau ?|boolean
-  10:qj|Mesurer la température. Le nourrisson a-t-il de la ou fièvre (> 37.5) ou est-il hypothermique (< 35.5 ou froid au toucher) ?|list|normale;hypothermique;fievre
-  11:qk|Rechercher les pustules cutanées. Sont-elles nombreuses ou sévères?|list|absentes;presentes;nombreuses_severes
-  12:ql|L'enfant est-il normal, agité ou irritable, léthargique ou inconscient ?|list|normal;agite_irritable;lethargique_inconscient
-  13:qm|Regarder les mouvements du nourrisson : Bouge-t-il moins que la normale?|boolean
+## INFECTIONS BACTERIENNES
+inf_bac|Infection Bactérienne
+  1:qa|Demander: Le nourrisson a-t-il eu des convulsions ?|boolean
+  2:qb|Le nouveau-né est-il *incapable* de s'alimenter ?|boolean
+  ---qc|Compter les respirations par minute; si leur nombre est élevé, compter à nouveau (rapide => plus 60 cycles par minutes)|list|normales;rapides
+  4:qd|Rechercher un tirage sous-costal grave|boolean
+  5:qe|Rechercher un geignement expiratoire|boolean
+  6:qf|Regarder les mouvements du nouveau- né|list|normaux;bouge_stimule;pas_mouvements
+  7:qg|Rechercher des pustules sur la peau|boolean
+  8:qh|Apprécier la température axilaire (Hypothermie modérée => 35.5 <= T <= 36.6 / Hypothermique sévère => T < 35.5 / Fievre =>  T >= 37.5)|list|normale;hypothermie_moderee;hypothermie_severe;fievre
+  9:qi|Rechercher un ictère grave|boolean
+  10:qj|Regarder l'ombilic. Est-il rouge ou purulent ?|boolean
+  
+## POIDS
+poids|Recherche d'un faible poids
+  qa|Regarder le poids actuel de l'enfant (normal => p >= 2500g / faible => 1500g <= p < 2500g / très faible => p < 1500g )|list|normal;faible;tres_faible
 
-## DIARRHEE
-diarrhee|Diarrhée
-  qa|L'enfant a-t-il la diarrhée ?|boolean
-  qb|Depuis combien de jours ?|integer
-  qc|Y a-t-il du sang dans les selles?|boolean
-  qd|Les yeux de l'enfant sont-ils enfoncés ?|boolean
-  qe|Pincer la peau de l’abdomen. Le pli cutané s’efface-t-il: Très lentement (plus de 2 secondes)? Ou lentement?|list|normalement;lentement;tres_lentement 
-
-## ALIMENTATION
-alimentation|Alimentation ou insuffisance pondérale
-  qa|Le nourrisson a-t-il des difficultés à se nourrir ?|boolean
-  qb|Le nourrisson est-il nourri au sein ?|boolean:neg
-  qc|Si oui, combien de fois en 24 heures ?|integer	
-  qd|Le nourrisson reçoit-il d’habitude d’autres aliments ou d’autres boissons ?|boolean
-  qe|Si oui, combien de fois ?|integer
-  qf|Le nourrisson peut-il bien prendre le sein?|list|pas_prise;mauvaise_prise;bonne_prise
-  qg|Est-ce que le nourrisson tète efficacement (c’est-à-dire par succions profondes et lentes entrecoupées de pauses) ?|list|pas_succion;non_efficace;efficace
-  qh|Regarder la bouche pour détecter des ulcérations ou plaques blanches (muguet).|boolean
+## INFECTIONS OCCULAIRES
+inf_occ|Recherche d'infections occulaires
+  qa|Inspecter les yeux du nouveau-né. Sont-ils purulents ? Sont-ils enflés ?|boolean
 
 ## VIH
 vih|Recherche d'une infection VIH
-  1:qa|Lymphadénopathie persistante généralisée|boolean
-  2:qb|Hépatomégalie|boolean
-  3:qc|Splénomégalie|boolean	
-  4:qd|Otite moyenne chronique / récurrente|boolean
-  5:qe|Problèmes cutanéo-muqueux|boolean
-  6:qf|Fièvre > 1 mois|boolean
-  7:qg|Anémie|boolean
-  8:qh|Pneumonie grave récurrente|boolean
-  9:qi|Encéphalopathie|boolean
-  11:qj|Sérologie mère|list|inconnue;negative;positive
+  qa|Quel est l'état sérologique de la mère ?|list|negatif_grossesse;inconnu;positif
+  qb|Hépatomégalie|boolean
+  qc|Splénomégalie|boolean
+  qd|Infection de l'oreille|boolean
+  qe|Signes d'infection cutanéo-muqueuse|boolean
+  qf|Pneumonie grave|boolean
+  qg|Faible poids de naissance|boolean
+
+## ALIMENTATION
+alimentation|Recherche de difficulté d'alimentation
+  qa|Le nourrisson a-t-il des difficultés à se nourrir ?|boolean
+  qb|Le nourrisson est-il nourri au sein ?|boolean:neg
+  qc|Si oui, combien de fois en 24 heures ?|integer
+  qd|Le nourrisson reçoit-il d’habitude d’autres aliments ou liquides en plus du lait maternel ?|boolean
+  qe|Si oui, reçoit-il du lait artificiel ?|boolean
+  qf|Regarder la bouche du nouveau-né pour détecter un muget|boolean
+  qg|Regarder la bouche du nouveau-né pour détecter une malformation au niveau de la bouche (bec de lièvre, une fente palatine)|boolean
+  qh|Le nourrisson peut-il bien prendre le sein ?|list|bonne_prise;mauvaise_prise;pas_prise
+  qi|Est-ce que le nourrisson tête efficacement (c'est-à-dire par succions profondes et lentes entrecoupées de pauses) ?|list|efficace;non_efficace;pas_succion
 
 yield
 
-inf_bac|Infection Bactériennes
-  2:freq_resp|Compter la fréquence respiratoire|integer|10|120
-
-vih|Recherche d'une infection VIH
-  10:qk|Muguet buccal (hors période néonatale)|boolean
-  11:ql|PCR Enfant|list|inconnue;negative;positive
+inf_bac|Infection Bactérienne
+  3:freq_resp|Compter la fréquence respiratoire|integer|10|120

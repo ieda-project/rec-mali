@@ -85,25 +85,36 @@ anemie|Anémie grave|high|@anemie_grave
 anemie|Anémie|medium|anemie.paleur_palmaire == legere AND !@anemie_grave
 anemie|Pas d'anémie|low|anemie.paleur_palmaire == absente AND !@anemie_grave
 
+#################
+## Malnutrtion ##
+#################
+
+# comparisons with negative values of the zscore do not work in the equations.
+# moved the '0' to '100' so that we are sure that we compare with positive values (see application.js)
+# -3 => 97
+# -2 => 98
+# -1 => 99
+# 0 => 100
+# 2 => 102
+# 3 => 103
+
+@complications_medicales = @signes_danger OR (toux.toux_presence AND @pneumonie_grave) OR @deshydratation_severe OR @diarrhee_persistente_severe OR @paludisme_grave OR @rougeole_compliquee OR (oreille.oreille_probleme AND @mastoidite) OR @anemie_grave OR (toux.toux_presence AND @pneumonie AND !@pneumonie_grave AND toux.tirage)
+
+@val_normal = (enfant.wfh_z >= 98) AND (enfant.muac >= 125)
+@val_mam = (enfant.wfh_z >= 97) AND (enfant.muac >= 115) AND !@val_normal
+@val_mas = (enfant.wfh_z < 97) OR (enfant.muac < 115)
+
+@masc = malnutrition.oedemes OR (@val_mas AND (@complications_medicales OR !malnutrition.atpe OR malnutrition.allaitement))
+@mass = @val_mas AND !malnutrition.oedemes AND !@complications_medicales AND malnutrition.atpe AND !malnutrition.allaitement
+@mam = @val_mam AND !malnutrition.oedemes
+@pas_ma = @val_normal AND !malnutrition.oedemes
+
+malnutrition|Malnutrition aiguë sévère avec complications|high|@masc
+malnutrition|Malnutrition aiguë sévère sans complications|medium|@mass
+malnutrition|Malnutrition aiguë modérée|medium|@mam
+malnutrition|Pas de malnutrition aiguë|low|@pas_ma
 
 
-
-# @classifications_graves = @signes_danger OR @pneumonie_grave OR @deshydratation_severe OR @diarrhee_persistente_severe OR @rougeole_compliquee OR @paludisme_grave OR @anemie_grave OR @mastoidite
-#
-#
-#
-# @ma_normal = (enfant.muac >= 125) AND (enfant.wfh >= 80)
-# @ma_mam = (enfant.muac >= 115) AND (enfant.wfh >= 70) AND !@ma_normal
-# @ma_mas = (enfant.muac < 115) OR (enfant.wfh < 70)
-#
-# malnutrition|Non applicable : enfant de moins de 6 mois|low|enfant.months < 6
-# malnutrition|Pas de malnutrition|low|(enfant.months >= 6) AND @ma_normal AND (malnutrition.oedemes == no)
-# malnutrition|MAM|medium|(enfant.months >= 6) AND @ma_mam AND (malnutrition.oedemes == no)
-# malnutrition|MASs|medium|(enfant.months >= 6) AND @ma_mas AND (malnutrition.test_appetit == positif) AND (malnutrition.oedemes == no) AND !@classifications_graves
-# malnutrition|MASc|high|(enfant.months >= 6) AND ((malnutrition.oedemes != no) OR (@ma_mas AND ((malnutrition.test_appetit == negatif) OR @classifications_graves)))
-#
-#
-#
 # @au_plus_une_maladie = AT_MOST_ONE_OF(@pneumonie_grave, vih.pneumonie_recidivante, vih.diarrhee_dernierement, oreille.oreille_ecoulement, (enfant.months >= 6) AND !@ma_normal, vih.candidose_buccale, vih.hypertrophie_ganglions_lymphatiques, vih.augmentation_glande_parotide, @diarrhee_persistente OR @diarrhee_persistente_severe)
 #
 # @au_moins_deux_maladies = AT_LEAST_TWO_OF(@pneumonie_grave, vih.pneumonie_recidivante, vih.diarrhee_dernierement, oreille.oreille_ecoulement, (enfant.months >= 6) AND !@ma_normal, vih.candidose_buccale, vih.hypertrophie_ganglions_lymphatiques, vih.augmentation_glande_parotide, @diarrhee_persistente OR @diarrhee_persistente_severe)

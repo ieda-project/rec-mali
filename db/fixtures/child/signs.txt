@@ -68,13 +68,9 @@ fievre|Fièvre
 
 oreille|Affection de l'oreille
   oreille_probleme|L'enfant a-t-il un problème à l'oreille ?|boolean
-
   oreille_douleur|Demander et palper : L'enfant a-t-il mal aux oreilles (appuyer sur la partie antérieure - tragus) ?|boolean
-
   oreille_ecoulement|Observer : Y a-t-il un écoulement de pus visible ?|boolean
-
   oreille_ecoulement_duree|Si oui, depuis combien de jours ?|integer
-
   oreille_gonflement|Rechercher : Y a-t-il un gonflement douloureux derrière l’oreille ?|boolean
 
 ############
@@ -83,20 +79,19 @@ oreille|Affection de l'oreille
 
 anemie|Anémie
   paleur_palmaire|Observer et rechercher la paleur palmaire|list|absente;legere;severe
-
   depranocytose|Demander : L’enfant est-il drépanocytaire ?|boolean
-
   crises|Demander : L'enfant fait-il des crises aigües et fréquentes ?|boolean
-
   priapisme|Demander et observer : L'enfant fait-il un priapisme ?|boolean
 
-# malnutrition|Etat nutritionnel
-#   amaigrissement|Observer : L'enfant a-t-il un amaigrissement visible et sévère ?|boolean
-#
-#   oedemes|Rechercher : L'enfant a-t-il des oedèmes au niveau des deux pieds ?|boolean
-#
-#   atpe|L'enfant est-il capable de finir une ration d'ATPE (test d'appétit) ?|boolean
-#
+#################
+## Malnutrtion ##
+#################
+
+malnutrition|Etat nutritionnel
+  oedemes|Rechercher : L'enfant a-t-il des oedèmes au niveau des deux pieds ?|boolean
+  atpe|L'enfant est-il capable de finir une ration d'ATPE (test d'appétit) ?|boolean:neg
+  allaitement|L’enfant a-t-il un problème d’allaitement au sein ?|boolean
+
 # vih|VIH
 #   vih_mere|Quel est le statut VIH de la mère ?|list|inconnu;positif;negatif
 #   serologie_enfant|Quelle est la sérologie de l'enfant ?|list|inconnue;positive;negative
