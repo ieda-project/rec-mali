@@ -79,7 +79,7 @@ oreille|Pas d'infection d'oreille|low|oreille.oreille_probleme AND !@mastoidite 
 ## Anémie ##
 ############
 
-@anemie_grave = anemie.paleur_palmaire == severe OR (anemie.depranocytose AND (fievre.ictere OR fievre.fievre_presence OR anemie.crises OR anemie.priapisme))
+@anemie_grave = anemie.paleur_palmaire == severe OR (anemie.depranocytose AND (fievre.ictere OR enfant.temp >= 38 OR anemie.crises OR anemie.priapisme))
 
 anemie|Anémie grave|high|@anemie_grave
 anemie|Anémie|medium|anemie.paleur_palmaire == legere AND !@anemie_grave
