@@ -62,28 +62,34 @@ fievre|Fièvre
   ulcerations|Signe de complication de rougeole : L'enfant a-t-il des ulcérations dans la bouche ?|list|absentes;presentes;profondes_etendues
   cornee|Signe de complication de rougeole : L'enfant a-t-il une opacité de la cornée ?|boolean
 
+#############
+## Oreille ##
+#############
 
-# oreille|Affection de l'oreille
-#   oreille_probleme|L'enfant a-t-il un problème à l'oreille ?|boolean
-#
-#   oreille_douleur|Demander et palper : L'enfant a-t-il mal aux oreilles (appuyer sur la partie antérieure - tragus) ?|boolean
-#
-#   oreille_ecoulement|Observer : Y a-t-il un écoulement de pus visible ?|boolean
-#
-#   oreille_ecoulement_duree|Si oui, depuis combien de jours ?|integer
-#
-#   oreille_gonflement|Rechercher : Y a-t-il un gonflement douloureux derrière l’oreille ?|boolean
-#
-#
-# anemie|Anémie
-#   paleur_palmaire|Observer et rechercher la paleur palmaire|list|absente;legere;severe
-#
-#   depranocytose|Demander : L’enfant est-il drépanocytaire ?|boolean
-#
-#   crises|Demander : L'enfant fait-il des crises aigües et fréquentes ?|boolean
-#
-#   priapisme|Demander et observer : L'enfant fait-il un priapisme ?|boolean
-#
+oreille|Affection de l'oreille
+  oreille_probleme|L'enfant a-t-il un problème à l'oreille ?|boolean
+
+  oreille_douleur|Demander et palper : L'enfant a-t-il mal aux oreilles (appuyer sur la partie antérieure - tragus) ?|boolean
+
+  oreille_ecoulement|Observer : Y a-t-il un écoulement de pus visible ?|boolean
+
+  oreille_ecoulement_duree|Si oui, depuis combien de jours ?|integer
+
+  oreille_gonflement|Rechercher : Y a-t-il un gonflement douloureux derrière l’oreille ?|boolean
+
+############
+## Anémie ##
+############
+
+anemie|Anémie
+  paleur_palmaire|Observer et rechercher la paleur palmaire|list|absente;legere;severe
+
+  depranocytose|Demander : L’enfant est-il drépanocytaire ?|boolean
+
+  crises|Demander : L'enfant fait-il des crises aigües et fréquentes ?|boolean
+
+  priapisme|Demander et observer : L'enfant fait-il un priapisme ?|boolean
+
 # malnutrition|Etat nutritionnel
 #   amaigrissement|Observer : L'enfant a-t-il un amaigrissement visible et sévère ?|boolean
 #

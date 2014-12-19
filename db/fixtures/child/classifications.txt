@@ -53,35 +53,41 @@ fievre|Paludisme simple|medium|fievre.fievre_presence AND @tdr_positif AND !@pal
 fievre|Fièvre : pas de paludisme|low|fievre.fievre_presence AND !@tdr_positif AND !@paludisme_grave
 
 @rougeole_actuelle = fievre.eruptions AND (fievre.ecoulement_nasal OR fievre.yeux_rouge OR toux.toux_presence)
-
 @rougeole_ou_antecedent = fievre.antecedent_rougeole OR @rougeole_actuelle
-
 @rougeole_compliquee = fievre.fievre_presence AND @rougeole_ou_antecedent AND (@signes_danger OR fievre.cornee OR fievre.ulcerations == profondes_etendues)
-
 @rougeole_yeux_bouche = fievre.fievre_presence AND @rougeole_ou_antecedent AND (fievre.ecoulement_oculaire OR fievre.ulcerations == presentes)
 
 fievre|Rougeole grave et compliquée|high|@rougeole_compliquee
 fievre|Rougeole avec complication aux yeux et/ou la bouche|medium|@rougeole_yeux_bouche AND !@rougeole_compliquee
-
 fievre|Rougeole|medium|fievre.fievre_presence AND @rougeole_actuelle AND !@rougeole_yeux_bouche AND !@rougeole_compliquee
-
 fievre|Antécédent de rougeole|low|fievre.fievre_presence AND fievre.antecedent_rougeole AND !@rougeole_actuelle AND !@rougeole_yeux_bouche AND !@rougeole_compliquee
 
-# @mastoidite = oreille.oreille_probleme AND oreille.oreille_gonflement
-#
-# oreille|Infection chronique de l'oreille|medium|oreille.oreille_probleme AND oreille.oreille_ecoulement AND (oreille.oreille_ecoulement_duree >= 14) AND !@mastoidite
-# oreille|Infection aiguë de l'oreille|medium|oreille.oreille_probleme AND ((oreille.oreille_ecoulement AND (oreille.oreille_ecoulement_duree < 14)) OR (!oreille.oreille_ecoulement AND oreille.oreille_douleur)) AND !@mastoidite
-# oreille|Mastoïdite|high|@mastoidite
-#
-#
-# @anemie_grave = anemie.paleur_palmaire == severe
-#
-# anemie|Pas d'anémie|low|anemie.paleur_palmaire == absente
-# anemie|Anémie|medium|anemie.paleur_palmaire == legere
-# anemie|Anémie grave|high|@anemie_grave
-#
-#
-#
+#############
+## Oreille ##
+#############
+
+@mastoidite = oreille.oreille_gonflement
+@infection_aigue = ((oreille.oreille_ecoulement AND oreille.oreille_ecoulement_duree < 14) OR oreille.oreille_douleur)
+@infection_chronique = (oreille.oreille_ecoulement AND oreille.oreille_ecoulement_duree >= 14)
+
+oreille|Mastoïdite|high|oreille.oreille_probleme AND @mastoidite
+oreille|Infection aiguë de l'oreille|medium|oreille.oreille_probleme AND @infection_aigue AND !@mastoidite
+oreille|Infection chronique de l'oreille|medium|oreille.oreille_probleme AND @infection_chronique AND !@infection_aigue AND !@mastoidite
+oreille|Pas d'infection d'oreille|low|oreille.oreille_probleme AND !@mastoidite AND !@infection_aigue AND !@infection_chronique
+
+############
+## Anémie ##
+############
+
+@anemie_grave = anemie.paleur_palmaire == severe OR (anemie.depranocytose AND (fievre.ictere OR fievre.fievre_presence OR anemie.crises OR anemie.priapisme))
+
+anemie|Anémie grave|high|@anemie_grave
+anemie|Anémie|medium|anemie.paleur_palmaire == legere AND !@anemie_grave
+anemie|Pas d'anémie|low|anemie.paleur_palmaire == absente AND !@anemie_grave
+
+
+
+
 # @classifications_graves = @signes_danger OR @pneumonie_grave OR @deshydratation_severe OR @diarrhee_persistente_severe OR @rougeole_compliquee OR @paludisme_grave OR @anemie_grave OR @mastoidite
 #
 #
