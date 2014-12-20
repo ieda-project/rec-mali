@@ -1,36 +1,42 @@
-$version 50
+$version 1
 
-@maladie_grave = inf_bac.qa OR inf_bac.qb OR (inf_bac.freq_resp >= 60) OR inf_bac.qd OR inf_bac.qe OR  (inf_bac.qf != normaux) OR (inf_bac.qh == fievre) OR (inf_bac.qh == hypothermie_severe) OR inf_bac.qi
-@infection_locale = inf_bac.qj OR inf_bac.qg
+##################################
+## Infection bactérienne locale ##
+##################################
 
-inf_bac|Maladie grave ou infection bactérienne grave|high|@maladie_grave
-inf_bac|Infection bactérienne locale|medium|!@maladie_grave AND @infection_locale
-inf_bac|Hypothermie modérée|medium|!@maladie_grave AND (inf_bac.qh == hypothermie_moderee)
-inf_bac|Infection bactérienne peu probable et pas d'hypothermie|low|!@maladie_grave AND !@infection_locale AND (inf_bac.qh == normale)
+@infection_bac_grave = inf_bac.convulsions OR inf_bac.alimentation OR inf_bac.freq_resp >= 60 OR inf_bac.tirage OR inf_bac.geignement OR enfant.temp >= 38 OR enfant.temp < 35.5 OR inf_bac.mouvements != de_lui_meme
+@infection_bac_locale = (inf_bac.ombilic OR inf_bac.pustules) AND !@infection_bac_grave
 
+inf_bac|Maladie grave|high|@infection_bac_grave
+inf_bac|Infection bactérienne locale|medium|@infection_bac_locale
+inf_bac|Pas d'infection bactérienne|low|!@infection_bac_grave AND !@infection_bac_locale
 
+##############
+## Diarrhée ##
+##############
 
-poids|Très faible poids|high|poids.qa == tres_faible
-poids|Faible poids|medium|poids.qa == faible
-poids|Pas de faible poids|low|poids.qa == normal
+@signes_deshy_severe = AT_LEAST_TWO_OF(inf_bac.mouvements != de_lui_meme, diarrhee.yeux_enfonces, diarrhee.pli_cutane == tres_lentement)
+@signes_deshy_evident = AT_LEAST_TWO_OF(diarrhee.agite, diarrhee.yeux_enfonces, diarrhee.pli_cutane == lentement)
 
+diarrhee|Déshydratation sévère|high|diarrhee.diarrhee_presence AND @signes_deshy_severe
+diarrhee|Signes évidents de déshydratation|medium|diarrhee.diarrhee_presence AND @signes_deshy_evident AND !@signes_deshy_severe
+diarrhee|Pas de déshydratation|low|diarrhee.diarrhee_presence AND !@signes_deshy_evident AND !@signes_deshy_severe
 
+#########
+## VIH ##
+#########
 
-inf_occ|Conjonctivite purulente du nouveau-né|medium|inf_occ.qa
-inf_occ|Pas d'infection occulaire|low|!inf_occ.qa
+vih|Infection a vih confirmee|medium|vih.mere_vih AND vih.virologie_enfant == positive
+vih|Nourrisson expose/infection a vih possible|medium|vih.mere_vih AND (vih.virologie_enfant == non_faite OR vih.virologie_enfant == negative_allaitement)
+vih|Pas d’infection a vih|low|vih.mere_vih AND vih.virologie_enfant == negative_pas_allaitement
 
+##############################
+## Problèmes d'alimentation ##
+##############################
 
+@pb_alimentation = !alimentation.allaitement OR (alimentation.allaitement AND alimentation.autres_aliments) OR (alimentation.allaitement AND alimentation.allaitement_combien < 8) OR enfant.wfa_z < 98 OR (alimentation.allaitement AND (alimentation.prise_sein != bonne_prise OR alimentation.tete != efficace)) OR alimentation.ulceration
 
-@signes_vih = AT_LEAST_TWO_OF(vih.qb, vih.qc, vih.qd, vih.qe, vih.qf, vih.qg)
+alimentation|Problème d’alimentation et/ou poids faible pour l’âge|medium|@pb_alimentation
+alimentation|Pas de problème d’alimentation|low|!@pb_alimentation
 
-vih|Infection VIH symptomatique probable|medium|(vih.qa == positif) AND @signes_vih
-vih|Infection VIH symptomatique possible|medium|(vih.qa == inconnu) AND @signes_vih
-vih|Infection VIH peu problable|low|(vih.qa == negatif_grossesse) OR !@signes_vih
-
-
-@maladie_grave_alim = alimentation.qa OR (alimentation.qb AND ((alimentation.qh == pas_prise) OR (alimentation.qi == pas_succion)))
-@pb_alim = (alimentation.qb AND ((alimentation.qh == mauvaise_prise) OR (alimentation.qi == non_efficace) OR (alimentation.qc < 12))) OR alimentation.qd OR alimentation.qf OR alimentation.qe OR alimentation.qg
-
-alimentation|Maladie grave ou infection bactérienne grave (alim)|high|@maladie_grave_alim	
-alimentation|Problème d'alimentation|medium|!@maladie_grave_alim AND @pb_alim
-alimentation|Pas de problèmes d'alimentation|low|!@maladie_grave_alim AND !@pb_alim
+yield

@@ -1,5 +1,14 @@
 $version 1
-alimentation.qc|data.alimentation.qb
-alimentation.qe|data.alimentation.qd
-alimentation.qh|data.alimentation.qb
-alimentation.qi|data.alimentation.qb
+diarrhee.agite|data.diarrhee.diarrhee_presence
+diarrhee.yeux_enfonces|data.diarrhee.diarrhee_presence
+diarrhee.pli_cutane|data.diarrhee.diarrhee_presence
+
+vih.virologie_enfant|data.vih.mere_vih
+
+alimentation.allaitement_combien|data.alimentation.allaitement
+alimentation.autres_aliments_combien|data.alimentation.autres_aliments
+alimentation.alim_biberon|data.alimentation.autres_aliments
+alimentation.alim_tasse|data.alimentation.autres_aliments
+alimentation.alim_gavage|data.alimentation.autres_aliments
+alimentation.prise_sein|data.alimentation.allaitement
+alimentation.tete|data.alimentation.allaitement

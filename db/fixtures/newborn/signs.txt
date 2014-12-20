@@ -1,50 +1,54 @@
-$version 50
-## NOUVEAUX NES
+$version 1
 
-## INFECTIONS BACTERIENNES
-inf_bac|Infection Bactérienne
-  1:qa|Demander: Le nourrisson a-t-il eu des convulsions ?|boolean
-  2:qb|Le nouveau-né est-il *incapable* de s'alimenter ?|boolean
-  ---qc|Compter les respirations par minute; si leur nombre est élevé, compter à nouveau (rapide => plus 60 cycles par minutes)|list|normales;rapides
-  4:qd|Rechercher un tirage sous-costal grave|boolean
-  5:qe|Rechercher un geignement expiratoire|boolean
-  6:qf|Regarder les mouvements du nouveau- né|list|normaux;bouge_stimule;pas_mouvements
-  7:qg|Rechercher des pustules sur la peau|boolean
-  8:qh|Apprécier la température axilaire (Hypothermie modérée => 35.5 <= T <= 36.6 / Hypothermique sévère => T < 35.5 / Fievre =>  T >= 37.5)|list|normale;hypothermie_moderee;hypothermie_severe;fievre
-  9:qi|Rechercher un ictère grave|boolean
-  10:qj|Regarder l'ombilic. Est-il rouge ou purulent ?|boolean
-  
-## POIDS
-poids|Recherche d'un faible poids
-  qa|Regarder le poids actuel de l'enfant (normal => p >= 2500g / faible => 1500g <= p < 2500g / très faible => p < 1500g )|list|normal;faible;tres_faible
+## NOURRISSON
 
-## INFECTIONS OCCULAIRES
-inf_occ|Recherche d'infections occulaires
-  qa|Inspecter les yeux du nouveau-né. Sont-ils purulents ? Sont-ils enflés ?|boolean
+##################################
+## Infection bactérienne locale ##
+##################################
 
-## VIH
+inf_bac|Maladie grave ou une infection bactérienne locale
+  convulsions|Demander : Le nourrisson a-t-il eu des convulsions ?|boolean
+  alimentation|Le nourrission est-il *incapable* de s'alimenter|boolean
+  freq_resp|Compter les mouvements respiratoires par minute|integer|10|120
+  tirage|Rechercher : Le nourrisson a-t-il un tirage sous-costal marqué ?|boolean
+  geignement|Ecouter : Le nourrisson émet-il un geignement expiratoire ?|boolean
+  temp|Mesurer la température. Le nourrisson a-t-il de la ou fièvre (>= 38) ou est-il hypothermique (< 35.5 ou froid au toucher) ?|list|normale;hypothermique;fievre
+  ombilic|Regarder : L’ombilic est-il rouge ou suintant de pus ?|boolean
+  pustules|Rechercher : Le nourrisson a-t-il des pustules cutanées ?|boolean
+  mouvements|Observer les mouvements du nourrisson : Comment bouge t-il ?|list|de_lui_meme;bouge_stimule;pas_mouvements
+
+##############
+## Diarrhée ##
+##############
+
+diarrhee|Diarrhée
+  diarrhee_presence|L'enfant a-t-il la diarrhée ?|boolean
+  agite|L'enfant est-il agité et irritable ?|boolean
+  yeux_enfonces|Les yeux de l'enfant sont-ils enfoncés ?|boolean
+  pli_cutane|Pincer la peau de l’abdomen. Comment le pli cutané s’efface-t-il ?|list|normalement;lentement;tres_lentement
+
+#########
+## VIH ##
+#########
+
 vih|Recherche d'une infection VIH
-  qa|Quel est l'état sérologique de la mère ?|list|negatif_grossesse;inconnu;positif
-  qb|Hépatomégalie|boolean
-  qc|Splénomégalie|boolean
-  qd|Infection de l'oreille|boolean
-  qe|Signes d'infection cutanéo-muqueuse|boolean
-  qf|Pneumonie grave|boolean
-  qg|Faible poids de naissance|boolean
+  mere_vih|Le nourrisson est-il né d'une mère séropositive|boolean
+  virologie_enfant|Le nourrisson a-t-il fait le test virologique ?|list|positive;non_faite;negative_allaitement;negative_pas_allaitement
 
-## ALIMENTATION
-alimentation|Recherche de difficulté d'alimentation
-  qa|Le nourrisson a-t-il des difficultés à se nourrir ?|boolean
-  qb|Le nourrisson est-il nourri au sein ?|boolean:neg
-  qc|Si oui, combien de fois en 24 heures ?|integer
-  qd|Le nourrisson reçoit-il d’habitude d’autres aliments ou liquides en plus du lait maternel ?|boolean
-  qe|Si oui, reçoit-il du lait artificiel ?|boolean
-  qf|Regarder la bouche du nouveau-né pour détecter un muget|boolean
-  qg|Regarder la bouche du nouveau-né pour détecter une malformation au niveau de la bouche (bec de lièvre, une fente palatine)|boolean
-  qh|Le nourrisson peut-il bien prendre le sein ?|list|bonne_prise;mauvaise_prise;pas_prise
-  qi|Est-ce que le nourrisson tête efficacement (c'est-à-dire par succions profondes et lentes entrecoupées de pauses) ?|list|efficace;non_efficace;pas_succion
+##############################
+## Problèmes d'alimentation ##
+##############################
+
+alimentation|Problème d'alimentation ou insuffisance pondérale
+  allaitement|Le nourrisson est-il allaité ?|boolean:neg
+  allaitement_combien|Si oui, combien de fois en 24 heures ?|integer
+  autres_aliments|Le nourrisson reçoit-il d’habitude d’autres aliments ou du liquide ?|boolean
+  autres_aliments_combien|Si oui, combien de fois ?|integer
+  alim_biberon|Mode d'alimentation : Biberon|boolean
+  alim_tasse|Mode d'alimentation : Tasse|boolean
+  alim_gavage|Mode d'alimentation : Gavage|boolean
+  prise_sein|Le nourrisson peut-il bien prendre le sein?|list|pas_prise;mauvaise_prise;bonne_prise
+  tete|Est-ce que le nourrisson tète efficacement (c’est-à-dire par succions profondes et lentes entrecoupées de pauses) ?|list|pas_succion;non_efficace;efficace
+  ulceration|Regarder la bouche pour détecter des ulcérations ou plaques blanches (muguet).|boolean
 
 yield
-
-inf_bac|Infection Bactérienne
-  3:freq_resp|Compter la fréquence respiratoire|integer|10|120
