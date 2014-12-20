@@ -92,15 +92,17 @@ malnutrition|Etat nutritionnel
   atpe|L'enfant est-il capable de finir une ration d'ATPE (test d'appétit) ?|boolean:neg
   allaitement|L’enfant a-t-il un problème d’allaitement au sein ?|boolean
 
-# vih|VIH
-#   vih_mere|Quel est le statut VIH de la mère ?|list|inconnu;positif;negatif
-#   serologie_enfant|Quelle est la sérologie de l'enfant ?|list|inconnue;positive;negative
-#   virologie_enfant|Quelle est la virologie de l'enfant ?|list|inconnue;positive;negative
-#   ganglions|L'enfant a t-il des ganglions dans deux aires ganglionnaires ou plus (cervicale, axilaire, sous maxilaire) ?|boolean
-#   muget|L'enfant a-t-il un muget ?|boolean
-#   parotide|Y a-t-il un gonflement de la parotide ?|boolean
-#   dermatose|Y a-t-il une dermatose généralisée ?|boolean
-#
-#
-#
+#########
+## VIH ##
+#########
+
+vih|VIH
+  vih_mere|Quel est le statut VIH de la mère ?|list|inconnu;positif;negatif
+  serologie_enfant|Quelle est la sérologie de l'enfant ?|list|inconnue;positive;negative
+  virologie_enfant|Quelle est la virologie de l'enfant ?|list|inconnue;positive;negative
+  ganglions|L'enfant a t-il des ganglions dans deux aires ganglionnaires ou plus (cervicale, axilaire, sous maxilaire) ?|boolean
+  muget|L'enfant a-t-il un muget ?|boolean
+  parotide|Y a-t-il un gonflement de la parotide ?|boolean
+  dermatose|Y a-t-il une dermatose généralisée ?|boolean
+
 yield

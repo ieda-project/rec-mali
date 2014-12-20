@@ -1,4 +1,4 @@
-$version 1
+$version 6
 
 ######################
 ## Signes de danger ##
@@ -114,19 +114,30 @@ malnutrition|Malnutrition aiguë sévère sans complications|medium|@mass
 malnutrition|Malnutrition aiguë modérée|medium|@mam
 malnutrition|Pas de malnutrition aiguë|low|@pas_ma
 
+#########
+## VIH ##
+#########
 
-# @au_plus_une_maladie = AT_MOST_ONE_OF(@pneumonie_grave, vih.pneumonie_recidivante, vih.diarrhee_dernierement, oreille.oreille_ecoulement, (enfant.months >= 6) AND !@ma_normal, vih.candidose_buccale, vih.hypertrophie_ganglions_lymphatiques, vih.augmentation_glande_parotide, @diarrhee_persistente OR @diarrhee_persistente_severe)
-#
-# @au_moins_deux_maladies = AT_LEAST_TWO_OF(@pneumonie_grave, vih.pneumonie_recidivante, vih.diarrhee_dernierement, oreille.oreille_ecoulement, (enfant.months >= 6) AND !@ma_normal, vih.candidose_buccale, vih.hypertrophie_ganglions_lymphatiques, vih.augmentation_glande_parotide, @diarrhee_persistente OR @diarrhee_persistente_severe)
-#
-# @infection_vih_symp_suspecte = (vih.serologie_enfant == inconnue) AND (vih.serologie_mere == inconnue) AND @au_moins_deux_maladies
-#
-# vih|Pas d'infection à VIH|low|(vih.serologie_enfant == negative) AND (vih.serologie_mere == negative) AND @au_plus_une_maladie
-# vih|Infection à VIH peu problable|low|(vih.serologie_enfant == inconnue) AND (vih.serologie_mere == inconnue) AND @au_plus_une_maladie AND !@infection_vih_symp_suspecte
-# vih|Infection à VIH symptomatique suspecte|medium|@infection_vih_symp_suspecte
-# vih|Infection à VIH possible / exposition au VIH|medium|(((vih.serologie_mere == positive) AND (vih.serologie_enfant == inconnue)) OR ((enfant.months < 18) AND (vih.serologie_enfant == positive))) AND @au_plus_une_maladie
-# vih|Infection à VIH symptomatique probable|medium|((vih.serologie_enfant == positive) AND (enfant.months < 18)) AND @au_moins_deux_maladies
-# vih|Infection à VIH confirmée|medium|(((vih.serologie_enfant == positive) AND (enfant.months >= 18)) OR (vih.test_enfant == positif)) AND @au_plus_une_maladie
-# vih|Infection à VIH symptomatique confirmée|medium|(((vih.serologie_enfant == positive) AND (enfant.months >= 18)) OR (vih.test_enfant == positif)) AND @au_moins_deux_maladies
-#
+@au_moins_deux_maladies = AT_LEAST_TWO_OF(toux.toux_presence AND @pneumonie AND !@pneumonie_grave, @diarrhee_persistente, @diarrhee_persistente_severe, oreille.oreille_ecoulement, enfant.wfh_z < 97, vih.ganglions, vih.muget, vih.parotide, vih.dermatose)
+@au_plus_une_maladie = AT_MOST_ONE_OF(toux.toux_presence AND @pneumonie AND !@pneumonie_grave, @diarrhee_persistente, @diarrhee_persistente_severe, oreille.oreille_ecoulement, enfant.wfh_z < 97, vih.ganglions, vih.muget, vih.parotide, vih.dermatose)
+
+@inf_symp_conf = ((enfant.months >= 18 AND vih.serologie_enfant == positive) OR vih.virologie_enfant == positive) AND @au_moins_deux_maladies
+
+@inf_asymp_conf = ((enfant.months >= 18 AND vih.serologie_enfant == positive) OR vih.virologie_enfant == positive) AND @au_plus_une_maladie
+
+@inf_symp_probable = @au_moins_deux_maladies AND !((enfant.months >= 18 AND vih.serologie_enfant == positive) OR vih.virologie_enfant == positive)
+
+@enfant_expose = vih.vih_mere == positive AND enfant.months < 18 AND @au_plus_une_maladie
+
+@peu_probable = ((vih.vih_mere == inconnu AND vih.virologie_enfant == inconnue AND vih.serologie_enfant == inconnue) OR vih.vih_mere == negatif) AND @au_plus_une_maladie AND !@enfant_expose AND !@inf_asymp_conf AND !((enfant.months < 18 AND vih.virologie_enfant == negative) OR (enfant.months >= 18 AND vih.serologie_enfant == negative))
+
+@pas_vih = ((enfant.months < 18 AND vih.virologie_enfant == negative) OR (enfant.months >= 18 AND vih.serologie_enfant == negative)) AND !@peu_probable AND !@enfant_expose AND !@inf_symp_probable AND !@inf_asymp_conf AND !@inf_symp_conf
+
+vih|Infection a vih symptomatique confirmee|medium|@inf_symp_conf
+vih|Infection a vih asymptomatique confirmee|medium|@inf_asymp_conf
+vih|Infection a vih symptomatique probable|medium|@inf_symp_probable
+vih|Enfant expose/infection a vih possible|medium|@enfant_expose
+vih|Infection a vih peu probable|low|@peu_probable
+vih|Pas d’infection a vih|low|@pas_vih
+
 yield
