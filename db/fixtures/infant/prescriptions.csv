@@ -1,13 +1,3 @@
 $version 1
-## TREATMENT-MEDICINE NEWBORN
+## TREATMENT-MEDICINE INFANT
 ## mandatory, treatment key,medicine key,duration,takes,description
-m,infection_grave,m12,,,{{name}} - {{dosage}}
-m,infection_grave,m13,,,{{name}} - {{dosage}}
-m,infection_grave,m11,,,{{name}} pré référence - {{dosage}} en prise unique
-m,infection_grave_no_ref,m12_1,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,infection_grave_no_ref,m13_2,5 jours,toutes les 12h,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,infection_grave_no_ref,m11,,,{{name}} pré référence - {{dosage}} en prise unique
-m,infection_locale,antibio:2,8 jours,3 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,infection_locale,antibio:3,8 jours,4 fois par jour,{{name}} - {{dosage}} par prise - {{takes}} pendant {{duration}}
-m,maladie_grave,m12,,,"{{name}} - {{dosage}} (mélanger avec 2.1ml d'eau distillée pour avoir 500mg/2,5ml)"
-m,maladie_grave,m13,,,{{name}} - {{dosage}} (diluer avec 6ml d'eau physiologique pour avoir 20mg/ml)

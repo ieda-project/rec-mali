@@ -1,5 +1,4 @@
-$version 1
-alimentation.qc|data.alimentation.qb
-alimentation.qe|data.alimentation.qd
-alimentation.qh|data.alimentation.qb
-alimentation.qi|data.alimentation.qb
+$version 2
+diarrhee.agite|data.diarrhee.diarrhee_presence
+diarrhee.yeux_enfonces|data.diarrhee.diarrhee_presence
+diarrhee.pli_cutane|data.diarrhee.diarrhee_presence
