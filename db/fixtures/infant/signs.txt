@@ -1,4 +1,5 @@
-$version 2
+$version 1
+
 ## NOURRISSON
 
 ##################################
@@ -26,23 +27,28 @@ diarrhee|Diarrhée
   yeux_enfonces|Les yeux de l'enfant sont-ils enfoncés ?|boolean
   pli_cutane|Pincer la peau de l’abdomen. Comment le pli cutané s’efface-t-il ?|list|normalement;lentement;tres_lentement
 
-# ## VIH
-# vih|Recherche d'une infection VIH
-#   mere_vih|Le nourrisson est-il né d'une mère séropositive|boolean
-#   virologie_enfant|Le nourrisson a-t-il fait le test virologique ?|list|positive;non_faite;negative_allaitement;negative_pas_allaitement
-#
-# ## ALIMENTATION
-# alimentation|Problème d'alimentation ou insuffisance pondérale
-#   qa|Existe-t-il des problème d'alimentation ?|boolean
-#   Le nourrisson est-il allaité|boolean:neg
-#   qc|Si oui, combien de fois en 24 heures ?|integer
-#   qd|Le nourrisson reçoit-il d’habitude d’autres aliments ou du liquide ?|boolean
-#   qe|Si oui, combien de fois ?|integer
-#   Mode d'alimentation : Biberon|boolean
-#   Mode d'alimentation : Tasse|boolean
-#   Mode d'alimentation : Gavage|boolean
-#   qf|Le nourrisson peut-il bien prendre le sein?|list|pas_prise;mauvaise_prise;bonne_prise
-#   qg|Est-ce que le nourrisson tète efficacement (c’est-à-dire par succions profondes et lentes entrecoupées de pauses) ?|list|pas_succion;non_efficace;efficace
-#   qh|Regarder la bouche pour détecter des ulcérations ou plaques blanches (muguet).|boolean
-#
-# yield
+#########
+## VIH ##
+#########
+
+vih|Recherche d'une infection VIH
+  mere_vih|Le nourrisson est-il né d'une mère séropositive|boolean
+  virologie_enfant|Le nourrisson a-t-il fait le test virologique ?|list|positive;non_faite;negative_allaitement;negative_pas_allaitement
+
+##############################
+## Problèmes d'alimentation ##
+##############################
+
+alimentation|Problème d'alimentation ou insuffisance pondérale
+  allaitement|Le nourrisson est-il allaité ?|boolean:neg
+  allaitement_combien|Si oui, combien de fois en 24 heures ?|integer
+  autres_aliments|Le nourrisson reçoit-il d’habitude d’autres aliments ou du liquide ?|boolean
+  autres_aliments_combien|Si oui, combien de fois ?|integer
+  alim_biberon|Mode d'alimentation : Biberon|boolean
+  alim_tasse|Mode d'alimentation : Tasse|boolean
+  alim_gavage|Mode d'alimentation : Gavage|boolean
+  prise_sein|Le nourrisson peut-il bien prendre le sein?|list|pas_prise;mauvaise_prise;bonne_prise
+  tete|Est-ce que le nourrisson tète efficacement (c’est-à-dire par succions profondes et lentes entrecoupées de pauses) ?|list|pas_succion;non_efficace;efficace
+  ulceration|Regarder la bouche pour détecter des ulcérations ou plaques blanches (muguet).|boolean
+
+yield
