@@ -1,173 +1,283 @@
-$version 5
-Cotrimoxazole (antibio:1)
-mg-smx
-20/kg
+$version 17
+#Cotrimoxazole (antibio:1)
+#mg-smx
+#20/kg
 
-Cotrimoxazole (m1_2)
-mg-smx
-40/kg
-
-Cotrimoxazole (m1_3)
-mg-smx
-15/kg
-
-Amoxiciline Orale (antibio:2)
-mg
-15/kg
-
-Ciprofloxacine Orale (m3)
-mg
-12.5/kg
-
-Erytromycine Orale (antibio:3)
-mg
-12.5/kg
-
-Métronidazole Oral (m5)
-mg
-7.5/kg
-
-Paracétamol Oral (m6)
-mg
-15/kg
-
-Vitamine A - Capsules 200'000 UI (vitamine_a:200)
-capsule
-[6-12m[ 1/2
->=12m 1
-
-Vitamine A - Capsules 100'000 UI (vitamine_a:100)
-capsule
-[6-12m[ 1
->=12m 2
-
-Fer/Folate (m8)
+Amoxicilline 250 cp (antibio:amoxi_250)
 comprimé
-[0-10k[ 1/2
+<6k 0.5
+[6-9k[ 1
+[9-13k[ 1.5
+
+Amoxicilline 500 cp (antibio:amoxi_500)
+comprimé
+<6k 0.25
+[6-9k[ 0.5
+[9-13k[ 1
+>=13k 1.25
+
+Amoxicilline 125 sirop (antibio:amoxi_sirop_125)
+cm
+<6k 1
+[6-9k[ 2
+[9-13k[ 3
+>=13k 4
+
+Amoxicilline 250 sirop (antibio:amoxi_sirop_250)
+cm
+<6k 0.5
+[6-9k[ 1
+[9-13k[ 1.5
+>=13k 2
+
+Ampicilline/Amoxicilline injectable (antibio:ampi_amoxi_inj)
+ml
+<6k 1
+[6-9k[ 2
+[9-13k[ 3
+>=13k 5
+
+Erythromycine 250 cp (antibio:ery_250)
+comprimé
+<6k 0.5
+[6-9k[ 1
+[9-13k[ 1.5
+>=13k 2
+
+Erythromycine sirop 125 (antibio:ery_sirop_125)
+cm
+<6k 1
+[6-9k[ 2
+[9-13k[ 3
+>=13k 4
+
+Sirop Balembo (expectorant:balembo_sirop)
+cm
+[6-24m[ 1
+[24-59m[ 3
+
+Carbocysteine (expectorant:carbo_sirop)
+cm
+[24-59m[ 1
+
+Salbutamol 4 mg (antiinflam:salbu_4)
+comprimé
+[4-10k[ 0.5
+>=10k 0.5
+
+Salbutamol 2 mg (antiinflam:salbu_2)
+comprimé
+[4-10k[ 0.5
 >=10k 1
 
-Mebendazole Oral (deparasitage:mebendazole)
-mg
->=12m 100
+Salbutamol sirop (antiinflam:salbu_sirop)
+cm
+[4-10k[ 0.5
+>=10k 1
 
-Albendazole (deparasitage:albendazole)
+Tetracycline 250 (antibio:tetra_250)
+comprimé
+[9-13k[ 0.75
+>=13k 1
+
+Zinc 20 (micronut:zinc_20)
+comprimé
+[0-6m[ 0.5
+>=6m 1
+
+SRO (sro:sro)
+sachet
+<6k 1
+[6-10k[ 2
+[10-12k[ 3
+>=12k 4
+
+Ciprofloxacine 100 (antibio:cipro_100)
+comprimé
+<6k 0.5
+[6-9k[ 1
+[9-13k[ 1.5
+[13-18k[ 2
+
+Ciprofloxacine 250 (antibio:cipro_250)
+comprimé
+<6k 0.25
+[6-9k[ 0.5
+[9-13k[ 0.5
+[13-18k[ 1
+
+Ciprofloxacine 500 (antibio:cipro_500)
+comprimé
+[6-9k[ 0.25
+[9-13k[ 0.25
+[13-18k[ 0.5
+
+Ceftriaxone injectable (antibio:ceftri_inj)
+ml
+<6k 3
+[6-9k[ 6
+[9-13k[ 10
+[13-18k[ 14
+
+Artesunate injectable (antipalu:artesunate_inj_ref)
+ml
+<=59k 2.4
+
+Arthemeter injectable (antipalu:arthemer_inj_ref)
+ml
+<24m 20
+
+Quinine injectable (antipalu:quinine_inj_ref)
+mg
+<6k 75
+[6-9k[ 125
+[9-13k[ 175
+>=13k 250
+
+Diazepam injectable (anticonvulsant:diazepam_inj)
+ml
+<6k 0.5
+[6-9k[ 1
+[9-13k[ 1.25
+>=13k 1.5
+
+Paracetamol 100 (antipyretique:para_100)
+comprimé
+<6k 0.75
+[6-9k[ 1.25
+[9-13k[ 1.75
+>=13k 2.5
+
+Paracetamol 500 (antipyretique:para_500)
+comprimé
+[6-9k[ 0.25
+[9-13k[ 0.5
+>=13k 0.75
+
+Paracetamol sirop 125 (antipyretique:para_sirop_125)
+cm
+<6k 0.5
+[6-9k[ 1
+
+Artéméther - Luméfantrine cp (antipalu:art_lumefan)
+comprimé
+[6-36m[ 1
+[36-59m[ 2
+
+Artéméther - Luméfantrine suspension (antipalu:art_lumefan_susp)
+cm
+[6-36m[ 2
+[36-59m[ 4
+
+Arthesunate - Amodiaquine cp (antipalu:art_amodiaq)
+mg-art
+[2-12m[ 25
+[12-59m[ 50
+
+Vitamine A (vitamine:vit_a)
+gel
+[1.5-6m[ 50000
+[6-12m[ 100000
+>=12m 200000
+
+Aspirine 100 (antipyretique:asp_100)
+comprimé
+<6k 0.5
+[6-9k[ 1
+[9-13k[ 1.5
+>=13k 2
+
+Aspirine 500 (antipyretique:asp_500)
+comprimé
+[6-9k[ 0.25
+[9-13k[ 0.5
+>=13k 0.75
+
+Aspirine inj (antipyretique:asp_inj)
+ml
+<6k 0.3
+[6-9k[ 0.4
+[9-13k[ 0.7
+>=13k 0.9
+
+Fer-acide folique (micronut:fer_acide_folique)
+comprimé
+[9-13k[ 0.5
+>=13k 0.5
+
+Fer-acide folique (micronut:fer_sirop)
+ml
+<6k 1
+[6-9k[ 1.25	
+[9-13k[ 2	
+>=13k 2.5
+
+Mebendazole (deparasitant:mebendazole)
+comprimé
+>=12m 1
+
+Albendazole (deparasitant:albendazole)
 mg
 [12-24m[ 200
 >=24m 400
 
-Phénobartital (m11)
-mg
-15/kg
-
-Ampicilline pré référence (m12)
-mg
-50/kg
-
-Ampicilline (m12_1)
-mg
-50/kg
-
-Gentamicine pré référence (m13)
-mg
-2.5/kg
-
-Gentamicine (m13_1)
-mg
-1.5/kg
-
-Gentamicine (m13_2)
-mg
-2.5/kg
-
-Chloramphénicol Huileux (m14)
-mg
-100/kg
-
-Quinine IM - charge (m15_1)
-mg
-20/kg
-
-Quinine IM - entretien (m15_2)
-mg
-10/kg
-
-Acetylsalicylate De Lysine (m16)
-mg
-15/kg
-
-Diazepam Injectable (m17)
-mg
-0.5/kg
-
-Artémether + Luméfantrine (artemether:lumefantrine_nourrisson)
+Cotrimoxazole 100 (antibio:cotri_100)
 comprimé
-<12m 1
+<5k 1
+[5-15k[ 2
+[15-30k[ 4
+>30k 8
 
-Artémether + Luméfantrine (artemether:lumefantrine_enfant)
+Cotrimoxazole 200/40 (antibio:cotri_200_susp)
+ml
+<5k 2.5
+[5-15k[ 5
+[15-30k[ 10
+>30k 20
+
+Cotrimoxazole 400/80 (antibio:cotri_400)
 comprimé
->=12m 1
+<5k 0.25
+[5-15k[ 0.5
+[15-30k[ 1
+>30k 2
 
-Artésunate + Amodiaquine - Forme Nourrisson (artemether:amodiaquine_nourrisson)
+Ampicilline/Amoxicilline injectable (ampi_amoxi_inj_nonref)
+ml
+<6k 1
+[6-9k[ 2
+[9-13k[ 3
+>=13k 5
+
+Gentamycine injectable 80 (genta_inj_nonref)
+ml
+<6k 4
+[6-9k[ 6
+[9-13k[ 8
+>=13k 12
+
+Erythromycine 250 cp (ery_250_cholera)
 comprimé
-[2-12m[ 1
+[9-13k[ 0.75
+>=13k 1
 
-Artésunate + Amodiaquine - Forme Petit Enfant (artemether:amodiaquine_enfant)
-comprimé
->=12m 1
+Erythromycine sirop 125 (ery_sirop_125_cholera)
+cm
+[9-13k[	1.2
 
-Ringer au lactate - phase 1 (perfusion_p1_a:ringer) 
+Artesunate injectable (artesunate_inj_nonref)
 ml
-<1y 30/kg
+<=59k 2.4
+>=13k 2
 
-Ringer au lactate - phase 2 (perfusion_p2_a:ringer)
+Arthemeter injectable (arthemer_inj_nonref)
 ml
-<1y 70/kg
+<24m 10
+[24-60m[ 20
 
-Ringer au lactate - phase 1 (perfusion_p1_b:ringer)
-ml
->=1y 30/kg
-
-Ringer au lactate - phase 2 (perfusion_p2_b:ringer)
-ml
->=1y 70/kg
-
-Soluté isotonique - phase 1 (perfusion_p1_a:iso)
-ml
-<1y 30/kg
-
-Soluté isotonique - phase 2 (perfusion_p2_a:iso)
-ml
-<1y 70/kg
-
-Soluté isotonique - phase 1 (perfusion_p1_b:iso)
-ml
->=1y 30/kg
-
-Soluté isotonique - phase 2 (perfusion_p2_b:iso)
-ml
->=1y 70/kg
-
-Solution de réhydratation orale plan C par gorgée (m24_1_3)
-ml
-<1y 1000/kg
-
-Solution de réhydratation orale plan C par gorgée (m24_1_4)
-ml
->=1y 1000/kg
-
-Solution de réhydratation orale plan B par SNG (m24_2)
-ml
-18/kg
-
-Multivitamines (m25)
-comprimé
-1
-
-Multivitamines (m25_1)
-comprimé
->=6m 1
-
-Sulfate de Zinc (m26)
+Quinine injectable (quinine_inj_nonref)
 mg
-<6m 10
->=6m 20
+<6k 75
+[6-9k[	125
+[9-13k[ 175
+>=13k 250
