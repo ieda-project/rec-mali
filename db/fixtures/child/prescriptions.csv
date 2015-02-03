@@ -1,4 +1,47 @@
-$version 1
+$version 14
 ## TREATMENT-MEDICINE CHILD
 ## mandatory,treatment key,medicine key,duration,takes,description
-m,paludisme,m12,,,{{name}} - {{dosage}}
+m,pneumonie_grave_transfert,antibio:amoxi_250,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_transfert,antibio:amoxi_500,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_transfert,antibio:amoxi_sirop_125,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_transfert,antibio:amoxi_sirop_250,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_transfert,antibio:ampi_amoxi_inj,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_transfert,antibio:ery_250,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_transfert,antibio:ery_sirop_125,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,pneumonie_grave_transfert,antiinflam:salbu_4,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,pneumonie_grave_transfert,antiinflam:salbu_2,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,pneumonie_grave_transfert,antiinflam:salbu_sirop,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,pneumonie_grave_no_transfert,ampi_amoxi_inj_nonref,5 jours,toutes les 12 heurs,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_no_transfert,genta_inj_nonref,3 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_no_transfert,antibio:amoxi_250,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_no_transfert,antibio:amoxi_500,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_no_transfert,antibio:amoxi_sirop_125,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_no_transfert,antibio:amoxi_sirop_250,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_no_transfert,antibio:ery_250,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie_grave_no_transfert,antibio:ery_sirop_125,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,pneumonie_grave_no_transfert,antiinflam:salbu_4,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,pneumonie_grave_no_transfert,antiinflam:salbu_2,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,pneumonie_grave_no_transfert,antiinflam:salbu_sirop,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,pneumonie,antibio:amoxi_250,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie,antibio:amoxi_500,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie,antibio:amoxi_sirop_125,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie,antibio:amoxi_sirop_250,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie,antibio:ery_250,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie,antibio:ery_sirop_125,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie,expectorant:balembo_sirop,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pneumonie,expectorant:carbo_sirop,3 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,pneumonie,antiinflam:salbu_4,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,pneumonie,antiinflam:salbu_2,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,pneumonie,antiinflam:salbu_sirop,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+o,toux,antiinflam:salbu_4,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,toux,antiinflam:salbu_2,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,toux,antiinflam:salbu_sirop,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,toux,expectorant:balembo_sirop,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,toux,expectorant:carbo_sirop,3 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+o,deshy_severe,antibio:ery_250_cholera,3 jours,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,deshy_severe,antibio:ery_sirop_125_cholera,3 jours,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,deshy_severe,antibio:tetra_250,3 jours,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}

@@ -1,19 +1,14 @@
-$version 1
+$version 16
 ##TREATMENT CHILD
 ##key,title,classification,description
-pneumonie,Pneumonie grave ou maladie très grave,Pneumonie grave ou maladie très grave,"# Traitement de la pneumonie grave ou maladie très grave"
-pneumonie_grave,Pneumonie,Pneumonie,"# Traitement de la pneumonie grave"
-pas_pneumonie,Pas de pneumonie : toux ou rhume,Pas de pneumonie : toux ou rhume,"# Traitement de pas de pneumonie : toux ou rhume"
-pas_deshydratation,Pas de déshydratation,Pas de déshydratation,"# Traitement de Pas de déshydratation"
-signes_evidents_deshydratation,Signes évidents de déshydratation,Signes évidents de déshydratation,"# Traitement de Signes évidents de déshydratation"
-deshydratation_severe,Déshydratation sévère,Déshydratation sévère,"# Traitement de Déshydratation sévère"
-diarrhee_persistente,Diarrhée persistente,Diarrhée persistente,"# Traitement de Diarrhée persistente"
-diarrhee_persistente_severeDiarrhée persistente sévère,Diarrhée persistente sévère,"# Traitement Diarrhée persistente sévère"
-dysenterie,Dysenterie,Dysenterie,"# Traitement de Dysenterie"
-paludisme_grave,Maladie fébrile très grave ou paludisme grave,Maladie fébrile très grave ou paludisme grave,"# Traitement de Maladie fébrile très grave ou paludisme grave"
-paludisme,Paludisme simple,Paludisme simple,"# Traitement de Paludisme simple {{med:m12}}"
-fievre,Fièvre : pas de paludisme,Fièvre : pas de paludisme,"# Traitement de Fièvre : pas de paludisme"
-rougeole_compliquee,Rougeole grave et compliquée,Rougeole grave et compliquée,"# Traitement de Rougeole grave et compliquée"
-rougeole_yeux_bouche,Rougeole avec complication aux yeux et/ou la bouche,Rougeole avec complication aux yeux et/ou la bouche,"# Traitement de Rougeole avec complication aux yeux et/ou la bouche"
-rougeole,Rougeole,Rougeole,"# Traitement de Rougeole"
-rougeole_antecedent,Antécédent de rougeole,Antécédent de rougeole,"# Traitement de Antécédent de rougeole"
+
+pneumonie_grave_transfert,Pneumonie grave ou maladie tres grave si transfert possible,Pneumonie grave ou maladie très grave,"# Donner la première dose d’antibiotique approprié :\n** Première intention : {{med:antibio:amoxi_250}}\n** Première intention : {{med:antibio:amoxi_500}}\n** Première intention : {{med:antibio:amoxi_sirop_125}}\n** Première intention : {{med:antibio:amoxi_sirop_250}}\n** Première intention : {{med:antibio:ampi_amoxi_inj}}\n** Deuxième intention : {{med:antibio:ery_250}}\n** Deuxième intention : {{med:antibio:ery_sirop_125}}\n# {{help:hypoglycemie}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_4}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_2}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_sirop}}\n# Transférer d’urgence à l’échelon supérieur."
+
+pneumonie_grave_no_transfert,Pneumonie grave ou maladie tres grave si transfert impossible,Pneumonie grave ou maladie très grave,"# Donner : {{med:ampi_amoxi_inj_nonref}}\n# Donner : {{med:genta_inj_nonref}}\n# Faire le relai avec la voie orale en utilisant l’antibiotique approprié :\n** Première intention :{{med:antibio:amoxi_250}}\n** Première intention :{{med:antibio:amoxi_500}}\n** Première intention :{{med:antibio:amoxi_sirop_125}}\n** Première intention :{{med:antibio:amoxi_sirop_250}}\n** Deuxième intention :{{med:antibio:ery_250}}\n** Deuxième intention :{{med:antibio:ery_sirop_125}}\n# {{help:hypoglycemie}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_4}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_2}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_sirop}}"
+
+pneumonie,Pneumonie,Pneumonie,"# Donner l’antibiotique approprié :\n** Première intention : {{med:antibio:amoxi_250}}\n** Première intention : {{med:antibio:amoxi_500}}\n** Première intention : {{med:antibio:amoxi_sirop_125}}\n** Première intention : {{med:antibio:amoxi_sirop_250}}\n** Première intention : {{med:antibio:ampi_amoxi_inj}}\n** Deuxième intention : {{med:antibio:ery_250}}\n** Deuxième intention : {{med:antibio:ery_sirop_125}}\n# Calmer la toux avec : \n** {{med:expectorant:balembo_sirop}}\n** {{med:expectorant:carbo_sirop}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_4}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_2}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_sirop}}\n# {{help:revenir_immediatement}}\n# Revoir dans 2 jours."
+
+toux,Pas de pneumonie : toux ou rhume,Pas de pneumonie : toux ou rhume,"# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_4}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_2}}\n# Traiter la respiration sifflante s’il y en a : {{med:antiinflam:salbu_sirop}}\n# Calmer la toux avec un remède inoffensif\n** {{med:expectorant:balembo_sirop}}\n** {{med:expectorant:carbo_sirop}}\n# {{help:revenir_immediatement}}\n# Revoir dans 5 jours s’il n’y a pas d’amélioration"
+
+deshy_severe,Déshydratation sévère,Déshydratation sévère,"Si l’enfant n’a pas de malnutrition sévère ou toute autre classification grave :\n# {{help:plan_c}}\n# _Transférer d’URGENCE à l’échelon supérieur, la mère donnant fréquemment des gorgées de SRO en cours de route._\n# Si l’enfant a 2 ans ou plus et si une épidémie de choléra sévit dans la région, donner \n** {{med:antibio:ery_250_cholera}}\n** {{med:antibio:ery_sirop_125_cholera}}\n** {{med:antibio:tetra_250}}"
+

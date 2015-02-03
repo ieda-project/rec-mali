@@ -1,4 +1,4 @@
-$version 17
+$version 19
 #Cotrimoxazole (antibio:1)
 #mg-smx
 #20/kg
@@ -256,12 +256,12 @@ ml
 [9-13k[ 8
 >=13k 12
 
-Erythromycine 250 cp (ery_250_cholera)
+Erythromycine 250 cp (antibio:ery_250_cholera)
 comprimé
 [9-13k[ 0.75
 >=13k 1
 
-Erythromycine sirop 125 (ery_sirop_125_cholera)
+Erythromycine sirop 125 (antibio:ery_sirop_125_cholera)
 cm
 [9-13k[	1.2
 
