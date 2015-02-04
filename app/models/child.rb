@@ -54,33 +54,32 @@ class Child < ActiveRecord::Base
     v_rota1: 'Rotavirus-1',
     v_rota2: 'Rotavirus-2',
     v_rota3: 'Rotavirus-3',
-    v_measles1: 'Antirougeoleux',
-    v_measles2: 'Rappel rougeole à 16 mois',
+    v_measles: 'Antirougeoleux',
     v_yellow: 'Fiẻvre Jaune'
   }
 
   VACCINATION_AGES = {
-    v_bcg: 0,
-    v_polio0: 0, # to 14 days
-    v_polio1: 8.weeks,
-    v_polio2: 12.weeks,
-    v_polio3: 16.weeks,
-    v_penta1: 8.weeks,
-    v_penta2: 12.weeks,
-    v_penta3: 16.weeks,
-    v_pneumo1: 8.weeks,
-    v_pneumo2: 12.weeks,
-    v_pneumo3: 16.weeks,
-    v_rota1: 8.weeks,
-    v_rota2: 12.weeks,
-    v_rota3: 16.weeks,
-    v_measles1: 9.months,
-    v_measles2: 15.months,
+    v_bcg: 0, # t0 7 days
+    v_polio0: 0, # to 7 days
+    v_polio1: 6.weeks,
+    v_polio2: 10.weeks,
+    v_polio3: 14.weeks,
+    v_penta1: 6.weeks,
+    v_penta2: 10.weeks,
+    v_penta3: 14.weeks,
+    v_pneumo1: 6.weeks,
+    v_pneumo2: 10.weeks,
+    v_pneumo3: 14.weeks,
+    v_rota1: 6.weeks,
+    v_rota2: 10.weeks,
+    v_rota3: 14.weeks,
+    v_measles: 9.months,
     v_yellow: 9.months
   }
 
   VACCINATION_TOP_AGES = {
-    v_polio0: 14.days
+    v_bcg: 7.days,
+    v_polio0: 7.days
   }
 
   def skip_vaccination_validations!

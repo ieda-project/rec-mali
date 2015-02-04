@@ -6,10 +6,10 @@ class NewAndSplitVaccinations < ActiveRecord::Migration
     'penta1_polio1' => %w(v_penta1 v_polio1),
     'penta2_polio2' => %w(v_penta2 v_polio2),
     'penta3_polio3' => %w(v_penta3 v_polio3),
-    'measles'       => %w(v_measles1)
+    'measles'       => %w(v_measles)
   }
 
-  NEW = %w(v_pneumo v_rota v_measles_r16)
+  NEW = %w(v_pneumo v_rota)
 
   class << self
     def up

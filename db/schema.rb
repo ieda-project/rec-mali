@@ -44,8 +44,7 @@ ActiveRecord::Schema.define(:version => 20140325171810) do
     t.integer  "v_rota1"
     t.integer  "v_rota2"
     t.integer  "v_rota3"
-    t.integer  "v_measles1"
-    t.integer  "v_measles2"
+    t.integer  "v_measles"
     t.integer  "v_yellow"
   end
 
