@@ -1,4 +1,4 @@
-$version 19
+$version 21
 #Cotrimoxazole (antibio:1)
 #mg-smx
 #20/kg
@@ -265,17 +265,17 @@ Erythromycine sirop 125 (antibio:ery_sirop_125_cholera)
 cm
 [9-13k[	1.2
 
-Artesunate injectable (artesunate_inj_nonref)
+Artesunate injectable (antipalu:artesunate_inj_nonref)
 ml
 <=59k 2.4
 >=13k 2
 
-Arthemeter injectable (arthemer_inj_nonref)
+Arthemeter injectable (antipalu:arthemer_inj_nonref)
 ml
 <24m 10
 [24-60m[ 20
 
-Quinine injectable (quinine_inj_nonref)
+Quinine injectable (antipalu:quinine_inj_nonref)
 mg
 <6k 75
 [6-9k[	125

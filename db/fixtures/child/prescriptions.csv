@@ -1,4 +1,4 @@
-$version 14
+$version 23
 ## TREATMENT-MEDICINE CHILD
 ## mandatory,treatment key,medicine key,duration,takes,description
 m,pneumonie_grave_transfert,antibio:amoxi_250,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
@@ -45,3 +45,43 @@ m,toux,expectorant:carbo_sirop,3 jours,3 fois par jour,{{name}} - {{dosage}} - {
 o,deshy_severe,antibio:ery_250_cholera,3 jours,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 o,deshy_severe,antibio:ery_sirop_125_cholera,3 jours,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 o,deshy_severe,antibio:tetra_250,3 jours,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,signes_deshy,micronut:zinc_20,4 heures,1 seule prise,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,signes_deshy,sro:sro,4 heures,pour la quantité recommandée,{{name}} - {{dosage}} - {{takes}} {{duration}}
+
+m,pas_deshy,micronut:zinc_20,14 jours,1 seule prise,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pas_deshy,sro:sro,jusqu'à l'arrêt de la diarrhée,après chaque liquide,{{name}} - {{dosage}} - {{takes}} {{duration}}
+
+m,diarrhee_persistente,micronut:zinc_20,4 heures,1 seule prise,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,dysenterie,antibio:cipro_100,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,dysenterie,antibio:cipro_250,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,dysenterie,antibio:cipro_500,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,dysenterie,antibio:ceftri_inj,5 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,palu_grave_transfer,antipalu:artesunate_inj_ref,1 seule fois,1 dose,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_transfer,antipalu:quinine_inj_ref,1 seule fois,1 dose,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_transfer,antipalu:arthemer_inj_ref,1 seule fois,1 dose,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_grave_transfer,anticonvulsant:diazepam_inj,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_grave_transfer,antipyretique:para_100,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_grave_transfer,antipyretique:para_500,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_grave_transfer,antipyretique:para_sirop_125,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+#m,palu_grave_transfer,ampi_amoxi_inj_ref,TODO,TODO,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+#m,palu_grave_transfer,genta_inj_ref,TODO,TODO,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,palu_grave_no_transfert,antipalu:arthemer_inj_nonref,7 jours ,1 dose complete au premier jour et 1/2 dose les jours suivants,{{name}} - {{dosage}} - {{takes}} pendant {{duration}} 
+m,palu_grave_no_transfert,antipalu:artesunate_inj_nonref,TODO,TODO,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_no_transfert,antipalu:quinine_inj_nonref,maximum 7 jours,toutes les 12 heures,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_grave_no_transfert,anticonvulsant:diazepam_inj,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_no_transfert,antibio:amoxi_250,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_no_transfert,antibio:amoxi_500,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_no_transfert,antibio:amoxi_sirop_125,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_no_transfert,antibio:amoxi_sirop_250,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_no_transfert,antibio:ery_250,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_no_transfert,antibio:ery_sirop_125,3 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_no_transfert,ampi_amoxi_inj_nonref,TODO,TODO,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_grave_no_transfert,genta_inj_nonref,TODO,TODO,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_grave_no_transfert,antipyretique:para_100,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_grave_no_transfert,antipyretique:para_500,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_grave_no_transfert,antipyretique:para_sirop_125,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+

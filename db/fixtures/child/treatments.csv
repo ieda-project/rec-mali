@@ -1,4 +1,4 @@
-$version 16
+$version 26
 ##TREATMENT CHILD
 ##key,title,classification,description
 
@@ -12,3 +12,16 @@ toux,Pas de pneumonie : toux ou rhume,Pas de pneumonie : toux ou rhume,"# Traite
 
 deshy_severe,Déshydratation sévère,Déshydratation sévère,"Si l’enfant n’a pas de malnutrition sévère ou toute autre classification grave :\n# {{help:plan_c}}\n# _Transférer d’URGENCE à l’échelon supérieur, la mère donnant fréquemment des gorgées de SRO en cours de route._\n# Si l’enfant a 2 ans ou plus et si une épidémie de choléra sévit dans la région, donner \n** {{med:antibio:ery_250_cholera}}\n** {{med:antibio:ery_sirop_125_cholera}}\n** {{med:antibio:tetra_250}}"
 
+signes_deshy,Signes évidents de déshydratation,Signes évidents de déshydratation,"# Donner : {{med:micronut:zinc_20}}\n# Donner : {{med:sro:sro}}\n# {{help:plan_b}}\n# {{help:revenir_immediatement}}\n# Revoir dans 5 jours.\n"
+
+pas_deshy,Pas de déshydratation,Pas de déshydratation,"# Donner : {{med:micronut:zinc_20}}\n# Donner : {{med:sro:sro}}\n# {{help:plan_a}}\n# Revoir dans 5 jours\n"
+
+diahree_persistante_severe,Diarrhée persistente sévère,Diarrhée persistente sévère,"# Traiter la déshydratation avant de transférer : {{help:plan_c}}\n# Transférer à l’échelon supérieur"
+
+diarrhee_persistente,Diarrhée persistente,Diarrhée persistente,"# Donner : {{med:micronut:zinc_20}}\n# {{help:diarrhee_persistante}}\n# {{help:multivatmine}}\n# Revoir dans 5 jours"
+
+dysenterie,Dysenterie,Dysenterie,"# Donner un antibiotique :\n** Première intention : {{med:antibio:cipro_100}}\n** Première intention : {{med:antibio:cipro_250}}\n** Première intention : {{med:antibio:cipro_500}}\n** Deuxième intention : {{med:antibio:ceftri_inj}}\n# {{help:revenir_immediatement}}\n# Revoir dans 2 jours."
+
+palu_grave_transfer,Maladie fébrile très grave ou paludisme grave avec transfert possible,Maladie fébrile très grave ou paludisme grave,"# Donner : (première dose)\n** {{med:antipalu:artesunate_inj_ref}}\n** {{med:antipalu:arthemer_inj_ref}}\n** {{med:antipalu:quinine_inj_ref}}\n# Donner la première dose de l’antibiotique:\n** MEDICAMENTS NON DEFINIS : med:ampi_amoxi_inj_ref\n** MEDICAMENTS NON DEFINIS : med:genta_inj_ref\n# Administrer du diazépam si l’enfant convulse : {{med:anticonvulsant:diazepam_inj}}\n# {{help:hypoglycemie}}\n# Administrer, au centre de santé, une dose de paracétamol si la fièvre  est élevée (38,5°C ou plus)\n** {{med:antipyretique:para_100}}\n** {{med:antipyretique:para_500}}\n** {{med:antipyretique:para_sirop_125}}\n# Transférer d’URGENCE à l’échelon supérieur."
+
+palu_grave_no_transfert,Maladie fébrile très grave ou paludisme grave si transfert impossible,Maladie fébrile très grave ou paludisme grave,"# Donner : (première dose)\n** {{med:antipalu:artesunate_inj_nonref}}\n** {{med:antipalu:arthemer_inj_nonref}}\n** {{med:antipalu:quinine_inj_nonref}}\n# Donner : {{med:ampi_amoxi_inj_nonref}}\n# Donner : {{med:genta_inj_nonref}}\n# Faire le relai avec la voie orale en utilisant l’antibiotique approprié\n** Première intention : {{med:antibio:amoxi_250}}\n** Première intention : {{med:antibio:amoxi_500}}\n** Première intention : {{med:antibio:amoxi_sirop_125}}\n** Première intention : {{med:antibio:amoxi_sirop_250}}\n** Deuxième intention : {{med:antibio:ery_250}}\n** Deuxième intention : {{med:antibio:ery_sirop_125}}\n# Administrer du diazépam si l’enfant convulse : {{med:anticonvulsant:diazepam_inj}}\n# {{help:hypoglycemie}}\n# Administrer, au centre de santé, une dose de paracétamol si la fièvre  est élevée (38,5°C ou plus)\n** {{med:antipyretique:para_100}}\n** {{med:antipyretique:para_500}}\n** {{med:antipyretique:para_sirop_125}}"
