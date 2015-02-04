@@ -1,4 +1,4 @@
-$version 23
+$version 40
 ## TREATMENT-MEDICINE CHILD
 ## mandatory,treatment key,medicine key,duration,takes,description
 m,pneumonie_grave_transfert,antibio:amoxi_250,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
@@ -85,3 +85,99 @@ o,palu_grave_no_transfert,antipyretique:para_100,jusqu'à arrêt de la fiévre,4
 o,palu_grave_no_transfert,antipyretique:para_500,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 o,palu_grave_no_transfert,antipyretique:para_sirop_125,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
 
+m,palu_simple,antipalu:art_lumefan,3 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_simple,antipalu:art_lumefan_susp,3 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,palu_simple,antipalu:art_amodiaq,3 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_simple,antipyretique:para_100,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_simple,antipyretique:para_500,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,palu_simple,antipyretique:para_sirop_125,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,rougeole_compliquee,vitamine:vit_a,2 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+#m,Rougéole grave et compliiquée,ampi_amoxi_inj_ref,,,
+#m,Rougéole grave et compliiquée,genta_inj_ref,,,
+
+m,rougeole_yeux_bouche,vitamine:vit_a,2 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole_yeux_bouche,antibio:amoxi_250,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole_yeux_bouche,antibio:amoxi_500,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole_yeux_bouche,antibio:amoxi_sirop_125,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole_yeux_bouche,antibio:amoxi_sirop_250,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole_yeux_bouche,antibio:ery_250,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole_yeux_bouche,antibio:ery_sirop_125,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,rougeole,vitamine:vit_a,2 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole,antibio:amoxi_250,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole,antibio:amoxi_500,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole,antibio:amoxi_sirop_125,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole,antibio:amoxi_sirop_250,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole,antibio:ery_250,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,rougeole,antibio:ery_sirop_125,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+o,rougeole_antecedent,vitamine:vit_a,2 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,masc,antibio:amoxi_250,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,masc,antibio:amoxi_500,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,masc,antibio:amoxi_sirop_125,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,masc,antibio:amoxi_sirop_250,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,masc,antibio:ery_250,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,masc,antibio:ery_sirop_125,5 jours,2 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,mastoidite,antibio:amoxi_250,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antibio:amoxi_500,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antibio:amoxi_sirop_125,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antibio:amoxi_sirop_250,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antibio:ampi_amoxi_inj,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antibio:ery_250,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antibio:ery_sirop_125,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antipyretique:para_100,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antipyretique:para_500,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antipyretique:para_sirop_125,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antipyretique:asp_100,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antipyretique:asp_500,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,mastoidite,antipyretique:asp_inj,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,oreille_aigue,antibio:amoxi_250,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antibio:amoxi_500,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antibio:amoxi_sirop_125,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antibio:amoxi_sirop_250,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antibio:ampi_amoxi_inj,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antibio:ery_250,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antibio:ery_sirop_125,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antipyretique:para_100,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antipyretique:para_500,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antipyretique:para_sirop_125,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antipyretique:asp_100,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antipyretique:asp_500,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,oreille_aigue,antipyretique:asp_inj,jusqu'à arrêt de la fiévre,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,anemie_grave,antipalu:artesunate_inj_ref,1 seule fois,1 dose,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,anemie_grave,antipalu:arthemer_inj_ref,1 seule fois,1 dose,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,anemie_grave,antipalu:quinine_inj_ref,1 seule fois,1 dose,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,anemie_grave,vitamine:vit_a,2 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,anemie,micronut:fer_acide_folique,2 mois,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,anemie,micronut:fer_sirop,2 mois,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,anemie,antipalu:art_lumefan,3 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,anemie,antipalu:art_lumefan_susp,3 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+o,anemie,antipalu:art_amodiaq,3 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,anemie,deparasitant:mebendazole,1 seule fois,1 dose ,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,anemie,deparasitant:albendazole,1 seule fois,1 dose ,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,vih_symp_confirmee,antibio:cotri_100,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_symp_confirmee,antibio:cotri_200_susp,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_symp_confirmee,antibio:cotri_400,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_symp_confirmee,vitamine:vit_a,2 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,vih_asymp_confirmee,antibio:cotri_100,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_asymp_confirmee,antibio:cotri_200_susp,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_asymp_confirmee,antibio:cotri_400,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_asymp_confirmee,vitamine:vit_a,2 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,vih_symp_probable,antibio:cotri_100,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_symp_probable,antibio:cotri_200_susp,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_symp_probable,antibio:cotri_400,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_symp_probable,vitamine:vit_a,2 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,vih_expose,antibio:cotri_100,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_expose,antibio:cotri_200_susp,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_expose,antibio:cotri_400,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_expose,vitamine:vit_a,2 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}

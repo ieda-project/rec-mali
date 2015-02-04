@@ -1,4 +1,4 @@
-$version 6
+$version 17
 
 ######################
 ## Signes de danger ##
@@ -112,7 +112,7 @@ anemie|Pas d'anémie|low|anemie.paleur_palmaire == absente AND !@anemie_grave
 malnutrition|Malnutrition aiguë sévère avec complications|high|@masc
 malnutrition|Malnutrition aiguë sévère sans complications|medium|@mass
 malnutrition|Malnutrition aiguë modérée|medium|@mam
-malnutrition|Pas de malnutrition aiguë|low|@pas_ma
+malnutrition|Pas de malnutrition aigue|low|@pas_ma
 
 #########
 ## VIH ##
@@ -127,7 +127,7 @@ malnutrition|Pas de malnutrition aiguë|low|@pas_ma
 
 @inf_symp_probable = @au_moins_deux_maladies AND !((enfant.months >= 18 AND vih.serologie_enfant == positive) OR vih.virologie_enfant == positive)
 
-@enfant_expose = vih.vih_mere == positive AND enfant.months < 18 AND @au_plus_une_maladie
+@enfant_expose = vih.vih_mere == positif AND enfant.months < 18 AND @au_plus_une_maladie
 
 @peu_probable = ((vih.vih_mere == inconnu AND vih.virologie_enfant == inconnue AND vih.serologie_enfant == inconnue) OR vih.vih_mere == negatif) AND @au_plus_une_maladie AND !@enfant_expose AND !@inf_asymp_conf AND !((enfant.months < 18 AND vih.virologie_enfant == negative) OR (enfant.months >= 18 AND vih.serologie_enfant == negative))
 
