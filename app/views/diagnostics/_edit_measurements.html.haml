@@ -8,17 +8,17 @@
         %em cm
       %th(scope='row') Temp.
       %td
-        = form.text_field :temperature, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.age < 5', 'data-validate' => 'value >= 33 && value <= 46'
+        = form.text_field :temperature, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.age < 5', 'data-validate' => 'value >= 33 && value <= 44'
         %em °C
     %tr
       %th(scope='row') Poids
       %td
-        = form.text_field :weight, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.age < 5', 'data-validate' => 'value >= 2 && value <= 30'
+        = form.text_field :weight, size: 4, class: 'float needed', 'data-condition' => 'data.enfant.age < 5', 'data-validate' => 'value >= 1.5 && value <= 25'
         %em kg
       - if form.object.new_record? or (form.object.months > 6 and form.object.months < 60)
         %th(scope='row') Périm. Brac.
         %td
-          = form.text_field :mac, size: 4, class: 'integer needed', 'data-condition' => 'data.enfant.months >= 6 && data.enfant.age < 5', 'data-key' => 'muac', 'data-validate' => 'value >= 50 && value <= 250'
+          = form.text_field :mac, size: 4, class: 'integer needed', 'data-condition' => 'data.enfant.months >= 6 && data.enfant.age < 5', 'data-key' => 'muac', 'data-validate' => 'value >= 60 && value <= 200'
           %em mm
 .ratios
   %ul

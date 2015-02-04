@@ -16,7 +16,7 @@
     le :
   = form.date_select(:born_on, :start_year => Date.today.year, :end_year => Date.today.year - 18, :include_blank => true)
 %p.name
-  %strong Zone :
+  %strong Village :
   = form.hidden_field :village_name
   = form.select :village_id, [ [], *zone_select_for_child(form.object) ], {}, class: 'required'
 - if @child.new_record?
