@@ -15,9 +15,9 @@
   %br/
   %strong Village :
   = village child
-  - if child.last_visit
-    %br/
-    %strong Dernière distance :
-    = child.last_visit.distance_name
+  / - if child.last_visit
+  /   %br/
+  /   %strong Dernière distance :
+  /   = child.last_visit.distance_name
 - if Csps.point?
   %button.edit(type="button") Modifier

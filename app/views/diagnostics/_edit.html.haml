@@ -23,9 +23,9 @@
 
         %strong Village :
         = village @child
-        %br/
-        %strong Distance :
-        = form.select :distance, [ [], *Diagnostic::DISTANCES.to_select ], {}, class: 'required'
+        / %br/
+        / %strong Distance :
+        / = form.select :distance, [ [], *Diagnostic::DISTANCES.to_select ], {}, class: 'required'
 
     .measurements= partial 'diagnostics/edit_measurements', locals: { form: form }
     = form.fields_for :child do |fields|

@@ -19,8 +19,8 @@
   %strong Village :
   = form.hidden_field :village_name
   = form.select :village_id, [ [], *zone_select_for_child(form.object) ], {}, class: 'required'
-- if @child.new_record?
-  = form.fields_for :diagnostic, @diagnostic do |fields|
-    %p.name
-      %strong Distance :
-      = fields.select :distance, [ [], *Diagnostic::DISTANCES.to_select ], {}, class: 'required'
+/ - if @child.new_record?
+/   = form.fields_for :diagnostic, @diagnostic do |fields|
+/     %p.name
+/       %strong Distance :
+/       = fields.select :distance, [ [], *Diagnostic::DISTANCES.to_select ], {}, class: 'required'

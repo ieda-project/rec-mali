@@ -50,10 +50,10 @@ returning children 12-59 months	12 - 59 mois
 returning children 24-59 months	24 - 59 mois
 returning children 0-59 months	0 - 59 mois
 
-new_children_by_distance	Nombre total d'enfants par distance
-new children 0-4 km	0 - 4km
-new children 5-9 km	5 - 9km
-new children 10 km	10km et plus
+# new_children_by_distance  Nombre total d'enfants par distance
+# new children 0-4 km  0 - 4km
+# new children 5-9 km  5 - 9km
+# new children 10 km  10km et plus
 
 total_children_by_age	Nombre total d'enfants par âge
 total children 0-6 days	0 - 6 jours (PCIME)

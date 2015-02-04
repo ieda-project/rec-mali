@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(:version => 20140325171810) do
     t.integer  "child_uqid"
     t.integer  "author_uqid"
     t.string   "ordonnance"
-    t.integer  "distance"
     t.text     "other_problems"
   end
 

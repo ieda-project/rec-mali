@@ -35,12 +35,12 @@
 
 %section.resume
   .measurements
-    %h2 Distance et mesures lors de la consultation
+    %h2 Mesures lors de la consultation
     %table
       %tbody
         %tr
-          %th Distance
-          %td= @diagnostic.distance_name
+          / %th Distance
+          / %td= @diagnostic.distance_name
           %th Taille
           - if @diagnostic.height.present?
             %td #{@diagnostic.height.round(1)} cm

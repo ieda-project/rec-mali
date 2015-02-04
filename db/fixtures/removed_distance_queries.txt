@@ -1,0 +1,65 @@
+@new children 0-4 km
+{
+  "klass":"Diagnostic",
+  "case_status":"new",
+  "group":"new_children_by_distance",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type": "field",
+    "field": "distance",
+    "operator":"=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
+  }]
+}
+
+@new children 5-9 km
+{
+  "klass":"Diagnostic",
+  "case_status":"new",
+  "group":"new_children_by_distance",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type": "field",
+    "field": "distance",
+    "operator":"=",
+    "value":1
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
+  }]
+}
+
+@new children 10 km
+{
+  "klass":"Diagnostic",
+  "case_status":"new",
+  "group":"new_children_by_distance",
+  "distinct":"child_uqid",
+  "conds": [{
+    "type": "field",
+    "field": "distance",
+    "operator":"=",
+    "value":2
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
+  }]
+}
