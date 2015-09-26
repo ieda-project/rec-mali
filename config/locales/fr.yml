@@ -144,3 +144,4 @@ fr:
         blank: doit être rempli(e)
         taken: déjà utilisé
         confirmation: ne concorde pas avec la confirmation
+        record_invalid: record invalid

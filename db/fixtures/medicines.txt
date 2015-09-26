@@ -1,13 +1,15 @@
-$version 21
+$version 42
 #Cotrimoxazole (antibio:1)
 #mg-smx
 #20/kg
 
 Amoxicilline 250 cp (antibio:amoxi_250)
 comprimé
-<6k 0.5
+<3k 0.25
+[3-6k[ 0.5
 [6-9k[ 1
 [9-13k[ 1.5
+>=13k 2
 
 Amoxicilline 500 cp (antibio:amoxi_500)
 comprimé
@@ -18,14 +20,16 @@ comprimé
 
 Amoxicilline 125 sirop (antibio:amoxi_sirop_125)
 cm
-<6k 1
+<3k 0.5
+[3-6k[ 1
 [6-9k[ 2
 [9-13k[ 3
 >=13k 4
 
 Amoxicilline 250 sirop (antibio:amoxi_sirop_250)
 cm
-<6k 0.5
+<3k 0.25
+[3-6k[ 0.5
 [6-9k[ 1
 [9-13k[ 1.5
 >=13k 2
@@ -114,10 +118,14 @@ comprimé
 
 Ceftriaxone injectable (antibio:ceftri_inj)
 ml
-<6k 3
-[6-9k[ 6
-[9-13k[ 10
-[13-18k[ 14
+<2k 50
+[2-3k[ 100
+[3-4k[ 150
+[4-5k[ 200
+[5-6k[ 300
+[6-9k[ 600
+[9-13k[ 1000
+>=13k 1400
 
 Artesunate injectable (antipalu:artesunate_inj_ref)
 ml
@@ -244,14 +252,22 @@ comprimé
 
 Ampicilline/Amoxicilline injectable (ampi_amoxi_inj_nonref)
 ml
-<6k 1
+<2k 0.2
+[2-3k[ 0.4
+[3-4k[ 0.6
+[4-5k[ 0.8
+[5-6k[ 1
 [6-9k[ 2
 [9-13k[ 3
 >=13k 5
 
 Gentamycine injectable 80 (genta_inj_nonref)
 ml
-<6k 4
+<2k 0.75
+[2-3k[ 1.5
+[3-4k[ 2.25
+[4-5k[ 3
+[5-6k[ 4
 [6-9k[ 6
 [9-13k[ 8
 >=13k 12
@@ -281,3 +297,66 @@ mg
 [6-9k[	125
 [9-13k[ 175
 >=13k 250
+
+Ceftriaxone injectable (antibio:ceftri_inj_nonref)
+ml
+<2k 50
+[2-3k[ 100
+[3-4k[ 150
+[4-5k[ 200
+[5-6k[ 300
+[6-9k[ 600
+[9-13k[ 1000
+>=13k 1400
+
+Ampicilline/Amoxicilline injectable (antibio:ampi_amoxi_inj_ref)
+ml
+<2k 0.2
+[2-3k[ 0.4
+[3-4k[ 0.6
+[4-5k[ 0.8
+[5-6k[ 1
+[6-9k[ 2
+[9-13k[ 3
+>=13k 5
+
+Gentamycine (antibio:genta_inj_ref)
+ml
+<2k 0.75
+[2-3k[ 1.5
+[3-4k[ 2.25
+[4-5k[ 3
+[5-6k[ 4
+[6-9k[ 6
+[9-13k[ 8
+>=13k 12
+
+Gentamycine (genta_inj_ref_nourrisson)
+ml
+<2k 0.75
+[2-3k[ 1.5
+[3-4k[ 2.25
+[4-5k[ 3
+[5-6k[ 4
+[6-9k[ 6
+[9-13k[ 8
+>=13k 12
+
+Oxacilline 250 cp (antibio:oxa_250)
+comprimé
+<3k 0.25
+>=3k 0.5
+
+Oxacilline 250 Sirop (antibio:oxa_250_sirop)
+ml
+<3k 1.25
+>=3k 2.5
+
+Oxacilline 125 Sirop (antibio:oxa_125_sirop)
+ml
+<3k 2.5
+>=3k 5
+
+Nystatine (antifong:nysta_sirop)
+ml
+<2m 1

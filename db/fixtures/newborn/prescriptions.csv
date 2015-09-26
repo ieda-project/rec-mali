@@ -1,3 +1,34 @@
-$version 1
+$version 32
 ## TREATMENT-MEDICINE INFANT
 ## mandatory, treatment key,medicine key,duration,takes,description
+
+m,maladie_grave_transfert,antibio:ampi_amoxi_inj_ref,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,maladie_grave_transfert,antibio:ceftri_inj,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,maladie_grave_transfert,genta_inj_ref_nourrisson,1 prise,1 seule fois,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,maladie_grave_no_transfert,ampi_amoxi_inj_nonref,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,maladie_grave_no_transfert,antibio:ceftri_inj_nonref,5 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,maladie_grave_no_transfert,genta_inj_nonref,5 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,infection_bacterienne,antibio:amoxi_250,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,infection_bacterienne,antibio:amoxi_sirop_250,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,infection_bacterienne,antibio:amoxi_sirop_125,5 jours,2 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,infection_bacterienne,antibio:oxa_250,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,infection_bacterienne,antibio:oxa_250_sirop,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,infection_bacterienne,antibio:oxa_125_sirop,5 jours,3 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,signes_evidents,micronut:zinc_20,14 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,signes_evidents,sro:sro,4 heures,pour la quantité recommandée,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,pas_deshy,micronut:zinc_20,14 jours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,pas_deshy,sro:sro,4 heures,pour la quantité recommandée,{{name}} - {{dosage}} - {{takes}} pendant {{durati
+
+m,vih_confirmee,antibio:cotri_100,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_confirmee,antibio:cotri_200_susp,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_confirmee,antibio:cotri_400,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,vih_expose,antibio:cotri_100,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_expose,antibio:cotri_200_susp,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+m,vih_expose,antibio:cotri_400,au long cours,1 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}
+
+m,pb_alim,antifong:nysta_sirop,7 jours,4 fois par jour,{{name}} - {{dosage}} - {{takes}} pendant {{duration}}

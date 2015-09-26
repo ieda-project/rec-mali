@@ -1,3 +1,28 @@
-$version 1
+$version 34
 ##TREATMENT INFANT
 ##key,title,classification,description
+
+maladie_grave_transfert,Maladie grave si transfert possible,Maladie grave,"# Donner :\n** {{med:antibio:ampi_amoxi_inj_ref}}\n** {{med:antibio:ceftri_inj}}\n# Donner : {{med:genta_inj_ref_nourrisson}}\n# {{help:guide_antibio_intramusculaire}}\n# {{help:hypoglycemie}}\n# {{help:garder_au_chaud}}\n# Transférer d’urgence à l’échelon supérieur."
+
+maladie_grave_no_transfert,Maladie grave si transfert impossible,Maladie grave,"# Donner :\n** {{med:ampi_amoxi_inj_nonref}}\n** {{med:antibio:ceftri_inj_nonref}}\n# Donner : {{med:genta_inj_nonref}}\n# {{help:hypoglycemie}}\n# {{help:garder_au_chaud}}"
+
+infection_bacterienne,Infection bactérienne locale,Infection bactérienne locale,"# Donner un antibiotique approprié par voie orale :\n** Première intention :\n*** {{med:antibio:amoxi_250}}\n*** {{med:antibio:amoxi_sirop_250}}\n*** {{med:antibio:amoxi_sirop_125}}\n** Deuxième intention :\n*** {{med:antibio:oxa_250}}\n*** {{med:antibio:oxa_250_sirop}}\n*** {{med:antibio:oxa_125_sirop}}\n# {{help:traiter_infection_locale_domicile}}\n# {{help:soins_nourrisson_domicile}}\n# Revoir après 2 jours"
+
+pas_infection,Pas d'infection bactérienne,Pas d'infection bactérienne,"* {{help:soins_nourrisson_domicile}}"
+
+deshy_severe,Déshydratation sévère,Déshydratation sévère,"# Si le nourrisson n’est pas classé MALADIE GRAVE :\n** {{help:plan_c}}\n** {{help:recommandations_alimentation}}\n# Si le nourrisson est aussi classé MALADIE GRAVE :\n** Transférer d’URGENCE à l’échelon supérieur, la mère  donnant fréquemment des gorgées de SRO en cours de route."
+
+
+signes_evidents,Signes évidents de déshydratation,Signes évidents de déshydratation,"* Donner : {{med:micronut:zinc_20}}\n* Donner : {{med:sro:sro}}\n# {{help:plan_b}}\n# Expliquer à la mère quand revenir immédiatement : {{help:soins_nourrisson_domicile}}\n# Revoir le nourrisson dans 2 jours si pas d'amélioration"
+
+pas_deshy,Pas de déshydratation,Pas de déshydratation,"* Donner : {{med:micronut:zinc_20}}\n* Donner : {{med:sro:sro}}\n# {{help:plan_a}}\n# Expliquer à la mère quand revenir immédiatement : {{help:soins_nourrisson_domicile}}\n# Revoir le nourrisson dans 2 jours si pas d'amélioration"
+
+vih_confirmee,Infection a vih confirmee,Infection a vih confirmee,"# Débuter le traitement pour les autres classifications\n# Débuter la prophylaxie au cotrimoxazole à partir de 6 semaines\n** {{med:antibio:cotri_100}}\n** {{med:antibio:cotri_200_susp}}\n** {{med:antibio:cotri_400}}\n# {{help:evaluer_alimentation}}\n# {{help:recommandations_alimentation}}\n# Initier le Traitement ARV si possible, si non\n# Référer l’enfant dans un site de traitement ARV\n# {{help:soins_nourrisson_domicile}}"
+
+vih_expose,Nourrisson expose/infection a vih possible,Nourrisson expose/infection a vih possible,"# Débuter le traitement pour les autres classifications\n# Débuter la prophylaxie au cotrimoxazole à partir de 6 semaines\n** {{med:antibio:cotri_100}}\n** {{med:antibio:cotri_200_susp}}\n** {{med:antibio:cotri_400}}\n# {{help:evaluer_alimentation}}\n# {{help:recommandations_alimentation}}\n# Si possible confirmer (PCR avant l’âge de 18 mois) et se référer à la classification appropriée sinon référer.\n# Refaire la PCR 2 mois après le sevrage (nourrisson sous allaitement maternel)"
+
+pas_vih,Pas d’infection a vih,Pas d’infection a vih,"# Débuter le traitement pour les autres classifications\n# {{help:evaluer_alimentation}}\n# {{help:recommandations_alimentation}}\n# {{help:conseiller_mere}}"
+
+pb_alim,Problème d’alimentation et/ou poids faible pour l’âge,Problème d’alimentation et/ou poids faible pour l’âge,"# {{help:bonne_position_prise_sein}}\n# {{help:exprimer_lait_maternel}}\n# {{help:nourrir_avec_tasse}}\n# Si pas d’allaitement : {{help:conseil_allaitement}}\n# {{help:recommandations_alimentation}}\n# {{help:garder_au_chaud_maison}}\n# En cas d’ulcération ou de muguet :\n** {{med:antifong:nysta_sirop}}\n** {{help:traiter_infection_locale_domicile}}\n** {{help:soins_nourrisson_domicile}}\n# Revoir tout problème d’alimentation ou de muguet après 2 jours\n# Revoir tout problème de poids faible pour l’âge après 14 jours"
+
+pas_pb_alim,Pas de problème d’alimentation,Pas de problème d’alimentation,"# {{help:soins_nourrisson_domicile}}\n# Féliciter la mère pour la bonne alimentation du nourrisson\n# {{help:conseil_allaitement}}\n# {{help:recommandations_alimentation}}"
