@@ -1,4 +1,4 @@
-$version 42
+$version 110
 #Cotrimoxazole (antibio:1)
 #mg-smx
 #20/kg
@@ -66,8 +66,7 @@ cm
 
 Salbutamol 4 mg (antiinflam:salbu_4)
 comprimé
-[4-10k[ 0.5
->=10k 0.5
+>=4k 0.5
 
 Salbutamol 2 mg (antiinflam:salbu_2)
 comprimé
@@ -101,24 +100,22 @@ comprimé
 <6k 0.5
 [6-9k[ 1
 [9-13k[ 1.5
-[13-18k[ 2
+>=13k 2
 
 Ciprofloxacine 250 (antibio:cipro_250)
 comprimé
 <6k 0.25
-[6-9k[ 0.5
-[9-13k[ 0.5
-[13-18k[ 1
+[6-13k[ 0.5
+>=13k 1
 
 Ciprofloxacine 500 (antibio:cipro_500)
 comprimé
-[6-9k[ 0.25
-[9-13k[ 0.25
-[13-18k[ 0.5
+[6-13k[ 0.25
+>=13k 0.5
 
 Ceftriaxone injectable (antibio:ceftri_inj)
-ml
-<2k 50
+mg
+[1-2k[ 50
 [2-3k[ 100
 [3-4k[ 150
 [4-5k[ 200
@@ -128,12 +125,13 @@ ml
 >=13k 1400
 
 Artesunate injectable (antipalu:artesunate_inj_ref)
-ml
+mg/kg
 <=59k 2.4
 
 Arthemeter injectable (antipalu:arthemer_inj_ref)
-ml
-<24m 20
+mg
+[0-24m[ 20
+[24-60m[ 40
 
 Quinine injectable (antipalu:quinine_inj_ref)
 mg
@@ -210,8 +208,7 @@ ml
 
 Fer-acide folique (micronut:fer_acide_folique)
 comprimé
-[9-13k[ 0.5
->=13k 0.5
+>=9k 0.5
 
 Fer-acide folique (micronut:fer_sirop)
 ml
@@ -279,12 +276,12 @@ comprimé
 
 Erythromycine sirop 125 (antibio:ery_sirop_125_cholera)
 cm
-[9-13k[	1.2
+[9-13k[ 1.5
+>=13k 2
 
 Artesunate injectable (antipalu:artesunate_inj_nonref)
-ml
+mg/kg
 <=59k 2.4
->=13k 2
 
 Arthemeter injectable (antipalu:arthemer_inj_nonref)
 ml
