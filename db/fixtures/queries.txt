@@ -1,4 +1,4 @@
-$version 11
+$version 13
 
 @new consult 0-6 days
 {
@@ -768,6 +768,28 @@ $version 11
   }]
 }
 
+@new children signes danger
+{
+  "klass":"Diagnostic",
+  "case_status":"new",
+  "group":"new_children_by_pcime",
+  
+  "conds": [{
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
+    "value": "Signe général de danger présent"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
+  }]
+}
+
 @new children pas de pneumonie
 {
   "klass":"Diagnostic",
@@ -937,6 +959,50 @@ $version 11
   }]
 }
 
+@new children paludisme
+{
+  "klass":"Diagnostic",
+  "case_status":"new",
+  "group":"new_children_by_pcime",
+  
+  "conds": [{
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
+    "value": "Paludisme simple"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
+  }]
+}
+
+@new children paludisme grave
+{
+  "klass":"Diagnostic",
+  "case_status":"new",
+  "group":"new_children_by_pcime",
+  
+  "conds": [{
+    "type": "field",
+    "field": "classifications.name",
+    "operator": "=",
+    "value": "Maladie fébrile très grave ou paludisme grave"
+  }, {
+    "type":"age",
+    "operator":">=",
+    "value":0
+  }, {
+    "type":"age",
+    "operator":"<=",
+    "value":59
+  }]
+}
+
 @new children antecedent rougeole
 {
   "klass":"Diagnostic",
@@ -988,7 +1054,7 @@ $version 11
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Rougeole avec complication aux yeux ou à la bouche"
+    "value": "Rougeole avec complication aux yeux et/ou la bouche"
   }, {
     "type":"age",
     "operator":">=",
@@ -1141,7 +1207,7 @@ $version 11
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "MAM"
+    "value": "Malnutrition aiguë modérée"
   }, {
     "type":"age",
     "operator":">=",
@@ -1163,7 +1229,7 @@ $version 11
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "MASs"
+    "value": "Malnutrition aiguë sévère sans complications"
   }, {
     "type":"age",
     "operator":">=",
@@ -1185,7 +1251,7 @@ $version 11
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "MASc"
+    "value": "Malnutrition aiguë sévère avec complications"
   }, {
     "type":"age",
     "operator":">=",
@@ -1197,7 +1263,7 @@ $version 11
   }]
 }
 
-@new children vih pru probable
+@new children vih symptomatique confirmee
 {
   "klass":"Diagnostic",
   "case_status":"new",
@@ -1207,7 +1273,7 @@ $version 11
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Infection VIH peu problable"
+    "value": "Infection a vih symptomatique confirmee"
   }, {
     "type":"age",
     "operator":">=",
@@ -1219,7 +1285,7 @@ $version 11
   }]
 }
 
-@new children vih symp suspecte
+@new children vih asymptomatique confirmee
 {
   "klass":"Diagnostic",
   "case_status":"new",
@@ -1229,7 +1295,7 @@ $version 11
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Infection à VIH symptomatique suspecte"
+    "value": "Infection a vih asymptomatique confirmee"
   }, {
     "type":"age",
     "operator":">=",
@@ -1241,7 +1307,7 @@ $version 11
   }]
 }
 
-@new children vih exposition
+@new children vih symptomatique probable
 {
   "klass":"Diagnostic",
   "case_status":"new",
@@ -1251,7 +1317,7 @@ $version 11
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Infection à VIH possible / exposition au VIH"
+    "value": "Infection a vih symptomatique probable"
   }, {
     "type":"age",
     "operator":">=",
@@ -1263,7 +1329,7 @@ $version 11
   }]
 }
 
-@new children vih symp probable
+@new children vih infection a vih possible
 {
   "klass":"Diagnostic",
   "case_status":"new",
@@ -1273,7 +1339,7 @@ $version 11
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Infection VIH symptomatique probable"
+    "value": "Enfant expose/infection a vih possible"
   }, {
     "type":"age",
     "operator":">=",
@@ -1285,179 +1351,17 @@ $version 11
   }]
 }
 
-@new children vih confirmee
+@new children vih peu probable
 {
   "klass":"Diagnostic",
   "case_status":"new",
   "group":"new_children_by_pcime",
+  
   "conds": [{
     "type": "field",
     "field": "classifications.name",
     "operator": "=",
-    "value": "Infection à VIH confirmée"
-  }, {
-    "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
-  }]
-}
-
-@new children vih symp confirmee
-{
-  "klass":"Diagnostic",
-  "case_status":"new",
-  "group":"new_children_by_pcime",
-  "conds": [{
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Infection VIH symptomatique confirmée"
-  }, {
-    "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
-  }]
-}
-
-@new children boy paludisme
-{
-  "klass":"Diagnostic",
-  "case_status":"new",
-  "group":"new_children_by_pcime",
-  "conds": [{
-    "type":"boolean",
-    "field":"child.gender",
-    "value":true
-  }, {
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Paludisme simple"
-  }, {
-    "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
-  }]
-}
-
-@new children girl paludisme
-{
-  "klass":"Diagnostic",
-  "case_status":"new",
-  "group":"new_children_by_pcime",
-  "conds": [{
-    "type":"boolean",
-    "field":"child.gender",
-    "value":false
-  }, {
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Paludisme simple"
-  }, {
-    "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
-  }]
-}
-
-@new children boy paludisme grave
-{
-  "klass":"Diagnostic",
-  "case_status":"new",
-  "group":"new_children_by_pcime",
-  "conds": [{
-    "type":"boolean",
-    "field":"child.gender",
-    "value":true
-  }, {
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Maladie fébrile très grave ou paludisme grave"
-  }, {
-    "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
-  }]
-}
-
-@new children girl paludisme grave
-{
-  "klass":"Diagnostic",
-  "case_status":"new",
-  "group":"new_children_by_pcime",
-  "conds": [{
-    "type":"boolean",
-    "field":"child.gender",
-    "value":false
-  }, {
-    "type": "field",
-    "field": "classifications.name",
-    "operator": "=",
-    "value": "Maladie fébrile très grave ou paludisme grave"
-  }, {
-    "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
-  }]
-}
-
-@new children fievre 14
-{
-  "klass":"Diagnostic",
-  "case_status":"new",
-  "group":"new_children_by_pcime",
-  "conds": [{
-    "type": "sign",
-    "sign": "fievre_presence_duree",
-    "operator": ">",
-    "value": 14
-  }, {
-    "type":"age",
-    "operator":">=",
-    "value":0
-  }, {
-    "type":"age",
-    "operator":"<=",
-    "value":59
-  }]
-}
-
-@new children ulcerations
-{
-  "klass":"Diagnostic",
-  "case_status":"new",
-  "group":"new_children_by_pcime",
-  "conds": [{
-    "type": "sign",
-    "sign": "ulcerations",
-    "operator": "!=",
-    "value": "absentes"
+    "value": "Infection a vih peu probable"
   }, {
     "type":"age",
     "operator":">=",

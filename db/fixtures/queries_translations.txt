@@ -1,4 +1,4 @@
-$version 7
+$version 12
 
 new_consult_by_age	Nombre de nouveaux consultants par âge
 new consult 0-6 days	0 - 6 jours (PCIME)
@@ -70,6 +70,9 @@ total children boy	Garçons
 total children girl	Filles
 
 new_children_by_pcime	Nombre de classifications PCIME pour les nouveaux consultants
+new children signes danger	Signe général de danger présent
+new children paludisme 	Paludisme simple
+new children paludisme grave	Maladie fébrile très grave ou paludisme grave
 new children pas de pneumonie	Pas de pneumonie: toux ou rhume
 new children pneumonie	Pneumonie
 new children pneumonie grave	Pneumonie grave ou maladie très grave
@@ -80,25 +83,18 @@ new children diarrhee severe	Diarrhée persistente sévère
 new children dysenterie	Dysenterie
 new children antecedent rougeole	Antécédent de rougeole
 new children rougeole	Rougeole
-new children rougeole complication	Rougeole avec complication aux yeux ou à la bouche
+new children rougeole complication	Rougeole avec complication aux yeux et/ou la bouche
 new children rougeole grave	Rougeole grave et compliquée
 new children infection chronique	Infection chronique
 new children infection aigue	Infection aiguë
 new children mastoidite	Mastoïdïte
 new children anemie	Anémie
 new children anemie grave	Anémie grave
-new children mam	MAM
-new children mass	MASs
-new children masc	MASc
-new children vih pru probable	Infection VIH peu problable
-new children vih symp suspecte	Infection VIH symptomatique suspecte
-new children vih exposition	Infection VIH possible / exposition au VIH
-new children vih symp probable	Infection VIH symptomatique probable
-new children vih confirmee	Infection VIH confirmée
-new children vih symp confirmee	Infection VIH symptomatique confirmée
-new children boy paludisme	Nombre d'enfants, garcons avec la classification de paludisme simple
-new children girl paludisme	Nombre d'enfants, filles avec la classification de paludisme simple
-new children boy paludisme grave	Nombre d'enfants, garcons avec la classification de paludisme grave
-new children girl paludisme grave	Nombre d'enfants, filles avec la classification de paludisme grave
-new children fievre 14	Nombre d'enfants avec une fièvre de plus de 14 jours
-new children ulcerations	Nombre d'enfants avec des ulcérations dans la bouche
+new children mam	Malnutrition aiguë modérée
+new children mass	Malnutrition aiguë sévère sans complications
+new children masc	Malnutrition aiguë sévère avec complications
+new children vih symptomatique confirmee	Infection a vih symptomatique confirmee
+new children vih asymptomatique confirmee	Infection a vih asymptomatique confirmee
+new children vih symptomatique probable	Infection a vih symptomatique probable
+new children vih infection a vih possible	Enfant expose/infection a vih possible
+new children vih peu probable	Infection a vih peu probable
