@@ -6,7 +6,7 @@
 %nav= link_to 'Nouvel utilisateur', new_user_path, :class => 'new-user'
 
 %section
-  %h1 Utilisateurs de ce CSPS
+  %h1 Utilisateurs de ce CSCOM
   %table.results.users
     %thead
       %tr
@@ -34,7 +34,7 @@
 
 - if (others = @users.where('zone_id != ?', Zone.csps.id)).any?
   %section
-    %h1 Utilisateurs d'autres CSPS
+    %h1 Utilisateurs d'autres CSCOM
     %table.results.users
       %thead
         %tr

@@ -30,7 +30,7 @@ total consult 12-59 months	12 - 59 mois
 total consult 24-59 months	24 - 59 mois
 total consult 0-59 months	0 - 59 mois
 
-new_children_by_age	Nombre d'enfants venus pour la première fois au CSPS par âge
+new_children_by_age	Nombre d'enfants venus pour la première fois au CSCOM par âge
 new children 0-6 days	0 - 6 jours (PCIME)
 new children 7 days - 1 month	7 jours - 1 mois (PCIME)
 new children 2-59 months	2 - 59 mois (PCIME)
@@ -40,7 +40,7 @@ new children 12-59 months	12 - 59 mois
 new children 24-59 months	24 - 59 mois
 new children 0-59 months	0 - 59 mois
 
-returning_children_by_age	Nombre d’enfants venus plus d’une fois au CSPS
+returning_children_by_age	Nombre d’enfants venus plus d’une fois au CSCOM
 returning children 0-6 days	0 - 6 jours (PCIME)
 returning children 7 days - 1 month	7 jours - 1 mois (PCIME)
 returning children 2-59 months	2 - 59 mois (PCIME)
