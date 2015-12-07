@@ -59,8 +59,8 @@ class Child < ActiveRecord::Base
   }
 
   VACCINATION_AGES = {
-    v_bcg: 0, # t0 7 days
-    v_polio0: 0, # to 7 days
+    v_bcg: 0, 
+    v_polio0: 0,
     v_polio1: 6.weeks,
     v_polio2: 10.weeks,
     v_polio3: 14.weeks,
@@ -78,8 +78,7 @@ class Child < ActiveRecord::Base
   }
 
   VACCINATION_TOP_AGES = {
-    v_bcg: 7.days,
-    v_polio0: 7.days
+    #v_bcg: 7.days
   }
 
   def skip_vaccination_validations!
