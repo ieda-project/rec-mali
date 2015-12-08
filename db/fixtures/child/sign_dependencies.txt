@@ -1,4 +1,5 @@
-$version 1
+$version 2
+
 toux.toux_presence_duree|data.toux.toux_presence
 toux.freq_resp|data.toux.toux_presence
 toux.tirage|data.toux.toux_presence
@@ -36,6 +37,9 @@ oreille.oreille_douleur|data.oreille.oreille_probleme
 oreille.oreille_ecoulement|data.oreille.oreille_probleme
 oreille.oreille_ecoulement_duree|data.oreille.oreille_probleme && data.oreille.oreille_ecoulement
 oreille.oreille_gonflement|data.oreille.oreille_probleme
+
+anemie.crises|data.anemie.depranocytose
+anemie.priapisme|data.anemie.depranocytose
 
 malnutrition.atpe|(data.enfant.months >= 6) && ((data.enfant.muac < 115) || (data.enfant.wfh_z < 97))
 malnutrition.allaitement|(data.enfant.months < 6) && ((data.enfant.muac < 115) || (data.enfant.wfh_z < 97))
