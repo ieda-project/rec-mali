@@ -1,4 +1,4 @@
-$version 20
+$version 21
 ##TREATMENT HELP
 ##key,title,description
 
@@ -8,7 +8,7 @@ revenir_immediatement,Consignes pour revenir immédiatement,"*Pour Pas de pneumo
 
 diarrhee_persistante,Recommandations pour l’alimentation d’un enfant avec une DIARRHÉE PERSISTANTE,"* S’il est encore allaité au sein, allaiter plus fréquemment et plus longtemps, jour et nuit.\n* Si l’enfant consomme un autre lait:\n** remplacer ce lait en augmentant l’allaitement au sein OU\n** remplacer ce lait par des produits laitiers fermentés, tels que le lait caillé OU\n** remplacer la moitié de ce lait par des aliments semi-solides très nutritifs.\n* Pour les autres aliments, suivre les recommandations pour l’alimentation de l’enfant selon son âge"
 
-baisser_fievre,Baisser la fièvre,""
+baisser_fievre,Baisser la fièvre,"Si fièvre : Faire abaisser la température par un enveloppement humide"
 
 multivitamine,Multivitamine,"Administrer des multivitamines et des aliments riches en vitamines et en sels minéraux pour la diarrhée persistante, administrer tous les jours un comprimé de multivitamines et des aliments riches en sels minéraux pendant 14 jours."
 
